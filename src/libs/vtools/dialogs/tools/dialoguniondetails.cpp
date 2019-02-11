@@ -44,9 +44,17 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogUnionDetails::DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogUnionDetails), indexD1(0), indexD2(0), d1(NULL_ID), d2(NULL_ID),
-      numberD(0), numberP(0), p1(NULL_ID), p2(NULL_ID)
+DialogUnionDetails::DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogUnionDetails),
+      indexD1(0),
+      indexD2(0),
+      d1(NULL_ID),
+      d2(NULL_ID),
+      numberD(0),
+      numberP(0),
+      p1(NULL_ID),
+      p2(NULL_ID)
 {
     ui->setupUi(this);
     InitOkCancel(ui);

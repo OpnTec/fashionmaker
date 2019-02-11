@@ -79,10 +79,10 @@ public:
     QString SecondCurveName() const;
 
     VCrossCurvesPoint GetVCrossPoint() const;
-    void              SetVCrossPoint(const VCrossCurvesPoint &value);
+    void              SetVCrossPoint(VCrossCurvesPoint value);
 
     HCrossCurvesPoint GetHCrossPoint() const;
-    void              SetHCrossPoint(const HCrossCurvesPoint &value);
+    void              SetHCrossPoint(HCrossCurvesPoint value);
 
     virtual void ShowVisualization(bool show) override;
 protected slots:

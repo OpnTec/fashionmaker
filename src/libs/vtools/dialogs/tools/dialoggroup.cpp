@@ -33,14 +33,14 @@
 #include "ui_dialoggroup.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogGroup::DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogGroup::DialogGroup(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogGroup),
-      group()
+      group(),
+      flagName(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
-    DialogTool::CheckState();
 
     connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogGroup::NameChanged);
 }

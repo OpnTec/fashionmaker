@@ -50,9 +50,10 @@ class DialogEndLine : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEndLine() override;
 
+    QString           GetPointName() const;
     void              SetPointName(const QString &value);
 
     QString           GetTypeLine() const;
@@ -73,17 +74,12 @@ public:
     virtual void      ShowDialog(bool click) override;
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type) override;
-    /**
-     * @brief DeployFormulaTextEdit grow or shrink formula input
-     */
-    void              DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void             FormulaTextChanged();
 
+    void             EvalLength();
     void             EvalAngle();
-    void             AngleTextChanged();
+
+    /** @brief DeployFormulaTextEdit grow or shrink formula input */
+    void             DeployFormulaTextEdit();
     void             DeployAngleTextEdit();
 
     void             FXAngle();
@@ -95,6 +91,7 @@ protected:
      */
     virtual void     SaveData() override;
     virtual void     closeEvent(QCloseEvent *event) override;
+    virtual bool     IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogEndLine)
 
@@ -102,16 +99,31 @@ private:
     Ui::DialogEndLine *ui;
 
     /** @brief formula formula */
-    QString           formulaLength;
+    QString formulaLength;
 
     /** @brief angle angle of line */
-    QString           formulaAngle;
+    QString formulaAngle;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int               formulaBaseHeight;
-    int               formulaBaseHeightAngle;
+    int formulaBaseHeight;
+    int formulaBaseHeightAngle;
+
+    QString pointName;
 
     bool m_firstRelease;
+
+    QTimer *timerFormulaLength;
+    QTimer *timerFormulaAngle;
+
+    bool flagFormula;
+    bool flagError;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogEndLine::IsValid() const
+{
+    return flagFormula && flagError && flagName;
+}
 
 #endif // DIALOGENDLINE_H

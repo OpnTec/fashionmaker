@@ -110,7 +110,7 @@ VToolTriangle* VToolTriangle::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.axisP2Id = dialogTool->GetAxisP2Id();
     initData.firstPointId = dialogTool->GetFirstPointId();
     initData.secondPointId = dialogTool->GetSecondPointId();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -294,7 +294,7 @@ void VToolTriangle::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrAxisP1, QString().setNum(dialogTool->GetAxisP1Id()));
     doc->SetAttribute(domElement, AttrAxisP2, QString().setNum(dialogTool->GetAxisP2Id()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));

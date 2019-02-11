@@ -50,21 +50,22 @@ class DialogLineIntersect : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogLineIntersect() override;
 
     quint32                 GetP1Line1() const;
-    void                    SetP1Line1(const quint32 &value);
+    void                    SetP1Line1(quint32 value);
 
     quint32                 GetP2Line1() const;
-    void                    SetP2Line1(const quint32 &value);
+    void                    SetP2Line1(quint32 value);
 
     quint32                 GetP1Line2() const;
-    void                    SetP1Line2(const quint32 &value);
+    void                    SetP1Line2(quint32 value);
 
     quint32                 GetP2Line2() const;
-    void                    SetP2Line2(const quint32 &value);
+    void                    SetP2Line2(quint32 value);
 
+    QString                 GetPointName() const;
     void                    SetPointName(const QString &value);
 public slots:
     virtual void            ChosenObject(quint32 id, const SceneObject &type) override;
@@ -76,17 +77,29 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void            SaveData() override;
+    virtual bool            IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogLineIntersect)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogLineIntersect *ui;
 
-    /** @brief flagPoint keep state of point */
-    bool                    flagPoint;
+    QString pointName;
 
-    virtual void            CheckState() final;
+    bool flagError;
+
+    /** @brief flagPoint keep state of point */
+    bool flagPoint;
+
+    bool flagName;
+
     bool                    CheckIntersecion();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogLineIntersect::IsValid() const
+{
+    return flagName && flagError && flagPoint;
+}
 
 #endif // DIALOGLINEINTERSECT_H

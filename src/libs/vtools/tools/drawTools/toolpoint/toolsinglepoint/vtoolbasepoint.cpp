@@ -298,7 +298,7 @@ void VToolBasePoint::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     Q_UNUSED(newDependencies)
 
     const QPointF p = dialogTool->GetPoint();
-    const QString name = dialogTool->getPointName();
+    const QString name = dialogTool->GetPointName();
     doc->SetAttribute(domElement, AttrName, name);
     doc->SetAttribute(domElement, AttrX, QString().setNum(qApp->fromPixel(p.x())));
     doc->SetAttribute(domElement, AttrY, QString().setNum(qApp->fromPixel(p.y())));

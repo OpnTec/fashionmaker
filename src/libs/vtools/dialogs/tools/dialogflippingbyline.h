@@ -51,7 +51,7 @@ class DialogFlippingByLine : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogFlippingByLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogFlippingByLine();
 
     quint32 GetFirstLinePointId() const;
@@ -75,11 +75,11 @@ private slots:
     void SuffixChanged();
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
+    virtual bool IsValid() const final;
 
 private slots:
     void PointChanged();
@@ -94,6 +94,15 @@ private:
     bool stage1;
 
     QString m_suffix;
+
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogFlippingByLine::IsValid() const
+{
+    return flagError && flagName;
+}
 
 #endif // DIALOGFLIPPINGBYLINE_H

@@ -98,7 +98,7 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(const QPo
     initData.circleRadius = dialogTool->GetCircleRadius();
     initData.tangentPointId = dialogTool->GetTangentPointId();
     initData.crossPoint = dialogTool->GetCrossCirclesPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -283,7 +283,7 @@ void VToolPointFromCircleAndTangent::SaveDialog(QDomElement &domElement, QList<q
     AddDependence(newDependencies, dialogTool->GetTangentPointId());
     AddDependence(newDependencies, dialogTool->GetCircleCenterId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrCCenter, QString().setNum(dialogTool->GetCircleCenterId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));
     doc->SetAttribute(domElement, AttrCRadius, dialogTool->GetCircleRadius());

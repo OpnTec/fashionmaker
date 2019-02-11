@@ -48,7 +48,7 @@ class DialogGroup : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogGroup(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogGroup(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogGroup();
 
     void    SetName(const QString &name);
@@ -61,6 +61,9 @@ public:
 public slots:
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool) override;
 
+protected:
+    virtual bool IsValid() const final;
+
 private slots:
     void NameChanged();
 
@@ -68,6 +71,13 @@ private:
     Q_DISABLE_COPY(DialogGroup)
     Ui::DialogGroup *ui;
     QMap<quint32, quint32> group;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogGroup::IsValid() const
+{
+    return flagName;
+}
 
 #endif // DIALOGGROUP_H

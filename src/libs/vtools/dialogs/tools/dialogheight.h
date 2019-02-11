@@ -50,9 +50,10 @@ class DialogHeight : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogHeight() override;
 
+    QString          GetPointName() const;
     void             SetPointName(const QString &value);
 
     QString          GetTypeLine() const;
@@ -78,11 +79,23 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData() override;
+    virtual bool     IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogHeight)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogHeight *ui;
+
+    QString pointName;
+
+    bool flagError;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogHeight::IsValid() const
+{
+    return flagError && flagName;
+}
 
 #endif // DIALOGHEIGHT_H

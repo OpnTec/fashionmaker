@@ -96,7 +96,7 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(const QPo
     initData.secondCurveId = dialogTool->GetSecondCurveId();
     initData.vCrossPoint = dialogTool->GetVCrossPoint();
     initData.hCrossPoint = dialogTool->GetHCrossPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -296,7 +296,7 @@ VCrossCurvesPoint VToolPointOfIntersectionCurves::GetVCrossPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SetVCrossPoint(const VCrossCurvesPoint &value)
+void VToolPointOfIntersectionCurves::SetVCrossPoint(VCrossCurvesPoint value)
 {
     vCrossPoint = value;
 
@@ -311,7 +311,7 @@ HCrossCurvesPoint VToolPointOfIntersectionCurves::GetHCrossPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointOfIntersectionCurves::SetHCrossPoint(const HCrossCurvesPoint &value)
+void VToolPointOfIntersectionCurves::SetHCrossPoint(HCrossCurvesPoint value)
 {
     hCrossPoint = value;
 
@@ -362,7 +362,7 @@ void VToolPointOfIntersectionCurves::SaveDialog(QDomElement &domElement, QList<q
     AddDependence(newDependencies, dialogTool->GetFirstCurveId());
     AddDependence(newDependencies, dialogTool->GetSecondCurveId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrCurve1, QString().setNum(dialogTool->GetFirstCurveId()));
     doc->SetAttribute(domElement, AttrCurve2, QString().setNum(dialogTool->GetSecondCurveId()));
     doc->SetAttribute(domElement, AttrVCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetVCrossPoint())));

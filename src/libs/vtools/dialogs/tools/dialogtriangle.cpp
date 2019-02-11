@@ -48,25 +48,31 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogTriangle::DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogTriangle)
+DialogTriangle::DialogTriangle(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogTriangle),
+      pointName(),
+      flagName(false),
+      flagError(false)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisP1);
     FillComboBoxPoints(ui->comboBoxAxisP2);
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogTriangle::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogTriangle::PointNameChanged);
     connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -189,7 +195,7 @@ void DialogTriangle::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxAxisP1));
     set.insert(getCurrentObjectId(ui->comboBoxAxisP2));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() < 3)//Need tree or more unique points for creation triangle
     {
         flagError = false;
@@ -198,7 +204,7 @@ void DialogTriangle::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -235,7 +241,13 @@ void DialogTriangle::SetSecondPointId(const quint32 &value)
 
     VisToolTriangle *line = qobject_cast<VisToolTriangle *>(vis);
     SCASSERT(line != nullptr)
-    line->setHypotenuseP2Id(value);
+            line->setHypotenuseP2Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogTriangle::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -57,17 +57,19 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogHeight)
+DialogHeight::DialogHeight(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogHeight),
+      pointName(),
+      flagError(true),
+      flagName(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxPoints(ui->comboBoxP1Line);
@@ -75,7 +77,11 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogHeight::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogHeight::PointNameChanged);
     connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -90,6 +96,12 @@ DialogHeight::DialogHeight(const VContainer *data, const quint32 &toolId, QWidge
 DialogHeight::~DialogHeight()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogHeight::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -260,7 +272,7 @@ void DialogHeight::PointNameChanged()
     const QPointF p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
     const QPointF p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
     {
         flagError = false;
@@ -269,7 +281,7 @@ void DialogHeight::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelBasePoint, color);
     ChangeColor(ui->labelFirstLinePoint, color);

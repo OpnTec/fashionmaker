@@ -48,22 +48,23 @@ class DialogPointOfIntersectionCurves : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogPointOfIntersectionCurves(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogPointOfIntersectionCurves(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionCurves() override;
 
+    QString GetPointName() const;
     void    SetPointName(const QString &value);
 
     quint32 GetFirstCurveId() const;
-    void    SetFirstCurveId(const quint32 &value);
+    void    SetFirstCurveId(quint32 value);
 
     quint32 GetSecondCurveId() const;
-    void    SetSecondCurveId(const quint32 &value);
+    void    SetSecondCurveId(quint32 value);
 
     VCrossCurvesPoint GetVCrossPoint() const;
-    void              SetVCrossPoint(const VCrossCurvesPoint &vP);
+    void              SetVCrossPoint(VCrossCurvesPoint vP);
 
     HCrossCurvesPoint GetHCrossPoint() const;
-    void              SetHCrossPoint(const HCrossCurvesPoint &hP);
+    void              SetHCrossPoint(HCrossCurvesPoint hP);
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -75,7 +76,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void SaveData() override;
-    virtual void CheckState() final;
+    virtual bool IsValid() const final;
 
 private slots:
     void CurveChanged();
@@ -84,6 +85,17 @@ private:
     Q_DISABLE_COPY(DialogPointOfIntersectionCurves)
 
     Ui::DialogPointOfIntersectionCurves *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointOfIntersectionCurves::IsValid() const
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONCURVES_H

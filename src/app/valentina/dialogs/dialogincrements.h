@@ -66,6 +66,7 @@ protected:
     virtual bool eventFilter(QObject *object, QEvent *event) override;
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
+    virtual bool IsValid() const final {return true;}
 private slots:
     void ShowIncrementDetails();
     void AddIncrement();

@@ -94,7 +94,7 @@ public:
                            VAbstractPattern *doc);
 
     static void AddAttributes(VAbstractPattern *doc, QDomElement &domElement, quint32 id, const VPiece &piece);
-    static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record);
+    static void AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, CustomSARecord record);
     static void AddCSARecords(VAbstractPattern *doc, QDomElement &domElement, const QVector<CustomSARecord> &records);
     static void AddInternalPaths(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &paths);
     static void AddPins(VAbstractPattern *doc, QDomElement &domElement, const QVector<quint32> &pins);

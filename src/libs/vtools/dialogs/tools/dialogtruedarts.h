@@ -48,7 +48,7 @@ class DialogTrueDarts : public DialogTool
     Q_OBJECT
 
 public:
-    DialogTrueDarts(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogTrueDarts();
 
     QString            GetFirstNewDartPointName();
@@ -82,7 +82,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void       SaveData() override;
-    virtual void       CheckState() final;
+    virtual bool       IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogTrueDarts)
@@ -96,6 +96,7 @@ private:
 
     bool flagName1;
     bool flagName2;
+    bool flagError;
 
     void NameChanged(QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                      QLineEdit *secondPointName, bool &flagName);
@@ -105,5 +106,11 @@ private:
     void CheckName(QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                    QLineEdit *secondPointName, bool &flagName);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogTrueDarts::IsValid() const
+{
+    return flagName1 && flagName2 && flagError;
+}
 
 #endif // DIALOGTRUEDARTS_H

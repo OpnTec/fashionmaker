@@ -50,7 +50,7 @@ class DialogUnionDetails : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogUnionDetails(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogUnionDetails(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogUnionDetails() override;
 
     quint32          getD1() const;
@@ -61,6 +61,8 @@ public:
     bool RetainPieces() const;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+protected:
+    virtual bool IsValid() const final {return true;}
 private:
     Q_DISABLE_COPY(DialogUnionDetails)
 

@@ -40,6 +40,7 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolarcwithlength.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vmisc/vabstractapplication.h"
@@ -48,15 +49,25 @@
 #include "ui_dialogarcwithlength.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogArcWithLength), flagRadius(false), flagF1(false),
-      flagLength(false), timerRadius(nullptr), timerF1(nullptr), timerLength(nullptr), radius(QString()), f1(QString()),
-      length(QString()),formulaBaseHeightRadius(0), formulaBaseHeightF1(0), formulaBaseHeightLength(0), angleF1(INT_MIN)
+DialogArcWithLength::DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogArcWithLength),
+      flagRadius(false),
+      flagF1(false),
+      flagLength(false),
+      timerRadius(new QTimer(this)),
+      timerF1(new QTimer(this)),
+      timerLength(new QTimer(this)),
+      radius(),
+      f1(),
+      length(),
+      formulaBaseHeightRadius(0),
+      formulaBaseHeightF1(0),
+      formulaBaseHeightLength(0)
 {
     ui->setupUi(this);
 
-    plainTextEditFormula = ui->plainTextEditRadius;
-    this->formulaBaseHeightLength = ui->plainTextEditRadius->height();
+    this->formulaBaseHeightRadius = ui->plainTextEditRadius->height();
     this->formulaBaseHeightF1 = ui->plainTextEditF1->height();
     this->formulaBaseHeightLength = ui->plainTextEditLength->height();
 
@@ -64,13 +75,13 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
     ui->plainTextEditF1->installEventFilter(this);
     ui->plainTextEditLength->installEventFilter(this);
 
-    timerRadius = new QTimer(this);
+    timerRadius->setSingleShot(true);
     connect(timerRadius, &QTimer::timeout, this, &DialogArcWithLength::Radius);
 
-    timerF1 = new QTimer(this);
+    timerF1->setSingleShot(true);
     connect(timerF1, &QTimer::timeout, this, &DialogArcWithLength::EvalF);
 
-    timerLength = new QTimer(this);
+    timerLength->setSingleShot(true);
     connect(timerLength, &QTimer::timeout, this, &DialogArcWithLength::Length);
 
     InitOkCancelApply(ui);
@@ -81,15 +92,24 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, const quint32 &
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    CheckState();
-
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogArcWithLength::FXRadius);
     connect(ui->toolButtonExprF1, &QPushButton::clicked, this, &DialogArcWithLength::FXF1);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogArcWithLength::FXLength);
 
-    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this, &DialogArcWithLength::RadiusChanged);
-    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArcWithLength::F1Changed);
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, &DialogArcWithLength::LengthChanged);
+    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerRadius->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerF1->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerLength->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowLengthRadius, &QPushButton::clicked, this, &DialogArcWithLength::DeployRadiusTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArcWithLength::DeployF1TextEdit);
@@ -249,45 +269,19 @@ void DialogArcWithLength::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::DeployRadiusTextEdit()
 {
-    DeployFormula(ui->plainTextEditRadius, ui->pushButtonGrowLengthArcLength, formulaBaseHeightRadius);
+    DeployFormula(this, ui->plainTextEditRadius, ui->pushButtonGrowLengthArcLength, formulaBaseHeightRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::DeployF1TextEdit()
 {
-    DeployFormula(ui->plainTextEditF1, ui->pushButtonGrowLengthF1, formulaBaseHeightF1);
+    DeployFormula(this, ui->plainTextEditF1, ui->pushButtonGrowLengthF1, formulaBaseHeightF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::DeployLengthTextEdit()
 {
-    DeployFormula(ui->plainTextEditLength, ui->pushButtonGrowLengthArcLength, formulaBaseHeightLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArcWithLength::RadiusChanged()
-{
-    labelEditFormula = ui->labelEditRadius;
-    labelResultCalculation = ui->labelResultRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagRadius, ui->plainTextEditRadius, timerRadius, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArcWithLength::F1Changed()
-{
-    labelEditFormula = ui->labelEditF1;
-    labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogArcWithLength::LengthChanged()
-{
-    labelEditFormula = ui->labelEditLength;
-    labelResultCalculation = ui->labelResultLength;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, postfix);
+    DeployFormula(this, ui->plainTextEditLength, ui->pushButtonGrowLengthArcLength, formulaBaseHeightLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,18 +327,6 @@ void DialogArcWithLength::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogArcWithLength::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagRadius && flagF1 && flagLength);
-    // In case dialog hasn't apply button
-    if ( bApply != nullptr)
-    {
-        bApply->setEnabled(bOk->isEnabled());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::ShowVisualization()
 {
     AddVisualization<VisToolArcWithLength>();
@@ -380,42 +362,40 @@ void DialogArcWithLength::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::Radius()
 {
-    labelEditFormula = ui->labelEditRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal radius = Eval(ui->plainTextEditRadius->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditRadius->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditRadius;
+    formulaData.labelResult = ui->labelResultRadius;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkLessThanZero = true;
 
-    if (radius < 0)
-    {
-        flagRadius = false;
-        ChangeColor(labelEditFormula, Qt::red);
-        ui->labelResultRadius->setText(tr("Error"));
-        ui->labelResultRadius->setToolTip(tr("Radius can't be negative"));
-
-        DialogArcWithLength::CheckState();
-    }
+    Eval(formulaData, flagRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::Length()
 {
-    labelEditFormula = ui->labelEditLength;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal length = Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditLength->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditLength;
+    formulaData.labelResult = ui->labelResultLength;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
 
-    if (qFuzzyIsNull(length))
-    {
-        flagLength = false;
-        ChangeColor(labelEditFormula, Qt::red);
-        ui->labelResultLength->setText(tr("Error"));
-        ui->labelResultLength->setToolTip(tr("Length can't be equal 0"));
-
-        DialogArcWithLength::CheckState();
-    }
+    Eval(formulaData, flagLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::EvalF()
 {
-    labelEditFormula = ui->labelEditF1;
-    angleF1 = Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, degreeSymbol, false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditF1->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditF1;
+    formulaData.labelResult = ui->labelResultF1;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagF1);
 }

@@ -51,9 +51,10 @@ class DialogBisector : public DialogTool
     Q_OBJECT
 public:
 
-    DialogBisector(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogBisector(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogBisector() override;
 
+    QString            GetPointName() const;
     void               SetPointName(const QString &value);
 
     QString            GetTypeLine() const;
@@ -79,12 +80,10 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void               DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void               FormulaTextChanged();
+
     virtual void       PointNameChanged() override;
     void               FXLength();
+    void               EvalFormula();
 protected:
     virtual void       ShowVisualization() override;
     /**
@@ -92,6 +91,7 @@ protected:
      */
     virtual void       SaveData() override;
     virtual void       closeEvent(QCloseEvent *event) override;
+    virtual bool       IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogBisector)
 
@@ -99,10 +99,23 @@ private:
     Ui::DialogBisector *ui;
 
     /** @brief formula formula */
-    QString            formula;
+    QString formula;
+    QString pointName;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int                formulaBaseHeight;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagError;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogBisector::IsValid() const
+{
+    return flagFormula && flagError && flagName;
+}
 
 #endif // DIALOGBISECTOR_H

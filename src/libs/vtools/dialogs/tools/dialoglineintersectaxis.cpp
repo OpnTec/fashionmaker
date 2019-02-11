@@ -59,26 +59,29 @@
 #include "ui_dialoglineintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogLineIntersectAxis),
       formulaAngle(),
       formulaBaseHeightAngle(0),
-      m_firstRelease(false)
+      pointName(),
+      m_firstRelease(false),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagError(true),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
@@ -87,8 +90,15 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::FXAngle);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersectAxis::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogLineIntersectAxis::AngleTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogLineIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogLineIntersectAxis::EvalAngle);
     connect(ui->comboBoxFirstLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -105,6 +115,12 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, const q
 DialogLineIntersectAxis::~DialogLineIntersectAxis()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLineIntersectAxis::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,7 +175,7 @@ quint32 DialogLineIntersectAxis::GetBasePointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLineIntersectAxis::SetBasePointId(const quint32 &value)
+void DialogLineIntersectAxis::SetBasePointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxAxisPoint, value);
 
@@ -175,7 +191,7 @@ quint32 DialogLineIntersectAxis::GetFirstPointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLineIntersectAxis::SetFirstPointId(const quint32 &value)
+void DialogLineIntersectAxis::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstLinePoint, value);
 
@@ -191,7 +207,7 @@ quint32 DialogLineIntersectAxis::GetSecondPointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLineIntersectAxis::SetSecondPointId(const quint32 &value)
+void DialogLineIntersectAxis::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondLinePoint, value);
 
@@ -311,19 +327,21 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::EvalAngle()
 {
-    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, degreeSymbol, false);
-}
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLineIntersectAxis::AngleTextChanged()
-{
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula, degreeSymbol);
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -334,7 +352,7 @@ void DialogLineIntersectAxis::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxSecondLinePoint));
     set.insert(getCurrentObjectId(ui->comboBoxAxisPoint));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() != 3)
     {
         flagError = false;
@@ -343,7 +361,7 @@ void DialogLineIntersectAxis::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);

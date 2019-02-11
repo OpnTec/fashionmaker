@@ -42,6 +42,7 @@
 #include <Qt>
 
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofintersectioncircles.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -51,40 +52,51 @@
 #include "ui_dialogpointofintersectioncircles.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId,
+DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId,
                                                                    QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersectionCircles), flagCircle1Radius(false),
-      flagCircle2Radius(false), timerCircle1Radius(nullptr), timerCircle2Radius(nullptr), circle1Radius(),
-      circle2Radius(), formulaBaseHeightCircle1Radius(0), formulaBaseHeightCircle2Radius(0)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointOfIntersectionCircles),
+      timerCircle1Radius(new QTimer(this)),
+      timerCircle2Radius(new QTimer(this)),
+      circle1Radius(),
+      circle2Radius(),
+      formulaBaseHeightCircle1Radius(0),
+      formulaBaseHeightCircle2Radius(0),
+      pointName(),
+      flagCircle1Radius(false),
+      flagCircle2Radius(false),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
-    plainTextEditFormula = ui->plainTextEditCircle1Radius;
     this->formulaBaseHeightCircle1Radius = ui->plainTextEditCircle1Radius->height();
     this->formulaBaseHeightCircle2Radius = ui->plainTextEditCircle2Radius->height();
 
     ui->plainTextEditCircle1Radius->installEventFilter(this);
     ui->plainTextEditCircle2Radius->installEventFilter(this);
 
-    timerCircle1Radius = new QTimer(this);
+    timerCircle1Radius->setSingleShot(true);
     connect(timerCircle1Radius, &QTimer::timeout, this, &DialogPointOfIntersectionCircles::EvalCircle1Radius);
 
-    timerCircle2Radius = new QTimer(this);
+    timerCircle2Radius->setSingleShot(true);
     connect(timerCircle2Radius, &QTimer::timeout, this, &DialogPointOfIntersectionCircles::EvalCircle2Radius);
 
     InitOkCancelApply(ui);
-    CheckState();
 
     FillComboBoxPoints(ui->comboBoxCircle1Center);
     FillComboBoxPoints(ui->comboBoxCircle2Center);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersectionCircles::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxCircle1Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersectionCircles::PointChanged);
     connect(ui->comboBoxCircle2Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -95,10 +107,15 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
     connect(ui->toolButtonExprCircle2Radius, &QPushButton::clicked, this,
             &DialogPointOfIntersectionCircles::FXCircle2Radius);
 
-    connect(ui->plainTextEditCircle1Radius, &QPlainTextEdit::textChanged, this,
-            &DialogPointOfIntersectionCircles::Circle1RadiusChanged);
-    connect(ui->plainTextEditCircle2Radius, &QPlainTextEdit::textChanged, this,
-            &DialogPointOfIntersectionCircles::Circle2RadiusChanged);
+    connect(ui->plainTextEditCircle1Radius, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerCircle1Radius->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditCircle2Radius, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerCircle2Radius->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowCircle1Radius, &QPushButton::clicked, this,
             &DialogPointOfIntersectionCircles::DeployCircle1RadiusTextEdit);
@@ -112,6 +129,12 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
 DialogPointOfIntersectionCircles::~DialogPointOfIntersectionCircles()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionCircles::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -266,7 +289,7 @@ void DialogPointOfIntersectionCircles::ChosenObject(quint32 id, const SceneObjec
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::PointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxCircle1Center) == getCurrentObjectId(ui->comboBoxCircle2Center))
     {
         flagError = false;
@@ -275,7 +298,7 @@ void DialogPointOfIntersectionCircles::PointChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelCircle1Center, color);
     ChangeColor(ui->labelCircle1Center, color);
@@ -285,31 +308,13 @@ void DialogPointOfIntersectionCircles::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::DeployCircle1RadiusTextEdit()
 {
-    DeployFormula(ui->plainTextEditCircle1Radius, ui->pushButtonGrowCircle1Radius, formulaBaseHeightCircle1Radius);
+    DeployFormula(this, ui->plainTextEditCircle1Radius, ui->pushButtonGrowCircle1Radius, formulaBaseHeightCircle1Radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::DeployCircle2RadiusTextEdit()
 {
-    DeployFormula(ui->plainTextEditCircle2Radius, ui->pushButtonGrowCircle2Radius, formulaBaseHeightCircle2Radius);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionCircles::Circle1RadiusChanged()
-{
-    labelEditFormula = ui->labelEditCircle1Radius;
-    labelResultCalculation = ui->labelResultCircle1Radius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagCircle1Radius, ui->plainTextEditCircle1Radius, timerCircle1Radius, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionCircles::Circle2RadiusChanged()
-{
-    labelEditFormula = ui->labelEditCircle2Radius;
-    labelResultCalculation = ui->labelResultCircle2Radius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagCircle2Radius, ui->plainTextEditCircle2Radius, timerCircle2Radius, postfix);
+    DeployFormula(this, ui->plainTextEditCircle2Radius, ui->pushButtonGrowCircle2Radius, formulaBaseHeightCircle2Radius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -343,15 +348,19 @@ void DialogPointOfIntersectionCircles::FXCircle2Radius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 {
-    labelEditFormula = ui->labelEditCircle1Radius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal radius = Eval(ui->plainTextEditCircle1Radius->toPlainText(), flagCircle1Radius,
-                              ui->labelResultCircle1Radius, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditCircle1Radius->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditCircle1Radius;
+    formulaData.labelResult = ui->labelResultCircle1Radius;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    const qreal radius = Eval(formulaData, flagCircle1Radius);
 
     if (radius < 0)
     {
         flagCircle2Radius = false;
-        ChangeColor(labelEditFormula, Qt::red);
+        ChangeColor(ui->labelEditCircle1Radius, errorColor);
         ui->labelResultCircle1Radius->setText(tr("Error"));
         ui->labelResultCircle1Radius->setToolTip(tr("Radius can't be negative"));
 
@@ -362,15 +371,19 @@ void DialogPointOfIntersectionCircles::EvalCircle1Radius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionCircles::EvalCircle2Radius()
 {
-    labelEditFormula = ui->labelEditCircle2Radius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal radius = Eval(ui->plainTextEditCircle2Radius->toPlainText(), flagCircle2Radius,
-                              ui->labelResultCircle2Radius, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditCircle2Radius->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditCircle2Radius;
+    formulaData.labelResult = ui->labelResultCircle1Radius;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    const qreal radius = Eval(formulaData, flagCircle2Radius);
 
     if (radius < 0)
     {
         flagCircle2Radius = false;
-        ChangeColor(labelEditFormula, Qt::red);
+        ChangeColor(ui->labelEditCircle2Radius, errorColor);
         ui->labelResultCircle2Radius->setText(tr("Error"));
         ui->labelResultCircle2Radius->setToolTip(tr("Radius can't be negative"));
 
@@ -406,16 +419,4 @@ void DialogPointOfIntersectionCircles::closeEvent(QCloseEvent *event)
     ui->plainTextEditCircle1Radius->blockSignals(true);
     ui->plainTextEditCircle2Radius->blockSignals(true);
     DialogTool::closeEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionCircles::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagFormula && flagName && flagError && flagCircle1Radius && flagCircle2Radius);
-    // In case dialog hasn't apply button
-    if ( bApply != nullptr)
-    {
-        bApply->setEnabled(bOk->isEnabled());
-    }
 }

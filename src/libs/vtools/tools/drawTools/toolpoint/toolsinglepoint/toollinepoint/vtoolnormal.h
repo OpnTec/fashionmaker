@@ -71,8 +71,8 @@ public:
     static VToolNormal* Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene  *scene, VAbstractPattern *doc,
                                VContainer *data);
     static VToolNormal* Create(VToolNormalInitData initData);
-    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                             const qreal &angle = 0);
+    static QPointF FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length,
+                             qreal angle = 0);
     static const QString ToolType;
     virtual int    type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::Normal)};

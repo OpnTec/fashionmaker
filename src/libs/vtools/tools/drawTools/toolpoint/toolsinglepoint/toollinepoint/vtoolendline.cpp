@@ -111,7 +111,7 @@ VToolEndLine* VToolEndLine::Create(const QPointer<DialogTool> &dialog, VMainGrap
     initData.basePointId = dialogTool->GetBasePointId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -184,7 +184,7 @@ void VToolEndLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepend
     AddDependence(oldDependencies, basePointId);
     AddDependence(newDependencies, dialogTool->GetBasePointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());

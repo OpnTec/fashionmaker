@@ -65,6 +65,7 @@ protected:
     virtual void CheckState() final;
     virtual void ShowVisualization() override;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 
 private slots:
     void ShowContextMenu(const QPoint &pos);
@@ -87,11 +88,6 @@ private slots:
     void FXWidthBefore();
     void FXWidthAfter();
     void FXVisible();
-
-    void WidthChanged();
-    void WidthBeforeChanged();
-    void WidthAfterChanged();
-    void VisibleChanged();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
@@ -119,6 +115,9 @@ private:
     bool m_flagFormulaBefore;
     bool m_flagFormulaAfter;
     bool m_flagFormulaVisible;
+    bool m_flagName;
+    bool m_flagError;
+    bool m_flagFormula;
 
     void InitPathTab();
     void InitSeamAllowanceTab();
@@ -165,6 +164,14 @@ private:
     void RefreshPathList(const VPiecePath &path);
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPiecePath::IsValid() const
+{
+    return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
+            && m_flagFormulaVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline bool DialogPiecePath::IsShowNotch() const
 {
     return m_showMode && GetType() == PiecePathType::CustomSeamAllowance;

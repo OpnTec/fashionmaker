@@ -59,12 +59,14 @@
 #include "ui_dialogflippingbyline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogFlippingByLine),
       objects(),
       stage1(true),
-      m_suffix()
+      m_suffix(),
+      flagName(false),
+      flagError(false)
 {
     ui->setupUi(this);
 
@@ -74,9 +76,6 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, const quint32
 
     FillComboBoxPoints(ui->comboBoxFirstLinePoint);
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
-
-    flagName = true;
-    CheckState();
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
     connect(ui->comboBoxFirstLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -271,7 +270,7 @@ void DialogFlippingByLine::SuffixChanged()
         if (suffix.isEmpty())
         {
             flagName = false;
-            ChangeColor(ui->labelSuffix, Qt::red);
+            ChangeColor(ui->labelSuffix, errorColor);
             CheckState();
             return;
         }
@@ -287,7 +286,7 @@ void DialogFlippingByLine::SuffixChanged()
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;
-                        ChangeColor(ui->labelSuffix, Qt::red);
+                        ChangeColor(ui->labelSuffix, errorColor);
                         CheckState();
                         return;
                     }
@@ -296,18 +295,9 @@ void DialogFlippingByLine::SuffixChanged()
         }
 
         flagName = true;
-        ChangeColor(ui->labelSuffix, okColor);
+        ChangeColor(ui->labelSuffix, OkColor(this));
     }
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByLine::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagError && flagName);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(bOk->isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -333,7 +323,7 @@ void DialogFlippingByLine::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::PointChanged()
 {
-    QColor color = okColor;
+    QColor color = OkColor(this);
     flagError = true;
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);

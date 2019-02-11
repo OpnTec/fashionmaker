@@ -99,7 +99,7 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(const QPointer<DialogTool
     initData.secondPointId = dialogTool->GetSecondPointId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -269,7 +269,7 @@ void VToolLineIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32> 
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());

@@ -53,7 +53,7 @@ class DialogSplinePath : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSplinePath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogSplinePath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSplinePath() override;
 
     VSplinePath GetPath() const;
@@ -65,8 +65,8 @@ public slots:
 protected:
     virtual void ShowVisualization() override;
     virtual void SaveData() override;
-    virtual void CheckState() final;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
@@ -107,6 +107,7 @@ private:
     QVector<bool> flagAngle2;
     QVector<bool> flagLength1;
     QVector<bool> flagLength2;
+    bool flagError;
 
     void EvalAngle1();
     void EvalAngle2();

@@ -82,10 +82,6 @@ private slots:
     void DeployRotationAngleTextEdit();
     void DeployLengthTextEdit();
 
-    void AngleChanged();
-    void RotationAngleChanged();
-    void LengthChanged();
-
     void FXAngle();
     void FXRotationAngle();
     void FXLength();
@@ -93,21 +89,16 @@ private slots:
     void SuffixChanged();
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogMove)
     Ui::DialogMove *ui;
-
-    /** @brief flagAngle true if value of angle is correct */
-    bool    flagAngle;
-    bool    flagRotationAngle;
-    bool    flagLength;
 
     /** @brief timerAngle timer of check formula of angle */
     QTimer  *timerAngle;
@@ -133,9 +124,21 @@ private:
 
     bool optionalRotationOrigin;
 
+    /** @brief flagAngle true if value of angle is correct */
+    bool flagAngle;
+    bool flagRotationAngle;
+    bool flagLength;
+    bool flagName;
+
     void EvalAngle();
     void EvalRotationAngle();
     void EvalLength();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogMove::IsValid() const
+{
+    return flagAngle && flagRotationAngle && flagLength && flagName;
+}
 
 #endif // DIALOGMOVING_H

@@ -40,7 +40,7 @@ class DialogDuplicateDetail : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogDuplicateDetail(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogDuplicateDetail();
 
     quint32 Duplicate() const;
@@ -50,6 +50,8 @@ public:
     virtual void ShowDialog(bool click) override;
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
+protected:
+    virtual bool IsValid() const final {return true;}
 private:
     Q_DISABLE_COPY(DialogDuplicateDetail)
     Ui::DialogDuplicateDetail *ui;

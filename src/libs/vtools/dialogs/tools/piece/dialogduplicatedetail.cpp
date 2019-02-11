@@ -31,7 +31,7 @@
 #include "../../../visualization/path/vistoolduplicatedetail.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogDuplicateDetail),
       m_idDetail(NULL_ID),

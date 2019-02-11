@@ -50,7 +50,7 @@ class DialogTriangle : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogTriangle(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogTriangle(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogTriangle() override;
 
     quint32        GetAxisP1Id() const;
@@ -65,6 +65,7 @@ public:
     quint32        GetSecondPointId() const;
     void           SetSecondPointId(const quint32 &value);
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
@@ -75,11 +76,23 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogTriangle)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogTriangle *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogTriangle::IsValid() const
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGTRIANGLE_H

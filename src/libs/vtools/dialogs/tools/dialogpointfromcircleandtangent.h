@@ -49,9 +49,10 @@ class DialogPointFromCircleAndTangent : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogPointFromCircleAndTangent();
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     quint32        GetCircleCenterId() const;
@@ -71,7 +72,6 @@ public slots:
     void           PointChanged();
 
     void           DeployCircleRadiusTextEdit();
-    void           CircleRadiusChanged();
     void           FXCircleRadius();
     void           EvalCircleRadius();
 
@@ -82,17 +82,26 @@ protected:
      */
     virtual void   SaveData() override;
     virtual void   closeEvent(QCloseEvent *event) override;
-    virtual void   CheckState() final;
+    virtual bool   IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogPointFromCircleAndTangent)
 
     Ui::DialogPointFromCircleAndTangent *ui;
 
-    bool          flagCircleRadius;
-    QTimer        *timerCircleRadius;
-    QString       circleRadius;
-    int           formulaBaseHeightCircleRadius;
+    QTimer* timerCircleRadius;
+    QString circleRadius;
+    int     formulaBaseHeightCircleRadius;
+    QString pointName;
+    bool    flagCircleRadius;
+    bool    flagName;
+    bool    flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointFromCircleAndTangent::IsValid() const
+{
+    return flagCircleRadius && flagName && flagError;
+}
 
 #endif // DIALOGPOINTFROMCIRCLEANDTANGENT_H

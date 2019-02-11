@@ -51,6 +51,7 @@
 #include <QWidget>
 #include <Qt>
 #include <new>
+#include <QTimer>
 
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -73,18 +74,28 @@ template <class T> class QSharedPointer;
 enum {ColumnName = 0, ColumnFullName};
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogEditWrongFormula), formula(QString()), formulaBaseHeight(0),
-      checkZero(false), checkLessThanZero(false), postfix(QString()), restoreCursor(false)
+DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogEditWrongFormula),
+      formula(),
+      formulaBaseHeight(0),
+      checkZero(false),
+      checkLessThanZero(false),
+      postfix(),
+      restoreCursor(false),
+      timerFormula(new QTimer(this)),
+      flagFormula(false)
 {
     ui->setupUi(this);
+
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogEditWrongFormula::EvalFormula);
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
 #endif
 
     InitVariables();
-    InitFormulaUI(ui);
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
     ui->filterFormulaInputs->setClearButtonEnabled(true);
@@ -92,13 +103,14 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, const qui
     connect(ui->filterFormulaInputs, &QLineEdit::textChanged, this, &DialogEditWrongFormula::FilterVariablesEdited);
 
     InitOkCancel(ui);
-    flagFormula = false;
-    CheckState();
 
     connect(ui->toolButtonPutHere, &QPushButton::clicked, this, &DialogEditWrongFormula::PutHere);
     connect(ui->tableWidget, &QTableWidget::itemDoubleClicked, this, &DialogEditWrongFormula::PutVal);
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEditWrongFormula::FormulaChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
 
     //Disable Qt::WaitCursor
 #ifndef QT_NO_CURSOR
@@ -146,11 +158,17 @@ void DialogEditWrongFormula::DialogRejected()
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::EvalFormula()
-{
-    SCASSERT(plainTextEditFormula != nullptr)
-    SCASSERT(labelResultCalculation != nullptr)
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, checkZero,
-         checkLessThanZero);
+{    
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = postfix;
+    formulaData.checkZero = checkZero;
+    formulaData.checkLessThanZero = checkLessThanZero;
+
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -337,13 +355,6 @@ void DialogEditWrongFormula::Functions()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEditWrongFormula::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagFormula);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogEditWrongFormula::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
@@ -370,6 +381,8 @@ void DialogEditWrongFormula::showEvent(QShowEvent *event)
     {
         resize(sz);
     }
+
+    CheckState();
 
     isInitialized = true;//first show windows are held
 }

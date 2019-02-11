@@ -99,7 +99,7 @@ void VToolAlongLine::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepe
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
@@ -164,8 +164,8 @@ QString VToolAlongLine::MakeToolTip() const
             .arg(qApp->fromPixel(curLine.length()))
             .arg(UnitsToStr(qApp->patternUnit(), true), tr("Angle"))
             .arg(curLine.angle())
-            .arg(QString("%1->%2").arg(basePoint->name(), current->name()),
-                 QString("%1->%2").arg(current->name(), secondPoint->name()))
+            .arg(QStringLiteral("%1->%2").arg(basePoint->name(), current->name()),
+                 QStringLiteral("%1->%2").arg(current->name(), secondPoint->name()))
             .arg(qApp->fromPixel(curToSecond.length()))
             .arg(tr("Label"), current->name());
     return toolTip;
@@ -230,7 +230,7 @@ VToolAlongLine* VToolAlongLine::Create(const QPointer<DialogTool> &dialog, VMain
     initData.secondPointId = dialogTool->GetSecondPointId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;

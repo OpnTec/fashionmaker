@@ -101,7 +101,7 @@ VToolCutArc* VToolCutArc::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     VToolCutArcInitData initData;
     initData.formula = dialogTool->GetFormula();
     initData.arcId = dialogTool->getArcId();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -205,7 +205,7 @@ void VToolCutArc::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     AddDependence(oldDependencies, curveCutId);
     AddDependence(newDependencies, dialogTool->getArcId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->getArcId()));
 }
@@ -283,5 +283,6 @@ QString VToolCutArc::MakeToolTip() const
         return toolTip;
     };
 
-    return ArcToolTip(ArcToolTip("<table>", ar1, QChar('1')), ar2, QChar('2')) + QLatin1String("</table>");
+    return ArcToolTip(ArcToolTip(QStringLiteral("<table>"), ar1, QChar('1')), ar2, QChar('2')) +
+            QStringLiteral("</table>");
 }

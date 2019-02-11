@@ -50,9 +50,10 @@ class DialogAlongLine : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogAlongLine() override;
 
+    QString             GetPointName() const;
     void                SetPointName(const QString &value);
 
     QString             GetTypeLine() const;
@@ -65,10 +66,10 @@ public:
     void                SetFormula(const QString &value);
 
     quint32             GetFirstPointId() const;
-    void                SetFirstPointId(const quint32 &value);
+    void                SetFirstPointId(quint32 value);
 
     quint32             GetSecondPointId() const;
-    void                SetSecondPointId(const quint32 &value);
+    void                SetSecondPointId(quint32 value);
 
     virtual void        Build(const Tool &type) override;
 public slots:
@@ -77,13 +78,10 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void                DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void                FormulaTextChanged();
     void                PointChanged();
 
     void                FXLength();
+    void                EvalFormula();
 protected:
     virtual void        ShowVisualization() override;
     /**
@@ -91,6 +89,7 @@ protected:
      */
     virtual void        SaveData() override;
     virtual void        closeEvent(QCloseEvent *event) override;
+    virtual bool        IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogAlongLine)
 
@@ -98,14 +97,28 @@ private:
     Ui::DialogAlongLine *ui;
 
     /** @brief formula formula */
-    QString             formula;
+    QString formula;
+
+    QString pointName;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int formulaBaseHeight;
 
     bool buildMidpoint;
 
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagError;
+    bool flagName;
+
     void SetCurrentLength();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogAlongLine::IsValid() const
+{
+    return flagName &&flagFormula && flagError;
+}
 
 #endif // DIALOGALONGLINE_H

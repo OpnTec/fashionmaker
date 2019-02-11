@@ -75,7 +75,7 @@ public:
     QString ArcName() const;
 
     CrossCirclesPoint GetCrossCirclesPoint() const;
-    void              SetCrossCirclesPoint(const CrossCirclesPoint &value);
+    void              SetCrossCirclesPoint(CrossCirclesPoint value);
 
     virtual void ShowVisualization(bool show) override;
 protected slots:

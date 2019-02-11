@@ -68,7 +68,10 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
       m_formulaBaseVisible(0),
       m_flagFormulaBefore(true),
       m_flagFormulaAfter(true),
-      m_flagFormulaVisible(true)
+      m_flagFormulaVisible(true),
+      m_flagName(true),//We have default name of piece.
+      m_flagError(false),
+      m_flagFormula(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -80,9 +83,7 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, quint32 toolId, QWidget
 
     EvalVisible();
 
-    flagName = true;//We have default name of piece.
-    flagError = PathIsValid();
-    CheckState();
+    m_flagError = PathIsValid();
 
     vis = new VisToolPiecePath(data);
 
@@ -219,7 +220,7 @@ void DialogPiecePath::CheckState()
     SCASSERT(bOk != nullptr);
     if (GetType() == PiecePathType::InternalPath)
     {
-        flagFormula = true;
+        m_flagFormula = true;
         m_flagFormulaBefore = true;
         m_flagFormulaAfter = true;
     }
@@ -228,17 +229,16 @@ void DialogPiecePath::CheckState()
         m_flagFormulaVisible = true; // Works only for internal paths
         if (not m_showMode)
         {
-            flagFormula = true;
+            m_flagFormula = true;
             m_flagFormulaBefore = true;
             m_flagFormulaAfter = true;
         }
     }
 
-    bOk->setEnabled(flagName && flagError && flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
-                    && m_flagFormulaVisible);
+    bOk->setEnabled(IsValid());
 
     const int tabSeamAllowanceIndex = ui->tabWidget->indexOf(ui->tabSeamAllowance);
-    if (flagFormula && m_flagFormulaBefore && m_flagFormulaAfter)
+    if (m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter)
     {
         ui->tabWidget->setTabIcon(tabSeamAllowanceIndex, QIcon());
     }
@@ -391,13 +391,13 @@ void DialogPiecePath::NameChanged()
 {
     if (ui->lineEditName->text().isEmpty())
     {
-        flagName = false;
-        ChangeColor(ui->labelName, Qt::red);
+        m_flagName = false;
+        ChangeColor(ui->labelName, errorColor);
     }
     else
     {
-        flagName = true;
-        ChangeColor(ui->labelName, okColor);
+        m_flagName = true;
+        ChangeColor(ui->labelName, OkColor(this));
     }
     CheckState();
 }
@@ -736,10 +736,16 @@ void DialogPiecePath::PassmarkShowSecondChanged(int state)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidth()
 {
-    labelEditFormula = ui->labelEditWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = ui->plainTextEditFormulaWidth->toPlainText();
-    m_saWidth = Eval(formula, flagFormula, ui->labelResultWidth, postfix, false, true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditWidth;
+    formulaData.labelResult = ui->labelResultWidth;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkZero = false;
+    formulaData.checkLessThanZero = true;
+
+    m_saWidth = Eval(formulaData, m_flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -759,14 +765,18 @@ void DialogPiecePath::EvalWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidthBefore()
 {
-    labelEditFormula = ui->labelEditBefore;
     if (ui->comboBoxNodes->count() > 0)
     {
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        QString formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
-        Eval(formula, m_flagFormulaBefore, ui->labelResultBefore, postfix, false, true);
+        FormulaData formulaData;
+        formulaData.formula = ui->plainTextEditFormulaWidthBefore->toPlainText();
+        formulaData.variables = data->DataVariables();
+        formulaData.labelEditFormula = ui->labelEditBefore;
+        formulaData.labelResult = ui->labelResultBefore;
+        formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+        formulaData.checkZero = false;
+        formulaData.checkLessThanZero = true;
 
-        formula = GetFormulaSAWidthBefore();
+        const QString formula = GetFormulaSAWidthBefore();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefBefore->setEnabled(true);
@@ -776,7 +786,7 @@ void DialogPiecePath::EvalWidthBefore()
     }
     else
     {
-        ChangeColor(labelEditFormula, okColor);
+        ChangeColor(ui->labelEditBefore, OkColor(this));
         ui->labelResultBefore->setText(tr("<Empty>"));
         m_flagFormulaBefore = true;
     }
@@ -785,14 +795,18 @@ void DialogPiecePath::EvalWidthBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalWidthAfter()
 {
-    labelEditFormula = ui->labelEditAfter;
     if (ui->comboBoxNodes->count() > 0)
     {
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        QString formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
-        Eval(formula, m_flagFormulaAfter, ui->labelResultAfter, postfix, false, true);
+        FormulaData formulaData;
+        formulaData.formula = ui->plainTextEditFormulaWidthAfter->toPlainText();
+        formulaData.variables = data->DataVariables();
+        formulaData.labelEditFormula = ui->labelEditAfter;
+        formulaData.labelResult = ui->labelResultAfter;
+        formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+        formulaData.checkZero = false;
+        formulaData.checkLessThanZero = true;
 
-        formula = GetFormulaSAWidthAfter();
+        const QString formula = GetFormulaSAWidthAfter();
         if (formula != currentSeamAllowance)
         {
             ui->pushButtonDefAfter->setEnabled(true);
@@ -802,7 +816,7 @@ void DialogPiecePath::EvalWidthAfter()
     }
     else
     {
-        ChangeColor(labelEditFormula, okColor);
+        ChangeColor(ui->labelEditAfter, OkColor(this));
         ui->labelResultAfter->setText(tr("<Empty>"));
         m_flagFormulaAfter = true;
     }
@@ -811,9 +825,16 @@ void DialogPiecePath::EvalWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::EvalVisible()
 {
-    labelEditFormula = ui->labelEditVisible;
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, QString(), false, true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditVisible;
+    formulaData.labelResult = ui->labelResultVisible;
+    formulaData.postfix = QString();
+    formulaData.checkZero = false;
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -871,62 +892,27 @@ void DialogPiecePath::FXVisible()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::WidthChanged()
-{
-    labelEditFormula = ui->labelEditWidth;
-    labelResultCalculation = ui->labelResultWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagFormula, ui->plainTextEditFormulaWidth, m_timerWidth, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::WidthBeforeChanged()
-{
-    labelEditFormula = ui->labelEditBefore;
-    labelResultCalculation = ui->labelResultBefore;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagFormulaBefore, ui->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::WidthAfterChanged()
-{
-    labelEditFormula = ui->labelEditAfter;
-    labelResultCalculation = ui->labelResultAfter;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagFormulaAfter, ui->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPiecePath::VisibleChanged()
-{
-    labelEditFormula = ui->labelEditVisible;
-    labelResultCalculation = ui->labelResultVisible;
-    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, QString());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::DeployWidthFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseWidth);
+    DeployFormula(this, ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::DeployWidthBeforeFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaWidthBefore, ui->pushButtonGrowWidthBefore, m_formulaBaseWidthBefore);
+    DeployFormula(this, ui->plainTextEditFormulaWidthBefore, ui->pushButtonGrowWidthBefore, m_formulaBaseWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::DeployWidthAfterFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaWidthAfter, ui->pushButtonGrowWidthAfter, m_formulaBaseWidthAfter);
+    DeployFormula(this, ui->plainTextEditFormulaWidthAfter, ui->pushButtonGrowWidthAfter, m_formulaBaseWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::DeployVisibleFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
+    DeployFormula(this, ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -994,7 +980,6 @@ void DialogPiecePath::InitPathTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::InitSeamAllowanceTab()
 {
-    plainTextEditFormula = ui->plainTextEditFormulaWidth;
     this->m_formulaBaseWidth = ui->plainTextEditFormulaWidth->height();
     this->m_formulaBaseWidthBefore = ui->plainTextEditFormulaWidthBefore->height();
     this->m_formulaBaseWidthAfter = ui->plainTextEditFormulaWidthAfter->height();
@@ -1002,6 +987,10 @@ void DialogPiecePath::InitSeamAllowanceTab()
     ui->plainTextEditFormulaWidth->installEventFilter(this);
     ui->plainTextEditFormulaWidthBefore->installEventFilter(this);
     ui->plainTextEditFormulaWidthAfter->installEventFilter(this);
+
+    m_timerWidth->setSingleShot(true);
+    m_timerWidthBefore->setSingleShot(true);
+    m_timerWidthAfter->setSingleShot(true);
 
     connect(m_timerWidth, &QTimer::timeout, this, &DialogPiecePath::EvalWidth);
     connect(m_timerWidthBefore, &QTimer::timeout, this, &DialogPiecePath::EvalWidthBefore);
@@ -1026,11 +1015,20 @@ void DialogPiecePath::InitSeamAllowanceTab()
     connect(ui->toolButtonExprBefore, &QPushButton::clicked, this, &DialogPiecePath::FXWidthBefore);
     connect(ui->toolButtonExprAfter, &QPushButton::clicked, this, &DialogPiecePath::FXWidthAfter);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, &DialogPiecePath::WidthChanged);
-    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
-            &DialogPiecePath::WidthBeforeChanged);
-    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
-            &DialogPiecePath::WidthAfterChanged);
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidth->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidthBefore->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidthAfter->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPiecePath::DeployWidthFormulaTextEdit);
     connect(ui->pushButtonGrowWidthBefore, &QPushButton::clicked,
@@ -1061,9 +1059,14 @@ void DialogPiecePath::InitControlTab()
 
     ui->plainTextEditFormulaVisible->installEventFilter(this);
 
+    m_timerVisible->setSingleShot(true);
+
     connect(m_timerVisible, &QTimer::timeout, this, &DialogPiecePath::EvalVisible);
     connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPiecePath::FXVisible);
-    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, &DialogPiecePath::VisibleChanged);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerVisible->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
             &DialogPiecePath::DeployVisibleFormulaTextEdit);
 }
@@ -1492,7 +1495,7 @@ bool DialogPiecePath::PathIsValid() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ValidObjects(bool value)
 {
-    flagError = value;
+    m_flagError = value;
     CheckState();
 }
 

@@ -50,9 +50,10 @@ class DialogShoulderPoint : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogShoulderPoint() override;
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     QString        GetTypeLine() const;
@@ -78,12 +79,9 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void           DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void           FormulaTextChanged();
     virtual void   PointNameChanged() override;
     void           FXLength();
+    void           EvalFormula();
 protected:
     virtual void   ShowVisualization() override;
     /**
@@ -91,6 +89,7 @@ protected:
      */
     virtual void   SaveData() override;
     virtual void   closeEvent(QCloseEvent *event) override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogShoulderPoint)
 
@@ -98,10 +97,24 @@ private:
     Ui::DialogShoulderPoint *ui;
 
     /** @brief formula formula */
-    QString        formula;
+    QString formula;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int             formulaBaseHeight;
+    int formulaBaseHeight;
+
+    QTimer *timerFormula;
+
+    QString pointName;
+
+    bool flagFormula;
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogShoulderPoint::IsValid() const
+{
+    return flagFormula && flagName && flagError;
+}
 
 #endif // DIALOGSHOULDERPOINT_H

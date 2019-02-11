@@ -37,6 +37,7 @@
 #include <QPointer>
 #include <QPushButton>
 #include <QSet>
+#include <QTimer>
 #include <QToolButton>
 
 #include "../vpatterndb/vtranslatevars.h"
@@ -56,23 +57,29 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogShoulderPoint), formula(QString()),
-      formulaBaseHeight(0)
+DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogShoulderPoint),
+      formula(),
+      formulaBaseHeight(0),
+      timerFormula(new QTimer(this)),
+      pointName(),
+      flagFormula(false),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogShoulderPoint::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
-    this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxPoints(ui->comboBoxP1Line);
@@ -81,8 +88,15 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogShoulderPoint::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogShoulderPoint::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogShoulderPoint::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
     connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogShoulderPoint::PointNameChanged);
@@ -95,12 +109,6 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, const quint32 &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogShoulderPoint::FormulaTextChanged()
-{
-    this->FormulaChangedPlainText();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::PointNameChanged()
 {
     QSet<quint32> set;
@@ -108,7 +116,7 @@ void DialogShoulderPoint::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxP2Line));
     set.insert(getCurrentObjectId(ui->comboBoxP3));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() != 3)
     {
         flagError = false;
@@ -117,7 +125,7 @@ void DialogShoulderPoint::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -140,6 +148,19 @@ void DialogShoulderPoint::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogShoulderPoint::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    Eval(formulaData, flagFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::ShowVisualization()
 {
     AddVisualization<VisToolShoulderPoint>();
@@ -148,13 +169,19 @@ void DialogShoulderPoint::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogShoulderPoint::~DialogShoulderPoint()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogShoulderPoint::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

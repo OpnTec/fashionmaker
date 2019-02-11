@@ -111,7 +111,7 @@ VToolNormal* VToolNormal::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.angle = dialogTool->GetAngle();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -182,8 +182,7 @@ VToolNormal* VToolNormal::Create(VToolNormalInitData initData)
  * @param angle additional angle.
  * @return normal point.
  */
-QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, const qreal &length,
-                               const qreal &angle)
+QPointF VToolNormal::FindPoint(const QPointF &firstPoint, const QPointF &secondPoint, qreal length, qreal angle)
 {
     QLineF line(firstPoint, secondPoint);
     QLineF normal = line.normalVector();
@@ -225,7 +224,7 @@ void VToolNormal::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());

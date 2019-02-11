@@ -47,7 +47,7 @@ class DialogEllipticalArc : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogEllipticalArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogEllipticalArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEllipticalArc() override;
 
     quint32       GetCenter() const;
@@ -85,12 +85,6 @@ public slots:
     void DeployF2TextEdit();
     void DeployRotationAngleTextEdit();
 
-    void          Radius1Changed();
-    void          Radius2Changed();
-    void          F1Changed();
-    void          F2Changed();
-    void          RotationAngleChanged();
-
     void          FXRadius1();
     void          FXRadius2();
     void          FXF1();
@@ -98,13 +92,13 @@ public slots:
     void          FXRotationAngle();
 
 protected:
-    virtual void  CheckState() final;
     virtual void  ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
+    virtual bool  IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogEllipticalArc)
@@ -171,5 +165,11 @@ private:
     void          EvalRadiuses();
     void          EvalAngles();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogEllipticalArc::IsValid() const
+{
+    return flagRadius1 && flagRadius2 && flagF1 && flagF2 && flagRotationAngle;
+}
 
 #endif // DIALOGELLIPTICALARC_H

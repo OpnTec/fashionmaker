@@ -48,6 +48,7 @@
 #include "../../support/dialogeditlabel.h"
 #include "../../../tools/vtoolseamallowance.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../../dialogtoolbox.h"
 
 #include <QMenu>
 #include <QTimer>
@@ -77,7 +78,7 @@ QString GetFormulaFromUser(QPlainTextEdit *textEdit)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, const quint32 &toolId,
+DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, quint32 toolId,
                                          QWidget *parent)
     : DialogSeamAllowance(data, toolId, parent)
 {
@@ -86,7 +87,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const VAbstract
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogSeamAllowance),
       uiTabPaths(new Ui::TabPaths),
@@ -114,6 +115,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       flagFormulaBefore(true),
       flagFormulaAfter(true),
       flagMainPathIsValid(true),
+      flagName(true), //We have default name of piece.
+      flagFormula(false),
       m_bAddMode(true),
       m_dialog(),
       m_visSpecialPoints(),
@@ -128,9 +131,9 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
       m_formulaBaseWidth(0),
       m_formulaBaseWidthBefore(0),
       m_formulaBaseWidthAfter(0),
-      m_timerWidth(nullptr),
-      m_timerWidthBefore(nullptr),
-      m_timerWidthAfter(nullptr),
+      m_timerWidth(new QTimer(this)),
+      m_timerWidthBefore(new QTimer(this)),
+      m_timerWidthAfter(new QTimer(this)),
       m_saWidth(0),
       m_templateLines(),
       m_undoStack(),
@@ -153,10 +156,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, const quint32 &
     InitPassmarksTab();
     InitPlaceLabelsTab();
 
-    flagName = true;//We have default name of piece.
-    ChangeColor(uiTabPaths->labelEditName, okColor);
+    ChangeColor(uiTabPaths->labelEditName, OkColor(this));
     flagMainPathIsValid = MainPathIsValid();
-    CheckState();
 
     m_ftb->SetCurrentIndex(TabOrder::Paths);// Show always first tab active on start.
 }
@@ -177,6 +178,14 @@ DialogSeamAllowance::~DialogSeamAllowance()
     delete uiTabLabels;
     delete uiTabPaths;
     delete ui;
+
+    for (auto &command : m_undoStack)
+    {
+        if (not command.isNull())
+        {
+            delete command;
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,8 +317,8 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabPaths->checkBoxBuiltIn->setChecked(piece.IsSeamAllowanceBuiltIn());
     uiTabPaths->lineEditName->setText(piece.GetName());
 
-    const QString width = qApp->TrVars()->FormulaToUser(piece.GetFormulaSAWidth(), qApp->Settings()->GetOsSeparator());
-    uiTabPaths->plainTextEditFormulaWidth->setPlainText(width);
+    uiTabPaths->plainTextEditFormulaWidth->setPlainText(
+                qApp->TrVars()->FormulaToUser(piece.GetFormulaSAWidth(), qApp->Settings()->GetOsSeparator()));
     m_saWidth = piece.GetSAWidth();
 
     const VPieceLabelData &ppData = piece.GetPatternPieceData();
@@ -471,9 +480,7 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckState()
 {
     SCASSERT(bOk != nullptr);
-    bOk->setEnabled(flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
-                    && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
-                    && (flagPLFormulas || flagPPin));
+    bOk->setEnabled(IsValid());
     // In case dialog hasn't apply button
     if ( bApply != nullptr && applyAllowed)
     {
@@ -581,12 +588,12 @@ void DialogSeamAllowance::NameDetailChanged()
         if (edit->text().isEmpty())
         {
             flagName = false;
-            ChangeColor(uiTabPaths->labelEditName, Qt::red);
+            ChangeColor(uiTabPaths->labelEditName, errorColor);
         }
         else
         {
             flagName = true;
-            ChangeColor(uiTabPaths->labelEditName, okColor);
+            ChangeColor(uiTabPaths->labelEditName, OkColor(this));
         }
     }
     CheckState();
@@ -811,9 +818,9 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         newLabel.SetLabelType(type);
         m_newPlaceLabels.insert(labelId, newLabel);
 
-        SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
-                                                                       qApp->getCurrentDocument(),
-                                                                       const_cast<VContainer *>(data), labelId);
+        QPointer<VUndoCommand> saveCommand =
+                new SavePlaceLabelOptions(toolId, currentLabel, newLabel, qApp->getCurrentDocument(),
+                                          const_cast<VContainer *>(data), labelId);
         m_undoStack.append(saveCommand);
         UpdateCurrentPlaceLabelRecords();
     };
@@ -1270,10 +1277,9 @@ void DialogSeamAllowance::PathDialogClosed(int result)
             VPiecePath newPath = dialogTool->GetPiecePath();
             m_newPaths.insert(dialogTool->GetToolId(), newPath);
 
-            SavePiecePathOptions *saveCommand = new SavePiecePathOptions(toolId, currentPath, newPath,
-                                                                         qApp->getCurrentDocument(),
-                                                                         const_cast<VContainer *>(data),
-                                                                         dialogTool->GetToolId());
+            QPointer<VUndoCommand> saveCommand =
+                        new SavePiecePathOptions(toolId, currentPath, newPath, qApp->getCurrentDocument(),
+                                                 const_cast<VContainer *>(data), dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentCustomSARecord();
             UpdateCurrentInternalPathRecord();
@@ -1323,10 +1329,9 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
 
             m_newPlaceLabels.insert(dialogTool->GetToolId(), newLabel);
 
-            SavePlaceLabelOptions *saveCommand = new SavePlaceLabelOptions(toolId, currentLabel, newLabel,
-                                                                           qApp->getCurrentDocument(),
-                                                                           const_cast<VContainer *>(data),
-                                                                           dialogTool->GetToolId());
+            QPointer<VUndoCommand> saveCommand =
+                        new SavePlaceLabelOptions(toolId, currentLabel, newLabel, qApp->getCurrentDocument(),
+                                                  const_cast<VContainer *>(data), dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentPlaceLabelRecords();
         }
@@ -1576,13 +1581,13 @@ void DialogSeamAllowance::UpdateGrainlineValues()
             else
             {
                 qsVal.setNum(dVal, 'f', 2);
-                ChangeColor(plbText, okColor);
+                ChangeColor(plbText, OkColor(this));
             }
         }
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            not flagGPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            not flagGPin ? ChangeColor(plbText, errorColor) : ChangeColor(plbText, OkColor(this));
             bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
@@ -1658,13 +1663,13 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
             else
             {
                 qsVal.setNum(dVal, 'f', 2);
-                ChangeColor(plbText, okColor);
+                ChangeColor(plbText, OkColor(this));
             }
         }
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            not flagDPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            not flagDPin ? ChangeColor(plbText, errorColor) : ChangeColor(plbText, OkColor(this));
             bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
@@ -1743,13 +1748,13 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
             else
             {
                 qsVal.setNum(dVal, 'f', 2);
-                ChangeColor(plbText, okColor);
+                ChangeColor(plbText, OkColor(this));
             }
         }
         catch (qmu::QmuParserError &e)
         {
             qsVal = tr("Error");
-            not flagPPin ? ChangeColor(plbText, Qt::red) : ChangeColor(plbText, okColor);
+            not flagPPin ? ChangeColor(plbText, errorColor) : ChangeColor(plbText, OkColor(this));
             bFormulasOK[i] = false;
             plbVal->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
         }
@@ -1997,49 +2002,51 @@ void DialogSeamAllowance::EditPLFormula()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployGrainlineRotation()
 {
-    DeployFormula(uiTabGrainline->lineEditRotFormula, uiTabGrainline->pushButtonShowRot, m_iRotBaseHeight);
+    DeployFormula(this, uiTabGrainline->lineEditRotFormula, uiTabGrainline->pushButtonShowRot, m_iRotBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployGrainlineLength()
 {
-    DeployFormula(uiTabGrainline->lineEditLenFormula, uiTabGrainline->pushButtonShowLen, m_iLenBaseHeight);
+    DeployFormula(this,uiTabGrainline->lineEditLenFormula, uiTabGrainline->pushButtonShowLen, m_iLenBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployDLWidth()
 {
-    DeployFormula(uiTabLabels->lineEditDLWidthFormula, uiTabLabels->pushButtonShowDLWidth, m_DLWidthBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditDLWidthFormula, uiTabLabels->pushButtonShowDLWidth, m_DLWidthBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployDLHeight()
 {
-    DeployFormula(uiTabLabels->lineEditDLHeightFormula, uiTabLabels->pushButtonShowDLHeight, m_DLHeightBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditDLHeightFormula, uiTabLabels->pushButtonShowDLHeight,
+                  m_DLHeightBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployDLAngle()
 {
-    DeployFormula(uiTabLabels->lineEditDLAngleFormula, uiTabLabels->pushButtonShowDLAngle, m_DLAngleBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditDLAngleFormula, uiTabLabels->pushButtonShowDLAngle, m_DLAngleBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPLWidth()
 {
-    DeployFormula(uiTabLabels->lineEditPLWidthFormula, uiTabLabels->pushButtonShowPLWidth, m_PLWidthBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditPLWidthFormula, uiTabLabels->pushButtonShowPLWidth, m_PLWidthBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPLHeight()
 {
-    DeployFormula(uiTabLabels->lineEditPLHeightFormula, uiTabLabels->pushButtonShowPLHeight, m_PLHeightBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditPLHeightFormula, uiTabLabels->pushButtonShowPLHeight,
+                  m_PLHeightBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPLAngle()
 {
-    DeployFormula(uiTabLabels->lineEditPLAngleFormula, uiTabLabels->pushButtonShowPLAngle, m_PLAngleBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditPLAngleFormula, uiTabLabels->pushButtonShowPLAngle, m_PLAngleBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2064,10 +2071,16 @@ void DialogSeamAllowance::ResetLabelsWarning()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::EvalWidth()
 {
-    labelEditFormula = uiTabPaths->labelEditWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const QString formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
-    m_saWidth = Eval(formula, flagFormula, uiTabPaths->labelResultWidth, postfix, false, true);
+    FormulaData formulaData;
+    formulaData.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = uiTabPaths->labelEditWidth;
+    formulaData.labelResult = uiTabPaths->labelResultWidth;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkZero = false;
+    formulaData.checkLessThanZero = true;
+
+    m_saWidth = Eval(formulaData, flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -2089,12 +2102,18 @@ void DialogSeamAllowance::EvalWidthBefore()
 {
     if (uiTabPaths->checkBoxSeams->isChecked())
     {
-        labelEditFormula = uiTabPaths->labelEditBefore;
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-            const QString formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
-            Eval(formula, flagFormulaBefore, uiTabPaths->labelResultBefore, postfix, false, true);
+            FormulaData formulaData;
+            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthBefore->toPlainText();
+            formulaData.variables = data->DataVariables();
+            formulaData.labelEditFormula = uiTabPaths->labelEditBefore;
+            formulaData.labelResult = uiTabPaths->labelResultBefore;
+            formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+            formulaData.checkZero = false;
+            formulaData.checkLessThanZero = true;
+
+            Eval(formulaData, flagFormulaBefore);
 
             const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
             UpdateNodeSABefore(formulaSABefore);
@@ -2102,7 +2121,7 @@ void DialogSeamAllowance::EvalWidthBefore()
         }
         else
         {
-            ChangeColor(labelEditFormula, okColor);
+            ChangeColor(uiTabPaths->labelEditBefore, OkColor(this));
             uiTabPaths->labelResultBefore->setText(tr("<Empty>"));
             flagFormulaBefore = true;
         }
@@ -2114,12 +2133,18 @@ void DialogSeamAllowance::EvalWidthAfter()
 {
     if (uiTabPaths->checkBoxSeams->isChecked())
     {
-        labelEditFormula = uiTabPaths->labelEditAfter;
         if (uiTabPaths->comboBoxNodes->count() > 0)
         {
-            const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-            const QString formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
-            Eval(formula, flagFormulaAfter, uiTabPaths->labelResultAfter, postfix, false, true);
+            FormulaData formulaData;
+            formulaData.formula = uiTabPaths->plainTextEditFormulaWidthAfter->toPlainText();
+            formulaData.variables = data->DataVariables();
+            formulaData.labelEditFormula = uiTabPaths->labelEditAfter;
+            formulaData.labelResult = uiTabPaths->labelResultAfter;
+            formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+            formulaData.checkZero = false;
+            formulaData.checkLessThanZero = true;
+
+            Eval(formulaData, flagFormulaAfter);
 
             const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
             UpdateNodeSAAfter(formulaSAAfter);
@@ -2127,7 +2152,7 @@ void DialogSeamAllowance::EvalWidthAfter()
         }
         else
         {
-            ChangeColor(labelEditFormula, okColor);
+            ChangeColor(uiTabPaths->labelEditAfter, OkColor(this));
             uiTabPaths->labelResultAfter->setText(tr("<Empty>"));
             flagFormulaAfter = true;
         }
@@ -2137,7 +2162,7 @@ void DialogSeamAllowance::EvalWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXWidth()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
@@ -2146,13 +2171,12 @@ void DialogSeamAllowance::FXWidth()
     {
         SetFormulaSAWidth(dialog->GetFormula());
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXWidthBefore()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore));
     dialog->setCheckLessThanZero(true);
@@ -2161,13 +2185,12 @@ void DialogSeamAllowance::FXWidthBefore()
     {
         SetCurrentSABefore(dialog->GetFormula());
     }
-    delete dialog;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::FXWidthAfter()
 {
-    DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
+    QScopedPointer<DialogEditWrongFormula> dialog(new DialogEditWrongFormula(data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter));
     dialog->setCheckLessThanZero(true);
@@ -2176,79 +2199,45 @@ void DialogSeamAllowance::FXWidthAfter()
     {
         SetCurrentSAAfter(dialog->GetFormula());
     }
-    delete dialog;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::WidthChanged()
-{
-    labelEditFormula = uiTabPaths->labelEditWidth;
-    labelResultCalculation = uiTabPaths->labelResultWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagFormula, uiTabPaths->plainTextEditFormulaWidth, m_timerWidth, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::WidthBeforeChanged()
-{
-    if (uiTabPaths->checkBoxSeams->isChecked())
-    {
-        labelEditFormula = uiTabPaths->labelEditBefore;
-        labelResultCalculation = uiTabPaths->labelResultBefore;
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        ValFormulaChanged(flagFormulaBefore, uiTabPaths->plainTextEditFormulaWidthBefore, m_timerWidthBefore, postfix);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::WidthAfterChanged()
-{
-    if (uiTabPaths->checkBoxSeams->isChecked())
-    {
-        labelEditFormula = uiTabPaths->labelEditAfter;
-        labelResultCalculation = uiTabPaths->labelResultAfter;
-        const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-        ValFormulaChanged(flagFormulaAfter, uiTabPaths->plainTextEditFormulaWidthAfter, m_timerWidthAfter, postfix);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthFormulaTextEdit()
 {
-    DeployFormula(uiTabPaths->plainTextEditFormulaWidth, uiTabPaths->pushButtonGrowWidth, m_formulaBaseWidth);
+    DeployFormula(this, uiTabPaths->plainTextEditFormulaWidth, uiTabPaths->pushButtonGrowWidth, m_formulaBaseWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthBeforeFormulaTextEdit()
 {
-    DeployFormula(uiTabPaths->plainTextEditFormulaWidthBefore, uiTabPaths->pushButtonGrowWidthBefore,
+    DeployFormula(this, uiTabPaths->plainTextEditFormulaWidthBefore, uiTabPaths->pushButtonGrowWidthBefore,
                   m_formulaBaseWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthAfterFormulaTextEdit()
 {
-    DeployFormula(uiTabPaths->plainTextEditFormulaWidthAfter, uiTabPaths->pushButtonGrowWidthAfter,
+    DeployFormula(this, uiTabPaths->plainTextEditFormulaWidthAfter, uiTabPaths->pushButtonGrowWidthAfter,
                   m_formulaBaseWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::GrainlinePinPointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     const quint32 topPinId = getCurrentObjectId(uiTabGrainline->comboBoxGrainlineTopPin);
     const quint32 bottomPinId = getCurrentObjectId(uiTabGrainline->comboBoxGrainlineBottomPin);
     if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagGPin = true;
-        color = okColor;
+        color = OkColor(this);
 
         ResetGrainlineWarning();
     }
     else
     {
         flagGPin = false;
-        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         if (not flagGFormulas && not flagGPin)
         {
@@ -2265,13 +2254,13 @@ void DialogSeamAllowance::GrainlinePinPointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DetailPinPointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     const quint32 topPinId = getCurrentObjectId(uiTabLabels->comboBoxDLTopLeftPin);
     const quint32 bottomPinId = getCurrentObjectId(uiTabLabels->comboBoxDLBottomRightPin);
     if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagDPin = true;
-        color = okColor;
+        color = OkColor(this);
 
         if (flagPPin)
         {
@@ -2282,7 +2271,7 @@ void DialogSeamAllowance::DetailPinPointChanged()
     else
     {
         flagDPin = false;
-        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
@@ -2299,13 +2288,13 @@ void DialogSeamAllowance::DetailPinPointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::PatternPinPointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     const quint32 topPinId = getCurrentObjectId(uiTabLabels->comboBoxPLTopLeftPin);
     const quint32 bottomPinId = getCurrentObjectId(uiTabLabels->comboBoxPLBottomRightPin);
     if (topPinId != NULL_ID && bottomPinId != NULL_ID && topPinId != bottomPinId)
     {
         flagPPin = true;
-        color = okColor;
+        color = OkColor(this);
 
         if (flagDPin)
         {
@@ -2316,7 +2305,7 @@ void DialogSeamAllowance::PatternPinPointChanged()
     else
     {
         flagPPin = false;
-        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = okColor : color = errorColor;
+        topPinId == NULL_ID && bottomPinId == NULL_ID ? color = OkColor(this) : color = errorColor;
 
         m_ftb->SetTabText(TabOrder::Labels, tr("Labels") + '*');
         const QIcon icon = QIcon::fromTheme("dialog-warning",
@@ -2765,7 +2754,6 @@ void DialogSeamAllowance::InitMainPathTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitSeamAllowanceTab()
 {
-    plainTextEditFormula = uiTabPaths->plainTextEditFormulaWidth;
     this->m_formulaBaseWidth = uiTabPaths->plainTextEditFormulaWidth->height();
     this->m_formulaBaseWidthBefore = uiTabPaths->plainTextEditFormulaWidthBefore->height();
     this->m_formulaBaseWidthAfter = uiTabPaths->plainTextEditFormulaWidthAfter->height();
@@ -2774,13 +2762,13 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     uiTabPaths->plainTextEditFormulaWidthBefore->installEventFilter(this);
     uiTabPaths->plainTextEditFormulaWidthAfter->installEventFilter(this);
 
-    m_timerWidth = new QTimer(this);
+    m_timerWidth->setSingleShot(true);
     connect(m_timerWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidth);
 
-    m_timerWidthBefore = new QTimer(this);
+    m_timerWidthBefore->setSingleShot(true);
     connect(m_timerWidthBefore, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthBefore);
 
-    m_timerWidthAfter = new QTimer(this);
+    m_timerWidthAfter->setSingleShot(true);
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthAfter);
 
     connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
@@ -2818,12 +2806,20 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     connect(uiTabPaths->toolButtonExprBefore, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthBefore);
     connect(uiTabPaths->toolButtonExprAfter, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthAfter);
 
-    connect(uiTabPaths->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
-            &DialogSeamAllowance::WidthChanged);
-    connect(uiTabPaths->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
-            &DialogSeamAllowance::WidthBeforeChanged);
-    connect(uiTabPaths->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
-            &DialogSeamAllowance::WidthAfterChanged);
+    connect(uiTabPaths->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidth->start(formulaTimerTimeout);
+    });
+
+    connect(uiTabPaths->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidthBefore->start(formulaTimerTimeout);
+    });
+
+    connect(uiTabPaths->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerWidthAfter->start(formulaTimerTimeout);
+    });
 
     connect(uiTabPaths->pushButtonGrowWidth, &QPushButton::clicked, this,
             &DialogSeamAllowance::DeployWidthFormulaTextEdit);
@@ -3077,7 +3073,7 @@ QString DialogSeamAllowance::GetFormulaSAWidth() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QUndoCommand *> &DialogSeamAllowance::UndoStack()
+QVector<QPointer<VUndoCommand>> &DialogSeamAllowance::UndoStack()
 {
     return m_undoStack;
 }

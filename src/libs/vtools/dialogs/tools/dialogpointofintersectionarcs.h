@@ -49,19 +49,20 @@ class DialogPointOfIntersectionArcs : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionArcs() override;
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     quint32        GetFirstArcId() const;
-    void           SetFirstArcId(const quint32 &value);
+    void           SetFirstArcId(quint32 value);
 
     quint32        GetSecondArcId() const;
-    void           SetSecondArcId(const quint32 &value);
+    void           SetSecondArcId(quint32 value);
 
     CrossCirclesPoint GetCrossArcPoint() const;
-    void              SetCrossArcPoint(const CrossCirclesPoint &p);
+    void              SetCrossArcPoint(CrossCirclesPoint p);
 
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
@@ -73,11 +74,23 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
+    virtual bool   IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionArcs)
 
     Ui::DialogPointOfIntersectionArcs *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointOfIntersectionArcs::IsValid() const
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONARCS_H

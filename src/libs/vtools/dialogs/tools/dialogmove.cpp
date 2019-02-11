@@ -67,12 +67,9 @@
 DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogMove),
-      flagAngle(false),
-      flagRotationAngle(false),
-      flagLength(false),
-      timerAngle(nullptr),
-      timerRotationAngle(nullptr),
-      timerLength(nullptr),
+      timerAngle(new QTimer(this)),
+      timerRotationAngle(new QTimer(this)),
+      timerLength(new QTimer(this)),
       formulaAngle(),
       formulaRotationAngle(),
       formulaLength(),
@@ -83,7 +80,11 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       stage1(true),
       stage2(false),
       m_suffix(),
-      optionalRotationOrigin(false)
+      optionalRotationOrigin(false),
+      flagAngle(false),
+      flagRotationAngle(false),
+      flagLength(false),
+      flagName(false)
 {
     ui->setupUi(this);
 
@@ -98,13 +99,13 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
 
     ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
 
-    timerAngle = new QTimer(this);
+    timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogMove::EvalAngle);
 
-    timerRotationAngle = new QTimer(this);
+    timerRotationAngle->setSingleShot(true);
     connect(timerRotationAngle, &QTimer::timeout, this, &DialogMove::EvalRotationAngle);
 
-    timerLength = new QTimer(this);
+    timerLength->setSingleShot(true);
     connect(timerLength, &QTimer::timeout, this, &DialogMove::EvalLength);
 
     InitOkCancelApply(ui);
@@ -115,16 +116,25 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     ui->comboBoxRotationOriginPoint->addItem(tr("Center point"), NULL_ID);
     ui->comboBoxRotationOriginPoint->blockSignals(false);
 
-    flagName = true;
-    CheckState();
-
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogMove::SuffixChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
-    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, &DialogMove::AngleChanged);
-    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this, &DialogMove::RotationAngleChanged);
-    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, &DialogMove::LengthChanged);
+    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerAngle->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditRotationAngle, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerRotationAngle->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditLength, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerLength->start(formulaTimerTimeout);
+    });
+
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogMove::DeployAngleTextEdit);
     connect(ui->pushButtonGrowRotationAngle, &QPushButton::clicked, this, &DialogMove::DeployRotationAngleTextEdit);
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogMove::DeployLengthTextEdit);
@@ -373,43 +383,19 @@ void DialogMove::SelectedObject(bool selected, quint32 object, quint32 tool)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditAngle, ui->pushButtonGrowAngle, formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditAngle, ui->pushButtonGrowAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployRotationAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle, formulaBaseHeightRotationAngle);
+    DeployFormula(this, ui->plainTextEditRotationAngle, ui->pushButtonGrowRotationAngle, formulaBaseHeightRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::DeployLengthTextEdit()
 {
-    DeployFormula(ui->plainTextEditLength, ui->pushButtonGrowLength, formulaBaseHeightLength);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::AngleChanged()
-{
-    labelEditFormula = ui->labelEditAngle;
-    labelResultCalculation = ui->labelResultAngle;
-    ValFormulaChanged(flagAngle, ui->plainTextEditAngle, timerAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::RotationAngleChanged()
-{
-    labelEditFormula = ui->labelEditRotationAngle;
-    labelResultCalculation = ui->labelResultRotationAngle;
-    ValFormulaChanged(flagRotationAngle, ui->plainTextEditRotationAngle, timerRotationAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::LengthChanged()
-{
-    labelEditFormula = ui->labelEditLength;
-    labelResultCalculation = ui->labelResultLength;
-    ValFormulaChanged(flagLength, ui->plainTextEditLength, timerLength, degreeSymbol);
+    DeployFormula(this, ui->plainTextEditLength, ui->pushButtonGrowLength, formulaBaseHeightLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -464,7 +450,7 @@ void DialogMove::SuffixChanged()
         if (suffix.isEmpty())
         {
             flagName = false;
-            ChangeColor(ui->labelSuffix, Qt::red);
+            ChangeColor(ui->labelSuffix, errorColor);
             CheckState();
             return;
         }
@@ -480,7 +466,7 @@ void DialogMove::SuffixChanged()
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;
-                        ChangeColor(ui->labelSuffix, Qt::red);
+                        ChangeColor(ui->labelSuffix, errorColor);
                         CheckState();
                         return;
                     }
@@ -489,18 +475,9 @@ void DialogMove::SuffixChanged()
         }
 
         flagName = true;
-        ChangeColor(ui->labelSuffix, okColor);
+        ChangeColor(ui->labelSuffix, OkColor(this));
     }
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogMove::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagAngle && flagRotationAngle && flagLength && flagName);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(bOk->isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -540,22 +517,40 @@ void DialogMove::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalAngle()
 {
-    labelEditFormula = ui->labelEditAngle;
-    Eval(ui->plainTextEditAngle->toPlainText(), flagAngle, ui->labelResultAngle, degreeSymbol, false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditAngle;
+    formulaData.labelResult = ui->labelResultAngle;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalRotationAngle()
 {
-    labelEditFormula = ui->labelEditRotationAngle;
-    Eval(ui->plainTextEditRotationAngle->toPlainText(), flagRotationAngle, ui->labelResultRotationAngle, degreeSymbol,
-         false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditRotationAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditRotationAngle;
+    formulaData.labelResult = ui->labelResultRotationAngle;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagRotationAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::EvalLength()
 {
-    labelEditFormula = ui->labelEditLength;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditLength->toPlainText(), flagLength, ui->labelResultLength, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditLength->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditLength;
+    formulaData.labelResult = ui->labelResultLength;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    Eval(formulaData, flagLength);
 }

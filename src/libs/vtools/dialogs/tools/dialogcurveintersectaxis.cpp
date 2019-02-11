@@ -54,26 +54,28 @@
 #include "ui_dialogcurveintersectaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogCurveIntersectAxis),
       formulaAngle(),
       formulaBaseHeightAngle(0),
-      m_firstRelease(false)
+      pointName(),
+      m_firstRelease(false),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
-    this->formulaBaseHeightAngle = ui->plainTextEditFormula->height();
+    formulaBaseHeightAngle = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxAxisPoint);
     FillComboBoxCurves(ui->comboBoxCurve);
@@ -81,8 +83,15 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::FXAngle);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCurveIntersectAxis::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCurveIntersectAxis::AngleTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogCurveIntersectAxis::DeployAngleTextEdit);
     connect(timerFormula, &QTimer::timeout, this, &DialogCurveIntersectAxis::EvalAngle);
 
@@ -93,6 +102,12 @@ DialogCurveIntersectAxis::DialogCurveIntersectAxis(const VContainer *data, const
 DialogCurveIntersectAxis::~DialogCurveIntersectAxis()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCurveIntersectAxis::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -147,7 +162,7 @@ quint32 DialogCurveIntersectAxis::GetBasePointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogCurveIntersectAxis::SetBasePointId(const quint32 &value)
+void DialogCurveIntersectAxis::SetBasePointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxAxisPoint, value);
 
@@ -163,7 +178,7 @@ quint32 DialogCurveIntersectAxis::getCurveId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogCurveIntersectAxis::setCurveId(const quint32 &value)
+void DialogCurveIntersectAxis::setCurveId(quint32 value)
 {
     setCurrentCurveId(ui->comboBoxCurve, value);
 
@@ -269,19 +284,21 @@ void DialogCurveIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::EvalAngle()
 {
-    Eval(ui->plainTextEditFormula->toPlainText(), flagError, ui->labelResultCalculation, degreeSymbol, false);
-}
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCurveIntersectAxis::AngleTextChanged()
-{
-    ValFormulaChanged(flagError, ui->plainTextEditFormula, timerFormula, degreeSymbol);
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCurveIntersectAxis::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

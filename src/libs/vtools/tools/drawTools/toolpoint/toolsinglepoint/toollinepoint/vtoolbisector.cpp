@@ -146,7 +146,7 @@ VToolBisector* VToolBisector::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.thirdPointId = dialogTool->GetThirdPointId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -254,7 +254,7 @@ void VToolBisector::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
     AddDependence(newDependencies, dialogTool->GetThirdPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());

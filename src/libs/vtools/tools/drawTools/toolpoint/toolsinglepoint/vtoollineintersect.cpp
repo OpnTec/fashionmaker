@@ -109,7 +109,7 @@ VToolLineIntersect* VToolLineIntersect::Create(const QPointer<DialogTool> &dialo
     initData.p2Line1Id = dialogTool->GetP2Line1();
     initData.p1Line2Id = dialogTool->GetP1Line2();
     initData.p2Line2Id = dialogTool->GetP2Line2();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -248,7 +248,7 @@ void VToolLineIntersect::SaveDialog(QDomElement &domElement, QList<quint32> &old
     AddDependence(newDependencies, dialogTool->GetP1Line2());
     AddDependence(newDependencies, dialogTool->GetP2Line2());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrP1Line1, QString().setNum(dialogTool->GetP1Line1()));
     doc->SetAttribute(domElement, AttrP2Line1, QString().setNum(dialogTool->GetP2Line1()));
     doc->SetAttribute(domElement, AttrP1Line2, QString().setNum(dialogTool->GetP1Line2()));

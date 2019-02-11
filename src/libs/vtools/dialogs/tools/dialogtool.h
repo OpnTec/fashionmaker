@@ -58,6 +58,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../dialogtoolbox.h"
 
 template <class T> class QSharedPointer;
 
@@ -77,7 +78,7 @@ class DialogTool : public QDialog
 {
     Q_OBJECT
 public:
-    DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogTool(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual          ~DialogTool() override;
 
     VAbstractTool*   GetAssociatedTool();
@@ -89,8 +90,6 @@ public:
 
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
-
-    QString          getPointName() const;
 
     static void MoveListRowTop(QListWidget *list);
     static void MoveListRowUp(QListWidget *list);
@@ -114,32 +113,14 @@ signals:
 public slots:
     virtual void     ChosenObject(quint32 id, const SceneObject &type);
     virtual void     SelectedObject(bool selected, quint32 object, quint32 tool);
-    void             NamePointChanged();
     virtual void     DialogAccepted();
     /**
      * @brief DialogApply save data and emit signal DialogApplied.
      */
     virtual void     DialogApply();
     virtual void     DialogRejected();
-    void             FormulaChanged();
-    /**
-     * @brief FormulaChangedPlainText check formula (plain text editor editor)
-     */
-    void             FormulaChangedPlainText();
-    void             ArrowUp();
-    void             ArrowDown();
-    void             ArrowLeft();
-    void             ArrowRight();
-    void             ArrowLeftUp();
-    void             ArrowLeftDown();
-    void             ArrowRightUp();
-    void             ArrowRightDown();
-    virtual void     EvalFormula();
-
     virtual void     PointNameChanged() {}
 protected:
-    Q_DISABLE_COPY(DialogTool)
-
     /** @brief data container with data */
     // cppcheck-suppress duplInheritedMember
     const VContainer *data;
@@ -147,45 +128,12 @@ protected:
     /** @brief isInitialized true if window is initialized */
     bool             isInitialized;
 
-    /** @brief flagName true if name is correct */
-    bool             flagName;
-
-    /** @brief flagFormula true if formula correct */
-    bool             flagFormula;
-
-    /** @brief flagError use this flag if for you do not enought @see flagName and @see flagFormula.
-     *
-     * In many cases you will need more flags fore checking if all data are valid.
-     * By default this flag is true.
-     */
-    bool             flagError;
-
-    /** @brief timerFormula timer for check formula */
-    QTimer           *timerFormula;
-
     /** @brief bOk button ok */
     QPushButton      *bOk;
 
     /** @brief bApply button apply */
     QPushButton      *bApply;
 
-    /** @brief spinBoxAngle spinbox for angle */
-    QDoubleSpinBox   *spinBoxAngle;
-
-    /** @brief plainTextEditFormula formula */
-    QPlainTextEdit   *plainTextEditFormula;
-
-    /** @brief labelResultCalculation label with result of calculation */
-    QLabel           *labelResultCalculation;
-
-    /** @brief labelEditNamePoint label used when need show wrong name of point */
-    QLabel           *labelEditNamePoint;
-
-    /** @brief labelEditFormula label used when need show wrong formula */
-    QLabel           *labelEditFormula;
-
-    const QColor     okColor;
-    const QColor     errorColor;
     /**
      * @brief associatedTool vdrawtool associated with opened dialog.
      */
@@ -195,9 +143,6 @@ protected:
     /** @brief prepare show if we prepare. Show dialog after finish working with visual part of tool*/
     bool             prepare;
 
-    /** @brief pointName name of point */
-    QString          pointName;
-
     /** @brief number number of handled objects */
     qint32           number;
 
@@ -206,12 +151,16 @@ protected:
     virtual void     closeEvent ( QCloseEvent * event ) override;
     virtual void     showEvent( QShowEvent *event ) override;
     virtual void     keyPressEvent(QKeyEvent *event) override;
+    virtual bool     eventFilter(QObject *object, QEvent *event) override;
+
+    virtual bool     IsValid() const =0;
+    virtual void     CheckState();
 
     void             FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
     void             FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
-                                        const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+                                        quint32 ch1 = NULL_ID, quint32 ch2 = NULL_ID) const;
     void             FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole,
-                                      const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID)const;
+                                      quint32 ch1 = NULL_ID, quint32 ch2 = NULL_ID) const;
     void             FillComboBoxSplines(QComboBox *box)const;
     void             FillComboBoxSplinesPath(QComboBox *box)const;
     void             FillComboBoxCurves(QComboBox *box)const;
@@ -221,14 +170,10 @@ protected:
     void             FillComboBoxVCrossCurvesPoint(QComboBox *box) const;
     void             FillComboBoxHCrossCurvesPoint(QComboBox *box) const;
 
-    virtual void     CheckState();
+
     QString          GetComboBoxCurrentData(const QComboBox *box, const QString &def)const;
     void             ChangeCurrentData(QComboBox *box, const QVariant &value) const;
-    void             ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer * timer, const QString &postfix = QString());
-    void             ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer * timer,
-                                       const QString &postfix = QString());
-    qreal            Eval(const QString &text, bool &flag, QLabel *label, const QString &postfix,
-                          bool checkZero = true, bool checkLessThanZero = false);
+    qreal            Eval(const FormulaData &formulaData, bool &flag);
 
     void             setCurrentPointId(QComboBox *box, const quint32 &value,
                                        FillComboBox rule = FillComboBox::NoChildren,
@@ -246,10 +191,6 @@ protected:
     T                getCurrentCrossPoint(QComboBox *box) const;
 
     bool             SetObject(const quint32 &id, QComboBox *box, const QString &toolTip);
-    void             DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
-
-    template <typename T>
-    void             InitArrow(T *ui);
 
     template <typename T>
     void             InitOkCancelApply(T *ui);
@@ -258,22 +199,16 @@ protected:
     void             InitOkCancel(T *ui);
 
     template <typename T>
-    void             InitFormulaUI(T *ui);
-
-    template <typename T>
     void             AddVisualization();
 
     template <typename T>
     QVector<T> GetListInternals(const QListWidget *list) const;
 
-    void             ChangeColor(QWidget *widget, const QColor &color);
     virtual void     ShowVisualization() {}
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void     SaveData() {}
-    void             MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const;
-    virtual bool     eventFilter(QObject *object, QEvent *event) override;
     quint32          DNumber(const QString &baseName) const;
 
     static int       FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
@@ -290,6 +225,7 @@ protected:
 
     void             InitNodeAngles(QComboBox *box);
 private:
+    Q_DISABLE_COPY(DialogTool)
     void FillList(QComboBox *box, const QMap<QString, quint32> &list)const;
 
     template <typename T>
@@ -327,22 +263,6 @@ inline VAbstractTool *DialogTool::GetAssociatedTool()
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-inline void DialogTool::InitArrow(T *ui)
-{
-    SCASSERT(ui != nullptr)
-    spinBoxAngle = ui->doubleSpinBoxAngle;
-    connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, &DialogTool::ArrowDown);
-    connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, &DialogTool::ArrowUp);
-    connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this, &DialogTool::ArrowLeft);
-    connect(ui->toolButtonArrowRight, &QPushButton::clicked, this, &DialogTool::ArrowRight);
-    connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this, &DialogTool::ArrowLeftUp);
-    connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, &DialogTool::ArrowLeftDown);
-    connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, &DialogTool::ArrowRightUp);
-    connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this, &DialogTool::ArrowRightDown);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
 /**
  * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
  * @param ui Dialog container
@@ -372,19 +292,6 @@ inline void DialogTool::InitOkCancel(T *ui)
     connect(bCancel, &QPushButton::clicked, this, &DialogTool::DialogRejected);
 
     qApp->Settings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-/**
- * @brief InitFormulaUI initialise ui object for formula fild
- * @param ui Dialog container
- */
-inline void DialogTool::InitFormulaUI(T *ui)
-{
-    labelResultCalculation = ui->labelResultCalculation;
-    plainTextEditFormula = ui->plainTextEditFormula;
-    labelEditFormula = ui->labelEditFormula;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

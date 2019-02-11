@@ -48,8 +48,10 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLine::DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLine)
+DialogLine::DialogLine(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogLine),
+      flagError(true)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -83,7 +85,7 @@ DialogLine::~DialogLine()
  * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogLine::SetSecondPoint(const quint32 &value)
+void DialogLine::SetSecondPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
@@ -120,7 +122,7 @@ void DialogLine::SetLineColor(const QString &value)
  * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogLine::SetFirstPoint(const quint32 &value)
+void DialogLine::SetFirstPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
@@ -132,7 +134,7 @@ void DialogLine::SetFirstPoint(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLine::PointNameChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
     {
         flagError = false;
@@ -141,7 +143,7 @@ void DialogLine::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);

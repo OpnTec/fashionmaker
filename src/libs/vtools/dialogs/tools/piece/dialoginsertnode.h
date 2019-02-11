@@ -57,7 +57,7 @@ public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() final;
+    virtual bool IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogInsertNode)
@@ -65,9 +65,16 @@ private:
 
     VPieceNode m_node;
     bool m_flagItem;
+    bool m_flagError;
 
     void CheckPieces();
     void CheckItem();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogInsertNode::IsValid() const
+{
+    return m_flagItem && m_flagError;
+}
 
 #endif // DIALOGINSERTNODE_H

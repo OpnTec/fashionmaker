@@ -37,9 +37,11 @@
 #include <QPointer>
 #include <QPushButton>
 #include <QSet>
+#include <QTimer>
 #include <QToolButton>
 
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointofcontact.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -55,30 +57,44 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogPointOfContact::DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfContact), radius(QString()), formulaBaseHeight(0)
+DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointOfContact),
+      radius(),
+      formulaBaseHeight(0),
+      pointName(),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogPointOfContact::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxPoints(ui->comboBoxCenter);
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogPointOfContact::FXRadius);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfContact::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogPointOfContact::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfContact::PointNameChanged);
@@ -97,9 +113,9 @@ DialogPointOfContact::~DialogPointOfContact()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfContact::FormulaTextChanged()
+QString DialogPointOfContact::GetPointName() const
 {
-    this->FormulaChangedPlainText();
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +126,7 @@ void DialogPointOfContact::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxSecondPoint));
     set.insert(getCurrentObjectId(ui->comboBoxCenter));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() != 3)
     {
         flagError = false;
@@ -119,7 +135,7 @@ void DialogPointOfContact::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -142,6 +158,19 @@ void DialogPointOfContact::FXRadius()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfContact::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    Eval(formulaData, flagFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::ShowVisualization()
 {
     AddVisualization<VisToolPointOfContact>();
@@ -150,7 +179,7 @@ void DialogPointOfContact::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfContact::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -243,7 +272,7 @@ void DialogPointOfContact::closeEvent(QCloseEvent *event)
  * @brief SetSecondPoint set id second point
  * @param value id
  */
-void DialogPointOfContact::SetSecondPoint(const quint32 &value)
+void DialogPointOfContact::SetSecondPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
@@ -257,7 +286,7 @@ void DialogPointOfContact::SetSecondPoint(const quint32 &value)
  * @brief SetFirstPoint set id first point
  * @param value id
  */
-void DialogPointOfContact::SetFirstPoint(const quint32 &value)
+void DialogPointOfContact::SetFirstPoint(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
@@ -271,7 +300,7 @@ void DialogPointOfContact::SetFirstPoint(const quint32 &value)
  * @brief SetCenter set id of center point
  * @param value id
  */
-void DialogPointOfContact::setCenter(const quint32 &value)
+void DialogPointOfContact::setCenter(quint32 value)
 {
     setCurrentPointId(ui->comboBoxCenter, value);
 

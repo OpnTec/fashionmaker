@@ -41,25 +41,30 @@
 #include "ui_dialogpointofintersectionarcs.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, const quint32 &toolId,
-                                                             QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersectionArcs)
+DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointOfIntersectionArcs),
+      pointName(),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc1);
     FillComboBoxArcs(ui->comboBoxArc2);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersectionArcs::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxArc1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersectionArcs::ArcChanged);
     connect(ui->comboBoxArc1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -72,6 +77,12 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
 DialogPointOfIntersectionArcs::~DialogPointOfIntersectionArcs()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersectionArcs::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -88,7 +99,7 @@ quint32 DialogPointOfIntersectionArcs::GetFirstArcId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetFirstArcId(const quint32 &value)
+void DialogPointOfIntersectionArcs::SetFirstArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc1, value);
 
@@ -104,7 +115,7 @@ quint32 DialogPointOfIntersectionArcs::GetSecondArcId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetSecondArcId(const quint32 &value)
+void DialogPointOfIntersectionArcs::SetSecondArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc2, value);
 
@@ -120,7 +131,7 @@ CrossCirclesPoint DialogPointOfIntersectionArcs::GetCrossArcPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointOfIntersectionArcs::SetCrossArcPoint(const CrossCirclesPoint &p)
+void DialogPointOfIntersectionArcs::SetCrossArcPoint(CrossCirclesPoint p)
 {
     const qint32 index = ui->comboBoxResult->findData(static_cast<int>(p));
     if (index != -1)
@@ -175,7 +186,7 @@ void DialogPointOfIntersectionArcs::ChosenObject(quint32 id, const SceneObject &
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ArcChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxArc1) == getCurrentObjectId(ui->comboBoxArc2))
     {
         flagError = false;
@@ -184,7 +195,7 @@ void DialogPointOfIntersectionArcs::ArcChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelArc1, color);
     ChangeColor(ui->labelArc2, color);

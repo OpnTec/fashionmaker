@@ -48,9 +48,10 @@ class DialogCurveIntersectAxis : public DialogTool
     Q_OBJECT
 
 public:
-    DialogCurveIntersectAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogCurveIntersectAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCurveIntersectAxis() override;
 
+    QString      GetPointName() const;
     void         SetPointName(const QString &value);
 
     QString      GetTypeLine() const;
@@ -60,10 +61,10 @@ public:
     void         SetAngle(const QString &value);
 
     quint32      GetBasePointId() const;
-    void         SetBasePointId(const quint32 &value);
+    void         SetBasePointId(quint32 value);
 
     quint32      getCurveId() const;
-    void         setCurveId(const quint32 &value);
+    void         setCurveId(quint32 value);
 
     QString      GetLineColor() const;
     void         SetLineColor(const QString &value);
@@ -72,7 +73,6 @@ public:
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
     void         EvalAngle();
-    void         AngleTextChanged();
     void         DeployAngleTextEdit();
     void         FXAngle();
 protected:
@@ -82,6 +82,7 @@ protected:
      */
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogCurveIntersectAxis)
     Ui::DialogCurveIntersectAxis *ui;
@@ -89,7 +90,20 @@ private:
     QString formulaAngle;
     int     formulaBaseHeightAngle;
 
+    QString pointName;
+
     bool m_firstRelease;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogCurveIntersectAxis::IsValid() const
+{
+    return flagFormula && flagName;
+}
 
 #endif // DIALOGCURVEINTERSECTAXIS_H

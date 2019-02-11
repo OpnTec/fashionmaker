@@ -52,7 +52,7 @@ class DialogCubicBezier : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCubicBezier();
 
     VCubicBezier GetSpline() const;
@@ -66,6 +66,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
+    virtual bool  IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogCubicBezier)
     Ui::DialogCubicBezier *ui;
@@ -75,10 +76,18 @@ private:
 
     qint32 newDuplicate;
 
+    bool flagError;
+
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP2() const;
     const QSharedPointer<VPointF> GetP3() const;
     const QSharedPointer<VPointF> GetP4() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogCubicBezier::IsValid() const
+{
+    return flagError;
+}
 
 #endif // DIALOGCUBICBEZIER_H

@@ -51,7 +51,7 @@ class DialogCubicBezierPath : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogCubicBezierPath(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCubicBezierPath();
 
     VCubicBezierPath GetPath() const;
@@ -62,6 +62,7 @@ public slots:
 protected:
     virtual void ShowVisualization() override;
     virtual void SaveData() override;
+    virtual bool IsValid() const final;
 private slots:
     void PointChanged(int row);
     void currentPointChanged(int index);
@@ -75,6 +76,8 @@ private:
 
     qint32 newDuplicate;
 
+    bool flagError;
+
     void             NewItem(const VPointF &point);
     void             DataPoint(const VPointF &p);
     void             SavePath();
@@ -82,5 +85,11 @@ private:
     bool             IsPathValid() const;
     VCubicBezierPath ExtractPath() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogCubicBezierPath::IsValid() const
+{
+    return flagError;
+}
 
 #endif // DIALOGCUBICBEZIERPATH_H

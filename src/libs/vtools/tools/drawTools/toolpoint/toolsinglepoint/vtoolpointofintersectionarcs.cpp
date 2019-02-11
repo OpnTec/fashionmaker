@@ -92,7 +92,7 @@ VToolPointOfIntersectionArcs *VToolPointOfIntersectionArcs::Create(const QPointe
     initData.firstArcId = dialogTool->GetFirstArcId();
     initData.secondArcId = dialogTool->GetSecondArcId();
     initData.pType = dialogTool->GetCrossArcPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -314,7 +314,7 @@ void VToolPointOfIntersectionArcs::SaveDialog(QDomElement &domElement, QList<qui
     AddDependence(newDependencies, dialogTool->GetFirstArcId());
     AddDependence(newDependencies, dialogTool->GetSecondArcId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrFirstArc, QString().setNum(dialogTool->GetFirstArcId()));
     doc->SetAttribute(domElement, AttrSecondArc, QString().setNum(dialogTool->GetSecondArcId()));
     doc->SetAttribute(domElement, AttrCrossPoint, QString().setNum(static_cast<int>(dialogTool->GetCrossArcPoint())));

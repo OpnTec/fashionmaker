@@ -33,9 +33,11 @@
 #include <QPlainTextEdit>
 #include <QPointer>
 #include <QPushButton>
+#include <QTimer>
 #include <QToolButton>
 
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolcutspline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -51,28 +53,41 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogCutSpline), formula(QString()), formulaBaseHeight(0)
+DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogCutSpline),
+      formula(),
+      formulaBaseHeight(0),
+      pointName(),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogCutSpline::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxSplines(ui->comboBoxSpline);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutSpline::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutSpline::FormulaChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
 
     vis = new VisToolCutSpline(data);
@@ -82,6 +97,12 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, const quint32 &toolId, 
 DialogCutSpline::~DialogCutSpline()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutSpline::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -123,7 +144,7 @@ void DialogCutSpline::SetFormula(const QString &value)
  * @brief setSplineId set id spline
  * @param value id
  */
-void DialogCutSpline::setSplineId(const quint32 &value)
+void DialogCutSpline::setSplineId(quint32 value)
 {
     setCurrentSplineId(ui->comboBoxSpline, value);
 
@@ -179,7 +200,7 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -194,6 +215,20 @@ void DialogCutSpline::FXLength()
         SetFormula(dialog->GetFormula());
     }
     delete dialog;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -50,7 +50,7 @@ class DialogArc : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogArc() override;
 
     quint32       GetCenter() const;
@@ -81,21 +81,19 @@ public slots:
     void DeployFormulaTextEdit();
     void DeployF1TextEdit();
     void DeployF2TextEdit();
-    void          RadiusChanged();
-    void          F1Changed();
-    void          F2Changed();
 
-    void          FXRadius();
-    void          FXF1();
-    void          FXF2();
+    void FXRadius();
+    void FXF1();
+    void FXF2();
+
 protected:
-    virtual void  CheckState() final;
     virtual void  ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
+    virtual bool  IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogArc)
 
@@ -140,5 +138,11 @@ private:
     void          EvalRadius();
     void          EvalF();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogArc::IsValid() const
+{
+    return flagRadius && flagF1 && flagF2;
+}
 
 #endif // DIALOGARC_H

@@ -101,7 +101,7 @@ VToolPointOfIntersectionCircles *VToolPointOfIntersectionCircles::Create(const Q
     initData.firstCircleRadius = dialogTool->GetFirstCircleRadius();
     initData.secondCircleRadius = dialogTool->GetSecondCircleRadius();
     initData.crossPoint = dialogTool->GetCrossCirclesPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -321,7 +321,7 @@ void VToolPointOfIntersectionCircles::SaveDialog(QDomElement &domElement, QList<
     AddDependence(newDependencies, dialogTool->GetFirstCircleCenterId());
     AddDependence(newDependencies, dialogTool->GetSecondCircleCenterId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrC1Center, QString().setNum(dialogTool->GetFirstCircleCenterId()));
     doc->SetAttribute(domElement, AttrC2Center, QString().setNum(dialogTool->GetSecondCircleCenterId()));
     doc->SetAttribute(domElement, AttrC1Radius, dialogTool->GetFirstCircleRadius());

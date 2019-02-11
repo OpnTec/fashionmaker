@@ -107,7 +107,7 @@ VToolCutSplinePath* VToolCutSplinePath::Create(const QPointer<DialogTool> &dialo
     VToolCutSplinePathInitData initData;
     initData.formula = dialogTool->GetFormula();
     initData.splinePathId = dialogTool->getSplinePathId();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -295,7 +295,7 @@ void VToolCutSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &old
     AddDependence(oldDependencies, curveCutId);
     AddDependence(newDependencies, dialogTool->getSplinePathId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrLength, dialogTool->GetFormula());
     doc->SetAttribute(domElement, AttrSplinePath, QString().setNum(dialogTool->getSplinePathId()));
 }

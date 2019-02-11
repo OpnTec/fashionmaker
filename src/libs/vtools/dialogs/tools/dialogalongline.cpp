@@ -38,6 +38,7 @@
 #include <QPointer>
 #include <QPushButton>
 #include <QSharedPointer>
+#include <QTimer>
 #include <QToolButton>
 #include <new>
 
@@ -61,24 +62,31 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogAlongLine),
-      formula(QString()), formulaBaseHeight(0), buildMidpoint(false)
+DialogAlongLine::DialogAlongLine(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogAlongLine),
+      formula(),
+      pointName(),
+      formulaBaseHeight(0),
+      buildMidpoint(false),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagError(true),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogAlongLine::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
@@ -86,8 +94,15 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogAlongLine::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogAlongLine::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogAlongLine::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogAlongLine::PointChanged);
@@ -101,15 +116,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, const quint32 &toolId, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogAlongLine::FormulaTextChanged()
-{
-    this->FormulaChangedPlainText();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::PointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (GetFirstPointId() == GetSecondPointId())
     {
         flagError = false;
@@ -118,7 +127,7 @@ void DialogAlongLine::PointChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     SetCurrentLength();
     ChangeColor(ui->labelFirstPoint, color);
@@ -141,6 +150,20 @@ void DialogAlongLine::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::ShowVisualization()
 {
     AddVisualization<VisToolAlongLine>();
@@ -149,7 +172,7 @@ void DialogAlongLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -191,7 +214,7 @@ void DialogAlongLine::ChosenObject(quint32 id, const SceneObject &type)
                             line->setObject2Id(id);
                             if (buildMidpoint)
                             {
-                                SetFormula(currentLength + QLatin1String("/2"));
+                                SetFormula(currentLength + QStringLiteral("/2"));
                             }
                             line->RefreshGeometry();
                             prepare = true;
@@ -254,7 +277,7 @@ void DialogAlongLine::SetCurrentLength()
  * @brief SetSecondPointId set id second point of line
  * @param value id
  */
-void DialogAlongLine::SetSecondPointId(const quint32 &value)
+void DialogAlongLine::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
@@ -280,7 +303,7 @@ void DialogAlongLine::Build(const Tool &type)
  * @brief SetFirstPointId set id first point of line
  * @param value id
  */
-void DialogAlongLine::SetFirstPointId(const quint32 &value)
+void DialogAlongLine::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
@@ -332,6 +355,12 @@ QString DialogAlongLine::GetLineColor() const
 void DialogAlongLine::SetLineColor(const QString &value)
 {
     ChangeCurrentData(ui->comboBoxLineColor, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogAlongLine::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

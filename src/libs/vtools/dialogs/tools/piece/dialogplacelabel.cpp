@@ -41,11 +41,6 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidg
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogPlaceLabel),
       m_showMode(false),
-      m_flagPoint(false),
-      m_flagWidth(false),
-      m_flagHeight(false),
-      m_flagAngle(false),
-      m_flagFormulaVisible(false),
       m_formulaBaseHeightWidth(0),
       m_formulaBaseHeightHeight(0),
       m_formulaBaseHeightAngle(0),
@@ -53,7 +48,13 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidg
       timerAngle(new QTimer(this)),
       timerWidth(new QTimer(this)),
       timerHeight(new QTimer(this)),
-      m_timerVisible(new QTimer(this))
+      m_timerVisible(new QTimer(this)),
+      m_flagPoint(false),
+      m_flagWidth(false),
+      m_flagHeight(false),
+      m_flagAngle(false),
+      m_flagFormulaVisible(false),
+      m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -62,9 +63,6 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, quint32 toolId, QWidg
     InitControlTab();
 
     EvalVisible();
-
-    flagError = false;
-    CheckState();
 
     connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
@@ -255,22 +253,15 @@ void DialogPlaceLabel::ChosenObject(quint32 id, const SceneObject &type)
                 CheckPoint();
                 prepare = true;
 
-                FormulaWidthChanged();
-                FormulaHeightChanged();
-                FormulaAngleChanged();
+                timerWidth->setSingleShot(formulaTimerTimeout);
+                timerHeight->setSingleShot(formulaTimerTimeout);
+                timerAngle->setSingleShot(formulaTimerTimeout);
 
                 this->setModal(true);
                 this->show();
             }
         }
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::CheckState()
-{
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(m_flagPoint && flagError && m_flagWidth && m_flagHeight && m_flagAngle && m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -295,93 +286,82 @@ void DialogPlaceLabel::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaWidthEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseHeightWidth);
+    DeployFormula(this, ui->plainTextEditFormulaWidth, ui->pushButtonGrowWidth, m_formulaBaseHeightWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaHeightEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaHeight, ui->pushButtonGrowHeight, m_formulaBaseHeightHeight);
+    DeployFormula(this, ui->plainTextEditFormulaHeight, ui->pushButtonGrowHeight, m_formulaBaseHeightHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployFormulaAngleEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaAngle, ui->pushButtonGrowAngle, m_formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditFormulaAngle, ui->pushButtonGrowAngle, m_formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::DeployVisibleFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaWidthChanged()
-{
-    labelEditFormula = ui->labelEditFormulaWidth;
-    labelResultCalculation = ui->labelResultCalculationWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagWidth, ui->plainTextEditFormulaWidth, timerWidth, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaHeightChanged()
-{
-    labelEditFormula = ui->labelEditFormulaHeight;
-    labelResultCalculation = ui->labelResultCalculationHeight;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(m_flagHeight, ui->plainTextEditFormulaHeight, timerHeight, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::FormulaAngleChanged()
-{
-    labelEditFormula = ui->labelEditFormulaAngle;
-    labelResultCalculation = ui->labelResultCalculationAngle;
-    ValFormulaChanged(m_flagAngle, ui->plainTextEditFormulaAngle, timerAngle, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPlaceLabel::VisibleChanged()
-{
-    labelEditFormula = ui->labelEditVisible;
-    labelResultCalculation = ui->labelResultVisible;
-    ValFormulaChanged(m_flagFormulaVisible, ui->plainTextEditFormulaVisible, m_timerVisible, QString());
+    DeployFormula(this, ui->plainTextEditFormulaVisible, ui->pushButtonGrowVisible, m_formulaBaseVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalWidth()
 {
-    labelEditFormula = ui->labelEditFormulaWidth;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormulaWidth->toPlainText(), m_flagWidth, ui->labelResultCalculationWidth, postfix, true,
-         true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaWidth->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaWidth;
+    formulaData.labelResult = ui->labelResultCalculationWidth;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalHeight()
 {
-    labelEditFormula = ui->labelEditFormulaHeight;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    Eval(ui->plainTextEditFormulaHeight->toPlainText(), m_flagHeight, ui->labelResultCalculationHeight, postfix, true,
-         true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaHeight->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaHeight;
+    formulaData.labelResult = ui->labelResultCalculationHeight;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalAngle()
 {
-    labelEditFormula = ui->labelEditFormulaAngle;
-    Eval(ui->plainTextEditFormulaAngle->toPlainText(), m_flagAngle, ui->labelResultCalculationAngle, degreeSymbol,
-         false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormulaAngle;
+    formulaData.labelResult = ui->labelResultCalculationAngle;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, m_flagAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::EvalVisible()
 {
-    labelEditFormula = ui->labelEditVisible;
-    QString formula = ui->plainTextEditFormulaVisible->toPlainText();
-    Eval(formula, m_flagFormulaVisible, ui->labelResultVisible, QString(), false, true);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormulaVisible->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditVisible;
+    formulaData.labelResult = ui->labelResultVisible;
+    formulaData.postfix = QString();
+    formulaData.checkZero = false;
+    formulaData.checkLessThanZero = true;
+
+    Eval(formulaData, m_flagFormulaVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -456,14 +436,28 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     connect(ui->toolButtonExprHeight, &QPushButton::clicked, this, &DialogPlaceLabel::FXHeight);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogPlaceLabel::FXAngle);
 
-    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::FormulaWidthChanged);
-    connect(ui->plainTextEditFormulaHeight, &QPlainTextEdit::textChanged, this,
-            &DialogPlaceLabel::FormulaHeightChanged);
-    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::FormulaAngleChanged);
+    connect(ui->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerWidth->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditFormulaHeight, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerHeight->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditFormulaAngle, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerAngle->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaWidthEdit);
     connect(ui->pushButtonGrowHeight, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaHeightEdit);
     connect(ui->pushButtonGrowAngle, &QPushButton::clicked, this, &DialogPlaceLabel::DeployFormulaAngleEdit);
+
+    timerWidth->setSingleShot(true);
+    timerHeight->setSingleShot(true);
+    timerAngle->setSingleShot(true);
 
     connect(timerWidth, &QTimer::timeout, this, &DialogPlaceLabel::EvalWidth);
     connect(timerHeight, &QTimer::timeout, this, &DialogPlaceLabel::EvalHeight);
@@ -477,9 +471,14 @@ void DialogPlaceLabel::InitControlTab()
 
     ui->plainTextEditFormulaVisible->installEventFilter(this);
 
+    m_timerVisible->setSingleShot(true);
+
     connect(m_timerVisible, &QTimer::timeout, this, &DialogPlaceLabel::EvalVisible);
     connect(ui->toolButtonExprVisible, &QPushButton::clicked, this, &DialogPlaceLabel::FXVisible);
-    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, &DialogPlaceLabel::VisibleChanged);
+    connect(ui->plainTextEditFormulaVisible, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        m_timerVisible->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowVisible, &QPushButton::clicked, this,
             &DialogPlaceLabel::DeployVisibleFormulaTextEdit);
 }
@@ -503,16 +502,16 @@ void DialogPlaceLabel::CheckPieces()
 {
     if (not m_showMode)
     {
-        QColor color = okColor;
+        QColor color;
         if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
         {
-            flagError = false;
+            m_flagError = false;
             color = errorColor;
         }
         else
         {
-            flagError = true;
-            color = okColor;
+            m_flagError = true;
+            color = OkColor(this);
         }
         ChangeColor(ui->labelPiece, color);
         CheckState();
@@ -522,11 +521,11 @@ void DialogPlaceLabel::CheckPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::CheckPoint()
 {
-    QColor color = okColor;
+    QColor color;
     if (ui->comboBoxPoint->currentIndex() != -1)
     {
         m_flagPoint = true;
-        color = okColor;
+        color = OkColor(this);
     }
     else
     {

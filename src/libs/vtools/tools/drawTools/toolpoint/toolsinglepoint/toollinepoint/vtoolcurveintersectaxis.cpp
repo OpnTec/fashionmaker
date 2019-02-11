@@ -112,7 +112,7 @@ VToolCurveIntersectAxis *VToolCurveIntersectAxis::Create(const QPointer<DialogTo
     initData.curveId = dialogTool->getCurveId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -255,7 +255,7 @@ void VToolCurveIntersectAxis::SaveDialog(QDomElement &domElement, QList<quint32>
     AddDependence(newDependencies, dialogTool->GetBasePointId());
     AddDependence(newDependencies, dialogTool->getCurveId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
@@ -346,7 +346,7 @@ void VToolCurveIntersectAxis::InitArc(VContainer *data, qreal segLength, const V
 //---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-void VToolCurveIntersectAxis::InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
+void VToolCurveIntersectAxis::InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId,
                                            VContainer *data)
 {
     switch(curveType)

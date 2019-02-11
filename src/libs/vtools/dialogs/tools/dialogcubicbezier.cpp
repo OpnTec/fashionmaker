@@ -44,11 +44,12 @@
 #include "ui_dialogcubicbezier.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogCubicBezier),
       spl(),
-      newDuplicate(-1)
+      newDuplicate(-1),
+      flagError(false)
 {
     ui->setupUi(this);
     InitOkCancelApply(ui);
@@ -61,8 +62,6 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, const quint32 &tool
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
-
-    DialogTool::CheckState();
 
     connect(ui->comboBoxP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogCubicBezier::PointNameChanged);
@@ -174,7 +173,7 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezier::PointNameChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxP1) == getCurrentObjectId(ui->comboBoxP4))
     {
         flagError = false;
@@ -185,7 +184,7 @@ void DialogCubicBezier::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
 
         if (getCurrentObjectId(ui->comboBoxP1) == spl.GetP1().id() &&
             getCurrentObjectId(ui->comboBoxP4) == spl.GetP4().id())

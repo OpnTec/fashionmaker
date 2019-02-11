@@ -51,7 +51,7 @@ class DialogFlippingByAxis : public DialogTool
     Q_OBJECT
 
 public:
-    explicit DialogFlippingByAxis(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogFlippingByAxis();
 
     quint32 GetOriginPointId() const;
@@ -75,11 +75,11 @@ private slots:
     void SuffixChanged();
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
+    virtual bool IsValid() const final;
 
 private slots:
     void PointChanged();
@@ -95,7 +95,16 @@ private:
 
     QString m_suffix;
 
+    bool flagName;
+    bool flagError;
+
     static void FillComboBoxAxisType(QComboBox *box);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogFlippingByAxis::IsValid() const
+{
+    return flagError && flagName;
+}
 
 #endif // DIALOGFLIPPINGBYAXIS_H

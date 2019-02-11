@@ -107,7 +107,7 @@ VToolHeight* VToolHeight::Create(const QPointer<DialogTool> &dialog, VMainGraphi
     initData.p2LineId = dialogTool->GetP2LineId();
     initData.typeLine = dialogTool->GetTypeLine();
     initData.lineColor = dialogTool->GetLineColor();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -215,7 +215,7 @@ void VToolHeight::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepende
     AddDependence(newDependencies, dialogTool->GetP1LineId());
     AddDependence(newDependencies, dialogTool->GetP2LineId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrTypeLine, dialogTool->GetTypeLine());
     doc->SetAttribute(domElement, AttrLineColor, dialogTool->GetLineColor());
     doc->SetAttribute(domElement, AttrBasePoint, QString().setNum(dialogTool->GetBasePointId()));

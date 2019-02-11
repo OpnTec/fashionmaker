@@ -51,27 +51,26 @@ class DialogCutArc : public DialogTool
     Q_OBJECT
 public:
 
-    DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCutArc() override;
 
+    QString           GetPointName() const;
     void              SetPointName(const QString &value);
 
     QString           GetFormula() const;
     void              SetFormula(const QString &value);
 
     quint32           getArcId() const;
-    void              setArcId(const quint32 &value);
+    void              setArcId(quint32 value);
 public slots:
     virtual void      ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void              DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void              FormulaTextChanged();
+
     void              FXLength();
+    void              EvalFormula();
 protected:
     virtual void      ShowVisualization() override;
     /**
@@ -79,16 +78,29 @@ protected:
      */
     virtual void      SaveData() override;
     virtual void      closeEvent(QCloseEvent *event) override;
+    virtual bool      IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogCutArc)
     /** @brief ui keeps information about user interface */
     Ui::DialogCutArc  *ui;
 
     /** @brief formula string with formula */
-    QString           formula;
+    QString formula;
+    QString pointName;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int               formulaBaseHeight;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogCutArc::IsValid() const
+{
+    return flagFormula && flagName;
+}
 
 #endif // DIALOGCUTARC_H

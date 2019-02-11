@@ -49,9 +49,10 @@ class DialogPointOfIntersectionCircles : public DialogTool
     Q_OBJECT
 
 public:
-    DialogPointOfIntersectionCircles(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersectionCircles(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersectionCircles() override;
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     quint32        GetFirstCircleCenterId() const;
@@ -76,9 +77,6 @@ public slots:
     void           DeployCircle1RadiusTextEdit();
     void           DeployCircle2RadiusTextEdit();
 
-    void           Circle1RadiusChanged();
-    void           Circle2RadiusChanged();
-
     void           FXCircle1Radius();
     void           FXCircle2Radius();
 
@@ -92,24 +90,34 @@ protected:
      */
     virtual void   SaveData() override;
     virtual void   closeEvent(QCloseEvent *event) override;
-    virtual void   CheckState() final;
+    virtual bool   IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogPointOfIntersectionCircles)
 
     Ui::DialogPointOfIntersectionCircles *ui;
 
-    bool          flagCircle1Radius;
-    bool          flagCircle2Radius;
+    QTimer *timerCircle1Radius;
+    QTimer *timerCircle2Radius;
 
-    QTimer        *timerCircle1Radius;
-    QTimer        *timerCircle2Radius;
+    QString circle1Radius;
+    QString circle2Radius;
 
-    QString       circle1Radius;
-    QString       circle2Radius;
+    int formulaBaseHeightCircle1Radius;
+    int formulaBaseHeightCircle2Radius;
 
-    int           formulaBaseHeightCircle1Radius;
-    int           formulaBaseHeightCircle2Radius;
+    QString pointName;
+
+    bool flagCircle1Radius;
+    bool flagCircle2Radius;
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointOfIntersectionCircles::IsValid() const
+{
+    return flagCircle1Radius && flagCircle2Radius && flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTIONCIRCLES_H

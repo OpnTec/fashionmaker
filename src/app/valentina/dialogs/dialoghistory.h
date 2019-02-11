@@ -68,6 +68,7 @@ signals:
 protected:
     virtual void      closeEvent ( QCloseEvent * event ) override;
     virtual void      changeEvent(QEvent* event) override;
+    virtual bool      IsValid() const final {return true;}
 private:
     Q_DISABLE_COPY(DialogHistory)
 

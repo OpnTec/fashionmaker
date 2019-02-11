@@ -56,8 +56,13 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogLineIntersect), flagPoint(true)
+DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogLineIntersect),
+      pointName(),
+      flagError(true),
+      flagPoint(true),
+      flagName(true)
 {
     ui->setupUi(this);
 
@@ -66,14 +71,17 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, const quint32 &
     number = 0;
     InitOkCancelApply(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     FillComboBoxPoints(ui->comboBoxP1Line1);
     FillComboBoxPoints(ui->comboBoxP2Line1);
     FillComboBoxPoints(ui->comboBoxP1Line2);
     FillComboBoxPoints(ui->comboBoxP2Line2);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogLineIntersect::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxP1Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogLineIntersect::PointNameChanged);
     connect(ui->comboBoxP2Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -229,7 +237,7 @@ void DialogLineIntersect::PointNameChanged()
     QPointF fPoint;
     QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() < 3 || intersect == QLineF::NoIntersection)
     {
         flagError = false;
@@ -238,7 +246,7 @@ void DialogLineIntersect::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelP1Line1, color);
     ChangeColor(ui->labelP2Line1, color);
@@ -251,16 +259,6 @@ void DialogLineIntersect::PointNameChanged()
 void DialogLineIntersect::ShowVisualization()
 {
     AddVisualization<VisToolLineIntersect>();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief CheckState check state of dialog. Enable or disable button ok.
- */
-void DialogLineIntersect::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagName && flagPoint);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -294,13 +292,19 @@ bool DialogLineIntersect::CheckIntersecion()
  * @brief SetP2Line2 set id second point of second line
  * @param value id
  */
-void DialogLineIntersect::SetP2Line2(const quint32 &value)
+void DialogLineIntersect::SetP2Line2(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP2Line2, value);
 
     VisToolLineIntersect *line = qobject_cast<VisToolLineIntersect *>(vis);
     SCASSERT(line != nullptr)
-    line->setLine2P2Id(value);
+            line->setLine2P2Id(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogLineIntersect::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,7 +312,7 @@ void DialogLineIntersect::SetP2Line2(const quint32 &value)
  * @brief SetP1Line2 set id first point of second line
  * @param value id
  */
-void DialogLineIntersect::SetP1Line2(const quint32 &value)
+void DialogLineIntersect::SetP1Line2(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP1Line2, value);
 
@@ -322,7 +326,7 @@ void DialogLineIntersect::SetP1Line2(const quint32 &value)
  * @brief SetP2Line1 set id second point of first line
  * @param value id
  */
-void DialogLineIntersect::SetP2Line1(const quint32 &value)
+void DialogLineIntersect::SetP2Line1(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP2Line1, value);
 
@@ -336,7 +340,7 @@ void DialogLineIntersect::SetP2Line1(const quint32 &value)
  * @brief SetP1Line1 set id first point of first line
  * @param value id
  */
-void DialogLineIntersect::SetP1Line1(const quint32 &value)
+void DialogLineIntersect::SetP1Line1(quint32 value)
 {
     setCurrentPointId(ui->comboBoxP1Line1, value);
 

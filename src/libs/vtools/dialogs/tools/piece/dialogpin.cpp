@@ -36,15 +36,13 @@ DialogPin::DialogPin(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogPin),
       m_showMode(false),
-      m_flagPoint(false)
+      m_flagPoint(false),
+      m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
 
     FillComboBoxPoints(ui->comboBoxPoint);
-
-    flagError = false;
-    CheckState();
 
     connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]()
     {
@@ -144,13 +142,6 @@ void DialogPin::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPin::CheckState()
-{
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(m_flagPoint && flagError);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogPin::ShowVisualization()
 {
     AddVisualization<VisToolSpecialPoint>();
@@ -161,16 +152,16 @@ void DialogPin::CheckPieces()
 {
     if (not m_showMode)
     {
-        QColor color = okColor;
+        QColor color;
         if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
         {
-            flagError = false;
+            m_flagError = false;
             color = errorColor;
         }
         else
         {
-            flagError = true;
-            color = okColor;
+            m_flagError = true;
+            color = OkColor(this);
         }
         ChangeColor(ui->labelPiece, color);
         CheckState();
@@ -180,11 +171,11 @@ void DialogPin::CheckPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPin::CheckPoint()
 {
-    QColor color = okColor;
+    QColor color;
     if (ui->comboBoxPoint->currentIndex() != -1)
     {
         m_flagPoint = true;
-        color = okColor;
+        color = OkColor(this);
     }
     else
     {

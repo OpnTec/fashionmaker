@@ -58,11 +58,12 @@
 class QWidget;
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogCubicBezierPath::DialogCubicBezierPath(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogCubicBezierPath),
       path(),
-      newDuplicate(-1)
+      newDuplicate(-1),
+      flagError(false)
 {
     ui->setupUi(this);
 
@@ -223,7 +224,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
     DataPoint(*point);
     item->setData(Qt::UserRole, QVariant::fromValue(*point));
 
-    QColor color = okColor;
+    QColor color;
     if (not IsPathValid())
     {
         flagError = false;
@@ -234,7 +235,7 @@ void DialogCubicBezierPath::currentPointChanged(int index)
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
 
         auto first = qvariant_cast<VPointF>(ui->listWidget->item(0)->data(Qt::UserRole));
         auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));

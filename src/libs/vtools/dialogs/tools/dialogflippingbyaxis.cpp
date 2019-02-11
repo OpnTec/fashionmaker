@@ -59,12 +59,14 @@
 #include "ui_dialogflippingbyaxis.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogFlippingByAxis),
       objects(),
       stage1(true),
-      m_suffix()
+      m_suffix(),
+      flagName(false),
+      flagError(false)
 {
     ui->setupUi(this);
 
@@ -74,9 +76,6 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, const quint32
 
     FillComboBoxPoints(ui->comboBoxOriginPoint);
     FillComboBoxAxisType(ui->comboBoxAxisType);
-
-    flagName = true;
-    CheckState();
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
     connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -244,7 +243,7 @@ void DialogFlippingByAxis::SuffixChanged()
         if (suffix.isEmpty())
         {
             flagName = false;
-            ChangeColor(ui->labelSuffix, Qt::red);
+            ChangeColor(ui->labelSuffix, errorColor);
             CheckState();
             return;
         }
@@ -260,7 +259,7 @@ void DialogFlippingByAxis::SuffixChanged()
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;
-                        ChangeColor(ui->labelSuffix, Qt::red);
+                        ChangeColor(ui->labelSuffix, errorColor);
                         CheckState();
                         return;
                     }
@@ -269,18 +268,9 @@ void DialogFlippingByAxis::SuffixChanged()
         }
 
         flagName = true;
-        ChangeColor(ui->labelSuffix, okColor);
+        ChangeColor(ui->labelSuffix, OkColor(this));
     }
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogFlippingByAxis::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagError && flagName);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(bOk->isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -306,7 +296,7 @@ void DialogFlippingByAxis::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::PointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (objects.contains(getCurrentObjectId(ui->comboBoxOriginPoint)))
     {
         flagError = false;
@@ -315,7 +305,7 @@ void DialogFlippingByAxis::PointChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelOriginPoint, color);
     CheckState();

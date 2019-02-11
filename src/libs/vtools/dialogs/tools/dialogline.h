@@ -50,14 +50,14 @@ class DialogLine : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogLine(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogLine(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogLine() override;
 
     quint32        GetFirstPoint() const;
-    void           SetFirstPoint(const quint32 &value);
+    void           SetFirstPoint(quint32 value);
 
     quint32        GetSecondPoint() const;
-    void           SetSecondPoint(const quint32 &value);
+    void           SetSecondPoint(quint32 value);
 
     QString        GetTypeLine() const;
     void           SetTypeLine(const QString &value);
@@ -73,11 +73,20 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogLine)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogLine *ui;
+
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogLine::IsValid() const
+{
+    return flagError;
+}
 
 #endif // DIALOGLINE_H

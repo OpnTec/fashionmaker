@@ -59,7 +59,7 @@ class DialogEditWrongFormula : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogEditWrongFormula(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogEditWrongFormula(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogEditWrongFormula() override;
 
     QString      GetFormula() const;
@@ -73,7 +73,7 @@ public:
 public slots:
     virtual void DialogAccepted() override;
     virtual void DialogRejected() override;
-    virtual void EvalFormula() override;
+    void         EvalFormula();
     void         ValChanged(int row);
     void         PutHere();
     void         PutVal(QTableWidgetItem * item);
@@ -89,7 +89,7 @@ public slots:
     void         PreviewCalculations();
     void         Functions();
 protected:
-    virtual void CheckState() final;
+    virtual bool IsValid() const final;
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
@@ -110,6 +110,10 @@ private:
     QString postfix;
     bool restoreCursor;
 
+    QTimer *timerFormula;
+
+    bool flagFormula;
+
     void InitVariables();
 
     template <class key, class val>
@@ -121,5 +125,10 @@ private:
     void SetDescription(const QString &name, qreal value, const QString &unit, const QString &description);
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogEditWrongFormula::IsValid() const
+{
+    return flagFormula;
+}
 
 #endif // DIALOGEDITWRONGFORMULA_H

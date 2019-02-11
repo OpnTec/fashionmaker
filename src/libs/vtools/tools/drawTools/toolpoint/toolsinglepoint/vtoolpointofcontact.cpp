@@ -178,7 +178,7 @@ VToolPointOfContact* VToolPointOfContact::Create(const QPointer<DialogTool> &dia
     initData.center = dialogTool->getCenter();
     initData.firstPointId = dialogTool->GetFirstPoint();
     initData.secondPointId = dialogTool->GetSecondPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -307,7 +307,7 @@ void VToolPointOfContact::SaveDialog(QDomElement &domElement, QList<quint32> &ol
     AddDependence(newDependencies, dialogTool->GetFirstPoint());
     AddDependence(newDependencies, dialogTool->GetSecondPoint());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrRadius, dialogTool->getRadius());
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->getCenter()));
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPoint()));
@@ -370,13 +370,13 @@ QString VToolPointOfContact::MakeToolTip() const
                                     "<tr> <td><b>%6:</b> %7 %3</td> </tr>"
                                     "<tr> <td><b>%8:</b> %9°</td> </tr>"
                                     "</table>")
-            .arg(QString("%1->%2").arg(p1->name(), current->name()))
+            .arg(QStringLiteral("%1->%2").arg(p1->name(), current->name()))
             .arg(qApp->fromPixel(p1ToCur.length()))
-            .arg(UnitsToStr(qApp->patternUnit(), true), QString("%1->%2").arg(p2->name(), current->name()))
+            .arg(UnitsToStr(qApp->patternUnit(), true), QStringLiteral("%1->%2").arg(p2->name(), current->name()))
             .arg(qApp->fromPixel(p2ToCur.length()))
-            .arg(QString("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
+            .arg(QStringLiteral("%1 %2->%3").arg(tr("Length"), centerP->name(), current->name()))
             .arg(qApp->fromPixel(centerToCur.length()))
-            .arg(QString("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
+            .arg(QStringLiteral("%1 %2->%3").arg(tr("Angle"), centerP->name(), current->name()))
             .arg(centerToCur.angle())
             .arg(tr("Label"), current->name());
     return toolTip;

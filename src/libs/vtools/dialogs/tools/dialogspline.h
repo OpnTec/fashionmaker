@@ -54,7 +54,7 @@ class DialogSpline : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSpline() override;
 
     VSpline GetSpline() const;
@@ -65,28 +65,28 @@ public slots:
     virtual void  PointNameChanged() override;
     virtual void  ShowDialog(bool click) override;
 protected:
-    virtual void  CheckState() final;
     virtual void  ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
+    virtual bool  IsValid() const final;
 private slots:
     void DeployAngle1TextEdit();
     void DeployAngle2TextEdit();
     void DeployLength1TextEdit();
     void DeployLength2TextEdit();
 
-    void Angle1Changed();
-    void Angle2Changed();
-    void Length1Changed();
-    void Length2Changed();
-
     void FXAngle1();
     void FXAngle2();
     void FXLength1();
     void FXLength2();
+
+    void EvalAngle1();
+    void EvalAngle2();
+    void EvalLength1();
+    void EvalLength2();
 private:
     Q_DISABLE_COPY(DialogSpline)
 
@@ -115,16 +115,18 @@ private:
     bool flagAngle2;
     bool flagLength1;
     bool flagLength2;
+    bool flagError;
 
     const QSharedPointer<VPointF> GetP1() const;
     const QSharedPointer<VPointF> GetP4() const;
 
-    void EvalAngle1();
-    void EvalAngle2();
-    void EvalLength1();
-    void EvalLength2();
-
     VSpline CurrentSpline() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogSpline::IsValid() const
+{
+    return flagAngle1 && flagAngle2 && flagLength1 && flagLength2 && flagError;
+}
 
 #endif // DIALOGSPLINE_H

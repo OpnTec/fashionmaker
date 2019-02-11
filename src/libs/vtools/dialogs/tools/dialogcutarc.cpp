@@ -33,9 +33,11 @@
 #include <QPlainTextEdit>
 #include <QPointer>
 #include <QPushButton>
+#include <QTimer>
 #include <QToolButton>
 
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -51,37 +53,44 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogCutArc::DialogCutArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    : DialogTool(data, toolId, parent), ui(new Ui::DialogCutArc), formula(QString()), formulaBaseHeight(0)
+DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogCutArc),
+      formula(),
+      pointName(),
+      formulaBaseHeight(0),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogCutArc::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
-    this->formulaBaseHeight = ui->plainTextEditFormula->height();
+    formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxArcs(ui->comboBoxArc);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogCutArc::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogCutArc::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
 
     vis = new VisToolCutArc(data);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogCutArc::FormulaTextChanged()
-{
-    this->FormulaChangedPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -99,6 +108,20 @@ void DialogCutArc::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ShowVisualization()
 {
     AddVisualization<VisToolCutArc>();
@@ -107,13 +130,19 @@ void DialogCutArc::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogCutArc::~DialogCutArc()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogCutArc::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -165,7 +194,7 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
  * @brief setArcId set id of arc
  * @param value id
  */
-void DialogCutArc::setArcId(const quint32 &value)
+void DialogCutArc::setArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc, value);
 

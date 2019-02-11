@@ -49,11 +49,11 @@ class DialogRotation : public DialogTool
 {
     Q_OBJECT
 public:
-    explicit DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    explicit DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogRotation();
 
     quint32 GetOrigPointId() const;
-    void    SetOrigPointId(const quint32 &value);
+    void    SetOrigPointId(quint32 value);
 
     QString GetAngle() const;
     void    SetAngle(const QString &value);
@@ -72,17 +72,17 @@ public slots:
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
     void DeployAngleTextEdit();
-    void AngleChanged();
     void FXAngle();
     void SuffixChanged();
+    void EvalAngle();
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
 
     /** @brief SaveData Put dialog data in local variables */
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 
 private slots:
     void PointChanged();
@@ -90,9 +90,6 @@ private slots:
 private:
     Q_DISABLE_COPY(DialogRotation)
     Ui::DialogRotation *ui;
-
-    /** @brief flagAngle true if value of angle is correct */
-    bool    flagAngle;
 
     /** @brief timerAngle timer of check formula of angle */
     QTimer  *timerAngle;
@@ -111,7 +108,16 @@ private:
 
     bool m_firstRelease;
 
-    void EvalAngle();
+    /** @brief flagAngle true if value of angle is correct */
+    bool flagAngle;
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogRotation::IsValid() const
+{
+    return flagAngle && flagName && flagError;
+}
 
 #endif // DIALOGROTATION_H

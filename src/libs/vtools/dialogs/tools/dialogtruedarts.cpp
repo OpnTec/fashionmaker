@@ -50,9 +50,16 @@
 #include "ui_dialogtruedarts.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogTrueDarts), d1PointName(), d2PointName(), ch1(NULL_ID),
-      ch2(NULL_ID), flagName1(true), flagName2(true)
+DialogTrueDarts::DialogTrueDarts(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogTrueDarts),
+      d1PointName(),
+      d2PointName(),
+      ch1(NULL_ID),
+      ch2(NULL_ID),
+      flagName1(true),
+      flagName2(true),
+      flagError(false)
 {
     ui->setupUi(this);
 
@@ -65,7 +72,6 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, const quint32 &toolId, 
     ui->lineEditSecondNewDartPoint->setText(name2);
 
     InitOkCancelApply(ui);
-    CheckState();
 
     FillComboBoxs(ch1, ch2);
 
@@ -317,7 +323,7 @@ void DialogTrueDarts::PointNameChanged()
     set.insert(getCurrentObjectId(ui->comboBoxSecondDartPoint));
     set.insert(getCurrentObjectId(ui->comboBoxThirdDartPoint));
 
-    QColor color = okColor;
+    QColor color;
     if (set.size() != 5)
     {
         flagError = false;
@@ -326,7 +332,7 @@ void DialogTrueDarts::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstBasePoint, color);
     ChangeColor(ui->labelSecondBasePoint, color);
@@ -372,18 +378,6 @@ void DialogTrueDarts::SaveData()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTrueDarts::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagName1 && flagName2 && flagError);
-    // In case dialog hasn't apply button
-    if ( bApply != nullptr)
-    {
-        bApply->setEnabled(bOk->isEnabled());
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogTrueDarts::NameChanged(QLabel *labelEditNamePoint, const QString &pointD1Name, const QString &pointD2Name,
                                   QLineEdit* secondPointName, bool &flagName)
 {
@@ -424,11 +418,11 @@ void DialogTrueDarts::CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, con
             || rx.match(name).hasMatch() == false)
     {
         flagName = false;
-        ChangeColor(labelEditNamePoint, Qt::red);
+        ChangeColor(labelEditNamePoint, errorColor);
     }
     else
     {
         flagName = true;
-        ChangeColor(labelEditNamePoint, okColor);
+        ChangeColor(labelEditNamePoint, OkColor(this));
     }
 }

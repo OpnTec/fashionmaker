@@ -77,8 +77,6 @@ template <class T> class QSharedPointer;
 
 Q_LOGGING_CATEGORY(vDialog, "v.dialog")
 
-#define DIALOG_MAX_FORMULA_HEIGHT 80
-
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -153,32 +151,19 @@ bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
  * @param data container with data
  * @param parent parent widget
  */
-DialogTool::DialogTool(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogTool::DialogTool(const VContainer *data, quint32 toolId, QWidget *parent)
     : QDialog(parent),
       data(data),
       isInitialized(false),
-      flagName(true),
-      flagFormula(true),
-      flagError(true),
-      timerFormula(new QTimer(this)),
       bOk(nullptr),
       bApply(nullptr),
-      spinBoxAngle(nullptr),
-      plainTextEditFormula(nullptr),
-      labelResultCalculation(nullptr),
-      labelEditNamePoint(nullptr),
-      labelEditFormula(nullptr),
-      okColor(this->palette().color(QPalette::Active, QPalette::WindowText)),
-      errorColor(Qt::red),
       associatedTool(nullptr),
       toolId(toolId),
       prepare(false),
-      pointName(),
       number(0),
       vis(nullptr)
 {
-    SCASSERT(data != nullptr)
-    connect(timerFormula, &QTimer::timeout, this, &DialogTool::EvalFormula);
+    SCASSERT(data != nullptr)      
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -226,6 +211,8 @@ void DialogTool::showEvent(QShowEvent *event)
 
     isInitialized = true;//first show windows are held
     ShowVisualization();
+
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -261,13 +248,13 @@ void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &
  * @brief FillComboBoxPoints fill comboBox list of points
  * @param box comboBox
  */
-void DialogTool::FillComboBoxPoints(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
+void DialogTool::FillComboBoxPoints(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
 {
     FillCombo<VPointF>(box, GOType::Point, rule, ch1, ch2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
+void DialogTool::FillComboBoxArcs(QComboBox *box, FillComboBox rule, quint32 ch1, quint32 ch2) const
 {
     FillCombo<VAbstractCurve>(box, GOType::Arc, rule, ch1, ch2);
 }
@@ -449,42 +436,15 @@ void DialogTool::ChangeCurrentData(QComboBox *box, const QVariant &value) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::MoveCursorToEnd(QPlainTextEdit *plainTextEdit) const
-{
-    SCASSERT(plainTextEdit != nullptr)
-    QTextCursor cursor = plainTextEdit->textCursor();
-    cursor.movePosition(QTextCursor::End, QTextCursor::MoveAnchor);
-    plainTextEdit->setTextCursor(cursor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool DialogTool::eventFilter(QObject *object, QEvent *event)
 {
-    if (QPlainTextEdit *plainTextEdit = qobject_cast<QPlainTextEdit *>(object))
+    const bool fitered = FilterObject(object, event);
+    if (fitered)
     {
-        if (event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
-            if ((keyEvent->key() == Qt::Key_Period) && (keyEvent->modifiers() & Qt::KeypadModifier))
-            {
-                if (qApp->Settings()->GetOsSeparator())
-                {
-                    plainTextEdit->insertPlainText(QLocale().decimalPoint());
-                }
-                else
-                {
-                    plainTextEdit->insertPlainText(QLocale::c().decimalPoint());
-                }
-                return true;
-            }
-        }
+        return fitered;
     }
-    else
-    {
-        // pass the event on to the parent class
-        return QDialog::eventFilter(object, event);
-    }
-    return false;// pass the event to the widget
+
+    return QDialog::eventFilter(object, event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -833,144 +793,12 @@ bool DialogTool::IsSplinePath(const QSharedPointer<VGObject> &obj) const
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief ValFormulaChanged handle change formula
- * @param flag flag state of formula
- * @param edit LineEdit
- * @param timer timer of formula
- */
-void DialogTool::ValFormulaChanged(bool &flag, QLineEdit *edit, QTimer *timer, const QString& postfix)
-{
-    SCASSERT(edit != nullptr)
-    SCASSERT(timer != nullptr)
-    SCASSERT(labelEditFormula != nullptr)
-    SCASSERT(labelResultCalculation != nullptr)
-    if (edit->text().isEmpty())
-    {
-        flag = false;
-        CheckState();
-        ChangeColor(labelEditFormula, Qt::red);
-        if (postfix.isEmpty())
-        {
-            labelResultCalculation->setText(tr("Error"));
-        }
-        else
-        {
-            labelResultCalculation->setText(tr("Error") + " (" + postfix + ")");
-        }
-        labelResultCalculation->setToolTip(tr("Empty field"));
-        return;
-    }
-    timer->start(1000);
-}
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::ValFormulaChanged(bool &flag, QPlainTextEdit *edit, QTimer *timer, const QString& postfix)
-{
-    SCASSERT(edit != nullptr)
-    SCASSERT(timer != nullptr)
-    SCASSERT(labelEditFormula != nullptr)
-    SCASSERT(labelResultCalculation != nullptr)
-    if (edit->toPlainText().isEmpty())
-    {
-        flag = false;
-        CheckState();
-        ChangeColor(labelEditFormula, Qt::red);
-        if (postfix.isEmpty())
-        {
-            labelResultCalculation->setText(tr("Error"));
-        }
-        else
-        {
-            labelResultCalculation->setText(tr("Error") + " (" + postfix + ")");
-        }
-
-        labelResultCalculation->setToolTip(tr("Empty field"));
-        return;
-    }
-    timer->setSingleShot(true);
-    timer->start(300);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief Eval evaluate formula and show result
- * @param text expresion that we parse
- * @param flag flag state of eval formula
- * @param label label for signal error
- * @param postfix unit name
- * @param checkZero true - if formula can't be equal zero
+ * @param formulaData options to control parsing
  */
-qreal DialogTool::Eval(const QString &text, bool &flag, QLabel *label, const QString& postfix, bool checkZero,
-                       bool checkLessThanZero)
+qreal DialogTool::Eval(const FormulaData &formulaData, bool &flag)
 {
-    SCASSERT(label != nullptr)
-    SCASSERT(labelEditFormula != nullptr)
-
-    qreal result = INT_MIN;//Value can be 0, so use max imposible value
-
-    if (text.isEmpty())
-    {
-        flag = false;
-        ChangeColor(labelEditFormula, Qt::red);
-        label->setText(tr("Error") + " (" + postfix + ")");
-        label->setToolTip(tr("Empty field"));
-    }
-    else
-    {
-        try
-        {
-            // Translate to internal look.
-            QString formula = qApp->TrVars()->FormulaFromUser(text, qApp->Settings()->GetOsSeparator());
-            QScopedPointer<Calculator> cal(new Calculator());
-            result = cal->EvalFormula(data->DataVariables(), formula);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                flag = false;
-                ChangeColor(labelEditFormula, Qt::red);
-                label->setText(tr("Error") + " (" + postfix + ")");
-                label->setToolTip(tr("Invalid result. Value is infinite or NaN. Please, check your calculations."));
-            }
-            else
-            {
-                //if result equal 0
-                if (checkZero && qFuzzyIsNull(result))
-                {
-                    flag = false;
-                    ChangeColor(labelEditFormula, Qt::red);
-                    label->setText(tr("Error") + " (" + postfix + ")");
-                    label->setToolTip(tr("Value can't be 0"));
-                }
-                else if (checkLessThanZero && result < 0)
-                {
-                    flag = false;
-                    ChangeColor(labelEditFormula, Qt::red);
-                    label->setText(tr("Error") + " (" + postfix + ")");
-                    label->setToolTip(tr("Value can't be less than 0"));
-                }
-                else
-                {
-                    label->setText(qApp->LocaleToString(result) + QChar(QChar::Space) +postfix);
-                    flag = true;
-                    ChangeColor(labelEditFormula, okColor);
-                    label->setToolTip(tr("Value"));
-                    emit ToolTip(QString());
-                }
-            }
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            label->setText(tr("Error") + " (" + postfix + ")");
-            flag = false;
-            ChangeColor(labelEditFormula, Qt::red);
-            emit ToolTip(tr("Parser error: %1").arg(e.GetMsg()));
-            label->setToolTip(tr("Parser error: %1").arg(e.GetMsg()));
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
-        }
-    }
+    const qreal result = EvalToolFormula(this, formulaData, flag);
     CheckState(); // Disable Ok and Apply buttons if something wrong.
     return result;
 }
@@ -1072,45 +900,6 @@ bool DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::DeployFormula(QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight)
-{
-    SCASSERT(formula != nullptr)
-    SCASSERT(buttonGrowLength != nullptr)
-
-    const QTextCursor cursor = formula->textCursor();
-
-    //Before deploy ned to release dialog size
-    //I don't know why, but don't need to fixate again.
-    //A dialog will be lefted fixated. That's what we need.
-    setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
-    setMinimumSize(QSize(0, 0));
-
-    if (formula->height() < DIALOG_MAX_FORMULA_HEIGHT)
-    {
-        formula->setFixedHeight(DIALOG_MAX_FORMULA_HEIGHT);
-        //Set icon from theme (internal for Windows system)
-        buttonGrowLength->setIcon(QIcon::fromTheme("go-next",
-                                                   QIcon(":/icons/win.icon.theme/16x16/actions/go-next.png")));
-    }
-    else
-    {
-       formula->setFixedHeight(formulaBaseHeight);
-       //Set icon from theme (internal for Windows system)
-       buttonGrowLength->setIcon(QIcon::fromTheme("go-down",
-                                                  QIcon(":/icons/win.icon.theme/16x16/actions/go-down.png")));
-    }
-
-    // I found that after change size of formula field, it was filed for angle formula, field for formula became black.
-    // This code prevent this.
-    setUpdatesEnabled(false);
-    repaint();
-    setUpdatesEnabled(true);
-
-    formula->setFocus();
-    formula->setTextCursor(cursor);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief FillList fill combobox list
  * @param box combobox
@@ -1161,7 +950,7 @@ bool DialogTool::IsSpline(const QSharedPointer<VGObject> &obj) const
 void DialogTool::CheckState()
 {
     SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagFormula && flagName && flagError);
+    bOk->setEnabled(IsValid());
     // In case dialog hasn't apply button
     if ( bApply != nullptr)
     {
@@ -1191,43 +980,6 @@ void DialogTool::SelectedObject(bool selected, quint32 object, quint32 tool)
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief NamePointChanged check name of point
- */
-void DialogTool::NamePointChanged()
-{
-    SCASSERT(labelEditNamePoint != nullptr)
-    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
-    if (edit)
-    {
-        QString name = edit->text();
-        QRegularExpression rx(NameRegExp());
-        if (name.isEmpty() || (pointName != name && data->IsUnique(name) == false) ||
-            rx.match(name).hasMatch() == false)
-        {
-            flagName = false;
-            ChangeColor(labelEditNamePoint, Qt::red);
-        }
-        else
-        {
-            flagName = true;
-            ChangeColor(labelEditNamePoint, okColor);
-        }
-    }
-    CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::ChangeColor(QWidget *widget, const QColor &color)
-{
-    SCASSERT(widget != nullptr)
-    QPalette palette = widget->palette();
-    palette.setColor(QPalette::Active, widget->foregroundRole(), color);
-    palette.setColor(QPalette::Inactive, widget->foregroundRole(), color);
-    widget->setPalette(palette);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief DialogAccepted save data and emit signal about closed dialog.
  */
 void DialogTool::DialogAccepted()
@@ -1253,120 +1005,6 @@ void DialogTool::DialogRejected()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief formula check formula
- */
-void DialogTool::FormulaChanged()
-{
-    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
-    if (edit)
-    {
-        ValFormulaChanged(flagFormula, edit, timerFormula);
-    }
-}
-//---------------------------------------------------------------------------------------------------------------------
-void DialogTool::FormulaChangedPlainText() //-V524
-{
-    QPlainTextEdit* edit = qobject_cast<QPlainTextEdit*>(sender());
-    if (edit)
-    {
-        ValFormulaChanged(flagFormula, edit, timerFormula);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowUp set angle value 90 degree
- */
-void DialogTool::ArrowUp()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(90);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowDown set angle value 270 degree
- */
-void DialogTool::ArrowDown()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(270);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowLeft set angle value 180 degree
- */
-void DialogTool::ArrowLeft()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(180);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowRight set angle value 0 degree
- */
-void DialogTool::ArrowRight()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowLeftUp set angle value 135 degree
- */
-void DialogTool::ArrowLeftUp()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(135);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowLeftDown set angle value 225 degree
- */
-void DialogTool::ArrowLeftDown()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(225);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowRightUp set angle value 45 degree
- */
-void DialogTool::ArrowRightUp()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(45);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ArrowRightDown set angle value 315 degree
- */
-void DialogTool::ArrowRightDown()
-{
-    SCASSERT(spinBoxAngle != nullptr)
-    spinBoxAngle->setValue(315);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief EvalFormula evaluate formula
- */
-void DialogTool::EvalFormula()
-{
-    SCASSERT(plainTextEditFormula != nullptr)
-    SCASSERT(labelResultCalculation != nullptr)
-    const QString postfix = UnitsToStr(qApp->patternUnit());//Show unit in dialog lable (cm, mm or inch)
-    Eval(plainTextEditFormula->toPlainText(), flagFormula, labelResultCalculation, postfix, false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 quint32 DialogTool::GetToolId() const
 {
@@ -1377,12 +1015,6 @@ quint32 DialogTool::GetToolId() const
 void DialogTool::SetToolId(const quint32 &value)
 {
     toolId = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::getPointName() const
-{
-    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

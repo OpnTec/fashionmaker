@@ -61,22 +61,29 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogEndLine::DialogEndLine(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogEndLine),
       formulaLength(),
       formulaAngle(),
       formulaBaseHeight(0),
       formulaBaseHeightAngle(0),
-      m_firstRelease(false)
+      pointName(),
+      m_firstRelease(false),
+      timerFormulaLength(new QTimer(this)),
+      timerFormulaAngle(new QTimer(this)),
+      flagFormula(false),
+      flagError(false),
+      flagName(true)
 {
     ui->setupUi(this);
 
+    timerFormulaLength->setSingleShot(true);
+    timerFormulaAngle->setSingleShot(true);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightAngle = ui->plainTextEditAngle->height();
 
@@ -85,7 +92,6 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
 
     InitOkCancelApply(ui);
     flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxBasePoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
@@ -94,15 +100,27 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogEndLine::FXLength);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogEndLine::FXAngle);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogEndLine::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogEndLine::FormulaTextChanged);
-    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, &DialogEndLine::AngleTextChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormulaLength->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditAngle, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormulaAngle->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogEndLine::DeployFormulaTextEdit);
     connect(ui->pushButtonGrowLengthAngle, &QPushButton::clicked, this, &DialogEndLine::DeployAngleTextEdit);
 
-    connect(timerFormula, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
+    connect(timerFormulaLength, &QTimer::timeout, this, &DialogEndLine::EvalLength);
+    connect(timerFormulaAngle, &QTimer::timeout, this, &DialogEndLine::EvalAngle);
 
     vis = new VisToolEndLine(data);
 }
@@ -113,35 +131,41 @@ DialogEndLine::DialogEndLine(const VContainer *data, const quint32 &toolId, QWid
  */
 void DialogEndLine::EvalAngle()
 {
-    labelEditFormula = ui->labelEditAngle;
-    Eval(ui->plainTextEditAngle->toPlainText(), flagError, ui->labelResultCalculationAngle, degreeSymbol, false);
-    labelEditFormula = ui->labelEditFormula;
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditAngle;
+    formulaData.labelResult = ui->labelResultCalculationAngle;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagError);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogEndLine::FormulaTextChanged()
+void DialogEndLine::EvalLength()
 {
-    this->FormulaChangedPlainText();
-}
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditAngle->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+    formulaData.checkLessThanZero = true;
 
-//---------------------------------------------------------------------------------------------------------------------
-void DialogEndLine::AngleTextChanged()
-{
-    labelEditFormula = ui->labelEditAngle;
-    ValFormulaChanged(flagError, ui->plainTextEditAngle, timerFormula, degreeSymbol);
-    labelEditFormula = ui->labelEditFormula;
+    Eval(formulaData, flagFormula);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEndLine::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditAngle, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
+    DeployFormula(this, ui->plainTextEditAngle, ui->pushButtonGrowLengthAngle, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -329,7 +353,7 @@ void DialogEndLine::ShowDialog(bool click)
         this->SetAngle(line->Angle());//Show in dialog angle what user choose
         this->SetFormula(line->Length());
         emit ToolTip(QString());
-        timerFormula->start();
+        timerFormulaLength->start();
         this->show();
     }
 }
@@ -369,6 +393,12 @@ void DialogEndLine::closeEvent(QCloseEvent *event)
 DialogEndLine::~DialogEndLine()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogEndLine::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

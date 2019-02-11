@@ -49,16 +49,16 @@ namespace Ui
 class VisPieceSpecialPoints;
 class FancyTabBar;
 class VPlaceLabelItem;
-class QUndoCommand;
+class VUndoCommand;
 
 class DialogSeamAllowance : public DialogTool
 {
     Q_OBJECT
 
 public:
-    DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, const quint32 &toolId,
+    DialogSeamAllowance(const VContainer *data, const VAbstractPattern *doc, quint32 toolId,
                         QWidget *parent = nullptr);
-    DialogSeamAllowance(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogSeamAllowance(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSeamAllowance();
 
     void EnableApply(bool enable);
@@ -68,7 +68,7 @@ public:
 
     QString GetFormulaSAWidth() const;
 
-    QVector<QUndoCommand*> &UndoStack();
+    QVector<QPointer<VUndoCommand> > &UndoStack();
 
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
@@ -81,6 +81,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void showEvent( QShowEvent *event ) override;
     virtual void resizeEvent(QResizeEvent *event) override;
+    virtual bool IsValid() const final;
 
 private slots:
     void NameDetailChanged();
@@ -143,10 +144,6 @@ private slots:
     void FXWidthBefore();
     void FXWidthAfter();
 
-    void WidthChanged();
-    void WidthBeforeChanged();
-    void WidthAfterChanged();
-
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
@@ -190,6 +187,8 @@ private:
     bool   flagFormulaBefore;
     bool   flagFormulaAfter;
     bool   flagMainPathIsValid;
+    bool   flagName;
+    bool   flagFormula;
     bool   m_bAddMode;
 
     QPointer<DialogTool>   m_dialog;
@@ -214,7 +213,7 @@ private:
 
     QVector<VLabelTemplateLine> m_templateLines;
 
-    QVector<QUndoCommand*> m_undoStack;
+    QVector<QPointer<VUndoCommand>> m_undoStack;
     QHash<quint32, VPlaceLabelItem> m_newPlaceLabels;
     QHash<quint32, VPiecePath> m_newPaths;
 
@@ -281,5 +280,13 @@ private:
     void EnableDetailLabelFormulaControls(bool enable);
     void EnablePatternLabelFormulaControls(bool enable);
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogSeamAllowance::IsValid() const
+{
+    return flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
+            && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
+            && (flagPLFormulas || flagPPin);
+}
 
 #endif // DIALOGSEAMALLOWANCE_H

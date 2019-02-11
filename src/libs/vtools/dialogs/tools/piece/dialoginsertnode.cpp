@@ -35,7 +35,8 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, quint32 toolId, QWidg
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogInsertNode),
       m_node(),
-      m_flagItem(false)
+      m_flagItem(false),
+      m_flagError(false)
 {
     ui->setupUi(this);
     InitOkCancel(ui);
@@ -163,25 +164,18 @@ void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogInsertNode::CheckState()
-{
-    SCASSERT(bOk != nullptr);
-    bOk->setEnabled(m_flagItem && flagError);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::CheckPieces()
 {
-    QColor color = okColor;
+    QColor color;
     if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
     {
-        flagError = false;
+        m_flagError = false;
         color = errorColor;
     }
     else
     {
-        flagError = true;
-        color = okColor;
+        m_flagError = true;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelPiece, color);
     CheckState();
@@ -190,8 +184,8 @@ void DialogInsertNode::CheckPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogInsertNode::CheckItem()
 {
-    QColor color = okColor;
-    m_flagItem ? color = okColor : color = errorColor;
+    QColor color;
+    m_flagItem ? color = OkColor(this) : color = errorColor;
     ChangeColor(ui->labelItem, color);
     CheckState();
 }

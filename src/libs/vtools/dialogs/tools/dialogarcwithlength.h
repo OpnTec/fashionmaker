@@ -48,7 +48,7 @@ class DialogArcWithLength : public DialogTool
     Q_OBJECT
 
 public:
-    DialogArcWithLength(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogArcWithLength(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     ~DialogArcWithLength();
 
     quint32       GetCenter() const;
@@ -80,22 +80,18 @@ public slots:
     void DeployF1TextEdit();
     void DeployLengthTextEdit();
 
-    void          RadiusChanged();
-    void          F1Changed();
-    void          LengthChanged();
-
     void          FXRadius();
     void          FXF1();
     void          FXLength();
 
 protected:
-    virtual void  CheckState() final;
     virtual void  ShowVisualization() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */
     virtual void  SaveData() override;
     virtual void  closeEvent(QCloseEvent *event) override;
+    virtual bool  IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogArcWithLength)
@@ -130,11 +126,15 @@ private:
     int           formulaBaseHeightF1;
     int           formulaBaseHeightLength;
 
-    qreal         angleF1;
-
     void          Radius();
     void          Length();
     void          EvalF();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogArcWithLength::IsValid() const
+{
+    return flagRadius && flagF1 && flagLength;
+}
 
 #endif // DIALOGARCWITHLENGTH_H

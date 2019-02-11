@@ -101,8 +101,7 @@ private:
 
     template <class Item>
     static void InitArc(VContainer *data, qreal segLength, const VPointF *p, quint32 curveId);
-    static void InitSegments(const GOType &curveType, qreal segLength, const VPointF *p, quint32 curveId,
-                             VContainer *data);
+    static void InitSegments(GOType curveType, qreal segLength, const VPointF *p, quint32 curveId, VContainer *data);
 };
 
 #endif // VTOOLCURVEINTERSECTAXIS_H

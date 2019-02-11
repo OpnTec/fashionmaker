@@ -51,34 +51,32 @@ class DialogPointOfContact : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogPointOfContact(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogPointOfContact(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfContact() override;
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     QString        getRadius() const;
     void           setRadius(const QString &value);
 
     quint32        getCenter() const;
-    void           setCenter(const quint32 &value);
+    void           setCenter(quint32 value);
 
     quint32        GetFirstPoint() const;
-    void           SetFirstPoint(const quint32 &value);
+    void           SetFirstPoint(quint32 value);
 
     quint32        GetSecondPoint() const;
-    void           SetSecondPoint(const quint32 &value);
+    void           SetSecondPoint(quint32 value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     /**
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void           DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void           FormulaTextChanged();
     virtual void   PointNameChanged() override;
     void           FXRadius();
+    void           EvalFormula();
 protected:
     virtual void   ShowVisualization() override;
     /**
@@ -86,6 +84,7 @@ protected:
      */
     virtual void   SaveData() override;
     virtual void   closeEvent(QCloseEvent *event) override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogPointOfContact)
 
@@ -93,10 +92,24 @@ private:
     Ui::DialogPointOfContact *ui;
 
     /** @brief radius radius of arc */
-    QString        radius;
+    QString radius;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int             formulaBaseHeight;
+    int formulaBaseHeight;
+
+    QString pointName;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointOfContact::IsValid() const
+{
+    return flagFormula && flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFCONTACT_H

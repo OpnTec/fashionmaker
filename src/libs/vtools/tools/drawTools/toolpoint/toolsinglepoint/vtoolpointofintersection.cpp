@@ -103,7 +103,7 @@ VToolPointOfIntersection *VToolPointOfIntersection::Create(const QPointer<Dialog
     VToolPointOfIntersectionInitData initData;
     initData.firstPointId = dialogTool->GetFirstPointId();
     initData.secondPointId = dialogTool->GetSecondPointId();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -202,7 +202,7 @@ void VToolPointOfIntersection::SaveDialog(QDomElement &domElement, QList<quint32
     AddDependence(newDependencies, dialogTool->GetFirstPointId());
     AddDependence(newDependencies, dialogTool->GetSecondPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrFirstPoint, QString().setNum(dialogTool->GetFirstPointId()));
     doc->SetAttribute(domElement, AttrSecondPoint, QString().setNum(dialogTool->GetSecondPointId()));
 }

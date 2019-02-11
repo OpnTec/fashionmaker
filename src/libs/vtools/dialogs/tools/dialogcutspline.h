@@ -50,16 +50,17 @@ class DialogCutSpline : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogCutSpline(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogCutSpline(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogCutSpline() override;
 
+    QString             GetPointName() const;
     void                SetPointName(const QString &value);
 
     QString             GetFormula() const;
     void                SetFormula(const QString &value);
 
     quint32             getSplineId() const;
-    void                setSplineId(const quint32 &value);
+    void                setSplineId(quint32 value);
 public slots:
     virtual void        ChosenObject(quint32 id, const SceneObject &type) override;
     /**
@@ -67,6 +68,7 @@ public slots:
      */
     void                DeployFormulaTextEdit();
     void                FXLength();
+    void                EvalFormula();
 protected:
     virtual void        ShowVisualization() override;
     /**
@@ -74,6 +76,7 @@ protected:
      */
     virtual void        SaveData() override;
     virtual void        closeEvent(QCloseEvent *event) override;
+    virtual bool        IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogCutSpline)
 
@@ -81,10 +84,23 @@ private:
     Ui::DialogCutSpline *ui;
 
     /** @brief formula string with formula */
-    QString             formula;
+    QString formula;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int                 formulaBaseHeight;
+    int formulaBaseHeight;
+
+    QString pointName;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogCutSpline::IsValid() const
+{
+    return flagFormula && flagName;
+}
 
 #endif // DIALOGCUTSPLINE_H

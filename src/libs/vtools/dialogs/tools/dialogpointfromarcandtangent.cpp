@@ -39,25 +39,29 @@
 #include "ui_dialogpointfromarcandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *data, const quint32 &toolId,
-                                                           QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointFromArcAndTangent)
+DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointFromArcAndTangent),
+      pointName(),
+      flagName(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxTangentPoint);
     FillComboBoxArcs(ui->comboBoxArc);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointFromArcAndTangent::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
 
     vis = new VisToolPointFromArcAndTangent(data);
 }
@@ -66,6 +70,12 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
 DialogPointFromArcAndTangent::~DialogPointFromArcAndTangent()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointFromArcAndTangent::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -82,7 +92,7 @@ quint32 DialogPointFromArcAndTangent::GetArcId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromArcAndTangent::SetArcId(const quint32 &value)
+void DialogPointFromArcAndTangent::SetArcId(quint32 value)
 {
     setCurrentArcId(ui->comboBoxArc, value);
 
@@ -98,7 +108,7 @@ quint32 DialogPointFromArcAndTangent::GetTangentPointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromArcAndTangent::SetTangentPointId(const quint32 &value)
+void DialogPointFromArcAndTangent::SetTangentPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxTangentPoint, value);
 
@@ -114,7 +124,7 @@ CrossCirclesPoint DialogPointFromArcAndTangent::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromArcAndTangent::SetCrossCirclesPoint(const CrossCirclesPoint &p)
+void DialogPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint p)
 {
     const qint32 index = ui->comboBoxResult->findData(static_cast<int>(p));
     if (index != -1)

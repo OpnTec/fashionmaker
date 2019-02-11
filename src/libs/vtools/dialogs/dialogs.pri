@@ -48,7 +48,8 @@ HEADERS += \
     $$PWD/tools/piece/dialoginsertnode.h \
     $$PWD/support/dialogeditlabel.h \
     $$PWD/tools/piece/dialogplacelabel.h \
-    $$PWD/tools/piece/dialogduplicatedetail.h
+    $$PWD/tools/piece/dialogduplicatedetail.h \
+    $$PWD/dialogtoolbox.h
 
 SOURCES += \
     $$PWD/tools/dialogalongline.cpp \
@@ -96,7 +97,8 @@ SOURCES += \
     $$PWD/tools/piece/dialoginsertnode.cpp \
     $$PWD/support/dialogeditlabel.cpp \
     $$PWD/tools/piece/dialogplacelabel.cpp \
-    $$PWD/tools/piece/dialogduplicatedetail.cpp
+    $$PWD/tools/piece/dialogduplicatedetail.cpp \
+    $$PWD/dialogtoolbox.cpp
 
 FORMS += \
     $$PWD/tools/dialogalongline.ui \

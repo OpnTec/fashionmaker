@@ -42,8 +42,12 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogSinglePoint), point(QPointF())
+DialogSinglePoint::DialogSinglePoint(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogSinglePoint),
+      point(),
+      pointName(),
+      flagName(true)
 {
     ui->setupUi(this);
 
@@ -51,13 +55,13 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, const quint32 &tool
 
     ui->doubleSpinBoxX->setRange(0, qApp->fromPixel(SceneSize));
     ui->doubleSpinBoxY->setRange(0, qApp->fromPixel(SceneSize));
-    labelEditNamePoint = ui->labelEditName;
     InitOkCancel(ui);
 
-    flagName = true;
-    DialogTool::CheckState();
-
-    connect(ui->lineEditName, &QLineEdit::textChanged, this, &DialogTool::NamePointChanged);
+    connect(ui->lineEditName, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, this->data, flagName);
+        CheckState();
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -117,4 +121,10 @@ DialogSinglePoint::~DialogSinglePoint()
 QPointF DialogSinglePoint::GetPoint() const
 {
     return point;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogSinglePoint::GetPointName() const
+{
+    return pointName;
 }

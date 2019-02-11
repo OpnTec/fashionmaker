@@ -291,7 +291,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, const CustomSARecord &record)
+void VToolSeamAllowance::AddCSARecord(VAbstractPattern *doc, QDomElement &domElement, CustomSARecord record)
 {
     QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
 
@@ -1190,7 +1190,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     }
 
     QMenu menu;
-    QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionOption = menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")), tr("Options"));
 
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
 
@@ -1206,7 +1206,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     forceFlippingOption->setCheckable(true);
     forceFlippingOption->setChecked(detail.IsForceFlipping());
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
     _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
 
     QAction *selectedAction = menu.exec(event->screenPos());
@@ -1441,7 +1441,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
     const VPiece newDet = dialogTool->GetPiece();
     const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
 
-    QVector<QUndoCommand*> &undocommands = dialogTool->UndoStack();
+    QVector<QPointer<VUndoCommand>> &undocommands = dialogTool->UndoStack();
     const bool groupChange = not undocommands.isEmpty();
 
     SavePieceOptions *saveCommand = new SavePieceOptions(oldDet, newDet, doc, m_id);
@@ -1457,6 +1457,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
         for (auto command : undocommands)
         {
             qApp->getUndoStack()->push(command);
+            command.clear(); // To prevent double free memory
         }
         undocommands.clear();
     }
@@ -1874,7 +1875,7 @@ void VToolSeamAllowance::DeleteToolWithConfirm(bool ask)
     qApp->getUndoStack()->push(delDet.take());
 
     // Throw exception, this will help prevent case when we forget to immediately quit function.
-    VExceptionToolWasDeleted e("Tool was used after deleting.");
+    VExceptionToolWasDeleted e(tr("Tool was used after deleting."));
     throw e;
 }
 

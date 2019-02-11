@@ -37,6 +37,7 @@
 #include <QPlainTextEdit>
 #include <QPointer>
 #include <QPushButton>
+#include <QTimer>
 #include <QToolButton>
 
 #include "../vpatterndb/vtranslatevars.h"
@@ -56,33 +57,56 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogNormal), formula(QString()), angle(0), formulaBaseHeight(0)
+DialogNormal::DialogNormal(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogNormal),
+      formula(),
+      angle(0),
+      formulaBaseHeight(0),
+      pointName(),
+      timerFormula(new QTimer(this)),
+      flagFormula(false),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
+    timerFormula->setSingleShot(true);
+    connect(timerFormula, &QTimer::timeout, this, &DialogNormal::EvalFormula);
+
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
-    InitFormulaUI(ui);
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     ui->plainTextEditFormula->installEventFilter(this);
 
     InitOkCancelApply(ui);
-    flagFormula = false;
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
     FillComboBoxTypeLine(ui->comboBoxLineType, LineStylesPics());
     FillComboBoxLineColors(ui->comboBoxLineColor);
 
-    InitArrow(ui);
+    connect(ui->toolButtonArrowDown, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(270);});
+    connect(ui->toolButtonArrowUp, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(90);});
+    connect(ui->toolButtonArrowLeft, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(180);});
+    connect(ui->toolButtonArrowRight, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(0);});
+    connect(ui->toolButtonArrowLeftUp, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(135);});
+    connect(ui->toolButtonArrowLeftDown, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(225);});
+    connect(ui->toolButtonArrowRightUp, &QPushButton::clicked, this, [this](){ui->doubleSpinBoxAngle->setValue(45);});
+    connect(ui->toolButtonArrowRightDown, &QPushButton::clicked, this,
+            [this](){ui->doubleSpinBoxAngle->setValue(315);});
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogNormal::FXLength);
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogNormal::NamePointChanged);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogNormal::FormulaTextChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerFormula->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogNormal::PointNameChanged);
@@ -93,15 +117,9 @@ DialogNormal::DialogNormal(const VContainer *data, const quint32 &toolId, QWidge
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogNormal::FormulaTextChanged()
-{
-    this->FormulaChangedPlainText();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::PointNameChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
     {
         flagError = false;
@@ -110,7 +128,7 @@ void DialogNormal::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -132,6 +150,19 @@ void DialogNormal::FXLength()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::EvalFormula()
+{
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditFormula;
+    formulaData.labelResult = ui->labelResultCalculation;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    Eval(formulaData, flagFormula);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::ShowVisualization()
 {
     AddVisualization<VisToolNormal>();
@@ -140,13 +171,19 @@ void DialogNormal::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogNormal::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogNormal::~DialogNormal()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogNormal::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -223,7 +260,7 @@ void DialogNormal::closeEvent(QCloseEvent *event)
  * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogNormal::SetSecondPointId(const quint32 &value)
+void DialogNormal::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
@@ -249,7 +286,7 @@ void DialogNormal::SetLineColor(const QString &value)
  * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogNormal::SetFirstPointId(const quint32 &value)
+void DialogNormal::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
@@ -263,7 +300,7 @@ void DialogNormal::SetFirstPointId(const quint32 &value)
  * @brief SetAngle set aditional angle of normal
  * @param value angle in degree
  */
-void DialogNormal::SetAngle(const qreal &value)
+void DialogNormal::SetAngle(qreal value)
 {
     angle = value;
     ui->doubleSpinBoxAngle->setValue(angle);

@@ -50,11 +50,13 @@ class DialogSinglePoint : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogSinglePoint(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogSinglePoint(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogSinglePoint() override;
 
     void           SetData(const QString &name, const QPointF &point);
     QPointF        GetPoint()const;
+
+    QString        GetPointName() const;
 
 public slots:
     void           mousePress(const QPointF &scenePos);
@@ -63,6 +65,7 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogSinglePoint)
 
@@ -70,7 +73,17 @@ private:
     Ui::DialogSinglePoint *ui;
 
     /** @brief point data of point */
-    QPointF        point;
+    QPointF point;
+
+    QString pointName;
+
+    bool flagName;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogSinglePoint::IsValid() const
+{
+    return flagName;
+}
 
 #endif // DIALOGSINGLEPOINT_H

@@ -74,20 +74,15 @@ public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
     virtual void closeEvent(QCloseEvent *event) override;
+    virtual bool IsValid() const final;
 
 private slots:
     void DeployFormulaWidthEdit();
     void DeployFormulaHeightEdit();
     void DeployFormulaAngleEdit();
     void DeployVisibleFormulaTextEdit();
-
-    void FormulaWidthChanged();
-    void FormulaHeightChanged();
-    void FormulaAngleChanged();
-    void VisibleChanged();
 
     void EvalWidth();
     void EvalHeight();
@@ -103,11 +98,6 @@ private:
     Q_DISABLE_COPY(DialogPlaceLabel)
     Ui::DialogPlaceLabel *ui;
     bool m_showMode;
-    bool m_flagPoint;
-    bool m_flagWidth;
-    bool m_flagHeight;
-    bool m_flagAngle;
-    bool m_flagFormulaVisible;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
     int m_formulaBaseHeightWidth;
@@ -120,6 +110,13 @@ private:
     QTimer *timerHeight;
     QTimer *m_timerVisible;
 
+    bool m_flagPoint;
+    bool m_flagWidth;
+    bool m_flagHeight;
+    bool m_flagAngle;
+    bool m_flagFormulaVisible;
+    bool m_flagError;
+
     void InitPlaceLabelTab();
     void InitControlTab();
 
@@ -128,5 +125,11 @@ private:
     void CheckPieces();
     void CheckPoint();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPlaceLabel::IsValid() const
+{
+    return m_flagPoint && m_flagError && m_flagWidth && m_flagHeight && m_flagAngle && m_flagFormulaVisible;
+}
 
 #endif // DIALOGPLACELABEL_H

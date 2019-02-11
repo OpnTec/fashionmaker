@@ -50,16 +50,17 @@ class DialogPointOfIntersection : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogPointOfIntersection() override;
 
+    QString        GetPointName() const;
     void           SetPointName(const QString &value);
 
     quint32        GetFirstPointId() const;
-    void           SetFirstPointId(const quint32 &value);
+    void           SetFirstPointId(quint32 value);
 
     quint32        GetSecondPointId() const;
-    void           SetSecondPointId(const quint32 &value);
+    void           SetSecondPointId(quint32 value);
 public slots:
     virtual void   ChosenObject(quint32 id, const SceneObject &type) override;
     virtual void   PointNameChanged() override;
@@ -69,11 +70,23 @@ protected:
      * @brief SaveData Put dialog data in local variables
      */
     virtual void   SaveData() override;
+    virtual bool   IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogPointOfIntersection)
 
     /** @brief ui keeps information about user interface */
     Ui::DialogPointOfIntersection *ui;
+
+    QString pointName;
+
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPointOfIntersection::IsValid() const
+{
+    return flagName && flagError;
+}
 
 #endif // DIALOGPOINTOFINTERSECTION_H

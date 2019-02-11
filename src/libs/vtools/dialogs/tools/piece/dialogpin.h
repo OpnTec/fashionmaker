@@ -57,17 +57,24 @@ public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type) override;
 
 protected:
-    virtual void CheckState() final;
     virtual void ShowVisualization() override;
+    virtual bool IsValid() const final;
 
 private:
     Q_DISABLE_COPY(DialogPin)
     Ui::DialogPin *ui;
-    bool  m_showMode;
-    bool  m_flagPoint;
+    bool m_showMode;
+    bool m_flagPoint;
+    bool m_flagError;
 
     void CheckPieces();
     void CheckPoint();
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogPin::IsValid() const
+{
+    return m_flagPoint && m_flagError;
+}
 
 #endif // DIALOGPIN_H

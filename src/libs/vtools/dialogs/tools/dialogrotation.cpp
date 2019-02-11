@@ -64,17 +64,19 @@
 #include "ui_dialogrotation.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QWidget *parent)
+DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *parent)
     : DialogTool(data, toolId, parent),
       ui(new Ui::DialogRotation),
-      flagAngle(false),
-      timerAngle(nullptr),
+      timerAngle(new QTimer(this)),
       formulaAngle(),
       formulaBaseHeightAngle(0),
       objects(),
       stage1(true),
       m_suffix(),
-      m_firstRelease(false)
+      m_firstRelease(false),
+      flagAngle(false),
+      flagName(false),
+      flagError(false)
 {
     ui->setupUi(this);
 
@@ -83,19 +85,19 @@ DialogRotation::DialogRotation(const VContainer *data, const quint32 &toolId, QW
 
     ui->lineEditSuffix->setText(qApp->getCurrentDocument()->GenerateSuffix());
 
-    timerAngle = new QTimer(this);
+    timerAngle->setSingleShot(true);
     connect(timerAngle, &QTimer::timeout, this, &DialogRotation::EvalAngle);
 
     InitOkCancelApply(ui);
 
     FillComboBoxPoints(ui->comboBoxOriginPoint);
 
-    flagName = true;
-    CheckState();
-
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogRotation::SuffixChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogRotation::FXAngle);
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogRotation::AngleChanged);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerAngle->start(formulaTimerTimeout);
+    });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
     connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogRotation::PointChanged);
@@ -116,7 +118,7 @@ quint32 DialogRotation::GetOrigPointId() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::SetOrigPointId(const quint32 &value)
+void DialogRotation::SetOrigPointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxOriginPoint, value);
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
@@ -291,15 +293,7 @@ void DialogRotation::SelectedObject(bool selected, quint32 object, quint32 tool)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::DeployAngleTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeightAngle);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::AngleChanged()
-{
-    labelEditFormula = ui->labelEditAngle;
-    labelResultCalculation = ui->labelResultAngle;
-    ValFormulaChanged(flagAngle, ui->plainTextEditFormula, timerAngle, degreeSymbol);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeightAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -326,7 +320,7 @@ void DialogRotation::SuffixChanged()
         if (suffix.isEmpty())
         {
             flagName = false;
-            ChangeColor(ui->labelSuffix, Qt::red);
+            ChangeColor(ui->labelSuffix, errorColor);
             CheckState();
             return;
         }
@@ -342,7 +336,7 @@ void DialogRotation::SuffixChanged()
                     if (not rx.match(name).hasMatch() || not data->IsUnique(name))
                     {
                         flagName = false;
-                        ChangeColor(ui->labelSuffix, Qt::red);
+                        ChangeColor(ui->labelSuffix, errorColor);
                         CheckState();
                         return;
                     }
@@ -351,18 +345,9 @@ void DialogRotation::SuffixChanged()
         }
 
         flagName = true;
-        ChangeColor(ui->labelSuffix, okColor);
+        ChangeColor(ui->labelSuffix, OkColor(this));
     }
     CheckState();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogRotation::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagAngle && flagName && flagError);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(bOk->isEnabled());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -396,7 +381,7 @@ void DialogRotation::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::PointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (objects.contains(getCurrentObjectId(ui->comboBoxOriginPoint)))
     {
         flagError = false;
@@ -405,7 +390,7 @@ void DialogRotation::PointChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelOriginPoint, color);
     CheckState();
@@ -414,6 +399,13 @@ void DialogRotation::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::EvalAngle()
 {
-    labelEditFormula = ui->labelEditAngle;
-    Eval(ui->plainTextEditFormula->toPlainText(), flagAngle, ui->labelResultAngle, degreeSymbol, false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditAngle;
+    formulaData.labelResult = ui->labelResultAngle;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
+
+    Eval(formulaData, flagAngle);
 }

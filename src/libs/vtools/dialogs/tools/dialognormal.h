@@ -50,9 +50,10 @@ class DialogNormal : public DialogTool
 {
     Q_OBJECT
 public:
-    DialogNormal(const VContainer *data, const quint32 &toolId, QWidget *parent = nullptr);
+    DialogNormal(const VContainer *data, quint32 toolId, QWidget *parent = nullptr);
     virtual ~DialogNormal() override;
 
+    QString          GetPointName() const;
     void             SetPointName(const QString &value);
 
     QString          GetTypeLine() const;
@@ -62,13 +63,13 @@ public:
     void             SetFormula(const QString &value);
 
     qreal            GetAngle() const;
-    void             SetAngle(const qreal &value);
+    void             SetAngle(qreal value);
 
     quint32          GetFirstPointId() const;
-    void             SetFirstPointId(const quint32 &value);
+    void             SetFirstPointId(quint32 value);
 
     quint32          GetSecondPointId() const;
-    void             SetSecondPointId(const quint32 &value);
+    void             SetSecondPointId(quint32 value);
 
     QString          GetLineColor() const;
     void             SetLineColor(const QString &value);
@@ -78,12 +79,9 @@ public slots:
      * @brief DeployFormulaTextEdit grow or shrink formula input
      */
     void             DeployFormulaTextEdit();
-    /**
-     * @brief FormulaTextChanged when formula text changes for validation and calc
-     */
-    void             FormulaTextChanged();
     virtual void     PointNameChanged() override;
     void             FXLength();
+    void             EvalFormula();
 protected:
     virtual void     ShowVisualization() override;
     /**
@@ -91,6 +89,7 @@ protected:
      */
     virtual void     SaveData() override;
     virtual void     closeEvent(QCloseEvent *event) override;
+    virtual bool     IsValid() const final;
 private:
     Q_DISABLE_COPY(DialogNormal)
 
@@ -98,13 +97,27 @@ private:
     Ui::DialogNormal *ui;
 
     /** @brief formula formula */
-    QString          formula;
+    QString formula;
 
     /** @brief angle aditional angle of normal */
-    qreal            angle;
+    qreal angle;
 
     /** @brief formulaBaseHeight base height defined by dialogui */
-    int              formulaBaseHeight;
+    int formulaBaseHeight;
+
+    QString pointName;
+
+    QTimer *timerFormula;
+
+    bool flagFormula;
+    bool flagName;
+    bool flagError;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+inline bool DialogNormal::IsValid() const
+{
+    return flagFormula && flagName && flagError;
+}
 
 #endif // DIALOGNORMAL_H

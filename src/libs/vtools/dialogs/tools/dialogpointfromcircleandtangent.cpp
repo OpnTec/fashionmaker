@@ -42,6 +42,7 @@
 #include <Qt>
 
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/visualization.h"
 #include "../../visualization/line/vistoolpointfromcircleandtangent.h"
 #include "../ifc/xml/vdomdocument.h"
@@ -51,19 +52,24 @@
 #include "ui_dialogpointfromcircleandtangent.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, const quint32 &toolId,
+DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContainer *data, quint32 toolId,
                                                                  QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointFromCircleAndTangent), flagCircleRadius(false),
-      timerCircleRadius(nullptr), circleRadius(), formulaBaseHeightCircleRadius(0)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointFromCircleAndTangent),
+      timerCircleRadius(nullptr),
+      circleRadius(),
+      formulaBaseHeightCircleRadius(0),
+      pointName(),
+      flagCircleRadius(false),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
-    plainTextEditFormula = ui->plainTextEditRadius;
     this->formulaBaseHeightCircleRadius = ui->plainTextEditRadius->height();
 
     ui->plainTextEditRadius->installEventFilter(this);
@@ -72,21 +78,26 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
     connect(timerCircleRadius, &QTimer::timeout, this, &DialogPointFromCircleAndTangent::EvalCircleRadius);
 
     InitOkCancelApply(ui);
-    CheckState();
 
     FillComboBoxPoints(ui->comboBoxCircleCenter);
     FillComboBoxPoints(ui->comboBoxTangentPoint);
     FillComboBoxCrossCirclesPoints(ui->comboBoxResult);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointFromCircleAndTangent::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxCircleCenter, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointFromCircleAndTangent::PointChanged);
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this,
             &DialogPointFromCircleAndTangent::FXCircleRadius);
 
-    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this,
-            &DialogPointFromCircleAndTangent::CircleRadiusChanged);
+    connect(ui->plainTextEditRadius, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerCircleRadius->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowRadius, &QPushButton::clicked, this,
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
@@ -98,6 +109,12 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
 DialogPointFromCircleAndTangent::~DialogPointFromCircleAndTangent()
 {
     delete ui;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogPointFromCircleAndTangent::GetPointName() const
+{
+    return pointName;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,7 +244,7 @@ void DialogPointFromCircleAndTangent::ChosenObject(quint32 id, const SceneObject
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::PointChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxCircleCenter) == getCurrentObjectId(ui->comboBoxTangentPoint))
     {
         flagError = false;
@@ -236,7 +253,7 @@ void DialogPointFromCircleAndTangent::PointChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelCircleCenter, color);
     ChangeColor(ui->labelTangentPoint, color);
@@ -246,16 +263,7 @@ void DialogPointFromCircleAndTangent::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit()
 {
-    DeployFormula(ui->plainTextEditRadius, ui->pushButtonGrowRadius, formulaBaseHeightCircleRadius);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromCircleAndTangent::CircleRadiusChanged()
-{
-    labelEditFormula = ui->labelEditRadius;
-    labelResultCalculation = ui->labelResultCircleRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagCircleRadius, ui->plainTextEditRadius, timerCircleRadius, postfix);
+    DeployFormula(this, ui->plainTextEditRadius, ui->pushButtonGrowRadius, formulaBaseHeightCircleRadius);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,15 +283,19 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::EvalCircleRadius()
 {
-    labelEditFormula = ui->labelEditRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal radius = Eval(ui->plainTextEditRadius->toPlainText(), flagCircleRadius,
-                              ui->labelResultCircleRadius, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditRadius->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditRadius;
+    formulaData.labelResult = ui->labelResultCircleRadius;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    const qreal radius = Eval(formulaData, flagCircleRadius);
 
     if (radius < 0)
     {
         flagCircleRadius = false;
-        ChangeColor(labelEditFormula, Qt::red);
+        ChangeColor(ui->labelEditRadius, errorColor);
         ui->labelResultCircleRadius->setText(tr("Error"));
         ui->labelResultCircleRadius->setToolTip(tr("Radius can't be negative"));
 
@@ -317,16 +329,4 @@ void DialogPointFromCircleAndTangent::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditRadius->blockSignals(true);
     DialogTool::closeEvent(event);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogPointFromCircleAndTangent::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagFormula && flagName && flagError && flagCircleRadius);
-    // In case dialog hasn't apply button
-    if ( bApply != nullptr)
-    {
-        bApply->setEnabled(bOk->isEnabled());
-    }
 }

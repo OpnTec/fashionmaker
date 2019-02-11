@@ -40,6 +40,7 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vpatterndb/vtranslatevars.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../../visualization/path/vistoolarc.h"
 #include "../../visualization/visualization.h"
 #include "../support/dialogeditwrongformula.h"
@@ -53,16 +54,28 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogArc), flagRadius(false), flagF1(false), flagF2(false),
-      timerRadius(nullptr), timerF1(nullptr), timerF2(nullptr), radius(QString()), f1(QString()), f2(QString()),
-      formulaBaseHeight(0), formulaBaseHeightF1(0), formulaBaseHeightF2(0), angleF1(INT_MIN), angleF2(INT_MIN)
+DialogArc::DialogArc(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogArc),
+      flagRadius(false),
+      flagF1(false),
+      flagF2(false),
+      timerRadius(new QTimer(this)),
+      timerF1(new QTimer(this)),
+      timerF2(new QTimer(this)),
+      radius(),
+      f1(),
+      f2(),
+      formulaBaseHeight(0),
+      formulaBaseHeightF1(0),
+      formulaBaseHeightF2(0),
+      angleF1(INT_MIN),
+      angleF2(INT_MIN)
 {
     ui->setupUi(this);
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    plainTextEditFormula = ui->plainTextEditFormula;
     this->formulaBaseHeight = ui->plainTextEditFormula->height();
     this->formulaBaseHeightF1 = ui->plainTextEditF1->height();
     this->formulaBaseHeightF2 = ui->plainTextEditF2->height();
@@ -71,13 +84,13 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     ui->plainTextEditF1->installEventFilter(this);
     ui->plainTextEditF2->installEventFilter(this);
 
-    timerRadius = new QTimer(this);
+    timerRadius->setSingleShot(true);
     connect(timerRadius, &QTimer::timeout, this, &DialogArc::EvalRadius);
 
-    timerF1 = new QTimer(this);
+    timerF1->setSingleShot(true);
     connect(timerF1, &QTimer::timeout, this, &DialogArc::EvalF);
 
-    timerF2 = new QTimer(this);
+    timerF2->setSingleShot(true);
     connect(timerF2, &QTimer::timeout, this, &DialogArc::EvalF);
 
     InitOkCancelApply(ui);
@@ -86,15 +99,24 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
     FillComboBoxLineColors(ui->comboBoxColor);
     FillComboBoxTypeLine(ui->comboBoxPenStyle, CurvePenStylesPics());
 
-    CheckState();
-
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this, &DialogArc::FXRadius);
     connect(ui->toolButtonExprF1, &QPushButton::clicked, this, &DialogArc::FXF1);
     connect(ui->toolButtonExprF2, &QPushButton::clicked, this, &DialogArc::FXF2);
 
-    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, &DialogArc::RadiusChanged);
-    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, &DialogArc::F1Changed);
-    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, &DialogArc::F2Changed);
+    connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerRadius->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditF1, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerF1->start(formulaTimerTimeout);
+    });
+
+    connect(ui->plainTextEditF2, &QPlainTextEdit::textChanged, this, [this]()
+    {
+        timerF2->start(formulaTimerTimeout);
+    });
 
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogArc::DeployFormulaTextEdit);
     connect(ui->pushButtonGrowLengthF1, &QPushButton::clicked, this, &DialogArc::DeployF1TextEdit);
@@ -106,19 +128,19 @@ DialogArc::DialogArc(const VContainer *data, const quint32 &toolId, QWidget *par
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DeployFormulaTextEdit()
 {
-    DeployFormula(ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
+    DeployFormula(this, ui->plainTextEditFormula, ui->pushButtonGrowLength, formulaBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DeployF1TextEdit()
 {
-    DeployFormula(ui->plainTextEditF1, ui->pushButtonGrowLengthF1, formulaBaseHeightF1);
+    DeployFormula(this, ui->plainTextEditF1, ui->pushButtonGrowLengthF1, formulaBaseHeightF1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArc::DeployF2TextEdit()
 {
-    DeployFormula(ui->plainTextEditF2, ui->pushButtonGrowLengthF2, formulaBaseHeightF2);
+    DeployFormula(this, ui->plainTextEditF2, ui->pushButtonGrowLengthF2, formulaBaseHeightF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -301,40 +323,6 @@ void DialogArc::closeEvent(QCloseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief RadiusChanged after change formula of radius calculate value and show result
- */
-void DialogArc::RadiusChanged()
-{
-    labelEditFormula = ui->labelEditRadius;
-    labelResultCalculation = ui->labelResultRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    ValFormulaChanged(flagRadius, ui->plainTextEditFormula, timerRadius, postfix);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief F1Changed after change formula of first angle calculate value and show result
- */
-void DialogArc::F1Changed()
-{
-    labelEditFormula = ui->labelEditF1;
-    labelResultCalculation = ui->labelResultF1;
-    ValFormulaChanged(flagF1, ui->plainTextEditF1, timerF1, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief F2Changed after change formula of second angle calculate value and show result
- */
-void DialogArc::F2Changed()
-{
-    labelEditFormula = ui->labelEditF2;
-    labelResultCalculation = ui->labelResultF2;
-    ValFormulaChanged(flagF2, ui->plainTextEditF2, timerF2, degreeSymbol);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogArc::FXRadius()
 {
     DialogEditWrongFormula *dialog = new DialogEditWrongFormula(data, toolId, this);
@@ -378,30 +366,23 @@ void DialogArc::FXF2()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
- * @brief CheckState if all is right enable button ok
- */
-void DialogArc::CheckState()
-{
-    SCASSERT(bOk != nullptr)
-    bOk->setEnabled(flagRadius && flagF1 && flagF2);
-    SCASSERT(bApply != nullptr)
-    bApply->setEnabled(flagRadius && flagF1 && flagF2);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
  * @brief EvalRadius calculate value of radius
  */
 void DialogArc::EvalRadius()
 {
-    labelEditFormula = ui->labelEditRadius;
-    const QString postfix = UnitsToStr(qApp->patternUnit(), true);
-    const qreal radius = Eval(ui->plainTextEditFormula->toPlainText(), flagRadius, ui->labelResultRadius, postfix);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditRadius;
+    formulaData.labelResult = ui->labelResultRadius;
+    formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
+
+    const qreal radius = Eval(formulaData, flagRadius);
 
     if (radius < 0)
     {
         flagRadius = false;
-        ChangeColor(labelEditFormula, Qt::red);
+        ChangeColor(ui->labelEditRadius, errorColor);
         ui->labelResultRadius->setText(tr("Error"));
         ui->labelResultRadius->setToolTip(tr("Radius can't be negative"));
 
@@ -415,11 +396,21 @@ void DialogArc::EvalRadius()
  */
 void DialogArc::EvalF()
 {
-    labelEditFormula = ui->labelEditF1;
-    angleF1 = Eval(ui->plainTextEditF1->toPlainText(), flagF1, ui->labelResultF1, degreeSymbol, false);
+    FormulaData formulaData;
+    formulaData.formula = ui->plainTextEditF1->toPlainText();
+    formulaData.variables = data->DataVariables();
+    formulaData.labelEditFormula = ui->labelEditF1;
+    formulaData.labelResult = ui->labelResultF1;
+    formulaData.postfix = degreeSymbol;
+    formulaData.checkZero = false;
 
-    labelEditFormula = ui->labelEditF2;
-    angleF2 = Eval(ui->plainTextEditF2->toPlainText(), flagF2, ui->labelResultF2, degreeSymbol, false);
+    angleF1 = Eval(formulaData, flagF1);
+
+    formulaData.formula = ui->plainTextEditF2->toPlainText();
+    formulaData.labelEditFormula = ui->labelEditF2;
+    formulaData.labelResult = ui->labelResultF2;
+
+    angleF2 = Eval(formulaData, flagF2);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

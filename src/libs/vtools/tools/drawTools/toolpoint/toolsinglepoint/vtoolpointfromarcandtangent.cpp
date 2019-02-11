@@ -92,7 +92,7 @@ VToolPointFromArcAndTangent *VToolPointFromArcAndTangent::Create(const QPointer<
     initData.arcId = dialogTool->GetArcId();
     initData.tangentPointId = dialogTool->GetTangentPointId();
     initData.crossPoint = dialogTool->GetCrossCirclesPoint();
-    initData.name = dialogTool->getPointName();
+    initData.name = dialogTool->GetPointName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -241,7 +241,7 @@ CrossCirclesPoint VToolPointFromArcAndTangent::GetCrossCirclesPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolPointFromArcAndTangent::SetCrossCirclesPoint(const CrossCirclesPoint &value)
+void VToolPointFromArcAndTangent::SetCrossCirclesPoint(CrossCirclesPoint value)
 {
     crossPoint = value;
 
@@ -292,7 +292,7 @@ void VToolPointFromArcAndTangent::SaveDialog(QDomElement &domElement, QList<quin
     AddDependence(newDependencies, dialogTool->GetArcId());
     AddDependence(newDependencies, dialogTool->GetTangentPointId());
 
-    doc->SetAttribute(domElement, AttrName, dialogTool->getPointName());
+    doc->SetAttribute(domElement, AttrName, dialogTool->GetPointName());
     doc->SetAttribute(domElement, AttrArc, QString().setNum(dialogTool->GetArcId()));
     doc->SetAttribute(domElement, AttrTangent, QString().setNum(dialogTool->GetTangentPointId()));
     doc->SetAttribute(domElement, AttrCrossPoint,

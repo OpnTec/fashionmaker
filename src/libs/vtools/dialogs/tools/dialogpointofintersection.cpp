@@ -48,23 +48,29 @@
  * @param data container with data
  * @param parent parent widget
  */
-DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, const quint32 &toolId, QWidget *parent)
-    :DialogTool(data, toolId, parent), ui(new Ui::DialogPointOfIntersection)
+DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, quint32 toolId, QWidget *parent)
+    : DialogTool(data, toolId, parent),
+      ui(new Ui::DialogPointOfIntersection),
+      pointName(),
+      flagName(true),
+      flagError(true)
 {
     ui->setupUi(this);
 
     ui->lineEditNamePoint->setClearButtonEnabled(true);
 
     ui->lineEditNamePoint->setText(qApp->getCurrentDocument()->GenerateLabel(LabelType::NewLabel));
-    labelEditNamePoint = ui->labelEditNamePoint;
 
     InitOkCancelApply(ui);
-    DialogTool::CheckState();
 
     FillComboBoxPoints(ui->comboBoxFirstPoint);
     FillComboBoxPoints(ui->comboBoxSecondPoint);
 
-    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, &DialogPointOfIntersection::NamePointChanged);
+    connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this, [this]()
+    {
+        CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+        CheckState();
+    });
     connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogPointOfIntersection::PointNameChanged);
     connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
@@ -81,11 +87,17 @@ DialogPointOfIntersection::~DialogPointOfIntersection()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QString DialogPointOfIntersection::GetPointName() const
+{
+    return pointName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetSecondPointId set id of second point
  * @param value id
  */
-void DialogPointOfIntersection::SetSecondPointId(const quint32 &value)
+void DialogPointOfIntersection::SetSecondPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxSecondPoint, value);
 
@@ -154,7 +166,7 @@ void DialogPointOfIntersection::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersection::PointNameChanged()
 {
-    QColor color = okColor;
+    QColor color;
     if (getCurrentObjectId(ui->comboBoxFirstPoint) == getCurrentObjectId(ui->comboBoxSecondPoint))
     {
         flagError = false;
@@ -163,7 +175,7 @@ void DialogPointOfIntersection::PointNameChanged()
     else
     {
         flagError = true;
-        color = okColor;
+        color = OkColor(this);
     }
     ChangeColor(ui->labelFirstPoint, color);
     ChangeColor(ui->labelSecondPoint, color);
@@ -181,7 +193,7 @@ void DialogPointOfIntersection::ShowVisualization()
  * @brief SetFirstPointId set id of first point
  * @param value id
  */
-void DialogPointOfIntersection::SetFirstPointId(const quint32 &value)
+void DialogPointOfIntersection::SetFirstPointId(quint32 value)
 {
     setCurrentPointId(ui->comboBoxFirstPoint, value);
 
