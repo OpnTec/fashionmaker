@@ -211,7 +211,10 @@ void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
     for (auto item : qAsConst(origins))
     {
-        item->setVisible(visible);
+        if (item)
+        {
+            item->setVisible(visible);
+        }
     }
 }
 
