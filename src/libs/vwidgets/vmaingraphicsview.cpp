@@ -524,6 +524,8 @@ void VMainGraphicsView::ZoomFitBest()
         return;
     }
 
+    VMainGraphicsView::NewSceneRect(scene(), this);
+
     this->fitInView(rect, Qt::KeepAspectRatio);
     QTransform transform = this->transform();
 
@@ -531,8 +533,6 @@ void VMainGraphicsView::ZoomFitBest()
     transform.setMatrix(factor, transform.m12(), transform.m13(), transform.m21(), factor, transform.m23(),
                         transform.m31(), transform.m32(), transform.m33());
     this->setTransform(transform);
-
-    VMainGraphicsView::NewSceneRect(scene(), this);
     emit ScaleChanged(this->transform().m11());
 }
 
