@@ -1189,7 +1189,8 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefBefore()
 {
-    uiTabPaths->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
+    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    uiTabPaths->plainTextEditFormulaWidthBefore->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
         button->setEnabled(false);
@@ -1199,7 +1200,8 @@ void DialogSeamAllowance::ReturnDefBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefAfter()
 {
-    uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
+    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
         button->setEnabled(false);

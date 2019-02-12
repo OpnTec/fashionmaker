@@ -598,7 +598,8 @@ void DialogPiecePath::PassmarkChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefBefore()
 {
-    ui->plainTextEditFormulaWidthBefore->setPlainText(currentSeamAllowance);
+    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    ui->plainTextEditFormulaWidthBefore->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
         button->setEnabled(false);
@@ -608,7 +609,8 @@ void DialogPiecePath::ReturnDefBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::ReturnDefAfter()
 {
-    ui->plainTextEditFormulaWidthAfter->setPlainText(currentSeamAllowance);
+    const QString def = qApp->TrVars()->FormulaToUser(currentSeamAllowance, qApp->Settings()->GetOsSeparator());
+    ui->plainTextEditFormulaWidthAfter->setPlainText(def);
     if (QPushButton* button = qobject_cast<QPushButton*>(sender()))
     {
         button->setEnabled(false);
@@ -782,7 +784,12 @@ void DialogPiecePath::EvalWidthBefore()
             ui->pushButtonDefBefore->setEnabled(true);
         }
 
-        UpdateNodeSABefore(formula);
+        Eval(formulaData, m_flagFormulaBefore);
+
+        if (m_flagFormulaBefore)
+        {
+            UpdateNodeSABefore(formula);
+        }
     }
     else
     {
@@ -812,7 +819,12 @@ void DialogPiecePath::EvalWidthAfter()
             ui->pushButtonDefAfter->setEnabled(true);
         }
 
-        UpdateNodeSAAfter(formula);
+        Eval(formulaData, m_flagFormulaAfter);
+
+        if (m_flagFormulaAfter)
+        {
+            UpdateNodeSAAfter(formula);
+        }
     }
     else
     {
