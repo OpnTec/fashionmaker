@@ -406,6 +406,7 @@ void DialogEditWrongFormula::SetFormula(const QString &value)
     formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
     ui->plainTextEditFormula->setPlainText(formula);
     MoveCursorToEnd(ui->plainTextEditFormula);
+    ui->plainTextEditFormula->selectAll();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
