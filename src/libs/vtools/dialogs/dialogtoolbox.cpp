@@ -224,9 +224,9 @@ void CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoin
     SCASSERT(edit != nullptr)
     SCASSERT(labelEditNamePoint != nullptr)
 
-    QString name = edit->text();
+    const QString name = edit->text();
     QRegularExpression rx(NameRegExp());
-    if (name.isEmpty() || (not (pointName != name && data->IsUnique(name))) || not rx.match(name).hasMatch())
+    if (name.isEmpty() || (pointName != name && not data->IsUnique(name)) || not rx.match(name).hasMatch())
     {
         flag = false;
         ChangeColor(labelEditNamePoint, errorColor);
