@@ -25,6 +25,7 @@
 - [#931] Variable translation for Greek and Chinese are broken.
 - [#938] Dialog Seam Allowance doesn't block user from saving broken formula.
 - [#939] Calling Formula Wizard through property explorer doesn't refresh formula.
+- [#937] Wrong symmetrical seam corners on pieces.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
