@@ -30,23 +30,26 @@
 #include "../core/vapplication.h"
 
 //must be the same order as PaperSizeTemplate constants
-const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames =
-        VAbstractLayoutDialog::FormatsVector () << QStringLiteral("A0")
-                                                << QStringLiteral("A1")
-                                                << QStringLiteral("A2")
-                                                << QStringLiteral("A3")
-                                                << QStringLiteral("A4")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Letter")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Legal")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 24in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 30in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 36in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 42in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 44in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 48in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 62in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Roll 72in")
-                                                << QApplication::translate("VAbstractLayoutDialog", "Custom");
+const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames
+{
+    QStringLiteral("A0"),
+    QStringLiteral("A1"),
+    QStringLiteral("A2"),
+    QStringLiteral("A3"),
+    QStringLiteral("A4"),
+    QApplication::translate("VAbstractLayoutDialog", "Letter", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Legal", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Tabloid", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 24in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 30in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 36in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 42in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 44in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 48in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 62in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Roll 72in", "Paper format"),
+    QApplication::translate("VAbstractLayoutDialog", "Custom", "Paper format")
+};
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractLayoutDialog::VAbstractLayoutDialog(QWidget *parent)
@@ -64,7 +67,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
     for(const auto& v : pageFormatNames)
     {
-        if (cntr <= static_cast<int>(PaperSizeTemplate::Legal))
+        if (cntr <= static_cast<int>(PaperSizeTemplate::Tabloid))
         {
             comboBoxTemplates->addItem(icoPaper, v+QChar(QChar::Space)+pdi, QVariant(cntr++));
         }
@@ -115,6 +118,10 @@ QSizeF VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit)
         case PaperSizeTemplate::Legal:
             width = UnitConvertor(8.5, Unit::Inch, unit);
             height = UnitConvertor(14, Unit::Inch, unit);
+            return RoundTemplateSize(width, height, unit);
+        case PaperSizeTemplate::Tabloid:
+            width = UnitConvertor(11, Unit::Inch, unit);
+            height = UnitConvertor(17, Unit::Inch, unit);
             return RoundTemplateSize(width, height, unit);
         case PaperSizeTemplate::Roll24in:
             width = UnitConvertor(24, Unit::Inch, unit);

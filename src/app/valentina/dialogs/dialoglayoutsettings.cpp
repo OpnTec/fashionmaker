@@ -837,11 +837,11 @@ QString DialogLayoutSettings::MakeHelpTiledPdfTemplateList()
 {
     QString out = "\n";
 
-    for (int i = 0; i <= static_cast<int>(PaperSizeTemplate::Legal); ++i)
+    for (int i = 0; i <= static_cast<int>(PaperSizeTemplate::Tabloid); ++i)
     {
         out += "\t* "+VAbstractLayoutDialog::pageFormatNames.at(i)+" = "+ QString::number(i);
 
-        if (i < static_cast<int>(PaperSizeTemplate::Legal))
+        if (i < static_cast<int>(PaperSizeTemplate::Tabloid))
         {
            out += ",\n";
         }
@@ -868,9 +868,10 @@ QSizeF DialogLayoutSettings::Template()
         case PaperSizeTemplate::A3:
         case PaperSizeTemplate::A4:
         case PaperSizeTemplate::Letter:
+        case PaperSizeTemplate::Legal:
+        case PaperSizeTemplate::Tabloid:
             SetAdditionalOptions(false);
             return GetTemplateSize(temp, paperUnit);
-        case PaperSizeTemplate::Legal:
         case PaperSizeTemplate::Roll24in:
         case PaperSizeTemplate::Roll30in:
         case PaperSizeTemplate::Roll36in:

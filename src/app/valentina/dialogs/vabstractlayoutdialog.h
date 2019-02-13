@@ -44,15 +44,16 @@ public:
                                           A4,
                                           Letter,
                                           Legal,
-                                          Roll24in = 7, // Be carefull when change order roll type
-                                          Roll30in,     // Used also for showing icon
+                                          Tabloid,
+                                          Roll24in, // Be carefull when change order for roll types
+                                          Roll30in, // Used also for showing icon
                                           Roll36in,
                                           Roll42in,
                                           Roll44in,
                                           Roll48in,
                                           Roll62in,
                                           Roll72in,
-                                          Custom = 15};
+                                          Custom};
 
     explicit VAbstractLayoutDialog(QWidget *parent = nullptr);
 
