@@ -24,6 +24,13 @@
             <point id="18" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
             <point id="19" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
             <point id="20" idObject="4" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="22" idObject="1" inUse="false" mx="-2.40606" my="-1.85332" showLabel="true" type="modeling"/>
+            <point id="23" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="24" idObject="6" inUse="false" type="modelingSpline"/>
+            <point id="25" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="26" idObject="7" inUse="false" type="modelingSpline"/>
+            <point id="27" idObject="4" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="28" idObject="8" inUse="false" type="modelingSpline"/>
         </modeling>
         <details>
             <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="21" inLayout="true" mx="-4.07881" my="-12.9851" name="Case 1" seamAllowance="true" united="false" version="2" width="1">
@@ -35,6 +42,20 @@
                     <node idObject="18" type="NodePoint"/>
                     <node after="4" angle="3" idObject="19" type="NodePoint"/>
                     <node angle="2" before="4" idObject="20" type="NodePoint"/>
+                </nodes>
+            </detail>
+            <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="29" inLayout="true" mx="-2.69737" my="10.9985" name="Case 4" seamAllowance="true" united="false" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="22" type="NodePoint"/>
+                    <node idObject="23" type="NodePoint"/>
+                    <node idObject="24" reverse="0" type="NodeSpline"/>
+                    <node after="4" angle="3" idObject="25" type="NodePoint"/>
+                    <node idObject="26" reverse="0" type="NodeSpline"/>
+                    <node angle="2" before="4" idObject="27" type="NodePoint"/>
+                    <node idObject="28" reverse="0" type="NodeSpline"/>
                 </nodes>
             </detail>
         </details>

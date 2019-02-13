@@ -162,14 +162,17 @@ private:
     QVector<VSAPoint> InputPointsIssue923Test6_6();
     QVector<QPointF>  OutputPointsIssue923Test6_6();
 
-    QVector<VSAPoint> InputPointsIssue934Case1() const;
-    QVector<QPointF>  OutputPointsIssue934Case1() const;
+    QVector<VSAPoint> InputPointsIssue937Case1() const;
+    QVector<QPointF>  OutputPointsIssue937Case1() const;
 
-    QVector<VSAPoint> InputPointsIssue934Case2() const;
-    QVector<QPointF>  OutputPointsIssue934Case2() const;
+    QVector<VSAPoint> InputPointsIssue937Case2() const;
+    QVector<QPointF>  OutputPointsIssue937Case2() const;
 
-    QVector<VSAPoint> InputPointsIssue934Case3() const;
-    QVector<QPointF>  OutputPointsIssue934Case3() const;
+    QVector<VSAPoint> InputPointsIssue937Case3() const;
+    QVector<QPointF>  OutputPointsIssue937Case3() const;
+
+    QVector<VSAPoint> InputPointsIssue937Case4() const;
+    QVector<QPointF>  OutputPointsIssue937Case4() const;
 };
 
 #endif // TST_VABSTRACTPIECE_H

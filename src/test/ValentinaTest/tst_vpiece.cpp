@@ -172,7 +172,7 @@ QVector<QPointF> Issue924SeamAllowanceTest3()
 {
     QVector<QPointF> points;
 
-    points += QPointF(-844.490345580522785, 355.767273366986956);
+    points += QPointF(-862.690254965683266, 340.819961100893522);
     points += QPointF(-814.714960629921279, 331.313196850393751);
     points += QPointF(-814.714960629921279, -46.738127408018386);
     points += QPointF(-778.560274683193597, -50.549491761193529);
@@ -230,7 +230,7 @@ QVector<QPointF> Issue924SeamAllowanceTest3()
     points += QPointF(-823.692975528084730, 369.271805550997954);
     points += QPointF(-829.575336882823422, 366.626948794191208);
     points += QPointF(-835.815139714856855, 362.892089667033019);
-    points += QPointF(-844.490345580522785, 355.767273366986956);
+    points += QPointF(-862.690254965683266, 340.819961100893522);
 
     return points;
 }
@@ -912,10 +912,10 @@ void TST_VPiece::TestSAPassmark_data()
     passmarkData.passmarkSAPoint = passmarkSAPoint;
     passmarkData.pieceName = QStringLiteral("Test 3");
 
-    lines = {QLineF(QPointF(-844.4903455805228, 355.76727336698696),
-                    QPointF(-825.5927077852472, 355.76727336698696)),
-             QLineF(QPointF(-825.5927077852472, 348.68065919375863),
-                    QPointF(-825.5927077852472, 362.8538875402153))};
+    lines = {QLineF(QPointF(-862.6902549656833, 340.8199611008935),
+                    QPointF(-844.3614525403156, 345.42166903309004)),
+            QLineF(QPointF(-842.6358120657416, 338.54836812357695),
+                   QPointF(-846.0870930148895, 352.29496994260313))};
 
     // See file src/app/share/collection/bugs/Issue_#924.val
     QTest::newRow("Test 3.") << passmarkData << Issue924SeamAllowanceTest3() << lines;
