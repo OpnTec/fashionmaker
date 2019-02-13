@@ -57,6 +57,8 @@ struct PosterData
     QRect rect; // rect section
 };
 
+Q_DECLARE_TYPEINFO(PosterData, Q_MOVABLE_TYPE);
+
 // cppcheck-suppress noConstructor
 class VPoster
 {

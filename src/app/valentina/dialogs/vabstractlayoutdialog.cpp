@@ -31,11 +31,11 @@
 
 //must be the same order as PaperSizeTemplate constants
 const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames =
-        VAbstractLayoutDialog::FormatsVector () << QLatin1String("A0")
-                                                << QLatin1String("A1")
-                                                << QLatin1String("A2")
-                                                << QLatin1String("A3")
-                                                << QLatin1String("A4")
+        VAbstractLayoutDialog::FormatsVector () << QStringLiteral("A0")
+                                                << QStringLiteral("A1")
+                                                << QStringLiteral("A2")
+                                                << QStringLiteral("A3")
+                                                << QStringLiteral("A4")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Letter")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Legal")
                                                 << QApplication::translate("VAbstractLayoutDialog", "Roll 24in")
@@ -59,7 +59,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
     SCASSERT(comboBoxTemplates != nullptr)
     const QIcon icoPaper("://icon/16x16/template.png");
     const QIcon icoRoll("://icon/16x16/roll.png");
-    const QString pdi = QString("(%1ppi)").arg(PrintDPI);
+    const QString pdi = QStringLiteral("(%1ppi)").arg(PrintDPI);
 
     auto cntr = static_cast<VIndexType>(PaperSizeTemplate::A0);
     for(const auto& v : pageFormatNames)
@@ -81,7 +81,7 @@ void VAbstractLayoutDialog::InitTemplates(QComboBox *comboBoxTemplates)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QSizeF VAbstractLayoutDialog::GetTemplateSize(const PaperSizeTemplate &tmpl, const Unit &unit) const
+QSizeF VAbstractLayoutDialog::GetTemplateSize(PaperSizeTemplate tmpl, Unit unit) const
 {
     qreal width = 0;
     qreal height = 0;
