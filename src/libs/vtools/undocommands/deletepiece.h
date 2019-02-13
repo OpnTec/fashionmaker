@@ -39,7 +39,7 @@ class DeletePiece : public VUndoCommand
 {
     Q_OBJECT
 public:
-    DeletePiece(VAbstractPattern *doc, quint32 id, VContainer data, VMainGraphicsScene *scene,
+    DeletePiece(VAbstractPattern *doc, quint32 id, const VContainer &data, VMainGraphicsScene *scene,
                 QUndoCommand *parent = nullptr);
     virtual ~DeletePiece();
 
