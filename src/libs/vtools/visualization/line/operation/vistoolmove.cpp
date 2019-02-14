@@ -41,6 +41,7 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vmodifierkey.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -172,26 +173,22 @@ void VisToolMove::RefreshGeometry()
     static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
     if (qFuzzyIsNull(length))
     {
-        Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>Shift</b> - sticking angle, "
+        Visualization::toolTip = tr("Length = %1%2, angle = %3°, <b>%4</b> - sticking angle, "
                                     "<b>Mouse click</b> - finish selecting a position")
                 .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
                                                    qApp->Settings()->GetOsSeparator()), prefix)
-                .arg(tempAngle);
+                .arg(tempAngle)
+                .arg(VModifierKey::Shift());
     }
     else
     {
-        // String below need for getting translation for key Ctrl
-        // Translation comes from Qt library. Use variables to prevent adding to our translation files.
-        const QString strQShortcut = QStringLiteral("QShortcut"); // Context
-        const QString strCtrl = QStringLiteral("Ctrl"); // String
-
-        Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>Shift</b> - sticking angle, "
-                                    "<b>%5</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
+        Visualization::toolTip = tr("Length = %1%2, angle = %3°, rotation angle = %4°, <b>%5</b> - sticking angle, "
+                                    "<b>%6</b> - change rotation origin point, <b>Mouse click</b> - finish creating")
                 .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(tempLength)),
                                                    qApp->Settings()->GetOsSeparator()), prefix)
                 .arg(tempAngle)
                 .arg(tempRoationAngle)
-                .arg(QCoreApplication::translate(strQShortcut.toUtf8().constData(), strCtrl.toUtf8().constData()));
+                .arg(VModifierKey::Shift(), VModifierKey::Control());
     }
 
     CreateMovedRotatedObjects(iPoint, iCurve, tempLength, tempAngle, tempRoationAngle, origin);

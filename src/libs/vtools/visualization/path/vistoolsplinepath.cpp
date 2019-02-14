@@ -45,6 +45,7 @@
 #include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolSplinePath::VisToolSplinePath(const VContainer *data, QGraphicsItem *parent)
@@ -115,11 +116,13 @@ void VisToolSplinePath::RefreshGeometry()
         else
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select three or more points, "
-                                        "<b>Enter</b> - finish creation");
+                                        "<b>%1</b> - finish creation")
+                    .arg(VModifierKey::EnterKey());
         }
         if (mode == Mode::Show)
         {
-            Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
+            Visualization::toolTip = tr("Use <b>%1</b> for sticking angle!")
+                    .arg(VModifierKey::Shift());
             emit ToolTip(Visualization::toolTip);
         }
     }

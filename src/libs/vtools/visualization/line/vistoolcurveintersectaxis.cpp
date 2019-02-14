@@ -45,6 +45,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCurveIntersectAxis::VisToolCurveIntersectAxis(const VContainer *data, QGraphicsItem *parent)
@@ -90,9 +91,10 @@ void VisToolCurveIntersectAxis::RefreshGeometry()
 
             DrawPoint(point, p, mainColor);
 
-            Visualization::toolTip = tr("<b>Intersection curve and axis</b>: angle = %1°; <b>Shift</b> - "
-                                        "sticking angle, <b>Enter</b> - finish creation")
-                    .arg(this->line().angle());
+            Visualization::toolTip = tr("<b>Intersection curve and axis</b>: angle = %1°; <b>%2</b> - "
+                                        "sticking angle, <b>%3</b> - finish creation")
+                    .arg(this->line().angle())
+                    .arg(VModifierKey::Shift(), VModifierKey::EnterKey());
         }
     }
 }

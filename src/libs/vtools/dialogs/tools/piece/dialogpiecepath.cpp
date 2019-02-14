@@ -33,6 +33,7 @@
 #include "../../../tools/vabstracttool.h"
 #include "../../../tools/vtoolseamallowance.h"
 #include "../../support/dialogeditwrongformula.h"
+#include "../vmisc/vmodifierkey.h"
 
 #include <QMenu>
 #include <QTimer>
@@ -171,8 +172,9 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
 
             if (p.CountNodes() == 1)
             {
-                emit ToolTip(tr("Select main path objects, <b>Shift</b> - reverse direction curve, "
-                                "<b>Enter</b> - finish creation"));
+                emit ToolTip(tr("Select main path objects, <b>%1</b> - reverse direction curve, "
+                                "<b>%2</b> - finish creation")
+                             .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
 
                 if (not qApp->getCurrentScene()->items().contains(visPath))
                 {

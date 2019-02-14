@@ -12,7 +12,8 @@ SOURCES += \
     $$PWD/qxtcsvmodel.cpp \
     $$PWD/vtablesearch.cpp \
     $$PWD/dialogs/dialogexporttocsv.cpp \
-    $$PWD/literals.cpp
+    $$PWD/literals.cpp \
+    $$PWD/vmodifierkey.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
@@ -40,7 +41,8 @@ HEADERS += \
     $$PWD/testvapplication.h \
     $$PWD/literals.h \
     $$PWD/qt_dispatch/qt_dispatch.h \
-    $$PWD/vdatastreamenum.h
+    $$PWD/vdatastreamenum.h \
+    $$PWD/vmodifierkey.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

@@ -49,6 +49,7 @@
 #include "../../../tools/vtoolseamallowance.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../../dialogtoolbox.h"
+#include "../vmisc/vmodifierkey.h"
 
 #include <QMenu>
 #include <QTimer>
@@ -430,8 +431,9 @@ void DialogSeamAllowance::ChosenObject(quint32 id, const SceneObject &type)
 
             if (p.GetPath().CountNodes() == 1)
             {
-                emit ToolTip(tr("Select main path objects clockwise, <b>Shift</b> - reverse direction curve, "
-                                "<b>Enter</b> - finish creation"));
+                emit ToolTip(tr("Select main path objects clockwise, <b>%1</b> - reverse direction curve, "
+                                "<b>%2</b> - finish creation")
+                             .arg(VModifierKey::Shift(), VModifierKey::EnterKey()));
 
                 if (not qApp->getCurrentScene()->items().contains(visPath))
                 {

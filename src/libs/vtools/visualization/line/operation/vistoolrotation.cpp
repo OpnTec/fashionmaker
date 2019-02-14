@@ -40,6 +40,7 @@
 #include <new>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vmodifierkey.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vcubicbezier.h"
@@ -119,8 +120,10 @@ void VisToolRotation::RefreshGeometry()
         VArc arc(*origin, ScaledRadius(SceneScale(qApp->getCurrentScene()))*2, 0, tempAngle);
         DrawPath(angleArc, arc.GetPath(), supportColor2, Qt::SolidLine, Qt::RoundCap);
 
-        Visualization::toolTip = tr("Rotating angle = %1°, <b>Shift</b> - sticking angle, "
-                                    "<b>Mouse click</b> - finish creation").arg(tempAngle);
+        Visualization::toolTip = tr("Rotating angle = %1°, <b>%2</b> - sticking angle, "
+                                    "<b>Mouse click</b> - finish creation")
+                .arg(tempAngle)
+                .arg(VModifierKey::Shift());
     }
 
     int iPoint = -1;

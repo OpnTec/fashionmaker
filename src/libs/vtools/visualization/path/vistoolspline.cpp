@@ -44,6 +44,7 @@
 #include "../vwidgets/scalesceneitems.h"
 #include "../visualization.h"
 #include "vispath.h"
+#include "../vmisc/vmodifierkey.h"
 
 const int EMPTY_ANGLE = -1;
 
@@ -170,7 +171,8 @@ void VisToolSpline::RefreshGeometry()
                 VSpline spline(*first, *second, angle1, angle2, kAsm1, kAsm2, kCurve);
                 spline.SetApproximationScale(m_approximationScale);
                 DrawPath(this, spline.GetPath(), spline.DirectionArrows(), mainColor, lineStyle, Qt::RoundCap);
-                Visualization::toolTip = tr("Use <b>Shift</b> for sticking angle!");
+                Visualization::toolTip = tr("Use <b>%1</b> for sticking angle!")
+                        .arg(VModifierKey::Shift());
                 emit ToolTip(Visualization::toolTip);
             }
         }

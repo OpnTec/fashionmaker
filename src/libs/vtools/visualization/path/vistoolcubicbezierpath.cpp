@@ -42,6 +42,7 @@
 #include "../visualization.h"
 #include "vispath.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vmisc/vmodifierkey.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolCubicBezierPath::VisToolCubicBezierPath(const VContainer *data, QGraphicsItem *parent)
@@ -286,7 +287,8 @@ void VisToolCubicBezierPath::RefreshToolTip()
         else if (size - VCubicBezierPath::SubSplPointsCount(countSubSpl) == 0)
         {
             Visualization::toolTip = tr("<b>Curved path</b>: select seven or more points, "
-                                        "<b>Enter</b> - finish creation");
+                                        "<b>%1</b> - finish creation")
+                    .arg(VModifierKey::EnterKey());
         }
         else
         {

@@ -41,6 +41,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/vmodifierkey.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
@@ -80,10 +81,11 @@ void VisToolEndLine::RefreshGeometry()
     DrawLine(this, line, mainColor, lineStyle);
     static const QString prefix = UnitsToStr(qApp->patternUnit(), true);
     Visualization::toolTip = tr("<b>Point at distance and angle</b>: angle = %1°, length = %2%3; "
-                                "<b>Shift</b> - sticking angle, <b>Enter</b> - finish creation")
+                                "<b>%4</b> - sticking angle, <b>%5</b> - finish creation")
             .arg(this->line().angle())
             .arg(qApp->TrVars()->FormulaToUser(QString::number(qApp->fromPixel(this->line().length())),
-                                               qApp->Settings()->GetOsSeparator()), prefix);
+                                               qApp->Settings()->GetOsSeparator()),
+                 prefix, VModifierKey::Shift(), VModifierKey::EnterKey());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
