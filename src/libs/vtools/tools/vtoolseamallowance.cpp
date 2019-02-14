@@ -358,10 +358,9 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, AttrHeight, data.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, data.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, data.GetRotation());
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrCenterPin, data.CenterPin(), not (data.CenterPin() > NULL_ID));
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrTopLeftPin, data.TopLeftPin(), not (data.TopLeftPin() > NULL_ID));
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrBottomRightPin, data.BottomRightPin(),
-                                      not (data.BottomRightPin() > NULL_ID));
+    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, data.CenterPin(), data.CenterPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrTopLeftPin, data.TopLeftPin(), data.TopLeftPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrBottomRightPin, data.BottomRightPin(), data.BottomRightPin() <= NULL_ID);
     doc->SetLabelTemplate(domData, data.GetLabelTemplate());
 
     domElement.appendChild(domData);
@@ -379,33 +378,9 @@ void VToolSeamAllowance::AddPatternInfo(VAbstractPattern *doc, QDomElement &domE
     doc->SetAttribute(domData, AttrHeight, geom.GetLabelHeight());
     doc->SetAttribute(domData, AttrFont, geom.GetFontSize());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, geom.GetRotation());
-
-    if (geom.CenterPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrCenterPin, geom.CenterPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrCenterPin);
-    }
-
-    if (geom.TopLeftPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrTopLeftPin, geom.TopLeftPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrTopLeftPin);
-    }
-
-    if (geom.BottomRightPin() > NULL_ID)
-    {
-        doc->SetAttribute(domData, AttrBottomRightPin, geom.BottomRightPin());
-    }
-    else
-    {
-        domData.removeAttribute(AttrBottomRightPin);
-    }
+    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, geom.CenterPin(), geom.CenterPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrTopLeftPin, geom.TopLeftPin(), geom.TopLeftPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrBottomRightPin, geom.BottomRightPin(), geom.BottomRightPin() <= NULL_ID);
 
     domElement.appendChild(domData);
 }
@@ -422,9 +397,9 @@ void VToolSeamAllowance::AddGrainline(VAbstractPattern *doc, QDomElement &domEle
     doc->SetAttribute(domData, AttrLength, glGeom.GetLength());
     doc->SetAttribute(domData, VAbstractPattern::AttrRotation, glGeom.GetRotation());
     doc->SetAttribute(domData, VAbstractPattern::AttrArrows, int(glGeom.GetArrowType()));
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrCenterPin, glGeom.CenterPin(), not (glGeom.CenterPin() > NULL_ID));
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrTopPin, glGeom.TopPin(), not (glGeom.TopPin() > NULL_ID));
-    doc->SetAttributeOrRemoveIf<bool>(domData, AttrBottomPin, glGeom.BottomPin(), not (glGeom.BottomPin() > NULL_ID));
+    doc->SetAttributeOrRemoveIf(domData, AttrCenterPin, glGeom.CenterPin(), glGeom.CenterPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrTopPin, glGeom.TopPin(), glGeom.TopPin() <= NULL_ID);
+    doc->SetAttributeOrRemoveIf(domData, AttrBottomPin, glGeom.BottomPin(), glGeom.BottomPin() <= NULL_ID);
 
     domElement.appendChild(domData);
 }

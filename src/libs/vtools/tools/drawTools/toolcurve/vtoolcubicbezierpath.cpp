@@ -269,19 +269,7 @@ void VToolCubicBezierPath::AddPathPoint(VAbstractPattern *doc, QDomElement &domE
 void VToolCubicBezierPath::SetSplinePathAttributes(QDomElement &domElement, const VCubicBezierPath &path)
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
-
-    if (path.GetDuplicate() > 0)
-    {
-        doc->SetAttribute(domElement, AttrDuplicate, path.GetDuplicate());
-    }
-    else
-    {
-        if (domElement.hasAttribute(AttrDuplicate))
-        {
-            domElement.removeAttribute(AttrDuplicate);
-        }
-    }
-
+    doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, path.GetDuplicate(), path.GetDuplicate() <= 0);
     doc->SetAttribute(domElement, AttrColor, path.GetColor());
     doc->SetAttribute(domElement, AttrPenStyle, path.GetPenStyle());
     doc->SetAttribute(domElement, AttrAScale, path.GetApproximationScale());

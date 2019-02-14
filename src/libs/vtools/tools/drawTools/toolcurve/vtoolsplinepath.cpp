@@ -339,18 +339,7 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
 void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path)
 {
     doc->SetAttribute(domElement, AttrType, ToolType);
-
-    if (path.GetDuplicate() > 0)
-    {
-        doc->SetAttribute(domElement, AttrDuplicate, path.GetDuplicate());
-    }
-    else
-    {
-        if (domElement.hasAttribute(AttrDuplicate))
-        {
-            domElement.removeAttribute(AttrDuplicate);
-        }
-    }
+    doc->SetAttributeOrRemoveIf(domElement, AttrDuplicate, path.GetDuplicate(), path.GetDuplicate() <= 0);
 
     if (domElement.hasAttribute(AttrKCurve))
     {
