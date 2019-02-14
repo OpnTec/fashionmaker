@@ -84,7 +84,7 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       flagAngle(false),
       flagRotationAngle(false),
       flagLength(false),
-      flagName(false)
+      flagName(true)
 {
     ui->setupUi(this);
 

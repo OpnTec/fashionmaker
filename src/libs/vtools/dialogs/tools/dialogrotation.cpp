@@ -75,7 +75,7 @@ DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *
       m_suffix(),
       m_firstRelease(false),
       flagAngle(false),
-      flagName(false),
+      flagName(true),
       flagError(false)
 {
     ui->setupUi(this);

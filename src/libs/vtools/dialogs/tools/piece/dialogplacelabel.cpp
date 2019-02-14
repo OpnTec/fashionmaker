@@ -462,6 +462,10 @@ void DialogPlaceLabel::InitPlaceLabelTab()
     connect(timerWidth, &QTimer::timeout, this, &DialogPlaceLabel::EvalWidth);
     connect(timerHeight, &QTimer::timeout, this, &DialogPlaceLabel::EvalHeight);
     connect(timerAngle, &QTimer::timeout, this, &DialogPlaceLabel::EvalAngle);
+
+    EvalWidth();
+    EvalHeight();
+    EvalAngle();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
