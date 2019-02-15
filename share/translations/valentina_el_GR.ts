@@ -725,15 +725,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
+        <translation type="vanished">Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
-        <translation>Το μήκος δεν μπορεί να ισουται με 0</translation>
+        <translation type="vanished">Το μήκος δεν μπορεί να ισουται με 0</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -2062,11 +2062,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
+        <translation type="vanished">Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -4300,10 +4300,6 @@ Apply settings anyway?</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Αντιστροφή</translation>
     </message>
@@ -4514,6 +4510,22 @@ Apply settings anyway?</source>
     <message>
         <source>Excluded</source>
         <translation>Εξαιρούμενο</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5433,10 +5445,6 @@ Apply settings anyway?</source>
         <translation>Γραμμή ισιάδας</translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Αντιστροφή</translation>
     </message>
@@ -5622,6 +5630,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5891,11 +5903,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
+        <translation type="vanished">Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -6030,11 +6042,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
+        <translation type="vanished">Το μήκος δεν είναι δυνατό να έχει αρνητική τιμή</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -6083,23 +6095,19 @@ Apply settings anyway?</source>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation type="vanished">Σφάλμα</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Κενό πεδίο</translation>
+        <translation type="vanished">Κενό πεδίο</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation>Η τιμή δεν μπορεί να είναι 0</translation>
+        <translation type="vanished">Η τιμή δεν μπορεί να είναι 0</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Τιμή</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Τιμή</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6155,11 +6163,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
+        <translation type="vanished">Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation>Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
+        <translation type="vanished">Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
     </message>
 </context>
 <context>
@@ -7628,10 +7636,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7734,14 +7738,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Forum</source>
         <translation>Φόρουμ</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -7917,6 +7913,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8750,6 +8758,10 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8759,6 +8771,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Σφάλμα</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished">Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation type="unfinished">Η τιμή δεν μπορεί να είναι 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation type="unfinished">Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10025,6 +10061,18 @@ Do you want to save your changes?</source>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
@@ -10545,47 +10593,63 @@ Do you want to save your changes?</source>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Legal</translation>
     </message>
     <message>
+        <source>Tabloid</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Roll 24in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 24 ιντσών</translation>
     </message>
     <message>
         <source>Roll 30in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 30 ιντσών</translation>
     </message>
     <message>
         <source>Roll 36in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 36 ιντσών</translation>
     </message>
     <message>
         <source>Roll 42in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 42 ιντσών</translation>
     </message>
     <message>
         <source>Roll 44in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 44 ιντσών</translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="unfinished">Προσαρμογή</translation>
-    </message>
-    <message>
         <source>Roll 48in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 44 ιντσών {48i?}</translation>
     </message>
     <message>
         <source>Roll 62in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 44 ιντσών {62i?}</translation>
     </message>
     <message>
         <source>Roll 72in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished">Ρολό 44 ιντσών {72i?}</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -12745,6 +12809,10 @@ Do you want to save your changes?</source>
         <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool was used after deleting.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -14168,18 +14236,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Μονοπάτι καμπύλης&lt;/b&gt;: επιλέξτε επτά ή περισσότερα σημεία, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">&lt;b&gt;Μονοπάτι καμπύλης&lt;/b&gt;: επιλέξτε επτά ή περισσότερα σημεία, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation>&lt;b&gt;Μονοπάτι καμπύλης&lt;/b&gt;: επιλέξτε περισσότερα σημεία για ολοκληρωμενο τμήμα</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Τομή καμπύλης και άξονα&lt;/b&gt;: γωνία = %1°; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">&lt;b&gt;Τομή καμπύλης και άξονα&lt;/b&gt;: γωνία = %1°; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14190,14 +14266,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Σημείο σε απόσταση και γωνία&lt;/b&gt;: γωνία = %1°, μήκος = %2%3; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">&lt;b&gt;Σημείο σε απόσταση και γωνία&lt;/b&gt;: γωνία = %1°, μήκος = %2%3; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Τομή γραμμής και άξονα&lt;/b&gt;: γωνία = %1°; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">&lt;b&gt;Τομή γραμμής και άξονα&lt;/b&gt;: γωνία = %1°; &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14207,11 +14291,11 @@ Do you want to save your changes?</source>
         <translation type="vanished">Μήκος = %1%2, γωνία = %3°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14219,14 +14303,22 @@ Do you want to save your changes?</source>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Γωνία περιστροφής = %1°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">Γωνία περιστροφής = %1°, &lt;b&gt;Shift&lt;/b&gt; - σταθεροποίηση γωνίας, &lt;b&gt;κλικ ποντικιού&lt;/b&gt; - τέλος δημιουργίας</translation>
+    </message>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Χρησιμοποιήστε &lt;b&gt;Shift&lt;/b&gt; για σταθεροποίηση της γωνίας!</translation>
+        <translation type="vanished">Χρησιμοποιήστε &lt;b&gt;Shift&lt;/b&gt; για σταθεροποίηση της γωνίας!</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14237,11 +14329,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Μονοπάτι καμπύλης&lt;/b&gt;: επιλέξτε τρία ή περισσότερα σημεία, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
+        <translation type="vanished">&lt;b&gt;Μονοπάτι καμπύλης&lt;/b&gt;: επιλέξτε τρία ή περισσότερα σημεία, &lt;b&gt;Enter&lt;/b&gt; - τέλος δημιουργίας</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Χρησιμοποιήστε &lt;b&gt;Shift&lt;/b&gt; για σταθεροποίηση της γωνίας!</translation>
+        <translation type="vanished">Χρησιμοποιήστε &lt;b&gt;Shift&lt;/b&gt; για σταθεροποίηση της γωνίας!</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

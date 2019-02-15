@@ -737,15 +737,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="vanished">Erro</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>O raio não pode ser negativo</translation>
+        <translation type="vanished">O raio não pode ser negativo</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
-        <translation>O comprimento não pode ser igual a 0</translation>
+        <translation type="vanished">O comprimento não pode ser igual a 0</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -2106,11 +2106,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="vanished">Erro</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>O raio não pode ser negativo</translation>
+        <translation type="vanished">O raio não pode ser negativo</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -4386,7 +4386,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Selecione os objetos do caminho principal, &lt;b&gt;Shift&lt;/b&gt; - inverte o sentido da curva, &lt;b&gt;Enter&lt;/b&gt; - terminar a criação</translation>
+        <translation type="vanished">Selecione os objetos do caminho principal, &lt;b&gt;Shift&lt;/b&gt; - inverte o sentido da curva, &lt;b&gt;Enter&lt;/b&gt; - terminar a criação</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4599,6 +4599,22 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Excluded</source>
         <translation>Excluído</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5519,7 +5535,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Selecione os objetos do caminho principal no sentido horário, &lt;b&gt;Shift&lt;/b&gt; - inverte a direção da curva &lt;b&gt;Enter&lt;/b&gt; - terminar a criação</translation>
+        <translation type="vanished">Selecione os objetos do caminho principal no sentido horário, &lt;b&gt;Shift&lt;/b&gt; - inverte a direção da curva &lt;b&gt;Enter&lt;/b&gt; - terminar a criação</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -5707,6 +5723,10 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5976,11 +5996,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="vanished">Erro</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>O comprimento não pode ser negativo</translation>
+        <translation type="vanished">O comprimento não pode ser negativo</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -6115,11 +6135,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="vanished">Erro</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>O comprimento não pode ser negativo</translation>
+        <translation type="vanished">O comprimento não pode ser negativo</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -6168,23 +6188,23 @@ Aplicar configurações de qualquer forma?</translation>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Erro</translation>
+        <translation type="vanished">Erro</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Campo vazio</translation>
+        <translation type="vanished">Campo vazio</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation>O valor não pode ser 0</translation>
+        <translation type="vanished">O valor não pode ser 0</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Valor</translation>
+        <translation type="vanished">Valor</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Erro de análise: %1</translation>
+        <translation type="vanished">Erro de análise: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6240,11 +6260,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Resultado inválido. Valor é infinito ou não é um número. Por favor, verifique seus cálculos.</translation>
+        <translation type="vanished">Resultado inválido. Valor é infinito ou não é um número. Por favor, verifique seus cálculos.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation>O valor não pode ser inferior a 0</translation>
+        <translation type="vanished">O valor não pode ser inferior a 0</translation>
     </message>
 </context>
 <context>
@@ -7746,7 +7766,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation>Selecione o caminho dos objetos, &lt;b&gt;Shift&lt;/b&gt; - inverte a direção da curva</translation>
+        <translation type="vanished">Selecione o caminho dos objetos, &lt;b&gt;Shift&lt;/b&gt; - inverte a direção da curva</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
@@ -7854,11 +7874,11 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Selecione um ou mais objetos, segure &lt;b&gt;%1&lt;/b&gt; - para múltipla seleção, &lt;b&gt;Enter&lt;/b&gt; - concluir a criação</translation>
+        <translation type="vanished">Selecione um ou mais objetos, segure &lt;b&gt;%1&lt;/b&gt; - para múltipla seleção, &lt;b&gt;Enter&lt;/b&gt; - concluir a criação</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation>Selecione um ou mais objetos, segure &lt;b&gt;%1&lt;/b&gt; - para múltipla seleção, &lt;b&gt;Enter&lt;/b&gt; - confirmar a seleção</translation>
+        <translation type="vanished">Selecione um ou mais objetos, segure &lt;b&gt;%1&lt;/b&gt; - para múltipla seleção, &lt;b&gt;Enter&lt;/b&gt; - confirmar a seleção</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8034,6 +8054,18 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8915,6 +8947,10 @@ Esta opção terá um efeito após o reinício.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8925,6 +8961,30 @@ Esta opção terá um efeito após o reinício.</translation>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erro</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished">Resultado inválido. Valor é infinito ou não é um número. Por favor, verifique seus cálculos.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation type="unfinished">O valor não pode ser 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation type="unfinished">O valor não pode ser inferior a 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Erro de análise: %1</translation>
     </message>
 </context>
 <context>
@@ -10244,6 +10304,18 @@ Deseja salvar suas mudanças?</translation>
         <source>Intersection 2 (only right)</source>
         <translation>Interseção 2 (apenas à direita)</translation>
     </message>
+    <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
@@ -10783,47 +10855,107 @@ Deseja salvar suas mudanças?</translation>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation>Carta</translation>
+        <translation type="vanished">Carta</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Ofício</translation>
+        <translation type="vanished">Ofício</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Rolo de 24&quot;</translation>
+        <translation type="vanished">Rolo de 24&quot;</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Rolo de 30&quot;</translation>
+        <translation type="vanished">Rolo de 30&quot;</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Rolo de 36&quot;</translation>
+        <translation type="vanished">Rolo de 36&quot;</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Rolo de 42&quot;</translation>
+        <translation type="vanished">Rolo de 42&quot;</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Rolo de 44&quot;</translation>
+        <translation type="vanished">Rolo de 44&quot;</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Personalizado</translation>
+        <translation type="vanished">Personalizado</translation>
     </message>
     <message>
         <source>Roll 48in</source>
-        <translation>Rolo de 44&quot; {481?}</translation>
+        <translation type="vanished">Rolo de 44&quot; {481?}</translation>
     </message>
     <message>
         <source>Roll 62in</source>
-        <translation>Rolo de 44&quot; {62i?}</translation>
+        <translation type="vanished">Rolo de 44&quot; {62i?}</translation>
     </message>
     <message>
         <source>Roll 72in</source>
-        <translation>Rolo de 44&quot; {72i?}</translation>
+        <translation type="vanished">Rolo de 44&quot; {72i?}</translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Carta</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Ofício</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 24&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 30&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 36&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 42&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 44&quot;</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 44&quot; {481?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 44&quot; {62i?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Rolo de 44&quot; {72i?}</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Personalizado</translation>
     </message>
 </context>
 <context>
@@ -13105,6 +13237,10 @@ Deseja salvar suas mudanças?</translation>
         <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool was used after deleting.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -14561,31 +14697,35 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione sete ou mais pontos,&lt;b&gt;Enter&lt;/b&gt; - finalizar criação</translation>
+        <translation type="vanished">&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione sete ou mais pontos,&lt;b&gt;Enter&lt;/b&gt; - finalizar criação</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation>&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione mais pontos para completar o segmento</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
-        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolEndLine</name>
     <message>
-        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
-        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14593,10 +14733,14 @@ Deseja salvar suas mudanças?</translation>
     <name>VisToolMove</name>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation>Comprimento = %1%2, ângulo = %3°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Mouse clique&lt;/b&gt; - terminar selecionando a posição</translation>
+        <translation type="vanished">Comprimento = %1%2, ângulo = %3°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Mouse clique&lt;/b&gt; - terminar selecionando a posição</translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14604,14 +14748,22 @@ Deseja salvar suas mudanças?</translation>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Rotação do ângulo = %1°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Mouse clique&lt;/b&gt; - finalizar criação</translation>
+        <translation type="vanished">Rotação do ângulo = %1°, &lt;b&gt;Shift&lt;/b&gt; - para travar o ângulo, &lt;b&gt;Mouse clique&lt;/b&gt; - finalizar criação</translation>
+    </message>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Usar &lt;b&gt;Shift&lt;/b&gt; para travar o ângulo!</translation>
+        <translation type="vanished">Usar &lt;b&gt;Shift&lt;/b&gt; para travar o ângulo!</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14622,11 +14774,19 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione três ou mais pontos,&lt;b&gt;Enter&lt;/b&gt; - finalizar criação</translation>
+        <translation type="vanished">&lt;b&gt;Traçado de Curva&lt;/b&gt;: selecione três ou mais pontos,&lt;b&gt;Enter&lt;/b&gt; - finalizar criação</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Usar &lt;b&gt;Shift&lt;/b&gt; para travar o ângulo!</translation>
+        <translation type="vanished">Usar &lt;b&gt;Shift&lt;/b&gt; para travar o ângulo!</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -737,15 +737,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Радиус не может быть отрицательным</translation>
+        <translation type="vanished">Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
-        <translation>Длина не может быть нулевой</translation>
+        <translation type="vanished">Длина не может быть нулевой</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -1792,7 +1792,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation>Рост</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1967,7 +1967,7 @@
     </message>
     <message>
         <source>Height</source>
-        <translation type="vanished">Рост</translation>
+        <translation type="vanished">Высота</translation>
     </message>
     <message>
         <source>Size</source>
@@ -2106,11 +2106,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Радиус не может быть отрицательным</translation>
+        <translation type="vanished">Радиус не может быть отрицательным</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -3708,7 +3708,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Базовая высота:</translation>
+        <translation>Базовый рост:</translation>
     </message>
     <message>
         <source>Individual</source>
@@ -3932,7 +3932,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>All heights (cm)</source>
-        <translation>Все росты (см)</translation>
+        <translation>Все роста (см)</translation>
     </message>
     <message>
         <source>All sizes (cm)</source>
@@ -3952,7 +3952,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -4068,7 +4068,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="vanished">Используйте %1 и %2 для вставки размера и высоты модели</translation>
+        <translation type="vanished">Используйте %1 и %2 для вставки размера и роста выкройки</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
@@ -4386,7 +4386,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Выберите объекты основного контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+        <translation type="vanished">Выберите объекты основного контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4599,6 +4599,22 @@ Apply settings anyway?</source>
     <message>
         <source>Excluded</source>
         <translation>Исключенный</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current seam allowance</source>
@@ -5524,7 +5540,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Выберите объекты основного контура по часовой стрелке, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+        <translation type="vanished">Выберите объекты основного контура по часовой стрелке, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -5713,6 +5729,10 @@ Apply settings anyway?</source>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Для открытия всех функций детали закончите создание главного контура. Пожалуйста, нажмите ОК.</translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -5981,11 +6001,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Длина не может быть отрицательной</translation>
+        <translation type="vanished">Длина не может быть отрицательной</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -6120,11 +6140,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Длина не может быть отрицательной</translation>
+        <translation type="vanished">Длина не может быть отрицательной</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -6174,23 +6194,23 @@ Apply settings anyway?</source>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Ошибка</translation>
+        <translation type="vanished">Ошибка</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Пустое поле</translation>
+        <translation type="vanished">Пустое поле</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation>Значение не может быть 0</translation>
+        <translation type="vanished">Значение не может быть 0</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Значение</translation>
+        <translation type="vanished">Значение</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Ошибка синтаксического анализатора: %1</translation>
+        <translation type="vanished">Ошибка синтаксического анализатора: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6246,11 +6266,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
+        <translation type="vanished">Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation>Значение не может быть меньше 0</translation>
+        <translation type="vanished">Значение не может быть меньше 0</translation>
     </message>
 </context>
 <context>
@@ -6622,7 +6642,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>The base height</source>
-        <translation>Базовая высота</translation>
+        <translation>Базовый рост</translation>
     </message>
     <message>
         <source>The base size</source>
@@ -6662,7 +6682,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Invalid base height argument. Must be %1cm.</source>
-        <translation>Неверный параметр базовой высоты. Должен быть %1 см.</translation>
+        <translation>Неверный параметр базового роста. Должен быть %1 см.</translation>
     </message>
     <message>
         <source>Invalid base size argument. Must be %1cm.</source>
@@ -6670,7 +6690,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Open with the base height. Valid values: %1cm.</source>
-        <translation>Открыть с базовой высотой. Возможные значения: %1 см.</translation>
+        <translation>Открыть с базовым ростом. Возможные значения: %1 см.</translation>
     </message>
     <message>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
@@ -6909,7 +6929,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>zoom in</source>
-        <translation>Увеличить</translation>
+        <translation>увеличить</translation>
     </message>
     <message>
         <source>Zoom out</source>
@@ -7382,8 +7402,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Sync measurements</source>
-        <translation type="vanished">Синхронизировать
-мерки</translation>
+        <translation type="vanished">Синхронизировать мерки</translation>
     </message>
     <message>
         <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
@@ -7488,15 +7507,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation>Значение высоты &apos;%1&apos; не поддерживается для этого файла выкройки.</translation>
+        <translation>Значение роста &apos;%1&apos; не поддерживается для этого файла выкройки.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation type="vanished">Невозможно установить высоту. Требуется файл стандартных мерок.</translation>
+        <translation type="vanished">Невозможно установить рост. Требуется файл стандартных мерок.</translation>
     </message>
     <message>
         <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
-        <translation>Невозможно установить высоту. Файл не был открыт.</translation>
+        <translation>Невозможно установить рост. Файл не был открыт.</translation>
     </message>
     <message>
         <source>Export error.</source>
@@ -7588,7 +7607,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
+        <translation>Файл блокировки не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -7700,7 +7719,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -7752,7 +7771,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation>Выберите объекты контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой</translation>
+        <translation type="vanished">Выберите объекты контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
@@ -7860,11 +7879,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Выберите один или несколько объектов, зажмите &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
+        <translation type="vanished">Выберите один или несколько объектов, зажмите &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation>Выберите один или несколько объектов, зажмите  &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
+        <translation type="vanished">Выберите один или несколько объектов, зажмите  &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -7908,7 +7927,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>zoom fit best current pattern piece</source>
-        <translation>Уместить текущую выкройку</translation>
+        <translation>уместить текущую выкройку</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
@@ -8044,6 +8063,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8473,7 +8504,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>default unit</source>
-        <translation>Единица измерения по умолчанию</translation>
+        <translation>единица измерения по умолчанию</translation>
     </message>
     <message>
         <source>General</source>
@@ -8937,6 +8968,10 @@ This option will take an affect after restart.</source>
         <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Невозможно скорректировать позицию надсечки.</translation>
     </message>
     <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8946,6 +8981,30 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation type="unfinished">Значение не может быть 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation type="unfinished">Значение не может быть меньше 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9102,7 +9161,7 @@ This option will take an affect after restart.</source>
     <message>
         <source>user defined binary operator &quot;$TOK$&quot; conflicts with a built in operator.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Определенный пользователем бинарный оператор &quot;$TOK$&quot; конфликтует с встроенным оператором.</translation>
+        <translation>определенный пользователем бинарный оператор &quot;$TOK$&quot; конфликтует с встроенным оператором.</translation>
     </message>
     <message>
         <source>Unexpected string token found at position $POS$.</source>
@@ -9262,7 +9321,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>In heights</source>
-        <translation>В высотах</translation>
+        <translation>В ростах</translation>
     </message>
     <message>
         <source>Details</source>
@@ -9290,7 +9349,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>In heights:</source>
-        <translation>В высотах:</translation>
+        <translation>В ростах:</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -9346,11 +9405,11 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Base height:</source>
-        <translation>Базовая высота:</translation>
+        <translation>Базовый рост:</translation>
     </message>
     <message>
         <source>Base height value</source>
-        <translation>Значение базовой высоты</translation>
+        <translation>Значение базового роста</translation>
     </message>
     <message>
         <source>Given name:</source>
@@ -9648,7 +9707,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The height increase value of known measurement forbidden to change.</source>
-        <translation type="vanished">Нельзя изменить значение приращения высоты известной мерки.</translation>
+        <translation type="vanished">Нельзя изменить значение приращения роста известной мерки.</translation>
     </message>
     <message>
         <source>The full name of known measurement forbidden to change.</source>
@@ -9787,7 +9846,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions.</source>
-        <translation>lock файл не может быть создан, не хватает прав доступа.</translation>
+        <translation>Файл блокировки не может быть создан, не хватает прав доступа.</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
@@ -9827,7 +9886,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Высота:</translation>
+        <translation>Рост:</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -10269,6 +10328,18 @@ Do you want to save your changes?</source>
     <message>
         <source>Intersection 2 (only right)</source>
         <translation>Пересечение 2 (только справа)</translation>
+    </message>
+    <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10813,47 +10884,107 @@ Do you want to save your changes?</source>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation>Letter</translation>
+        <translation type="vanished">Letter</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Рулон 24 дюйма</translation>
+        <translation type="vanished">Рулон 24 дюйма</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Рулон 30 дюймов</translation>
+        <translation type="vanished">Рулон 30 дюймов</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Рулон 36 дюймов</translation>
+        <translation type="vanished">Рулон 36 дюймов</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Рулон 42 дюйма</translation>
+        <translation type="vanished">Рулон 42 дюйма</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Рулон 44 дюйма</translation>
+        <translation type="vanished">Рулон 44 дюйма</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Клиент</translation>
+        <translation type="vanished">Клиент</translation>
     </message>
     <message>
         <source>Roll 48in</source>
-        <translation>Рулон 44 дюйма {не 48 ли?}</translation>
+        <translation type="vanished">Рулон 44 дюйма {не 48 ли?}</translation>
     </message>
     <message>
         <source>Roll 62in</source>
-        <translation>Рулон 44 дюйма {не 62 ли?}</translation>
+        <translation type="vanished">Рулон 44 дюйма {не 62 ли?}</translation>
     </message>
     <message>
         <source>Roll 72in</source>
-        <translation>Рулон 44 дюйма {не 72 ли?}</translation>
+        <translation type="vanished">Рулон 44 дюйма {не 72 ли?}</translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 24 дюйма</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 30 дюймов</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 36 дюймов</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 42 дюйма</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 44 дюйма</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 44 дюйма {не 48 ли?}</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 44 дюйма {не 62 ли?}</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Рулон 44 дюйма {не 72 ли?}</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11515,7 +11646,7 @@ Do you want to save your changes?</source>
     <name>VCommonSettings</name>
     <message>
         <source>measurements</source>
-        <translation>Мерки</translation>
+        <translation>мерки</translation>
     </message>
     <message>
         <source>individual</source>
@@ -13149,7 +13280,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>apply save detail options</source>
-        <translation>Применить &quot;сохранить параметры детали&quot;</translation>
+        <translation>применить &quot;сохранить параметры детали&quot;</translation>
     </message>
     <message>
         <source>multi deletion</source>
@@ -13165,6 +13296,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool was used after deleting.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14315,7 +14450,7 @@ Do you want to save your changes?</source>
     <message>
         <source>height</source>
         <comment>placeholder</comment>
-        <translation>Рост</translation>
+        <translation>рост</translation>
     </message>
     <message>
         <source>C1LengthSpl_</source>
@@ -14673,19 +14808,27 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек,
+        <translation type="vanished">&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек,
 &lt;b&gt;Enter&lt;/b&gt; - создать кривую</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите больше точек для завершения</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation type="vanished">&lt;b&gt;Пересечение кривой и дуги&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14696,14 +14839,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Точка на расстоянии и под углом&lt;/b&gt;: угол = %1°, длина = %2%3; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - создание</translation>
+        <translation type="vanished">&lt;b&gt;Точка на расстоянии и под углом&lt;/b&gt;: угол = %1°, длина = %2%3; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - создание</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation type="vanished">&lt;b&gt;Пересечение линии и оси&lt;/b&gt;: угол = %1°; &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14714,25 +14865,41 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation>Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - окончание выбора позиции</translation>
+        <translation type="vanished">Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - окончание выбора позиции</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation>Длина = %1%2, угол = %3°, угол вращения = %4°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;%5&lt;/b&gt; - сменить координаты точки вращения, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+        <translation type="vanished">Длина = %1%2, угол = %3°, угол вращения = %4°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;%5&lt;/b&gt; - сменить координаты точки вращения, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Угол поворота = %1°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+        <translation type="vanished">Угол поворота = %1°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
+    </message>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
+        <translation type="vanished">Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14743,11 +14910,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
+        <translation type="vanished">&lt;b&gt;Сложная кривая&lt;/b&gt;: выберите три или больше точек, &lt;b&gt;Enter&lt;/b&gt; - завершение создания</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
+        <translation type="vanished">Удерживайте &lt;b&gt;Shift&lt;/b&gt; для фиксации угла!</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

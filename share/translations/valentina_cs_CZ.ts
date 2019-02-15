@@ -228,7 +228,7 @@
     </message>
     <message>
         <source>Label language</source>
-        <translation type="vanished">Jazyk štítků</translation>
+        <translation type="vanished">Jazyk popisu</translation>
     </message>
     <message>
         <source>Send crash reports</source>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="vanished">Jazyk označení:</translation>
+        <translation type="vanished">Jazyk popisu:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
@@ -737,15 +737,15 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Poloměr nemůže být záporný</translation>
+        <translation type="vanished">Poloměr nemůže být záporný</translation>
     </message>
     <message>
         <source>Length can&apos;t be equal 0</source>
-        <translation>Délka se nemůže rovnat 0</translation>
+        <translation type="vanished">Délka se nemůže rovnat 0</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -808,7 +808,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point</source>
@@ -1041,7 +1041,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -1136,7 +1136,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Segment an arc</source>
@@ -1215,7 +1215,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Segmenting a simple curve</source>
@@ -1684,7 +1684,7 @@
     </message>
     <message>
         <source>Centers horizontally in the available space</source>
-        <translation>Vystředí vodorovně v dostupném prostoru</translation>
+        <translation>Vystředit vodorovně v dostupném prostoru</translation>
     </message>
     <message>
         <source>Aligns with the right edge</source>
@@ -2106,11 +2106,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Poloměr nemůže být záporný</translation>
+        <translation type="vanished">Poloměr nemůže být záporný</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -2173,7 +2173,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -2504,7 +2504,7 @@
     <name>DialogHeight</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Base point</source>
@@ -3327,7 +3327,7 @@ Přesto použít nastavení?</translation>
     <name>DialogLineIntersect</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First line</source>
@@ -3414,7 +3414,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Type of line</source>
@@ -3794,7 +3794,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point</source>
@@ -4088,7 +4088,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>For technical notes</source>
-        <translation>Pro technické poznámky</translation>
+        <translation>Technické poznámky</translation>
     </message>
     <message>
         <source>Label data</source>
@@ -4144,7 +4144,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Jazyk popisu:</translation>
     </message>
 </context>
 <context>
@@ -4386,7 +4386,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Vybrat hlavní cestu předmětů, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
+        <translation type="vanished">Vybrat hlavní cestu předmětů, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4601,6 +4601,22 @@ Přesto použít nastavení?</translation>
         <translation>Vyloučeno</translation>
     </message>
     <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Current seam allowance</source>
         <translation type="unfinished">Nynější přídavek na šev</translation>
     </message>
@@ -4763,7 +4779,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Tangent point</source>
@@ -4826,7 +4842,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Center of the circle</source>
@@ -4917,7 +4933,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Center of arc</source>
@@ -4992,7 +5008,7 @@ Přesto použít nastavení?</translation>
     <name>DialogPointOfIntersection</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point of angle</source>
@@ -5047,7 +5063,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First arc</source>
@@ -5118,7 +5134,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Center of the first circle</source>
@@ -5524,7 +5540,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Vybrat hlavní cestu předmětů po směru hodinových ručiček, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
+        <translation type="vanished">Vybrat hlavní cestu předmětů po směru hodinových ručiček, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -5715,6 +5731,10 @@ Přesto použít nastavení?</translation>
         <translation>Pro otevření všech vlastností jednotlivosti (dílu střihu) dokončete vytvoření hlavní cesty. Stiskněte, prosím, OK.</translation>
     </message>
     <message>
+        <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished">&lt;prázdné&gt;</translation>
     </message>
@@ -5739,7 +5759,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point</source>
@@ -5981,11 +6001,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Délka nemůže být záporná</translation>
+        <translation type="vanished">Délka nemůže být záporná</translation>
     </message>
     <message>
         <source>Calculation</source>
@@ -6120,11 +6140,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Length can&apos;t be negative</source>
-        <translation>Délka nemůže být záporná</translation>
+        <translation type="vanished">Délka nemůže být záporná</translation>
     </message>
     <message>
         <source>Not used</source>
@@ -6174,23 +6194,23 @@ Přesto použít nastavení?</translation>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Chyba</translation>
+        <translation type="vanished">Chyba</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Prázdné pole</translation>
+        <translation type="vanished">Prázdné pole</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation>Hodnota nemůže být 0</translation>
+        <translation type="vanished">Hodnota nemůže být 0</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Hodnota</translation>
+        <translation type="vanished">Hodnota</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Chyba zpracování: %1</translation>
+        <translation type="vanished">Chyba zpracování: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -6246,18 +6266,18 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation>Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
+        <translation type="vanished">Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
     </message>
     <message>
         <source>Value can&apos;t be less than 0</source>
-        <translation>Hodnota nemůže být menší než 0</translation>
+        <translation type="vanished">Hodnota nemůže být menší než 0</translation>
     </message>
 </context>
 <context>
     <name>DialogTriangle</name>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point of axis</source>
@@ -7752,7 +7772,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation>Vyberte předměty cesty, &lt;b&gt;Shift&lt;/b&gt; - obrátitkřivku směru</translation>
+        <translation type="vanished">Vyberte předměty cesty, &lt;b&gt;Shift&lt;/b&gt; - obrátitkřivku směru</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
@@ -7800,7 +7820,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Open Tape</source>
-        <translation>Otevřít pásek měření</translation>
+        <translation>Otevřít Tape</translation>
     </message>
     <message>
         <source>Edit Current</source>
@@ -7860,11 +7880,11 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
+        <translation type="vanished">Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation>Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - potvrdit výběr</translation>
+        <translation type="vanished">Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - potvrdit výběr</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8044,6 +8064,18 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8937,6 +8969,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Nelze opravit polohu zářezu.</translation>
     </message>
     <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8946,6 +8982,30 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Chyba</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished">Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation type="unfinished">Hodnota nemůže být 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation type="unfinished">Hodnota nemůže být menší než 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10270,6 +10330,18 @@ Chcete uložit změny?</translation>
         <source>Intersection 2 (only right)</source>
         <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
+    <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
@@ -10813,47 +10885,107 @@ Chcete uložit změny?</translation>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation>Dopis</translation>
+        <translation type="vanished">Dopis</translation>
     </message>
     <message>
         <source>Legal</source>
-        <translation>Legal</translation>
+        <translation type="vanished">Legal</translation>
     </message>
     <message>
         <source>Roll 24in</source>
-        <translation>Role 24 palců</translation>
+        <translation type="vanished">Role 24 palců</translation>
     </message>
     <message>
         <source>Roll 30in</source>
-        <translation>Role 30 palců</translation>
+        <translation type="vanished">Role 30 palců</translation>
     </message>
     <message>
         <source>Roll 36in</source>
-        <translation>Role 36 palců</translation>
+        <translation type="vanished">Role 36 palců</translation>
     </message>
     <message>
         <source>Roll 42in</source>
-        <translation>Role 42 palců</translation>
+        <translation type="vanished">Role 42 palců</translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation>Role 44 palců</translation>
+        <translation type="vanished">Role 44 palců</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Vlastní</translation>
+        <translation type="vanished">Vlastní</translation>
     </message>
     <message>
         <source>Roll 48in</source>
-        <translation>Role 48 palců</translation>
+        <translation type="vanished">Role 48 palců</translation>
     </message>
     <message>
         <source>Roll 62in</source>
-        <translation>Role 62 palců</translation>
+        <translation type="vanished">Role 62 palců</translation>
     </message>
     <message>
         <source>Roll 72in</source>
-        <translation>Role 72 palců</translation>
+        <translation type="vanished">Role 72 palců</translation>
+    </message>
+    <message>
+        <source>Letter</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Dopis</translation>
+    </message>
+    <message>
+        <source>Legal</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Legal</translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Roll 24in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 24 palců</translation>
+    </message>
+    <message>
+        <source>Roll 30in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 30 palců</translation>
+    </message>
+    <message>
+        <source>Roll 36in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 36 palců</translation>
+    </message>
+    <message>
+        <source>Roll 42in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 42 palců</translation>
+    </message>
+    <message>
+        <source>Roll 44in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 44 palců</translation>
+    </message>
+    <message>
+        <source>Roll 48in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 48 palců</translation>
+    </message>
+    <message>
+        <source>Roll 62in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 62 palců</translation>
+    </message>
+    <message>
+        <source>Roll 72in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Role 72 palců</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished">Vlastní</translation>
     </message>
 </context>
 <context>
@@ -12501,7 +12633,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>Position</source>
@@ -13165,6 +13297,10 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool was used after deleting.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14668,18 +14804,26 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte sedum nebo více bodů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte sedum nebo více bodů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation>&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte více bodů pro celou část</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Průnik křivky a osy&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Průnik křivky a osy&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14690,14 +14834,22 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Bod ve vzdálenosti a úhlu&lt;/b&gt;: úhel = %1°, délka = %2%3; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Bod ve vzdálenosti a úhlu&lt;/b&gt;: úhel = %1°, délka = %2%3; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Průnik čáry a osy&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Průnik čáry a osy&lt;/b&gt;: úhel = %1°; &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14708,25 +14860,41 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation>Délka = %1%2, úhel = %3°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit výber polohy</translation>
+        <translation type="vanished">Délka = %1%2, úhel = %3°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit výber polohy</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation>Délka = %1%2, úhel = %3°, úhel otočení = %4°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;%5&lt;/b&gt; - změnit původní bod otočení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">Délka = %1%2, úhel = %3°, úhel otočení = %4°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;%5&lt;/b&gt; - změnit původní bod otočení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolRotation</name>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation>Úhel otočení = %1°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">Úhel otočení = %1°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
+    </message>
+    <message>
+        <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Použít &lt;b&gt;Shift&lt;/b&gt;pro úhel otočení!</translation>
+        <translation type="vanished">Použít &lt;b&gt;Shift&lt;/b&gt;pro úhel otočení!</translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14737,11 +14905,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte tři nebo více bodů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
+        <translation type="vanished">&lt;b&gt;Cesta křivky&lt;/b&gt;: vyberte tři nebo více bodů, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytváření</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation>Použít &lt;b&gt;Shift&lt;/b&gt;pro úhel otočení!</translation>
+        <translation type="vanished">Použít &lt;b&gt;Shift&lt;/b&gt;pro úhel otočení!</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

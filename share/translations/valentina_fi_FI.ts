@@ -609,15 +609,11 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Virhe</translation>
+        <translation type="vanished">Virhe</translation>
     </message>
     <message>
         <source>Radius can&apos;t be negative</source>
-        <translation>Säde ei voi olla negatiivinen</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be equal 0</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Säde ei voi olla negatiivinen</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -1731,14 +1727,6 @@
     <message>
         <source>Color:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="unfinished">Säde ei voi olla negatiivinen</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -3836,10 +3824,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation type="unfinished">Käännä päinvastoin</translation>
     </message>
@@ -4045,6 +4029,22 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Excluded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks inside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4873,10 +4873,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation type="unfinished">Käännä päinvastoin</translation>
     </message>
@@ -5062,6 +5058,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5318,14 +5318,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Calculation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5445,14 +5437,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Virhe</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be negative</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not used</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5499,23 +5483,23 @@ Apply settings anyway?</source>
     <name>DialogTool</name>
     <message>
         <source>Error</source>
-        <translation>Virhe</translation>
+        <translation type="vanished">Virhe</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation>Tyhjä sarake</translation>
+        <translation type="vanished">Tyhjä sarake</translation>
     </message>
     <message>
         <source>Value can&apos;t be 0</source>
-        <translation>Arvo ei voi olla 0</translation>
+        <translation type="vanished">Arvo ei voi olla 0</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation>Arvo</translation>
+        <translation type="vanished">Arvo</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
-        <translation>Jäsentämis virhe: %1</translation>
+        <translation type="vanished">Jäsentämis virhe: %1</translation>
     </message>
     <message>
         <source>First point</source>
@@ -5563,14 +5547,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6879,10 +6855,6 @@ Haluatko tallentaa muutokset?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6984,14 +6956,6 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Forum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7168,6 +7132,18 @@ Haluatko tallentaa muutokset?</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7926,6 +7902,10 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7936,6 +7916,30 @@ This option will take an affect after restart.</source>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Virhe</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation type="unfinished">Arvo ei voi olla 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation type="unfinished">Jäsentämis virhe: %1</translation>
     </message>
 </context>
 <context>
@@ -9109,6 +9113,18 @@ Do you want to save your changes?</source>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
@@ -9597,46 +9613,62 @@ Do you want to save your changes?</source>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Legal</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 24in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 30in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 36in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 42in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 44in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Custom</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 48in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 62in</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Roll 72in</source>
+        <comment>Paper format</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>Paper format</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11692,6 +11724,10 @@ Do you want to save your changes?</source>
         <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Tool was used after deleting.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolShoulderPoint</name>
@@ -13149,11 +13185,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13161,7 +13197,11 @@ Do you want to save your changes?</source>
     <name>VisToolCurveIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Leikkauskäyrä ja akseli&lt;/b&gt;: kulma = %1°; &lt;b&gt;Siirto&lt;/b&gt; - kulma, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
+        <translation type="vanished">&lt;b&gt;Leikkauskäyrä ja akseli&lt;/b&gt;: kulma = %1°; &lt;b&gt;Siirto&lt;/b&gt; - kulma, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13171,7 +13211,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">&lt;b&gt;Piste etäisyydellä ja kulmassa&lt;/b&gt;: kulma = %1°; &lt;b&gt;Siirto&lt;/b&gt; - kulma, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
+        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13179,31 +13219,35 @@ Do you want to save your changes?</source>
     <name>VisToolLineIntersectAxis</name>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Leikkausviiva ja akseli&lt;/b&gt;: kulma = %1°; &lt;b&gt;Siirto&lt;/b&gt; - kulma, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
+        <translation type="vanished">&lt;b&gt;Leikkausviiva ja akseli&lt;/b&gt;: kulma = %1°; &lt;b&gt;Siirto&lt;/b&gt; - kulma, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolMove</name>
     <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
+        <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
+        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolRotation</name>
     <message>
-        <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
+        <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>VisToolSpline</name>
     <message>
-        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13215,10 +13259,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Käyräpolku&lt;/b&gt;: Valitse ainakin kolme pistettä, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
+        <translation type="vanished">&lt;b&gt;Käyräpolku&lt;/b&gt;: Valitse ainakin kolme pistettä, &lt;b&gt;Enter&lt;/b&gt; - Hyväksy luonti</translation>
     </message>
     <message>
-        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
+        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

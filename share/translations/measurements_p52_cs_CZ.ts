@@ -7,19 +7,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="207"/>
         <source>height</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška</translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="209"/>
         <source>Height: Total</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Celkem</translation>
+        <translation>Výška: Celková</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="210"/>
         <source>Vertical distance from crown of head to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od temene hlavy k podlaze</translation>
+        <translation>Svislá vzdálenost od temene hlavy k podlaze.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="214"/>
@@ -79,19 +79,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="235"/>
         <source>height_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_boční_pás</translation>
+        <translation>výška_bok_pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="237"/>
         <source>Height: Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Boční pás</translation>
+        <translation>Výška: Bok pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="238"/>
         <source>Vertical distance from the Waist Side to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od pásu k podlaze.</translation>
+        <translation>Svislá vzdálenost od pasu k podlaze.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="242"/>
@@ -223,19 +223,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="291"/>
         <source>height_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_přední_pás</translation>
+        <translation>výška_přední_pas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="293"/>
         <source>Height: Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Přední pás</translation>
+        <translation>Výška: Přední pas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="294"/>
         <source>Vertical distance from the Waist Front to the floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od předního pásu k podlaze.</translation>
+        <translation>Svislá vzdálenost od předního pasu k podlaze.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="298"/>
@@ -277,7 +277,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="312"/>
         <source>height_neck_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_krk_vpředu</translation>
+        <translation>výška_krku_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="314"/>
@@ -331,37 +331,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="333"/>
         <source>height_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_boční_pás_ke_kolenům</translation>
+        <translation>výška_bok_pasu_ke_kolenům</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="335"/>
         <source>Height: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Boční pás ke kolenům</translation>
+        <translation>Výška: Bok pasu ke kolenům</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="336"/>
         <source>Vertical distance from the Waist Side to the fold at the back of the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od bočního pásu k podkolení.</translation>
+        <translation>Svislá vzdálenost od boku pasu k podkolení.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="341"/>
         <source>height_waist_side_to_hip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_boční_pás_ke_kyčlím</translation>
+        <translation>výška_bok_pasu_ke_kyčlím</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="343"/>
         <source>Height: Waist Side to Hip</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Boční pás ke kyčlím</translation>
+        <translation>Výška: Bok pasu ke kyčlím</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="344"/>
         <source>Vertical distance from the Waist Side to the Hip level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od bočního pásu ke kyčelnímu kloubu.</translation>
+        <translation>Svislá vzdálenost od boku pasu ke kyčelnímu kloubu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="348"/>
@@ -385,19 +385,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="355"/>
         <source>height_neck_back_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>výška_krční_obratel_k_bočnímu_pásu</translation>
+        <translation>výška_krční_obratel_k_boku_pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="357"/>
         <source>Height: Neck Back to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Výška: Krční obratel k bočnímu pásu</translation>
+        <translation>Výška: Krční obratel k boku pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="358"/>
         <source>Vertical distance from Neck Back to Waist Side. (&apos;Height: Neck Back&apos; - &apos;Height: Waist Side&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Svislá vzdálenost od krčního obratele k bočnímu pásu. (Výška: krční obratel - Výška: boční pás).</translation>
+        <translation>Svislá vzdálenost od krčního obratele k boku pasu. (Výška: krční obratel - Výška: bok pasu).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
@@ -439,19 +439,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="395"/>
         <source>width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>šířka_pás</translation>
+        <translation>šířka_pas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="397"/>
         <source>Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation>Šířka: Pás</translation>
+        <translation>Šířka: Pas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="398"/>
         <source>Horizontal distance from Waist Side to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Vodorovná vzdálenost od jedné strany pásu ke druhé straně pásu.</translation>
+        <translation>Vodorovná vzdálenost od jedné strany pasu ke druhé straně pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="402"/>
@@ -511,19 +511,19 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="435"/>
         <source>indent_waist_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>důlek_pás_vzadu</translation>
+        <translation>důlek_pas_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="437"/>
         <source>Indent: Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Důlek: Pás vzadu</translation>
+        <translation>Důlek: Pas vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="438"/>
         <source>Horizontal distance between a flat stick, placed to touch Hip and Scapula, and Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Vodorovná vzdálenost rovnou tyčí, která se dotýká kyčlí a lopatek, a zády na výšku pásu.</translation>
+        <translation>Vodorovná vzdálenost mezi rovnou čárou, která se dotýká kyčlí a lopatek, a zády na výšku pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="442"/>
@@ -564,7 +564,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="468"/>
         <source>hand_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>délka_ruky</translation>
+        <translation>ruka_délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="470"/>
@@ -978,7 +978,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="655"/>
         <source>Circumference around Highhip, where Abdomen protrusion is  greatest, parallel to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Obvod okolo kyčlí nahoře, místo největšího obvodu břicha, rovnoběžný s podlahou.</translation>
+        <translation>Obvod okolo kyčlí nahoře (pánev), místo největšího obvodu břicha, rovnoběžný s podlahou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="660"/>
@@ -1068,7 +1068,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="692"/>
         <source>Same as bust_arc_f.</source>
         <comment>Full measurement description.</comment>
-        <translation>Stejné jako oblouk_prsou_vpředu</translation>
+        <translation>Stejné jako oblouk_prsou_vpředu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="696"/>
@@ -1788,7 +1788,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="996"/>
         <source>From Neck Side over Bustpoint to Waist level, forming a straight line.</source>
         <comment>Full measurement description.</comment>
-        <translation>Vzdálenost od strany krku jdoucí v přímou čarou přes bod prsou až k pasu.</translation>
+        <translation>Vzdálenost od strany krku přímou čarou přes bod prsou až k pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1000"/>
@@ -2466,7 +2466,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1272"/>
         <source>Shoulder Tip to Shoulder Tip, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Špička ramene ke špičce ramene_vpředu</translation>
+        <translation>Špička ramene ke špičce ramene, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1273"/>
@@ -2694,7 +2694,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1375"/>
         <source>bustpoint_to_bustpoint</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>od_bradavky_k_bradavce</translation>
+        <translation>bod_prsů_k_bodu_prsů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1377"/>
@@ -3018,139 +3018,139 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1513"/>
         <source>neck_side_to_armpit_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>strana_krku_k_podpaží_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1515"/>
         <source>Neck Side to Highbust Side, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Côté à l&apos;aisselle côté, devant</translation>
+        <translation>Strana krku ke straně nadprsí, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1516"/>
         <source>From Neck Side diagonal across front to Highbust Side (Armpit).</source>
         <comment>Full measurement description.</comment>
-        <translation>De la diagonale du côté du cou en traversant l&apos;avant jusqu&apos;au côté du haut-buste (aisselle).</translation>
+        <translation>Od strany krku diagonálně přes prsa ke straně nadprsí (podpaží).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1520"/>
         <source>neck_side_to_bust_side_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_a_carrure_cote_devant</translation>
+        <translation>strana_krku_ke_straně_prsů_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1522"/>
         <source>Neck Side to Bust Side, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Côté à la Carrure Côté, devant</translation>
+        <translation>Strana krku ke straně prsů, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1523"/>
         <source>Neck Side diagonal across front to Bust Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure Côté à la Carrure Côté en passant sur le devant.</translation>
+        <translation>Od strany krku diagonálně přes prsa ke straně prsů.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1527"/>
         <source>neck_side_to_armfold_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_au_pli_coude_dos</translation>
+        <translation>strana_krku_k_podpaží_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1529"/>
         <source>Neck Side to Armfold Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Côté au Bas de l&apos;Aisselle Dos</translation>
+        <translation>Od strany krku k podpaží, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1530"/>
         <source>From Neck Side diagonal to Armfold Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure Côté au Bas de l&apos;Aisselle Dos</translation>
+        <translation>Od strany krku diagonálně k zadní straně podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1534"/>
         <source>neck_side_to_armpit_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>strana_krku_k_podpaží_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1536"/>
         <source>Neck Side to Highbust Side, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Strana krku ke straně nadprsí, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1537"/>
         <source>From Neck Side diagonal across back to Highbust Side (Armpit).</source>
         <comment>Full measurement description.</comment>
-        <translation>Diagonale partant de l&apos;Encolure Côté jusqu&apos;au plus haut du Buste côté (sous Aisselle) en passant par le dos.</translation>
+        <translation>Od strany krku diagonálně přes záda ke straně nadprsí (podpaží).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1541"/>
         <source>neck_side_to_bust_side_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_cote_au_buste_cote_dos</translation>
+        <translation>strana_krku_ke_straně_prsů_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1543"/>
         <source>Neck Side to Bust Side, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Côté au Buste Côté, dos</translation>
+        <translation>Strana krku ke straně prsů, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1544"/>
         <source>Neck Side diagonal across back to Bust Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesurer en diagonale de l&apos;Encolure Côté jusqu&apos;au commencement du Buste Côté dos.</translation>
+        <translation>Od strany krku diagonálně přes záda ke straně prsů.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1560"/>
         <source>arm_shoulder_tip_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_pointe_epaule_au_poignet_plie</translation>
+        <translation>špička_ramene_ruky_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1562"/>
         <source>Arm: Shoulder Tip to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ruka: špička ramene k zápěstí, ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1563"/>
         <source>Bend Arm, measure from Shoulder Tip around Elbow to radial Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras en équerre, mesurer de la Pointe d&apos;épaule jusqu&apos;à l&apos;os du Poignet en passant par le coude.</translation>
+        <translation>Ohnout ruku. Měřit od špičky ramene přes loket až po kost zápěstí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1567"/>
         <source>arm_shoulder_tip_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_pointe_epaule_au_coude_plie</translation>
+        <translation>špička_ramene_ruky_k_loktu_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1569"/>
         <source>Arm: Shoulder Tip to Elbow, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Pointe épaule au Coude, plié</translation>
+        <translation>Ruka: špička ramene k loktu, ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1570"/>
         <source>Bend Arm, measure from Shoulder Tip to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras en équerre, mesurer de la Pointe épaule jusqu&apos;à l&apos;articulation du Coude.</translation>
+        <translation>Ohnout ruku. Měřit od špičky ramene přes loket až po loket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1574"/>
         <source>arm_elbow_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_coude_au_poignet_plie</translation>
+        <translation>loket_ruky_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1576"/>
         <source>Arm: Elbow to Wrist, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Coude au Poignet, plié</translation>
+        <translation>Ruka: loket k zápěstí, ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1577"/>
@@ -3162,43 +3162,43 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1583"/>
         <source>arm_elbow_circ_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>loket_ruky_obvod_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1585"/>
         <source>Arm: Elbow circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Circonférence du Coude, plié</translation>
+        <translation>Ruka: Obvod lokte, ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1586"/>
         <source>Elbow circumference, arm is bent.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras en équerre, mesurer la Circonférence du Coude.</translation>
+        <translation>Obvod lokte. Ruka je ohnuta.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1589"/>
         <source>arm_shoulder_tip_to_wrist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>špička_ramene_ruky_k_zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1591"/>
         <source>Arm: Shoulder Tip to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ruka: Špička ramene k zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1592"/>
         <source>From Shoulder Tip to Wrist bone, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Od špičky ramene ke kosti zápěstí. Ruka je držena rovně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1596"/>
         <source>arm_shoulder_tip_to_elbow</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_pointe_epaule_au_coude</translation>
+        <translation>špička_ramene_ruky_k_loktu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1598"/>
@@ -3216,37 +3216,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1603"/>
         <source>arm_elbow_to_wrist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_coude_au_poignet</translation>
+        <translation>loket_ruky_k_zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1605"/>
         <source>Arm: Elbow to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ruka: Loket k zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1606"/>
         <source>From Elbow to Wrist, arm straight. (&apos;Arm: Shoulder Tip to Wrist&apos; - &apos;Arm: Shoulder Tip to Elbow&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du Coude au Poignet, bras tendu. (&apos;Bras: Pointe épaule au Poignet&apos; - &apos;Bras: Pointe épaule au Coude&apos;).</translation>
+        <translation>Od lokte k zápěstí. Ruka je držena rovně. (Ruka: špička ramene k zápěstí - Ruka: špička ramene k loktu).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1611"/>
         <source>arm_armpit_to_wrist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_aisselle_au_poignet</translation>
+        <translation>podpaží_ruky_po_zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1613"/>
         <source>Arm: Armpit to Wrist, inside</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Aisselle au Poignet, par l&apos;intérieur</translation>
+        <translation>Ruka: Podpaží k zápěstí, uvnitř</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1614"/>
         <source>From Armpit to ulna Wrist bone, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;Aisselle au l&apos;os du poignet fixant le cubitus, bras tendu.</translation>
+        <translation>Od podpaží ke kosti zápěstí. Ruka je držena rovně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1618"/>
@@ -3258,235 +3258,235 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1620"/>
         <source>Arm: Armpit to Elbow, inside</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Aisselle au Coude, par l&apos;intérieur</translation>
+        <translation>Ruka: Podpaží k loktu, uvnitř</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1621"/>
         <source>From Armpit to inner Elbow, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Od podpaží k vnitřní strany lokte. Ruka je držena rovně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1625"/>
         <source>arm_elbow_to_wrist_inside</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>loket_ruky_k_zápěstí_uvnitř</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1627"/>
         <source>Arm: Elbow to Wrist, inside</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Coude au Poignet, intérieur</translation>
+        <translation>Ruka: loket k zápěstí, uvnitř</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1628"/>
         <source>From inside Elbow to Wrist. (&apos;Arm: Armpit to Wrist, inside&apos; - &apos;Arm: Armpit to Elbow, inside&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;intérieur du Coude au Poignet. (&apos;Bras: Aisselle au Poignet, intérieur&apos; - &apos;Bras : Aisselle au coude, intérieur&apos;).</translation>
+        <translation>Od vnitřní strany lokte k zápěstí. (Ruka: podpaží k zápěstí, uvnitř - Ruka: podpaží k loktu, uvnitř).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1633"/>
         <source>arm_upper_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ruka_nadloktí_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1635"/>
         <source>Arm: Upper Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : circonférence de la partie Supérieure du Bras</translation>
+        <translation>Ruka: Obvod nadloktí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1636"/>
         <source>Arm circumference at Armpit level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Obvod nadloktí ve výšce podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1639"/>
         <source>arm_above_elbow_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_au_dessus_coude_circ</translation>
+        <translation>ruka_nad_loktem_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1641"/>
         <source>Arm: Above Elbow circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Circonférence au-dessus du Coude</translation>
+        <translation>Ruka: Obvod nad loktem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1642"/>
         <source>Arm circumference at Bicep level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du Bras au niveau du Biceps.</translation>
+        <translation>Obvod nadloktí ve výšce dvojhlavého svalu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1645"/>
         <source>arm_elbow_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_coude_circ</translation>
+        <translation>loket_ruky_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1647"/>
         <source>Arm: Elbow circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Circonférence du Coude</translation>
+        <translation>Ruka: Obvod lokte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1648"/>
         <source>Elbow circumference, arm straight.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du Coude, bras tendu.</translation>
+        <translation>Obvod lokte. Ruka je držena rovně.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1651"/>
         <source>arm_lower_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_bas_circ</translation>
+        <translation>předloktí_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1653"/>
         <source>Arm: Lower Arm circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Circonférence de l&apos;Avant-Bras</translation>
+        <translation>Ruka: Obvod předloktí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1654"/>
         <source>Arm circumference where lower arm is widest.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de l&apos;avant-Bras où il est le plus fort.</translation>
+        <translation>Obvod nejširšího místa předloktí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1658"/>
         <source>arm_wrist_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_poignet_circ</translation>
+        <translation>ruka_zápěstí_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1660"/>
         <source>Arm: Wrist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Circonférence du Poignet</translation>
+        <translation>Ruka: Obvod zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1661"/>
         <source>Wrist circumference.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du Poignet.</translation>
+        <translation>Obvod zápěstí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1664"/>
         <source>arm_shoulder_tip_to_armfold_line</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_pointe_epaule_a_ligne_basse_aisselle</translation>
+        <translation>špička_ramene_ruky_k_podpaží</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1666"/>
         <source>Arm: Shoulder Tip to Armfold line</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Pointe d&apos;Épaule à la ligne basse de l&apos;Aisselle</translation>
+        <translation>Ruka: Špička ramene k podpaží</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1667"/>
         <source>From Shoulder Tip down to Armpit level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Od špičky ramene k výšce podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1670"/>
         <source>arm_neck_side_to_wrist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_cote_au_poignet</translation>
+        <translation>ruka_strana_krku_k_zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1672"/>
         <source>Arm: Neck Side to Wrist</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Côté au Poignet</translation>
+        <translation>Ruka: Strana krku k zápěstí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1673"/>
         <source>From Neck Side to Wrist. (&apos;Shoulder Length&apos; + &apos;Arm: Shoulder Tip to Wrist&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;Encolure Côté jusqu&apos;au Poignet. (&apos;Longueur Épaule&apos; + &apos;Bras: Pointe d&apos;Épaule au Poignet&apos;).</translation>
+        <translation>Od strany krku k zápěstí. (Délka ramene + Ruka: špička ramene k zápěstí).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1678"/>
         <source>arm_neck_side_to_finger_tip</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_cote_au_extremite_doigt</translation>
+        <translation>ruka_strana_krku_ke_špičkám_prstů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1680"/>
         <source>Arm: Neck Side to Finger Tip</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Côté à l&apos;Extrémité Doigt</translation>
+        <translation>Ruka: Strana krku ke špičkám prstů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1681"/>
         <source>From Neck Side down arm to tip of middle finger. (&apos;Shoulder Length&apos; + &apos;Arm: Shoulder Tip to Wrist&apos; + &apos;Hand: Length&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;Encolure côté descendre par le bras jusqu&apos;à l&apos;extrémité du majeur. (&apos;Longueur Épaule&apos; + &apos;Bras: Pointe Épaule au poignet&apos; + &apos;Main: Longueur&apos;).</translation>
+        <translation>Od strany krku dolů ke špičkám prstů. (Délka ramene + Ruka: Špička ramene k zápěstí + Ruka: Délka).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1687"/>
         <source>armscye_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>tour_d&apos;emmanchure</translation>
+        <translation>otvor_rukávu_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1689"/>
         <source>Armscye: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Tour d&apos;emmanchure</translation>
+        <translation>Průramek (otvor rukávu): Obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1690"/>
         <source>Let arm hang at side. Measure Armscye circumference through Shoulder Tip and Armpit.</source>
         <comment>Full measurement description.</comment>
-        <translation>Les bras le long du corps. Mesurer le tour d&apos;emmanchure de l&apos;épaule en passant par l&apos;aisselle.</translation>
+        <translation>Nechat ruku viset po straně. Obvod průramku přes špičku ramene a podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1695"/>
         <source>armscye_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_d&apos;emmanchure</translation>
+        <translation>otvor_rukávu_délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1697"/>
         <source>Armscye: Length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Průramek (otvor rukávu): Délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1698"/>
         <source>Vertical distance from Shoulder Tip to Armpit.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance entre l&apos;épaule et l&apos;aisselle.</translation>
+        <translation>Svislá vzdálenost od špičky ramene k podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1702"/>
         <source>armscye_width</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>largeur_d&apos;emmanchure</translation>
+        <translation>otvor_rukávu_šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1704"/>
         <source>Armscye: Width</source>
         <comment>Full measurement name.</comment>
-        <translation>Emmanchure : largeur</translation>
+        <translation>Průramek (otvor rukávu): Šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1705"/>
         <source>Horizontal distance between Armscye Front and Armscye Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance entre l&apos;emmanchure devant et l&apos;emmanchure dos.</translation>
+        <translation>Vodorovná vzdálenost mezi přední a zadní stranou průramku (otvoru rukávu).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1709"/>
         <source>arm_neck_side_to_outer_elbow</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ruka_strana_krku_k_vnější_straně_lokte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1711"/>
@@ -3498,37 +3498,37 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1712"/>
         <source>From Neck Side over Shoulder Tip down to Elbow. (Shoulder length + Arm: Shoulder Tip to Elbow).</source>
         <comment>Full measurement description.</comment>
-        <translation>De l&apos;encolure coté jusqu&apos;à l&apos;extérieur du coude. (Y compris la longueur d&apos;épaule).</translation>
+        <translation>Od strany krku přes špičku ramene dolů k loktu. (Délka ramene + Ruka: špička ramene k zápěstí).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1728"/>
         <source>leg_crotch_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_entrejambe</translation>
+        <translation>noha_rozkrok_po_podlahu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1730"/>
         <source>Leg: Crotch to floor</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Noha: Rozkrok po podlahu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1731"/>
         <source>Stand feet close together. Measure from crotch level (touching body, no extra space) down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Les jambes serrées. Mesurer de l&apos;entrejambe  (toucher le corps, sans espace supplémentaire) jusqu&apos;au sol.</translation>
+        <translation>Nohy postavit těsně k sobě. Měřte od výšky rozkroku (dotknuvše se těla, žádné místo navíc) až po podlahu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1822"/>
         <source>From Waist Side along curve to Hip level then straight down to  Knee level. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height Knee&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Du Côté de la Taille le long de la courbe de la Hanche et jusqu&apos;au genou. (&apos;Jambe : Côté de la Taille jusqu&apos;au genou&apos; - &apos;Genou&apos;).</translation>
+        <translation>Od strany pasu podél strany a křivky kyčle, potom od kyčlí přímo dolů k výšce kolene. (Noha: Strana pasu po podlahu - Výška: Koleno).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1862"/>
         <source>rise_length_side_sitting</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>hauteur_montant_cote_assis</translation>
+        <translation>výška_těla_po_straně_sedící</translation>
     </message>
     <message>
         <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
@@ -3544,241 +3544,241 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1895"/>
         <source>Vertical distance from Waist side down to Crotch level. Use formula (Height: Waist side - Leg: Crotch to floor).</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale à partir du Côté de la Taille jusqu&apos;au niveau de la Fourche. (&apos;Hauteur: Taille Côté&apos; - &apos;Jambe: Fourche jusqu&apos;au Sol&apos;)</translation>
+        <translation>Svislá vzdálenost od strany pasu k výšce rozkroku. (Výška: Strana pasu - Noha: Rozkrok k podlaze).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2148"/>
         <source>This information is pulled from pattern charts in some  patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation>Cette information provient de tableaux de certains systèmes de patronage, ex : Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
+        <translation>Tyto údaje budou převzaty z tabulek střihu z některého ze systémů střihových vzorů (krejčovských šablon), jako je např. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1736"/>
         <source>leg_waist_side_to_floor</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_jambe_cote_au_sol</translation>
+        <translation>noha_strana_pasu_po_podlahu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1738"/>
         <source>Leg: Waist Side to floor</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : du Côté de la Taille au sol</translation>
+        <translation>Noha: Strana pasu až k podlaze</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1739"/>
         <source>From Waist Side along curve to Hip level then straight down to floor.</source>
         <comment>Full measurement description.</comment>
-        <translation>Partir du Côté de la Taille en passant par la courbe de la Hanche et finir droit jusqu&apos;au sol.</translation>
+        <translation>Od strany pasu podél strany a křivky kyčle, od výšky kyčle rovnou dolů až po podlahu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1743"/>
         <source>leg_thigh_upper_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_cuisse_haut_circ</translation>
+        <translation>noha_stehno_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1745"/>
         <source>Leg: Thigh Upper circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence Haut de Cuisse</translation>
+        <translation>Noha: Obvod stehna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1746"/>
         <source>Thigh circumference at the fullest part of the upper Thigh near the Crotch.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la Cuisse au plus haut de la cuisse proche de la Fourche.</translation>
+        <translation>Obvod stehna na místě nejširšího obvodu stehna v blízkosti rozkroku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1751"/>
         <source>leg_thigh_mid_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_cuisse_milieu_circ</translation>
+        <translation>noha_stehno_obvod_střed</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1753"/>
         <source>Leg: Thigh Middle circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence cuisse mi-distance fourche et genou</translation>
+        <translation>Noha: Střední obvod stehna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1754"/>
         <source>Thigh circumference about halfway between Crotch and Knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la Cuisse à mi-distance entre la Fourche et le Genou.</translation>
+        <translation>Obvod stehna, asi v půli cesty mezi rozkrokem a kolenem.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1758"/>
         <source>leg_knee_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_genou_circ</translation>
+        <translation>noha_obvod_kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1760"/>
         <source>Leg: Knee circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence Genou</translation>
+        <translation>Noha: Obvod kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1761"/>
         <source>Knee circumference with straight leg.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du genou avec la jambe droite.</translation>
+        <translation>Obvod kolene s rovnou nohou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1764"/>
         <source>leg_knee_small_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_genou_petit_circ</translation>
+        <translation>noha_nejmenší_obvod_kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1766"/>
         <source>Leg: Knee Small circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : Petite circonférence du Genou</translation>
+        <translation>Noha: Nejmenší obvod kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1767"/>
         <source>Leg circumference just below the knee.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la Jambe juste en dessous du Genou.</translation>
+        <translation>Obvod nohy těsně pod kolenem.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1770"/>
         <source>leg_calf_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_mollet_circ</translation>
+        <translation>noha_obvod_lýtka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1772"/>
         <source>Leg: Calf circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence Mollet</translation>
+        <translation>Noha: Obvod lýtka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1773"/>
         <source>Calf circumference at the largest part of lower leg.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du mollet au plus large.</translation>
+        <translation>Obvod lýtka na nejsilnějším místě bérce.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1777"/>
         <source>leg_ankle_high_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_cheville_haut_circ</translation>
+        <translation>noha_horní_obvod_kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1779"/>
         <source>Leg: Ankle High circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence du Haut de la Cheville</translation>
+        <translation>Noha: Horní obvod kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1780"/>
         <source>Ankle circumference where the indentation at the back of the ankle is the deepest.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la Cheville où cette dernière est au plus creux sur l&apos;arrière.</translation>
+        <translation>Obvod kotníku tam, kde je záhyb na zadní straně kotníku nejhlubší.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1785"/>
         <source>leg_ankle_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_cheville_circ</translation>
+        <translation>noha_obvod_kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1787"/>
         <source>Leg: Ankle circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence Cheville</translation>
+        <translation>Noha: Obvod kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1788"/>
         <source>Ankle circumference where front of leg meets the top of the foot.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence Cheville à l&apos;endroit où la jambe rencontre le haut du pied.</translation>
+        <translation>Obvod kotníku tam, kde se přední strana nohy potkává s nejvyšší částí chodidla.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1792"/>
         <source>leg_knee_circ_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_genou_circ_plié</translation>
+        <translation>noha_obvod_ohnutého_kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1794"/>
         <source>Leg: Knee circumference, bent</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : circonférence Genou, plié</translation>
+        <translation>Noha: Obvod ohnutého kolene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1795"/>
         <source>Knee circumference with leg bent.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du Genou avec la jambe pliée.</translation>
+        <translation>Obvod kolene s ohnutou nohou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1798"/>
         <source>leg_ankle_diag_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_cheville_diag_circ</translation>
+        <translation>noha_diagonální_obvod_kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1800"/>
         <source>Leg: Ankle diagonal circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : Circonférence Cheville en diagonale</translation>
+        <translation>Noha: Diagonální obvod kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1801"/>
         <source>Ankle circumference diagonal from top of foot to bottom of heel.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence de la Cheville mesurée en diagonale à partir du devant de la cheville, jusqu&apos;à la partie basse du Talon.</translation>
+        <translation>Obvod kotníku diagonálně od horní strany chodidla ke spodní části paty.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1805"/>
         <source>leg_crotch_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_fourche_a_cheville</translation>
+        <translation>noha_rozkrok_po_kotník</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1807"/>
         <source>Leg: Crotch to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : Fourche à la Cheville</translation>
+        <translation>Noha: Rozkrok ke kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1808"/>
         <source>From Crotch to Ankle. (&apos;Leg: Crotch to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de la fourche jusqu&apos;à la Cheville. (&apos;Jambe : Fourche jusqu&apos;au Sol&apos; - &apos;Hauteur : Cheville&apos;).</translation>
+        <translation>Od rozkroku ke kotníku. (Noha: rozkrok po podlahu - Výška: kotník).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1812"/>
         <source>leg_waist_side_to_ankle</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_taille_cote_a_cheville</translation>
+        <translation>noha_strana_pasu_po_kotník</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1814"/>
         <source>Leg: Waist Side to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : Taille Côté à la Cheville</translation>
+        <translation>Noha: Strana pasu ke kotníku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1815"/>
         <source>From Waist Side to Ankle. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de la Taille Côté jusqu&apos;à la cheville. (&apos;Jambe : Taille Côté jusqu&apos;au Sol&apos; - &apos;Hauteur : Cheville&apos;).</translation>
+        <translation>Od strany pasu ke kotníku. (Noha: strana pasu po podlahu - Výška: kotník).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
         <source>leg_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>jambe_taille_cote_au_genou</translation>
+        <translation>noha_strana_pasu_po_koleno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1821"/>
         <source>Leg: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation>Jambe : Taille Côté au Genou</translation>
+        <translation>Noha: Strana pasu ke kolenu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
@@ -3790,85 +3790,85 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1841"/>
         <source>Crotch length</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur de l&apos;entrejambe</translation>
+        <translation>Délka rozkroku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>Put tape across gap between buttocks at Hip level. Measure from Waist Front down betwen legs and up to Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Faire passer le Ruban sur le creux des Fesses en commençant au niveau de Hanches. Mesurer de la Taille Devant, en descendant par l&apos;entrejambe et en remontant jusqu&apos;à la Taille Dos.</translation>
+        <translation>Mezeru mezi hýžděmi přemostit ve výšce kyčlí lepicí páskou. Měřte od přední strany pasu dolů mezi nohami a nahoru k zadní straně pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1846"/>
         <source>crotch_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>entrejambe_longueur_dos</translation>
+        <translation>délka_rozkroku_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1848"/>
         <source>Crotch length, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Entrejambe, dos</translation>
+        <translation>Délka rozkroku, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1849"/>
         <source>Put tape across gap between buttocks at Hip level. Measure from Waist Back to mid-Crotch, either at the vagina or between testicles and anus).</source>
         <comment>Full measurement description.</comment>
-        <translation>Faire passer le Ruban sur le creux des Fesses se dessinant au niveau de Hanches. Mesurer à partir de la Taille Dos jusqu&apos;au milieu de la fourche, se point se situer au Vagin chez la femme ou entre les testicules et l&apos;anus chez l&apos;homme).</translation>
+        <translation>Mezeru mezi hýžděmi přemostit ve výšce kyčlí lepicí páskou. Měřte od zadní strany pasu ke středu rozkroku. Tento bod se nachází u pochvy u ženy, nebo mezi varlaty a řití u muže.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>crotch_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>entrejambe_longueur_devant</translation>
+        <translation>délka_rozkroku_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
         <source>Crotch length, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Entrejambe, devant</translation>
+        <translation>Délka rozkroku, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
         <source>From Waist Front to start of vagina or end of testicles. (&apos;Crotch length&apos; - &apos;Crotch length, back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de la Taille Devant, jusqu&apos;au début du vagin ou à la fin des testicules. (&apos;longueur Entrejambe&apos; - &apos;longueur Entrejambe, dos&apos;).</translation>
+        <translation>Od přední strany pasu po začátek pochvy nebo po konec varlat. (Délka rozkroku - Délka rozkroku, vzadu).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1864"/>
         <source>Rise length, side, sitting</source>
         <comment>Full measurement name.</comment>
-        <translation>Hauteur Montant, côté, assis</translation>
+        <translation>Postranní výška těla, vsedě</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1866"/>
         <source>From Waist Side around hip curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du Côté de la Taille le long de la courbe des hanches jusqu&apos;à la surface, en étant assis sur une surface dure</translation>
+        <translation>Výška těla. Měřte od strany pasu přes stranu (křivku kyčle) dolů až po povrch pevného povrchu, na kterém osoba sedí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1881"/>
         <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale à partir de la Taille Dos jusqu&apos;au niveau de Fourche. (&apos;Hauteur : Taille Dos&apos; - &apos;Jambe : Fourche jusqu&apos;au Sol&apos;)</translation>
+        <translation>Svislá vzdálenost od zadní strany pasu k výšce rozkroku. (Výška: pas vzadu - Noha: rozkrok k podlaze)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1888"/>
         <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation>Distance verticale à partir de la Taille Devant jusqu&apos;au niveau de Fourche. (&apos;Hauteur : Taille Devant&apos; - &apos;Jambe : Fourche jusqu&apos;au Sol&apos;)</translation>
+        <translation>Svislá vzdálenost od přední strany pasu k výšce rozkroku. (Výška: pas vpředu - Noha: rozkrok k podlaze)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1892"/>
         <source>rise_length_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>montant_longueur_cote</translation>
+        <translation>výška_těla_strana</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1894"/>
         <source>Rise length, side</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Montant, côté</translation>
+        <translation>Postranní výška těla</translation>
     </message>
     <message>
         <source>From Waist Side down to surface, while seated on hard surface.</source>
@@ -3879,31 +3879,31 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
         <source>rise_length_diag</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>montant_longueur_diag</translation>
+        <translation>výška_těla_diagonálně</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1873"/>
         <source>Rise length, diagonal</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Montant, diagonale</translation>
+        <translation>Diagonálně měřená výška těla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1874"/>
         <source>Measure from Waist Side diagonally to a string tied at the top of the leg, seated on a hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation>Mesurer en diagonale à partir de la Taille Côté jusqu&apos;à une ficelle marquant le niveau du début de la jambe, en position assise sur une surface dure.</translation>
+        <translation>Měřit od pasu přes stranu diagonálně až po provázek označující začátek nohy, v poloze vsedě na pevném povrchu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1878"/>
         <source>rise_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>montant_longueur_dos</translation>
+        <translation>výška_těla_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1880"/>
         <source>Rise length, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Montant, dos</translation>
+        <translation>Výška těla, vzadu</translation>
     </message>
     <message>
         <source>Vertical distance from Waist Back to Crotch level.</source>
@@ -3914,13 +3914,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1885"/>
         <source>rise_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>montant_longueur_devant</translation>
+        <translation>výška_těla_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1887"/>
         <source>Rise length, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Longueur Montant, devant</translation>
+        <translation>Výška těla, vpředu</translation>
     </message>
     <message>
         <source>Vertical Distance from Waist Front to Crotch level.</source>
@@ -3931,397 +3931,397 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1911"/>
         <source>neck_back_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_dos_a_taille_devant</translation>
+        <translation>krk_vzadu_k_pasu_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1913"/>
         <source>Neck Back to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Dos jusqu&apos;à la Taille Devant</translation>
+        <translation>Krk vzadu k pasu vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1914"/>
         <source>From Neck Back around Neck Side down to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de l&apos;Encolure Dos, en passant par l&apos;encolure côté, rejoindre la Taille Devant (milieu).</translation>
+        <translation>Od týlu přes stranu krku dolů k přední straně pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1918"/>
         <source>waist_to_waist_halter</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_à_taille_opposee</translation>
+        <translation>pas_k_pasu_přes_týl</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1920"/>
         <source>Waist to Waist Halter, around Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Taille à Taille Opposée, en passant par l&apos;Encolure Dos</translation>
+        <translation>Od pasu přes šíji k pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1921"/>
         <source>From Waist level around Neck Back to Waist level.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir du niveau de Taille, monter verticalement jusqu&apos;à l&apos;encolure, passer par l&apos;Encolure Dos et redescendre jusqu&apos;au niveau de Taille.</translation>
+        <translation>Od výšky pasu okolo týlu zpět k pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1925"/>
         <source>waist_natural_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_naturelle_circ</translation>
+        <translation>pas_přirozený_obvod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1927"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Circonférence Taille naturelle</translation>
+        <translation>Obvod přirozeného pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1928"/>
         <source>Torso circumference at men&apos;s natural side Abdominal Obliques indentation, if Oblique indentation isn&apos;t found then just below the Navel level.</source>
         <comment>Full measurement description.</comment>
-        <translation>Circonférence du tronc au commencement de l&apos;Échancrure des Obliques Abdominales naturelles masculin, si l&apos;Échancrure de l&apos;oblique ne peut être trouvée alors mesurer juste en-dessous du niveau du Nombril.</translation>
+        <translation>Obvod trupu ve výšce přirozeného záhybu při vnějším šikmém břišním svalu (u mužů). Když záhyb nelze najít, měří se přímo pod pupkem.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1933"/>
         <source>waist_natural_arc_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>demi_taille_naturel_devant</translation>
+        <translation>pas_přirozený_oblouk_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1935"/>
         <source>Natural Waist arc, front</source>
         <comment>Full measurement name.</comment>
-        <translation>Arc Taille Naturel, devant.</translation>
+        <translation>Přirozený oblouk pasu, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1936"/>
         <source>From Side to Side at the Natural Waist level, across the front.</source>
         <comment>Full measurement description.</comment>
-        <translation>De Coté à Coté au niveau de la Taille Naturelle, sur le devant.</translation>
+        <translation>Od strany ke straně ve výšce přirozeného pasu přes břicho.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1940"/>
         <source>waist_natural_arc_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_naturelle_arc_dos</translation>
+        <translation>pas_přirozený_oblouk_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1942"/>
         <source>Natural Waist arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation>Arc Taille Naturel, dos</translation>
+        <translation>Přirozený oblouk pasu, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1943"/>
         <source>From Side to Side at Natural Waist level, across the back. Calculate as ( Natural Waist circumference  - Natural Waist arc (front) ).</source>
         <comment>Full measurement description.</comment>
-        <translation>Au niveau de la Taille Naturelle, mesurer du côté jusqu&apos;à l&apos;autre en passant par le dos. Vérifier en calculant (Circonférence Taille Naturelle - Arc Taille Naturelle (devant) ).</translation>
+        <translation>Od strany ke straně ve výšce přirozeného pasu přes záda. Počítat jako (Obvod přirozeného pasu - Přirozený oblouk pasu, vpředu).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1947"/>
         <source>waist_to_natural_waist_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_a_taille_naturelle_devant</translation>
+        <translation>pas_k_přirozenému_pasu_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1949"/>
         <source>Waist Front to Natural Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Taille Devant à Taille Naturelle Devant</translation>
+        <translation>Pas k přirozenému pasu, vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1950"/>
         <source>Length from Waist Front to Natural Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur à partir de la Taille Devant jusqu&apos;à la Taille Naturelle Devant</translation>
+        <translation>Délka od přední strany pasu k přední straně přirozeného pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1954"/>
         <source>waist_to_natural_waist_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>taille_a_taille_naturelle_dos</translation>
+        <translation>pas_k_přirozenému_pasu_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1956"/>
         <source>Waist Back to Natural Waist Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Taille Dos à la Taille Naturelle Dos</translation>
+        <translation>Pas k přirozenému pasu, vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1957"/>
         <source>Length from Waist Back to Natural Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Longueur partant de la Taille Dos allant à la Taille Naturelle Dos.</translation>
+        <translation>Délka od zadní strany pasu k zadní straně přirozeného pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1961"/>
         <source>arm_neck_back_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_dos_au_coude_plie</translation>
+        <translation>ruka_krk_vzadu_k_loktu_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1963"/>
         <source>Arm: Neck Back to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Dos au Coude, complètement plié</translation>
+        <translation>Ruka: krk vzadu až k loktu, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1964"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Plier le Bras avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer de l&apos;Encolure Dos jusqu&apos;à la Pointe du Coude.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od zadní strany krku ke špičce lokte.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1969"/>
         <source>arm_neck_back_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_dos_au_poignet_plie</translation>
+        <translation>ruka_krk_vzadu_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1971"/>
         <source>Arm: Neck Back to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Dos au Poignet, complètement plié</translation>
+        <translation>Ruka: krk vzadu k zápěstí, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1972"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer de l&apos;Encolure Dos jusqu&apos;à la Pointe du Coude pour arriver à l&apos;Os du Poignet.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od zadní strany krku přes špičku lokte k zápěstí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1976"/>
         <source>arm_neck_side_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_cote_au_coude_plie</translation>
+        <translation>ruka_strana_krku_k_loktu_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1978"/>
         <source>Arm: Neck Side to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Côté au Coude, complètement plié</translation>
+        <translation>Ruka: Strana krku k loktu, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1979"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer de l&apos;Encolure Côté à la Pointe du Coude.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od strany krku ke špičce lokte.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1983"/>
         <source>arm_neck_side_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_encolure_cote_poignet_plie</translation>
+        <translation>ruka_strana_krku_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1985"/>
         <source>Arm: Neck Side to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Encolure Côté au Poignet, complètement plié</translation>
+        <translation>Ruka: Strana krku k zápěstí, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1986"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Neck Side to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer à partir de l&apos;Encolure Côté jusqu&apos;à la Pointe du Coude et rejoindre l&apos;Os du Poignet.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od strany krku přes špičku lokte k zápěstí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1991"/>
         <source>arm_across_back_center_to_elbow_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_sur_milieu_dos_au_coude_plie</translation>
+        <translation>ruka_střed_přes_záda_k_loktu_vysoko_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1993"/>
         <source>Arm: Across Back Center to Elbow, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Sur le Milieu Dos jusqu&apos;au Coude, complètement plié</translation>
+        <translation>Ruka: Přes záda středem k loktu, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1994"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer à partir du Milieu Dos jusqu&apos;à la Pointe du Coude.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od středu zad ke špičce lokte.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1999"/>
         <source>arm_across_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_sur_milieu_dos_au_poignet_plie</translation>
+        <translation>ruka_střed_přes_záda_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2001"/>
         <source>Arm: Across Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Centrer sur le Milieu Dos au Poignet, complètement plié</translation>
+        <translation>Ruka: Přes záda středem k zápěstí, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2002"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Middle of Back to Elbow Tip to Wrist bone.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer à partir un Milieu Dos jusqu&apos;à la Pointe du Coude et rejoindre l&apos;Os du Poignet.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od středu zad přes špičku lokte k zápěstí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2007"/>
         <source>arm_armscye_back_center_to_wrist_bent</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_emmanchure_centre_dos_au_poignet_plie</translation>
+        <translation>ruka_otvor_rukávu_střed_zad_k_zápěstí_ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2009"/>
         <source>Arm: Armscye Back Center to Wrist, high bend</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras : Centre de l&apos;Emmanchure Dos au Poignet, complètement plié</translation>
+        <translation>Ruka: Střed otvoru rukávu vzadu (průramek) k zápěstí, vysoko ohnuto</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2010"/>
         <source>Bend Arm with Elbow out, hand in front. Measure from Armscye Back to Elbow Tip.</source>
         <comment>Full measurement description.</comment>
-        <translation>Bras Plié avec le Coude vers l&apos;extérieur, main vers le buste. Mesurer à partir de l&apos;Emmanchure Dos jusqu&apos;à l&apos;Os du Coude.</translation>
+        <translation>Ruku s loktem ohnout vně, ruku držet vpředu. Měřte od zadní strany otvoru rukávu (průramku) ke špičce lokte.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2027"/>
         <source>neck_back_to_bust_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_dos_au_buste_devant</translation>
+        <translation>krk_vzadu_k_prsům_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2029"/>
         <source>Neck Back to Bust Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Dos au Buste Devant</translation>
+        <translation>Krk vzadu k prsům vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2030"/>
         <source>From Neck Back, over Shoulder, to Bust Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de l&apos;Encolure Dos, passer sur l&apos;Épaule, pour arriver au Buste Devant.</translation>
+        <translation>Od týlu přes rameno až k přední straně prsů.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2034"/>
         <source>neck_back_to_armfold_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_dos_aiselle_devant</translation>
+        <translation>krk_vzadu_k_podpaží_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2036"/>
         <source>Neck Back to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Dos jusqu&apos;en bas de l&apos;Aisselle Devant</translation>
+        <translation>Krk vzadu k podpaží vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2037"/>
         <source>From Neck Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de l&apos;Encolure Dos passer par l&apos;Épaule et arriver au bas de l&apos;Aisselle Devant.</translation>
+        <translation>Od krku vzadu přes rameno až k přední straně podpaží.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2041"/>
         <source>neck_back_to_armfold_front_to_waist_side</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>encolure_dos_a_emmanchure_devant_a_taille_cote</translation>
+        <translation>krk_vzadu_k_podpaží_vpředu_ke_straně_pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2043"/>
         <source>Neck Back, over Shoulder, to Waist Side</source>
         <comment>Full measurement name.</comment>
-        <translation>Encolure Dos, passant dessus l&apos;Épaule, arriver à la Taille Côté</translation>
+        <translation>Krk vzadu přes rameno ke straně pasu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2044"/>
         <source>From Neck Back, over Shoulder, down chest to Waist Side.</source>
         <comment>Full measurement description.</comment>
-        <translation>Partir de l&apos;Encolure Dos, passer par l&apos;Épaule, descendre le long de la poitrine jusqu&apos;à la Taille Côté.</translation>
+        <translation>Od krku vzadu přes rameno dolů ke straně pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2048"/>
         <source>highbust_back_over_shoulder_to_armfold_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>milieu_buste_dos_sur_épaule_arriver_bas_aisselle_devant</translation>
+        <translation>nadprsí_vzadu_přes_rameno_k_podpaží_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2050"/>
         <source>Highbust Back, over Shoulder, to Armfold Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Milieu buste dos, passer sur épaule, arriver aisselle devant</translation>
+        <translation>Nadprsí vzadu přes rameno k podpaží vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2051"/>
         <source>From Highbust Back over Shoulder to Armfold Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir du milieu du buste dans le dos, passer par l&apos;Épaule et arriver au bas de l&apos;Aisselle Devant.</translation>
+        <translation>Od nadprsí vzadu přes rameno až k podpaží vpředu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2055"/>
         <source>highbust_back_over_shoulder_to_waist_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>milieu_buste_dos_passer_épaule_arriver_taille_devant</translation>
+        <translation>nadprsí_vzadu_přes_rameno_k_pasu_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2057"/>
         <source>Highbust Back, over Shoulder, to Waist Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Milieu buste dos, passer épaule, arriver taille devant</translation>
+        <translation>Nadprsí vzadu přes rameno k pasu vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2058"/>
         <source>From Highbust Back, over Shoulder touching  Neck Side, to Waist Front.</source>
         <comment>Full measurement description.</comment>
-        <translation>À partir du dos haut, sur l&apos;épaule touchant le côté du cou, à la taille avant.</translation>
+        <translation>Od nadprsí vzadu přes rameno dotknouce se strany krku k přední straně pasu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2062"/>
         <source>neck_back_to_armfold_front_to_neck_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>cou_dos_aisselle_devant_cou_dos</translation>
+        <translation>krk_vzadu_k_podpaží_vpředu_ke_krku_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2064"/>
         <source>Neck Back, to Armfold Front, to Neck Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Cou dos, aisselle devant, cou dos</translation>
+        <translation>Krk vzadu k podpaží vpředu ke krku vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2065"/>
         <source>From Neck Back, over Shoulder to Armfold Front, under arm and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du cou dos, en passant sur l&apos;épaule à l&apos;aisselle devant, passer sous le bras et retourner au point de départ.</translation>
+        <translation>Od krku vzadu přes rameno k podpaží vpředu, potom pod rukou skrz zpět k týlu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2070"/>
         <source>across_back_center_to_armfold_front_to_across_back_center</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>centre_milieu_dos_aisselle_devant_centre_milieu_dos</translation>
+        <translation>přes_záda_střed_k_podpaží_vpředu_k_přes_záda_střed</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2072"/>
         <source>Across Back Center, circled around Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation>Au milieu du centre dos, entourant l&apos;épaule</translation>
+        <translation>Přes záda středem okolo ramene</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2073"/>
         <source>From center of Across Back, over Shoulder, under Arm, and return to start.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du centre du milieu dos, en passant par dessus l&apos;épaule, puis sous le bras, et revenir au début.</translation>
+        <translation>Ze středu Přes záda, přes ramena, pod rukou skrz a zpět k začátku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2078"/>
         <source>neck_back_to_armfold_front_to_highbust_back</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>cou_dos_aisselle_devant_haut_buste_dos</translation>
+        <translation>krk_vzadu_k_podpaží_vpředu_k_nadprsí_vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2080"/>
         <source>Neck Back, to Armfold Front, to Highbust Back</source>
         <comment>Full measurement name.</comment>
-        <translation>Cou dos, par aisselle devant, à haut du buste dos</translation>
+        <translation>Krk vzadu k podpaží vpředu k nadprsí vzadu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2081"/>
         <source>From Neck Back over Shoulder to Armfold Front, under arm to Highbust Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>Du cou dans le dos, par dessus l&apos;épaule jusqu&apos;à l&apos;aisselle devant, en passant sous le bras jusqu&apos;en haut du buste dans le dos.</translation>
+        <translation>Od krku vzadu přes rameno k podpaží vpředu, potom pod rukou skrz na zádech až k výšce nadprsí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2086"/>
@@ -4339,104 +4339,104 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2090"/>
         <source>Measure in a curve from Armfold Left Front through Bust Front curved back up to Armfold Right Front.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Měřte v křivce od podpaží vlevo vpředu přes prsa vpředu zahnuto zpět až po podpaží vpravo vpředu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2094"/>
         <source>armfold_to_bust_front</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>bras_croisés_devant_la_poitrine</translation>
+        <translation>podpaží_k_prsům_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2096"/>
         <source>Armfold to Bust Front</source>
         <comment>Full measurement name.</comment>
-        <translation>Bras croisés devant la poitrine </translation>
+        <translation>Podpaží k prsům vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2097"/>
         <source>Measure from Armfold Front to Bust Front, shortest distance between the two, as straight as possible.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Měřte od podpaží vpředu po prsa vpředu, nejkratší vzdálenost mezi nimi, rovně, jak je to jen možné.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2101"/>
         <source>highbust_b_over_shoulder_to_highbust_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>nadprsí_vzadu_přes_rameno_po_nadprsí_vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2103"/>
         <source>Highbust Back, over Shoulder, to Highbust level</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nadprsí vzadu, přes rameno, po nadprsí vpředu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2105"/>
         <source>From Highbust Back, over Shoulder, then aim at Bustpoint, stopping measurement at Highbust level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Od nadprsí vzadu, přes rameno, potom mířit na bod prsů, zastavení měření ve výšce nadprsí.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2110"/>
         <source>armscye_arc</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>emmanchure_arc</translation>
+        <translation>otvor_rukávu_oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2112"/>
         <source>Armscye: Arc</source>
         <comment>Full measurement name.</comment>
-        <translation>Emmanchure: Arc</translation>
+        <translation>Průramek (otvor rukávu): Oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2113"/>
         <source>From Armscye at Across Chest over ShoulderTip  to Armscye at Across Back.</source>
         <comment>Full measurement description.</comment>
-        <translation>A partir de l&apos;Emmanchure Corps Devant au niveau de la poitrine passer par la Pointe Épaule jusqu&apos;au milieu de l&apos;Emmanchure Dos.</translation>
+        <translation>Od průramku (otvoru rukávu) vpředu ve výšce Přes hrudník/záda přes špičku ramene k průramku (otvoru rukávu) vzadu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2129"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>larg_pince_epaule</translation>
+        <translation>záševek_šířka_rameno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2131"/>
         <source>Dart Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur de pince d&apos;épaule</translation>
+        <translation>Šířka záševku: Rameno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2132"/>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2140"/>
         <source>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation>Cette information provient de tableaux de certains systèmes de patronage, ex: Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
+        <translation>Tyto údaje budou převzaty z tabulek střihu z některého ze systémů střihových vzorů (krejčovských šablon), jako je např. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2137"/>
         <source>dart_width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>larg_pince_poitrine</translation>
+        <translation>záševek_šířka_prsa</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2139"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur de pince de poitrine</translation>
+        <translation>Šířka záševku: Prsa</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>
         <source>dart_width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation>larg_pince_taille</translation>
+        <translation>záševek_šířka_pas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2147"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation>Largeur de pince de taille</translation>
+        <translation>Šířka záševku: Pas</translation>
     </message>
 </context>
 </TS>
