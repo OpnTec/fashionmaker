@@ -42,7 +42,7 @@
 #include <QTimer>
 #include <QLineEdit>
 #include <QRegularExpression>
-#include <QtGlobal>
+#include <qnumeric.h>
 
 const QColor errorColor = Qt::red;
 
