@@ -1667,7 +1667,6 @@ VToolUnionDetails::VToolUnionDetails(const VToolUnionDetailsInitData &initData, 
       indexD2(initData.indexD2),
       version(initData.version)
 {
-    _referens = 0;
     ToolCreation(initData.typeCreation);
 }
 

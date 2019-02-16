@@ -1820,6 +1820,18 @@ void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &pars
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.pointId = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+
+        try
+        {
+            initData.data->GeometricObject<VPointF>(initData.pointId);
+        }
+        catch (const VExceptionBadId &)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
+                        "id =" << initData.id << ".";
+            return;// Just ignore
+        }
+
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         VToolPin::Create(initData);
     }
@@ -1846,6 +1858,18 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
 
         ToolsCommonAttributes(domElement, initData.id);
         initData.centerPoint = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
+
+        try
+        {
+            initData.data->GeometricObject<VPointF>(initData.centerPoint);
+        }
+        catch (const VExceptionBadId &)
+        { // Possible case. Parent was deleted, but the node object is still here.
+            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
+                        "id =" << initData.id << ".";
+            return;// Just ignore
+        }
+
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
 
         initData.width = GetParametrString(domElement, AttrWidth, QStringLiteral("1.0"));
@@ -3787,6 +3811,26 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
         if (not element.isNull())
         {
             initData.path = ParsePathNodes(element);
+
+            try
+            {
+                for (int i = 0; i < initData.path.CountNodes(); ++i)
+                {
+                    initData.data->GetGObject(initData.path.at(i).GetId());
+                }
+            }
+            catch (const VExceptionBadId &)
+            { // Possible case. Parent was deleted, but the node object is still here.
+                qDebug() << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
+                            "path id =" << initData.id << ".";
+                return;// Just ignore
+            }
+        }
+        else
+        {
+            VExceptionObjectError excep(tr("Error creating or updating a piece path"), domElement);
+            excep.AddMoreInformation(tr("Piece path doesn't contain nodes"));
+            throw excep;
         }
 
         const QString defType = QString().setNum(static_cast<int>(PiecePathType::CustomSeamAllowance));

@@ -294,7 +294,6 @@ VToolPiecePath::VToolPiecePath(const VToolPiecePathInitData &initData, QObject *
       QGraphicsPathItem(parent),
       m_pieceId(initData.idObject)
 {
-    IncrementNodes(VAbstractTool::data.GetPiecePath(initData.id));
     RefreshGeometry();
     ToolCreation(initData.typeCreation);
 }

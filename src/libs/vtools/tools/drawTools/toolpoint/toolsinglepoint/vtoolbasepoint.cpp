@@ -227,18 +227,6 @@ QVariant VToolBasePoint::itemChange(QGraphicsItem::GraphicsItemChange change, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief decrementReferens decrement referens parents objects.
- */
-void VToolBasePoint::decrementReferens()
-{
-    if (_referens > 1)
-    {
-        --_referens;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QPointF VToolBasePoint::GetBasePointPos() const
 {
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);

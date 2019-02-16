@@ -1124,7 +1124,7 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     forceFlippingOption->setChecked(detail.IsForceFlipping());
 
     QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), tr("Delete"));
-    _referens > 1 ? actionRemove->setEnabled(false) : actionRemove->setEnabled(true);
+    actionRemove->setDisabled(_referens > 0);
 
     QAction *selectedAction = menu.exec(event->screenPos());
     if (selectedAction == actionOption)

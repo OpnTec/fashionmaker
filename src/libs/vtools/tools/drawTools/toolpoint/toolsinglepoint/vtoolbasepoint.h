@@ -74,7 +74,6 @@ public:
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Tool::BasePoint)};
     virtual void ShowVisualization(bool show) override;
-    virtual void decrementReferens() override;
 
     QPointF GetBasePointPos() const;
     void    SetBasePointPos(const QPointF &pos);
