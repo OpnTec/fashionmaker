@@ -50,7 +50,7 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
-      brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/064395d87d3bb352f8c4568d3e8f7b80b627f36a/qt5.rb;
+      brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/20544ac8e68ef3523f92e15f432bbaf9a6aa2c22/qt5.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
   fi
