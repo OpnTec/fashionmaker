@@ -50,6 +50,7 @@ before_install:
       brew install qt5;
     else
       unset SSL_CERT_FILE;
+      brew upgrade > /dev/null;
       brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/064395d87d3bb352f8c4568d3e8f7b80b627f36a/qt5.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
@@ -88,9 +89,6 @@ script:
   else
     make -j1;
   fi
-after_failure:
-  - if [ -f /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper-dump.json ]; then cat /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper-dump.json; fi  
-  - if [ -f /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper.log ]; then cat /home/travis/build/dismine/Valentina_git/bw-outputs/build-wrapper.log; fi 
 notifications:
   email:
     recipients:
