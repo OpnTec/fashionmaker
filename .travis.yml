@@ -72,7 +72,7 @@ before_script:
 - qmake --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+    qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests;
   else
     qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
   fi
@@ -81,8 +81,6 @@ script:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
-    xvfb-run -a make --silent check TESTARGS="-silent";
     cd ..;
     sonar-scanner;
   else
