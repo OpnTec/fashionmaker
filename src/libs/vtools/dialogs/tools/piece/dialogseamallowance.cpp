@@ -117,7 +117,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, quint32 toolId,
       flagFormulaAfter(true),
       flagMainPathIsValid(true),
       flagName(true), //We have default name of piece.
-      flagFormula(false),
+      flagFormula(true),
       m_bAddMode(true),
       m_dialog(),
       m_visSpecialPoints(),
