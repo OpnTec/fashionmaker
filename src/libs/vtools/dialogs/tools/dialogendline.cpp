@@ -146,7 +146,7 @@ void DialogEndLine::EvalAngle()
 void DialogEndLine::EvalLength()
 {
     FormulaData formulaData;
-    formulaData.formula = ui->plainTextEditAngle->toPlainText();
+    formulaData.formula = ui->plainTextEditFormula->toPlainText();
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
