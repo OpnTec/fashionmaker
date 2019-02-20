@@ -547,6 +547,11 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QP
         seam.setAngle(seam.angle()+90);
         seam.setLength(p.GetSAAfter(width));
         points.append(seam.p2());
+
+        if (needRollback != nullptr)
+        {
+            *needRollback = true;
+        }
     }
     else
     {
@@ -982,22 +987,51 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
                     ekvPoints.removeLast();
 
-                    bool success = false;
-                    ekvPoints = RollbackSeamAllowance(ekvPoints, edge, &success);
-
-                    if (success)
+                    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
                     {
-                        px = ekvPoints.last();
-                    }
+                        if (ekvPoints.size() > 3)
+                        {
+                            const QLineF edge1(ekvPoints.at(ekvPoints.size()-2), ekvPoints.last());
+                            const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
 
-                    QLineF seam(px, points.at(1));
-                    seam.setAngle(seam.angle()+90);
-                    seam.setLength(points.at(0).GetSAAfter(width));
-                    ekvPoints.append(seam.p2());
+                            QPointF crosPoint;
+                            const QLineF::IntersectType type = edge1.intersect(edge2, &crosPoint );
+                            if (type == QLineF::BoundedIntersection)
+                            {
+                                ekvPoints.removeFirst();
+                                ekvPoints.removeLast();
+
+                                ekvPoints.append(crosPoint);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        bool success = false;
+                        ekvPoints = RollbackSeamAllowance(ekvPoints, edge, &success);
+
+                        if (success)
+                        {
+                            px = ekvPoints.last();
+                        }
+
+                        QLineF seam(px, points.at(1));
+                        seam.setAngle(seam.angle()+90);
+                        seam.setLength(points.at(0).GetSAAfter(width));
+                        ekvPoints.append(seam.p2());
+
+                        if (not ekvPoints.isEmpty())
+                        {
+                            ekvPoints.append(ekvPoints.first());
+                        }
+                    }
 
                     if (not ekvPoints.isEmpty())
                     {
-                        ekvPoints.append(ekvPoints.first());
+                        if (ekvPoints.last().toPoint() != ekvPoints.first().toPoint())
+                        {
+                            ekvPoints.append(ekvPoints.first());// Should be always closed
+                        }
                     }
                 }
                 break;
