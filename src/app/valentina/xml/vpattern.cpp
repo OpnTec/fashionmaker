@@ -236,7 +236,14 @@ void VPattern::Parse(const Document &parse)
         }
         domNode = domNode.nextSibling();
     }
-    QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
+    if (qApp->IsGUIMode())
+    {
+        QTimer::singleShot(1000, Qt::VeryCoarseTimer, this, SLOT(RefreshPieceGeometry()));
+    }
+    else if (qApp->CommandLine()->IsTestModeEnabled())
+    {
+        RefreshPieceGeometry();
+    }
     emit CheckLayout();
 }
 
