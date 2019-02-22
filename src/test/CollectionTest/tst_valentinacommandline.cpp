@@ -122,7 +122,7 @@ void TST_ValentinaCommandLine::OpenPatterns()
     const int exit = Run(exitCode, ValentinaPath(), QStringList() << arguments.split(";;")
                          << tmp + QDir::separator() + file, error);
 
-    QVERIFY2(exit == exitCode, qUtf8Printable(error));
+    QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ void TST_ValentinaCommandLine::ExportMode()
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QVERIFY2(exit == exitCode, qUtf8Printable(error));
+    QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -232,7 +232,7 @@ void TST_ValentinaCommandLine::TestMode()
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QVERIFY2(exit == exitCode, qUtf8Printable(error));
+    QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -293,7 +293,7 @@ void TST_ValentinaCommandLine::TestOpenCollection()
                                           << arguments.split(";;");
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
-    QVERIFY2(exit == exitCode, qUtf8Printable(error));
+    QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -124,7 +124,7 @@ void TST_TapeCommandLine::OpenMeasurements()
                          << QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder +
                          QDir::separator() + file, error);
 
-    QVERIFY2(exit == exitCode, qUtf8Printable(error));
+    QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
