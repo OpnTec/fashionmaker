@@ -62,6 +62,7 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
+#include <QTimer>
 
 // Current version of seam allowance tag need for backward compatibility
 const quint8 VToolSeamAllowance::pieceVersion = 2;
@@ -1335,13 +1336,32 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_seamAllowance->setPath(QPainterPath());
     }
 
-    UpdateDetailLabel();
-    UpdatePatternInfo();
-    UpdateGrainline();
-    UpdateExcludeState();
-    if (updateChildren)
+    if (qApp->IsAppInGUIMode())
     {
-        UpdateInternalPaths();
+        QTimer::singleShot(100, this, [this, updateChildren]()
+        {
+            this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+            UpdateDetailLabel();
+            UpdatePatternInfo();
+            UpdateGrainline();
+            UpdateExcludeState();
+            if (updateChildren)
+            {
+                UpdateInternalPaths();
+            }
+            this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+        });
+    }
+    else
+    {
+        UpdateDetailLabel();
+        UpdatePatternInfo();
+        UpdateGrainline();
+        UpdateExcludeState();
+        if (updateChildren)
+        {
+            UpdateInternalPaths();
+        }
     }
 
     m_passmarks->setPath(futurePassmarks.result());

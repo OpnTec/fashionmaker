@@ -3578,7 +3578,7 @@ void VPattern::RefreshPieceGeometry()
 {
     for(auto piece : qAsConst(updatePieces))
     {
-        piece->RefreshGeometry(true); // Refresh internal paths
+        piece->RefreshGeometry();
         QApplication::processEvents();
     }
     updatePieces.clear();
