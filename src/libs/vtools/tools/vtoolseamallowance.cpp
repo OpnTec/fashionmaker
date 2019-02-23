@@ -1295,10 +1295,12 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     QFuture<QPainterPath > futurePassmarks = QtConcurrent::run(detail, &VPiece::PassmarksPath, this->getData());
 
     QFuture<QVector<QPointF> > futureSeamAllowance;
+    QFuture<bool> futureSeamAllowanceValid;
 
     if (detail.IsSeamAllowance())
     {
         futureSeamAllowance = QtConcurrent::run(detail, &VPiece::SeamAllowancePoints, this->getData());
+        futureSeamAllowanceValid = QtConcurrent::run(detail, &VPiece::IsSeamAllowanceValid, this->getData());
     }
 
     this->setPos(detail.GetMx(), detail.GetMy());
@@ -1327,6 +1329,12 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
+        if (not futureSeamAllowanceValid.result())
+        {
+            const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
+                    .arg(detail.GetName());
+            qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+        }
         path.addPath(detail.SeamAllowancePath(futureSeamAllowance.result()));
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);

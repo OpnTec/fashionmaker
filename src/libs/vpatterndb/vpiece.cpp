@@ -611,6 +611,12 @@ QPainterPath VPiece::PlaceLabelPath(const VContainer *data) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VPiece::IsSeamAllowanceValid(const VContainer *data) const
+{
+    return VAbstractPiece::IsAllowanceValid(UniteMainPathPoints(data), SeamAllowancePoints(data));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VPiece::IsInLayout() const
 {
     return d->m_inLayout;

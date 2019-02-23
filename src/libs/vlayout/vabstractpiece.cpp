@@ -1420,6 +1420,52 @@ QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qrea
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance)
+{
+    if (base.size() < 3 || allowance.size() < 3)
+    {
+        return false; // Not enough data
+    }
+
+    const qreal baseDirection = VPiece::SumTrapezoids(base);
+    const qreal allowanceDirection = VPiece::SumTrapezoids(allowance);
+
+    if (baseDirection >= 0 || allowanceDirection >= 0)
+    {
+        return false; // Wrong direction
+    }
+
+    for (auto i = 0; i < base.count()-1; ++i)
+    {
+        QLineF baseSegment(base.at(i), base.at(i+1));
+        if (baseSegment.isNull())
+        {
+            continue;
+        }
+
+        for (auto j = 0; j < allowance.count()-1; ++j)
+        {
+            QLineF allowanceSegment(allowance.at(j), allowance.at(j+1));
+            if (allowanceSegment.isNull())
+            {
+                continue;
+            }
+
+            QPointF crosPoint;
+            const auto type = baseSegment.intersect(allowanceSegment, &crosPoint);
+            if (type == QLineF::BoundedIntersection && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
+                    && not VFuzzyComparePoints(baseSegment.p2(), crosPoint))
+            {
+
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint)
 {
     return VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);

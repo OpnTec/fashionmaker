@@ -196,6 +196,7 @@ public:
                                      const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width,
                                      bool *needRollback = nullptr);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
+    static bool             IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance);
 
     template <class T>
     static QVector<T> CorrectPathDistortion(QVector<T> path);

@@ -32,6 +32,7 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/logging.h"
+#include "../vmisc/vabstractapplication.h"
 #include "vlayoutpiece.h"
 
 QT_WARNING_PUSH
@@ -190,10 +191,11 @@ bool VBank::Prepare()
     {
         details[i].SetLayoutWidth(layoutWidth);
         details[i].SetLayoutAllowancePoints();
-        if (not details[i].IsLayoutAllowanceValid())
+        if (not details.at(i).IsLayoutAllowanceValid())
         {
-            qWarning()<< QObject::tr("Piece '%1' may broke a layout. Please, check seam allowance to check how seam "
-                                     "allowance behave.").arg(details[i].GetName());
+            const QString errorMsg = QObject::tr("Piece '%1' has invalid layout allowance. Please, check seam allowance"
+                                                 " to check how seam allowance behave.").arg(details.at(i).GetName());
+            qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
         }
 
         const qreal d = details.at(i).Diagonal();

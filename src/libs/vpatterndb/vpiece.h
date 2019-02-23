@@ -112,6 +112,8 @@ public:
     QPainterPath PassmarksPath(const VContainer *data) const;
     QPainterPath PlaceLabelPath(const VContainer *data) const;
 
+    bool IsSeamAllowanceValid(const VContainer *data) const;
+
     bool IsInLayout() const;
     void SetInLayout(bool inLayout);
 

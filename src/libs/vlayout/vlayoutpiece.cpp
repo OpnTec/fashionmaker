@@ -254,6 +254,7 @@ VLayoutPiece::~VLayoutPiece()
 VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
 {
     QFuture<QVector<QPointF> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints, pattern);
+    QFuture<bool> futureSeamAllowanceValid = QtConcurrent::run(piece, &VPiece::IsSeamAllowanceValid, pattern);
     QFuture<QVector<QPointF> > futureMainPath = QtConcurrent::run(piece, &VPiece::MainPathPoints, pattern);
     QFuture<QVector<VLayoutPiecePath> > futureInternalPaths = QtConcurrent::run(ConvertInternalPaths, piece, pattern);
     QFuture<QVector<QLineF> > futurePassmarksLines = QtConcurrent::run(piece, &VPiece::PassmarksLines, pattern);
@@ -269,6 +270,13 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
     det.SetForceFlipping(piece.IsForceFlipping());
+
+    if (not futureSeamAllowanceValid.result())
+    {
+        const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.")
+                .arg(piece.GetName());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+    }
 
     det.SetCountourPoints(futureMainPath.result(), piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
@@ -933,16 +941,8 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPiece::IsLayoutAllowanceValid() const
 {
-    QVector<QPointF> piecePath;
-    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
-    {
-        piecePath = d->seamAllowance;
-    }
-    else
-    {
-        piecePath = d->contour;
-    }
-    return qFloor(qAbs(SumTrapezoids(d->layoutAllowance)/2.0)) >= qFloor(qAbs(SumTrapezoids(piecePath)/2.0));
+    QVector<QPointF> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? d->seamAllowance : d->contour;
+    return VAbstractPiece::IsAllowanceValid(base, d->layoutAllowance);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
