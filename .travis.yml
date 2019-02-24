@@ -1,13 +1,15 @@
 language: cpp
-matrix:
+jobs:
   include:
-  - os: linux
+  - stage: "main test"
+    os: linux
     dist: trusty
     sudo: required
     compiler: clang
     env: 
     - DEPLOY=false
     - CCACHE_CPP2=yes
+    - RUN_TESTS=true
     cache:
     - ccache
     directories:
@@ -24,6 +26,19 @@ matrix:
     - DEPLOY=true
     - LEGACY=true
     osx_image: xcode8
+  - stage: "sonarcloud"
+    os: linux
+    dist: trusty
+    sudo: required
+    compiler: clang
+    env: 
+    - DEPLOY=false
+    - CCACHE_CPP2=yes
+    - RUN_TESTS=false
+    cache:
+    - ccache
+    directories:
+      - '$HOME/.sonar/cache'
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -72,7 +87,11 @@ before_script:
 - qmake --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests;
+    if [[ "$RUN_TESTS" == "true" ]]; then
+      qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings;
+    else
+      qmake ../Valentina.pro -r -spec linux-clang CONFIG+=noDebugSymbols CONFIG+=checkWarnings CONFIG+=noTests;
+    fi
   else
     qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
   fi
@@ -80,9 +99,15 @@ script:
 - $CXX --version
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
-    cd ..;
-    sonar-scanner;
+    if [[ "$RUN_TESTS" == "true" ]]; then
+      make -j$(nproc);
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"$TRAVIS_BUILD_DIR/build/src/libs/vpropertyexplorer/bin:$TRAVIS_BUILD_DIR/build/src/libs/qmuparser/bin";
+      xvfb-run -a make --silent check TESTARGS="-silent";
+    else
+      build-wrapper-linux-x86-64 --out-dir ../bw-outputs make -j$(nproc);
+      cd ..;
+      sonar-scanner;
+    fi
   else
     make -j1;
   fi
