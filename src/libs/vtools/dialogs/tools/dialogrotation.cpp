@@ -249,10 +249,18 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 
             if (objects.contains(id))
             {
-                // It's not really logical for a user that a center of rotation no need to select.
-                // To fix this issue we just silently remove it from the list.
-                objects.removeOne(id);
-                operation->SetObjects(objects.toVector());
+                if (objects.size() > 1)
+                {
+                    // It's not really logical for a user that a center of rotation no need to select.
+                    // To fix this issue we just silently remove it from the list.
+                    objects.removeOne(id);
+                    operation->SetObjects(objects.toVector());
+                }
+                else
+                {
+                    emit ToolTip(tr("This point cannot be origin point. Please, select another origin point"));
+                    return;
+                }
             }
 
             if (SetObject(id, ui->comboBoxOriginPoint, QString()))

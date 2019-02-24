@@ -28,6 +28,7 @@
 - [#939] Calling Formula Wizard through property explorer doesn't refresh formula.
 - [#937] Wrong symmetrical seam corners on pieces.
 - [#942] Save Layout mode ignores paper format for tiled PDF.
+- [#954] Valentina produces empty rotation operation.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
