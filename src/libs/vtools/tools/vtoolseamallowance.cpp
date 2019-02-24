@@ -600,13 +600,14 @@ void VToolSeamAllowance::UpdateDetailLabel()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     const VPieceLabelData& labelData = detail.GetPatternPieceData();
+    const QVector<quint32> &pins = detail.GetPins();
 
     if (labelData.IsVisible() == true)
     {
         QPointF pos;
         qreal labelAngle = 0;
 
-        if (PrepareLabelData(labelData, m_dataLabel, pos, labelAngle))
+        if (PrepareLabelData(labelData, pins, m_dataLabel, pos, labelAngle))
         {
             m_dataLabel->UpdateData(detail.GetName(), labelData);
             UpdateLabelItem(m_dataLabel, pos, labelAngle);
@@ -626,13 +627,14 @@ void VToolSeamAllowance::UpdatePatternInfo()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     const VPatternLabelData& geom = detail.GetPatternInfo();
+    const QVector<quint32> &pins = detail.GetPins();
 
     if (geom.IsVisible() == true)
     {
         QPointF pos;
         qreal labelAngle = 0;
 
-        if (PrepareLabelData(geom, m_patternInfo, pos, labelAngle))
+        if (PrepareLabelData(geom, pins, m_patternInfo, pos, labelAngle))
         {
             m_patternInfo->UpdateData(doc);
             UpdateLabelItem(m_patternInfo, pos, labelAngle);
@@ -652,6 +654,7 @@ void VToolSeamAllowance::UpdateGrainline()
 {
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     const VGrainlineData& geom = detail.GetGrainlineGeometry();
+    const QVector<quint32> &pins = detail.GetPins();
 
     if (geom.IsVisible() == true)
     {
@@ -659,7 +662,7 @@ void VToolSeamAllowance::UpdateGrainline()
         qreal dRotation = 0;
         qreal dLength = 0;
 
-        const VGrainlineItem::MoveTypes type = FindGrainlineGeometry(geom, dLength, dRotation, pos);
+        const VGrainlineItem::MoveTypes type = FindGrainlineGeometry(geom, pins, dLength, dRotation, pos);
         if (type & VGrainlineItem::Error)
         {
             m_grainLine->hide();
@@ -1518,7 +1521,8 @@ void VToolSeamAllowance::ToggleNodePointPassmark(quint32 id, bool toggle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData, qreal &rotationAngle,
+VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData,
+                                                            const QVector<quint32> &pins, qreal &rotationAngle,
                                                             qreal &labelWidth, qreal &labelHeight, QPointF &pos)
 {
 
@@ -1542,7 +1546,8 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
     const quint32 topLeftPin = labelData.TopLeftPin();
     const quint32 bottomRightPin = labelData.BottomRightPin();
 
-    if (topLeftPin != NULL_ID && bottomRightPin != NULL_ID)
+    if (topLeftPin != NULL_ID && pins.contains(topLeftPin) && bottomRightPin != NULL_ID
+            && pins.contains(bottomRightPin))
     {
         try
         {
@@ -1591,7 +1596,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
     }
 
     const quint32 centerPin = labelData.CenterPin();
-    if (centerPin != NULL_ID)
+    if (centerPin != NULL_ID && pins.contains(centerPin))
     {
         try
         {
@@ -1617,13 +1622,14 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelD
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData& geom, qreal &length,
-                                                               qreal &rotationAngle, QPointF &pos)
+VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainlineData& geom,
+                                                                const QVector<quint32> &pins, qreal &length,
+                                                                qreal &rotationAngle, QPointF &pos)
 {
     const quint32 topPin = geom.TopPin();
     const quint32 bottomPin = geom.BottomPin();
 
-    if (topPin != NULL_ID && bottomPin != NULL_ID)
+    if (topPin != NULL_ID && pins.contains(topPin) && bottomPin != NULL_ID && pins.contains(bottomPin))
     {
         try
         {
@@ -1675,7 +1681,7 @@ VPieceItem::MoveTypes VToolSeamAllowance::FindGrainlineGeometry(const VGrainline
     }
 
     const quint32 centerPin = geom.CenterPin();
-    if (centerPin != NULL_ID)
+    if (centerPin != NULL_ID && pins.contains(centerPin))
     {
         try
         {
@@ -1838,14 +1844,15 @@ void VToolSeamAllowance::ToolCreation(const Source &typeCreation)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem,
-                                          QPointF &pos, qreal &labelAngle)
+bool VToolSeamAllowance::PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                                          VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle)
 {
     SCASSERT(labelItem != nullptr)
 
     qreal labelWidth = 0;
     qreal labelHeight = 0;
-    const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(labelData, labelAngle, labelWidth, labelHeight, pos);
+    const VTextGraphicsItem::MoveTypes type = FindLabelGeometry(labelData, pins, labelAngle, labelWidth, labelHeight,
+                                                                pos);
     if (type & VGrainlineItem::Error)
     {
         labelItem->hide();

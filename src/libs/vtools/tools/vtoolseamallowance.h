@@ -193,10 +193,10 @@ private:
     void UpdateExcludeState();
     void UpdateInternalPaths();
 
-    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, qreal &rotationAngle, qreal &labelWidth,
-                                            qreal &labelHeight, QPointF &pos);
-    VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, qreal &length, qreal &rotationAngle,
-                                                QPointF &pos);
+    VPieceItem::MoveTypes FindLabelGeometry(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                                            qreal &rotationAngle, qreal &labelWidth, qreal &labelHeight, QPointF &pos);
+    VPieceItem::MoveTypes FindGrainlineGeometry(const VGrainlineData &geom, const QVector<quint32> &pins, qreal &length,
+                                                qreal &rotationAngle, QPointF &pos);
 
     void InitNodes(const VPiece &detail, VMainGraphicsScene *scene);
     static void InitNode(const VPieceNode &node, VMainGraphicsScene *scene, VContainer *data, VAbstractPattern *doc,
@@ -205,8 +205,8 @@ private:
     void InitInternalPaths(const VPiece &detail);
     void InitSpecialPoints(const QVector<quint32> &points) const;
 
-    bool PrepareLabelData(const VPatternLabelData &labelData, VTextGraphicsItem *labelItem, QPointF &pos,
-                          qreal &labelAngle);
+    bool PrepareLabelData(const VPatternLabelData &labelData, const QVector<quint32> &pins,
+                          VTextGraphicsItem *labelItem, QPointF &pos, qreal &labelAngle);
     void UpdateLabelItem(VTextGraphicsItem *labelItem, QPointF pos, qreal labelAngle);
 
     QList<VToolSeamAllowance *> SelectedTools() const;
