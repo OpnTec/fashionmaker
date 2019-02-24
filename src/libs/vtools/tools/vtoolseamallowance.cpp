@@ -1347,9 +1347,10 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_seamAllowance->setPath(QPainterPath());
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     if (qApp->IsAppInGUIMode())
     {
-        QTimer::singleShot(100, this, [this, updateChildren]()
+        QTimer::singleShot(100, Qt::CoarseTimer, this, [this, updateChildren]()
         {
             this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
             UpdateDetailLabel();
@@ -1374,6 +1375,16 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
             UpdateInternalPaths();
         }
     }
+#else
+    UpdateDetailLabel();
+    UpdatePatternInfo();
+    UpdateGrainline();
+    UpdateExcludeState();
+    if (updateChildren)
+    {
+        UpdateInternalPaths();
+    }
+#endif
 
     m_passmarks->setPath(futurePassmarks.result());
 
