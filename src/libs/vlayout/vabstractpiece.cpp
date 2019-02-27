@@ -1427,6 +1427,9 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Not enough data
     }
 
+//    DumpVector(base); // Uncomment for dumping test data
+//    DumpVector(allowance); // Uncomment for dumping test data
+
     const qreal baseDirection = VPiece::SumTrapezoids(base);
     const qreal allowanceDirection = VPiece::SumTrapezoids(allowance);
 
@@ -1453,8 +1456,11 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
 
             QPointF crosPoint;
             const auto type = baseSegment.intersect(allowanceSegment, &crosPoint);
-            if (type == QLineF::BoundedIntersection && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
-                    && not VFuzzyComparePoints(baseSegment.p2(), crosPoint))
+            if (type == QLineF::BoundedIntersection
+                    && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
+                    && not VFuzzyComparePoints(baseSegment.p2(), crosPoint)
+                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p1(), baseSegment.p1(), baseSegment.p2())
+                    && not VGObject::IsPointOnLineviaPDP(allowanceSegment.p2(), baseSegment.p1(), baseSegment.p2()))
             {
 
                 return false;
