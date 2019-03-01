@@ -297,7 +297,6 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/Qt5Core.dll \
         $$[QT_INSTALL_BINS]/Qt5Concurrent.dll \
-        $$[QT_INSTALL_BINS]/Qt5OpenGL.dll \
         $$[QT_INSTALL_BINS]/Qt5Gui.dll \
         $$[QT_INSTALL_BINS]/Qt5Network.dll \
         $$[QT_INSTALL_BINS]/Qt5PrintSupport.dll \
@@ -308,6 +307,11 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+
+    # Don't use Qt OpenGL module since Q5.4
+    equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
+        package.files += $$[QT_INSTALL_BINS]/Qt5OpenGL.dll
+    }
 
     # For support Windows 7+
     greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {

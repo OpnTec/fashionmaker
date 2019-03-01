@@ -7,7 +7,12 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT += widgets printsupport opengl
+QT += widgets printsupport
+
+# Don't use Qt OpenGL module since Q5.4
+equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
+    QT += opengl
+}
 
 # Name of the library
 TARGET = vwidgets
