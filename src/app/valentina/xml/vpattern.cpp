@@ -147,13 +147,6 @@ void VPattern::CreateEmptyFile()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::setXMLContent(const QString &fileName)
-{
-    VAbstractPattern::setXMLContent(fileName);
-    GarbageCollector();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Parse parse file.
  * @param parse parser file mode.

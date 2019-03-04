@@ -67,7 +67,6 @@ public:
 
     QVector<quint32> GetActivePPPieces() const;
 
-    virtual void   setXMLContent(const QString &fileName) override;
     virtual bool   SaveDocument(const QString &fileName, QString &error) override;
 
     QRectF         ActiveDrawBoundingRect() const;
