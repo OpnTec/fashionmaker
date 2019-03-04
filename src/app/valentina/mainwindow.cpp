@@ -4721,7 +4721,11 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
     { // No errors occurred
         /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
          * a reference. */
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+        QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
+#else
         doc->GarbageCollector(true);
+#endif
 
         patternReadOnly = doc->IsReadOnly();
         SetEnableWidgets(true);
