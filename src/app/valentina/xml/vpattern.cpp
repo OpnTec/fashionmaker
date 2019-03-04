@@ -1788,9 +1788,8 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         {
             point = initData.data->GeometricObject<VPointF>(initData.idObject);
         }
-        catch (const VExceptionBadId &e)
+        catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
             qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
                      << initData.id << ".";
             return;// Just ignore
