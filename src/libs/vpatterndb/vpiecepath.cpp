@@ -1167,7 +1167,8 @@ QString VPiecePath::NodeName(const QVector<VPieceNode> &nodes, int nodeIndex, co
         QSharedPointer<VGObject> obj = data->GetGObject(nodes.at(nodeIndex).GetId());
         return obj->name();
     }
-    catch (VExceptionBadId) {
+    catch (const VExceptionBadId& )
+    {
         // ignore
     }
     return QString();
