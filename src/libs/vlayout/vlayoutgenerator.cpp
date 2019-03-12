@@ -415,7 +415,7 @@ void VLayoutGenerator::UnitePages()
             int paperHeight = 0;
             if (autoCrop)
             {
-                paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
+                paperHeight = qCeil(papers.at(i).DetailsBoundingRect().height());
             }
             else
             {
@@ -447,7 +447,7 @@ void VLayoutGenerator::UnitePages()
             int paperWidth = 0;
             if (autoCrop)
             {
-                paperWidth = qRound(papers.at(i).DetailsBoundingRect().width());
+                paperWidth = qCeil(papers.at(i).DetailsBoundingRect().width());
             }
             else
             {
@@ -479,8 +479,8 @@ void VLayoutGenerator::UnitePages()
     QVector<VLayoutPaper> nPapers;
     for (int i = 0; i < nDetails.size(); ++i)
     {
-        const int height = IsPortrait() ? qFloor(papersLength.at(i)) : PageHeight();
-        const int width = IsPortrait() ? PageWidth() : qFloor(papersLength.at(i));
+        const int height = IsPortrait() ? qCeil(papersLength.at(i)) : PageHeight();
+        const int width = IsPortrait() ? PageWidth() : qCeil(papersLength.at(i));
 
         VLayoutPaper paper(height, width, bank->GetLayoutWidth());
         paper.SetShift(shift);

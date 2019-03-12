@@ -345,29 +345,16 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) c
             scene->addItem(item);
         }
 
+        const QRect boundingRect = scene->itemsBoundingRect().toRect();
         if (d->globalContour.IsPortrait())
         {
-            const int height = scene->itemsBoundingRect().toRect().height();
-            if (d->globalContour.GetHeight() > height) //-V807
-            {
-                paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
-            }
-            else
-            {
-                paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
-            }
+            const int height = boundingRect.height() + boundingRect.y() + 1;
+            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
         }
         else
         {
-            const int width = scene->itemsBoundingRect().toRect().width();
-            if (d->globalContour.GetWidth() > width) //-V807
-            {
-                paper = new QGraphicsRectItem(QRectF(0, 0, width, d->globalContour.GetHeight()));
-            }
-            else
-            {
-                paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
-            }
+            const int width = boundingRect.width() + boundingRect.x() + 1;
+            paper = new QGraphicsRectItem(QRectF(0, 0, width, d->globalContour.GetHeight()));
         }
     }
     else
