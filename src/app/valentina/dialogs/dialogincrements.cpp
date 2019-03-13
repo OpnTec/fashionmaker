@@ -750,13 +750,19 @@ void DialogIncrements::AddNewIncrement(IncrementType type)
 {
     qCDebug(vDialog, "Add new increment");
 
-    auto *action = qobject_cast<QAction *>(sender());
-    if (action == nullptr)
+    bool incrementMode = true;
+    if (auto *action = qobject_cast<QAction *>(sender()))
+    {
+        incrementMode = action->data().toBool();
+    }
+    else if (auto *button = qobject_cast<QToolButton *>(sender()))
+    {
+        incrementMode = button == ui->toolButtonAdd;
+    }
+    else
     {
         return;
     }
-
-    const bool incrementMode = action->data().toBool();
 
     QTableWidget *table = incrementMode ? ui->tableWidgetIncrement : ui->tableWidgetPC;
 
