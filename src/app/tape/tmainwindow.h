@@ -126,8 +126,6 @@ private slots:
     void SaveMDescription();
     void SaveMFullName();
 
-    void PatternUnitChanged(int index);
-
 private:
     Q_DISABLE_COPY(TMainWindow)
     Ui::TMainWindow *ui;
@@ -219,6 +217,8 @@ private:
 
     void ImportIndividualMeasurements(const QxtCsvModel &csv);
     void ImportMultisizeMeasurements(const QxtCsvModel &csv);
+
+    void SetCurrentPatternUnit();
 };
 
 #endif // TMAINWINDOW_H

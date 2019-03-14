@@ -202,6 +202,7 @@ void TMainWindow::SetBaseMSize(int size)
 void TMainWindow::SetPUnit(Unit unit)
 {
     pUnit = unit;
+    SetCurrentPatternUnit();
     UpdatePatternUnit();
 }
 
@@ -1896,14 +1897,6 @@ void TMainWindow::SaveMFullName()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::PatternUnitChanged(int index)
-{
-    pUnit = static_cast<Unit>(comboBoxUnits->itemData(index).toInt());
-
-    UpdatePatternUnit();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetupMenu()
 {
     // File
@@ -3302,6 +3295,21 @@ void TMainWindow::ImportMultisizeMeasurements(const QxtCsvModel &csv)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::SetCurrentPatternUnit()
+{
+    if (comboBoxUnits)
+    {
+        comboBoxUnits->blockSignals(true);
+        const qint32 indexUnit = comboBoxUnits->findData(static_cast<int>(pUnit));
+        if (indexUnit != -1)
+        {
+            comboBoxUnits->setCurrentIndex(indexUnit);
+        }
+        comboBoxUnits->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SetDecimals()
 {
     switch (mUnit)
@@ -3349,15 +3357,14 @@ void TMainWindow::InitUnits()
 
     comboBoxUnits = new QComboBox(this);
     InitComboBoxUnits();
+    SetCurrentPatternUnit();
 
-    // set default unit
-    const qint32 indexUnit = comboBoxUnits->findData(static_cast<int>(pUnit));
-    if (indexUnit != -1)
+    connect(comboBoxUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int index)
     {
-        comboBoxUnits->setCurrentIndex(indexUnit);
-    }
+        pUnit = static_cast<Unit>(comboBoxUnits->itemData(index).toInt());
 
-    connect(comboBoxUnits, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TMainWindow::PatternUnitChanged);
+        UpdatePatternUnit();
+    });
 
     ui->toolBarGradation->addWidget(comboBoxUnits);
 }
