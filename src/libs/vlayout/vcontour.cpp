@@ -369,7 +369,7 @@ void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detai
         ++processedEdges;
         ++j;
     }
-    while (processedEdges < nD);
+    while (processedEdges <= nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
