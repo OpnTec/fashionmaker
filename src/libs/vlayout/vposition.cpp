@@ -507,7 +507,8 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VPosition::SheetContains(const QRectF &rect) const
 {
-    const QRectF bRect(0, 0, m_data.gContour.GetWidth(), m_data.gContour.GetHeight());
+    const QRectF bRect(-accuracyPointOnLine, -accuracyPointOnLine, m_data.gContour.GetWidth()+accuracyPointOnLine,
+                       m_data.gContour.GetHeight()+accuracyPointOnLine);
     return bRect.contains(rect);
 }
 
