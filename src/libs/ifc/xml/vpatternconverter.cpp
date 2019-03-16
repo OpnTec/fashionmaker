@@ -251,215 +251,215 @@ void VPatternConverter::ApplyPatches()
         case (FORMAT_VERSION(0, 1, 4)):
             ToV0_2_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 0)):
             ToV0_2_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 1)):
             ToV0_2_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 2)):
             ToV0_2_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 3)):
             ToV0_2_4();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 4)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 4)):
             ToV0_2_5();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 5)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 5)):
             ToV0_2_6();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 6)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 6)):
             ToV0_2_7();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 2, 7)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 2, 7)):
             ToV0_3_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 0)):
             ToV0_3_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 1)):
             ToV0_3_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 2)):
             ToV0_3_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 3)):
             ToV0_3_4();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 4)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 4)):
             ToV0_3_5();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 5)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 5)):
             ToV0_3_6();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 6)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 6)):
             ToV0_3_7();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 7)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 7)):
             ToV0_3_8();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 8)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 8)):
             ToV0_3_9();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 9)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 9)):
             ToV0_4_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 0)):
             ToV0_4_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 1)):
             ToV0_4_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 2)):
             ToV0_4_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 3)):
             ToV0_4_4();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 4)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 4)):
             ToV0_4_5();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 5)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 5)):
             ToV0_4_6();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 6)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 6)):
             ToV0_4_7();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 7)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 7)):
             ToV0_4_8();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 8)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 8)):
             ToV0_5_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 5, 0)):
             ToV0_5_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 5, 1)):
             ToV0_6_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 0)):
             ToV0_6_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 1)):
             ToV0_6_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 2)):
             ToV0_6_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 3)):
             ToV0_6_4();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 4)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 4)):
             ToV0_6_5();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 5)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 5)):
             ToV0_6_6();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 6, 6)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 6, 6)):
             ToV0_7_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 0)):
             ToV0_7_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 1)):
             ToV0_7_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 2)):
             ToV0_7_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 3)):
             ToV0_7_4();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 4)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 4)):
             ToV0_7_5();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 5)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 5)):
             ToV0_7_6();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 6)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 6)):
             ToV0_7_7();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 7)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 7)):
             ToV0_7_8();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 8)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 8)):
             ToV0_7_9();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 9)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 9)):
             ToV0_7_10();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 10)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 10)):
             ToV0_7_11();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 11)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 11)):
             ToV0_7_12();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 12)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 12)):
             ToV0_7_13();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 7, 13)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 7, 13)):
             ToV0_8_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 8, 0)):
             ToV0_8_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 8, 1)):
             ToV0_8_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 8, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 8, 2)):
             break;
         default:

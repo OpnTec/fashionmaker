@@ -110,27 +110,27 @@ void VVITConverter::ApplyPatches()
         case (FORMAT_VERSION(0, 2, 0)):
             ToV0_3_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 0)):
             ToV0_3_1();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 1)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 1)):
             ToV0_3_2();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 2)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 2)):
             ToV0_3_3();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 3, 3)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 3, 3)):
             ToV0_4_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 4, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 4, 0)):
             ToV0_5_0();
             ValidateXML(XSDSchema(FORMAT_VERSION(0, 5, 0)), m_convertedFileName);
-            V_FALLTHROUGH
+            Q_FALLTHROUGH();
         case (FORMAT_VERSION(0, 5, 0)):
             break;
         default:
