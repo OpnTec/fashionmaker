@@ -17,12 +17,6 @@
 
 #include "logging.h"
 
-#ifdef __GNUC__
-#define V_UNUSED __attribute__ ((unused))
-#else
-#define V_UNUSED
-#endif
-
 typedef std::function<void()> voidBlock;
 
 class WorkerClass : public QObject
@@ -43,7 +37,7 @@ public slots:
     }
 };
 
-static inline void q_dispatch_async(QThread* thread, voidBlock block) V_UNUSED;
+static inline Q_DECL_UNUSED void q_dispatch_async(QThread* thread, voidBlock block);
 static inline void q_dispatch_async(QThread* thread, voidBlock block)
 {
   qRegisterMetaType<voidBlock>("voidBlock");
@@ -52,7 +46,7 @@ static inline void q_dispatch_async(QThread* thread, voidBlock block)
   QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(voidBlock, block));
 }
 
-static inline void q_dispatch_async_main(voidBlock block) V_UNUSED;
+static inline Q_DECL_UNUSED void q_dispatch_async_main(voidBlock block);
 static inline void q_dispatch_async_main(voidBlock block)
 {
   QThread *mainThread = QCoreApplication::instance()->thread();
@@ -98,8 +92,8 @@ private:
     QString m_category;
 };
 
-static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
-                                    const QMessageLogContext &context, const QString &msg) V_UNUSED;
+static inline Q_DECL_UNUSED void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
+                                                  const QMessageLogContext &context, const QString &msg);
 static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMsgType type,
                                     const QMessageLogContext &context, const QString &msg)
 {
@@ -109,8 +103,8 @@ static inline void q_dispatch_async(QThread* thread, msgHandlerBlock block, QtMs
   QMetaObject::invokeMethod(worker, "DoWork", Qt::QueuedConnection, Q_ARG(msgHandlerBlock, block));
 }
 
-static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type, const QMessageLogContext &context,
-                                         const QString &msg) V_UNUSED;
+static inline Q_DECL_UNUSED void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type,
+                                                       const QMessageLogContext &context, const QString &msg);
 static inline void q_dispatch_async_main(msgHandlerBlock block, QtMsgType type, const QMessageLogContext &context,
                                          const QString &msg)
 {
