@@ -1619,26 +1619,26 @@
     </message>
     <message>
         <source>Click to place duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca per posizionare duplicato</translation>
     </message>
 </context>
 <context>
     <name>DialogEditLabel</name>
     <message>
         <source>Edit label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica modello etichetta</translation>
     </message>
     <message>
         <source>Clear current and begin new label</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancella attuale e componi nuova etichetta</translation>
     </message>
     <message>
         <source>Import from label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa da modello etichetta</translation>
     </message>
     <message>
         <source>Export label as template</source>
-        <translation type="unfinished"></translation>
+        <translation>esporta etichetta come modello</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -1668,15 +1668,15 @@
     </message>
     <message>
         <source>Additional font size. Use to make a line bigger.</source>
-        <translation type="unfinished"></translation>
+        <translation>Misura carattere aggiuntiva. Usa per ingrandire una linea.</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo:</translation>
     </message>
     <message>
         <source>Line of text</source>
-        <translation type="unfinished"></translation>
+        <translation>Linea di testo</translation>
     </message>
     <message>
         <source>Insert placeholders</source>
@@ -1684,7 +1684,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima</translation>
     </message>
     <message>
         <source>&lt;empty&gt;</source>
@@ -1692,19 +1692,19 @@
     </message>
     <message>
         <source>Create new template</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea nuovo modello</translation>
     </message>
     <message>
         <source>Creating new template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Creare un nuovo modello sovrascriverà quello attuale, vuoi continuare?</translation>
     </message>
     <message>
         <source>Label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modello etichetta</translation>
     </message>
     <message>
         <source>Export label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta modello etichetta</translation>
     </message>
     <message>
         <source>template</source>
@@ -1804,11 +1804,11 @@
     </message>
     <message>
         <source>Quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantità</translation>
     </message>
     <message>
         <source>Material: Fabric</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiale: Tessuto</translation>
     </message>
     <message>
         <source>Fabric</source>
@@ -1816,7 +1816,7 @@
     </message>
     <message>
         <source>Material: Lining</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiale: Fodera</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -1864,19 +1864,19 @@
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in alto</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta su</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta giù</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in basso</translation>
     </message>
 </context>
 <context>
@@ -2256,7 +2256,7 @@
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima</translation>
     </message>
     <message>
         <source>Global</source>
@@ -2870,7 +2870,7 @@
     </message>
     <message>
         <source>Refresh a pattern with all changes you made</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna modello con i cambiamenti effettuati</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -4512,19 +4512,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in alto</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta su</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta giù</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in basso</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
@@ -5288,6 +5288,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8872,10 +8876,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8913,6 +8913,14 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10410,19 +10418,19 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in alto</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta su</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta giù</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Sposta in basso</translation>
     </message>
 </context>
 <context>
@@ -11665,15 +11673,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra etichetta</translation>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi a gruppo</translation>
     </message>
     <message>
         <source>Remove from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi dal gruppo</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -11735,7 +11743,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Show label</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra etichetta</translation>
     </message>
     <message>
         <source>Exclude</source>
@@ -12056,6 +12064,10 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

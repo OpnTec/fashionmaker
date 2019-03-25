@@ -3533,12 +3533,12 @@
     <message>
         <source>Sit on hard surface. Rise length, side, taken from waist over hip curve down to surface</source>
         <comment>Full measurement name.</comment>
-        <translation type="vanished">Assis sur une surface dure. Hauteur du Montant, sur le côté, mesurer de la taille au-dessus de la courbure des hanches jusqu&apos;au sol.</translation>
+        <translation type="vanished">Sedět na pevném povrchu. Měřte od pasu přes křivku kyčle dolů k povrchu.</translation>
     </message>
     <message>
         <source>From Waist Side around hp curve down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Du Côté de la Taille, le long de la courbe des hanches jusqu&apos;à la surface, en étant assis sur une surface dure.</translation>
+        <translation type="vanished">Měřte od strany pasu přes křivku kyčle dolů k povrchu, v poloze vsedě na pevném povrchu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1895"/>
@@ -3873,7 +3873,7 @@
     <message>
         <source>From Waist Side down to surface, while seated on hard surface.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">A partir de la Taille Côté jusqu&apos;à la surface visible de la fesse, mesurer en ligne droite, en position assise sur une surface dure.</translation>
+        <translation type="vanished">Měřte od strany pasu dolů k povrchu, v poloze vsedě na pevném povrchu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
@@ -3908,7 +3908,7 @@
     <message>
         <source>Vertical distance from Waist Back to Crotch level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Distance Verticale à partir de la Taille Dos jusqu&apos;au niveau de Fourche.</translation>
+        <translation type="vanished">Svislá vzdálenost od pasu vzadu k výšce rozkroku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1885"/>
@@ -3925,7 +3925,7 @@
     <message>
         <source>Vertical Distance from Waist Front to Crotch level.</source>
         <comment>Full measurement description.</comment>
-        <translation type="vanished">Distance verticale partant de la Taille Devant jusqu&apos;au niveau de Fourche.</translation>
+        <translation type="vanished">Svislá vzdálenost od pasu vpředu k výšce rozkroku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1911"/>

@@ -5336,6 +5336,10 @@ Aplicar configurações de qualquer forma?</translation>
         <source>Calculation</source>
         <translation>Cálculo</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -8912,7 +8916,7 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation>A peça &apos;%1&apos; quebrou o layout. Pro favor, verifique a margem de costura para verificar o comportamento da margem de costura.</translation>
+        <translation type="vanished">A peça &apos;%1&apos; quebrou o layout. Pro favor, verifique a margem de costura para verificar o comportamento da margem de costura.</translation>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -8952,6 +8956,14 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12152,6 +12164,10 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

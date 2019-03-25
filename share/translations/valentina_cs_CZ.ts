@@ -5280,10 +5280,10 @@ Přesto použít nastavení?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Následována %n volba, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
+            <numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
+            <numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -5336,6 +5336,10 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Calculation</source>
         <translation>Výpočet</translation>
+    </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6184,9 +6188,9 @@ Přesto použít nastavení?</translation>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Následována %n volba, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
+            <numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
+            <numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -8934,7 +8938,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation>Díl &apos;%1&apos; může poškodit rozvržení. Prověřte, prosím, přídavek na šev, a tak ověřte, jak se přídavek na šev chová.</translation>
+        <translation type="vanished">Díl &apos;%1&apos; může poškodit rozvržení. Prověřte, prosím, přídavek na šev, a tak ověřte, jak se přídavek na šev chová.</translation>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -8974,6 +8978,14 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12215,6 +12227,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Error creating or updating place lavel</source>
         <translation>Chyba při vytváření nebo aktualizaci popisu umístění</translation>
+    </message>
+    <message>
+        <source>Piece path doesn&apos;t contain nodes</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

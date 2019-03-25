@@ -5331,6 +5331,10 @@ Apply settings anyway?</source>
         <source>Calculation</source>
         <translation>Calcul</translation>
     </message>
+    <message>
+        <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -8885,10 +8889,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8926,6 +8926,14 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12101,6 +12109,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error creating or updating place lavel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

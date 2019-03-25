@@ -3769,13 +3769,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
         <source>crotch_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>dlugosc_krocza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1841"/>
         <source>Crotch length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Długość krocza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
