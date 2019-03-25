@@ -278,7 +278,6 @@ VApplication::VApplication(int &argc, char **argv)
     setApplicationVersion(APP_VERSION_STR);
     // making sure will create new instance...just in case we will ever do 2 objects of VApplication
     VCommandLine::Reset();
-    VCommandLine::Get(*this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -606,6 +605,9 @@ void VApplication::InitOptions()
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
     }
+
+    // Create command line parser after loading translations to show localized version.
+    VCommandLine::Get(*this);
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
