@@ -631,7 +631,9 @@ QStringList VApplication::LabelLanguages()
                       "uk",  // Ukrainian
                       "hr",  // Croatian
                       "sr",  // Serbian
-                      "bs"}; // Bosnian
+                      "bs",  // Bosnian
+                      "cs"   // Czech
+                     };
     return list;
 }
 

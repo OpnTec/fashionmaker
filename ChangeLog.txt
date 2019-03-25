@@ -11,6 +11,7 @@
 - Speed optimization for switching "In layout" state.
 - [#932] 2nd version V passmarks.
 - [#936] Improve list of predefined paper size formats for layout export. Added format Tabloid.
+- Extend Label language to support Czech alphabet.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

@@ -1399,6 +1399,13 @@ QString VPattern::GetLabelBase(quint32 index) const
             alphabet = al.split(QChar(','));
             break;
         }
+        case 8: // cs
+        {
+            const QString al = QStringLiteral("a,á,b,c,č,d,ď,e,é,ě,f,g,h,ch,i,í,j,k,l,m,n,ň,o,ó,p,q,r,ř,s,š,t,ť,u,ú,ů,"
+                                              "v,w,x,y,ý,z,ž");
+            alphabet = al.split(QChar(','));
+            break;
+        }
         case 1: // en
         default: // en
         {
