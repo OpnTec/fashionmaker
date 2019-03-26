@@ -20,7 +20,8 @@ HEADERS += \
     $$PWD/vlayoutpiece.h \
     $$PWD/vlayoutpiece_p.h \
     $$PWD/vlayoutpiecepath.h \
-    $$PWD/vlayoutpiecepath_p.h
+    $$PWD/vlayoutpiecepath_p.h \
+    $$PWD/vbestsquare_p.h
 
 SOURCES += \
     $$PWD/vlayoutgenerator.cpp \

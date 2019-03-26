@@ -32,13 +32,26 @@
 #include <QSizeF>
 #include <QTransform>
 #include <QtGlobal>
+#include <QSharedDataPointer>
+#include <QTypeInfo>
 
 #include "vlayoutdef.h"
+
+class VBestSquareData;
 
 class VBestSquare
 {
 public:
     VBestSquare(const QSizeF &sheetSize, bool saveLength);
+    VBestSquare(const VBestSquare &res);
+    virtual ~VBestSquare();
+
+#ifdef Q_COMPILER_RVALUE_REFS
+    VBestSquare &operator=(VBestSquare &&res) Q_DECL_NOTHROW { Swap(res); return *this; }
+#endif
+
+    inline void Swap(VBestSquare &res) Q_DECL_NOTHROW
+    { std::swap(d, res.d); }
 
     void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, qreal position,
                    BestFrom type);
@@ -48,7 +61,7 @@ public:
     int        GContourEdge() const;
     int        DetailEdge() const;
     QTransform Matrix() const;
-    bool       ValidResult() const;
+    bool       IsValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
     qreal      Position() const;
@@ -56,71 +69,9 @@ public:
     bool IsSaveLength() const;
 
 private:
-    // All nedded information about best result
-    int resI; // Edge of global contour
-    int resJ; // Edge of detail
-    QTransform resMatrix; // Matrix for rotation and translation detail
-    QSizeF bestSize;
-    QSizeF sheetSize;
-    bool valideResult;
-    bool resMirror;
-    BestFrom type;
-    bool saveLength;
-    qreal position;
+    QSharedDataPointer<VBestSquareData> d;
 };
 
-//---------------------------------------------------------------------------------------------------------------------
-inline QSizeF VBestSquare::BestSize() const
-{
-    return bestSize;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline int VBestSquare::GContourEdge() const
-{
-    return resI;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline int VBestSquare::DetailEdge() const
-{
-    return resJ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline QTransform VBestSquare::Matrix() const
-{
-    return resMatrix;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VBestSquare::ValidResult() const
-{
-    return valideResult;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VBestSquare::Mirror() const
-{
-    return resMirror;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline BestFrom VBestSquare::Type() const
-{
-    return type;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline qreal VBestSquare::Position() const
-{
-    return position;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline bool VBestSquare::IsSaveLength() const
-{
-    return saveLength;
-}
+Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE);
 
 #endif // VBESTSQUARE_H
