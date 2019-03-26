@@ -44,17 +44,6 @@ class VLayoutPaperData : public QSharedData
 {
 public:
     VLayoutPaperData()
-        : details(QVector<VLayoutPiece>()),
-          globalContour(VContour()),
-          paperIndex(0),
-          frame(0),
-          layoutWidth(0),
-          globalRotate(true),
-          localRotate(true),
-          globalRotationIncrease(180),
-          localRotationIncrease(180),
-          saveLength(false),
-          followGrainline(false)
     {}
 
     VLayoutPaperData(int height,
@@ -90,20 +79,20 @@ public:
     ~VLayoutPaperData() {}
 
     /** @brief details list of arranged details. */
-    QVector<VLayoutPiece> details;
+    QVector<VLayoutPiece> details{};
 
     /** @brief globalContour list of global points contour. */
-    VContour globalContour;
+    VContour globalContour{};
 
-    quint32 paperIndex;
-    quint32 frame;
-    qreal layoutWidth;
-    bool globalRotate;
-    bool localRotate;
-    int globalRotationIncrease;
-    int localRotationIncrease;
-    bool saveLength;
-    bool followGrainline;
+    quint32 paperIndex{0};
+    quint32 frame{0};
+    qreal layoutWidth{0};
+    bool globalRotate{true};
+    bool localRotate{true};
+    int globalRotationIncrease{180};
+    int localRotationIncrease{180};
+    bool saveLength{false};
+    bool followGrainline{false};
 
 private:
     VLayoutPaperData& operator=(const VLayoutPaperData&) Q_DECL_EQ_DELETE;
