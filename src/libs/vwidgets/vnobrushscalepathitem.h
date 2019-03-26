@@ -40,6 +40,8 @@ class VNoBrushScalePathItem : public QGraphicsPathItem
 public:
     explicit VNoBrushScalePathItem(QGraphicsItem *parent = nullptr);
 
+    void SetWidth(qreal width);
+
 protected:
     virtual void paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
                        QWidget * widget = nullptr) override;
@@ -49,6 +51,7 @@ protected:
 
 private:
     Q_DISABLE_COPY(VNoBrushScalePathItem)
+    qreal m_defaultWidth;
 };
 
 #endif // VNOBRUSHSCALEPATHITEM_H

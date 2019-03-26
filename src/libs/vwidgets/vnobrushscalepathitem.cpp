@@ -28,6 +28,7 @@
 
 #include "vnobrushscalepathitem.h"
 #include "global.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QBrush>
 #include <QMatrix>
@@ -35,8 +36,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VNoBrushScalePathItem::VNoBrushScalePathItem(QGraphicsItem *parent) :
-    QGraphicsPathItem(parent)
+    QGraphicsPathItem(parent),
+    m_defaultWidth(qApp->Settings()->WidthHairLine())
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNoBrushScalePathItem::SetWidth(qreal width)
+{
+    m_defaultWidth = width;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -57,5 +65,10 @@ void VNoBrushScalePathItem::paint(QPainter *painter, const QStyleOptionGraphicsI
     QBrush brush = this->brush();
     brush.setMatrix(painter->combinedMatrix().inverted());
     this->setBrush(brush);
+
+    QPen toolPen = pen();
+    toolPen.setWidthF(ScaleWidth(m_defaultWidth, SceneScale(scene())));
+    setPen(toolPen);
+
     PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }
