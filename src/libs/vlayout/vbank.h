@@ -52,10 +52,10 @@ public:
     VBank();
 
     qreal GetLayoutWidth() const;
-    void SetLayoutWidth(const qreal &value);
+    void SetLayoutWidth(qreal value);
 
     void SetDetails(const QVector<VLayoutPiece> &details);
-    int  GetTiket();
+    int  GetNext();
     VLayoutPiece GetDetail(int i) const;
 
     void Arranged(int i);
@@ -66,7 +66,7 @@ public:
     void SetCaseType(Cases caseType);
 
     int AllDetailsCount() const;
-    int LeftArrange() const;
+    int LeftToArrange() const;
     int ArrangedCount() const;
 
     qreal GetBiggestDiagonal() const;

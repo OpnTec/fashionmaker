@@ -151,7 +151,7 @@ void VLayoutGenerator::Generate()
             paper.SetSaveLength(saveLength);
             do
             {
-                const int index = bank->GetTiket();
+                const int index = bank->GetNext();
                 if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
                 {
                     bank->Arranged(index);
@@ -166,7 +166,7 @@ void VLayoutGenerator::Generate()
                 {
                     break;
                 }
-            } while(bank->LeftArrange() > 0);
+            } while(bank->LeftToArrange() > 0);
 
             if (stopGeneration.load())
             {

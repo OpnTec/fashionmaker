@@ -53,9 +53,15 @@ QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
-    :details(QVector<VLayoutPiece>()), unsorted(QHash<int, qint64>()), big(QHash<int, qint64>()),
-      middle(QHash<int, qint64>()), small(QHash<int, qint64>()), layoutWidth(0), caseType(Cases::CaseDesc),
-      prepare(false), diagonal(0)
+    : details(),
+      unsorted(),
+      big(),
+      middle(),
+      small(),
+      layoutWidth(0),
+      caseType(Cases::CaseDesc),
+      prepare(false),
+      diagonal(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -65,7 +71,7 @@ qreal VBank::GetLayoutWidth() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBank::SetLayoutWidth(const qreal &value)
+void VBank::SetLayoutWidth(qreal value)
 {
     layoutWidth = value;
     Reset();
@@ -79,14 +85,14 @@ void VBank::SetDetails(const QVector<VLayoutPiece> &details)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::GetTiket()
+int VBank::GetNext()
 {
     if (prepare == false)
     {
         return -1;
     }
 
-    if (LeftArrange() == 0)
+    if (LeftToArrange() == 0)
     {
         if (unsorted.isEmpty())
         {
@@ -245,7 +251,7 @@ int VBank::AllDetailsCount() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VBank::LeftArrange() const
+int VBank::LeftToArrange() const
 {
     return big.count() + middle.count() + small.count();
 }
