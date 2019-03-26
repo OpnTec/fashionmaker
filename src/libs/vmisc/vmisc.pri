@@ -42,7 +42,8 @@ HEADERS += \
     $$PWD/literals.h \
     $$PWD/qt_dispatch/qt_dispatch.h \
     $$PWD/vdatastreamenum.h \
-    $$PWD/vmodifierkey.h
+    $$PWD/vmodifierkey.h \
+    $$PWD/typedef.h
 
 # Qt's versions
 # 5.2.0, 5.2.1

@@ -33,6 +33,7 @@
 #include <QStringList>
 #include <QtGlobal>
 
+#include "../vmisc/typedef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
 
@@ -43,11 +44,6 @@ extern const QString CustomIncrSign;
     extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
     #include <windows.h>
 #endif /*Q_OS_WIN32*/
-
-static const quint32 null_id = 0;
-
-#define NULL_ID null_id//use this value for initialization variables that keeps id values. 0 mean uknown id value.
-#define NULL_ID_STR QChar('0')
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)

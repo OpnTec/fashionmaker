@@ -31,6 +31,8 @@
 
 #include <ciso646>
 
+#include "../vmisc/typedef.h"
+
 enum class LayoutErrors : char
 {
     NoError,
