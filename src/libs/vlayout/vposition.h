@@ -40,13 +40,26 @@
 #include "vlayoutdef.h"
 #include "vlayoutpiece.h"
 
+struct VPositionData
+{
+    VContour gContour{};
+    VLayoutPiece detail{};
+    int i{-1};
+    int j{-1};
+    bool rotate{false};
+    int rotationIncrease{0};
+    bool followGrainline{false};
+};
+
 class VPosition : public QRunnable
 {
 public:
-    VPosition(const VContour &gContour, int j, const VLayoutPiece &detail, int i, std::atomic_bool *stop, bool rotate,
-              int rotationIncrease, bool saveLength, bool followGainline);
+    VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
     virtual ~VPosition() override = default;
 
+    virtual void run() override;
+
+#ifdef LAYOUT_DEBUG
     quint32 getPaperIndex() const;
     void setPaperIndex(quint32 value);
 
@@ -57,33 +70,32 @@ public:
     void setDetailsCount(quint32 value);
 
     void setDetails(const QVector<VLayoutPiece> &details);
+#endif
 
     VBestSquare getBestResult() const;
 
+#ifdef LAYOUT_DEBUG
     static void DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
                           int detailsCount, const QVector<VLayoutPiece> &details = QVector<VLayoutPiece>());
 
     static int Bias(int length, int maxLength);
+#endif
 
 private:
     Q_DISABLE_COPY(VPosition)
-    VBestSquare bestResult;
-    const VContour gContour;
-    const VLayoutPiece detail;
-    int i;
-    int j;
+    VBestSquare m_bestResult;
+    VPositionData m_data;
+#ifdef LAYOUT_DEBUG
     quint32 paperIndex;
     quint32 frame;
     quint32 detailsCount;
     QVector<VLayoutPiece> details;
+#endif
     std::atomic_bool *stop;
-    bool rotate;
-    int rotationIncrease;
     /**
      * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
      */
     qreal angle_between;
-    bool followGrainline;
 
     enum class CrossingType : char
     {
@@ -98,8 +110,6 @@ private:
         Inside = 1,
         EdgeError = 2
     };
-
-    virtual void run() override;
 
     void SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ, BestFrom type);
 
@@ -118,6 +128,8 @@ private:
     void FollowGrainline();
 
     QLineF FabricGrainline() const;
+
+    void FindBestPosition();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -127,7 +139,8 @@ private:
  */
 inline QLineF VPosition::FabricGrainline() const
 {
-    return gContour.GetHeight() >= gContour.GetWidth() ? QLineF(10, 10, 10, 100) : QLineF(10, 10, 100, 10);
+    return m_data.gContour.GetHeight() >= m_data.gContour.GetWidth() ? QLineF(10, 10, 10, 100) :
+                                                                       QLineF(10, 10, 100, 10);
 }
 
 #endif // VPOSITION_H

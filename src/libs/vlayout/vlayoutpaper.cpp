@@ -238,23 +238,23 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
-    int detailEdgesCount = 0;
-
-    if (d->globalContour.GetContour().isEmpty())
-    {
-        detailEdgesCount = detail.DetailEdgesCount();
-    }
-    else
-    {
-        detailEdgesCount = detail.LayoutEdgesCount();
-    }
+    int detailEdgesCount = d->globalContour.GetContour().isEmpty() ? detail.DetailEdgesCount() :
+                                                                     detail.LayoutEdgesCount();
 
     for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
         for (int i=1; i<= detailEdgesCount; ++i)
         {
-            auto *thread = new VPosition(d->globalContour, j, detail, i, &stop, d->localRotate,
-                                         d->localRotationIncrease, d->saveLength, d->followGrainline);
+            VPositionData data;
+            data.gContour = d->globalContour;
+            data.detail = detail;
+            data.i = i;
+            data.j = j;
+            data.rotate = d->localRotate;
+            data.rotationIncrease = d->localRotationIncrease;
+            data.followGrainline = d->followGrainline;
+
+            auto *thread = new VPosition(data, &stop, d->saveLength);
             //Info for debug
             #ifdef LAYOUT_DEBUG
                 thread->setPaperIndex(d->paperIndex);
@@ -267,7 +267,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
             threads.append(thread);
             thread_pool->start(thread);
 
+#ifdef LAYOUT_DEBUG
             d->frame = d->frame + 3 + static_cast<quint32>(360/d->localRotationIncrease*2);
+#endif
         }
     }
 
