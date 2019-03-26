@@ -311,8 +311,8 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
 
-    const bool isPortrait = m_data.gContour.GetSize().height() >= m_data.gContour.GetSize().width();
-    const qreal position = isPortrait ? detail.DetailBoundingRect().y() : detail.DetailBoundingRect().x();
+    const qreal position = m_data.gContour.IsPortrait() ? detail.DetailBoundingRect().y() :
+                                                          detail.DetailBoundingRect().x();
 
     bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), position, type);
 }

@@ -144,15 +144,7 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
             return QVector<QPointF>();
         }
 
-        int i2 = 0;
-        if (globalI == d->globalContour.count())
-        {
-            i2 = 0;
-        }
-        else
-        {
-            i2 = globalI;
-        }
+        const int i2 = globalI == d->globalContour.count() ? 0 : globalI;
 
         int i=0;
         while (i < d->globalContour.count())
@@ -165,40 +157,11 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
                 }
                 else
                 {
-                    int processedEdges = 0;
-                    const int nD = detail.LayoutEdgesCount();
-                    int j = detJ+1;
-                    do
-                    {
-                        if (j > nD)
-                        {
-                            j=1;
-                        }
-                        if (j != detJ)
-                        {
-                            const QVector<QPointF> points = CutEdge(detail.LayoutEdge(j));
-                            for (int i = 0; i < points.size()-1; ++i)
-                            {
-                                newContour.append(points.at(i));
-                            }
-                        }
-                        ++processedEdges;
-                        ++j;
-                    }while (processedEdges < nD);
+                    InsertDetail(newContour, detail, detJ);
                 }
             }
 
-            if (not newContour.isEmpty())
-            {
-                if (newContour.last() != d->globalContour.at(i))
-                {
-                    newContour.append(d->globalContour.at(i));
-                }
-            }
-            else
-            {
-                newContour.append(d->globalContour.at(i));
-            }
+            AppendToContour(newContour, d->globalContour.at(i));
             ++i;
         }
     }
@@ -337,6 +300,22 @@ QPainterPath VContour::ContourPath() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContour::AppendToContour(QVector<QPointF> &contour, QPointF point) const
+{
+    if (not contour.isEmpty())
+    {
+        if (not VFuzzyComparePoints(contour.last(), point))
+        {
+            contour.append(point);
+        }
+    }
+    else
+    {
+        contour.append(point);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
 {
     int processedEdges = 0;
@@ -356,6 +335,31 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
         ++processedEdges;
         ++j;
     }while (processedEdges < nD);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
+{
+    int processedEdges = 0;
+    const int nD = detail.LayoutEdgesCount();
+    int j = detJ+1;
+    do
+    {
+        if (j > nD)
+        {
+            j=1;
+        }
+        if (j != detJ)
+        {
+            for(auto &point : CutEdge(detail.LayoutEdge(j)))
+            {
+                AppendToContour(contour, point);
+            }
+        }
+        ++processedEdges;
+        ++j;
+    }
+    while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
