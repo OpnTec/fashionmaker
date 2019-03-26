@@ -592,7 +592,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetUnitePages(IsUnitePages());
     generator->SetStripOptimization(IsStripOptimization());
     generator->SetMultiplier(GetMultiplier());
-    generator->SetTestAsPaths(IsTextAsPaths());
+    generator->SetTextAsPaths(IsTextAsPaths());
 
     if (IsIgnoreAllFields())
     {

@@ -112,7 +112,7 @@ public:
     void SetStripOptimization(bool value);
 
     bool IsTestAsPaths() const;
-    void SetTestAsPaths(bool value);
+    void SetTextAsPaths(bool value);
 
 signals:
     void Start();

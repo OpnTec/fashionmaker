@@ -271,7 +271,7 @@ bool VLayoutGenerator::IsTestAsPaths() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetTestAsPaths(bool value)
+void VLayoutGenerator::SetTextAsPaths(bool value)
 {
     textAsPaths = value;
 }
