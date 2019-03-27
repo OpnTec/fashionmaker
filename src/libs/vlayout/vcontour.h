@@ -96,7 +96,6 @@ public:
 private:
     QSharedDataPointer<VContourData> d;
 
-    void AppendToContour(QVector<QPointF> &contour, QPointF point) const;
     void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
     void InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
 };

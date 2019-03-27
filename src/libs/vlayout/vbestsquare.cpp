@@ -55,6 +55,17 @@ VBestSquare::~VBestSquare()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VBestSquare &VBestSquare::operator=(const VBestSquare &res)
+{
+    if ( &res == this )
+    {
+        return *this;
+    }
+    d = res.d;
+    return *this;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquareResData &data)
 {
     auto SaveResult = [this, data]()

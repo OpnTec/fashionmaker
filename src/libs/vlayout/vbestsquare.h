@@ -46,6 +46,7 @@ public:
     VBestSquare(const VBestSquare &res);
     virtual ~VBestSquare();
 
+    VBestSquare &operator=(const VBestSquare &res);
 #ifdef Q_COMPILER_RVALUE_REFS
     VBestSquare &operator=(VBestSquare &&res) Q_DECL_NOTHROW { Swap(res); return *this; }
 #endif

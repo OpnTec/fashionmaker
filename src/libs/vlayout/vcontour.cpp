@@ -40,6 +40,25 @@
 #include "vlayoutpiece.h"
 #include "../vmisc/vmath.h"
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+void AppendToContour(QVector<QPointF> &contour, QPointF point)
+{
+    if (not contour.isEmpty())
+    {
+        if (not VFuzzyComparePoints(contour.last(), point))
+        {
+            contour.append(point);
+        }
+    }
+    else
+    {
+        contour.append(point);
+    }
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VContour::VContour()
     :d(new VContourData())
@@ -307,22 +326,6 @@ QPainterPath VContour::ContourPath() const
     path.lineTo(points.at(0));
 
     return path;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VContour::AppendToContour(QVector<QPointF> &contour, QPointF point) const
-{
-    if (not contour.isEmpty())
-    {
-        if (not VFuzzyComparePoints(contour.last(), point))
-        {
-            contour.append(point);
-        }
-    }
-    else
-    {
-        contour.append(point);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
