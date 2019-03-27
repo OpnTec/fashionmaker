@@ -276,7 +276,8 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
     doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
-    doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(), false);
+    doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
+                                not piece.IsSeamAllowanceBuiltIn());
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
 }

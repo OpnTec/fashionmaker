@@ -75,7 +75,7 @@ void TogglePieceInLayout::Do(bool state)
     QDomElement detail = doc->elementById(m_id, VAbstractPattern::TagDetail);
     if (detail.isElement())
     {
-        doc->SetAttributeOrRemoveIf(detail, AttrInLayout, state, true);
+        doc->SetAttributeOrRemoveIf(detail, AttrInLayout, state, state);
 
         VPiece det = m_data->DataPieces()->value(m_id);
         det.SetInLayout(state);

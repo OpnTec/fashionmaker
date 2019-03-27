@@ -523,8 +523,9 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         }
     }
 
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(), false);
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(), true);
+    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeExcluded, node.IsExcluded(), not node.IsExcluded());
+    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrCheckUniqueness, node.IsCheckUniqueness(),
+                                node.IsCheckUniqueness());
 
     switch (type)
     {
@@ -581,7 +582,8 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
         nod.removeAttribute(VAbstractPattern::AttrNodePassmarkAngle);
     }
 
-    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(), true);
+    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(),
+                                node.IsShowSecondPassmark());
 
     return nod;
 }

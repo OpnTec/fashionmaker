@@ -4227,7 +4227,7 @@ void VPattern::SetDefCustomHeight(int value)
     QDomElement domElement = domNode.toElement();
     if (domElement.isNull() == false)
     {
-        SetAttributeOrRemoveIf(domElement, AttrDefHeight, value, 0);
+        SetAttributeOrRemoveIf(domElement, AttrDefHeight, value, value == 0);
         modified = true;
     }
     else
@@ -4279,7 +4279,7 @@ void VPattern::SetDefCustomSize(int value)
     QDomElement domElement = domNode.toElement();
     if (domElement.isNull() == false)
     {
-        SetAttributeOrRemoveIf(domElement, AttrDefSize, value, 0);
+        SetAttributeOrRemoveIf(domElement, AttrDefSize, value, value == 0);
         modified = true;
     }
     else
@@ -4308,7 +4308,7 @@ void VPattern::SetReadOnly(bool rOnly)
 
     if (not pattern.isNull())
     {
-        SetAttributeOrRemoveIf(pattern, AttrReadOnly, rOnly, false);
+        SetAttributeOrRemoveIf(pattern, AttrReadOnly, rOnly, not rOnly);
         modified = true;
     }
 }
