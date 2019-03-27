@@ -72,14 +72,7 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
         {
             if (d->saveLength)
             {
-                const QSizeF saveSpaceSize = IsPortrait() ? QSizeF(d->sheetSize.width(), data.bestSize.height()) :
-                                                            QSizeF(data.bestSize.width(), d->sheetSize.height());
-
-                const QSizeF saveSpaceBestSize = IsPortrait() ? QSizeF(d->sheetSize.width(), d->data.bestSize.height()):
-                                                                QSizeF(d->data.bestSize.width(), d->sheetSize.height());
-
-                if (Square(saveSpaceBestSize) > 0 && Square(saveSpaceSize) > 0
-                        && Square(saveSpaceSize) <= Square(saveSpaceBestSize))
+                if (data.depthPosition <= d->data.depthPosition)
                 {
                     SaveResult();
                 }
