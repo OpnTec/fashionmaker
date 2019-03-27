@@ -42,37 +42,28 @@ class VBestSquareData : public QSharedData
 {
 public:
     VBestSquareData(const QSizeF &sheetSize, bool saveLength)
-        : bestSize(QSizeF(sheetSize.width()+10, sheetSize.height()+10)),
-          sheetSize(sheetSize),
+        : sheetSize(sheetSize),
           saveLength(saveLength)
-    {}
+    {
+        data.bestSize = QSizeF(sheetSize.width()+10, sheetSize.height()+10);
+    }
 
     VBestSquareData(const VBestSquareData &res)
         : QSharedData(res),
-          resI(res.resI),
-          resJ(res.resJ),
-          resMatrix(res.resMatrix),
-          bestSize(res.bestSize),
           sheetSize(res.sheetSize),
           valideResult(res.valideResult),
-          resMirror(res.resMirror),
-          type(res.type),
           saveLength(res.saveLength),
-          position(res.position)
+          depthPosition(res.depthPosition),
+          data(res.data)
     {}
 
     ~VBestSquareData() {}
 
-    int resI{0}; // Edge of global contour
-    int resJ{0}; // Edge of detail
-    QTransform resMatrix{}; // Matrix for rotation and translation detail
-    QSizeF bestSize;
     QSizeF sheetSize;
     bool valideResult{false};
-    bool resMirror{false};
-    BestFrom type{BestFrom::Rotation};
     bool saveLength;
-    qreal position{INT_MAX};
+    qreal depthPosition{INT_MAX};
+    VBestSquareResData data{};
 
 private:
     VBestSquareData &operator=(const VBestSquareData &) Q_DECL_EQ_DELETE;

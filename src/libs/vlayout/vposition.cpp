@@ -315,11 +315,19 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     QVector<QPointF> newGContour = m_data.gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
+    const qreal depthPosition = m_data.gContour.IsPortrait() ? detail.DetailBoundingRect().y() :
+                                                               detail.DetailBoundingRect().x();
 
-    const qreal position = m_data.gContour.IsPortrait() ? detail.DetailBoundingRect().y() :
-                                                          detail.DetailBoundingRect().x();
+    VBestSquareResData data;
+    data.bestSize = size;
+    data.globalI = globalI; // Edge of global contour
+    data.detJ = detJ; // Edge of detail
+    data.resMatrix = detail.GetMatrix(); // Matrix for rotation and translation detail
+    data.resMirror = detail.IsMirror();
+    data.type = type;
+    data.depthPosition = depthPosition;
 
-    bestResult.NewResult(size, globalI, detJ, detail.GetMatrix(), detail.IsMirror(), position, type);
+    bestResult.NewResult(data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

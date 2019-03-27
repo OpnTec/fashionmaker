@@ -29,6 +29,8 @@
 #ifndef VLAYOUTDEF_H
 #define VLAYOUTDEF_H
 
+#include <QSize>
+#include <QTransform>
 #include <ciso646>
 
 #include "../vmisc/typedef.h"
@@ -45,6 +47,21 @@ enum class BestFrom : char
 {
     Rotation = 0,
     Combine = 1
+};
+
+struct VBestSquareResData
+{
+    QSizeF        bestSize{INT_MAX, INT_MAX};
+    // cppcheck-suppress unusedStructMember
+    int           globalI{0}; // Edge of global contour
+    // cppcheck-suppress unusedStructMember
+    int           detJ{0}; // Edge of detail
+    QTransform    resMatrix{}; // Matrix for rotation and translation detail
+    // cppcheck-suppress unusedStructMember
+    bool          resMirror{false};
+    BestFrom      type{BestFrom::Rotation};
+    // cppcheck-suppress unusedStructMember
+    qreal         depthPosition{INT_MAX};
 };
 
 /* Warning! Debugging doesn't work stable in debug mode. If you need big allocation use release mode. Or disable

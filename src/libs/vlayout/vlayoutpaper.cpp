@@ -301,7 +301,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail)
 {
-    if (bestResult.IsValidResult())
+    if (bestResult.HasValidResult())
     {
         VLayoutPiece workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
@@ -329,7 +329,7 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
 #endif
     }
 
-    return bestResult.IsValidResult(); // Do we have the best result?
+    return bestResult.HasValidResult(); // Do we have the best result?
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -42,7 +42,7 @@ class VBestSquareData;
 class VBestSquare
 {
 public:
-    VBestSquare(const QSizeF &sheetSize, bool saveLength);
+    VBestSquare(QSizeF sheetSize, bool saveLength);
     VBestSquare(const VBestSquare &res);
     virtual ~VBestSquare();
 
@@ -53,20 +53,22 @@ public:
     inline void Swap(VBestSquare &res) Q_DECL_NOTHROW
     { std::swap(d, res.d); }
 
-    void NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror, qreal position,
-                   BestFrom type);
+    void NewResult(const VBestSquareResData &data);
     void NewResult(const VBestSquare &best);
 
     QSizeF     BestSize() const;
     int        GContourEdge() const;
     int        DetailEdge() const;
     QTransform Matrix() const;
-    bool       IsValidResult() const;
+    bool       HasValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
     qreal      Position() const;
 
+    VBestSquareResData BestResultData() const;
+
     bool IsSaveLength() const;
+    bool IsPortrait() const;
 
 private:
     QSharedDataPointer<VBestSquareData> d;

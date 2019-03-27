@@ -34,14 +34,14 @@
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline qint64 Square(const QSizeF &size)
+Q_DECL_CONSTEXPR inline qint64 Square(QSizeF size)
 {
     return static_cast<qint64>(size.width()*size.height());
 }
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare::VBestSquare(const QSizeF &sheetSize, bool saveLength)
+VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength)
     : d(new VBestSquareData(sheetSize, saveLength))
 {}
 
@@ -55,43 +55,39 @@ VBestSquare::~VBestSquare()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransform &matrix, bool mirror,
-                            qreal position, BestFrom type)
+void VBestSquare::NewResult(const VBestSquareResData &data)
 {
-    auto SaveResult = [this, candidate, i, j, matrix, mirror, type, position]()
+    auto SaveResult = [this, data]()
     {
-        d->bestSize = candidate;
-        d->resI = i;
-        d->resJ = j;
-        d->resMatrix = matrix;
         d->valideResult = true;
-        d->resMirror = mirror;
-        d->type = type;
-        d->position = position;
+        d->data = data;
     };
 
-    if (d->saveLength)
-    {
-        const bool isPortrait = d->sheetSize.height() >= d->sheetSize.width();
-        const QSizeF saveSpaceSize = isPortrait ? QSizeF(d->sheetSize.width(), candidate.height()) :
-                                                  QSizeF(candidate.width(), d->sheetSize.height());
+    const qint64 candidateSquare = Square(data.bestSize);
 
-        const QSizeF saveSpaceBestSize = isPortrait ? QSizeF(d->sheetSize.width(), d->bestSize.height()) :
-                                                      QSizeF(d->bestSize.width(), d->sheetSize.height());
-
-        if (Square(saveSpaceSize) <= Square(saveSpaceBestSize) && Square(candidate) <= Square(d->bestSize)
-                && position <= d->position && Square(saveSpaceSize) > 0 && Square(saveSpaceBestSize) > 0
-                && type >= d->type)
-        {
-            SaveResult();
-        }
-    }
-    else
+    if (candidateSquare > 0)
     {
-        if (Square(candidate) <= Square(d->bestSize) && Square(candidate) > 0 && position <= d->position
-                && type >= d->type)
+        if (data.type >= d->data.type && candidateSquare <= Square(d->data.bestSize)
+                && data.depthPosition <= d->data.depthPosition)
         {
-            SaveResult();
+            if (d->saveLength)
+            {
+                const QSizeF saveSpaceSize = IsPortrait() ? QSizeF(d->sheetSize.width(), data.bestSize.height()) :
+                                                            QSizeF(data.bestSize.width(), d->sheetSize.height());
+
+                const QSizeF saveSpaceBestSize = IsPortrait() ? QSizeF(d->sheetSize.width(), d->data.bestSize.height()):
+                                                                QSizeF(d->data.bestSize.width(), d->sheetSize.height());
+
+                if (Square(saveSpaceBestSize) > 0 && Square(saveSpaceSize) > 0
+                        && Square(saveSpaceSize) <= Square(saveSpaceBestSize))
+                {
+                    SaveResult();
+                }
+            }
+            else
+            {
+                SaveResult();
+            }
         }
     }
 }
@@ -99,39 +95,38 @@ void VBestSquare::NewResult(const QSizeF &candidate, int i, int j, const QTransf
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquare &best)
 {
-    if (best.IsValidResult() && d->saveLength == best.IsSaveLength())
+    if (best.HasValidResult() && d->saveLength == best.IsSaveLength())
     {
-        NewResult(best.BestSize(), best.GContourEdge(), best.DetailEdge(), best.Matrix(), best.Mirror(),
-                  best.Position(), best.Type());
+        NewResult(best.BestResultData());
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline QSizeF VBestSquare::BestSize() const
+QSizeF VBestSquare::BestSize() const
 {
-    return d->bestSize;
+    return d->data.bestSize;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline int VBestSquare::GContourEdge() const
+int VBestSquare::GContourEdge() const
 {
-    return d->resI;
+    return d->data.globalI;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VBestSquare::DetailEdge() const
 {
-    return d->resJ;
+    return d->data.detJ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QTransform VBestSquare::Matrix() const
 {
-    return d->resMatrix;
+    return d->data.resMatrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBestSquare::IsValidResult() const
+bool VBestSquare::HasValidResult() const
 {
     return d->valideResult;
 }
@@ -139,23 +134,35 @@ bool VBestSquare::IsValidResult() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VBestSquare::Mirror() const
 {
-    return d->resMirror;
+    return d->data.resMirror;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 BestFrom VBestSquare::Type() const
 {
-    return d->type;
+    return d->data.type;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VBestSquare::Position() const
 {
-    return d->position;
+    return d->depthPosition;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquareResData VBestSquare::BestResultData() const
+{
+    return d->data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VBestSquare::IsSaveLength() const
 {
     return d->saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VBestSquare::IsPortrait() const
+{
+    return d->sheetSize.height() >= d->sheetSize.width();
 }
