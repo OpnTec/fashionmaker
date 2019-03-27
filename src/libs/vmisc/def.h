@@ -329,6 +329,15 @@ enum class GSizes : unsigned char { ALL,
 #endif
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
+
+#ifndef QT_HAS_CPP_ATTRIBUTE
+#ifdef __has_cpp_attribute
+#  define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
+#else
+#  define QT_HAS_CPP_ATTRIBUTE(x) 0
+#endif
+#endif // QT_HAS_CPP_ATTRIBUTE
+
 #if defined(__cplusplus)
 #if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
 #    define Q_FALLTHROUGH() [[clang::fallthrough]]
@@ -344,8 +353,8 @@ enum class GSizes : unsigned char { ALL,
 #  else
 #    define Q_FALLTHROUGH() (void)0
 #endif
-#endif
-#endif
+#endif // defined(__cplusplus)
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);

@@ -55,23 +55,33 @@
 # define __has_cpp_attribute(x) 0
 #endif
 
-#if __cplusplus > 201402L && __has_cpp_attribute(fallthrough)
-#   define QMUP_FALLTHROUGH [[fallthrough]];
-#elif defined(Q_CC_CLANG) && __cplusplus >= 201103L
-    /* clang's fallthrough annotations are only available starting in C++11. */
-#   define QMUP_FALLTHROUGH [[clang::fallthrough]];
-#elif defined(Q_CC_MSVC)
-   /*
-    * MSVC's __fallthrough annotations are checked by /analyze (Code Analysis):
-    * https://msdn.microsoft.com/en-us/library/ms235402%28VS.80%29.aspx
-    */
-#   include <sal.h>
-#   define QMUP_FALLTHROUGH __fallthrough;
-#elif defined(Q_CC_GNU) && (__GNUC__ >= 7)
-#   define QMUP_FALLTHROUGH [[gnu::fallthrough]];
+#if QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
+
+#ifndef QT_HAS_CPP_ATTRIBUTE
+#ifdef __has_cpp_attribute
+#  define QT_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)
 #else
-#   define QMUP_FALLTHROUGH
+#  define QT_HAS_CPP_ATTRIBUTE(x) 0
 #endif
+#endif // QT_HAS_CPP_ATTRIBUTE
+
+#if defined(__cplusplus)
+#if QT_HAS_CPP_ATTRIBUTE(clang::fallthrough)
+#    define Q_FALLTHROUGH() [[clang::fallthrough]]
+#elif QT_HAS_CPP_ATTRIBUTE(gnu::fallthrough)
+#    define Q_FALLTHROUGH() [[gnu::fallthrough]]
+#elif QT_HAS_CPP_ATTRIBUTE(fallthrough)
+#  define Q_FALLTHROUGH() [[fallthrough]]
+#endif
+#endif
+#ifndef Q_FALLTHROUGH
+#  if (defined(Q_CC_GNU) && Q_CC_GNU >= 700) && !defined(Q_CC_INTEL)
+#    define Q_FALLTHROUGH() __attribute__((fallthrough))
+#  else
+#    define Q_FALLTHROUGH() (void)0
+#endif
+#endif // defined(__cplusplus)
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
 /** @brief If this macro is defined mathematical exceptions (div by zero) will be thrown as exceptions. */
 //#define QMUP_MATH_EXCEPTIONS

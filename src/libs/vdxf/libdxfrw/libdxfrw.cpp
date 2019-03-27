@@ -2530,7 +2530,7 @@ bool dxfRW::processPolyline() {
                 processVertex(&pl);
             }
         }
-        DRW_FALLTHROUGH
+        Q_FALLTHROUGH();
         default:
             pl.parseCode(code, reader);
             break;
@@ -2556,7 +2556,7 @@ bool dxfRW::processVertex(DRW_Polyline *pl) {
                 v.reset(new DRW_Vertex()); //another vertex
             }
         }
-        DRW_FALLTHROUGH
+        Q_FALLTHROUGH();
         default:
             v->parseCode(code, reader);
             break;
