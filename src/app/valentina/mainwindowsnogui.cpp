@@ -108,6 +108,21 @@ void RemoveLayoutPath(const QString &path, bool usedNotExistedDir)
         dir.rmpath(QChar('.'));
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_UNUSED void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &gcontours);
+void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGraphicsItem *> &gcontours)
+{
+    if (scenes.size() != gcontours.size())
+    {
+        return;
+    }
+
+    for(int i = 0; i < scenes.size(); ++i)
+    {
+        scenes.at(i)->addItem(gcontours.at(i));
+    }
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,6 +137,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       shadows(),
       scenes(),
       details(),
+      gcontours(),
       detailsOnLayout(),
       undoAction(nullptr),
       redoAction(nullptr),
@@ -228,6 +244,9 @@ bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
             detailsOnLayout = lGenerator.GetAllDetails();// All details items
             shadows = CreateShadows(papers);
             scenes = CreateScenes(papers, shadows, details);
+           //Uncomment to debug, shows global contour
+//            gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
+//            InsertGlobalContours(scenes, gcontours); // uncomment for debugging
             PrepareSceneList();
             ignorePrinterFields = not lGenerator.IsUsePrinterFields();
             margins = lGenerator.GetPrinterFields();

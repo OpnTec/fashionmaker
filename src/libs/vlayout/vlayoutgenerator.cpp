@@ -222,6 +222,17 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QList<QGraphicsItem *> VLayoutGenerator::GetGlobalContours() const
+{
+    QList<QGraphicsItem *> list;
+    for (auto &paper : papers)
+    {
+        list.append(paper.GetGlobalContour());
+    }
+    return list;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QList<QList<QGraphicsItem *> > VLayoutGenerator::GetAllDetailsItems() const
 {
     QList<QList<QGraphicsItem *> > list;

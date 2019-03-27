@@ -367,6 +367,32 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QGraphicsPathItem *VLayoutPaper::GetGlobalContour() const
+{
+    // contour
+    const QVector<QPointF> points = d->globalContour.GetContour();
+
+    QPainterPath path;
+    if (points.size() > 0)
+    {
+        path.moveTo(points.at(0));
+        for (auto point : points)
+        {
+            path.lineTo(point);
+        }
+        path.lineTo(points.at(0));
+    }
+
+    const qreal radius = 1;
+    for (auto point : points)
+    {
+        path.addEllipse(point.x()-radius, point.y()-radius, radius*2, radius*2);
+    }
+
+    return new QGraphicsPathItem(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QList<QGraphicsItem *> VLayoutPaper::GetItemDetails(bool textAsPaths) const
 {
     QList<QGraphicsItem *> list;

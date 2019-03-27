@@ -83,6 +83,7 @@ public:
     LayoutErrors State() const;
 
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
+    Q_REQUIRED_RESULT QList<QGraphicsItem *> GetGlobalContours() const;
     Q_REQUIRED_RESULT QList<QList<QGraphicsItem *>> GetAllDetailsItems() const;
 
     QVector<QVector<VLayoutPiece>> GetAllDetails() const;

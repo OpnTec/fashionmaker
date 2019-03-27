@@ -1539,6 +1539,7 @@ void MainWindow::CleanLayout()
     scenes.clear();
     shadows.clear();
     papers.clear();
+    gcontours.clear();
     ui->listWidget->clear();
     SetLayoutModeActions();
 }

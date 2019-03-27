@@ -99,6 +99,7 @@ protected:
     QList<QGraphicsItem *> shadows;
     QList<QGraphicsScene *> scenes;
     QList<QList<QGraphicsItem *> > details;
+    QList<QGraphicsItem *> gcontours;
 
     QVector<QVector<VLayoutPiece> > detailsOnLayout;
 
