@@ -50,7 +50,7 @@ class VLayoutPaper
 {
 public:
     VLayoutPaper();
-    VLayoutPaper(int height, int width);
+    VLayoutPaper(int height, int width, qreal layoutWidth);
     VLayoutPaper(const VLayoutPaper &paper);
 
     ~VLayoutPaper();

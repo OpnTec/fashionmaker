@@ -55,8 +55,8 @@ VLayoutPaper::VLayoutPaper()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPaper::VLayoutPaper(int height, int width)
-    :d(new VLayoutPaperData(height, width))
+VLayoutPaper::VLayoutPaper(int height, int width, qreal layoutWidth)
+    :d(new VLayoutPaperData(height, width, layoutWidth))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -238,8 +238,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;
 
-    int detailEdgesCount = d->globalContour.GetContour().isEmpty() ? detail.DetailEdgesCount() :
-                                                                     detail.LayoutEdgesCount();
+    int detailEdgesCount = detail.LayoutEdgesCount();
 
     for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
@@ -307,6 +306,12 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         VLayoutPiece workDetail = detail;
         workDetail.SetMatrix(bestResult.Matrix());// Don't forget set matrix
         workDetail.SetMirror(bestResult.Mirror());
+
+        if (d->saveLength)
+        {
+            d->globalContour.CeateEmptySheetContour();
+        }
+
         const QVector<QPointF> newGContour = d->globalContour.UniteWithContour(workDetail, bestResult.GContourEdge(),
                                                                                bestResult.DetailEdge(),
                                                                                bestResult.Type());

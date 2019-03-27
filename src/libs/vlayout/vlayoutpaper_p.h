@@ -46,19 +46,9 @@ public:
     VLayoutPaperData()
     {}
 
-    VLayoutPaperData(int height,
-                     int width)
-        : details(QVector<VLayoutPiece>()),
-          globalContour(VContour(height, width)),
-          paperIndex(0),
-          frame(0),
-          layoutWidth(0),
-          globalRotate(true),
-          localRotate(true),
-          globalRotationIncrease(180),
-          localRotationIncrease(180),
-          saveLength(false),
-          followGrainline(false)
+    VLayoutPaperData(int height, int width, qreal layoutWidth)
+        : globalContour(VContour(height, width, layoutWidth)),
+          layoutWidth(layoutWidth)
     {}
 
     VLayoutPaperData(const VLayoutPaperData &paper)

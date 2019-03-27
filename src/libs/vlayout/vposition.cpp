@@ -307,6 +307,11 @@ int VPosition::Bias(int length, int maxLength)
 void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detail, int globalI, int detJ,
                               BestFrom type)
 {
+    if (bestResult.IsSaveLength())
+    {
+        m_data.gContour.CeateEmptySheetContour();
+    }
+
     QVector<QPointF> newGContour = m_data.gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();

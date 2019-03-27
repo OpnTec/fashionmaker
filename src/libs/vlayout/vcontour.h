@@ -48,7 +48,7 @@ class VContour
 {
 public:
     VContour();
-    VContour(int height, int width);
+    VContour(int height, int width, qreal layoutWidth);
     VContour(const VContour &contour);
 
     ~VContour();
@@ -60,6 +60,8 @@ public:
 
     inline void Swap(VContour &contour) Q_DECL_NOTHROW
     { std::swap(d, contour.d); }
+
+    void CeateEmptySheetContour();
 
     void             SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;

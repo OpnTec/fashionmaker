@@ -141,9 +141,8 @@ void VLayoutGenerator::Generate()
                 break;
             }
 
-            VLayoutPaper paper(height, width);
+            VLayoutPaper paper(height, width, bank->GetLayoutWidth());
             paper.SetShift(shift);
-            paper.SetLayoutWidth(bank->GetLayoutWidth());
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
             paper.SetFollowGrainline(followGrainline);
@@ -380,9 +379,8 @@ void VLayoutGenerator::GatherPages()
     QVector<VLayoutPaper> nPapers;
     for (int i = 0; i < nDetails.size(); ++i)
     {
-        VLayoutPaper paper(PageHeight(), PageWidth());
+        VLayoutPaper paper(PageHeight(), PageWidth(), bank->GetLayoutWidth());
         paper.SetShift(shift);
-        paper.SetLayoutWidth(bank->GetLayoutWidth());
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetFollowGrainline(followGrainline);
@@ -484,9 +482,8 @@ void VLayoutGenerator::UnitePages()
         const int height = IsPortrait() ? qFloor(papersLength.at(i)) : PageHeight();
         const int width = IsPortrait() ? PageWidth() : qFloor(papersLength.at(i));
 
-        VLayoutPaper paper(height, width);
+        VLayoutPaper paper(height, width, bank->GetLayoutWidth());
         paper.SetShift(shift);
-        paper.SetLayoutWidth(bank->GetLayoutWidth());
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetFollowGrainline(followGrainline);

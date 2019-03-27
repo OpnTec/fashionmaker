@@ -31,6 +31,7 @@
 
 #include <QSharedData>
 #include <QPointF>
+#include <QVector>
 
 #include "../vmisc/diagnostic.h"
 
@@ -42,30 +43,37 @@ class VContourData : public QSharedData
 {
 public:
     VContourData()
-        :globalContour(QVector<QPointF>()), paperHeight(0), paperWidth(0), shift(0)
     {}
 
-    VContourData(int height, int width)
-        :globalContour(QVector<QPointF>()), paperHeight(height), paperWidth(width), shift(0)
+    VContourData(int height, int width, qreal layoutWidth)
+        : paperHeight(height),
+          paperWidth(width),
+          layoutWidth(layoutWidth)
     {}
 
     VContourData(const VContourData &contour)
-        :QSharedData(contour), globalContour(contour.globalContour), paperHeight(contour.paperHeight),
-          paperWidth(contour.paperWidth), shift(contour.shift)
+        : QSharedData(contour),
+          globalContour(contour.globalContour),
+          paperHeight(contour.paperHeight),
+          paperWidth(contour.paperWidth),
+          shift(contour.shift),
+          layoutWidth(contour.layoutWidth)
     {}
 
     ~VContourData() {}
 
     /** @brief globalContour list of global points contour. */
-    QVector<QPointF> globalContour;
+    QVector<QPointF> globalContour{};
 
     /** @brief paperHeight height of paper in pixels*/
-    int paperHeight;
+    int paperHeight{0};
 
     /** @brief paperWidth width of paper in pixels*/
-    int paperWidth;
+    int paperWidth{0};
 
-    quint32 shift;
+    quint32 shift{0};
+
+    qreal layoutWidth{0};
 
 private:
     VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;

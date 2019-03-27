@@ -46,8 +46,8 @@ VContour::VContour()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VContour::VContour(int height, int width)
-    :d(new VContourData(height, width))
+VContour::VContour(int height, int width, qreal layoutWidth)
+    :d(new VContourData(height, width, layoutWidth))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -69,6 +69,16 @@ VContour &VContour::operator=(const VContour &contour)
 //---------------------------------------------------------------------------------------------------------------------
 VContour::~VContour()
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContour::CeateEmptySheetContour()
+{
+    if (d->globalContour.isEmpty())
+    {
+        d->globalContour = CutEmptySheetEdge();
+        d->globalContour.append(d->globalContour.first()); // Close path
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VContour::SetContour(const QVector<QPointF> &contour)
@@ -371,5 +381,8 @@ bool VContour::IsPortrait() const
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VContour::EmptySheetEdge() const
 {
-    return IsPortrait() ? QLineF(0, 0, d->paperWidth, 0) : QLineF(0, 0, 0, d->paperHeight);
+    static const int offset = 2;
+    const int layoutOffset = qCeil(d->layoutWidth + accuracyPointOnLine);
+    return IsPortrait() ? QLineF(offset, -layoutOffset, d->paperWidth-offset, -layoutOffset) :
+                          QLineF(-layoutOffset, offset, -layoutOffset, d->paperHeight-offset);
 }
