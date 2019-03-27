@@ -29,7 +29,9 @@
 #ifndef MAINWINDOWSNOGUI_H
 #define MAINWINDOWSNOGUI_H
 
+#include <QLabel>
 #include <QMainWindow>
+#include <QPointer>
 #include <QPrinter>
 
 #include "../vlayout/vlayoutpiece.h"
@@ -113,6 +115,9 @@ protected:
     QSizeF paperSize;
 
     QSharedPointer<DialogSaveLayout> m_dialogSaveLayout;
+
+    /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
+    QPointer<QLabel> m_mouseCoordinate;
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QWinTaskbarButton *m_taskbarButton;

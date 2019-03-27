@@ -160,7 +160,7 @@ QVector<DetailForLayout> SortDetailsForLayout(const QHash<quint32, VPiece> *allD
 MainWindow::MainWindow(QWidget *parent)
     :MainWindowsNoGUI(parent), ui(new Ui::MainWindow), watcher(new QFileSystemWatcher(this)), currentTool(Tool::Arrow),
       lastUsedTool(Tool::Arrow), sceneDraw(nullptr), sceneDetails(nullptr),
-      mouseCoordinate(nullptr), isInitialized(false), mChanges(false), mChangesAsked(true),
+      isInitialized(false), mChanges(false), mChangesAsked(true),
       patternReadOnly(false),
       dialogTable(nullptr),
       dialogTool(),
@@ -1894,10 +1894,6 @@ void MainWindow::OpenAt(QAction *where)
 void MainWindow::ToolBarOption()
 {
     ui->toolBarOption->clear();
-    if (not mouseCoordinate.isNull())
-    {
-        delete mouseCoordinate;
-    }
     if (not gradationHeights.isNull())
     {
         delete gradationHeights;
@@ -1962,8 +1958,8 @@ void MainWindow::ToolBarOption()
 
     ui->toolBarOption->addSeparator();
 
-    mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
-    ui->toolBarOption->addWidget(mouseCoordinate);
+    m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
+    ui->toolBarOption->addWidget(m_mouseCoordinate);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2136,12 +2132,12 @@ void MainWindow::InitToolButtons()
  */
 void MainWindow::MouseMove(const QPointF &scenePos)
 {
-    if (mouseCoordinate)
+    if (not m_mouseCoordinate.isNull())
     {
         //: Coords in status line: "X, Y (units)"
-        mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                                                       .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                                       .arg(UnitsToStr(qApp->patternUnit(), true)));
+        m_mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                                         .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
+                                                         .arg(UnitsToStr(qApp->patternUnit(), true)));
     }
 }
 
@@ -2673,7 +2669,10 @@ void MainWindow::ActionLayout(bool checked)
         SetEnableWidgets(true);
         ui->toolBox->setCurrentIndex(ui->toolBox->indexOf(ui->layoutPage));
 
-        mouseCoordinate->setText(QString());
+        if (not m_mouseCoordinate.isNull())
+        {
+            m_mouseCoordinate->setText(QString());
+        }
 
         if (qApp->patternType() == MeasurementsType::Multisize)
         {
@@ -3463,8 +3462,8 @@ void MainWindow::on_actionNew_triggered()
 
         AddPP(patternPieceName);
 
-        mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
-        ui->toolBarOption->addWidget(mouseCoordinate);
+        m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
+        ui->toolBarOption->addWidget(m_mouseCoordinate);
 
         m_curFileFormatVersion = VPatternConverter::PatternMaxVer;
         m_curFileFormatVersionStr = VPatternConverter::PatternMaxVerStr;

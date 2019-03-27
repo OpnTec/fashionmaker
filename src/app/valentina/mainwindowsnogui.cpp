@@ -134,6 +134,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       margins(),
       paperSize(),
       m_dialogSaveLayout(),
+      m_mouseCoordinate(),
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
       m_taskbarButton(new QWinTaskbarButton(this)),
       m_taskbarProgress(nullptr),
@@ -155,6 +156,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::~MainWindowsNoGUI()
 {
+    delete m_mouseCoordinate;
     delete tempSceneLayout;
     delete pattern;
 }

@@ -225,9 +225,6 @@ private:
     /** @brief sceneDetails details scene. */
     VMainGraphicsScene *sceneDetails;
 
-    /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
-    QPointer<QLabel>    mouseCoordinate;
-
     /** @brief isInitialized true after first show window. */
     bool               isInitialized;
 
