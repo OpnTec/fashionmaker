@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>243</height>
         </rect>
        </property>
@@ -743,7 +743,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>282</height>
         </rect>
        </property>
@@ -1007,7 +1007,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Point from tangent circle and segment</string>
+           <string>Point of intersection circle and segment</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
@@ -1034,7 +1034,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>102</height>
         </rect>
        </property>
@@ -1118,7 +1118,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>333</height>
+         <height>331</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>237</height>
         </rect>
        </property>
@@ -1587,7 +1587,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>333</height>
+         <height>331</height>
         </rect>
        </property>
        <attribute name="icon">
