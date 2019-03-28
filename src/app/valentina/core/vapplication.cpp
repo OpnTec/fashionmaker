@@ -601,13 +601,13 @@ void VApplication::InitOptions()
 
     LoadTranslation(QLocale().name());// By default the console version uses system locale
 
+    // Create command line parser after loading translations to show localized version.
+    VCommandLine::Get(*this);
+
     if (VApplication::IsGUIMode())// By default console version uses system locale
     {
         LoadTranslation(ValentinaSettings()->GetLocale());
     }
-
-    // Create command line parser after loading translations to show localized version.
-    VCommandLine::Get(*this);
 
     static const char * GENERIC_ICON_TO_CHECK = "document-open";
     if (QIcon::hasThemeIcon(GENERIC_ICON_TO_CHECK) == false)
