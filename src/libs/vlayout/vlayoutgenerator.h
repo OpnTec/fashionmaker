@@ -74,19 +74,23 @@ public:
     int  GetNestingTime() const;
     void SetNestingTime(int value);
 
-    qreal GetEfficiencyRatio() const;
+    qreal GetEfficiencyCoefficient() const;
     void  SetEfficiencyCoefficient(qreal coefficient);
 
     bool IsUsePrinterFields() const;
     QMarginsF GetPrinterFields() const;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    qreal GetShift() const;
+    void  SetShift(qreal shift);
 
     void Generate();
 
+    qreal LayoutEfficiency() const;
+
     LayoutErrors State() const;
+
+    int PapersCount() const {return papers.size();}
 
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetGlobalContours() const;
@@ -100,8 +104,8 @@ public:
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool value);
 
-    int GetRotationIncrease() const;
-    void SetRotationIncrease(int value);
+    int GetRotationNumber() const;
+    void SetRotationNumber(int value);
 
     bool GetAutoCrop() const;
     void SetAutoCrop(bool value);
@@ -121,12 +125,6 @@ public:
     bool IsTestAsPaths() const;
     void SetTextAsPaths(bool value);
 
-signals:
-    void Start();
-    void Arranged(int count);
-    void Error(const LayoutErrors &state);
-    void Finished();
-
 public slots:
     void Abort();
 
@@ -140,10 +138,10 @@ private:
     bool usePrinterFields;
     std::atomic_bool stopGeneration;
     LayoutErrors state;
-    quint32 shift;
+    qreal shift;
     bool rotate;
     bool followGrainline;
-    int rotationIncrease;
+    int rotationNumber;
     bool autoCrop;
     bool saveLength;
     bool unitePages;

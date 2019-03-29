@@ -33,7 +33,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>Nesting. Please, wait.</string>
      </property>
     </widget>
    </item>
@@ -47,6 +47,15 @@
      </property>
      <property name="value">
       <number>24</number>
+     </property>
+     <property name="textVisible">
+      <bool>false</bool>
+     </property>
+     <property name="textDirection">
+      <enum>QProgressBar::TopToBottom</enum>
+     </property>
+     <property name="format">
+      <string notr="true">%p%</string>
      </property>
     </widget>
    </item>
@@ -62,7 +71,14 @@
      <item>
       <widget class="QLabel" name="labelMessage">
        <property name="text">
-        <string notr="true">Arranged:</string>
+        <string notr="true">Efficiency coefficient: -</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelTimeLeft">
+       <property name="text">
+        <string>Time left:</string>
        </property>
       </widget>
      </item>

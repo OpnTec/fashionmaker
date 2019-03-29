@@ -137,6 +137,8 @@ public:
     /** @brief m_placeLabels list of place labels. */
     QVector<VLayoutPlaceLabel> m_placeLabels;
 
+    qint64 m_square{0};
+
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;
 };

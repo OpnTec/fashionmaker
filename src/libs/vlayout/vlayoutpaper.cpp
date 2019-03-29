@@ -119,13 +119,13 @@ void VLayoutPaper::SetLayoutWidth(qreal width)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLayoutPaper::GetShift() const
+qreal VLayoutPaper::GetShift() const
 {
     return d->globalContour.GetShift();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SetShift(quint32 shift)
+void VLayoutPaper::SetShift(qreal shift)
 {
     d->globalContour.SetShift(shift);
 }
@@ -156,24 +156,22 @@ void VLayoutPaper::SetFollowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VLayoutPaper::GetRotationIncrease() const
+int VLayoutPaper::GetRotationNumber() const
 {
-    return d->globalRotationIncrease;
+    return d->globalRotationNumber;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPaper::SetRotationIncrease(int value)
+void VLayoutPaper::SetRotationNumber(int value)
 {
-    d->globalRotationIncrease = value;
+    d->globalRotationNumber = value;
 
-    if (not (d->globalRotationIncrease >= 1
-         && d->globalRotationIncrease <= 180
-         && 360 % d->globalRotationIncrease == 0))
+    if (d->globalRotationNumber > 360 || d->globalRotationNumber < 1)
     {
-        d->globalRotationIncrease = 180;
+        d->globalRotationNumber = 2;
     }
 
-    d->localRotationIncrease = d->globalRotationIncrease;
+    d->localRotationNumber = d->globalRotationNumber;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,12 +209,12 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
     if ((detail.IsForceFlipping() || detail.IsForbidFlipping()) && not d->globalRotate)
     { // Compensate forbidden flipping by rotating. 180 degree will be enough.
         d->localRotate = true;
-        d->localRotationIncrease = 180;
+        d->localRotationNumber = 2;
     }
     else
     { // Return to global values if was changed
         d->localRotate = d->globalRotate;
-        d->localRotationIncrease = d->globalRotationIncrease;
+        d->localRotationNumber = d->globalRotationNumber;
     }
 
     d->frame = 0;
@@ -250,7 +248,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
             data.i = i;
             data.j = j;
             data.rotate = d->localRotate;
-            data.rotationIncrease = d->localRotationIncrease;
+            data.rotationNumber = d->localRotationNumber;
             data.followGrainline = d->followGrainline;
 
             auto *thread = new VPosition(data, &stop, d->saveLength);
@@ -425,4 +423,16 @@ QRectF VLayoutPaper::DetailsBoundingRect() const
     }
 
     return rec;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutPaper::Efficiency() const
+{
+    qreal efficiency = 0;
+    for(auto &detail : d->details)
+    {
+        efficiency += detail.Square();
+    }
+
+    return efficiency / (d->globalContour.GetWidth() * d->globalContour.GetHeight()) * 100;
 }

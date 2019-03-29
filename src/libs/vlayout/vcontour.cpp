@@ -112,13 +112,13 @@ QVector<QPointF> VContour::GetContour() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VContour::GetShift() const
+qreal VContour::GetShift() const
 {
     return d->shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContour::SetShift(quint32 shift)
+void VContour::SetShift(qreal shift)
 {
     d->shift = shift;
 }
@@ -207,7 +207,7 @@ int VContour::GlobalEdgesCount() const
     }
     else
     {
-        const qreal shift = d->shift == 0 ? ToPixel(0.5, Unit::Cm) : d->shift;
+        const qreal shift = qFuzzyIsNull(d->shift) ? ToPixel(0.5, Unit::Cm) : d->shift;
         count = qFloor(EmptySheetEdge().length()/shift);
     }
     return count;
@@ -251,7 +251,7 @@ QLineF VContour::GlobalEdge(int i) const
 QVector<QPointF> VContour::CutEdge(const QLineF &edge) const
 {
     QVector<QPointF> points;
-    if (d->shift == 0)
+    if (qFuzzyIsNull(d->shift))
     {
         points.append(edge.p1());
         points.append(edge.p2());

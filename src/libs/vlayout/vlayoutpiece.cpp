@@ -742,15 +742,7 @@ bool VLayoutPiece::isNull() const
 //---------------------------------------------------------------------------------------------------------------------
 qint64 VLayoutPiece::Square() const
 {
-    if (d->layoutAllowance.isEmpty()) //-V807
-    {
-        return 0;
-    }
-
-    const qreal res = SumTrapezoids(d->layoutAllowance);
-
-    const qint64 sq = qFloor(qAbs(res/2.0));
-    return sq;
+    return d->m_square;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -779,6 +771,13 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         d->layoutAllowance.clear();
     }
+
+    if (d->layoutAllowance.isEmpty()) //-V807
+    {
+        d->m_square = 0;
+    }
+
+    d->m_square = qFloor(qAbs(SumTrapezoids(d->layoutAllowance)/2.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -943,6 +942,28 @@ bool VLayoutPiece::IsLayoutAllowanceValid() const
 {
     QVector<QPointF> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? d->seamAllowance : d->contour;
     return VAbstractPiece::IsAllowanceValid(base, d->layoutAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutPiece::BiggestEdge() const
+{
+    qreal edge = 0;
+
+    if (d->layoutAllowance.size() < 2)
+    {
+        return edge;
+    }
+
+    for (int i = 1; i < d->layoutAllowance.size() - 1; ++i)
+    {
+        const qreal length = QLineF(d->layoutAllowance.at(i-1), d->layoutAllowance.at(i)).length();
+        if (length > edge)
+        {
+            edge = length;
+        }
+    }
+
+    return edge;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

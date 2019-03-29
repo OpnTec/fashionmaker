@@ -71,7 +71,7 @@ public:
     /** @brief paperWidth width of paper in pixels*/
     int paperWidth{0};
 
-    quint32 shift{0};
+    qreal shift{0};
 
     qreal layoutWidth{0};
 

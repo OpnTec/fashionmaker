@@ -146,7 +146,6 @@ protected:
     void CheckRequiredMeasurements(const VMeasurements *m) const;
 private slots:
     void PrintPages (QPrinter *printer);
-    void ErrorConsoleMode(const LayoutErrors &state);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
@@ -212,6 +211,8 @@ private:
                           bool ignorePrinterFields, const QMarginsF &margins);
 
     void ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails);
+
+    void ShowLayoutError(const LayoutErrors &state);
 };
 
 #endif // MAINWINDOWSNOGUI_H

@@ -123,6 +123,22 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
         scenes.at(i)->addItem(gcontours.at(i));
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal BiggestEdge(const QVector<VLayoutPiece> &pieces)
+{
+    qreal edge = 0;
+    for(auto &piece : pieces)
+    {
+        const qreal pieceEdge = piece.BiggestEdge();
+        if (pieceEdge > edge)
+        {
+            edge = pieceEdge;
+        }
+    }
+
+    return edge;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,74 +223,167 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
 {
     lGenerator.SetDetails(listDetails);
-    DialogLayoutProgress progress(listDetails.count(), this);
+
+    QElapsedTimer timer;
+    timer.start();
+
+#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    QTimer *progressTimer = nullptr;
+#endif
+
+    DialogLayoutProgress *progress = new DialogLayoutProgress(timer, lGenerator.GetNestingTime()*1000, this);
     if (VApplication::IsGUIMode())
     {
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         m_taskbarProgress->setVisible(true);
         m_taskbarProgress->setValue(0);
-        m_taskbarProgress->setMaximum(listDetails.count());
-        connect(&lGenerator, &VLayoutGenerator::Arranged, m_taskbarProgress, &QWinTaskbarProgress::setValue);
+        m_taskbarProgress->setMaximum(lGenerator.GetNestingTime());
+        progressTimer = new QTimer(this);
+        connect(progressTimer, &QTimer::timeout, this, [timer, &lGenerator]()
+        {
+            const qint64 elapsed = timer.elapsed();
+            const int timeout = static_cast<int>(lGenerator.GetNestingTime() * 1000 - elapsed);
+
+            m_taskbarProgress->setValue(static_cast<int>(elapsed/1000));
+        });
+        progressTimer->start(1000);
 #endif
-        connect(&lGenerator, &VLayoutGenerator::Start, &progress, &DialogLayoutProgress::Start);
-        connect(&lGenerator, &VLayoutGenerator::Arranged, &progress, &DialogLayoutProgress::Arranged);
-        connect(&lGenerator, &VLayoutGenerator::Error, &progress, &DialogLayoutProgress::Error);
-        connect(&lGenerator, &VLayoutGenerator::Finished, &progress, &DialogLayoutProgress::Finished);
-        connect(&progress, &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
+        connect(progress, &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
     }
-    else
+
+    progress->Start();
+
+    LayoutErrors nestingState = LayoutErrors::NoError;
+
+    auto IsTimeout = [progress, &lGenerator, timer, &nestingState]()
     {
-        connect(&lGenerator, &VLayoutGenerator::Error, this, &MainWindowsNoGUI::ErrorConsoleMode);
+        if (lGenerator.GetNestingTime() * 1000 - timer.elapsed() <= 0)
+        {
+            nestingState = LayoutErrors::Timeout;
+            progress->Finished();
+            return true;
+        }
+        return false;
+    };
+
+    bool rotationUsed = false;
+    int rotatate = 1;
+    lGenerator.SetShift(BiggestEdge(listDetails) + 1);
+    int papersCount = INT_MAX;
+    qreal efficiency = 0;
+
+    forever
+    {
+        if (IsTimeout())
+        {
+            break;
+        }
+
+        lGenerator.Generate();
+
+        if (IsTimeout())
+        {
+            break;
+        }
+
+        nestingState = lGenerator.State();
+
+        switch (nestingState)
+        {
+            case LayoutErrors::NoError:
+                if (lGenerator.PapersCount() <= papersCount)
+                {
+                    const qreal layoutEfficiency = lGenerator.LayoutEfficiency();
+                    if (efficiency > layoutEfficiency)
+                    {
+                        efficiency = layoutEfficiency;
+                        progress->Efficiency(efficiency);
+
+                        CleanLayout();
+                        papers = lGenerator.GetPapersItems();// Blank sheets
+                        details = lGenerator.GetAllDetailsItems();// All details items
+                        detailsOnLayout = lGenerator.GetAllDetails();// All details items
+                        shadows = CreateShadows(papers);
+                        scenes = CreateScenes(papers, shadows, details);
+                       //Uncomment to debug, shows global contour
+            //            gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
+            //            InsertGlobalContours(scenes, gcontours); // uncomment for debugging
+                        PrepareSceneList();
+                        ignorePrinterFields = not lGenerator.IsUsePrinterFields();
+                        margins = lGenerator.GetPrinterFields();
+                        paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
+                        isAutoCrop = lGenerator.GetAutoCrop();
+                        isUnitePages = lGenerator.IsUnitePages();
+                        isLayoutStale = false;
+                    }
+                }
+                lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                break;
+            case LayoutErrors::EmptyPaperError:
+                if (not rotationUsed)
+                {
+                    lGenerator.SetRotate(true);
+                    lGenerator.SetRotationNumber(++rotatate);
+                    rotationUsed = true;
+                }
+                else
+                {
+                    lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                    rotationUsed = false;
+                }
+                break;
+            case LayoutErrors::Timeout:
+                Q_UNREACHABLE();
+                break;
+            case LayoutErrors::PrepareLayoutError:
+            case LayoutErrors::ProcessStoped:
+            default:
+                break;
+        }
+
+        if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped
+                || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
+                    && efficiency >= lGenerator.GetEfficiencyCoefficient()))
+        {
+            break;
+        }
+
+        if (IsTimeout())
+        {
+            break;
+        }
     }
-    lGenerator.Generate();
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     if (VApplication::IsGUIMode())
     {
+        progressTimer->stop();
         m_taskbarProgress->setVisible(false);
     }
 #endif
 
-    switch (lGenerator.State())
+    if (VApplication::IsGUIMode())
     {
-        case LayoutErrors::NoError:
-            CleanLayout();
-            papers = lGenerator.GetPapersItems();// Blank sheets
-            details = lGenerator.GetAllDetailsItems();// All details items
-            detailsOnLayout = lGenerator.GetAllDetails();// All details items
-            shadows = CreateShadows(papers);
-            scenes = CreateScenes(papers, shadows, details);
-           //Uncomment to debug, shows global contour
-//            gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
-//            InsertGlobalContours(scenes, gcontours); // uncomment for debugging
-            PrepareSceneList();
-            ignorePrinterFields = not lGenerator.IsUsePrinterFields();
-            margins = lGenerator.GetPrinterFields();
-            paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
-            isAutoCrop = lGenerator.GetAutoCrop();
-            isUnitePages = lGenerator.IsUnitePages();
-            isLayoutStale = false;
-            if (VApplication::IsGUIMode())
-            {
-                QApplication::alert(this);
-            }
-            break;
-        case LayoutErrors::ProcessStoped:
-        case LayoutErrors::PrepareLayoutError:
-        case LayoutErrors::EmptyPaperError:
-            if (VApplication::IsGUIMode())
-            {
-                QApplication::alert(this);
-            }
-            return false;
-        default:
-            break;
-
+        QApplication::alert(this);
     }
-    return true;
+
+    if (nestingState == LayoutErrors::NoError)
+    {
+        return true;
+    }
+    else
+    {
+        ShowLayoutError(nestingState);
+        if (not VApplication::IsGUIMode())
+        {
+            qApp->exit(V_EX_DATAERR);
+        }
+        return false;
+    }
 }
+
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
+void MainWindowsNoGUI::ShowLayoutError(const LayoutErrors &state)
 {
     switch (state)
     {
@@ -287,12 +396,13 @@ void MainWindowsNoGUI::ErrorConsoleMode(const LayoutErrors &state)
             qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
                               "select a bigger paper format.");
             break;
+        case LayoutErrors::Timeout:
+            qCritical() << tr("Timeout.");
+            break;
         case LayoutErrors::ProcessStoped:
         default:
             break;
     }
-
-    qApp->exit(V_EX_DATAERR);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

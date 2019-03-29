@@ -56,7 +56,7 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       shift(0),
       rotate(true),
       followGrainline(false),
-      rotationIncrease(180),
+      rotationNumber(2),
       autoCrop(false),
       saveLength(false),
       unitePages(false),
@@ -111,8 +111,6 @@ void VLayoutGenerator::Generate()
     debugDir.mkpath(path);
 #endif
 
-    emit Start();
-
     if (bank->Prepare())
     {
         int width = PageWidth();
@@ -146,7 +144,7 @@ void VLayoutGenerator::Generate()
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
             paper.SetFollowGrainline(followGrainline);
-            paper.SetRotationIncrease(rotationIncrease);
+            paper.SetRotationNumber(rotationNumber);
             paper.SetSaveLength(saveLength);
             do
             {
@@ -154,7 +152,6 @@ void VLayoutGenerator::Generate()
                 if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
                 {
                     bank->Arranged(index);
-                    emit Arranged(bank->ArrangedCount());
                 }
                 else
                 {
@@ -179,7 +176,6 @@ void VLayoutGenerator::Generate()
             else
             {
                 state = LayoutErrors::EmptyPaperError;
-                emit Error(state);
                 return;
             }
         }
@@ -187,7 +183,6 @@ void VLayoutGenerator::Generate()
     else
     {
         state = LayoutErrors::PrepareLayoutError;
-        emit Error(state);
         return;
     }
 
@@ -200,8 +195,22 @@ void VLayoutGenerator::Generate()
     {
         UnitePages();
     }
+}
 
-    emit Finished();
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutGenerator::LayoutEfficiency() const
+{
+    qreal efficiency = 0;
+    if (not papers.isEmpty())
+    {
+        for(auto &paper : papers)
+        {
+            efficiency += paper.Efficiency();
+        }
+
+        efficiency /= papers.size();
+    }
+    return efficiency;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -395,7 +404,7 @@ void VLayoutGenerator::GatherPages()
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetFollowGrainline(followGrainline);
-        paper.SetRotationIncrease(rotationIncrease);
+        paper.SetRotationNumber(rotationNumber);
         paper.SetSaveLength(saveLength);
         paper.SetDetails(nDetails.at(i));
 
@@ -498,7 +507,7 @@ void VLayoutGenerator::UnitePages()
         paper.SetPaperIndex(static_cast<quint32>(i));
         paper.SetRotate(rotate);
         paper.SetFollowGrainline(followGrainline);
-        paper.SetRotationIncrease(rotationIncrease);
+        paper.SetRotationNumber(rotationNumber);
         paper.SetSaveLength(saveLength);
         paper.SetDetails(nDetails.at(i));
 
@@ -591,19 +600,19 @@ void VLayoutGenerator::SetAutoCrop(bool value)
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-int VLayoutGenerator::GetRotationIncrease() const
+int VLayoutGenerator::GetRotationNumber() const
 {
-    return rotationIncrease;
+    return rotationNumber;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetRotationIncrease(int value)
+void VLayoutGenerator::SetRotationNumber(int value)
 {
-    rotationIncrease = value;
+    rotationNumber = value;
 
-    if (not (rotationIncrease >= 1 && rotationIncrease <= 180 && 360 % rotationIncrease == 0))
+    if (rotationNumber > 360 || rotationNumber < 1)
     {
-        rotationIncrease = 180;
+        rotationNumber = 2;
     }
 }
 
@@ -656,7 +665,7 @@ void VLayoutGenerator::SetNestingTime(int value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VLayoutGenerator::GetEfficiencyRatio() const
+qreal VLayoutGenerator::GetEfficiencyCoefficient() const
 {
     return efficiencyCoefficient;
 }
@@ -687,13 +696,13 @@ void VLayoutGenerator::SetPrinterFields(bool usePrinterFields, const QMarginsF &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-quint32 VLayoutGenerator::GetShift() const
+qreal VLayoutGenerator::GetShift() const
 {
     return shift;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetShift(quint32 shift)
+void VLayoutGenerator::SetShift(qreal shift)
 {
     this->shift = shift;
 }

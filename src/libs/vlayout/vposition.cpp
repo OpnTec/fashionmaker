@@ -147,9 +147,9 @@ VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool sav
       stop(stop),
       angle_between(0)
 {
-    if (not (m_data.rotationIncrease >= 1 && m_data.rotationIncrease <= 180 && 360 % m_data.rotationIncrease == 0))
+    if (m_data.rotationNumber > 360 || m_data.rotationNumber < 1)
     {
-        m_data.rotationIncrease = 180;
+        m_data.rotationNumber = 2;
     }
 }
 
@@ -566,14 +566,15 @@ void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::Rotate(int increase)
+void VPosition::Rotate(int number)
 {
-    int startAngle = 0;
+    const qreal step = 360/number;
+    qreal startAngle = 0;
     if (VFuzzyComparePossibleNulls(angle_between, 360))
     {
-        startAngle = increase;
+        startAngle = step;
     }
-    for (int angle = startAngle; angle < 360; angle = angle+increase)
+    for (qreal angle = startAngle; angle < 360; angle = angle+step)
     {
         if (stop->load())
         {
@@ -642,13 +643,13 @@ void VPosition::FindBestPosition()
 
         if (m_data.rotate)
         {
-            Rotate(m_data.rotationIncrease);
+            Rotate(m_data.rotationNumber);
         }
         else
         {
             if (m_data.gContour.GetContour().isEmpty())
             {
-                Rotate(m_data.rotationIncrease);
+                Rotate(m_data.rotationNumber);
             }
         }
     }

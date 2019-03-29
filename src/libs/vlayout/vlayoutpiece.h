@@ -144,6 +144,8 @@ public:
 
     bool IsLayoutAllowanceValid() const;
 
+    qreal BiggestEdge() const;
+
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 
