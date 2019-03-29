@@ -179,6 +179,33 @@ private:
 
     template <typename T>
     T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;
+
+    template <class T>
+    T ValueOrDef(const QString &setting, const T &defValue) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(defValue));
+    return val.canConvert<T>() ? val.value<T>() : defValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline Cases VSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
+    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
+    {
+        return defValue;
+    }
+    else
+    {
+        return static_cast<Cases>(g);
+    }
+}
 
 #endif // VSETTINGS_H
