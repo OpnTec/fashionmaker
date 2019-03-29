@@ -644,6 +644,30 @@ void VLayoutGenerator::SetPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::GetNestingTime() const
+{
+    return nestingTime;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetNestingTime(int value)
+{
+    nestingTime = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutGenerator::GetEfficiencyRatio() const
+{
+    return efficiencyCoefficient;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetEfficiencyCoefficient(qreal coefficient)
+{
+    efficiencyCoefficient = coefficient;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::IsUsePrinterFields() const
 {
     return usePrinterFields;

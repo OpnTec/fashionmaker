@@ -71,6 +71,12 @@ public:
     qreal GetPaperWidth() const;
     void SetPaperWidth(qreal value);
 
+    int  GetNestingTime() const;
+    void SetNestingTime(int value);
+
+    qreal GetEfficiencyRatio() const;
+    void  SetEfficiencyCoefficient(qreal coefficient);
+
     bool IsUsePrinterFields() const;
     QMarginsF GetPrinterFields() const;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
@@ -145,6 +151,8 @@ private:
     quint8 multiplier;
     bool stripOptimization;
     bool textAsPaths;
+    int nestingTime{1};
+    qreal efficiencyCoefficient{0.0};
 
     int PageHeight() const;
     int PageWidth() const;

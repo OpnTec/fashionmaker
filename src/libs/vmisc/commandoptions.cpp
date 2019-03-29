@@ -54,9 +54,6 @@ const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
 const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
 const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
 
-const QString LONG_OPTION_ROTATE            = QStringLiteral("rotate");
-const QString SINGLE_OPTION_ROTATE          = QStringLiteral("r");
-
 const QString LONG_OPTION_CROP              = QStringLiteral("crop");
 const QString SINGLE_OPTION_CROP            = QStringLiteral("c");
 
@@ -74,9 +71,6 @@ const QString SINGLE_OPTION_PAGEUNITS       = QStringLiteral("U");
 
 const QString LONG_OPTION_SAVELENGTH        = QStringLiteral("savelen");
 const QString SINGLE_OPTION_SAVELENGTH      = QStringLiteral("S");
-
-const QString LONG_OPTION_SHIFTLENGTH       = QStringLiteral("shiftlen");
-const QString SINGLE_OPTION_SHIFTLENGTH     = QStringLiteral("s");
 
 const QString LONG_OPTION_SHIFTUNITS        = QStringLiteral("layounits");
 const QString SINGLE_OPTION_SHIFTUNITS      = QStringLiteral("l");
@@ -115,6 +109,12 @@ const QString SINGLE_OPTION_TOP_MARGIN      = QStringLiteral("T");
 const QString LONG_OPTION_BOTTOM_MARGIN     = QStringLiteral("bmargin");
 const QString SINGLE_OPTION_BOTTOM_MARGIN   = QStringLiteral("B");
 
+const QString LONG_OPTION_NESTING_TIME      = QStringLiteral("time");
+const QString SINGLE_OPTION_NESTING_TIME    = QStringLiteral("n");
+
+const QString LONG_OPTION_EFFICIENCY_COEFFICIENT  = QStringLiteral("сoefficient");
+const QString SINGLE_OPTION_EFFICIENCY_COEFFICIENT= QStringLiteral("e");
+
 const QString LONG_OPTION_CSVWITHHEADER = QStringLiteral("csvWithHeader");
 const QString LONG_OPTION_CSVCODEC      = QStringLiteral("csvCodec");
 const QString LONG_OPTION_CSVSEPARATOR  = QStringLiteral("csvSeparator");
@@ -148,14 +148,12 @@ QStringList AllKeys()
          << LONG_OPTION_TEXT2PATHS
          << LONG_OPTION_EXPORTONLYDETAILS
          << LONG_OPTION_EXPORTSUCHDETAILS
-         << LONG_OPTION_ROTATE << SINGLE_OPTION_ROTATE
          << LONG_OPTION_CROP << SINGLE_OPTION_CROP
          << LONG_OPTION_UNITE << SINGLE_OPTION_UNITE
          << LONG_OPTION_PAGEW << SINGLE_OPTION_PAGEW
          << LONG_OPTION_PAGEH << SINGLE_OPTION_PAGEH
          << LONG_OPTION_PAGEUNITS << SINGLE_OPTION_PAGEUNITS
          << LONG_OPTION_SAVELENGTH << SINGLE_OPTION_SAVELENGTH
-         << LONG_OPTION_SHIFTLENGTH << SINGLE_OPTION_SHIFTLENGTH
          << LONG_OPTION_SHIFTUNITS << SINGLE_OPTION_SHIFTUNITS
          << LONG_OPTION_GAPWIDTH << SINGLE_OPTION_GAPWIDTH
          << LONG_OPTION_GROUPPING << SINGLE_OPTION_GROUPPING
@@ -169,6 +167,8 @@ QStringList AllKeys()
          << LONG_OPTION_RIGHT_MARGIN << SINGLE_OPTION_RIGHT_MARGIN
          << LONG_OPTION_TOP_MARGIN << SINGLE_OPTION_TOP_MARGIN
          << LONG_OPTION_BOTTOM_MARGIN << SINGLE_OPTION_BOTTOM_MARGIN
+         << LONG_OPTION_NESTING_TIME << SINGLE_OPTION_NESTING_TIME
+         << LONG_OPTION_EFFICIENCY_COEFFICIENT << SINGLE_OPTION_EFFICIENCY_COEFFICIENT
          << LONG_OPTION_NO_HDPI_SCALING
          << LONG_OPTION_CSVWITHHEADER
          << LONG_OPTION_CSVCODEC

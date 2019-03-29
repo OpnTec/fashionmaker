@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   vsettings.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -82,10 +82,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutWidth, (QLatin1String("lay
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("layout/sorting")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperHeight, (QLatin1String("layout/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutShift, (QLatin1String("layout/shift")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotate, (QLatin1String("layout/Rotate")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutRotationIncrease, (QLatin1String("layout/rotationIncrease")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCrop, (QLatin1String("layout/autoCrop")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))
@@ -94,6 +91,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("la
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingStripOptimization, (QLatin1String("layout/stripOptimization")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingMultiplier, (QLatin1String("layout/multiplier")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTextAsPaths, (QLatin1String("layout/textAsPaths")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, (QLatin1String("layout/time")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, (QLatin1String("layout/efficiencyCoefficient")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFMargins, (QLatin1String("tiledPDF/margins")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, (QLatin1String("tiledPDF/paperHeight")))
@@ -224,34 +223,6 @@ void VSettings::SetLayoutPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetLayoutShift() const
-{
-    const qreal def = GetDefLayoutShift();
-    bool ok = false;
-    const qreal shift = value(*settingLayoutShift, def).toDouble(&ok);
-    if (ok)
-    {
-        return shift;
-    }
-    else
-    {
-        return def;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal VSettings::GetDefLayoutShift()
-{
-    return 0;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutShift(qreal value)
-{
-    setValue(*settingLayoutShift, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 qreal VSettings::GetLayoutWidth() const
 {
     const qreal def = GetDefLayoutWidth();
@@ -277,6 +248,36 @@ qreal VSettings::GetDefLayoutWidth()
 void VSettings::SetLayoutWidth(qreal value)
 {
     setValue(*settingLayoutWidth, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetNestingTime() const
+{
+    const int def = GetDefNestingTime();
+    bool ok = false;
+    const int time = value(*settingNestingTime, def).toInt(&ok);
+    return ok ? time : def;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetNestingTime(int value)
+{
+    setValue(*settingNestingTime, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VSettings::GetEfficiencyCoefficient() const
+{
+    const qreal def = GetDefEfficiencyCoefficient();
+    bool ok = false;
+    const qreal coefficient = value(*settingEfficiencyCoefficient, def).toDouble(&ok);
+    return ok ? coefficient : def;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetEfficiencyCoefficient(qreal value)
+{
+    setValue(*settingEfficiencyCoefficient, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -332,24 +333,6 @@ void VSettings::SetLayoutGroup(const Cases &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutRotate() const
-{
-    return value(*settingLayoutRotate, GetDefLayoutRotate()).toBool();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutRotate()
-{
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutRotate(bool value)
-{
-    setValue(*settingLayoutRotate, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutFollowGrainline() const
 {
     return value(*settingLayoutFollowGrainline, GetDefLayoutFollowGrainline()).toBool();
@@ -365,41 +348,6 @@ bool VSettings::GetDefLayoutFollowGrainline()
 void VSettings::SetLayoutFollowGrainline(bool value)
 {
     setValue(*settingLayoutFollowGrainline, value);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetLayoutRotationIncrease() const
-{
-    const int def = GetDefLayoutRotationIncrease();
-    bool ok = false;
-    const int r = value(*settingLayoutRotationIncrease, def).toInt(&ok);
-    if (ok)
-    {
-        if (not (r >= 1 && r <= 180 && 360 % r == 0))
-        {
-            return def;
-        }
-        else
-        {
-            return r;
-        }
-    }
-    else
-    {
-        return def;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VSettings::GetDefLayoutRotationIncrease()
-{
-    return 180;/*degree*/
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutRotationIncrease(int value)
-{
-    setValue(*settingLayoutRotationIncrease, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

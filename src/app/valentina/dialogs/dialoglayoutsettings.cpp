@@ -141,15 +141,27 @@ void DialogLayoutSettings::SetPaperWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal DialogLayoutSettings::GetShift() const
+int DialogLayoutSettings::GetNestingTime() const
 {
-    return UnitConvertor(ui->doubleSpinBoxShift->value(), oldLayoutUnit, Unit::Px);
+    return ui->spinBoxNestingTime->value();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetShift(qreal value)
+void DialogLayoutSettings::SetNestingTime(int value)
 {
-    ui->doubleSpinBoxShift->setValue(UnitConvertor(value, Unit::Px, LayoutUnit()));
+    ui->spinBoxNestingTime->setValue(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal DialogLayoutSettings::GetEfficiencyCoefficient() const
+{
+    return ui->doubleSpinBoxEfficiency->value();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetEfficiencyCoefficient(qreal ration)
+{
+    ui->doubleSpinBoxEfficiency->setValue(ration);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -221,18 +233,6 @@ void DialogLayoutSettings::SetGroup(const Cases &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogLayoutSettings::GetRotate() const
-{
-    return ui->groupBoxRotate->isChecked();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetRotate(bool state)
-{
-    ui->groupBoxRotate->setChecked(state);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::GetFollowGrainline() const
 {
     return ui->checkBoxFollowGrainline->isChecked();
@@ -242,28 +242,6 @@ bool DialogLayoutSettings::GetFollowGrainline() const
 void DialogLayoutSettings::SetFollowGrainline(bool state)
 {
     ui->checkBoxFollowGrainline->setChecked(state);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int DialogLayoutSettings::GetIncrease() const
-{
-    return ui->comboBoxIncrease->currentText().toInt();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-bool DialogLayoutSettings::SetIncrease(int increase)
-{
-    int index = ui->comboBoxIncrease->findText(QString::number(increase));
-    bool failed = (index == -1);
-    if (failed)
-    {
-        const QString def = QString::number(VSettings::GetDefLayoutRotationIncrease());// Value by default
-        index = ui->comboBoxIncrease->findText(def);
-    }
-
-    ui->comboBoxIncrease->setCurrentIndex(index);
-    return failed;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -512,20 +490,16 @@ void DialogLayoutSettings::ConvertLayoutSize()
 {
     const Unit unit = LayoutUnit();
     const qreal layoutWidth = ui->doubleSpinBoxLayoutWidth->value();
-    const qreal shift = ui->doubleSpinBoxShift->value();
 
     ui->doubleSpinBoxLayoutWidth->setMaximum(FromPixel(QIMAGE_MAX, unit));
-    ui->doubleSpinBoxShift->setMaximum(FromPixel(QIMAGE_MAX, unit));
 
     const qreal newLayoutWidth = UnitConvertor(layoutWidth, oldLayoutUnit, unit);
-    const qreal newShift = UnitConvertor(shift, oldLayoutUnit, unit);
 
     oldLayoutUnit = unit;
     CorrectLayoutDecimals();
     MinimumLayoutSize();
 
     ui->doubleSpinBoxLayoutWidth->setValue(newLayoutWidth);
-    ui->doubleSpinBoxShift->setValue(newShift);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -583,10 +557,9 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetCaseType(GetGroup());
     generator->SetPaperHeight(GetPaperHeight());
     generator->SetPaperWidth(GetPaperWidth());
-    generator->SetShift(static_cast<quint32>(qFloor(GetShift())));
-    generator->SetRotate(GetRotate());
+    generator->SetNestingTime(GetNestingTime());
+    generator->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
     generator->SetFollowGrainline(GetFollowGrainline());
-    generator->SetRotationIncrease(GetIncrease());
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
@@ -674,14 +647,13 @@ void DialogLayoutSettings::RestoreDefaults()
     ui->comboBoxPrinter->blockSignals(false);
 
     SetLayoutWidth(VSettings::GetDefLayoutWidth());
-    SetShift(VSettings::GetDefLayoutShift());
     SetGroup(VSettings::GetDefLayoutGroup());
-    SetRotate(VSettings::GetDefLayoutRotate());
     SetFollowGrainline(VSettings::GetDefLayoutFollowGrainline());
-    SetIncrease(VSettings::GetDefLayoutRotationIncrease());
     SetFields(GetDefPrinterFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
     SetMultiplier(VSettings::GetDefMultiplier());
+    SetNestingTime(VSettings::GetDefNestingTime());
+    SetEfficiencyCoefficient(VSettings::GetDefEfficiencyCoefficient());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -990,11 +962,9 @@ void DialogLayoutSettings::CorrectLayoutDecimals()
         case Unit::Mm:
         case Unit::Px:
             ui->doubleSpinBoxLayoutWidth->setDecimals(2);
-            ui->doubleSpinBoxShift->setDecimals(2);
             break;
         case Unit::Inch:
             ui->doubleSpinBoxLayoutWidth->setDecimals(5);
-            ui->doubleSpinBoxShift->setDecimals(5);
             break;
         default:
             break;
@@ -1021,15 +991,14 @@ void DialogLayoutSettings::ReadSettings()
 {
     const VSettings *settings = qApp->ValentinaSettings();
     SetLayoutWidth(settings->GetLayoutWidth());
-    SetShift(settings->GetLayoutShift());
+    SetNestingTime(settings->GetNestingTime());
+    SetEfficiencyCoefficient(settings->GetEfficiencyCoefficient());
 
     const qreal width = UnitConvertor(settings->GetLayoutPaperWidth(), Unit::Px, LayoutUnit());
     const qreal height = UnitConvertor(settings->GetLayoutPaperHeight(), Unit::Px, LayoutUnit());
     SheetSize(QSizeF(width, height));
     SetGroup(settings->GetLayoutGroup());
     SetFollowGrainline(settings->GetLayoutFollowGrainline());
-    SetRotate(settings->GetLayoutRotate());
-    SetIncrease(settings->GetLayoutRotationIncrease());
     SetAutoCrop(settings->GetLayoutAutoCrop());
     SetSaveLength(settings->GetLayoutSaveLength());
     SetUnitePages(settings->GetLayoutUnitePages());
@@ -1053,10 +1022,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutGroup(GetGroup());
     settings->SetLayoutPaperHeight(GetPaperHeight());
     settings->SetLayoutPaperWidth(GetPaperWidth());
-    settings->SetLayoutShift(GetShift());
-    settings->SetLayoutRotate(GetRotate());
     settings->SetLayoutFollowGrainline(GetFollowGrainline());
-    settings->SetLayoutRotationIncrease(GetIncrease());
     settings->SetLayoutAutoCrop(GetAutoCrop());
     settings->SetLayoutSaveLength(IsSaveLength());
     settings->SetLayoutUnitePages(IsUnitePages());
@@ -1065,6 +1031,8 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetStripOptimization(IsStripOptimization());
     settings->SetMultiplier(GetMultiplier());
     settings->SetTextAsPaths(IsTextAsPaths());
+    settings->SetNestingTime(GetNestingTime());
+    settings->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

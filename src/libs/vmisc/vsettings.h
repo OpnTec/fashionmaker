@@ -74,13 +74,17 @@ public:
     qreal GetLayoutPaperWidth() const;
     void SetLayoutPaperWidth(qreal value);
 
-    qreal GetLayoutShift() const;
-    static qreal GetDefLayoutShift();
-    void SetLayoutShift(qreal value);
-
     qreal GetLayoutWidth() const;
     static qreal GetDefLayoutWidth();
     void SetLayoutWidth(qreal value);
+
+    int  GetNestingTime() const;
+    static int GetDefNestingTime(){return 1;}
+    void SetNestingTime(int value);
+
+    qreal GetEfficiencyCoefficient() const;
+    static qreal GetDefEfficiencyCoefficient(){return 0.0;}
+    void SetEfficiencyCoefficient(qreal value);
 
     QMarginsF GetFields(const QMarginsF &def = QMarginsF()) const;
     void SetFields(const QMarginsF &value);
@@ -89,17 +93,9 @@ public:
     static Cases GetDefLayoutGroup();
     void SetLayoutGroup(const Cases &value);
 
-    bool GetLayoutRotate() const;
-    static bool GetDefLayoutRotate();
-    void SetLayoutRotate(bool value);
-
     bool GetLayoutFollowGrainline() const;
     static bool GetDefLayoutFollowGrainline();
     void SetLayoutFollowGrainline(bool value);
-
-    int GetLayoutRotationIncrease() const;
-    static int GetDefLayoutRotationIncrease();
-    void SetLayoutRotationIncrease(int value);
 
     bool GetLayoutAutoCrop() const;
     static bool GetDefLayoutAutoCrop();
