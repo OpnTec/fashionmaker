@@ -123,22 +123,6 @@ void InsertGlobalContours(const QList<QGraphicsScene *> &scenes, const QList<QGr
         scenes.at(i)->addItem(gcontours.at(i));
     }
 }
-
-//---------------------------------------------------------------------------------------------------------------------
-qreal BiggestEdge(const QVector<VLayoutPiece> &pieces)
-{
-    qreal edge = 0;
-    for(auto &piece : pieces)
-    {
-        const qreal pieceEdge = piece.BiggestEdge();
-        if (pieceEdge > edge)
-        {
-            edge = pieceEdge;
-        }
-    }
-
-    return edge;
-}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,7 +215,8 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     QTimer *progressTimer = nullptr;
 #endif
 
-    DialogLayoutProgress *progress = new DialogLayoutProgress(timer, lGenerator.GetNestingTime()*1000, this);
+    QScopedPointer<DialogLayoutProgress> progress(new DialogLayoutProgress(timer, lGenerator.GetNestingTime()*60000,
+                                                                           this));
     if (VApplication::IsGUIMode())
     {
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
@@ -241,23 +226,20 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         progressTimer = new QTimer(this);
         connect(progressTimer, &QTimer::timeout, this, [timer, &lGenerator]()
         {
-            const qint64 elapsed = timer.elapsed();
-            const int timeout = static_cast<int>(lGenerator.GetNestingTime() * 1000 - elapsed);
-
-            m_taskbarProgress->setValue(static_cast<int>(elapsed/1000));
+            m_taskbarProgress->setValue(static_cast<int>(timer.elapsed()/60000));
         });
         progressTimer->start(1000);
 #endif
-        connect(progress, &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
+        connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
     }
 
     progress->Start();
 
     LayoutErrors nestingState = LayoutErrors::NoError;
 
-    auto IsTimeout = [progress, &lGenerator, timer, &nestingState]()
+    auto IsTimeout = [&progress, &lGenerator, timer, &nestingState]()
     {
-        if (lGenerator.GetNestingTime() * 1000 - timer.elapsed() <= 0)
+        if (timer.hasExpired(lGenerator.GetNestingTime() * 60000))
         {
             nestingState = LayoutErrors::Timeout;
             progress->Finished();
@@ -268,9 +250,12 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
 
     bool rotationUsed = false;
     int rotatate = 1;
-    lGenerator.SetShift(BiggestEdge(listDetails) + 1);
+    lGenerator.SetShift(-1); // Trigger first shift calulation
+    lGenerator.SetRotate(false);
     int papersCount = INT_MAX;
     qreal efficiency = 0;
+
+    QCoreApplication::processEvents();
 
     forever
     {
@@ -279,22 +264,20 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
             break;
         }
 
-        lGenerator.Generate();
+        lGenerator.Generate(timer, lGenerator.GetNestingTime()*60000);
 
         if (IsTimeout())
         {
             break;
         }
 
-        nestingState = lGenerator.State();
-
-        switch (nestingState)
+        switch (lGenerator.State())
         {
             case LayoutErrors::NoError:
                 if (lGenerator.PapersCount() <= papersCount)
                 {
                     const qreal layoutEfficiency = lGenerator.LayoutEfficiency();
-                    if (efficiency > layoutEfficiency)
+                    if (efficiency < layoutEfficiency)
                     {
                         efficiency = layoutEfficiency;
                         progress->Efficiency(efficiency);
@@ -320,26 +303,33 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 lGenerator.SetShift(lGenerator.GetShift()/2.0);
                 break;
             case LayoutErrors::EmptyPaperError:
-                if (not rotationUsed)
+                if (lGenerator.IsRotationNeeded())
                 {
-                    lGenerator.SetRotate(true);
-                    lGenerator.SetRotationNumber(++rotatate);
-                    rotationUsed = true;
+                    if (not rotationUsed)
+                    {
+                        lGenerator.SetRotate(true);
+                        lGenerator.SetRotationNumber(++rotatate);
+                        rotationUsed = true;
+                    }
+                    else
+                    {
+                        lGenerator.SetShift(lGenerator.GetShift()/2.0);
+                        rotationUsed = false;
+                    }
                 }
                 else
                 {
                     lGenerator.SetShift(lGenerator.GetShift()/2.0);
-                    rotationUsed = false;
                 }
                 break;
             case LayoutErrors::Timeout:
-                Q_UNREACHABLE();
-                break;
             case LayoutErrors::PrepareLayoutError:
             case LayoutErrors::ProcessStoped:
             default:
                 break;
         }
+
+        nestingState = lGenerator.State();
 
         if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped
                 || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
@@ -354,6 +344,8 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         }
     }
 
+    progress->Finished();
+
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     if (VApplication::IsGUIMode())
     {
@@ -367,7 +359,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         QApplication::alert(this);
     }
 
-    if (nestingState == LayoutErrors::NoError)
+    if (nestingState == LayoutErrors::NoError || (nestingState == LayoutErrors::Timeout && not papers.isEmpty()))
     {
         return true;
     }

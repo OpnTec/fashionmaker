@@ -52,6 +52,7 @@ class QMarginsF;
 
 class QGraphicsItem;
 class VLayoutPaper;
+class QElapsedTimer;
 
 class VLayoutGenerator :public QObject
 {
@@ -84,7 +85,7 @@ public:
     qreal GetShift() const;
     void  SetShift(qreal shift);
 
-    void Generate();
+    void Generate(QElapsedTimer timer, qint64 timeout);
 
     qreal LayoutEfficiency() const;
 
@@ -124,6 +125,8 @@ public:
 
     bool IsTestAsPaths() const;
     void SetTextAsPaths(bool value);
+
+    bool IsRotationNeeded() const;
 
 public slots:
     void Abort();

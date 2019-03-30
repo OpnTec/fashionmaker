@@ -28,6 +28,7 @@
 
 #include "vlayoutgenerator.h"
 
+#include <QElapsedTimer>
 #include <QGraphicsRectItem>
 #include <QRectF>
 #include <QThreadPool>
@@ -98,21 +99,25 @@ int VLayoutGenerator::DetailsCount()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::Generate()
+void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
 {
     stopGeneration.store(false);
     papers.clear();
+    bank->Reset();
     state = LayoutErrors::NoError;
 
-#ifdef LAYOUT_DEBUG
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
-    QDir debugDir(path);
-    debugDir.removeRecursively();
-    debugDir.mkpath(path);
-#endif
-
-    if (bank->Prepare())
+    if (VFuzzyComparePossibleNulls(shift, -1))
     {
+        if (bank->PrepareDetails())
+        {
+            SetShift(bank->DetailsBiggestEdge() + 1);
+        }
+        else
+        {
+            state = LayoutErrors::PrepareLayoutError;
+            return;
+        }
+
         int width = PageWidth();
         int height = PageHeight();
 
@@ -131,15 +136,43 @@ void VLayoutGenerator::Generate()
 
             IsPortrait() ? SetStrip(height) : SetStrip(width);
         }
+    }
+
+    if (timer.hasExpired(timeout))
+    {
+        state = LayoutErrors::Timeout;
+        return;
+    }
+
+#ifdef LAYOUT_DEBUG
+    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
+    QDir debugDir(path);
+    debugDir.removeRecursively();
+    debugDir.mkpath(path);
+#endif
+
+    if (bank->PrepareUnsorted())
+    {
+        if (timer.hasExpired(timeout))
+        {
+            state = LayoutErrors::Timeout;
+            return;
+        }
 
         while (bank->AllDetailsCount() > 0)
         {
             if (stopGeneration.load())
             {
-                break;
+                return;
             }
 
-            VLayoutPaper paper(height, width, bank->GetLayoutWidth());
+            if (timer.hasExpired(timeout))
+            {
+                state = LayoutErrors::Timeout;
+                return;
+            }
+
+            VLayoutPaper paper(PageHeight(), PageWidth(), bank->GetLayoutWidth());
             paper.SetShift(shift);
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);
@@ -158,15 +191,29 @@ void VLayoutGenerator::Generate()
                     bank->NotArranged(index);
                 }
 
+                QCoreApplication::processEvents();
+
                 if (stopGeneration.load())
                 {
                     break;
+                }
+
+                if (timer.hasExpired(timeout))
+                {
+                    state = LayoutErrors::Timeout;
+                    return;
                 }
             } while(bank->LeftToArrange() > 0);
 
             if (stopGeneration.load())
             {
-                break;
+                return;
+            }
+
+            if (timer.hasExpired(timeout))
+            {
+                state = LayoutErrors::Timeout;
+                return;
             }
 
             if (paper.Count() > 0)
@@ -183,6 +230,12 @@ void VLayoutGenerator::Generate()
     else
     {
         state = LayoutErrors::PrepareLayoutError;
+        return;
+    }
+
+    if (timer.hasExpired(timeout))
+    {
+        state = LayoutErrors::Timeout;
         return;
     }
 
@@ -293,6 +346,19 @@ bool VLayoutGenerator::IsTestAsPaths() const
 void VLayoutGenerator::SetTextAsPaths(bool value)
 {
     textAsPaths = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsRotationNeeded() const
+{
+    if (followGrainline)
+    {
+        return bank->IsRotationNeeded();
+    }
+    else
+    {
+        return true;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

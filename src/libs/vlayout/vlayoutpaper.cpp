@@ -240,6 +240,8 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
 
     for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
     {
+        QCoreApplication::processEvents();
+
         for (int i=1; i<= detailEdgesCount; ++i)
         {
             VPositionData data;
@@ -431,8 +433,10 @@ qreal VLayoutPaper::Efficiency() const
     qreal efficiency = 0;
     for(auto &detail : d->details)
     {
-        efficiency += detail.Square();
+        efficiency += static_cast<qreal>(detail.Square());
     }
 
-    return efficiency / (d->globalContour.GetWidth() * d->globalContour.GetHeight()) * 100;
+    const QRectF boundingRect = DetailsBoundingRect();
+
+    return efficiency / (boundingRect.width() * boundingRect.height()) * 100.0;
 }
