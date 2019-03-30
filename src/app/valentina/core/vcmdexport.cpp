@@ -596,13 +596,14 @@ void VCommandLine::InitCommandLineOptions()
     optionsUsed.insert(LONG_OPTION_NESTING_TIME, option);
     parser.addOption(option);
 
-    option = VCommandLineOption(QStringList({SINGLE_OPTION_EFFICIENCY_COEFFICIENT, LONG_OPTION_EFFICIENCY_COEFFICIENT}),
-                                translate("VCommandLine", "Set layout efficiency coefficient. Layout efficiency "
+    option = VCommandLineOption(LONG_OPTION_EFFICIENCY_COEFFICIENT,
+                                translate("VCommandLine", "Set layout efficiency <coefficient>. Layout efficiency "
                                                           "coefficient is the ratio of the area occupied by the pieces "
-                                                          "to the entire area of the sheet. If nesting reaches "
+                                                          "to the bounding rect of all pieces. If nesting reaches "
                                                           "required level the process stops. If value is 0 no check "
                                                           "will be made. Сoefficient must be in range from 0 to 100. "
-                                                          "Default value 0."));
+                                                          "Default value 0."),
+                                translate("VCommandLine", "Coefficient"));
     optionsUsed.insert(LONG_OPTION_EFFICIENCY_COEFFICIENT, option);
     parser.addOption(option);
 
