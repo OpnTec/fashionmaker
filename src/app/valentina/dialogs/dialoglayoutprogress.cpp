@@ -103,7 +103,7 @@ void DialogLayoutProgress::Finished()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::Efficiency(qreal value)
 {
-    ui->labelMessage->setText(tr("Efficiency coefficient: %1").arg(qRound(value * 10) / 10));
+    ui->labelMessage->setText(tr("Efficiency coefficient: %1%").arg(qRound(value * 10.) / 10.));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
