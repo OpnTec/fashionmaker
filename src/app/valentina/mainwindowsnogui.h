@@ -133,7 +133,7 @@ protected:
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
-    bool LayoutSettings(VLayoutGenerator& lGenerator);
+    bool GenerateLayout(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;
     void SetSizeHeightForIndividualM() const;

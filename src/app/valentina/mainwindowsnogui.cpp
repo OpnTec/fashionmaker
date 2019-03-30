@@ -210,7 +210,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
             return;
         }
         layoutPrinterName = layout.SelectedPrinter();
-        LayoutSettings(lGenerator);
+        GenerateLayout(lGenerator);
         tButton->setChecked(false);
     }
     else
@@ -220,7 +220,7 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool MainWindowsNoGUI::LayoutSettings(VLayoutGenerator& lGenerator)
+bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
 {
     lGenerator.SetDetails(listDetails);
 
