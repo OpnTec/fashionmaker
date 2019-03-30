@@ -426,7 +426,7 @@
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="doubleSpinBoxEfficiency">
             <property name="toolTip">
-             <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the entire area of the sheet. If nesting reaches required level the process stops. If value is 0 no check will be made. </string>
+             <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </string>
             </property>
             <property name="suffix">
              <string>%</string>
@@ -642,7 +642,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroupPrinciple"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
