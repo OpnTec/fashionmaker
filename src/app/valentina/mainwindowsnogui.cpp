@@ -362,7 +362,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         QApplication::alert(this);
     }
 
-    if (nestingState == LayoutErrors::NoError || (nestingState == LayoutErrors::Timeout && not papers.isEmpty()))
+    if (not papers.isEmpty() && nestingState != LayoutErrors::ProcessStoped)
     {
         return true;
     }
