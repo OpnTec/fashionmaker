@@ -241,7 +241,10 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     {
         if (timer.hasExpired(lGenerator.GetNestingTime() * 60000))
         {
-            nestingState = LayoutErrors::Timeout;
+            if (nestingState != LayoutErrors::EmptyPaperError)
+            {
+                nestingState = LayoutErrors::Timeout;
+            }
             progress->Finished();
             return true;
         }
