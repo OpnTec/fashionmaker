@@ -66,8 +66,8 @@ public:
     void             SetContour(const QVector<QPointF> &contour);
     QVector<QPointF> GetContour() const;
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    qreal GetShift() const;
+    void  SetShift(qreal shift);
 
     int  GetHeight() const;
     void SetHeight(int height);
@@ -98,6 +98,10 @@ private:
 
     void AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
     void InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const;
+
+    void ResetAttributes();
+
+    int EmptySheetEdgesCount() const;
 };
 
 Q_DECLARE_TYPEINFO(VContour, Q_MOVABLE_TYPE);

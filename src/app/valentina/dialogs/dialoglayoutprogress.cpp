@@ -35,23 +35,26 @@
 #include <QPushButton>
 #include <QMovie>
 #include <QtDebug>
+#include <QTime>
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
-    :QDialog(parent), ui(new Ui::DialogLayoutProgress), maxCount(count), movie(nullptr), isInitialized(false)
+DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent)
+    : QDialog(parent),
+      ui(new Ui::DialogLayoutProgress),
+      m_movie(new QMovie(QStringLiteral("://icon/16x16/progress.gif"))),
+      m_timer(timer),
+      m_timeout(timeout),
+      progressTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
     qApp->ValentinaSettings()->GetOsSeparator() ? setLocale(QLocale()) : setLocale(QLocale::c());
 
-    ui->progressBar->setMaximum(maxCount);
+    ui->progressBar->setMaximum(static_cast<int>(timeout/1000));
     ui->progressBar->setValue(0);
 
-    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(0).arg(count));
-
-    movie = new QMovie("://icon/16x16/progress.gif");
-    ui->labelProgress->setMovie (movie);
-    movie->start ();
+    ui->labelProgress->setMovie(m_movie);
+    m_movie->start();
 
     QPushButton *bCancel = ui->buttonBox->button(QDialogButtonBox::Cancel);
     SCASSERT(bCancel != nullptr)
@@ -59,13 +62,30 @@ DialogLayoutProgress::DialogLayoutProgress(int count, QWidget *parent)
     setModal(true);
 
     this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+
+    connect(progressTimer, &QTimer::timeout, this, [this]()
+    {
+        const qint64 elapsed = m_timer.elapsed();
+        const int timeout = static_cast<int>(m_timeout - elapsed);
+        QTime t(0, 0);
+        t = t.addMSecs(timeout);
+        ui->labelTimeLeft->setText(tr("Time left: %1").arg(t.toString()));
+        ui->progressBar->setValue(static_cast<int>(elapsed/1000));
+
+        if (timeout <= 1000)
+        {
+            emit Timeout();
+            progressTimer->stop();
+        }
+    });
+    progressTimer->start(1000);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogLayoutProgress::~DialogLayoutProgress()
 {
+    delete m_movie;
     delete ui;
-    delete movie;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -75,38 +95,16 @@ void DialogLayoutProgress::Start()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::Arranged(int count)
-{
-    ui->progressBar->setValue(count);
-    ui->labelMessage->setText(tr("Arranged workpieces: %1 from %2").arg(count).arg(maxCount));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutProgress::Error(const LayoutErrors &state)
-{
-    switch (state)
-    {
-        case LayoutErrors::NoError:
-            return;
-        case LayoutErrors::PrepareLayoutError:
-            qCritical() << tr("Couldn't prepare data for creation layout");
-            break;
-        case LayoutErrors::EmptyPaperError:
-            qCritical() << tr("One or more pattern pieces are bigger than the paper format you selected. Please, "
-                              "select a bigger paper format.");
-            break;
-        case LayoutErrors::ProcessStoped:
-        default:
-            break;
-    }
-
-    done(QDialog::Rejected);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutProgress::Finished()
 {
+    progressTimer->stop();
     done(QDialog::Accepted);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutProgress::Efficiency(qreal value)
+{
+    ui->labelMessage->setText(tr("Efficiency coefficient: %1%").arg(qRound(value * 10.) / 10.));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ struct VPositionData
     int i{-1};
     int j{-1};
     bool rotate{false};
-    int rotationIncrease{0};
+    int rotationNumber{0};
     bool followGrainline{false};
 };
 
@@ -124,7 +124,7 @@ private:
     void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
     void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const;
 
-    void Rotate(int increase);
+    void Rotate(int number);
     void FollowGrainline();
 
     QLineF FabricGrainline() const;

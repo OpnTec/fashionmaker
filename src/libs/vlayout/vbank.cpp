@@ -176,7 +176,29 @@ void VBank::NotArranged(int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::Prepare()
+bool VBank::PrepareUnsorted()
+{
+    for (int i=0; i < details.size(); ++i)
+    {
+        const qint64 square = details.at(i).Square();
+        if (square <= 0)
+        {
+            qCCritical(lBank, "Preparing data for layout error: Detail '%s' square <= 0",
+                       qUtf8Printable(details.at(i).GetName()));
+            prepare = false;
+            return prepare;
+        }
+        unsorted.insert(i, square);
+    }
+
+    PrepareGroup();
+
+    prepare = true;
+    return prepare;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VBank::PrepareDetails()
 {
     if (layoutWidth <= 0)
     {
@@ -193,10 +215,12 @@ bool VBank::Prepare()
     }
 
     diagonal = 0;
+
     for (int i=0; i < details.size(); ++i)
     {
         details[i].SetLayoutWidth(layoutWidth);
         details[i].SetLayoutAllowancePoints();
+
         if (not details.at(i).IsLayoutAllowanceValid())
         {
             const QString errorMsg = QObject::tr("Piece '%1' has invalid layout allowance. Please, check seam allowance"
@@ -209,19 +233,7 @@ bool VBank::Prepare()
         {
             diagonal = d;
         }
-
-        const qint64 square = details.at(i).Square();
-        if (square <= 0)
-        {
-            qCCritical(lBank, "Preparing data for layout error: Detail '%s' square <= 0",
-                       qUtf8Printable(details.at(i).GetName()));
-            prepare = false;
-            return prepare;
-        }
-        unsorted.insert(i, square);
     }
-
-    PrepareGroup();
 
     prepare = true;
     return prepare;
@@ -434,6 +446,35 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin) const
         ++i;
     }
 
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VBank::DetailsBiggestEdge() const
+{
+    qreal edge = 0;
+    for(auto &piece : details)
+    {
+        const qreal pieceEdge = piece.BiggestEdge();
+        if (pieceEdge > edge)
+        {
+            edge = pieceEdge;
+        }
+    }
+
+    return edge;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VBank::IsRotationNeeded() const
+{
+    for(auto &piece : details)
+    {
+        if (not piece.IsGrainlineEnabled())
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 #if defined (Q_OS_WIN) && defined (Q_CC_MSVC)

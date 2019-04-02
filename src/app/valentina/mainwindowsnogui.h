@@ -133,7 +133,7 @@ protected:
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList()=0;
     QIcon ScenePreview(int i) const;
-    bool LayoutSettings(VLayoutGenerator& lGenerator);
+    bool GenerateLayout(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;
     void SetSizeHeightForIndividualM() const;
@@ -146,7 +146,6 @@ protected:
     void CheckRequiredMeasurements(const VMeasurements *m) const;
 private slots:
     void PrintPages (QPrinter *printer);
-    void ErrorConsoleMode(const LayoutErrors &state);
 private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
@@ -212,6 +211,8 @@ private:
                           bool ignorePrinterFields, const QMarginsF &margins);
 
     void ExportDetailsAsFlatLayout(const QVector<VLayoutPiece> &listDetails);
+
+    void ShowLayoutError(const LayoutErrors &state);
 };
 
 #endif // MAINWINDOWSNOGUI_H

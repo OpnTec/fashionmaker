@@ -60,8 +60,8 @@ public:
           layoutWidth(paper.layoutWidth),
           globalRotate(paper.globalRotate),
           localRotate(paper.localRotate),
-          globalRotationIncrease(paper.globalRotationIncrease),
-          localRotationIncrease(paper.localRotationIncrease),
+          globalRotationNumber(paper.globalRotationNumber),
+          localRotationNumber(paper.localRotationNumber),
           saveLength(paper.saveLength),
           followGrainline(paper.followGrainline)
     {}
@@ -79,8 +79,8 @@ public:
     qreal layoutWidth{0};
     bool globalRotate{true};
     bool localRotate{true};
-    int globalRotationIncrease{180};
-    int localRotationIncrease{180};
+    int globalRotationNumber{2};
+    int localRotationNumber{2};
     bool saveLength{false};
     bool followGrainline{false};
 

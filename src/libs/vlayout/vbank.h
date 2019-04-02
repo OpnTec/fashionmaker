@@ -54,6 +54,7 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(qreal value);
 
+
     void SetDetails(const QVector<VLayoutPiece> &details);
     int  GetNext();
     VLayoutPiece GetDetail(int i) const;
@@ -61,7 +62,8 @@ public:
     void Arranged(int i);
     void NotArranged(int i);
 
-    bool Prepare();
+    bool PrepareUnsorted();
+    bool PrepareDetails();
     void Reset();
     void SetCaseType(Cases caseType);
 
@@ -70,6 +72,9 @@ public:
     int ArrangedCount() const;
 
     qreal GetBiggestDiagonal() const;
+    qreal DetailsBiggestEdge() const;
+
+    bool IsRotationNeeded() const;
 
 private:
     Q_DISABLE_COPY(VBank)

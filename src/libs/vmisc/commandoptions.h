@@ -51,9 +51,6 @@ extern const QString LONG_OPTION_TEXT2PATHS;
 extern const QString LONG_OPTION_EXPORTONLYDETAILS;
 extern const QString LONG_OPTION_EXPORTSUCHDETAILS;
 
-extern const QString LONG_OPTION_ROTATE;
-extern const QString SINGLE_OPTION_ROTATE;
-
 extern const QString LONG_OPTION_CROP;
 extern const QString SINGLE_OPTION_CROP;
 
@@ -71,9 +68,6 @@ extern const QString SINGLE_OPTION_PAGEUNITS;
 
 extern const QString LONG_OPTION_SAVELENGTH;
 extern const QString SINGLE_OPTION_SAVELENGTH;
-
-extern const QString LONG_OPTION_SHIFTLENGTH;
-extern const QString SINGLE_OPTION_SHIFTLENGTH;
 
 extern const QString LONG_OPTION_SHIFTUNITS;
 extern const QString SINGLE_OPTION_SHIFTUNITS;
@@ -111,6 +105,11 @@ extern const QString SINGLE_OPTION_TOP_MARGIN;
 
 extern const QString LONG_OPTION_BOTTOM_MARGIN;
 extern const QString SINGLE_OPTION_BOTTOM_MARGIN;
+
+extern const QString LONG_OPTION_NESTING_TIME;
+extern const QString SINGLE_OPTION_NESTING_TIME;
+
+extern const QString LONG_OPTION_EFFICIENCY_COEFFICIENT;
 
 extern const QString LONG_OPTION_CSVWITHHEADER;
 extern const QString LONG_OPTION_CSVCODEC;

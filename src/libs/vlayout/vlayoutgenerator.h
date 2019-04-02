@@ -52,6 +52,7 @@ class QMarginsF;
 
 class QGraphicsItem;
 class VLayoutPaper;
+class QElapsedTimer;
 
 class VLayoutGenerator :public QObject
 {
@@ -71,16 +72,26 @@ public:
     qreal GetPaperWidth() const;
     void SetPaperWidth(qreal value);
 
+    int  GetNestingTime() const;
+    void SetNestingTime(int value);
+
+    qreal GetEfficiencyCoefficient() const;
+    void  SetEfficiencyCoefficient(qreal coefficient);
+
     bool IsUsePrinterFields() const;
     QMarginsF GetPrinterFields() const;
     void SetPrinterFields(bool usePrinterFields, const QMarginsF &value);
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    qreal GetShift() const;
+    void  SetShift(qreal shift);
 
-    void Generate();
+    void Generate(QElapsedTimer timer, qint64 timeout);
+
+    qreal LayoutEfficiency() const;
 
     LayoutErrors State() const;
+
+    int PapersCount() const {return papers.size();}
 
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetPapersItems() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetGlobalContours() const;
@@ -94,8 +105,8 @@ public:
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool value);
 
-    int GetRotationIncrease() const;
-    void SetRotationIncrease(int value);
+    int GetRotationNumber() const;
+    void SetRotationNumber(int value);
 
     bool GetAutoCrop() const;
     void SetAutoCrop(bool value);
@@ -115,14 +126,11 @@ public:
     bool IsTestAsPaths() const;
     void SetTextAsPaths(bool value);
 
-signals:
-    void Start();
-    void Arranged(int count);
-    void Error(const LayoutErrors &state);
-    void Finished();
+    bool IsRotationNeeded() const;
 
 public slots:
     void Abort();
+    void Timeout();
 
 private:
     Q_DISABLE_COPY(VLayoutGenerator)
@@ -134,10 +142,10 @@ private:
     bool usePrinterFields;
     std::atomic_bool stopGeneration;
     LayoutErrors state;
-    quint32 shift;
+    qreal shift;
     bool rotate;
     bool followGrainline;
-    int rotationIncrease;
+    int rotationNumber;
     bool autoCrop;
     bool saveLength;
     bool unitePages;
@@ -145,6 +153,8 @@ private:
     quint8 multiplier;
     bool stripOptimization;
     bool textAsPaths;
+    int nestingTime{1};
+    qreal efficiencyCoefficient{0.0};
 
     int PageHeight() const;
     int PageWidth() const;

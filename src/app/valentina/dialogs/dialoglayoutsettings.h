@@ -61,8 +61,11 @@ public:
     qreal GetPaperWidth() const;
     void SetPaperWidth(qreal value);
 
-    qreal GetShift() const;
-    void SetShift(qreal value);
+    int  GetNestingTime() const;
+    void SetNestingTime(int value);
+
+    qreal GetEfficiencyCoefficient() const;
+    void  SetEfficiencyCoefficient(qreal ration);
 
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(qreal value);
@@ -73,14 +76,8 @@ public:
     Cases GetGroup() const;
     void SetGroup(const Cases &value);
 
-    bool GetRotate() const;
-    void SetRotate(bool state);
-
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool state);
-
-    int GetIncrease() const;
-    bool SetIncrease(int increase);
 
     bool GetAutoCrop() const;
     void SetAutoCrop(bool autoCrop);

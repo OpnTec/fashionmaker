@@ -112,19 +112,6 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     {
         //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
-        bool a = IsOptionSet(LONG_OPTION_SHIFTLENGTH);
-        bool b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
-
-        if ((a || b) && !(a && b))
-        {
-            qCritical() << translate("VCommandLine", "Shift/Offset length must be used together with shift units.")
-                        << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
-
-    {
-        //just anonymous namespace ...don' like to have a,b,c,d everywhere defined
         bool a = IsOptionSet(LONG_OPTION_GAPWIDTH);
         bool b = IsOptionSet(LONG_OPTION_SHIFTUNITS);
 
@@ -163,19 +150,6 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
              translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
 
-    const int rotateDegree = OptRotation();
-    diag.SetRotate(rotateDegree != 0 ); // 0 disable rotation
-
-    if (rotateDegree != VSettings::GetDefLayoutRotationIncrease())//Value by default
-    {
-        if (not diag.SetIncrease(rotateDegree))
-        {
-            qCritical() << translate("VCommandLine", "Invalid rotation value. That must be one of predefined values.")
-                        << "\n";
-            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
-        }
-    }
-
     // if present units MUST be set before any other to keep conversions correct
     if (!diag.SelectTemplate(OptPaperSize()))
     {
@@ -210,11 +184,6 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
             qCritical() << translate("VCommandLine", "Unsupported layout units.") << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }
-    }
-
-    if (IsOptionSet(LONG_OPTION_SHIFTLENGTH))
-    {
-        diag.SetShift(Lo2Px(OptionValue(LONG_OPTION_SHIFTLENGTH), diag));
     }
 
     if (IsOptionSet(LONG_OPTION_GAPWIDTH))
@@ -256,6 +225,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
 
     diag.SetFields(margins);
     diag.SetFollowGrainline(IsOptionSet(LONG_OPTION_FOLLOW_GRAINLINE));
+    diag.SetNestingTime(OptNestingTime());
+    diag.SetEfficiencyCoefficient(OptEfficiencyCoefficient());
 
     diag.DialogAccepted(); // filling VLayoutGenerator
 
@@ -338,24 +309,6 @@ bool VCommandLine::IsExportFMEnabled() const
 VAbstractLayoutDialog::PaperSizeTemplate VCommandLine::OptPaperSize() const
 {
     return FormatSize(LONG_OPTION_PAGETEMPLATE);
-}
-
-//------------------------------------------------------------------------------------------------------
-int VCommandLine::OptRotation() const
-{
-    int rotate = VSettings::GetDefLayoutRotationIncrease();
-    if (IsOptionSet(LONG_OPTION_ROTATE))
-    {
-        bool ok = false;
-        rotate = OptionValue(LONG_OPTION_ROTATE).toInt(&ok);
-
-        if (not ok)
-        {
-            rotate = VSettings::GetDefLayoutRotationIncrease();
-        }
-    }
-
-    return rotate;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -635,6 +588,25 @@ void VCommandLine::InitCommandLineOptions()
     optionsUsed.insert(LONG_OPTION_MEASUREFILE, option);
     parser.addOption(option);
 
+    option = VCommandLineOption(QStringList({SINGLE_OPTION_NESTING_TIME, LONG_OPTION_NESTING_TIME}),
+                                translate("VCommandLine", "<Time> in minutes given for the algorithm to find best "
+                                                          "layout. Time must be in range from 1 minute to 60 "
+                                                          "minutes. Default value 1 minute."),
+                                translate("VCommandLine", "Time"));
+    optionsUsed.insert(LONG_OPTION_NESTING_TIME, option);
+    parser.addOption(option);
+
+    option = VCommandLineOption(LONG_OPTION_EFFICIENCY_COEFFICIENT,
+                                translate("VCommandLine", "Set layout efficiency <coefficient>. Layout efficiency "
+                                                          "coefficient is the ratio of the area occupied by the pieces "
+                                                          "to the bounding rect of all pieces. If nesting reaches "
+                                                          "required level the process stops. If value is 0 no check "
+                                                          "will be made. Сoefficient must be in range from 0 to 100. "
+                                                          "Default value 0."),
+                                translate("VCommandLine", "Coefficient"));
+    optionsUsed.insert(LONG_OPTION_EFFICIENCY_COEFFICIENT, option);
+    parser.addOption(option);
+
     option = VCommandLineOption(QStringList({SINGLE_OPTION_EXP2FORMAT, LONG_OPTION_EXP2FORMAT}),
                                 translate("VCommandLine", "Number corresponding to output format (default = 0, "
                                                           "export mode):") +
@@ -773,18 +745,6 @@ void VCommandLine::InitCommandLineOptions()
     parser.addOption(option);
 
     //=================================================================================================================
-    option = VCommandLineOption(QStringList({SINGLE_OPTION_ROTATE, LONG_OPTION_ROTATE}),
-                                translate("VCommandLine", "Rotation in degrees (one of predefined, export mode). "
-                                                          "Default value is 180. 0 is no-rotate. Valid values: "
-                                                          "%1. Each value show how many times details will be "
-                                                          "rotated. For example 180 mean two times (360/180=2) "
-                                                          "by 180 degree.")
-                                .arg("0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, "
-                                     "180"),
-                                translate("VCommandLine", "Angle"));
-    optionsUsed.insert(LONG_OPTION_ROTATE, option);
-    parser.addOption(option);
-
     option = VCommandLineOption(LONG_OPTION_FOLLOW_GRAINLINE,
                                 translate("VCommandLine", "Order detail to follow grainline direction (export mode)."));
     optionsUsed.insert(LONG_OPTION_FOLLOW_GRAINLINE, option);
@@ -815,14 +775,6 @@ void VCommandLine::InitCommandLineOptions()
                                 translate("VCommandLine", "Layout units (as paper's one except px, export mode)."),
                                 translate("VCommandLine", "The unit"));
     optionsUsed.insert(LONG_OPTION_SHIFTUNITS, option);
-    parser.addOption(option);
-
-    option = VCommandLineOption(QStringList({SINGLE_OPTION_SHIFTLENGTH, LONG_OPTION_SHIFTLENGTH}),
-                                translate("VCommandLine", "Shift/Offset layout length measured in layout units "
-                                                          "(export mode). The option show how many points along "
-                                                          "edge will be used in creating a layout."),
-                                translate("VCommandLine", "Shift/Offset length"));
-    optionsUsed.insert(LONG_OPTION_SHIFTLENGTH, option);
     parser.addOption(option);
 
     option = VCommandLineOption(QStringList({SINGLE_OPTION_GAPWIDTH, LONG_OPTION_GAPWIDTH}),
@@ -971,6 +923,46 @@ QString VCommandLine::OptionValue(const QString &option) const
 QStringList VCommandLine::OptionValues(const QString &option) const
 {
     return parser.values(optionsUsed.value(option));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommandLine::OptNestingTime() const
+{
+    int time = VSettings::GetDefNestingTime();
+    if (IsOptionSet(LONG_OPTION_NESTING_TIME))
+    {
+        bool ok = false;
+        time = OptionValue(LONG_OPTION_NESTING_TIME).toInt(&ok);
+
+        if (not ok || time < 1 || time > 60)
+        {
+            qCritical() << translate("VCommandLine", "Time must be in range from 1 minute to 60 minutes.")
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
+    return time;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommandLine::OptEfficiencyCoefficient() const
+{
+    qreal coefficient = VSettings::GetDefEfficiencyCoefficient();
+    if (IsOptionSet(LONG_OPTION_EFFICIENCY_COEFFICIENT))
+    {
+        bool ok = false;
+        coefficient = OptionValue(LONG_OPTION_EFFICIENCY_COEFFICIENT).toDouble(&ok);
+
+        if (not ok || coefficient < 0 || coefficient > 100)
+        {
+            qCritical() << translate("VCommandLine", "Сoefficient must be in range from 0 to 100.")
+                        << "\n";
+            const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
+        }
+    }
+
+    return coefficient;
 }
 
 #undef translate

@@ -361,6 +361,39 @@
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Time:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboBoxLayoutUnit"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelLayoutWidth">
+            <property name="text">
+             <string>Gap width:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="spinBoxNestingTime">
+            <property name="toolTip">
+             <string>Time given for the algorithm to find best layout.</string>
+            </property>
+            <property name="suffix">
+             <string> min</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>60</number>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1">
            <widget class="QDoubleSpinBox" name="doubleSpinBoxLayoutWidth">
             <property name="minimumSize">
@@ -368,6 +401,9 @@
               <width>94</width>
               <height>0</height>
              </size>
+            </property>
+            <property name="suffix">
+             <string notr="true"> ×2</string>
             </property>
             <property name="minimum">
              <double>0.000000000000000</double>
@@ -380,43 +416,26 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelLayoutWidth">
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>Gap width:</string>
+             <string>Efficiency:</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="labelShiftLength">
-            <property name="text">
-             <string>Shift/Offset length:</string>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBoxEfficiency">
+            <property name="toolTip">
+             <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </string>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxShift">
-            <property name="minimumSize">
-             <size>
-              <width>94</width>
-              <height>0</height>
-             </size>
+            <property name="suffix">
+             <string>%</string>
             </property>
-            <property name="maximum">
-             <double>99999.990000000005239</double>
+            <property name="decimals">
+             <number>1</number>
             </property>
-            <property name="value">
-             <double>0.000000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QComboBox" name="comboBoxLayoutUnit"/>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string notr="true">×2</string>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -441,165 +460,6 @@
           <property name="text">
            <string>Follow grainline</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="Line" name="line_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBoxRotate">
-          <property name="title">
-           <string>Rotate workpiece</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Rotate by</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="comboBoxIncrease">
-             <property name="currentIndex">
-              <number>21</number>
-             </property>
-             <item>
-              <property name="text">
-               <string notr="true">1</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">2</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">3</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">4</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">5</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">6</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">8</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">9</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">10</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">12</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">15</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">18</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">20</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">24</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">30</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">36</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">40</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">45</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">60</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">72</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">90</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">180</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>degree</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
         </item>
         <item>

@@ -74,13 +74,17 @@ public:
     qreal GetLayoutPaperWidth() const;
     void SetLayoutPaperWidth(qreal value);
 
-    qreal GetLayoutShift() const;
-    static qreal GetDefLayoutShift();
-    void SetLayoutShift(qreal value);
-
     qreal GetLayoutWidth() const;
     static qreal GetDefLayoutWidth();
     void SetLayoutWidth(qreal value);
+
+    int  GetNestingTime() const;
+    static int GetDefNestingTime(){return 1;}
+    void SetNestingTime(int value);
+
+    qreal GetEfficiencyCoefficient() const;
+    static qreal GetDefEfficiencyCoefficient(){return 0.0;}
+    void SetEfficiencyCoefficient(qreal value);
 
     QMarginsF GetFields(const QMarginsF &def = QMarginsF()) const;
     void SetFields(const QMarginsF &value);
@@ -89,17 +93,9 @@ public:
     static Cases GetDefLayoutGroup();
     void SetLayoutGroup(const Cases &value);
 
-    bool GetLayoutRotate() const;
-    static bool GetDefLayoutRotate();
-    void SetLayoutRotate(bool value);
-
     bool GetLayoutFollowGrainline() const;
     static bool GetDefLayoutFollowGrainline();
     void SetLayoutFollowGrainline(bool value);
-
-    int GetLayoutRotationIncrease() const;
-    static int GetDefLayoutRotationIncrease();
-    void SetLayoutRotationIncrease(int value);
 
     bool GetLayoutAutoCrop() const;
     static bool GetDefLayoutAutoCrop();
@@ -183,6 +179,33 @@ private:
 
     template <typename T>
     T GetCachedValue(T &cache, const QString &setting, T defValue, T valueMin, T valueMax) const;
+
+    template <class T>
+    T ValueOrDef(const QString &setting, const T &defValue) const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(defValue));
+    return val.canConvert<T>() ? val.value<T>() : defValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline Cases VSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
+    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
+    {
+        return defValue;
+    }
+    else
+    {
+        return static_cast<Cases>(g);
+    }
+}
 
 #endif // VSETTINGS_H

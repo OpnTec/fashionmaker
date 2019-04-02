@@ -40,7 +40,8 @@ enum class LayoutErrors : char
     NoError,
     PrepareLayoutError,
     ProcessStoped,
-    EmptyPaperError
+    EmptyPaperError,
+    Timeout
 };
 
 enum class BestFrom : char

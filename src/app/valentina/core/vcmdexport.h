@@ -150,8 +150,6 @@ protected:
 
     //@brief returns VAbstractLayoutDialog::PaperSizeTemplate
     VAbstractLayoutDialog::PaperSizeTemplate OptPaperSize() const;
-    //@brief returns rotation in degrees or 0 if not set
-    int OptRotation() const;
 
     Cases OptGroup() const;
 
@@ -175,6 +173,9 @@ private:
     bool IsOptionSet(const QString &option) const;
     QString OptionValue(const QString &option) const;
     QStringList OptionValues(const QString &option) const;
+
+    int   OptNestingTime() const;
+    qreal OptEfficiencyCoefficient() const;
 };
 
 #endif // VCMDEXPORT_H

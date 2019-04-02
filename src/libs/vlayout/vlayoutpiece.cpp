@@ -314,45 +314,36 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
+QVector<T> VLayoutPiece::Map(QVector<T> points) const
 {
-    QVector<T> p;
-    for (auto point : points)
+    for (int i = 0; i < points.size(); ++i)
     {
-        p.append(d->matrix.map(point));
+        points[i] = d->matrix.map(points.at(i));
     }
 
     if (d->mirror)
     {
-        QList<T> list = p.toList();
+        QList<T> list = points.toList();
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
             list.swap(k, s-(1+k));
         }
-        p = list.toVector();
+        points = list.toVector();
     }
-    return p;
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(const QVector<VLayoutPlaceLabel> &points) const
+QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(QVector<VLayoutPlaceLabel> points) const
 {
-    QVector<VLayoutPlaceLabel> p;
-    p.reserve(points.size());
-    for (auto &label : points)
+    for (int i = 0; i < points.size(); ++i)
     {
-        VLayoutPlaceLabel mappedLabel;
-        mappedLabel.type = label.type;
-        mappedLabel.center = d->matrix.map(label.center);
-        for (const auto &p : label.shape)
-        {
-            mappedLabel.shape.append(d->matrix.map(p));
-        }
-        p.append(mappedLabel);
+        points[i].center = d->matrix.map(points.at(i).center);
+        points[i].shape = Map(points.at(i).shape);
     }
 
-    return p;
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -742,15 +733,7 @@ bool VLayoutPiece::isNull() const
 //---------------------------------------------------------------------------------------------------------------------
 qint64 VLayoutPiece::Square() const
 {
-    if (d->layoutAllowance.isEmpty()) //-V807
-    {
-        return 0;
-    }
-
-    const qreal res = SumTrapezoids(d->layoutAllowance);
-
-    const qint64 sq = qFloor(qAbs(res/2.0));
-    return sq;
+    return d->m_square;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -779,6 +762,13 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         d->layoutAllowance.clear();
     }
+
+    if (d->layoutAllowance.isEmpty()) //-V807
+    {
+        d->m_square = 0;
+    }
+
+    d->m_square = qFloor(qAbs(SumTrapezoids(d->layoutAllowance)/2.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -943,6 +933,28 @@ bool VLayoutPiece::IsLayoutAllowanceValid() const
 {
     QVector<QPointF> base = (IsSeamAllowance() && not IsSeamAllowanceBuiltIn()) ? d->seamAllowance : d->contour;
     return VAbstractPiece::IsAllowanceValid(base, d->layoutAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VLayoutPiece::BiggestEdge() const
+{
+    qreal edge = 0;
+
+    if (d->layoutAllowance.size() < 2)
+    {
+        return edge;
+    }
+
+    for (int i = 1; i < d->layoutAllowance.size() - 1; ++i)
+    {
+        const qreal length = QLineF(d->layoutAllowance.at(i-1), d->layoutAllowance.at(i)).length();
+        if (length > edge)
+        {
+            edge = length;
+        }
+    }
+
+    return edge;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

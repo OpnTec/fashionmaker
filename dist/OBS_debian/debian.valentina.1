@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "27 December, 2018" "valentina man page"
+.TH valentina 1 "30 March, 2019" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -23,6 +23,10 @@ Displays version information.
 The path to output destination folder. By default the directory at which the application was started. The path must exists and be reachable for the program.
 .IP "-m, --mfile <The measure file>"
 .RB "Path to custom measure file (" "export mode" ")."
+.IP "-n, --time <Time>"
+.RB "<Time> in minutes given for the algorithm to find best layout (" "export mode" "). Time must be in range from 1 minute to 60 minutes. Default value 1 minute."
+.IP "--сoefficient <Coefficient>"
+.RB "Set layout efficiency coefficient (" "export mode" "). Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0."
 .IP "-f, --format <Format number>" 
 .RB "Number corresponding to output format (default = 0, " "export mode" "):" 
 .RS 
@@ -182,8 +186,6 @@ The path to output destination folder. By default the directory at which the app
 .RB "Page top margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "-B, --bmargin <The bottom margin>"
 .RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
-.IP "-r, --rotate <Angle>"
-.RB "Rotation in degrees (one of predefined, " "export mode" "). Default value is " "180" ". 0 is no-rotate. Valid values: 0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 180. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree."
 .IP "--followGrainline"
 .RB "Order detail to follow grainline direction (" "export mode" ").
 .IP "-c, --crop"
@@ -194,8 +196,6 @@ The path to output destination folder. By default the directory at which the app
 .RB "Save length of the sheet if set (" "export mode" "). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used."
 .IP "-l, --layounits <The unit>"
 .RB "Layout units (as paper's one except px, " "export mode" ")."
-.IP "-s, --shiftlen <Shift length>"
-.RB "Shift layout length measured in layout units (" "export mode" "). The option show how many points along edge will be used in creating a layout."
 .IP "-G, --gapwidth <The gap width>"
 .RB "The layout gap width x2, measured in layout units (" "export mode" "). Set distance between details and a detail and a sheet."
 .IP "-g, --groups <Grouping type>"

@@ -73,8 +73,8 @@ public:
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(qreal width);
 
-    quint32 GetShift() const;
-    void    SetShift(quint32 shift);
+    qreal GetShift() const;
+    void    SetShift(qreal shift);
 
     bool GetRotate() const;
     void SetRotate(bool value);
@@ -82,8 +82,8 @@ public:
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool value);
 
-    int GetRotationIncrease() const;
-    void SetRotationIncrease(int value);
+    int GetRotationNumber() const;
+    void SetRotationNumber(int value);
 
     bool IsSaveLength() const;
     void SetSaveLength(bool value);
@@ -100,6 +100,8 @@ public:
     void                  SetDetails(const QList<VLayoutPiece>& details);
 
     QRectF DetailsBoundingRect() const;
+
+    qreal Efficiency() const;
 
 private:
     QSharedDataPointer<VLayoutPaperData> d;

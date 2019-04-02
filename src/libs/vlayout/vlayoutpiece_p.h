@@ -87,7 +87,8 @@ public:
           grainlineEnabled(detail.grainlineEnabled),
           m_tmDetail(detail.m_tmDetail),
           m_tmPattern(detail.m_tmPattern),
-          m_placeLabels(detail.m_placeLabels)
+          m_placeLabels(detail.m_placeLabels),
+          m_square(detail.m_square)
     {}
 
     ~VLayoutPieceData() {}
@@ -136,6 +137,8 @@ public:
 
     /** @brief m_placeLabels list of place labels. */
     QVector<VLayoutPlaceLabel> m_placeLabels;
+
+    qint64 m_square{0};
 
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;

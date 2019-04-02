@@ -30,6 +30,8 @@
 #define DIALOGLAYOUTPROGRESS_H
 
 #include <QDialog>
+#include <QElapsedTimer>
+#include <QTimer>
 
 #include "../vlayout/vlayoutdef.h"
 
@@ -43,17 +45,17 @@ class DialogLayoutProgress : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogLayoutProgress(int count, QWidget *parent = nullptr);
+    explicit DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, QWidget *parent = nullptr);
     ~DialogLayoutProgress();
 
 signals:
     void Abort();
+    void Timeout();
 
 public slots:
     void Start();
-    void Arranged(int count);
-    void Error(const LayoutErrors &state);
     void Finished();
+    void Efficiency(qreal value);
 
 protected:
     virtual void showEvent(QShowEvent *event) override;
@@ -61,9 +63,11 @@ protected:
 private:
     Q_DISABLE_COPY(DialogLayoutProgress)
     Ui::DialogLayoutProgress *ui;
-    const int maxCount;
-    QMovie *movie;
-    bool isInitialized;
+    QMovie *m_movie;
+    QElapsedTimer m_timer;
+    qint64 m_timeout;
+    bool isInitialized{false};
+    QTimer *progressTimer;
 };
 
 #endif // DIALOGLAYOUTPROGRESS_H
