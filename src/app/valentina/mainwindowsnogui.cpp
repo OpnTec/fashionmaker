@@ -231,6 +231,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         progressTimer->start(1000);
 #endif
         connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
+        connect(progress.data(), &DialogLayoutProgress::Timeout, &lGenerator, &VLayoutGenerator::Timeout);
     }
 
     progress->Start();

@@ -50,6 +50,7 @@ public:
 
 signals:
     void Abort();
+    void Timeout();
 
 public slots:
     void Start();

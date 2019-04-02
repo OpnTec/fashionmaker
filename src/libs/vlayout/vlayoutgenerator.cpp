@@ -325,6 +325,14 @@ void VLayoutGenerator::Abort()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::Timeout()
+{
+    stopGeneration.store(true);
+    state = LayoutErrors::Timeout;
+    QThreadPool::globalInstance()->clear();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::IsStripOptimization() const
 {
     return stripOptimization;

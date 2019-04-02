@@ -74,7 +74,8 @@ DialogLayoutProgress::DialogLayoutProgress(QElapsedTimer timer, qint64 timeout, 
 
         if (timeout <= 1000)
         {
-            emit Abort();
+            emit Timeout();
+            progressTimer->stop();
         }
     });
     progressTimer->start(1000);

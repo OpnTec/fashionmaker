@@ -130,6 +130,7 @@ public:
 
 public slots:
     void Abort();
+    void Timeout();
 
 private:
     Q_DISABLE_COPY(VLayoutGenerator)
