@@ -32,6 +32,8 @@
 #include <QSharedData>
 #include <QPointF>
 #include <QVector>
+#include <QRectF>
+#include <QPainterPath>
 
 #include "../vmisc/diagnostic.h"
 
@@ -57,7 +59,10 @@ public:
           paperHeight(contour.paperHeight),
           paperWidth(contour.paperWidth),
           shift(contour.shift),
-          layoutWidth(contour.layoutWidth)
+          layoutWidth(contour.layoutWidth),
+          m_boundingRect(contour.m_boundingRect),
+          m_contourPath(contour.m_contourPath),
+          m_emptySheetEdgesCount(contour.m_emptySheetEdgesCount)
     {}
 
     ~VContourData() {}
@@ -74,6 +79,11 @@ public:
     qreal shift{0};
 
     qreal layoutWidth{0};
+
+    QRectF m_boundingRect{};
+    QPainterPath m_contourPath{};
+
+    int  m_emptySheetEdgesCount{0};
 
 private:
     VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;

@@ -159,7 +159,7 @@ private:
     void CreateGrainlineItem(QGraphicsItem *parent) const;
 
     template <class T>
-    QVector<T> Map(const QVector<T> &points) const;
+    QVector<T> Map(QVector<T> points) const;
 
     QLineF Edge(const QVector<QPointF> &path, int i) const;
     int    EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) const;

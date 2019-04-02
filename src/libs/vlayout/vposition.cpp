@@ -493,7 +493,7 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 
     const QPainterPath gPath = m_data.gContour.ContourPath();
     CrossingType crossing = CrossingType::EdgeError;
-    if (not gPath.intersects(detail.LayoutAllowancePath()) && not gPath.contains(detail.ContourPath()))
+    if (not gPath.contains(detail.ContourPath()) && not gPath.intersects(detail.LayoutAllowancePath()))
     {
         crossing = CrossingType::NoIntersection;
     }
@@ -644,13 +644,6 @@ void VPosition::FindBestPosition()
         if (m_data.rotate)
         {
             Rotate(m_data.rotationNumber);
-        }
-        else
-        {
-            if (m_data.gContour.GetContour().isEmpty())
-            {
-                Rotate(m_data.rotationNumber);
-            }
         }
     }
     else

@@ -314,45 +314,36 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
 
 //---------------------------------------------------------------------------------------------------------------------
 template <class T>
-QVector<T> VLayoutPiece::Map(const QVector<T> &points) const
+QVector<T> VLayoutPiece::Map(QVector<T> points) const
 {
-    QVector<T> p;
-    for (auto point : points)
+    for (int i = 0; i < points.size(); ++i)
     {
-        p.append(d->matrix.map(point));
+        points[i] = d->matrix.map(points.at(i));
     }
 
     if (d->mirror)
     {
-        QList<T> list = p.toList();
+        QList<T> list = points.toList();
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
             list.swap(k, s-(1+k));
         }
-        p = list.toVector();
+        points = list.toVector();
     }
-    return p;
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <>
-QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(const QVector<VLayoutPlaceLabel> &points) const
+QVector<VLayoutPlaceLabel> VLayoutPiece::Map<VLayoutPlaceLabel>(QVector<VLayoutPlaceLabel> points) const
 {
-    QVector<VLayoutPlaceLabel> p;
-    p.reserve(points.size());
-    for (auto &label : points)
+    for (int i = 0; i < points.size(); ++i)
     {
-        VLayoutPlaceLabel mappedLabel;
-        mappedLabel.type = label.type;
-        mappedLabel.center = d->matrix.map(label.center);
-        for (const auto &p : label.shape)
-        {
-            mappedLabel.shape.append(d->matrix.map(p));
-        }
-        p.append(mappedLabel);
+        points[i].center = d->matrix.map(points.at(i).center);
+        points[i].shape = Map(points.at(i).shape);
     }
 
-    return p;
+    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
