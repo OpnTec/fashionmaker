@@ -46,6 +46,8 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+    void TestCutArc_data();
+    void TestCutArc();
 };
 
 #endif // TST_VARC_H

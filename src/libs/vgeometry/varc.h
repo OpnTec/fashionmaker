@@ -83,8 +83,8 @@ public:
 
     virtual QVector<QPointF> GetPoints () const override;
 
-    QPointF CutArc (const qreal &length, VArc &arc1, VArc &arc2) const;
-    QPointF CutArc (const qreal &length) const;
+    QPointF CutArc (qreal length, VArc &arc1, VArc &arc2) const;
+    QPointF CutArc (qreal length) const;
 protected:
     virtual void CreateName() override;
     virtual void FindF2(qreal length) override;

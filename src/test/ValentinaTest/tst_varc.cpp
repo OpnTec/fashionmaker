@@ -318,3 +318,81 @@ void TST_VArc::TestFlip()
     QCOMPARE(originArc.GetRadius(), res.GetRadius());
     QCOMPARE(originArc.AngleArc(), res.AngleArc());
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestCutArc_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("length");
+    QTest::addColumn<qreal>("cutLength");
+    QTest::addColumn<QPointF>("cutPoint");
+
+    QPointF center (189.13625196850393, 344.1267401574803);
+    qreal radius = ToPixel(10, Unit::Cm);
+    qreal startAngle = 45.0;
+    qreal length = ToPixel(-10, Unit::Cm);
+    qreal cutLength = ToPixel(6, Unit::Cm);
+    QPointF cutPoint(539.3657292513009, 202.04366960088566);
+
+    // See file <root>/src/app/share/collection/bugs/Issue_#957.val
+    QTest::newRow("Arc -10 cm length, cut length 6 cm") << center << radius << startAngle << length << cutLength
+                                                        << cutPoint;
+
+    cutLength = ToPixel(-4, Unit::Cm);
+
+    // Opposite case
+    QTest::newRow("Arc -10 cm length, cut length -4 cm") << center << radius << startAngle << length << cutLength
+                                                         << cutPoint;
+
+    startAngle = 135;
+    length = ToPixel(10, Unit::Cm);
+    cutLength = ToPixel(-7, Unit::Cm);
+    cutPoint = QPointF(-145.1588983496871, 167.78888781060192);
+
+    // See file <root>/src/app/share/collection/bugs/Issue_#957.val
+    QTest::newRow("Arc 10 cm length, cut length -7 cm") << center << radius << startAngle << length << cutLength
+                                                        << cutPoint;
+
+    // Opposite case
+    cutLength = ToPixel(3, Unit::Cm);
+    QTest::newRow("Arc 10 cm length, cut length 3 cm") << center << radius << startAngle << length << cutLength
+                                                       << cutPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestCutArc()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, length);
+    QFETCH(qreal, cutLength);
+    QFETCH(QPointF, cutPoint);
+
+    VArc arc (length, VPointF(center), radius, startAngle);
+    arc.SetApproximationScale(0.5);
+
+    VArc arc1;
+    VArc arc2;
+    QPointF point = arc.CutArc(cutLength, arc1, arc2);
+
+    QCOMPARE(point, cutPoint);
+
+    QCOMPARE(arc1.IsFlipped(), arc.IsFlipped());
+    QCOMPARE(arc2.IsFlipped(), arc.IsFlipped());
+
+    QCOMPARE(arc1.GetApproximationScale(), arc.GetApproximationScale());
+    QCOMPARE(arc2.GetApproximationScale(), arc.GetApproximationScale());
+
+    QCOMPARE(arc1.GetStartAngle(), arc.GetStartAngle());
+    QCOMPARE(arc2.GetEndAngle(), arc.GetEndAngle());
+
+    QVERIFY(VFuzzyComparePossibleNulls(arc1.GetEndAngle(), arc2.GetStartAngle()));
+
+    QCOMPARE(arc1.GetLength() + arc2.GetLength(), arc.GetLength());
+
+    qreal segmentsLength = VAbstractCurve::PathLength(arc1.GetPoints()) + VAbstractCurve::PathLength(arc2.GetPoints());
+    QVERIFY(qAbs(segmentsLength - VAbstractCurve::PathLength(arc.GetPoints())) <= accuracyPointOnLine);
+}

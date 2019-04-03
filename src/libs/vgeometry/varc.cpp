@@ -232,8 +232,7 @@ QVector<QPointF> VArc::GetPoints() const
     QVector<QPointF> points;
     QVector<qreal> sectionAngle;
 
-    QPointF pStart;
-    IsFlipped() ? pStart = GetP2() : pStart = GetP1();
+    QPointF pStart = IsFlipped() ? GetP2() : GetP1();
 
     {
         qreal angle = AngleArc();
@@ -304,53 +303,56 @@ QVector<QPointF> VArc::GetPoints() const
  * @param arc2 second arc.
  * @return point cutting
  */
-QPointF VArc::CutArc(const qreal &length, VArc &arc1, VArc &arc2) const
+QPointF VArc::CutArc(qreal length, VArc &arc1, VArc &arc2) const
 {
     //Always need return two arcs, so we must correct wrong length.
-    qreal len = 0;
-    const qreal minLength = ToPixel(1, Unit::Mm);
     const qreal fullLength = GetLength();
 
-    if (fullLength <= minLength)
+    if (qAbs(fullLength) < ToPixel(2, Unit::Mm))
     {
         arc1 = VArc();
         arc2 = VArc();
         return QPointF();
     }
 
-    const qreal maxLength = fullLength - minLength;
+    QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
 
-    if (length < minLength)
+    if (not IsFlipped())
     {
-        len = minLength;
-    }
-    else if (length > maxLength)
-    {
-        len = maxLength;
+        if (length < 0)
+        {
+            length = fullLength + length;
+        }
+        length = qBound(ToPixel(1, Unit::Mm), length, fullLength - ToPixel(1, Unit::Mm));
+
+        line.setAngle(line.angle() + qRadiansToDegrees(length/d->radius));
     }
     else
     {
-        len = length;
+        if (length > 0)
+        {
+            length = fullLength + length;
+        }
+        length = qBound(fullLength + ToPixel(1, Unit::Mm), length, ToPixel(-1, Unit::Mm));
+
+        line.setAngle(line.angle() - qRadiansToDegrees(qAbs(length)/d->radius));
     }
-
-    qreal n = qRadiansToDegrees(len/d->radius); // n - is angle in degrees
-
-    QLineF line(static_cast<QPointF>(GetCenter()), GetP1());
-    line.setAngle(line.angle()+n);
 
     arc1 = VArc (GetCenter(), d->radius, d->formulaRadius, GetStartAngle(), GetFormulaF1(), line.angle(),
                  QString().setNum(line.angle()), getIdObject(), getMode());
     arc1.SetApproximationScale(GetApproximationScale());
+    arc1.SetFlipped(IsFlipped());
 
     arc2 = VArc (GetCenter(), d->radius, d->formulaRadius, line.angle(), QString().setNum(line.angle()), GetEndAngle(),
                  GetFormulaF2(), getIdObject(), getMode());
     arc2.SetApproximationScale(GetApproximationScale());
+    arc2.SetFlipped(IsFlipped());
     return line.p2();
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------
-QPointF VArc::CutArc(const qreal &length) const
+QPointF VArc::CutArc(qreal length) const
 {
     VArc arc1;
     VArc arc2;

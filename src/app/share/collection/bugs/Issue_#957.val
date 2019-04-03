@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.2.0 (https://valentinaproject.bitbucket.io/).-->
+    <version>0.7.12</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="А" showLabel="true" type="single" x="5.00423" y="9.10502"/>
+            <arc aScale="0.5" angle1="45" center="1" color="black" id="2" length="-10" penStyle="hair" radius="10" type="arcWithLength"/>
+            <point arc="2" id="3" length="6" mx="0.132292" my="0.264583" name="А1" showLabel="true" type="cutArc"/>
+            <arc aScale="0" angle1="135" center="1" color="black" id="4" length="10" penStyle="hair" radius="10" type="arcWithLength"/>
+            <point arc="4" id="5" length="-7" mx="0.132292" my="0.241842" name="А2" showLabel="true" type="cutArc"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

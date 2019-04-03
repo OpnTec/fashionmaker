@@ -33,6 +33,7 @@
 - [#954] Valentina produces empty rotation operation.
 - [#955] Valentina corrupts file.
 - [#956] Setting pattern unit doesn't change combobox value in Tape app.
+- [#957] Unable to cut an arc with negative length.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
