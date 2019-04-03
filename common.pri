@@ -343,7 +343,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wno-error=strict-overflow \
     -Wundef \
     -Wno-unused \
-    -Wno-unknown-pragmas \
+    -Wno-pragmas \
     -ftrapv
 
 # Since GCC 5
@@ -806,7 +806,7 @@ ICC_DEBUG_CXXFLAGS += \
 GCC_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
-    -Wno-unknown-pragmas \
+    -Wno-pragmas \
     -Wno-error=strict-overflow \
     -Wextra \
     -fno-omit-frame-pointer # Need for exchndl.dll
