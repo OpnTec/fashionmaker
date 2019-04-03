@@ -1,4 +1,4 @@
-FROM gcc
+FROM gcc:latest
 MAINTAINER Roman Telezhynskyi <dismine@gmail.com>
 
 RUN apt-get update && apt-get install -y \
