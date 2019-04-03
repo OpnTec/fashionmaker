@@ -343,6 +343,7 @@ GCC_DEBUG_CXXFLAGS += \
     -Wno-error=strict-overflow \
     -Wundef \
     -Wno-unused \
+    -Wno-unknown-pragmas \
     -ftrapv
 
 # Good support Q_NULLPTR came later
@@ -394,6 +395,11 @@ g++7:GCC_DEBUG_CXXFLAGS += \
     -Wrestrict \
     -Walloc-zero \
     -Wnonnull
+
+# Since GCC 7
+g++7:GCC_DEBUG_CXXFLAGS += \
+    -Wmultistatement-macros \
+    -Warray-bounds
 
 # Usefull Clang warnings keys.
 CLANG_DEBUG_CXXFLAGS += \
@@ -795,7 +801,7 @@ ICC_DEBUG_CXXFLAGS += \
     -Wstrict-prototypes \
     -Wtrigraphs \
     -Wuninitialized \
-    -Wunknown-pragmas \
+    -Wno-unknown-pragmas \
     -Wunused-variable \
     -Wno-pch-messages \
     -wd1418,2012,2015,2017,2022,2013 #disable warnings. Syntax example -wd1572,873,2259,2261
@@ -805,6 +811,7 @@ ICC_DEBUG_CXXFLAGS += \
 GCC_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
+    -Wno-unknown-pragmas \
     -Wno-error=strict-overflow \
     -Wextra \
     -fno-omit-frame-pointer # Need for exchndl.dll

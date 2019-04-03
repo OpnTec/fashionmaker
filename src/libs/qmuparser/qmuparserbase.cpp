@@ -1128,6 +1128,7 @@ QT_WARNING_POP
                 int iArgCount = pTok->Fun.argc;
 
 QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wcast-function-type")
 QT_WARNING_DISABLE_CLANG("-Wundefined-reinterpret-cast")
 QT_WARNING_DISABLE_MSVC(4191)
 
