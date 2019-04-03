@@ -2987,7 +2987,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Kon geen data voorbereiden om opmaak te creëren</translation>
+        <translation type="vanished">Kon geen data voorbereiden om opmaak te creëren</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -3003,15 +3003,31 @@
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
-        <translation>Gerangschikte werkstukken: %1 van %2</translation>
+        <translation type="vanished">Gerangschikte werkstukken: %1 van %2</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beste positie zoeken voor de werkstukken. Een moment geduld a.u.b.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beste positie zoeken voor de werkstukken. Een moment geduld a.u.b.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation>Een of meer patroon delen zijn groter dan het papierformaat welke je hebt geselecteerd. Kies a.u.b. een groter formaat papier.</translation>
+        <translation type="vanished">Een of meer patroon delen zijn groter dan het papierformaat welke je hebt geselecteerd. Kies a.u.b. een groter formaat papier.</translation>
+    </message>
+    <message>
+        <source>Nesting. Please, wait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency coefficient: %1%</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3034,15 +3050,15 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Draai werkstuk</translation>
+        <translation type="vanished">Draai werkstuk</translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Draai om</translation>
+        <translation type="vanished">Draai om</translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>graad</translation>
+        <translation type="vanished">graad</translation>
     </message>
     <message>
         <source>Creation options</source>
@@ -3204,7 +3220,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Verschuivings/Offset lengte:</translation>
+        <translation type="vanished">Verschuivings/Offset lengte:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -3270,6 +3286,30 @@ Apply settings anyway?</source>
         <translation>Marges gaan voorbij afdrukbereik. 
 
 Toch de instellingen aanpassen?</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished">Tijd:</translation>
+    </message>
+    <message>
+        <source>Time given for the algorithm to find best layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Follow grainline</source>
@@ -8021,7 +8061,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point from tangent circle and segment</source>
-        <translation>Punt van raaklijn cirkel en segment</translation>
+        <translation type="vanished">Punt van raaklijn cirkel en segment</translation>
     </message>
     <message>
         <source>Place label tool</source>
@@ -8057,6 +8097,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8237,6 +8281,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Please, additionally provide: %1</source>
         <translation>Alstublieft, verstrek extra: %1</translation>
+    </message>
+    <message>
+        <source>Timeout.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
@@ -11216,7 +11264,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Hoek</translation>
+        <translation type="vanished">Hoek</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -11272,7 +11320,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Ongeldige rotatie waarde. Dat moet een van de vooraf gedefinieerde waarden zijn.</translation>
+        <translation type="vanished">Ongeldige rotatie waarde. Dat moet een van de vooraf gedefinieerde waarden zijn.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -11432,7 +11480,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation>Rotatie in graden (een van de vooraf gedefinieerde, export modus). Standaardwaarde is 180. 0 is niet roteren. Geldige waarden: %1. Elke waarde geeft weer hoeveel keer details zal worden gedraaid. Bijvoorbeeld 180 betekend twee keer (360/180 = 2) door 180 graden.</translation>
+        <translation type="vanished">Rotatie in graden (een van de vooraf gedefinieerde, export modus). Standaardwaarde is 180. 0 is niet roteren. Geldige waarden: %1. Elke waarde geeft weer hoeveel keer details zal worden gedraaid. Bijvoorbeeld 180 betekend twee keer (360/180 = 2) door 180 graden.</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
@@ -11460,15 +11508,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Verschuiving/Offset opmaaklengte gemeten in opmaak eenheden (export modus). De optie laat zien hoeveel punten langs de rand zal worden gebruikt bij het maken van een opmaak.</translation>
+        <translation type="vanished">Verschuiving/Offset opmaaklengte gemeten in opmaak eenheden (export modus). De optie laat zien hoeveel punten langs de rand zal worden gebruikt bij het maken van een opmaak.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation>Verschuivings/Offset lengte</translation>
+        <translation type="vanished">Verschuivings/Offset lengte</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation>Verschuiving/Offset lengte moet gebruikt worden in combinatie met verschuiving eenheden.</translation>
+        <translation type="vanished">Verschuiving/Offset lengte moet gebruikt worden in combinatie met verschuiving eenheden.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
@@ -11631,6 +11679,22 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Tijd</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11640,6 +11704,14 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time must be in range from 1 minute to 60 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

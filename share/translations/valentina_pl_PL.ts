@@ -2770,23 +2770,23 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create a Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Arranged workpieces: %1 from %2</source>
+        <source>Nesting. Please, wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Time left:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <source>Time left: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency coefficient: %1%</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2807,18 +2807,6 @@
     <message>
         <source>Height:</source>
         <translation>Wysokość:</translation>
-    </message>
-    <message>
-        <source>Rotate workpiece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate by</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>degree</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Three groups: big, middle, small</source>
@@ -2924,10 +2912,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Shift/Offset length:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rule for choosing the next workpiece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2980,6 +2964,30 @@
         <source>Margins go beyond printing. 
 
 Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time given for the algorithm to find best layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7168,10 +7176,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point from tangent circle and segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Place label tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7205,6 +7209,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7356,6 +7364,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10098,7 +10110,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Kąt</translation>
+        <translation type="vanished">Kąt</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -10122,10 +10134,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Page height, width, units must be used all 3 at once.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid rotation value. That must be one of predefined values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10233,10 +10241,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10254,18 +10258,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Run the program in a test mode. The program in this mode loads a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift/Offset length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift/Offset length must be used together with shift units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10425,6 +10417,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Czas</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10434,6 +10442,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time must be in range from 1 minute to 60 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

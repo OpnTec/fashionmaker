@@ -2987,7 +2987,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Impossible de préparer les données pour la création du plan de coupe</translation>
+        <translation type="vanished">Impossible de préparer les données pour la création du plan de coupe</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -3003,14 +3003,22 @@
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
-        <translation>Tri des pièces: %1 à %2</translation>
+        <translation type="vanished">Tri des pièces: %1 à %2</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Nesting. Please, wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
+        <source>Time left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency coefficient: %1%</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3034,15 +3042,15 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Tourner pièce en cours</translation>
+        <translation type="vanished">Tourner pièce en cours</translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Tourner</translation>
+        <translation type="vanished">Tourner</translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>degré</translation>
+        <translation type="vanished">degré</translation>
     </message>
     <message>
         <source>Creation options</source>
@@ -3201,7 +3209,7 @@ Appliquer les réglages quand-même ?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Longueur de décalage:</translation>
+        <translation type="vanished">Longueur de décalage:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -3264,6 +3272,30 @@ Appliquer les réglages quand-même ?</translation>
         <source>Margins go beyond printing. 
 
 Apply settings anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time given for the algorithm to find best layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7992,10 +8024,6 @@ Voulez-vous sauvegarder les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point from tangent circle and segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Place label tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8029,6 +8057,10 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8208,6 +8240,10 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11112,7 +11148,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation type="vanished">Angle</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -11168,7 +11204,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Valeur de rotation invalide. Utilisez les valeurs prédéfinies.</translation>
+        <translation type="vanished">Valeur de rotation invalide. Utilisez les valeurs prédéfinies.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -11328,7 +11364,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation>Rotation en degrés (un des prédéfinis, mode export). La valeur par défaut est 180. 0 pour aucune rotation. Les valeurs possibles : %1. Chaque valeur indique combien de fois la pièce de patron tournera. par exemple 18 veut dire 2 fois (360/180=2) par 180 degrés.</translation>
+        <translation type="vanished">Rotation en degrés (un des prédéfinis, mode export). La valeur par défaut est 180. 0 pour aucune rotation. Les valeurs possibles : %1. Chaque valeur indique combien de fois la pièce de patron tournera. par exemple 18 veut dire 2 fois (360/180=2) par 180 degrés.</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
@@ -11356,15 +11392,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Décalage mesuré en fonction des dimensions du plan de coupe (mode export). Cette option affiche le nombre de point, le long d&apos;une arête, qui seront utilisé pour créer le plan de coupe.</translation>
+        <translation type="vanished">Décalage mesuré en fonction des dimensions du plan de coupe (mode export). Cette option affiche le nombre de point, le long d&apos;une arête, qui seront utilisé pour créer le plan de coupe.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation>Longueur de décalage</translation>
+        <translation type="vanished">Longueur de décalage</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation>la longueur de décalage doit être spécifiée dans l&apos;unité de décalage.</translation>
+        <translation type="vanished">la longueur de décalage doit être spécifiée dans l&apos;unité de décalage.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
@@ -11527,6 +11563,22 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Heure</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11536,6 +11588,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time must be in range from 1 minute to 60 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

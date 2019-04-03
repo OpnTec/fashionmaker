@@ -2987,7 +2987,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Nepodařilo se připravit data pro vytvoření rozvržení</translation>
+        <translation type="vanished">Nepodařilo se připravit data pro vytvoření rozvržení</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -3003,15 +3003,31 @@
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
-        <translation>Uspořádané střihové díly: %1 z %2</translation>
+        <translation type="vanished">Uspořádané střihové díly: %1 z %2</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hledá se nejlepší poloha pro střihové díly. Počkejte, prosím.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hledá se nejlepší poloha pro střihové díly. Počkejte, prosím.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation>Jeden nebo více dílů střihu je větší než formát papíru, jejž jste vybral. Vyberte, prosím, větší formát papíru.</translation>
+        <translation type="vanished">Jeden nebo více dílů střihu je větší než formát papíru, jejž jste vybral. Vyberte, prosím, větší formát papíru.</translation>
+    </message>
+    <message>
+        <source>Nesting. Please, wait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency coefficient: %1%</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3034,15 +3050,15 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Otočit střihový díl</translation>
+        <translation type="vanished">Otočit střihový díl</translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Otočit o</translation>
+        <translation type="vanished">Otočit o</translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>stupňů</translation>
+        <translation type="vanished">stupňů</translation>
     </message>
     <message>
         <source>Creation options</source>
@@ -3204,7 +3220,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Délka posunutí/vyrovnání:</translation>
+        <translation type="vanished">Délka posunutí/vyrovnání:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -3270,6 +3286,30 @@ Apply settings anyway?</source>
         <translation>Okraje jdou za tisk.
 
 Přesto použít nastavení?</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished">Čas:</translation>
+    </message>
+    <message>
+        <source>Time given for the algorithm to find best layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Follow grainline</source>
@@ -8024,7 +8064,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point from tangent circle and segment</source>
-        <translation>Bod z kruhu  tangenty a části</translation>
+        <translation type="vanished">Bod z kruhu  tangenty a části</translation>
     </message>
     <message>
         <source>Place label tool</source>
@@ -8065,6 +8105,10 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -8244,6 +8288,10 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Please, additionally provide: %1</source>
         <translation>Dodatečně, prosím, poskytněte: %1</translation>
+    </message>
+    <message>
+        <source>Timeout.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
@@ -11228,7 +11276,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Úhel</translation>
+        <translation type="vanished">Úhel</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -11284,7 +11332,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Neplatná hodnota otočení. Musí to být jedna z předem vymezených.</translation>
+        <translation type="vanished">Neplatná hodnota otočení. Musí to být jedna z předem vymezených.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -11444,7 +11492,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation>Otočení ve stupních (jedno z předem vymezených, režim vyvedení). Výchozí hodnota je 180. 0 je žádné otočení. Platné hodnoty: %1. Každá hodnota ukazuje, kolikrát budou jednotlivosti (díly střihu) otočeny. Například 180 znamená, že to bude dvakrát (360/180=2) o 180 stupňů.</translation>
+        <translation type="vanished">Otočení ve stupních (jedno z předem vymezených, režim vyvedení). Výchozí hodnota je 180. 0 je žádné otočení. Platné hodnoty: %1. Každá hodnota ukazuje, kolikrát budou jednotlivosti (díly střihu) otočeny. Například 180 znamená, že to bude dvakrát (360/180=2) o 180 stupňů.</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
@@ -11472,15 +11520,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Posunutí změřených délek rozvržení v jednotkách rozvržení. (režim vyvedení). Volba ukazuje, kolik bodů podél okraje se použije na vytvoření rozvržení.</translation>
+        <translation type="vanished">Posunutí změřených délek rozvržení v jednotkách rozvržení. (režim vyvedení). Volba ukazuje, kolik bodů podél okraje se použije na vytvoření rozvržení.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation>Délka posunutí/vyrovnání</translation>
+        <translation type="vanished">Délka posunutí/vyrovnání</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation>Délka posunutí/vyrovnání se musí používat společně s jednotkami posunutí.</translation>
+        <translation type="vanished">Délka posunutí/vyrovnání se musí používat společně s jednotkami posunutí.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
@@ -11643,6 +11691,22 @@ Chcete uložit změny?</translation>
         <translation>Neplatný uživatelský materiál &apos;%1&apos;. Špatné číslo materiálu.</translation>
     </message>
     <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Čas</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11652,6 +11716,14 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time must be in range from 1 minute to 60 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

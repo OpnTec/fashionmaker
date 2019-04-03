@@ -2987,7 +2987,7 @@
     <name>DialogLayoutProgress</name>
     <message>
         <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation>Daten für die Erstellung des Layouts konnten nicht vorbereitet werden</translation>
+        <translation type="vanished">Daten für die Erstellung des Layouts konnten nicht vorbereitet werden</translation>
     </message>
     <message>
         <source>Several workpieces left not arranged, but none of them match for paper</source>
@@ -3003,15 +3003,31 @@
     </message>
     <message>
         <source>Arranged workpieces: %1 from %2</source>
-        <translation>Angeordnete Schnitteile: %1 bis %2</translation>
+        <translation type="vanished">Angeordnete Schnitteile: %1 bis %2</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finde die beste Position für die Werksstücke. Bitte warten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finde die beste Position für die Werksstücke. Bitte warten.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation>Ein oder mehrere Schnittteile sind größer als das Papierformat, das Sie ausgewählt haben. Bitte wählen Sie ein größeres Papierformat.</translation>
+        <translation type="vanished">Ein oder mehrere Schnittteile sind größer als das Papierformat, das Sie ausgewählt haben. Bitte wählen Sie ein größeres Papierformat.</translation>
+    </message>
+    <message>
+        <source>Nesting. Please, wait.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency coefficient: %1%</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3034,15 +3050,15 @@
     </message>
     <message>
         <source>Rotate workpiece</source>
-        <translation>Drehen</translation>
+        <translation type="vanished">Drehen</translation>
     </message>
     <message>
         <source>Rotate by</source>
-        <translation>Drehen im Winkel von</translation>
+        <translation type="vanished">Drehen im Winkel von</translation>
     </message>
     <message>
         <source>degree</source>
-        <translation>Grad</translation>
+        <translation type="vanished">Grad</translation>
     </message>
     <message>
         <source>Creation options</source>
@@ -3203,7 +3219,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <source>Shift/Offset length:</source>
-        <translation>Verschiebungs-/Ausgleichslänge:</translation>
+        <translation type="vanished">Verschiebungs-/Ausgleichslänge:</translation>
     </message>
     <message>
         <source>Rule for choosing the next workpiece</source>
@@ -3269,6 +3285,30 @@ Apply settings anyway?</source>
         <translation>Ränder gehen über den Druckbereich hinaus.
 
 Einstellungen trotzdem anwenden?</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time given for the algorithm to find best layout.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Efficiency:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Follow grainline</source>
@@ -8012,10 +8052,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Strg+BildAuf</translation>
     </message>
     <message>
-        <source>Point from tangent circle and segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Place label tool</source>
         <translation>Beschriftung platzieren-Werkzeug</translation>
     </message>
@@ -8049,6 +8085,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8228,6 +8268,10 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Please, additionally provide: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11113,7 +11157,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Winkel</translation>
+        <translation type="vanished">Winkel</translation>
     </message>
     <message>
         <source>Auto crop unused length (export mode).</source>
@@ -11169,7 +11213,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation>Ungültiger Rotationswert. Dies muss ein vordefinierter Wert sein.</translation>
+        <translation type="vanished">Ungültiger Rotationswert. Dies muss ein vordefinierter Wert sein.</translation>
     </message>
     <message>
         <source>Unknown page templated selected.</source>
@@ -11329,7 +11373,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation>Drehung in Grad (eins der vordefinierten, Exportmodus). Standardwert ist 180. 0 bedeutet keine Drehung. Gültige erte: %1. Jeder Wert zeigt, wie oft Details gedreht werden sollen. Zum Beispiel bedeutet 180, dass das Detail zweimal im 180 Grad gedreht word (360/180=2).</translation>
+        <translation type="vanished">Drehung in Grad (eins der vordefinierten, Exportmodus). Standardwert ist 180. 0 bedeutet keine Drehung. Gültige erte: %1. Jeder Wert zeigt, wie oft Details gedreht werden sollen. Zum Beispiel bedeutet 180, dass das Detail zweimal im 180 Grad gedreht word (360/180=2).</translation>
     </message>
     <message>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
@@ -11357,15 +11401,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation>Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
+        <translation type="vanished">Verschieben der gemessenen Layoutlängen in Layouteinheiten (Exportmodus). Die Option zeigt, wie viele Punkte entlang der Kante verwendet werden, um ein Layout zu erstellen.</translation>
     </message>
     <message>
         <source>Shift/Offset length</source>
-        <translation>Verschiebungs-/Ausgleichslänge</translation>
+        <translation type="vanished">Verschiebungs-/Ausgleichslänge</translation>
     </message>
     <message>
         <source>Shift/Offset length must be used together with shift units.</source>
-        <translation>Die Verschiebungs-/Ausgleichslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
+        <translation type="vanished">Die Verschiebungs-/Ausgleichslänge muss zusammen mit Verschiebungseinheiten genutzt werden.</translation>
     </message>
     <message>
         <source>Number corresponding to output format (default = 0, export mode):</source>
@@ -11524,6 +11568,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished">Uhrzeit</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11533,6 +11593,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time must be in range from 1 minute to 60 minutes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
