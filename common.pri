@@ -346,11 +346,6 @@ GCC_DEBUG_CXXFLAGS += \
     -Wno-unknown-pragmas \
     -ftrapv
 
-# Good support Q_NULLPTR came later
-greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 5) {
-GCC_DEBUG_CXXFLAGS += -Wzero-as-null-pointer-constant
-}
-
 # Since GCC 5
 g++5:GCC_DEBUG_CXXFLAGS += \
     -Wswitch-bool \
