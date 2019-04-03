@@ -224,7 +224,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         m_taskbarProgress->setValue(0);
         m_taskbarProgress->setMaximum(lGenerator.GetNestingTime());
         progressTimer = new QTimer(this);
-        connect(progressTimer, &QTimer::timeout, this, [timer, &lGenerator]()
+        connect(progressTimer, &QTimer::timeout, this, [this, timer, &lGenerator]()
         {
             m_taskbarProgress->setValue(static_cast<int>(timer.elapsed()/60000));
         });
