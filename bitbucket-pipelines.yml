@@ -11,6 +11,7 @@ pipelines:
             - cat /etc/*-release
             - uname -a
             - grep -i processor /proc/cpuinfo | wc -l
+            - sed -i '/jessie-updates/d' /etc/apt/sources.list
             - apt-get update && apt-get install -y qtbase5-dev libqt5svg5-dev qt5-default qttools5-dev-tools libqt5xmlpatterns5-dev libqt5core5a libqt5gui5 libqt5printsupport5 libqt5svg5 libqt5widgets5 libqt5xml5 libqt5xmlpatterns5 xpdf xvfb
             - gcc --version
             - mkdir build
