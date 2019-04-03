@@ -733,6 +733,12 @@ int VLayoutGenerator::GetNestingTime() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VLayoutGenerator::GetNestingTimeMSecs() const
+{
+    return nestingTime * 60000;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutGenerator::SetNestingTime(int value)
 {
     nestingTime = value;

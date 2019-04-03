@@ -73,6 +73,7 @@ public:
     void SetPaperWidth(qreal value);
 
     int  GetNestingTime() const;
+    int  GetNestingTimeMSecs() const;
     void SetNestingTime(int value);
 
     qreal GetEfficiencyCoefficient() const;

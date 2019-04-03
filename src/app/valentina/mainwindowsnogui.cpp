@@ -215,8 +215,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     QTimer *progressTimer = nullptr;
 #endif
 
-    QScopedPointer<DialogLayoutProgress> progress(new DialogLayoutProgress(timer, lGenerator.GetNestingTime()*60000,
-                                                                           this));
+    QSharedPointer<DialogLayoutProgress> progress;
     if (VApplication::IsGUIMode())
     {
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
@@ -230,23 +229,48 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         });
         progressTimer->start(1000);
 #endif
+
+        progress = QSharedPointer<DialogLayoutProgress>(
+                    new DialogLayoutProgress(timer, lGenerator.GetNestingTimeMSecs(), this));
+
         connect(progress.data(), &DialogLayoutProgress::Abort, &lGenerator, &VLayoutGenerator::Abort);
         connect(progress.data(), &DialogLayoutProgress::Timeout, &lGenerator, &VLayoutGenerator::Timeout);
-    }
 
-    progress->Start();
+        progress->Start();
+    }
+    else
+    {
+        // Because the progress bar dialog will not terminate nesting we must create separate timer for this
+        auto *progressTimer = new QTimer(this);
+        connect(progressTimer, &QTimer::timeout, this, [timer, &lGenerator, progressTimer]()
+        {
+            const int timeout = static_cast<int>(lGenerator.GetNestingTimeMSecs() - timer.elapsed());
+
+            if (timeout <= 1000)
+            {
+                lGenerator.Timeout();
+                progressTimer->stop();
+                progressTimer->deleteLater();
+            }
+        });
+        progressTimer->start(1000);
+    }
 
     LayoutErrors nestingState = LayoutErrors::NoError;
 
     auto IsTimeout = [&progress, &lGenerator, timer, &nestingState]()
     {
-        if (timer.hasExpired(lGenerator.GetNestingTime() * 60000))
+        if (timer.hasExpired(lGenerator.GetNestingTimeMSecs()))
         {
             if (nestingState != LayoutErrors::EmptyPaperError)
             {
                 nestingState = LayoutErrors::Timeout;
             }
-            progress->Finished();
+
+            if (VApplication::IsGUIMode())
+            {
+                progress->Finished();
+            }
             return true;
         }
         return false;
@@ -268,7 +292,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
             break;
         }
 
-        lGenerator.Generate(timer, lGenerator.GetNestingTime()*60000);
+        lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs());
 
         if (IsTimeout())
         {
@@ -284,7 +308,10 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                     if (efficiency < layoutEfficiency)
                     {
                         efficiency = layoutEfficiency;
-                        progress->Efficiency(efficiency);
+                        if (VApplication::IsGUIMode())
+                        {
+                            progress->Efficiency(efficiency);
+                        }
 
                         CleanLayout();
                         papers = lGenerator.GetPapersItems();// Blank sheets
@@ -348,7 +375,10 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         }
     }
 
-    progress->Finished();
+    if (VApplication::IsGUIMode())
+    {
+        progress->Finished();
+    }
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     if (VApplication::IsGUIMode())
