@@ -3,7 +3,7 @@ jobs:
   include:
   - stage: "main test"
     os: linux
-    dist: trusty
+    dist: xenial
     sudo: required
     compiler: clang
     env: 
