@@ -733,7 +733,7 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wunicode \
     -Wunicode-whitespace \
     -Wuninitialized \
-    -Wunknown-warning-option \
+#    -Wunknown-warning-option \
     -Wunnamed-type-template-args \
     -Wunneeded-internal-declaration \
     -Wunneeded-member-function \
