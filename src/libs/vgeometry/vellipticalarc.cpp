@@ -288,7 +288,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
         }
     }
 
-    return polygon;
+    return static_cast<QVector<QPointF>>(polygon);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
