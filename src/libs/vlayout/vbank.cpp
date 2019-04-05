@@ -31,7 +31,6 @@
 #include <climits>
 
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "vlayoutpiece.h"
 

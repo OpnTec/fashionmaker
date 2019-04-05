@@ -35,7 +35,6 @@
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../version.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vmath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../mainwindow.h"
@@ -171,7 +170,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                              .arg(context.function, context.category, msg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
                 break;
-            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
+            #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
                 debugdate += QString(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, msg);
@@ -209,7 +208,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
                 messageBox.setIcon(QMessageBox::Critical);
                 break;
-            #if QT_VERSION > QT_VERSION_CHECK(5, 4, 2)
+            #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
                 messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
                 messageBox.setIcon(QMessageBox::Information);

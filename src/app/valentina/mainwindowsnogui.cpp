@@ -882,16 +882,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                 qreal x,y;
                 if(printer->fullPage())
                 {
-                    #if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
-                        QMarginsF printerMargins = printer->pageLayout().margins();
-                        x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
-                        y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
-                    #else
-                        qreal left = 0, top = 0, right = 0, bottom = 0;
-                        printer->getPageMargins(&left, &top, &right, &bottom, QPrinter::Millimeter);
-                        x = qFloor(ToPixel(left,Unit::Mm));
-                        y = qFloor(ToPixel(top,Unit::Mm));
-                    #endif
+                    QMarginsF printerMargins = printer->pageLayout().margins();
+                    x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
+                    y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
                 }
                 else
                 {
@@ -1173,15 +1166,12 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     const qreal top = FromPixel(margins.top(), Unit::Mm);
     const qreal right = FromPixel(margins.right(), Unit::Mm);
     const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+
     const bool success = printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
     if (not success)
     {
         qWarning() << tr("Cannot set printer margins");
     }
-#else
-    printer.setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
 
     QPainter painter;
     if (painter.begin( &printer ) == false)
@@ -1592,16 +1582,12 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             bottom = pageMargin.bottom();
         }
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
-    const bool success = printer->setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
 
+    const bool success = printer->setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
     if (not success)
     {
         qWarning() << tr("Cannot set printer margins");
     }
-#else
-    printer->setPageMargins(left, top, right, bottom, QPrinter::Millimeter);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
 
     switch(printType)
     {

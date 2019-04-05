@@ -738,22 +738,7 @@ void DialogLayoutSettings::InitLayoutUnits()
 void DialogLayoutSettings::InitPrinter()
 {
     ui->comboBoxPrinter->clear();
-    QStringList printerNames;
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-    const QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
-    for(auto printer : printers)
-    {
-        const QString name = printer.printerName();
-        if (not name.isEmpty())
-        {
-            printerNames.append(name);
-        }
-    }
-#else
-    printerNames = QPrinterInfo::availablePrinterNames();
-#endif
-
-    ui->comboBoxPrinter->addItems(printerNames);
+    ui->comboBoxPrinter->addItems(QPrinterInfo::availablePrinterNames());
 
     if (ui->comboBoxPrinter->count() == 0)
     {
@@ -761,17 +746,7 @@ void DialogLayoutSettings::InitPrinter()
     }
     else
     {
-        QString defPrinterName;
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-        const QPrinterInfo def = QPrinterInfo::defaultPrinter();
-        if(not def.isNull())
-        {
-            defPrinterName = def.printerName();
-        }
-#else
-        defPrinterName = QPrinterInfo::defaultPrinterName();
-#endif
-        const int index = ui->comboBoxPrinter->findText(defPrinterName);
+        const int index = ui->comboBoxPrinter->findText(QPrinterInfo::defaultPrinterName());
         if(index != -1)
         {
             ui->comboBoxPrinter->setCurrentIndex(index);

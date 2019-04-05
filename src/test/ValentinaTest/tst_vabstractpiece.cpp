@@ -4218,13 +4218,8 @@ void TST_VAbstractPiece::PathRemoveLoop_data() const
     res << QPointF(20, 10);
     QTest::newRow("One loop, the first loop, closed a path (six unique points)") << path << res;
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 1, 0)
-    path.remove(path.size() - 1);
-    res.remove(res.size() - 1);
-#else
     path.removeLast();
     res.removeLast();
-#endif
     QTest::newRow("One loop, the first loop, unclosed a path (six unique points)") << path << res;
 
     path.clear();

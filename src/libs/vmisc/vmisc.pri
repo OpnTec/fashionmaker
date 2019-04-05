@@ -20,7 +20,6 @@ SOURCES += \
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/def.h \
-    $$PWD/logging.h \
     $$PWD/vmath.h \
     $$PWD/vsettings.h \
     $$PWD/vabstractapplication.h \
@@ -51,11 +50,9 @@ HEADERS += \
 
 
 contains(QT_VERSION, ^5\\.[0-2]\\.[0-2]$) { # Since Qt 5.3.0
-    HEADERS += \
-        $$PWD/backport/qmarginsf.h
+    HEADERS +=
 
-    SOURCES += \
-        $$PWD/backport/qmarginsf.cpp
+    SOURCES +=
 }
 
 FORMS    += \

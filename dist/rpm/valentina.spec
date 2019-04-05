@@ -9,7 +9,7 @@ Requires(postun): desktop-file-utils
 Conflicts: seamly2d
 
 %if 0%{?fedora_version} > 0 || 0%{?rhel_version} >= 700 || 0%{?centos_version} >= 700
-BuildRequires: qt5-qtbase-devel >= 5.2.0
+BuildRequires: qt5-qtbase-devel >= 5.4.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
@@ -20,17 +20,17 @@ BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
 BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
-BuildRequires: qt5-qtxmlpatterns-devel  >= 5.2.0
-BuildRequires: qt5-qtsvg-devel >= 5.2.0
-BuildRequires: qt5-qttools-devel >= 5.2.0
+BuildRequires: qt5-qtxmlpatterns-devel  >= 5.4.0
+BuildRequires: qt5-qtsvg-devel >= 5.4.0
+BuildRequires: qt5-qttools-devel >= 5.4.0
 
-Requires:      qt5-qtsvg >= 5.2.0
-Requires:      qt5-qtbase-gui >= 5.2.0
-Requires:      qt5-qtxmlpatterns >= 5.2.0
+Requires:      qt5-qtsvg >= 5.4.0
+Requires:      qt5-qtbase-gui >= 5.4.0
+Requires:      qt5-qtxmlpatterns >= 5.4.0
 %endif
 
 %if 0%{?mageia} > 0
-BuildRequires: libqt5-devel >= 5.2.0
+BuildRequires: libqt5-devel >= 5.4.0
 BuildRequires: pkgconfig(Qt5Svg)
 BuildRequires: pkgconfig(Qt5Core)
 BuildRequires: pkgconfig(Qt5Gui)
@@ -43,7 +43,7 @@ BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
 BuildRequires: qttools5
-BuildRequires: qtbase5-common-devel >= 5.2.0
+BuildRequires: qtbase5-common-devel >= 5.4.0
 
 %if 0%{?mageia} == 6
 BuildRequires: pkgconfig(openssl)

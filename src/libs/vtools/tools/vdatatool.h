@@ -34,8 +34,8 @@
 #include <QObject>
 #include <QString>
 #include <QtGlobal>
+#include <QLoggingCategory>
 
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vTool)

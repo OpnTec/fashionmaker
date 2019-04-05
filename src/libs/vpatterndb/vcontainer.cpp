@@ -32,6 +32,7 @@
 #include <QVector>
 #include <QtDebug>
 #include <QUuid>
+#include <QLoggingCategory>
 
 #include "../ifc/exception/vexception.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -43,7 +44,6 @@
 #include "../vgeometry/varc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"

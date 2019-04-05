@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(flags);
     Q_INIT_RESOURCE(style);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg
+    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
@@ -55,11 +55,7 @@ int main(int argc, char *argv[])
     MApplication app(argc, argv);
     app.InitOptions();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     QTimer::singleShot(0, &app, &MApplication::ProcessCMD);
-#else
-    QTimer::singleShot(0, &app, SLOT(ProcessCMD()));
-#endif
 
     return app.exec();
 }

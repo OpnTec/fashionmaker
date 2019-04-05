@@ -29,8 +29,6 @@
 #include "tst_abstractregexp.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmuformulabase.h"
-
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../ifc/ifcdef.h"
 

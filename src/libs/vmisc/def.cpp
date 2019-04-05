@@ -307,27 +307,15 @@ QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::Prin
     QPrinterInfo tmpInfo = info;
     if(tmpInfo.isNull() || tmpInfo.printerName().isEmpty())
     {
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-        const QList<QPrinterInfo> list = QPrinterInfo::availablePrinters();
+        const QStringList list = QPrinterInfo::availablePrinterNames();
         if(list.isEmpty())
         {
             return QSharedPointer<QPrinter>();
         }
         else
         {
-            tmpInfo = list.first();
+            tmpInfo = QPrinterInfo::printerInfo(list.first());
         }
-#else
-    const QStringList list = QPrinterInfo::availablePrinterNames();
-    if(list.isEmpty())
-    {
-        return QSharedPointer<QPrinter>();
-    }
-    else
-    {
-        tmpInfo = QPrinterInfo::printerInfo(list.first());
-    }
-#endif
     }
 
     auto printer = QSharedPointer<QPrinter>(new QPrinter(tmpInfo, mode));
@@ -338,7 +326,6 @@ QSharedPointer<QPrinter> PreparePrinter(const QPrinterInfo &info, QPrinter::Prin
 //---------------------------------------------------------------------------------------------------------------------
 QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
     QPageLayout layout = printer->pageLayout();
     layout.setUnits(QPageLayout::Millimeter);
     const QMarginsF minMargins = layout.minimumMargins();
@@ -349,12 +336,6 @@ QMarginsF GetMinPrinterFields(const QSharedPointer<QPrinter> &printer)
     min.setTop(UnitConvertor(minMargins.top(), Unit::Mm, Unit::Px));
     min.setBottom(UnitConvertor(minMargins.bottom(), Unit::Mm, Unit::Px));
     return min;
-#else
-    auto tempPrinter = QSharedPointer<QPrinter>(new QPrinter(QPrinterInfo(* printer)));
-    tempPrinter->setFullPage(false);
-    tempPrinter->setPageMargins(0, 0, 0, 0, QPrinter::Millimeter);
-    return GetPrinterFields(tempPrinter);
-#endif //QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

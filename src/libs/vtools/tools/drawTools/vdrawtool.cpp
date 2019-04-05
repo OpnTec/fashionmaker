@@ -45,7 +45,6 @@
 #include "../../undocommands/savetooloptions.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vmisc/logging.h"
 #include "../vabstracttool.h"
 
 template <class T> class QSharedPointer;

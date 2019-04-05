@@ -48,12 +48,7 @@
 #include <QThread>
 #include <QGestureEvent>
 #include <QScreen>
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
-#   include <QOpenGLWidget>
-#else
-#   include <QGLWidget>
-#endif
+#include <QOpenGLWidget>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
@@ -435,7 +430,6 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
     VSettings *settings = qobject_cast<VSettings *>(qApp->Settings());
     if (settings && settings->IsOpenGLRender())
     {
-    #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
         QOpenGLWidget *viewport = new QOpenGLWidget();
         QSurfaceFormat fmt;
         fmt.setSamples(settings->GetGraphicalOutput() ? 10 : 0);
@@ -443,13 +437,6 @@ VMainGraphicsView::VMainGraphicsView(QWidget *parent)
         viewport->setFormat(fmt);
 
         setViewport(viewport);
-    #else
-        QGLWidget *viewport = new QGLWidget();
-        QGLFormat fmt = QGLFormat(QGL::DoubleBuffer|QGL::SampleBuffers);
-        fmt.setStencilBufferSize(8);
-        viewport->setFormat(fmt);
-        setViewport(viewport);
-    #endif
     }
 
     zoom = new GraphicsViewZoom(this);
@@ -726,11 +713,7 @@ void VMainGraphicsView::SetAntialiasing(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 bool VMainGraphicsView::IsOpenGLRender() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     QOpenGLWidget *viewport = qobject_cast<QOpenGLWidget *>(this->viewport());
-#else
-    QGLWidget *viewport = qobject_cast<QGLWidget *>(this->viewport());
-#endif
     if (viewport)
     {
         return true;

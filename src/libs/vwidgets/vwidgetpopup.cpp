@@ -136,10 +136,6 @@ void VWidgetPopup::Show(QPoint coord)
 
     if (lifeTime > 0)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
         QTimer::singleShot(lifeTime, this, &QWidget::close);
-#else
-        QTimer::singleShot(lifeTime, this, SLOT(close()));
-#endif
     }
 }

@@ -37,7 +37,6 @@
 #include "../exception/vexceptionemptyparameter.h"
 #include "../exception/vexceptionwrongid.h"
 #include "../exception/vexception.h"
-#include "../vmisc/logging.h"
 #include "../ifcdef.h"
 
 #include <QAbstractMessageHandler>

@@ -45,7 +45,6 @@
 #include "core/vtooloptionspropertybrowser.h"
 #include "options.h"
 #include "../ifc/xml/vpatternconverter.h"
-#include "../vmisc/logging.h"
 #include "../vformat/vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -4723,11 +4722,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
         {
             /* Collect garbage only after successfully parse. This way wrongly accused items have one more time to restore
              * a reference. */
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
             QTimer::singleShot(100, Qt::CoarseTimer, this, [this](){doc->GarbageCollector(true);});
-#else
-            doc->GarbageCollector(true);
-#endif
         }
 
         patternReadOnly = doc->IsReadOnly();

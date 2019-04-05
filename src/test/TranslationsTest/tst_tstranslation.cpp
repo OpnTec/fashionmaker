@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "tst_tstranslation.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/def.h"
 
 #include <QDomDocument>

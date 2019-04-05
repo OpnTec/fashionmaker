@@ -15,8 +15,6 @@
 #include <functional>
 #include <cassert>
 
-#include "logging.h"
-
 typedef std::function<void()> voidBlock;
 
 class WorkerClass : public QObject

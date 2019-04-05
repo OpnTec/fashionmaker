@@ -36,6 +36,7 @@
 #include <Qt>
 #include <QtGlobal>
 #include <csignal>
+#include <QMargins>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
@@ -43,12 +44,6 @@
 #include "literals.h"
 #include "debugbreak.h"
 #include "defglobal.h"
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-#   include "backport/qmarginsf.h"
-#else
-#   include <QMargins>
-#endif
 
 template <class T> class QSharedPointer;
 

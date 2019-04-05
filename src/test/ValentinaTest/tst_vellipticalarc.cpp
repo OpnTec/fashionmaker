@@ -29,7 +29,6 @@
 #include "tst_vellipticalarc.h"
 #include "../vgeometry/vellipticalarc.h"
 #include "../vlayout/vabstractpiece.h"
-#include "../vmisc/logging.h"
 
 #include <QtGlobal>
 #include <QtTest>

@@ -34,7 +34,6 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vdomdocument.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/def.h"
 #include "../tools/vdatatool.h"
 #include "vundocommand.h"

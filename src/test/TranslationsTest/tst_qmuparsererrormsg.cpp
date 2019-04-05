@@ -28,7 +28,6 @@
 
 #include "tst_qmuparsererrormsg.h"
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 

@@ -45,7 +45,6 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../ifc/ifcdef.h"
 #include "../vwidgets/vsimplepoint.h"

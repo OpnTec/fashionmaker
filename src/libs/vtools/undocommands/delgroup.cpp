@@ -32,7 +32,6 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/def.h"
 #include "../vwidgets/vmaingraphicsview.h"

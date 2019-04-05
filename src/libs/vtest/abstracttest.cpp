@@ -47,7 +47,6 @@
 #include <QtGlobal>
 #include <QLineF>
 
-#include "logging.h"
 #include "vsysexits.h"
 #include "../vgeometry/vgobject.h"
 

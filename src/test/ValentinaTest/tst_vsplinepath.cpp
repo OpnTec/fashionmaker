@@ -28,7 +28,6 @@
 
 #include "tst_vsplinepath.h"
 #include "../vgeometry/vsplinepath.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 

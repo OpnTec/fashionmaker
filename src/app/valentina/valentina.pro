@@ -13,11 +13,6 @@ include(../../../common.pri)
 # library in installer.
 QT       += core gui widgets xml svg printsupport xmlpatterns concurrent
 
-# Don't use Qt OpenGL module since Q5.4
-equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
-    QT += opengl
-}
-
 # Use winextras only for Windows 7+
 win32:greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
     QT += winextras
@@ -36,13 +31,7 @@ macx{
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
-# Since Q5.4 available support C++14
-greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 3) {
-    CONFIG += c++14
-} else {
-    # We use C++11 standard
-    CONFIG += c++11
-}
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -313,11 +302,6 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll
 
-    # Don't use Qt OpenGL module since Q5.4
-    equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
-        package.files += $$[QT_INSTALL_BINS]/Qt5OpenGL.dll
-    }
-
     # For support Windows 7+
     greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
         package.files += $$[QT_INSTALL_BINS]/Qt5WinExtras.dll
@@ -474,11 +458,6 @@ noRunPath{ # For enable run qmake with CONFIG+=noRunPath
         QMAKE_LFLAGS_RPATH =
         QMAKE_LFLAGS += "-Wl,-rpath,\'\$$ORIGIN\' -Wl,-rpath,$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -Wl,-rpath,$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}"
     }
-}
-
-win32:greaterThan(QT_MAJOR_VERSION, 4) {
-    # Link with library uxtheme to enable new style since WindowsXP or later
-    LIBS += -luxtheme
 }
 
 # When the GNU linker sees a library, it discards all symbols that it doesn't need.

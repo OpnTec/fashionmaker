@@ -28,8 +28,6 @@
 
 #include "tst_buitinregexp.h"
 #include "../qmuparser/qmudef.h"
-
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../ifc/ifcdef.h"
 

@@ -41,11 +41,11 @@
 #include <QStringDataPtr>
 #include <QtGlobal>
 #include <QLocale>
+#include <QLoggingCategory>
 
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
 
 class QDomElement;
 class QDomNode;

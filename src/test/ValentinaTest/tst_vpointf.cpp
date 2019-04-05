@@ -28,7 +28,6 @@
 
 #include "tst_vpointf.h"
 #include "../vgeometry/vpointf.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 

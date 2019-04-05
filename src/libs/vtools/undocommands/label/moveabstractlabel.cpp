@@ -30,7 +30,6 @@
 
 #include <QDomElement>
 
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vundocommand.h"

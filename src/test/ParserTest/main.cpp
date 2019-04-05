@@ -60,10 +60,6 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     qInstallMessageHandler(testMessageOutput);
     qmu::Test::QmuParserTester pt;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     QTimer::singleShot(0, &pt, &qmu::Test::QmuParserTester::Run);
-#else
-    QTimer::singleShot(0, &pt, SLOT(Run()));
-#endif
     return a.exec();
 }

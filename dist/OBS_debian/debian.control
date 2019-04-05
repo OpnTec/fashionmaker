@@ -3,20 +3,20 @@ Section: graphics
 Priority: optional
 Maintainer: Roman Telezhynskyi <dismine@gmail.com>
 Build-Depends: debhelper (>= 8.0.0), 
-               qtbase5-dev (>= 5.2.0), 
-               libqt5svg5-dev (>= 5.2.0), 
-               g++ (>= 4.7.0), 
-               qt5-default (>= 5.2.0), 
-               qttools5-dev-tools (>= 5.2.0), 
-               libqt5xmlpatterns5-dev (>= 5.2.0),
-               libqt5opengl5-dev (>= 5.2.0) 
+               qtbase5-dev (>= 5.4.0), 
+               libqt5svg5-dev (>= 5.4.0), 
+               g++ (>= 4.8.0), 
+               qt5-default (>= 5.4.0), 
+               qttools5-dev-tools (>= 5.4.0), 
+               libqt5xmlpatterns5-dev (>= 5.4.0),
+               libqt5opengl5-dev (>= 5.4.0) 
 Standards-Version: 3.9.5
 Homepage: https://valentinaproject.bitbucket.io/
 Vcs-Browser: https://bitbucket.org/dismine/valentina
 
 Package: valentina
 Architecture: i386 amd64
-Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt5core5a (>= 5.2.0) | libqt5core5 (>= 5.2.0), libqt5gui5 (>= 5.2.0) | libqt5gui5-gles (>= 5.2.0), libqt5printsupport5 (>= 5.2.0), libqt5svg5 (>= 5.2.0), libqt5widgets5 (>= 5.2.0), libqt5xml5 (>= 5.2.0), libqt5xmlpatterns5 (>= 5.2.0), libqt5concurrent5(>= 5.2.0), libqt5opengl5 (>= 5.2.0), libstdc++6 (>= 4.6), xpdf
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt5core5a (>= 5.4.0) | libqt5core5 (>= 5.4.0), libqt5gui5 (>= 5.4.0) | libqt5gui5-gles (>= 5.4.0), libqt5printsupport5 (>= 5.4.0), libqt5svg5 (>= 5.4.0), libqt5widgets5 (>= 5.4.0), libqt5xml5 (>= 5.4.0), libqt5xmlpatterns5 (>= 5.4.0), libqt5concurrent5(>= 5.4.0), libqt5opengl5 (>= 5.4.0), libstdc++6 (>= 4.8), xpdf
 Conflicts: seamly2d
 Description: Pattern making program.
  Valentina is a cross-platform patternmaking program which allows designers 

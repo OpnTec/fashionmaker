@@ -39,7 +39,6 @@
 #include <QtGlobal>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 

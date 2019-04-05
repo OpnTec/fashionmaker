@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(toolicon);
     Q_INIT_RESOURCE(style);
 
-    QT_REQUIRE_VERSION(argc, argv, "5.2.0")// clazy:exclude=qstring-arg,qstring-allocations
+    QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
 
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
@@ -89,11 +89,7 @@ int main(int argc, char *argv[])
         msec = 15; // set delay for correct the first fitbest zoom
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
     QTimer::singleShot(msec, &w, &MainWindow::ProcessCMD);
-#else
-    QTimer::singleShot(msec, &w, SLOT(ProcessCMD()));
-#endif
 
     return app.exec();
 }

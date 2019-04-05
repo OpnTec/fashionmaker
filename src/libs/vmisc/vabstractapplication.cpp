@@ -30,6 +30,7 @@
 
 #include <QDir>
 #include <QLibraryInfo>
+#include <QLoggingCategory>
 #include <QMessageLogger>
 #include <QStaticStringData>
 #include <QStringData>
@@ -40,7 +41,6 @@
 #include <QtDebug>
 
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
@@ -65,15 +65,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       mode(Draw::Calculation)
 {
     QString rules;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-    // In Qt 5.2 need manualy enable debug information for categories. This work
-    // because Qt doesn't provide debug information for categories itself. And in this
-    // case will show our messages. Another situation with Qt 5.3 that has many debug
-    // messages itself. We don't need this information and can turn on later if need.
-    // But here Qt already show our debug messages without enabling.
-    rules += QLatin1String("*.debug=true\n");
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 #if defined(V_NO_ASSERT)

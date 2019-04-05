@@ -855,13 +855,7 @@ DRW_Entity *VDxfEngine::AAMAText(const QPointF &pos, const QString &text, const 
 //---------------------------------------------------------------------------------------------------------------------
 std::string VDxfEngine::FromUnicodeToCodec(const QString &str, QTextCodec *codec)
 {
-    const QByteArray encodedString = codec->fromUnicode(str);
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
-    return encodedString.toStdString();
-#else
-    return std::string(encodedString.constData(), static_cast<std::string::size_type>(encodedString.length()));
-#endif
+    return codec->fromUnicode(str).toStdString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

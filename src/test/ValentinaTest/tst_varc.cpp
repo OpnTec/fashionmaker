@@ -29,7 +29,6 @@
 #include "tst_varc.h"
 #include "../vgeometry/varc.h"
 #include "../vlayout/vabstractpiece.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 

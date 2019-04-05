@@ -33,9 +33,9 @@
 #include <QGraphicsItem>
 #include <QObject>
 #include <QtGlobal>
+#include <QLoggingCategory>
 
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vcurvepathitem.h"

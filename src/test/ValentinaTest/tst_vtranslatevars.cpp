@@ -27,7 +27,6 @@
  *************************************************************************/
 
 #include "tst_vtranslatevars.h"
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "testvapplication.h"

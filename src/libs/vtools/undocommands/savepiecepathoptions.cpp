@@ -33,7 +33,6 @@
 #include <QDebug>
 
 #include "../ifc/xml/vabstractpattern.h"
-#include "../vmisc/logging.h"
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../tools/vtoolseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"

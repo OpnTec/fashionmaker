@@ -29,7 +29,6 @@
 #include "tst_measurementregexp.h"
 #include "../qmuparser/qmudef.h"
 
-#include "../vmisc/logging.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/measurements.h"
 #include "../ifc/ifcdef.h"

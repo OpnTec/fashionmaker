@@ -32,7 +32,6 @@
 #include <QDomElement>
 
 #include "../vmisc/def.h"
-#include "../vmisc/logging.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"
 

@@ -31,7 +31,6 @@
 #include <QDomNode>
 #include <QDomNodeList>
 
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "vundocommand.h"

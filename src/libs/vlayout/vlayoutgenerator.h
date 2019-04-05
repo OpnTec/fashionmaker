@@ -38,17 +38,10 @@
 #include <QtGlobal>
 #include <memory>
 #include <atomic>
+#include <QMargins>
 
 #include "vbank.h"
 #include "vlayoutdef.h"
-
-class QMarginsF;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-#   include "../vmisc/backport/qmarginsf.h"
-#else
-#   include <QMargins>
-#endif
 
 class QGraphicsItem;
 class VLayoutPaper;

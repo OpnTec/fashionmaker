@@ -34,18 +34,13 @@
 #include <QSettings>
 #include <QString>
 #include <QtGlobal>
+#include <QMargins>
 
 #include "../vmisc/def.h"
 #include "../vlayout/vbank.h"
 #include "vcommonsettings.h"
 
 template <class T> class QSharedPointer;
-
-#if QT_VERSION < QT_VERSION_CHECK(5, 3, 0)
-#   include "../vmisc/backport/qmarginsf.h"
-#else
-#   include <QMargins>
-#endif
 
 class VSettings : public VCommonSettings
 {

@@ -57,7 +57,6 @@
 #include "../vgeometry/vsplinepoint.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/logging.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecepath.h"
