@@ -28,7 +28,6 @@
 
 #include "tst_qmutokenparser.h"
 #include "../qmuparser/qmutokenparser.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 

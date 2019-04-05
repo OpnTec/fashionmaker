@@ -28,7 +28,6 @@
 
 #include "tst_vcommandline.h"
 #include "../vmisc/commandoptions.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 #include <ciso646>

@@ -29,8 +29,6 @@
 
 #include <QtTest>
 
-#include "../vmisc/logging.h"
-
 const QString TST_AbstractTranslation::TagName           = QStringLiteral("name");
 const QString TST_AbstractTranslation::TagMessage        = QStringLiteral("message");
 const QString TST_AbstractTranslation::TagSource         = QStringLiteral("source");

@@ -28,7 +28,6 @@
 
 #include "tst_readval.h"
 #include "../qmuparser/qmudef.h"
-#include "../vmisc/logging.h"
 
 #include <QtTest>
 #include <limits>
