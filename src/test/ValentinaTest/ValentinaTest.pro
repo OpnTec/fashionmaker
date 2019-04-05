@@ -4,7 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core testlib gui printsupport xml xmlpatterns concurrent opengl
+QT += core testlib gui printsupport xml xmlpatterns concurrent
+
+# Don't use Qt OpenGL module since Q5.4
+equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
+    QT += opengl
+}
 
 TARGET = ValentinaTests
 

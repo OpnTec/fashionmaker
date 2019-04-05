@@ -7,7 +7,12 @@
 # File with common stuff for whole project
 include(../../../common.pri)
 
-QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent opengl
+QT       += core gui widgets network xml xmlpatterns printsupport svg concurrent
+
+# Don't use Qt OpenGL module since Q5.4
+equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 4) {
+    QT += opengl
+}
 
 # Name of binary file
 TARGET = tape
