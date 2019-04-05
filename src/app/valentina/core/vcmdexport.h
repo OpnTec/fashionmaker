@@ -42,29 +42,6 @@ class VCommandLine;
 using VCommandLinePtr = std::shared_ptr<VCommandLine>;
 using VLayoutGeneratorPtr = std::shared_ptr<VLayoutGenerator>;
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Weffc++")
-
-/**
- * @brief The VCommandLineOption class wrapper for class QCommandLineOption. Add support for containers.
- */
-class VCommandLineOption : public QCommandLineOption
-{
-public:
-    VCommandLineOption()
-        : QCommandLineOption(QStringLiteral("fakeOption")) {}
-
-    VCommandLineOption(const QString &name, const QString &description, const QString &valueName = QString(),
-                       const QString &defaultValue = QString())
-        : QCommandLineOption(name, description, valueName, defaultValue) {}
-
-    VCommandLineOption(const QStringList &names, const QString &description, const QString &valueName = QString(),
-                       const QString &defaultValue = QString())
-        : QCommandLineOption(names, description, valueName, defaultValue) {}
-};
-
-QT_WARNING_POP
-
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive
 class VCommandLine
@@ -163,7 +140,6 @@ private:
     Q_DISABLE_COPY(VCommandLine)
     static VCommandLinePtr instance;
     QCommandLineParser parser;
-    QMap<QString, VCommandLineOption> optionsUsed;
     bool isGuiEnabled;
     friend class VApplication;
     
