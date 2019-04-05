@@ -408,7 +408,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wabstract-final-class \
     -Wabstract-vbase-init \
     -Waddress \
-    -Waddress-of-array-temporary \
     -Waddress-of-temporary \
     -Waggregate-return \
     -Wall \
@@ -519,7 +518,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wenum-compare \
     -Wenum-conversion \
     -Wexplicit-ownership-type \
-    -Wextended-offsetof \
     -Wextern-initializer \
     -Wextra \
     -Wextra-semi \
@@ -733,7 +731,6 @@ CLANG_DEBUG_CXXFLAGS += \
     -Wunicode \
     -Wunicode-whitespace \
     -Wuninitialized \
-#    -Wunknown-warning-option \
     -Wunnamed-type-template-args \
     -Wunneeded-internal-declaration \
     -Wunneeded-member-function \
@@ -771,9 +768,8 @@ CLANG_DEBUG_CXXFLAGS += \
     -fcolor-diagnostics \
     -fms-extensions # Need for pragma message
 
-freebsd-clang* {
-    # https://bitbucket.org/dismine/valentina/issues/877/lots-of-warnings-unknown-warning-option
-    CLANG_DEBUG_CXXFLAGS -= -Wextended-offsetof
+CONFIG(release, debug|release){
+    CLANG_DEBUG_CXXFLAGS += -Wno-unknown-warning-option
 }
 
 ICC_DEBUG_CXXFLAGS += \
