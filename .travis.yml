@@ -28,7 +28,7 @@ jobs:
     osx_image: xcode8
   - stage: "sonarcloud"
     os: linux
-    dist: trusty
+    dist: xenial
     sudo: required
     compiler: clang
     env: 
