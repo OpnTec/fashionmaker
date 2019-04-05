@@ -1167,8 +1167,7 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     const qreal right = FromPixel(margins.right(), Unit::Mm);
     const qreal bottom = FromPixel(margins.bottom(), Unit::Mm);
 
-    const bool success = printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter);
-    if (not success)
+    if (not printer.setPageMargins(QMarginsF(left, top, right, bottom), QPageLayout::Millimeter))
     {
         qWarning() << tr("Cannot set printer margins");
     }
