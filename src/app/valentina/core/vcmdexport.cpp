@@ -565,8 +565,6 @@ PageOrientation VCommandLine::OptTiledPageOrientation() const
 //---------------------------------------------------------------------------------------------------------------------
 void VCommandLine::InitCommandLineOptions()
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_MSVC(4868)
     //keep in mind order here - that is how user will see it, so group-up for usability
     //=================================================================================================================
     parser.addOptions({
@@ -731,7 +729,6 @@ QT_WARNING_DISABLE_MSVC(4868)
          translate("VCommandLine", "Set tiled page orienatation to landscape (export mode). Default value if not set "
          "portrait.")}
     });
-QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
