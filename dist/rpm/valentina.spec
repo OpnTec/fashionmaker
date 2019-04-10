@@ -18,7 +18,6 @@ BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
-BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: qt5-qtxmlpatterns-devel  >= 5.4.0
 BuildRequires: qt5-qtsvg-devel >= 5.4.0
@@ -39,7 +38,6 @@ BuildRequires: pkgconfig(Qt5PrintSupport)
 BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Xml)
 BuildRequires: pkgconfig(Qt5Concurrent)
-BuildRequires: pkgconfig(Qt5OpenGL)
 BuildRequires: pkgconfig(Qt5XmlPatterns)
 BuildRequires: libproxy-pacrunner
 BuildRequires: qttools5
