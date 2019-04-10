@@ -252,6 +252,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
             data.rotate = d->localRotate;
             data.rotationNumber = d->localRotationNumber;
             data.followGrainline = d->followGrainline;
+            data.positionsCache = d->positionsCache;
 
             auto *thread = new VPosition(data, &stop, d->saveLength);
             //Info for debug
@@ -321,6 +322,12 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         }
         d->details.append(workDetail);
         d->globalContour.SetContour(newGContour);
+
+        VCachedPositions positionChache;
+        QVector<QPointF> layoutPoints = workDetail.GetLayoutAllowancePoints();
+        positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
+        positionChache.layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
+        d->positionsCache.append(positionChache);
 
 #ifdef LAYOUT_DEBUG
 #   ifdef SHOW_BEST

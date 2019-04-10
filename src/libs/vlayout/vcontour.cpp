@@ -297,18 +297,6 @@ const QPointF &VContour::at(int i) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QRectF VContour::BoundingRect() const
-{
-    return d->m_boundingRect;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QPainterPath VContour::ContourPath() const
-{
-    return d->m_contourPath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail, int detJ) const
 {
     int processedEdges = 0;
@@ -360,35 +348,6 @@ void VContour::ResetAttributes()
 {
     if (not d->globalContour.isEmpty())
     {
-        // Bounding rect
-        {
-            QVector<QPointF> points = d->globalContour;
-            if (points.isEmpty())
-            {
-                d->m_boundingRect = QRectF();
-            }
-            else
-            {
-                points.append(points.first());
-                d->m_boundingRect = QPolygonF(points).boundingRect();
-            }
-        }
-
-        {
-            // Countour path
-            QPainterPath path;
-            path.setFillRule(Qt::WindingFill);
-            const QVector<QPointF> points = d->globalContour;
-            path.moveTo(points.at(0));
-            for (qint32 i = 1; i < points.count(); ++i)
-            {
-                path.lineTo(points.at(i));
-            }
-            path.lineTo(points.at(0));
-
-            d->m_contourPath = path;
-        }
-
         d->m_emptySheetEdgesCount = d->globalContour.count(); // Edges count
     }
     else

@@ -681,26 +681,14 @@ int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::DetailBoundingRect() const
 {
-    QVector<QPointF> points;
-    if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
-    {
-        points = GetSeamAllowancePoints();
-    }
-    else
-    {
-        points = GetContourPoints();
-    }
-
-    points.append(points.first());
-    return QPolygonF(points).boundingRect();
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetSeamAllowancePoints()) :
+                                                               BoundingRect(GetContourPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::LayoutBoundingRect() const
 {
-    QVector<QPointF> points = GetLayoutAllowancePoints();
-    points.append(points.first());
-    return QPolygonF(points).boundingRect();
+    return BoundingRect(GetLayoutAllowancePoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -832,16 +820,9 @@ QPainterPath VLayoutPiece::ContourPath() const
     QPainterPath path;
 
     // contour
-    QVector<QPointF> points = GetContourPoints();
-
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path.moveTo(points.at(0));
-        for (qint32 i = 1; i < points.count(); ++i)
-        {
-            path.lineTo(points.at(i));
-        }
-        path.lineTo(points.at(0));
+        path = PainterPath(GetContourPoints());
     }
 
     // seam allowance
@@ -886,10 +867,15 @@ QPainterPath VLayoutPiece::ContourPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QPainterPath VLayoutPiece::LayoutAllowancePath() const
 {
+    return PainterPath(GetLayoutAllowancePoints());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VLayoutPiece::PainterPath(const QVector<QPointF> &points)
+{
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
 
-    const QVector<QPointF> points = GetLayoutAllowancePoints();
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
     {
@@ -955,6 +941,13 @@ qreal VLayoutPiece::BiggestEdge() const
     }
 
     return edge;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VLayoutPiece::BoundingRect(QVector<QPointF> points)
+{
+    points.append(points.first());
+    return QPolygonF(points).boundingRect();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -54,6 +54,7 @@ public:
     VLayoutPaperData(const VLayoutPaperData &paper)
         : QSharedData(paper),
           details(paper.details),
+          positionsCache(paper.positionsCache),
           globalContour(paper.globalContour),
           paperIndex(paper.paperIndex),
           frame(paper.frame),
@@ -70,6 +71,8 @@ public:
 
     /** @brief details list of arranged details. */
     QVector<VLayoutPiece> details{};
+
+    QVector<VCachedPositions> positionsCache{};
 
     /** @brief globalContour list of global points contour. */
     VContour globalContour{};

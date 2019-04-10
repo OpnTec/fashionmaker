@@ -60,8 +60,6 @@ public:
           paperWidth(contour.paperWidth),
           shift(contour.shift),
           layoutWidth(contour.layoutWidth),
-          m_boundingRect(contour.m_boundingRect),
-          m_contourPath(contour.m_contourPath),
           m_emptySheetEdgesCount(contour.m_emptySheetEdgesCount)
     {}
 
@@ -79,9 +77,6 @@ public:
     qreal shift{0};
 
     qreal layoutWidth{0};
-
-    QRectF m_boundingRect{};
-    QPainterPath m_contourPath{};
 
     int  m_emptySheetEdgesCount{0};
 

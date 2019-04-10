@@ -135,11 +135,16 @@ public:
     QRectF LayoutBoundingRect() const;
     qreal  Diagonal() const;
 
+    static QRectF BoundingRect(QVector<QPointF> points);
+
     bool isNull() const;
     qint64 Square() const;
-    QPainterPath ContourPath() const;
 
+    QPainterPath ContourPath() const;
     QPainterPath LayoutAllowancePath() const;
+
+    static QPainterPath PainterPath(const QVector<QPointF> &points);
+
     Q_REQUIRED_RESULT QGraphicsItem *GetItem(bool textAsPaths) const;
 
     bool IsLayoutAllowanceValid() const;

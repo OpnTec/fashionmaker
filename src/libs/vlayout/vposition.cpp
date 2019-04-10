@@ -484,24 +484,33 @@ void VPosition::RotateOnAngle(qreal angle)
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
 {
-    const QRectF gRect = m_data.gContour.BoundingRect();
-    if (not gRect.intersects(detail.LayoutBoundingRect()) && not gRect.contains(detail.DetailBoundingRect()))
+    if (m_data.positionsCache.isEmpty())
     {
-        // This we can determine efficiently.
         return CrossingType::NoIntersection;
     }
 
-    const QPainterPath gPath = m_data.gContour.ContourPath();
-    CrossingType crossing = CrossingType::EdgeError;
-    if (not gPath.contains(detail.ContourPath()) && not gPath.intersects(detail.LayoutAllowancePath()))
+    const QVector<QPointF> layoutPoints = detail.GetLayoutAllowancePoints();
+    const QRectF layoutBoundingRect = VLayoutPiece::BoundingRect(layoutPoints);
+    const QPainterPath layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
+
+    const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
+                detail.GetSeamAllowancePoints() : detail.GetContourPoints();
+    const QRectF detailBoundingRect = VLayoutPiece::BoundingRect(contourPoints);
+    const QPainterPath contourPath = VLayoutPiece::PainterPath(contourPoints);
+
+    for(auto &position : m_data.positionsCache)
     {
-        crossing = CrossingType::NoIntersection;
+        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect))
+        {
+            if (position.layoutAllowancePath.contains(contourPath) ||
+                    position.layoutAllowancePath.intersects(layoutAllowancePath))
+            {
+                return CrossingType::Intersection;
+            }
+        }
     }
-    else
-    {
-        crossing = CrossingType::Intersection;
-    }
-    return crossing;
+
+    return CrossingType::NoIntersection;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

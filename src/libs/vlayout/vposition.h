@@ -49,6 +49,7 @@ struct VPositionData
     bool rotate{false};
     int rotationNumber{0};
     bool followGrainline{false};
+    QVector<VCachedPositions> positionsCache{};
 };
 
 class VPosition : public QRunnable
