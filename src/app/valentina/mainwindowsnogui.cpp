@@ -476,7 +476,7 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
             for (int i = 0; i < detailsOnLayout.size(); ++i)
             {
                 const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                        QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+                        QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
                 QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
                 SCASSERT(paper != nullptr)
@@ -522,7 +522,7 @@ void MainWindowsNoGUI::ExportFlatLayout(const QList<QGraphicsScene *> &scenes,
     if (format == LayoutExportFormats::PDFTiled && m_dialogSaveLayout->Mode() == Draw::Layout)
     {
         const QString name = path + '/' + m_dialogSaveLayout->FileName() + QString::number(1)
-                + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+                + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
         PdfTiledFile(name);
     }
     else
@@ -743,7 +743,7 @@ void MainWindowsNoGUI::ExportDetailsAsApparelLayout(QVector<VLayoutPiece> listDe
     }
 
     const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-            QString::number(1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+            QString::number(1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
 
     ExportApparelLayout(listDetails, name, rect.size());
 }
@@ -1748,7 +1748,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes,
         if (paper)
         {
             const QString name = m_dialogSaveLayout->Path() + '/' + m_dialogSaveLayout->FileName() +
-                    QString::number(i+1) + DialogSaveLayout::ExportFromatSuffix(m_dialogSaveLayout->Format());
+                    QString::number(i+1) + DialogSaveLayout::ExportFormatSuffix(m_dialogSaveLayout->Format());
             QBrush *brush = new QBrush();
             brush->setColor( QColor( Qt::white ) );
             QGraphicsScene *scene = scenes.at(i);

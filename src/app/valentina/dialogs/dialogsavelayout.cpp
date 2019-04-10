@@ -103,6 +103,8 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
     RemoveFormatFromList(LayoutExportFormats::OBJ);
 #endif
 
+//    RemoveFormatFromList(LayoutExportFormats::NC); // No support for now
+
     if (m_mode != Draw::Layout)
     {
         RemoveFormatFromList(LayoutExportFormats::PDFTiled);
@@ -247,6 +249,7 @@ void DialogSaveLayout::SetBinaryDXFFormat(bool binary)
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
+        case LayoutExportFormats::NC:
         default:
             ui->checkBoxBinaryDXF->setChecked(false);
             break;
@@ -293,6 +296,7 @@ bool DialogSaveLayout::IsBinaryDXFFormat() const
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
+        case LayoutExportFormats::NC:
         default:
             return false;
     }
@@ -429,14 +433,16 @@ QString DialogSaveLayout::ExportFormatDescription(LayoutExportFormats format)
         case LayoutExportFormats::DXF_AC1027_ASTM:
             return QStringLiteral("AutoCAD DXF 2013 ASTM %1 %2").arg(filesStr, dxfSuffix);
         case LayoutExportFormats::PDFTiled:
-            return QStringLiteral("PDF tiled %1 (*.pdf)").arg(filesStr);
+            return QStringLiteral("PDF %1 %2 (*.pdf)").arg(tr("tiled"), filesStr);
+        case LayoutExportFormats::NC:
+            return QStringLiteral("%1 %2 (*.nc)").arg(tr("Numerical control"), filesStr);
         default:
             return QString();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
+QString DialogSaveLayout::ExportFormatSuffix(LayoutExportFormats format)
 {
     switch(format)
     {
@@ -481,6 +487,8 @@ QString DialogSaveLayout::ExportFromatSuffix(LayoutExportFormats format)
         case LayoutExportFormats::DXF_AC1024_ASTM:
         case LayoutExportFormats::DXF_AC1027_ASTM:
             return QStringLiteral(".dxf");
+        case LayoutExportFormats::NC:
+            return QStringLiteral(".nc");
         default:
             return QString();
     }
@@ -515,7 +523,7 @@ void DialogSaveLayout::Save()
 {
     for (int i=0; i < count; ++i)
     {
-        const QString name = Path()+'/'+FileName()+QString::number(i+1)+ExportFromatSuffix(Format());
+        const QString name = Path()+'/'+FileName()+QString::number(i+1)+ExportFormatSuffix(Format());
         if (QFile::exists(name))
         {
             QMessageBox::StandardButton res = QMessageBox::question(this, tr("Name conflict"),
@@ -563,7 +571,7 @@ void DialogSaveLayout::PathChanged(const QString &text)
 void DialogSaveLayout::ShowExample()
 {
     const LayoutExportFormats currentFormat = Format();
-    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + ExportFromatSuffix(currentFormat));
+    ui->labelExample->setText(tr("Example:") + FileName() + QLatin1Char('1') + ExportFormatSuffix(currentFormat));
 
     ui->checkBoxBinaryDXF->setEnabled(false);
     ui->groupBoxPaperFormat->setEnabled(false);
@@ -610,6 +618,7 @@ void DialogSaveLayout::ShowExample()
         case LayoutExportFormats::OBJ:
         case LayoutExportFormats::PS:
         case LayoutExportFormats::EPS:
+        case LayoutExportFormats::NC:
         default:
             break;
     }
@@ -813,6 +822,7 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
 //    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
 //    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled); 
+//    InitFormat(LayoutExportFormats::NC);
 
     return list;
 }

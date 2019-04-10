@@ -81,6 +81,7 @@ enum class LayoutExportFormats : char
     DXF_AC1024_ASTM = 31, /* ACAD 2010. */
     DXF_AC1027_ASTM = 32, /* ACAD 2013. */
     PDFTiled = 33,
+    NC = 34,              /*G-code. Reserved for future*/
     COUNT                 /*Use only for validation*/
 };
 
@@ -108,7 +109,7 @@ public:
     Draw Mode() const;
 
     static QString ExportFormatDescription(LayoutExportFormats format);
-    static QString ExportFromatSuffix(LayoutExportFormats format);
+    static QString ExportFormatSuffix(LayoutExportFormats format);
 
     bool IsTextAsPaths() const;
     void SetTextAsPaths(bool textAsPaths);
