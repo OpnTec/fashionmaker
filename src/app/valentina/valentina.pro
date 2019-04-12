@@ -300,7 +300,11 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/Qt5XmlPatterns.dll \
         $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
-        $$[QT_INSTALL_BINS]/libwinpthread-1.dll
+        $$[QT_INSTALL_BINS]/libwinpthread-1.dll \
+        $$[QT_INSTALL_BINS]/libEGL.dll \
+        $$[QT_INSTALL_BINS]/libGLESv2.dll \
+        $$[QT_INSTALL_BINS]/d3dcompiler_*.dll \
+        $$[QT_INSTALL_BINS]/opengl32sw.dll
 
     # For support Windows 7+
     greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
