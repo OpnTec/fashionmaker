@@ -336,8 +336,12 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
     QRectF rec = QRectF(0, 0, INT_MAX, INT_MAX);
     rec.translate(-INT_MAX/2.0, -INT_MAX/2.0);
 
-    const QLineF axis = VGObject::BuildAxis(point, angle, rec);
-    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+    // Instead of using axis compare two rays. See issue #963.
+    QLineF axis = QLineF(point, VGObject::BuildRay(point, angle, rec));
+    QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(curvePoints, axis);
+
+    axis = QLineF(point, VGObject::BuildRay(point, angle + 180, rec));
+    points += VAbstractCurve::CurveIntersectLine(curvePoints, axis);
 
     if (points.size() > 0)
     {
@@ -352,7 +356,7 @@ bool VAbstractCurve::CurveIntersectAxis(const QPointF &point, qreal angle, const
 
         for ( qint32 i = 0; i < points.size(); ++i )
         {
-            if (points.at(i) == point)
+            if (VFuzzyComparePoints(points.at(i), point))
             { // Always seek unique intersection
                 continue;
             }

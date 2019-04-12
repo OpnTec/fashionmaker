@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.6.2.0 (https://valentinaproject.bitbucket.io/).-->
+    <version>0.7.12</version>
+    <unit>inch</unit>
+    <description/>
+    <notes/>
+    <measurements></measurements>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Armhole">
+        <calculation>
+            <point id="218" mx="0.0520833" my="0.104167" name="D" showLabel="true" type="single" x="37.0097" y="0.416667"/>
+            <elArc aScale="0.5" angle1="0" angle2="0" center="218" color="black" id="219" penStyle="hair" radius1="8" radius2="8" rotationAngle="360" type="simple"/>
+            <point angle="90" basePoint="218" curve="219" id="220" lineColor="black" mx="0.0520833" my="0.104167" name="D1" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="270" basePoint="218" curve="219" id="223" lineColor="black" mx="0.0520833" my="0.104167" name="D2" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="180" basePoint="218" curve="219" id="226" lineColor="black" mx="0.0520833" my="0.104167" name="D3" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="0" basePoint="218" curve="219" id="229" lineColor="black" mx="0.0520833" my="0.104167" name="D4" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="225" basePoint="218" curve="219" id="232" lineColor="black" mx="0.0520833" my="0.104167" name="D5" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="135" basePoint="218" curve="219" id="233" lineColor="black" mx="0.0520833" my="0.104167" name="D6" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="45" basePoint="218" curve="219" id="236" lineColor="black" mx="0.0520833" my="0.104167" name="D7" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="315" basePoint="218" curve="219" id="237" lineColor="black" mx="0.0520833" my="0.104167" name="D8" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

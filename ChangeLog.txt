@@ -35,6 +35,7 @@
 - [#956] Setting pattern unit doesn't change combobox value in Tape app.
 - [#957] Unable to cut an arc with negative length.
 - [#962] Failed to load LibEGL.
+- [#963] Bug in tool Point intersect curve and axis.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
