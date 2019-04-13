@@ -915,7 +915,11 @@ void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type>
     }
     else
     {
-        Q_ASSERT(a_stVal.size()>=2);
+        if(a_stVal.size()<2)
+        {
+            Error(ecUNEXPECTED_OPERATOR);
+        }
+
         token_type valTok1 = a_stVal.pop(),
                    valTok2 = a_stVal.pop(),
                    optTok  = a_stOpt.pop(),
@@ -930,7 +934,7 @@ void QmuParserBase::ApplyBinOprt(QStack<token_type> &a_stOpt, QStack<token_type>
         {
             if (valTok2.GetCode()!=cmVAR)
             {
-                Error(ecUNEXPECTED_OPERATOR, -1, "=");
+                Error(ecUNEXPECTED_OPERATOR, -1, QChar('='));
             }
             m_vRPN.AddAssignOp(valTok2.GetVar());
         }

@@ -266,6 +266,7 @@ int QmuParserTester::TestBinOprt()
     iStat += EqnTest ( "2*(a=b+1)", 6, true );
     iStat += EqnTest ( "(a=b+1)*2", 6, true );
     iStat += EqnTest ( "a=c; a*10", 30, true);
+    iStat += EqnTest ( "a = -", 0, false );    // broken assigment
 
     iStat += EqnTest ( "2^2^3", 256, true );
     iStat += EqnTest ( "1/2/3", 1.0 / 6.0, true );
