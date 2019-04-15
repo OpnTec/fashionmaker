@@ -300,6 +300,8 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 
             actionPassmark->setChecked(node.IsPassmark());
             actionPassmark->setVisible(node.IsPassmark());
+
+            angleTypeMenu->setEnabled(detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn());
         }
         else
         {
