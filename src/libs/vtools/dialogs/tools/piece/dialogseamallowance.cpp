@@ -918,19 +918,6 @@ void DialogSeamAllowance::ListChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::EnableSeamAllowance(bool enable)
-{
-    uiTabPaths->checkBoxBuiltIn->setEnabled(enable);
-    uiTabPaths->groupBoxAutomatic->setEnabled(enable);
-    uiTabPaths->groupBoxCustom->setEnabled(enable);
-
-    if (enable)
-    {
-        InitNodesList();
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NodeChanged(int index)
 {
     uiTabPaths->plainTextEditFormulaWidthBefore->setDisabled(true);
@@ -2775,7 +2762,31 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     m_timerWidthAfter->setSingleShot(true);
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthAfter);
 
-    connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::EnableSeamAllowance);
+    connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, [this](bool enable)
+    {
+        uiTabPaths->checkBoxBuiltIn->setEnabled(enable);
+
+        if (not enable)
+        {
+            uiTabPaths->groupBoxAutomatic->setEnabled(enable);
+            uiTabPaths->groupBoxCustom->setEnabled(enable);
+        }
+        else
+        {
+            uiTabPaths->checkBoxBuiltIn->toggled(uiTabPaths->checkBoxBuiltIn->isChecked());
+        }
+    });
+
+    connect(uiTabPaths->checkBoxBuiltIn, &QCheckBox::toggled, this, [this](bool enable)
+    {
+        uiTabPaths->groupBoxAutomatic->setEnabled(not enable);
+        uiTabPaths->groupBoxCustom->setEnabled(not enable);
+
+        if (not enable)
+        {
+            InitNodesList();
+        }
+    });
 
     // init the default seam allowance, convert the value if app unit is different than pattern unit
     m_saWidth = UnitConvertor(qApp->Settings()->GetDefaultSeamAllowance(),

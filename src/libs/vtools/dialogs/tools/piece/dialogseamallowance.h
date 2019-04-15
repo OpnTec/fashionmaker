@@ -92,7 +92,6 @@ private slots:
     void ShowPlaceLabelsContextMenu(const QPoint &pos);
 
     void ListChanged();
-    void EnableSeamAllowance(bool enable);
     void NodeChanged(int index);
     void PassmarkChanged(int index);
     void CSAStartPointChanged(int index);
