@@ -74,4 +74,5 @@ HEADERS += \
     $$PWD/floatItemData/vpatternlabeldata_p.h \
     $$PWD/floatItemData/vpiecelabeldata_p.h \
     $$PWD/measurements.h \
-    $$PWD/pmsystems.h
+    $$PWD/pmsystems.h \
+    $$PWD/vformula_p.h

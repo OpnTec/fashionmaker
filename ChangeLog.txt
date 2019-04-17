@@ -13,6 +13,7 @@
 - [#936] Improve list of predefined paper size formats for layout export. Added format Tabloid.
 - Extend Label language to support Czech alphabet.
 - [#916] Improve layout generation. 
+- [#965] Control passmark length with formula.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

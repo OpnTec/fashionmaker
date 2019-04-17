@@ -30,40 +30,11 @@
 #include "vpiecenode_p.h"
 #include "vcontainer.h"
 #include "calculator.h"
+#include "vformula.h"
+#include "../vmisc/vabstractapplication.h"
 
 #include <QDataStream>
 #include <QtNumeric>
-
-namespace
-{
-//---------------------------------------------------------------------------------------------------------------------
-qreal EvalFormula(const VContainer *data, QString formula)
-{
-    if (formula.isEmpty())
-    {
-        return -1;
-    }
-    else
-    {
-        try
-        {
-            QScopedPointer<Calculator> cal(new Calculator());
-            const qreal result = cal->EvalFormula(data->DataVariables(), formula);
-
-            if (qIsInf(result) || qIsNaN(result))
-            {
-                return -1;
-            }
-            return result;
-        }
-        catch (qmu::QmuParserError &e)
-        {
-            Q_UNUSED(e)
-            return -1;
-        }
-    }
-}
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
@@ -157,7 +128,25 @@ qreal VPieceNode::GetSABefore(const VContainer *data) const
         return -1;
     }
 
-    return EvalFormula(data, d->m_formulaWidthBefore);
+    VFormula formula(d->m_formulaWidthBefore, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {}
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
+                .arg(nodeName, formula.Reason());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+        return -1;
+    }
+    return formula.getDoubleValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -168,7 +157,26 @@ qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
         return -1;
     }
 
-    qreal value = EvalFormula(data, d->m_formulaWidthBefore);
+    VFormula formula(d->m_formulaWidthBefore, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {}
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance before for point '%1'. Reason: %2.")
+                .arg(nodeName, formula.Reason());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+        return -1;
+    }
+
+    qreal value = formula.getDoubleValue();
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -199,7 +207,26 @@ qreal VPieceNode::GetSAAfter(const VContainer *data) const
         return -1;
     }
 
-    return EvalFormula(data, d->m_formulaWidthAfter);
+    VFormula formula(d->m_formulaWidthAfter, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {}
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: %2.")
+                .arg(nodeName, formula.Reason());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+        return -1;
+    }
+
+    return formula.getDoubleValue();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,7 +237,27 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
         return -1;
     }
 
-    qreal value = EvalFormula(data, d->m_formulaWidthAfter);
+    VFormula formula(d->m_formulaWidthAfter, data);
+    formula.Eval();
+
+    if (formula.error())
+    {
+        QString nodeName;
+        try
+        {
+            nodeName = data->GetGObject(d->m_id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {}
+
+        const QString errorMsg = QObject::tr("Cannot calculate seam allowance after for point '%1'. Reason: ")
+                .arg(nodeName, formula.Reason());
+        qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+        return -1;
+    }
+
+    qreal value = formula.getDoubleValue();
+
     if (value >= 0)
     {
         value = ToPixel(value, unit);
@@ -231,6 +278,52 @@ void VPieceNode::SetFormulaSAAfter(const QString &formula)
     {
         d->m_formulaWidthAfter = formula;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VPieceNode::GetFormulaPassmarkLength() const
+{
+    return d->m_formulaPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetFormulaPassmarkLength(const QString &formula)
+{
+    if (d->m_typeTool == Tool::NodePoint)
+    {
+        d->m_formulaPassmarkLength = formula;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VPieceNode::GetPassmarkLength(const VContainer *data, Unit unit) const
+{
+    if (d->m_manualPassmarkLength)
+    {
+        VFormula formula(d->m_formulaPassmarkLength, data);
+        formula.setCheckZero(false);
+        formula.setCheckLessThanZero(false);
+        formula.Eval();
+
+        if (formula.error())
+        {
+            QString nodeName;
+            try
+            {
+                nodeName = data->GetGObject(d->m_id)->name();
+            }
+            catch (const VExceptionBadId &)
+            {}
+
+            const QString errorMsg = QObject::tr("Cannot calculate passmark length for point '%1'. Reason: %2.")
+                    .arg(nodeName, formula.Reason());
+            qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+            return VSAPoint::maxPassmarkLength;
+        }
+
+        return ToPixel(formula.getDoubleValue(), unit);
+    }
+    return -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +414,18 @@ bool VPieceNode::IsCheckUniqueness() const
 void VPieceNode::SetCheckUniqueness(bool value)
 {
     d->m_checkUniqueness = (d->m_typeTool == Tool::NodePoint ? value : true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VPieceNode::IsManualPassmarkLength() const
+{
+    return d->m_manualPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::SetManualPassmarkLength(bool value)
+{
+    d->m_manualPassmarkLength = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

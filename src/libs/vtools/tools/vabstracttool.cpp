@@ -584,6 +584,11 @@ QDomElement VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagNa
     doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrNodeShowSecondPassmark, node.IsShowSecondPassmark(),
                                 node.IsShowSecondPassmark());
 
+    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrManualPassmarkLength, node.IsManualPassmarkLength(),
+                                not node.IsManualPassmarkLength());
+    doc->SetAttributeOrRemoveIf(nod, VAbstractPattern::AttrPassmarkLength, node.GetFormulaPassmarkLength(),
+                                not node.IsManualPassmarkLength());
+
     return nod;
 }
 

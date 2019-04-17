@@ -1059,6 +1059,8 @@ VSAPoint VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *d
     p.SetSAAfter(node.GetSAAfter(data, *data->GetPatternUnit()));
     p.SetSABefore(node.GetSABefore(data, *data->GetPatternUnit()));
     p.SetAngleType(node.GetAngleType());
+    p.SetManualPasskmarkLength(node.IsManualPassmarkLength());
+    p.SetPasskmarkLength(node.GetPassmarkLength(data, *data->GetPatternUnit()));
 
     return p;
 }

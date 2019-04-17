@@ -30,13 +30,16 @@
 #define VFORMULA_H
 
 #include <QCoreApplication>
+#include <QSharedDataPointer>
 #include <QMetaType>
+#include <QTypeInfo>
 #include <QString>
 #include <QtGlobal>
 
 enum class FormulaType : char{ToUser, FromUser};
 
 class VContainer;
+class VFormulaData;
 
 class VFormula
 {
@@ -46,6 +49,8 @@ public:
     VFormula(const QString &formula, const VContainer *container);
     VFormula &operator=(const VFormula &formula);
     VFormula(const VFormula &formula);
+    ~VFormula();
+
     bool operator==(const VFormula &formula) const;
     bool operator!=(const VFormula &formula) const;
 
@@ -58,30 +63,30 @@ public:
     bool getCheckZero() const;
     void setCheckZero(bool value);
 
+    bool getCheckLessThanZero() const;
+    void setCheckLessThanZero(bool value);
+
     const VContainer *getData() const;
     void setData(const VContainer *value);
 
     quint32 getToolId() const;
-    void setToolId(const quint32 &value);
+    void setToolId(quint32 value);
 
     QString getPostfix() const;
     void setPostfix(const QString &value);
 
     bool error() const;
+    QString Reason() const;
 
     static int FormulaTypeId();
 
     void Eval();
 private:
-    QString formula;
-    QString value;
-    bool checkZero;
-    const VContainer *data;
-    quint32 toolId;
-    QString postfix;
-    bool _error;
-    qreal dValue;
+    QSharedDataPointer<VFormulaData> d;
+
+    void ResetState();
 };
 Q_DECLARE_METATYPE(VFormula)
+Q_DECLARE_TYPEINFO(VFormula, Q_MOVABLE_TYPE);
 
 #endif // VFORMULA_H

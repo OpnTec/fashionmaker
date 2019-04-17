@@ -82,6 +82,11 @@ public:
     QString GetFormulaSAAfter() const;
     void    SetFormulaSAAfter(const QString &formula);
 
+    QString GetFormulaPassmarkLength() const;
+    void    SetFormulaPassmarkLength(const QString &formula);
+
+    qreal GetPassmarkLength(const VContainer *data, Unit unit) const;
+
     PieceNodeAngle GetAngleType() const;
     void           SetAngleType(PieceNodeAngle type);
 
@@ -102,6 +107,9 @@ public:
 
     bool IsCheckUniqueness() const;
     void SetCheckUniqueness(bool value);
+
+    bool IsManualPassmarkLength() const;
+    void SetManualPassmarkLength(bool value);
 private:
     QSharedDataPointer<VPieceNodeData> d;
 };

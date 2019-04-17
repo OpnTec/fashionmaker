@@ -1365,6 +1365,11 @@ QVector<QLineF> VPiece::CreatePassmark(const QVector<VPieceNode> &path, int prev
 
     const QVector<QPointF> mainPath = MainPathPoints(data);
 
+    if (passmarkSAPoint.IsManualPasskmarkLength() && passmarkSAPoint.GetPasskmarkLength() <= 0)
+    {
+        return QVector<QLineF>();
+    }
+
     if (not IsSeamAllowanceBuiltIn())
     {
         // Because rollback cannot be calulated if passmark is not first point in main path we rotate it.
@@ -1434,8 +1439,14 @@ QVector<QLineF> VPiece::SAPassmark(const VPiecePassmarkData &passmarkData, const
             if (intersections.last() != passmarkData.passmarkSAPoint)
             {
                 line = QLineF(intersections.last(), passmarkData.passmarkSAPoint);
-                line.setLength(qMin(width * VSAPoint::passmarkFactor, VSAPoint::maxPassmarkLength));
-
+                if (not passmarkData.passmarkSAPoint.IsManualPasskmarkLength())
+                {
+                    line.setLength(qMin(width * VSAPoint::passmarkFactor, VSAPoint::maxPassmarkLength));
+                }
+                else
+                {
+                    line.setLength(passmarkData.passmarkSAPoint.GetPasskmarkLength());
+                }
                 passmarksLines += CreatePassmarkLines(passmarkData.passmarkLineType, passmarkData.passmarkAngleType,
                                                       line, seamAllowance);
             }

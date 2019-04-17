@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "vformula.h"
+#include "vformula_p.h"
 
 #include <qnumeric.h>
 #include <QMessageLogger>
@@ -45,26 +46,12 @@
 //VFormula
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula()
-    : formula(QString()),
-      value(tr("Error")),
-      checkZero(true),
-      data(nullptr),
-      toolId(NULL_ID),
-      postfix(QString()),
-      _error(true),
-      dValue(0)
+    : d(new VFormulaData)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const QString &formula, const VContainer *container)
-    : formula(qApp->TrVars()->FormulaToUser(formula, qApp->Settings()->GetOsSeparator())),
-      value(tr("Error")),
-      checkZero(true),
-      data(container),
-      toolId(NULL_ID),
-      postfix(QString()),
-      _error(true),
-      dValue(0)
+    : d(new VFormulaData(formula, container))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -74,41 +61,26 @@ VFormula &VFormula::operator=(const VFormula &formula)
     {
         return *this;
     }
-    this->formula = formula.formula;
-    this->value = formula.value;
-    this->checkZero = formula.checkZero;
-    this->data = formula.data;
-    this->toolId = formula.toolId;
-    this->postfix = formula.postfix;
-    this->_error = formula._error;
-    this->dValue = formula.dValue;
+    d = formula.d;
     return *this;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VFormula::VFormula(const VFormula &formula)
-    : formula(formula.formula),
-      value(formula.value),
-      checkZero(formula.checkZero),
-      data(formula.getData()),
-      toolId(formula.toolId),
-      postfix(formula.postfix),
-      _error(formula._error),
-      dValue(formula.dValue)
+    : d (formula.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+VFormula::~VFormula()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VFormula::operator==(const VFormula &formula) const
 {
-    bool isEqual = false;
-    if (this->formula == formula.GetFormula() && this->value == formula.getStringValue() &&
-        this->checkZero == formula.getCheckZero() && this->data == formula.getData() &&
-        this->toolId == formula.getToolId() && this->postfix == formula.getPostfix() &&
-        this->_error == formula.error() && VFuzzyComparePossibleNulls(this->dValue, formula.getDoubleValue()))
-    {
-        isEqual = true;
-    }
-    return isEqual;
+    return d->formula == formula.GetFormula() && d->strValue == formula.getStringValue() &&
+            d->checkZero == formula.getCheckZero() && d->checkLessThanZero == formula.getCheckLessThanZero() &&
+            d->data == formula.getData() && d->toolId == formula.getToolId() && d->postfix == formula.getPostfix() &&
+            d->error == formula.error() && VFuzzyComparePossibleNulls(d->dValue, formula.getDoubleValue());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,103 +94,120 @@ QString VFormula::GetFormula(FormulaType type) const
 {
     if (type == FormulaType::ToUser)
     {
-        return formula;
+        return qApp->TrVars()->TryFormulaToUser(d->formula, qApp->Settings()->GetOsSeparator());
     }
     else
     {
-        return qApp->TrVars()->TryFormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
+        return d->formula;
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormula::SetFormula(const QString &value, FormulaType type)
 {
-    if (formula != value)
+    if (d->formula != value)
     {
-        if (type == FormulaType::ToUser)
+        if (type == FormulaType::FromUser)
         {
-            formula = qApp->TrVars()->FormulaToUser(value, qApp->Settings()->GetOsSeparator());
+            d->formula = qApp->TrVars()->FormulaFromUser(value, qApp->Settings()->GetOsSeparator());
         }
         else
         {
-            formula = value;
+            d->formula = value;
         }
+
+        ResetState();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VFormula::getStringValue() const
 {
-    return value;
+    return d->strValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VFormula::getDoubleValue() const
 {
-    return dValue;
+    return d->dValue;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VFormula::getCheckZero() const
 {
-    return checkZero;
+    return d->checkZero;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormula::setCheckZero(bool value)
 {
-    if (checkZero != value)
-    {
-        checkZero = value;
-    }
+    d->checkZero = value;
+    ResetState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VFormula::getCheckLessThanZero() const
+{
+    return d->checkLessThanZero;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VFormula::setCheckLessThanZero(bool value)
+{
+    d->checkLessThanZero = value;
+    ResetState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 const VContainer *VFormula::getData() const
 {
-    return data;
+    return d->data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormula::setData(const VContainer *value)
 {
-    if (data != value && value != nullptr)
+    if (d->data != value && value != nullptr)
     {
-        data = value;
+        d->data = value;
+        ResetState();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 quint32 VFormula::getToolId() const
 {
-    return toolId;
+    return d->toolId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VFormula::setToolId(const quint32 &value)
+void VFormula::setToolId(quint32 value)
 {
-    toolId = value;
+    d->toolId = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VFormula::getPostfix() const
 {
-    return postfix;
+    return d->postfix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VFormula::setPostfix(const QString &value)
 {
-    if (postfix != value)
-    {
-        postfix = value;
-    }
+    d->postfix = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VFormula::error() const
 {
-    return _error;
+    return d->error;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VFormula::Reason() const
+{
+    return d->reason;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -230,39 +219,64 @@ int VFormula::FormulaTypeId()
 //---------------------------------------------------------------------------------------------------------------------
 void VFormula::Eval()
 {
-    if (data == nullptr)
+    ResetState();
+
+    if (d->data == nullptr)
     {
+        d->reason = tr("Data container is empty");
         return;
     }
 
-    value = tr("Error");
-    _error = true;
-    dValue = 0;
     qreal result = 0;
 
-    if (not formula.isEmpty())
+    if (not d->formula.isEmpty())
     {
         try
         {
             QScopedPointer<Calculator> cal(new Calculator());
-            const QString expression = qApp->TrVars()->FormulaFromUser(formula, qApp->Settings()->GetOsSeparator());
-            result = cal->EvalFormula(data->DataVariables(), expression);
+            result = cal->EvalFormula(d->data->DataVariables(), d->formula);
         }
         catch (qmu::QmuParserError &e)
         {
-            qDebug() << "\nMath parser error:\n"
-                     << "--------------------------------------\n"
-                     << "Message:     " << e.GetMsg()  << "\n"
-                     << "Expression:  " << e.GetExpr() << "\n"
-                     << "--------------------------------------";
+            d->reason = tr("Math parser error: %1").arg(e.GetMsg());
             return;
         }
 
-        if (not qIsInf(result) && not qIsNaN(result) && not (checkZero && qFuzzyIsNull(result)))
+        d->dValue = result;
+
+        if (qIsInf(result))
         {
-            dValue = result;
-            value = qApp->LocaleToString(result) + QLatin1Char(' ') + postfix;
-            _error = false;
+            d->reason = tr("Result is infinite");
+        }
+        else if (qIsNaN(result))
+        {
+            d->reason = tr("Result is NaN");
+        }
+        else if (d->checkZero && qFuzzyIsNull(result))
+        {
+            d->reason = tr("Result is zero");
+        }
+        else if (d->checkLessThanZero && result < 0)
+        {
+            d->reason = tr("Result less than zero");
+        }
+        else
+        {
+            d->strValue = qApp->LocaleToString(result) + QLatin1Char(' ') + d->postfix;
+            d->error = false;
         }
     }
+    else
+    {
+        d->reason = tr("Formula is empty");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VFormula::ResetState()
+{
+    d->strValue = tr("Error");
+    d->error = true;
+    d->dValue = NAN;
+    d->reason = tr("Not evaluated");
 }

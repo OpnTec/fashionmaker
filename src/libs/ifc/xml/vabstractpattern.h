@@ -278,6 +278,8 @@ public:
     static const QString AttrRotation;
     static const QString AttrNumber;
     static const QString AttrCheckUniqueness;
+    static const QString AttrManualPassmarkLength;
+    static const QString AttrPassmarkLength;
 
     static const QString AttrAll;
 

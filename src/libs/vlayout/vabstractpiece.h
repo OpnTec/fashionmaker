@@ -57,7 +57,7 @@ class VSAPoint : public QPointF
 public:
     Q_DECL_CONSTEXPR VSAPoint();
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
-    Q_DECL_CONSTEXPR explicit VSAPoint(const QPointF &p);
+    Q_DECL_CONSTEXPR explicit VSAPoint(QPointF p);
 
     Q_DECL_CONSTEXPR qreal GetSABefore() const;
                      qreal GetSABefore(qreal width) const;
@@ -70,6 +70,12 @@ public:
     Q_DECL_CONSTEXPR PieceNodeAngle GetAngleType() const;
                      void           SetAngleType(PieceNodeAngle value);
 
+    Q_DECL_CONSTEXPR bool IsManualPasskmarkLength() const;
+    Q_DECL_CONSTEXPR void SetManualPasskmarkLength(bool value);
+
+    Q_DECL_CONSTEXPR qreal GetPasskmarkLength() const;
+    Q_DECL_CONSTEXPR void  SetPasskmarkLength(qreal value);
+
     qreal MaxLocalSA(qreal width) const;
     qreal PassmarkLength(qreal width) const;
 
@@ -77,9 +83,11 @@ public:
     static const qreal maxPassmarkLength;
 
 private:
-    qreal          m_before;
-    qreal          m_after;
-    PieceNodeAngle m_angle;
+    qreal          m_before{-1};
+    qreal          m_after{-1};
+    PieceNodeAngle m_angle{PieceNodeAngle::ByLength};
+    bool           m_manualPassmarkLength{false};
+    qreal          m_passmarkLength{0};
 };
 
 Q_DECLARE_METATYPE(VSAPoint)
@@ -87,26 +95,16 @@ Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
-    : QPointF(),
-      m_before(-1),
-      m_after(-1),
-      m_angle(PieceNodeAngle::ByLength)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
-    : QPointF(xpos, ypos),
-      m_before(-1),
-      m_after(-1),
-      m_angle(PieceNodeAngle::ByLength)
+    : QPointF(xpos, ypos)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(const QPointF &p)
-    : QPointF(p),
-      m_before(-1),
-      m_after(-1),
-      m_angle(PieceNodeAngle::ByLength)
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(QPointF p)
+    : QPointF(p)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,6 +141,30 @@ Q_DECL_CONSTEXPR inline PieceNodeAngle VSAPoint::GetAngleType() const
 inline void VSAPoint::SetAngleType(PieceNodeAngle value)
 {
     m_angle = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline bool VSAPoint::IsManualPasskmarkLength() const
+{
+    return m_manualPassmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline void VSAPoint::SetManualPasskmarkLength(bool value)
+{
+    m_manualPassmarkLength = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline qreal VSAPoint::GetPasskmarkLength() const
+{
+    return m_passmarkLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+Q_DECL_CONSTEXPR inline void VSAPoint::SetPasskmarkLength(qreal value)
+{
+    m_passmarkLength = value;
 }
 
 QT_WARNING_POP

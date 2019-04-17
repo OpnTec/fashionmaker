@@ -134,18 +134,22 @@ private slots:
     void EnabledGrainline();
     void EnabledDetailLabel();
     void EnabledPatternLabel();
+    void EnabledManualPassmarkLength();
 
     void EvalWidth();
     void EvalWidthBefore();
     void EvalWidthAfter();
+    void EvalPassmarkLength();
 
     void FXWidth();
     void FXWidthBefore();
     void FXWidthAfter();
+    void FXPassmarkLength();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
+    void DeployPassmarkLength();
 
     void GrainlinePinPointChanged();
     void DetailPinPointChanged();
@@ -185,6 +189,7 @@ private:
     bool   flagPLFormulas;
     bool   flagFormulaBefore;
     bool   flagFormulaAfter;
+    bool   flagFormulaPassmarkLength{true};
     bool   flagMainPathIsValid;
     bool   flagName;
     bool   flagFormula;
@@ -204,10 +209,12 @@ private:
     int                  m_formulaBaseWidth;
     int                  m_formulaBaseWidthBefore;
     int                  m_formulaBaseWidthAfter;
+    int                  m_formulaBasePassmarkLength{0};
 
     QTimer *m_timerWidth;
     QTimer *m_timerWidthBefore;
     QTimer *m_timerWidthAfter;
+    QTimer *m_timerPassmarkLength;
     qreal   m_saWidth;
 
     QVector<VLabelTemplateLine> m_templateLines;
@@ -236,6 +243,7 @@ private:
 
     void UpdateNodeSABefore(const QString &formula);
     void UpdateNodeSAAfter(const QString &formula);
+    void UpdateNodePassmarkLength(const QString &formula);
 
     void InitFancyTabBar();
     void InitMainPathTab();
@@ -255,6 +263,7 @@ private:
     void InitAllPinComboboxes();
 
     void SetFormulaSAWidth(const QString &formula);
+    void SetFormularPassmarkLength(const QString &formula);
 
     void SetGrainlineAngle(QString angleFormula);
     void SetGrainlineLength(QString lengthFormula);
@@ -285,7 +294,7 @@ inline bool DialogSeamAllowance::IsValid() const
 {
     return flagName && flagMainPathIsValid && flagFormula && flagFormulaBefore && flagFormulaAfter
             && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
-            && (flagPLFormulas || flagPPin);
+            && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H

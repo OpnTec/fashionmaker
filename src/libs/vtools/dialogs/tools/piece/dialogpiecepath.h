@@ -83,16 +83,19 @@ private slots:
     void EvalWidthBefore();
     void EvalWidthAfter();
     void EvalVisible();
+    void EvalPassmarkLength();
 
     void FXWidth();
     void FXWidthBefore();
     void FXWidthAfter();
     void FXVisible();
+    void FXPassmarkLength();
 
     void DeployWidthFormulaTextEdit();
     void DeployWidthBeforeFormulaTextEdit();
     void DeployWidthAfterFormulaTextEdit();
     void DeployVisibleFormulaTextEdit();
+    void DeployPassmarkLength();
 
     void SetMoveControls();
 
@@ -106,15 +109,18 @@ private:
     QTimer *m_timerWidthBefore;
     QTimer *m_timerWidthAfter;
     QTimer *m_timerVisible;
+    QTimer *m_timerPassmarkLength;
 
     int m_formulaBaseWidth;
     int m_formulaBaseWidthBefore;
     int m_formulaBaseWidthAfter;
     int m_formulaBaseVisible;
+    int m_formulaBasePassmarkLength{0};
 
     bool m_flagFormulaBefore;
     bool m_flagFormulaAfter;
     bool m_flagFormulaVisible;
+    bool m_flagFormulaPassmarkLength{true};
     bool m_flagName;
     bool m_flagError;
     bool m_flagFormula;
@@ -152,12 +158,18 @@ private:
 
     void UpdateNodeSABefore(const QString &formula);
     void UpdateNodeSAAfter(const QString &formula);
+    void UpdateNodePassmarkLength(const QString &formula);
+
+    void EnabledManualPassmarkLength();
 
     QString GetFormulaSAWidthBefore() const;
     QString GetFormulaSAWidthAfter() const;
 
     QString GetFormulaVisible() const;
     void    SetFormulaVisible(const QString &formula);
+
+    QString GetFormulaPassmarkLength() const;
+    void    SetFormulaPassmarkLength(const QString &formula);
 
     bool IsShowNotch() const;
 
@@ -168,7 +180,7 @@ private:
 inline bool DialogPiecePath::IsValid() const
 {
     return m_flagName && m_flagError && m_flagFormula && m_flagFormulaBefore && m_flagFormulaAfter
-            && m_flagFormulaVisible;
+            && m_flagFormulaVisible && m_flagFormulaPassmarkLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

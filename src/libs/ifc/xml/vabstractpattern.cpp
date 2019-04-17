@@ -130,6 +130,8 @@ const QString VAbstractPattern::AttrIncludeAs         = QStringLiteral("includeA
 const QString VAbstractPattern::AttrRotation          = QStringLiteral("rotation");
 const QString VAbstractPattern::AttrNumber            = QStringLiteral("number");
 const QString VAbstractPattern::AttrCheckUniqueness   = QStringLiteral("checkUniqueness");
+const QString VAbstractPattern::AttrManualPassmarkLength = QStringLiteral("manualPassmarkLength");
+const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmarkLength");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -764,6 +766,10 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
 
     const bool showSecond = VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrNodeShowSecondPassmark,
                                                           trueStr);
+    const bool manualPassmarkLength =
+            VDomDocument::GetParametrBool(domElement, VAbstractPattern::AttrManualPassmarkLength, falseStr);
+    const QString passmarkLength =
+            VDomDocument::GetParametrEmptyString(domElement, VAbstractPattern::AttrPassmarkLength);
 
     const QString t = VDomDocument::GetParametrString(domElement, AttrType, VAbstractPattern::NodePoint);
     Tool tool;
@@ -808,6 +814,8 @@ VPieceNode VAbstractPattern::ParseSANode(const QDomElement &domElement)
     node.SetPassmark(passmark);
     node.SetPassmarkLineType(passmarkLine);
     node.SetPassmarkAngleType(passmarkAngle);
+    node.SetManualPassmarkLength(manualPassmarkLength);
+    node.SetFormulaPassmarkLength(passmarkLength);
 
     return node;
 }

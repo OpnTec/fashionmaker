@@ -1571,9 +1571,16 @@ qreal VSAPoint::MaxLocalSA(qreal width) const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSAPoint::PassmarkLength(qreal width) const
 {
-    qreal passmarkLength = MaxLocalSA(width) * passmarkFactor;
-    passmarkLength = qMin(passmarkLength, maxPassmarkLength);
-    return passmarkLength;
+    if (not m_manualPassmarkLength)
+    {
+        qreal passmarkLength = MaxLocalSA(width) * passmarkFactor;
+        passmarkLength = qMin(passmarkLength, maxPassmarkLength);
+        return passmarkLength;
+    }
+    else
+    {
+        return m_passmarkLength;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

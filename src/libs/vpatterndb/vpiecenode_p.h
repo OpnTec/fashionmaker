@@ -89,11 +89,13 @@ public:
           m_isMainPathNode(node.m_isMainPathNode),
           m_formulaWidthBefore(node.m_formulaWidthBefore),
           m_formulaWidthAfter(node.m_formulaWidthAfter),
+          m_formulaPassmarkLength(node.m_formulaPassmarkLength),
           m_angleType(node.m_angleType),
           m_passmarkLineType(node.m_passmarkLineType),
           m_passmarkAngleType(node.m_passmarkAngleType),
           m_isShowSecondPassmark(node.m_isShowSecondPassmark),
-          m_checkUniqueness(node.m_checkUniqueness)
+          m_checkUniqueness(node.m_checkUniqueness),
+          m_manualPassmarkLength(node.m_manualPassmarkLength)
     {}
 
     ~VPieceNodeData() Q_DECL_EQ_DEFAULT;
@@ -122,6 +124,7 @@ public:
 
     QString m_formulaWidthBefore;
     QString m_formulaWidthAfter;
+    QString m_formulaPassmarkLength{};
 
     PieceNodeAngle m_angleType;
 
@@ -134,6 +137,8 @@ public:
      * By default the check enabled. Disable it only if in a path cannot be used just one point. For example if
      * gradation change a piece shape and the seond point should be remaind.*/
     bool m_checkUniqueness;
+
+    bool m_manualPassmarkLength{false};
 
 private:
     VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
