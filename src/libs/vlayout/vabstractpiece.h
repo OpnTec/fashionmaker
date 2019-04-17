@@ -71,10 +71,10 @@ public:
                      void           SetAngleType(PieceNodeAngle value);
 
     Q_DECL_CONSTEXPR bool IsManualPasskmarkLength() const;
-    Q_DECL_CONSTEXPR void SetManualPasskmarkLength(bool value);
+    Q_DECL_RELAXED_CONSTEXPR void SetManualPasskmarkLength(bool value);
 
     Q_DECL_CONSTEXPR qreal GetPasskmarkLength() const;
-    Q_DECL_CONSTEXPR void  SetPasskmarkLength(qreal value);
+    Q_DECL_RELAXED_CONSTEXPR void  SetPasskmarkLength(qreal value);
 
     qreal MaxLocalSA(qreal width) const;
     qreal PassmarkLength(qreal width) const;
@@ -150,7 +150,7 @@ Q_DECL_CONSTEXPR inline bool VSAPoint::IsManualPasskmarkLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline void VSAPoint::SetManualPasskmarkLength(bool value)
+Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetManualPasskmarkLength(bool value)
 {
     m_manualPassmarkLength = value;
 }
@@ -162,7 +162,7 @@ Q_DECL_CONSTEXPR inline qreal VSAPoint::GetPasskmarkLength() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline void VSAPoint::SetPasskmarkLength(qreal value)
+Q_DECL_RELAXED_CONSTEXPR inline void VSAPoint::SetPasskmarkLength(qreal value)
 {
     m_passmarkLength = value;
 }
