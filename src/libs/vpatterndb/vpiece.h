@@ -184,7 +184,7 @@ private:
     QVector<QLineF> CreatePassmark(const QVector<VPieceNode> &path, int previousIndex, int passmarkIndex, int nextIndex,
                                    const VContainer *data) const;
 
-    static QVector<QLineF> BuiltInSAPassmark(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &mainPath);
+    QVector<QLineF> BuiltInSAPassmark(const VPiecePassmarkData &passmarkData, const QVector<QPointF> &mainPath) const;
     static QVector<QLineF> PassmarkBisector(PassmarkStatus seamPassmarkType, const VPiecePassmarkData &passmarkData,
                                             const QPointF &seamPassmarkSAPoint, const QVector<QPointF>& seamAllowance);
 
