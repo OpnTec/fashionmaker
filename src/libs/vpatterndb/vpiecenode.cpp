@@ -129,6 +129,7 @@ qreal VPieceNode::GetSABefore(const VContainer *data) const
     }
 
     VFormula formula(d->m_formulaWidthBefore, data);
+    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -158,6 +159,7 @@ qreal VPieceNode::GetSABefore(const VContainer *data, Unit unit) const
     }
 
     VFormula formula(d->m_formulaWidthBefore, data);
+    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -208,6 +210,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data) const
     }
 
     VFormula formula(d->m_formulaWidthAfter, data);
+    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
@@ -238,6 +241,7 @@ qreal VPieceNode::GetSAAfter(const VContainer *data, Unit unit) const
     }
 
     VFormula formula(d->m_formulaWidthAfter, data);
+    formula.setCheckZero(false);
     formula.Eval();
 
     if (formula.error())
