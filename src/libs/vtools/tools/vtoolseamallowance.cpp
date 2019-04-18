@@ -271,15 +271,16 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
     doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
     doc->SetAttribute(domElement, AttrMx, qApp->fromPixel(piece.GetMx()));
     doc->SetAttribute(domElement, AttrMy, qApp->fromPixel(piece.GetMy()));
-    doc->SetAttribute(domElement, AttrInLayout, piece.IsInLayout());
+    doc->SetAttributeOrRemoveIf(domElement, AttrInLayout, piece.IsInLayout(), piece.IsInLayout());
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
-    doc->SetAttribute(domElement, AttrSeamAllowance, piece.IsSeamAllowance());
+    doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowance, piece.IsSeamAllowance(),
+                                not piece.IsSeamAllowance());
     doc->SetAttribute(domElement, AttrHideMainPath, piece.IsHideMainPath());
     doc->SetAttributeOrRemoveIf(domElement, AttrSeamAllowanceBuiltIn, piece.IsSeamAllowanceBuiltIn(),
                                 not piece.IsSeamAllowanceBuiltIn());
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
-    doc->SetAttribute(domElement, AttrUnited, piece.IsUnited());
+    doc->SetAttributeOrRemoveIf(domElement, AttrUnited, piece.IsUnited(), not piece.IsUnited());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

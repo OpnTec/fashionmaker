@@ -3984,7 +3984,19 @@ void VPattern::SetIncrementFormula(const QString &name, const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetIncrementDescription(const QString &name, const QString &text)
 {
-    SetIncrementAttribute(name, AttrDescription, text);
+    if (not text.isEmpty())
+    {
+        SetIncrementAttribute(name, AttrDescription, text);
+    }
+    else
+    {
+        QDomElement node = FindIncrement(name);
+        if (not node.isNull())
+        {
+            node.removeAttribute(AttrDescription);
+            emit patternChanged(false);
+        }
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

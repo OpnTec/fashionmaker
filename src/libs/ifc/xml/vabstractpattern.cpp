@@ -2285,7 +2285,7 @@ void VAbstractPattern::SetFMeasurements(QDomElement &element, const QVector<VFin
 
             SetAttribute(tagFMeasurement, AttrName, m.name);
             SetAttribute(tagFMeasurement, AttrFormula, m.formula);
-            SetAttribute(tagFMeasurement, AttrDescription, m.description);
+            SetAttributeOrRemoveIf(tagFMeasurement, AttrDescription, m.description, m.description.isEmpty());
 
             element.appendChild(tagFMeasurement);
         }
