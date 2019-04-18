@@ -2031,6 +2031,7 @@ QVector<VFormulaField> VAbstractPattern::ListNodesExpressions(const QDomElement 
         {
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSABefore);
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSAAfter);
+            ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrPassmarkLength);
         }
     }
     return expressions;
