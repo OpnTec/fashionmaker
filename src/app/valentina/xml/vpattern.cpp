@@ -3164,6 +3164,7 @@ void VPattern::ParseToolArcWithLength(VMainGraphicsScene *scene, QDomElement &do
         const QString lengthFix = initData.length;//need for saving fixed length;
         initData.color = GetParametrString(domElement, AttrColor, ColorBlack);
         initData.penStyle = GetParametrString(domElement, AttrPenStyle, TypeLineLine);
+        initData.approximationScale = GetParametrDouble(domElement, AttrAScale, QChar('0'));
 
         VToolArcWithLength::Create(initData);
         //Rewrite attribute formula. Need for situation when we have wrong formula.

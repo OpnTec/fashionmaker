@@ -128,6 +128,7 @@ VToolArcWithLength *VToolArcWithLength::Create(VToolArcWithLengthInitData &initD
     VArc *arc = new VArc(calcLength, initData.length, c, calcRadius, initData.radius, calcF1, initData.f1);
     arc->SetColor(initData.color);
     arc->SetPenStyle(initData.penStyle);
+    arc->SetApproximationScale(initData.approximationScale);
 
     if (initData.typeCreation == Source::FromGui)
     {
