@@ -31,6 +31,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vgeometry/vpointf.h"
 
 #include <QDialog>
 #include <QLabel>
@@ -43,12 +45,79 @@
 #include <QLineEdit>
 #include <QRegularExpression>
 #include <qnumeric.h>
+#include <QListWidget>
+#include <QBuffer>
 
 const QColor errorColor = Qt::red;
 
 namespace
 {
-    const int dialogMaxFormulaHeight = 80;
+const int dialogMaxFormulaHeight = 80;
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data)
+{
+    if (firstNode.GetTypeTool() == Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
+            && secondNode.GetTypeTool() == Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    {
+        // don't ignore the same point twice
+        if (firstNode.GetId() == secondNode.GetId())
+        {
+            return true;
+        }
+
+        // But ignore the same coordinate if a user wants
+        if (not firstNode.IsCheckUniqueness() || not secondNode.IsCheckUniqueness())
+        {
+            return false;
+        }
+
+        try
+        {
+            const QSharedPointer<VPointF> firstPoint = data->GeometricObject<VPointF>(firstNode.GetId());
+            const QSharedPointer<VPointF> secondPoint = data->GeometricObject<VPointF>(secondNode.GetId());
+
+            return firstPoint->toQPointF() == secondPoint->toQPointF();
+        }
+        catch(const VExceptionBadId &)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode)
+{
+    if (firstNode.GetTypeTool() != Tool::NodePoint && not (firstNode.GetId() == NULL_ID)
+            && secondNode.GetTypeTool() != Tool::NodePoint && not (secondNode.GetId() == NULL_ID))
+    {
+        // don't ignore the same curve twice
+        if (firstNode.GetId() == secondNode.GetId())
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VPieceNode RowNode(QListWidget *listWidget, int i)
+{
+    SCASSERT(listWidget != nullptr);
+
+    if (i < 0 || i >= listWidget->count())
+    {
+        return VPieceNode();
+    }
+
+    const QListWidgetItem *rowItem = listWidget->item(i);
+    SCASSERT(rowItem != nullptr);
+    return qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -237,4 +306,159 @@ void CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoin
         flag = true;
         ChangeColor(labelEditNamePoint, OkColor(dialog));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int FindNotExcludedNodeDown(QListWidget *listWidget, int candidate)
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            index = i;
+        }
+
+        ++i;
+    }
+    while (rowNode.IsExcluded() && i < listWidget->count());
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int FindNotExcludedNodeUp(QListWidget *listWidget, int candidate)
+{
+    SCASSERT(listWidget != nullptr);
+
+    int index = -1;
+    if (candidate < 0 || candidate >= listWidget->count())
+    {
+        return index;
+    }
+
+    int i = candidate;
+    VPieceNode rowNode;
+    do
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+
+        if (not rowNode.IsExcluded())
+        {
+            index = i;
+        }
+
+        --i;
+    }
+    while (rowNode.IsExcluded() && i > -1);
+
+    return index;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FirstPointEqualLast(QListWidget *listWidget, const VContainer *data)
+{
+    SCASSERT(listWidget != nullptr);
+    if (listWidget->count() > 1)
+    {
+        const VPieceNode topNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, 0));
+        const VPieceNode bottomNode = RowNode(listWidget, FindNotExcludedNodeUp(listWidget, listWidget->count()-1));
+
+        return DoublePoint(topNode, bottomNode, data);
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoublePoints(QListWidget *listWidget, const VContainer *data)
+{
+    SCASSERT(listWidget != nullptr);
+    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    {
+        const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
+        const VPieceNode firstNode = RowNode(listWidget, firstIndex);
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+
+        if (DoublePoint(firstNode, secondNode, data))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DoubleCurves(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    for (int i=0, sz = listWidget->count()-1; i<sz; ++i)
+    {
+        const int firstIndex = FindNotExcludedNodeDown(listWidget, i);
+        const VPieceNode firstNode = RowNode(listWidget, firstIndex);
+        const VPieceNode secondNode = RowNode(listWidget, FindNotExcludedNodeDown(listWidget, firstIndex+1));
+
+        if (DoubleCurve(firstNode, secondNode))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool EachPointLabelIsUnique(QListWidget *listWidget)
+{
+    SCASSERT(listWidget != nullptr);
+    QSet<quint32> pointLabels;
+    int countPoints = 0;
+    for (int i=0; i < listWidget->count(); ++i)
+    {
+        const QListWidgetItem *rowItem = listWidget->item(i);
+        SCASSERT(rowItem != nullptr);
+        const VPieceNode rowNode = qvariant_cast<VPieceNode>(rowItem->data(Qt::UserRole));
+        if (rowNode.GetTypeTool() == Tool::NodePoint)
+        {
+            ++countPoints;
+            pointLabels.insert(rowNode.GetId());
+        }
+    }
+
+    return countPoints == pointLabels.size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogWarningIcon()
+{
+    const QIcon icon = QIcon::fromTheme("dialog-warning",
+                                  QIcon(":/icons/win.icon.theme/16x16/status/dialog-warning.png"));
+
+    const QPixmap pixmap = icon.pixmap(QSize(16, 16));
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    pixmap.save(&buffer, "PNG");
+    return QStringLiteral("<img src=\"data:image/png;base64,") + byteArray.toBase64() + QStringLiteral("\"/> ");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QFont NodeFont(QFont font, bool nodeExcluded)
+{
+    font.setPointSize(12);
+    font.setWeight(QFont::Bold);
+    font.setStrikeOut(nodeExcluded);
+    return font;
 }

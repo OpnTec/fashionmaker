@@ -209,16 +209,6 @@ protected:
      */
     virtual void     SaveData() {}
     quint32          DNumber(const QString &baseName) const;
-
-    static int       FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
-    static int       FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
-    static bool      FirstPointEqualLast(QListWidget *listWidget, const VContainer *data);
-    static bool      DoublePoints(QListWidget *listWidget, const VContainer *data);
-    static bool      DoubleCurves(QListWidget *listWidget);
-    static bool      EachPointLabelIsUnique(QListWidget *listWidget);
-    static QString   DialogWarningIcon();
-    static QFont     NodeFont(QFont font, bool nodeExcluded = false);
-
     QString          GetNodeName(const VPieceNode &node, bool showDetails = false) const;
     void             NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true);
 

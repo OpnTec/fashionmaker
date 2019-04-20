@@ -44,6 +44,8 @@ class QWidget;
 class QColor;
 class QLineEdit;
 class VContainer;
+class QListWidget;
+class VPieceNode;
 
 constexpr int formulaTimerTimeout = 300;
 
@@ -65,6 +67,7 @@ struct FormulaData
 
 QT_WARNING_POP
 
+VPieceNode RowNode(QListWidget *listWidget, int i);
 void   MoveCursorToEnd(QPlainTextEdit *plainTextEdit);
 void   DeployFormula(QDialog *dialog, QPlainTextEdit *formula, QPushButton *buttonGrowLength, int formulaBaseHeight);
 bool   FilterObject(QObject *object, QEvent *event);
@@ -73,5 +76,13 @@ void   ChangeColor(QWidget *widget, const QColor &color);
 QColor OkColor(QWidget *widget);
 void   CheckPointLabel(QDialog *dialog, QLineEdit* edit, QLabel *labelEditNamePoint, const QString &pointName,
                        const VContainer *data, bool &flag);
+int    FindNotExcludedNodeDown(QListWidget *listWidget, int candidate);
+int    FindNotExcludedNodeUp(QListWidget *listWidget, int candidate);
+bool   FirstPointEqualLast(QListWidget *listWidget, const VContainer *data);
+bool   DoublePoints(QListWidget *listWidget, const VContainer *data);
+bool   DoubleCurves(QListWidget *listWidget);
+bool   EachPointLabelIsUnique(QListWidget *listWidget);
+QString DialogWarningIcon();
+QFont  NodeFont(QFont font, bool nodeExcluded = false);
 
 #endif // DIALOGTOOLBOX_H
