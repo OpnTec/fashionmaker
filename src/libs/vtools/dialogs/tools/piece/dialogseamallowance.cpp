@@ -2563,7 +2563,7 @@ bool DialogSeamAllowance::MainPathIsValid() const
             uiTabPaths->helpLabel->setText(url);
             valid = false;
         }
-        else if (DoubleCurves(uiTabPaths->listWidgetMainPath, data))
+        else if (DoubleCurves(uiTabPaths->listWidgetMainPath))
         {
             url += tr("The same curve repeats twice!");
             uiTabPaths->helpLabel->setText(url);

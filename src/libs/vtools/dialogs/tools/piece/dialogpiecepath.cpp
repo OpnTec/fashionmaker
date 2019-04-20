@@ -1598,7 +1598,7 @@ bool DialogPiecePath::PathIsValid() const
             ui->helpLabel->setText(url);
             return false;
         }
-        else if (DoubleCurves(ui->listWidget, data))
+        else if (DoubleCurves(ui->listWidget))
         {
             url += tr("The same curve repeats twice!");
             ui->helpLabel->setText(url);
