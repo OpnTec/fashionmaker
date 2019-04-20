@@ -317,14 +317,14 @@ QString NameRegExp()
             }
         }
 
-        negativeSigns.replace('-', "\\-");
+        negativeSigns.replace('-', QLatin1String("\\-"));
         groupSeparators.remove('\'');
 
         //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
         // \p{Nd} - \p{Decimal_Digit_Number}
         // \p{Zs} - \p{Space_Separator}
-        regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;'\"]){1,1}"
-                        "([^\\p{Zs}*/&|!<>^\\()%1%2%3%4=?:;\"]){0,}$")
+        regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                        "([^\\p{Zs}*/&|!<>^\n\\()%1%2%3%4=?:;\"]){0,}$")
                 .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
     }
 

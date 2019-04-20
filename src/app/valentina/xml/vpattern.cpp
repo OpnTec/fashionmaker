@@ -3882,7 +3882,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
             {
                 if (domElement.tagName() == TagIncrement)
                 {
-                    const QString name = GetParametrString(domElement, AttrName, QString());
+                    const QString name = GetParametrString(domElement, AttrName, QString()).simplified();
                     const QString desc = GetParametrEmptyString(domElement, AttrDescription);
                     const IncrementType type = StringToIncrementType(GetParametrString(domElement, AttrType,
                                                                                        strTypeIncrement));

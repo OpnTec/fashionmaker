@@ -39,6 +39,7 @@
 - [#963] Bug in tool Point intersect curve and axis.
 - [#964] Assign operator crashes math parser.
 - [#966] Unable to control Approximation scale for arc with length.
+- [#967] Variable must not include new line character.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

@@ -264,7 +264,7 @@ void VMeasurements::ReadMeasurements(qreal height, qreal size) const
     {
         const QDomElement dom = list.at(i).toElement();
 
-        const QString name = GetParametrString(dom, AttrName);
+        const QString name = GetParametrString(dom, AttrName).simplified();
         const QString description = GetParametrEmptyString(dom, AttrDescription);
         const QString fullName = GetParametrEmptyString(dom, AttrFullName);
 
