@@ -15,6 +15,7 @@
 - [#916] Improve layout generation. 
 - [#965] Control passmark length with formula.
 - New placelabel shape Circle.
+- Two new passmark types: U and Box.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

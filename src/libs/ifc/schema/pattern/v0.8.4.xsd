@@ -1051,6 +1051,8 @@
       <xs:enumeration value="tMark"/>
       <xs:enumeration value="vMark"/>
       <xs:enumeration value="vMark2"/>
+      <xs:enumeration value="uMark"/>
+      <xs:enumeration value="boxMark"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="passmarkAngleType">

@@ -477,6 +477,8 @@ const QString strThree = QStringLiteral("three");
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strTMark, (QLatin1String("tMark")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark, (QLatin1String("vMark")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, strVMark2, (QLatin1String("vMark2")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strUMark, (QLatin1String("uMark")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, strBoxMark, (QLatin1String("boxMark")))
 
 //---------------------------------------------------------------------------------------------------------------------
 QString PassmarkLineTypeToString(PassmarkLineType type)
@@ -495,6 +497,10 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
             return *strVMark;
         case PassmarkLineType::VMark2:
             return *strVMark2;
+        case PassmarkLineType::UMark:
+            return *strUMark;
+        case PassmarkLineType::BoxMark:
+            return *strBoxMark;
         default:
             break;
     }
@@ -505,7 +511,7 @@ QString PassmarkLineTypeToString(PassmarkLineType type)
 //---------------------------------------------------------------------------------------------------------------------
 PassmarkLineType StringToPassmarkLineType(const QString &value)
 {
-    const QStringList values{strOne, strTwo, strThree, *strTMark, *strVMark, *strVMark2};
+    const QStringList values{strOne, strTwo, strThree, *strTMark, *strVMark, *strVMark2, *strUMark, *strBoxMark};
 
     switch(values.indexOf(value))
     {
@@ -521,6 +527,10 @@ PassmarkLineType StringToPassmarkLineType(const QString &value)
             return PassmarkLineType::VMark;
         case 5: // strVMark2
             return PassmarkLineType::VMark2;
+        case 6: // strUMark
+            return PassmarkLineType::UMark;
+        case 7: // strBoxMark
+            return PassmarkLineType::BoxMark;
         default:
             break;
     }

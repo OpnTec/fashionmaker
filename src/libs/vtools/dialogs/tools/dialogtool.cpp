@@ -433,6 +433,12 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showDetails) const
                 case PassmarkLineType::VMark2:
                     name += QStringLiteral("⊽");
                     break;
+                case PassmarkLineType::UMark:
+                    name += QStringLiteral("⋃");
+                    break;
+                case PassmarkLineType::BoxMark:
+                    name += QStringLiteral("⎕");
+                    break;
                 default:
                     break;
             }

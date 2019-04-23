@@ -31,6 +31,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/vplacelabelitem.h"
+#include "../vgeometry/varc.h"
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
@@ -196,6 +197,20 @@ QVector<QLineF> CreateVMarkPassmark(const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QLineF FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance)
+{
+    QLineF testLine = line;
+    testLine.setLength(testLine.length()*10);
+    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
+    if (not intersections.isEmpty())
+    {
+        return QLineF(line.p1(), intersections.last());
+    }
+
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
 {
     QLineF l1 = QLineF(line.p2(), line.p1());
@@ -204,23 +219,141 @@ QVector<QLineF> CreateVMark2Passmark(const QLineF &line, const QVector<QPointF> 
     QLineF l2 = QLineF(line.p2(), line.p1());
     l2.setAngle(l2.angle() - 35);
 
-    auto FindIntersection = [seamAllowance](const QLineF &line)
-    {
-        QLineF testLine = line;
-        testLine.setLength(testLine.length()*10);
-        QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
-        if (not intersections.isEmpty())
-        {
-            return QLineF(line.p1(), intersections.last());
-        }
-
-        return line;
-    };
-
     QVector<QLineF> lines;
-    lines.append(FindIntersection(l1));
-    lines.append(FindIntersection(l2));
+    lines.append(FindIntersection(l1, seamAllowance));
+    lines.append(FindIntersection(l2, seamAllowance));
     return lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> PointsToSegments(const QVector<QPointF> &points)
+{
+    QVector<QLineF> lines;
+    if (points.size() >= 2)
+    {
+        for (int i=0; i < points.size()-1; ++i)
+        {
+            QLineF segment = QLineF(points.at(i), points.at(i+1));
+            if (segment.length() > 0)
+            {
+                lines.append(segment);
+            }
+        }
+    }
+    return lines;
+}
+
+const qreal passmarkRadiusFactor = 0.45;
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> CreateUMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+{
+    const qreal radius = line.length() * passmarkRadiusFactor;
+
+    QPointF l1p1;
+    {
+        QLineF line1 = line;
+        line1.setAngle(line1.angle() + 90);
+        line1.setLength(radius);
+        l1p1 = line1.p2();
+    }
+
+    QPointF l2p1;
+    {
+        QLineF line2 = line;
+        line2.setAngle(line2.angle() - 90);
+        line2.setLength(radius);
+        l2p1 = line2.p2();
+    }
+
+    QPointF l1p2;
+    {
+        QLineF line1 = QLineF(line.p2(), line.p1());
+        line1.setAngle(line1.angle() - 90);
+        line1.setLength(radius);
+        l1p2 = line1.p2();
+    }
+
+    QPointF l2p2;
+    {
+        QLineF line2 = QLineF(line.p2(), line.p1());
+        line2.setAngle(line2.angle() + 90);
+        line2.setLength(radius);
+        l2p2 = line2.p2();
+    }
+
+    QLineF axis = QLineF(line.p2(), line.p1());
+    axis.setLength(radius);
+
+    QVector<QPointF> points;
+
+    QLineF seg = FindIntersection(QLineF(l2p2, l2p1), seamAllowance);
+    seg = QLineF(seg.p2(), seg.p1());
+    seg.setLength(seg.length() - radius);
+    points.append(seg.p1());
+    points.append(seg.p2());
+
+    VArc arc(VPointF(axis.p2()), radius, QLineF(l1p2, l2p2).angle(), QLineF(l1p2, l2p2).angle()+180);
+    arc.SetApproximationScale(10);
+    points += arc.GetPoints();
+
+    seg = FindIntersection(QLineF(l1p2, l1p1), seamAllowance);
+    seg = QLineF(seg.p2(), seg.p1());
+    seg.setLength(seg.length() - radius);
+    points.append(seg.p2());
+    points.append(seg.p1());
+
+    return PointsToSegments(points);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> CreateBoxMarkPassmark(const QLineF &line, const QVector<QPointF> &seamAllowance)
+{
+    const qreal radius = line.length() * passmarkRadiusFactor;
+
+    QPointF l1p1;
+    {
+        QLineF line1 = line;
+        line1.setAngle(line1.angle() + 90);
+        line1.setLength(radius);
+        l1p1 = line1.p2();
+    }
+
+    QPointF l2p1;
+    {
+        QLineF line2 = line;
+        line2.setAngle(line2.angle() - 90);
+        line2.setLength(radius);
+        l2p1 = line2.p2();
+    }
+
+    QPointF l1p2;
+    {
+        QLineF line1 = QLineF(line.p2(), line.p1());
+        line1.setAngle(line1.angle() - 90);
+        line1.setLength(radius);
+        l1p2 = line1.p2();
+    }
+
+    QPointF l2p2;
+    {
+        QLineF line2 = QLineF(line.p2(), line.p1());
+        line2.setAngle(line2.angle() + 90);
+        line2.setLength(radius);
+        l2p2 = line2.p2();
+    }
+
+    QVector<QPointF> points;
+
+    QLineF seg = FindIntersection(QLineF(l1p2, l1p1), seamAllowance);
+    points.append(seg.p2());
+    points.append(seg.p1());
+
+    seg = FindIntersection(QLineF(l2p2, l2p1), seamAllowance);
+    points.append(seg.p1());
+    points.append(seg.p2());
+
+    return PointsToSegments(points);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -254,6 +387,12 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
             case PassmarkLineType::VMark2:
                 passmarksLines += CreateVMark2Passmark(line, seamAllowance);
                 break;
+            case PassmarkLineType::UMark:
+                passmarksLines += CreateUMarkPassmark(line, seamAllowance);
+                break;
+            case PassmarkLineType::BoxMark:
+                passmarksLines += CreateBoxMarkPassmark(line, seamAllowance);
+                break;
             case PassmarkLineType::OneLine:
             default:
                 passmarksLines.append(line);
@@ -272,6 +411,8 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
             case PassmarkLineType::ThreeLines:
             case PassmarkLineType::VMark:
             case PassmarkLineType::VMark2:
+            case PassmarkLineType::UMark:
+            case PassmarkLineType::BoxMark:
             default:
                 passmarksLines.append(line);
                 break;

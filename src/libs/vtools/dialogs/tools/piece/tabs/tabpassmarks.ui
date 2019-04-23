@@ -367,6 +367,26 @@
               </attribute>
              </widget>
             </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonUMark">
+              <property name="text">
+               <string>U mark</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroupLineType</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QRadioButton" name="radioButtonBoxMark">
+              <property name="text">
+               <string>Box mark</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">buttonGroupLineType</string>
+              </attribute>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>

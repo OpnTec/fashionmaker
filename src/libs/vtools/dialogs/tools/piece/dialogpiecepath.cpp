@@ -584,6 +584,12 @@ void DialogPiecePath::PassmarkChanged(int index)
                 case PassmarkLineType::VMark2:
                     ui->radioButtonVMark2->setChecked(true);
                     break;
+                case PassmarkLineType::UMark:
+                    ui->radioButtonUMark->setChecked(true);
+                    break;
+                case PassmarkLineType::BoxMark:
+                    ui->radioButtonBoxMark->setChecked(true);
+                    break;
                 default:
                     break;
             }
@@ -691,6 +697,14 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
             else if (id == ui->buttonGroupMarkType->id(ui->radioButtonVMark2))
             {
                 lineType = PassmarkLineType::VMark2;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonUMark))
+            {
+                lineType = PassmarkLineType::UMark;
+            }
+            else if (id == ui->buttonGroupMarkType->id(ui->radioButtonBoxMark))
+            {
+                lineType = PassmarkLineType::BoxMark;
             }
 
             rowNode.SetPassmarkLineType(lineType);

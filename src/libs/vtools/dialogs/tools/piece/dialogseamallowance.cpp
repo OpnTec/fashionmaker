@@ -1088,6 +1088,12 @@ void DialogSeamAllowance::PassmarkChanged(int index)
                 case PassmarkLineType::VMark2:
                     uiTabPassmarks->radioButtonVMark2->setChecked(true);
                     break;
+                case PassmarkLineType::UMark:
+                    uiTabPassmarks->radioButtonUMark->setChecked(true);
+                    break;
+                case PassmarkLineType::BoxMark:
+                    uiTabPassmarks->radioButtonBoxMark->setChecked(true);
+                    break;
                 default:
                     break;
             }
@@ -1480,6 +1486,14 @@ void DialogSeamAllowance::PassmarkLineTypeChanged(int id)
             else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonVMark2))
             {
                 lineType = PassmarkLineType::VMark2;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonUMark))
+            {
+                lineType = PassmarkLineType::UMark;
+            }
+            else if (id == uiTabPassmarks->buttonGroupLineType->id(uiTabPassmarks->radioButtonBoxMark))
+            {
+                lineType = PassmarkLineType::BoxMark;
             }
 
             rowNode.SetPassmarkLineType(lineType);
