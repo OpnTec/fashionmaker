@@ -341,6 +341,20 @@ PlaceLabelImg VPlaceLabelItem::LabelShape() const
         return PlaceLabelImg({t.map(shape1), t.map(shape2), t.map(shape3)});
     };
 
+    auto CircleShape = [t, this]()
+    {
+        const qreal radius = qMin(d->wValue/2.0, d->hValue/2.0);
+        VArc arc(*this, radius, 0, 360);
+        arc.SetApproximationScale(10);
+        QPolygonF circle(arc.GetPoints());
+        if (not circle.isClosed() && not circle.isEmpty())
+        {
+            circle << circle.first();
+        }
+
+        return PlaceLabelImg({t.map(circle)});
+    };
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
         switch(d->type)
@@ -363,6 +377,8 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 return HshapedShape();
             case PlaceLabelType::Button:
                 return ButtonShape();
+            case PlaceLabelType::Circle:
+                return CircleShape();
         }
     QT_WARNING_POP
 

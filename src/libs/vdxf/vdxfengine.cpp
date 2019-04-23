@@ -700,7 +700,8 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
     const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
     for(auto &label : labels)
     {
-        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button)
+        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
+                && label.type != PlaceLabelType::Circle)
         {
             for(auto &p : qAsConst(label.shape))
             {
@@ -793,7 +794,8 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 
     for(auto &label : labels)
     {
-        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button)
+        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
+                || label.type == PlaceLabelType::Circle)
         {
             DRW_Point *point = new DRW_Point();
             point->basePoint = DRW_Coord(FromPixel(label.center.x(), varInsunits),

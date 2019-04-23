@@ -57,7 +57,8 @@ enum class PlaceLabelType :  unsigned char
     Corner = 5,
     Triangle = 6,
     Hshaped = 7,
-    Button = 8
+    Button = 8,
+    Circle = 9
 };
 
 typedef QVector<QPolygonF> PlaceLabelImg;

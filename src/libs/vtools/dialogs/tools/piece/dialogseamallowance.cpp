@@ -856,6 +856,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     QAction *actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
     QAction *actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
     QAction *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
+    QAction *actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
     menu->addSeparator();
     QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
 
@@ -916,6 +917,10 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     else if (selectedAction == actionButton)
     {
         SaveType(PlaceLabelType::Button);
+    }
+    else if (selectedAction == actionCircle)
+    {
+        SaveType(PlaceLabelType::Circle);
     }
 }
 

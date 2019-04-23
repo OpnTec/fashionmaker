@@ -499,6 +499,7 @@ void DialogPlaceLabel::FillPlaceLabelTypes()
     ui->comboBoxLabelType->addItem(tr("Triangle"), static_cast<int>(PlaceLabelType::Triangle));
     ui->comboBoxLabelType->addItem(tr("H-shaped"), static_cast<int>(PlaceLabelType::Hshaped));
     ui->comboBoxLabelType->addItem(tr("Button"), static_cast<int>(PlaceLabelType::Button));
+    ui->comboBoxLabelType->addItem(tr("Circle"), static_cast<int>(PlaceLabelType::Circle));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

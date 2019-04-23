@@ -14,6 +14,7 @@
 - Extend Label language to support Czech alphabet.
 - [#916] Improve layout generation. 
 - [#965] Control passmark length with formula.
+- New placelabel shape Circle.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
