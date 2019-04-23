@@ -74,7 +74,21 @@ QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVecto
 const qreal passmarkGap = (1.5/*mm*/ / 25.4) * PrintDPI;
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateTwoPassmarkLines(const QLineF &line)
+QLineF FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance)
+{
+    QLineF testLine = line;
+    testLine.setLength(testLine.length()*10);
+    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
+    if (not intersections.isEmpty())
+    {
+        return QLineF(line.p1(), intersections.last());
+    }
+
+    return line;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QLineF> CreateTwoPassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance)
 {
     QPointF l1p1;
     {
@@ -109,13 +123,16 @@ QVector<QLineF> CreateTwoPassmarkLines(const QLineF &line)
     }
 
     QVector<QLineF> lines;
-    lines.append(QLineF(l1p1, l1p2));
-    lines.append(QLineF(l2p1, l2p2));
+    QLineF seg = FindIntersection(QLineF(l1p2, l1p1), seamAllowance);
+    lines.append(QLineF(seg.p2(), seg.p1()));
+
+    seg = FindIntersection(QLineF(l2p2, l2p1), seamAllowance);
+    lines.append(QLineF(seg.p2(), seg.p1()));
     return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreateThreePassmarkLines(const QLineF &line)
+QVector<QLineF> CreateThreePassmarkLines(const QLineF &line, const QVector<QPointF> &seamAllowance)
 {
     QPointF l1p1;
     {
@@ -150,9 +167,13 @@ QVector<QLineF> CreateThreePassmarkLines(const QLineF &line)
     }
 
     QVector<QLineF> lines;
-    lines.append(QLineF(l1p1, l1p2));
+    QLineF seg = FindIntersection(QLineF(l1p2, l1p1), seamAllowance);
+    lines.append(QLineF(seg.p2(), seg.p1()));
+
     lines.append(line);
-    lines.append(QLineF(l2p1, l2p2));
+
+    seg = FindIntersection(QLineF(l2p2, l2p1), seamAllowance);
+    lines.append(QLineF(seg.p2(), seg.p1()));
     return lines;
 }
 
@@ -194,20 +215,6 @@ QVector<QLineF> CreateVMarkPassmark(const QLineF &line)
     lines.append(l1);
     lines.append(l2);
     return lines;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QLineF FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance)
-{
-    QLineF testLine = line;
-    testLine.setLength(testLine.length()*10);
-    QVector<QPointF> intersections = VAbstractCurve::CurveIntersectLine(seamAllowance, testLine);
-    if (not intersections.isEmpty())
-    {
-        return QLineF(line.p1(), intersections.last());
-    }
-
-    return line;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -373,10 +380,10 @@ QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType
         switch (lineType)
         {
             case PassmarkLineType::TwoLines:
-                passmarksLines += CreateTwoPassmarkLines(line);
+                passmarksLines += CreateTwoPassmarkLines(line, seamAllowance);
                 break;
             case PassmarkLineType::ThreeLines:
-                passmarksLines += CreateThreePassmarkLines(line);
+                passmarksLines += CreateThreePassmarkLines(line, seamAllowance);
                 break;
             case PassmarkLineType::TMark:
                 passmarksLines += CreateTMarkPassmark(line);
