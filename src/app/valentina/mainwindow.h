@@ -106,7 +106,7 @@ protected:
     virtual void closeEvent(QCloseEvent *event) override;
     virtual void customEvent(QEvent * event) override;
     virtual void CleanLayout() override;
-    virtual void PrepareSceneList() override;
+    virtual void PrepareSceneList(PreviewQuatilty quality) override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
                                  const QChar &separator) final;
 private slots:

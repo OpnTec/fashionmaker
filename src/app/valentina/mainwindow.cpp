@@ -1544,11 +1544,13 @@ void MainWindow::CleanLayout()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::PrepareSceneList()
+void MainWindow::PrepareSceneList(PreviewQuatilty quality)
 {
+    ui->listWidget->clear();
     for (int i=1; i<=scenes.size(); ++i)
     {
-        QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1), QString::number(i));
+        QListWidgetItem *item = new QListWidgetItem(ScenePreview(i-1, ui->listWidget->iconSize(), quality),
+                                                    QString::number(i));
         ui->listWidget->addItem(item);
     }
 

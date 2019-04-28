@@ -66,6 +66,8 @@ struct DetailForLayout {
 
 QT_WARNING_POP
 
+enum class PreviewQuatilty : bool {Fast = true, Slow = false};
+
 class MainWindowsNoGUI : public VAbstractMainWindow
 {
     Q_OBJECT
@@ -131,8 +133,8 @@ protected:
 
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
-    virtual void PrepareSceneList()=0;
-    QIcon ScenePreview(int i) const;
+    virtual void PrepareSceneList(PreviewQuatilty quality)=0;
+    QIcon ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const;
     bool GenerateLayout(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
     QString FileName() const;

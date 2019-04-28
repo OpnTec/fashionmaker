@@ -322,7 +322,10 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                        //Uncomment to debug, shows global contour
             //            gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
             //            InsertGlobalContours(scenes, gcontours); // uncomment for debugging
-                        PrepareSceneList();
+                        if (VApplication::IsGUIMode())
+                        {
+                            PrepareSceneList(PreviewQuatilty::Fast);
+                        }
                         ignorePrinterFields = not lGenerator.IsUsePrinterFields();
                         margins = lGenerator.GetPrinterFields();
                         paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
@@ -377,6 +380,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
 
     if (VApplication::IsGUIMode())
     {
+        PrepareSceneList(PreviewQuatilty::Slow);
         progress->Finished();
     }
 
@@ -1005,36 +1009,48 @@ void MainWindowsNoGUI::InitTempLayoutScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QIcon MainWindowsNoGUI::ScenePreview(int i) const
+QIcon MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const
 {
     QImage image;
     QGraphicsRectItem *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i));
     if (paper)
     {
-        const QRectF r = paper->rect();
-        // Create the image with the exact size of the shrunk scene
-        image = QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())), QImage::Format_RGB32);
-
-        if (not image.isNull())
+        if (quality == PreviewQuatilty::Fast)
         {
+            image = QImage(iconSize, QImage::Format_RGB32);
             image.fill(Qt::white);
-            QPainter painter(&image);
-            painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
-            painter.setRenderHint(QPainter::Antialiasing, true);
-            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
-                                Qt::RoundJoin));
-            painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
-            painter.end();
         }
         else
         {
-            qWarning()<<"Cannot create image. Size too big";
+            const QRectF r = paper->rect();
+            // Create the image with the exact size of the shrunk scene
+            image = QImage(QSize(static_cast<qint32>(r.width()), static_cast<qint32>(r.height())),
+                           QImage::Format_RGB32);
+
+            if (not image.isNull())
+            {
+                image.fill(Qt::white);
+                QPainter painter(&image);
+                painter.setFont( QFont( QStringLiteral("Arial"), 8, QFont::Normal ) );
+                painter.setRenderHint(QPainter::Antialiasing, true);
+                painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
+                                    Qt::RoundJoin));
+                painter.setBrush ( QBrush ( Qt::NoBrush ) );
+                scenes.at(i)->render(&painter, r, r, Qt::IgnoreAspectRatio);
+                painter.end();
+            }
+            else
+            {
+                qDebug()<<"Cannot create image. Size " << r.size() << "too big";
+
+                image = QImage(iconSize, QImage::Format_RGB32);
+                image.fill(Qt::white);
+            }
         }
     }
     else
     {
-        image = QImage(QSize(101, 146), QImage::Format_RGB32);
+        image = QImage(iconSize, QImage::Format_RGB32);
         image.fill(Qt::white);
     }
     return QIcon(QBitmap::fromImage(image));
