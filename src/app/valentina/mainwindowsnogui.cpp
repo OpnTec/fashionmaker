@@ -62,6 +62,7 @@
 #include <QPrinterInfo>
 #include <QtConcurrent>
 #include <functional>
+#include <QPageSize>
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 #include <QWinTaskbarButton>
@@ -1174,9 +1175,12 @@ void MainWindowsNoGUI::PdfFile(const QString &name, QGraphicsRectItem *paper, QG
     printer.setResolution(static_cast<int>(PrintDPI));
     printer.setOrientation(QPrinter::Portrait);
     printer.setFullPage(ignorePrinterFields);
-    printer.setPaperSize ( QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
-                                  FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
-                           QPrinter::Millimeter );
+    if (not printer.setPageSize(QPageSize(QSizeF(FromPixel(r.width() + margins.left() + margins.right(), Unit::Mm),
+                                                 FromPixel(r.height() + margins.top() + margins.bottom(), Unit::Mm)),
+                                          QPageSize::Millimeter)))
+    {
+        qWarning() << tr("Cannot set printer page size");
+    }
 
     const qreal left = FromPixel(margins.left(), Unit::Mm);
     const qreal top = FromPixel(margins.top(), Unit::Mm);
@@ -1533,14 +1537,20 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             }
         }
 
-        const QPrinter::PageSize pSZ = FindQPrinterPageSize(size);
-        if (pSZ == QPrinter::Custom)
+        const QPageSize::PageSizeId pSZ = FindPageSizeId(size);
+        if (pSZ == QPageSize::Custom)
         {
-            printer->setPaperSize (size, QPrinter::Millimeter );
+            if (not printer->setPageSize(QPageSize(size, QPageSize::Millimeter)))
+            {
+                qWarning() << tr("Cannot set custom printer page size");
+            }
         }
         else
         {
-            printer->setPaperSize (pSZ);
+            if (not printer->setPageSize(QPageSize(pSZ)))
+            {
+                qWarning() << tr("Cannot set printer page size");
+            }
         }
     }
     else
@@ -1548,7 +1558,11 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
         if (not m_dialogSaveLayout.isNull())
         {
             VAbstractLayoutDialog::PaperSizeTemplate tiledFormat = m_dialogSaveLayout->GetTiledPageFormat();
-            printer->setPaperSize (m_dialogSaveLayout->GetTemplateSize(tiledFormat, Unit::Mm), QPrinter::Millimeter);
+            if (not printer->setPageSize(QPageSize(m_dialogSaveLayout->GetTemplateSize(tiledFormat, Unit::Mm),
+                                                   QPageSize::Millimeter)))
+            {
+                qWarning() << tr("Cannot set printer page size");
+            }
         }
     }
 
@@ -1672,44 +1686,44 @@ bool MainWindowsNoGUI::IsLayoutGrayscale() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QPrinter::PaperSize MainWindowsNoGUI::FindQPrinterPageSize(const QSizeF &size) const
+QPageSize::PageSizeId MainWindowsNoGUI::FindPageSizeId(const QSizeF &size) const
 {
     if (size == QSizeF(841, 1189) || size == QSizeF(1189, 841))
     {
-        return QPrinter::A0;
+        return QPageSize::A0;
     }
 
     if (size == QSizeF(594, 841) || size == QSizeF(841, 594))
     {
-        return QPrinter::A1;
+        return QPageSize::A1;
     }
 
     if (size == QSizeF(420, 594) || size == QSizeF(594, 420))
     {
-        return QPrinter::A2;
+        return QPageSize::A2;
     }
 
     if (size == QSizeF(297, 420) || size == QSizeF(420, 297))
     {
-        return QPrinter::A3;
+        return QPageSize::A3;
     }
 
     if (size == QSizeF(210, 297) || size == QSizeF(297, 210))
     {
-        return QPrinter::A4;
+        return QPageSize::A4;
     }
 
     if (size == QSizeF(215.9, 355.6) || size == QSizeF(355.6, 215.9))
     {
-        return QPrinter::Legal;
+        return QPageSize::Legal;
     }
 
     if (size == QSizeF(215.9, 279.4) || size == QSizeF(279.4, 215.9))
     {
-        return QPrinter::Letter;
+        return QPageSize::Letter;
     }
 
-    return QPrinter::Custom;
+    return QPageSize::Custom;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
