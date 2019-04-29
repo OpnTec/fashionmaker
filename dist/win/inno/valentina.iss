@@ -36,7 +36,7 @@ UninstallDisplayIcon={app}\valentina.ico
 Compression=lzma
 SolidCompression=yes
 VersionInfoVersion={#MyAppVersion}
-ShowLanguageDialog=auto
+ShowLanguageDialog=yes
 VersionInfoProductName=Valentina
 AppComments=Patternmaking program
 AppContact={#MyAppURL}
@@ -268,77 +268,77 @@ Root: "HKCR"; Subkey: "Valentina.StandardMeasurements\DefaultIcon"; ValueType: s
 Root: "HKCR"; Subkey: "Valentina.StandardMeasurements\shell\open\command"; ValueType: string; ValueData: """{app}\tape.exe"" ""%1"""; Tasks: fileassoc3
 
 [CustomMessages]
-FileAssoc = Undefined //just in case (should be equal to English)
+FileAssoc = Create file associations
 english.FileAssoc = Create file associations
 russian.FileAssoc = Создание ассоциаций файлов
 ukrainian.FileAssoc = Створити асоціації файлів
 
-CreateFileAssocVal = Undefined //just in case (should be equal to English)
+CreateFileAssocVal = *.val (Pattern file)
 english.CreateFileAssocVal = *.val (Pattern file)
 russian.CreateFileAssocVal = *.val (Файл выкройки)
 ukrainian.CreateFileAssocVal = *.val (Файл викрійки)
 
-CreateFileAssocVit = Undefined //just in case (should be equal to English)
+CreateFileAssocVit = *.vit (Individual measurement file)
 english.CreateFileAssocVit = *.vit (Individual measurement file)
 russian.CreateFileAssocVit = *.vit (Файл индивидуальных мерок)
 ukrainian.CreateFileAssocVit = *.vit (Файл індивідуальних мірок)
 
-CreateFileAssocVst = Undefined //just in case (should be equal to English)
+CreateFileAssocVst = *.vst (Multisize measurement file)
 english.CreateFileAssocVst = *.vst (Multisize measurement file)
 russian.CreateFileAssocVst = *.vst (Мультиразмерный файл мерок)
 ukrainian.CreateFileAssocVst = *.vst (Мультирозмірний файл мірок)
 
-WarnRemoveOld = Undefined //just in case (should be equal to English)
+WarnRemoveOld = is installed at the moment. Remove old version?
 english.WarnRemoveOld = is installed at the moment. Remove old version?
 russian.WarnRemoveOld = установлена на данный момент. Удалить старую версию?
 ukrainian.WarnRemoveOld = встановлено на даний момент. Видалити стару версію?
 
-WarnSameVersionExit = Undefined //just in case (should be equal to English)
+WarnSameVersionExit = is already installed. This installer will exit.
 english.WarnSameVersionExit = is already installed. This installer will exit.
 russian.WarnSameVersionExit = уже установлено. Установщик завершит свою работу.
 ukrainian.WarnSameVersionExit = вже встановлено. Інсталятор завершить свою роботу.
 
-WarnRunningOnUnInstall1 = Undefined //just in case (should be equal to English)
+WarnRunningOnUnInstall1 = is currently running.
 english.WarnRunningOnUnInstall1 = is currently running.
 russian.WarnRunningOnUnInstall1 = в настоящее время работает.
 ukrainian.WarnRunningOnUnInstall1 = в даний час працює.
 
-WarnRunningOnUnInstall2 = Undefined //just in case (should be equal to English)
+WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 english.WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 russian.WarnRunningOnUnInstall2 = Закройте его и нажмите ''Повторить'', чтобы продолжить.
 ukrainian.WarnRunningOnUnInstall2 = Закрийте його та натисніть ''Повторити'', щоб продовжити.
 
-WarnCancelInstall = Undefined //just in case (should be equal to English)
+WarnCancelInstall = The installation was canceled.
 english.WarnCancelInstall = The installation was canceled.
 russian.WarnCancelInstall = Установка была отменена.
 ukrainian.WarnCancelInstall = Установка була скасована.
 
-WarnCancelUninstall = Undefined //just in case (should be equal to English)
+WarnCancelUninstall = The uninstallation process was canceled.
 english.WarnCancelUninstall = The uninstallation process was canceled.
 russian.WarnCancelUninstall = Процесс удаления был отменен.
 ukrainian.WarnCancelUninstall = Процес деінсталяції скасовано.
 
-WarnOverwrite = Undefined //just in case (should be equal to English)
+WarnOverwrite = is already installed. Overwrite existing installation?
 english.WarnOverwrite= is already installed. Overwrite existing installation?
 russian.WarnOverwrite= уже установлено. Перезаписать существующую установку?
 ukrainian.WarnOverwrite= вже встановлено. Перезаписати існуючу установку?
 
-SetupIsRunningWarning = Undefined //just in case (should be equal to English)
+SetupIsRunningWarning = Valentina setup is already running!
 english.SetupIsRunningWarning = Valentina setup is already running!
 russian.SetupIsRunningWarning = Установка Valentina уже запущена!
 ukrainian.SetupIsRunningWarning = Встановлення Valentina вже працює!
 
-DeinstIsRunningWarning = Undefined //just in case (should be equal to English)
+DeinstIsRunningWarning = Valentina uninstall is already running!
 english.DeinstIsRunningWarning = Valentina uninstall is already running!
 russian.DeinstIsRunningWarning = Удаление Valentina уже запущено!
 ukrainian.DeinstIsRunningWarning = Видалення Valentina вже працює!
 
-RemoveAnyExistingSettings = Undefined //just in case (should be equal to English)
+RemoveAnyExistingSettings = Remove any existing settings
 english.RemoveAnyExistingSettings = Remove any existing settings
 russian.RemoveAnyExistingSettings = Удалить все существующие настройки
 ukrainian.RemoveAnyExistingSettings = Видалити всі існуючі налаштування
 
-ManageSettings = Undefined //just in case (should be equal to English)
+ManageSettings = Manage settings
 english.ManageSettings = Manage settings
 russian.ManageSettings = Управление настройками
 ukrainian.ManageSettings = Керування налаштуваннями
