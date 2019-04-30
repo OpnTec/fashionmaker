@@ -272,76 +272,91 @@ FileAssoc = Create file associations
 english.FileAssoc = Create file associations
 russian.FileAssoc = Создание ассоциаций файлов
 ukrainian.FileAssoc = Створити асоціації файлів
+german.FileAssoc = Dateizuordnungen erstellen
 
 CreateFileAssocVal = *.val (Pattern file)
 english.CreateFileAssocVal = *.val (Pattern file)
 russian.CreateFileAssocVal = *.val (Файл выкройки)
 ukrainian.CreateFileAssocVal = *.val (Файл викрійки)
+german.CreateFileAssocVal = *.val (Schnittmusterdatei)
 
 CreateFileAssocVit = *.vit (Individual measurement file)
 english.CreateFileAssocVit = *.vit (Individual measurement file)
 russian.CreateFileAssocVit = *.vit (Файл индивидуальных мерок)
 ukrainian.CreateFileAssocVit = *.vit (Файл індивідуальних мірок)
+german.CreateFileAssocVit = *.vit (Individuelle Maßdatei) 
 
 CreateFileAssocVst = *.vst (Multisize measurement file)
 english.CreateFileAssocVst = *.vst (Multisize measurement file)
 russian.CreateFileAssocVst = *.vst (Мультиразмерный файл мерок)
 ukrainian.CreateFileAssocVst = *.vst (Мультирозмірний файл мірок)
+german.CreateFileAssocVst = *.vst (Multi-Size Maßdatei)
 
 WarnRemoveOld = is installed at the moment. Remove old version?
 english.WarnRemoveOld = is installed at the moment. Remove old version?
 russian.WarnRemoveOld = установлена на данный момент. Удалить старую версию?
 ukrainian.WarnRemoveOld = встановлено на даний момент. Видалити стару версію?
+german.WarnRemoveOld = ist im Moment installiert. Alte Version entfernen?
 
 WarnSameVersionExit = is already installed. This installer will exit.
 english.WarnSameVersionExit = is already installed. This installer will exit.
 russian.WarnSameVersionExit = уже установлено. Установщик завершит свою работу.
 ukrainian.WarnSameVersionExit = вже встановлено. Інсталятор завершить свою роботу.
+german.WarnSameVersionExit = ist bereits installiert. Dieses Installationsprogramm wird beendet.
 
 WarnRunningOnUnInstall1 = is currently running.
 english.WarnRunningOnUnInstall1 = is currently running.
 russian.WarnRunningOnUnInstall1 = в настоящее время работает.
 ukrainian.WarnRunningOnUnInstall1 = в даний час працює.
+german.WarnRunningOnUnInstall1 = läuft derzeit.
 
 WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 english.WarnRunningOnUnInstall2 = Please close it and then click on ''Retry'' to proceed.
 russian.WarnRunningOnUnInstall2 = Закройте его и нажмите ''Повторить'', чтобы продолжить.
 ukrainian.WarnRunningOnUnInstall2 = Закрийте його та натисніть ''Повторити'', щоб продовжити.
+german.WarnRunningOnUnInstall2 = Bitte schließen Sie es und klicken Sie auf ''Wiederholen'', um fortzufahren.
 
 WarnCancelInstall = The installation was canceled.
 english.WarnCancelInstall = The installation was canceled.
 russian.WarnCancelInstall = Установка была отменена.
 ukrainian.WarnCancelInstall = Установка була скасована.
+german.WarnCancelInstall = Die Installation wurde abgebrochen.
 
 WarnCancelUninstall = The uninstallation process was canceled.
 english.WarnCancelUninstall = The uninstallation process was canceled.
 russian.WarnCancelUninstall = Процесс удаления был отменен.
 ukrainian.WarnCancelUninstall = Процес деінсталяції скасовано.
+german.WarnCancelUninstall = Der Deinstallationsvorgang wurde abgebrochen.
 
 WarnOverwrite = is already installed. Overwrite existing installation?
 english.WarnOverwrite= is already installed. Overwrite existing installation?
 russian.WarnOverwrite= уже установлено. Перезаписать существующую установку?
 ukrainian.WarnOverwrite= вже встановлено. Перезаписати існуючу установку?
+german.WarnOverwrite = ist bereits installiert. Vorhandene Installation überschreiben?
 
 SetupIsRunningWarning = Valentina setup is already running!
 english.SetupIsRunningWarning = Valentina setup is already running!
 russian.SetupIsRunningWarning = Установка Valentina уже запущена!
 ukrainian.SetupIsRunningWarning = Встановлення Valentina вже працює!
+german.SetupIsRunningWarning = Valentina-Setup läuft bereits!
 
 DeinstIsRunningWarning = Valentina uninstall is already running!
 english.DeinstIsRunningWarning = Valentina uninstall is already running!
 russian.DeinstIsRunningWarning = Удаление Valentina уже запущено!
 ukrainian.DeinstIsRunningWarning = Видалення Valentina вже працює!
+german.DeinstIsRunningWarning = Die Deinstallation von Valentina läuft bereits!
 
 RemoveAnyExistingSettings = Remove any existing settings
 english.RemoveAnyExistingSettings = Remove any existing settings
 russian.RemoveAnyExistingSettings = Удалить все существующие настройки
 ukrainian.RemoveAnyExistingSettings = Видалити всі існуючі налаштування
+german.RemoveAnyExistingSettings = Alle vorhandenen Einstellungen entfernen
 
 ManageSettings = Manage settings
 english.ManageSettings = Manage settings
 russian.ManageSettings = Управление настройками
 ukrainian.ManageSettings = Керування налаштуваннями
+german.ManageSettings = Einstellungen verwalten
 
 [Code]
 const
