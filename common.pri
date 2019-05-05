@@ -389,8 +389,8 @@ g++7:GCC_DEBUG_CXXFLAGS += \
     -Walloc-zero \
     -Wnonnull
 
-# Since GCC 7
-g++7:GCC_DEBUG_CXXFLAGS += \
+# Since GCC 8
+g++8:GCC_DEBUG_CXXFLAGS += \
     -Wmultistatement-macros \
     -Warray-bounds
 
