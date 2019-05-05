@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file   vgraphicssimpletextitem.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -63,6 +63,10 @@ public:
     void LabelSelectionType(const SelectionType &type);
 
     void SetShowParentTooltip(bool show);
+
+    void SetRealPos(QPointF pos);
+
+
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -91,8 +95,11 @@ private:
     SelectionType selectionType;
     qreal         m_oldScale;
     bool          m_showParentTooltip;
+    QPointF       m_realPos{};
 
     void Init();
+
+    void CorrectLabelPosition();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

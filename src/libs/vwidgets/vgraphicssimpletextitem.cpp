@@ -96,17 +96,15 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
     const qreal scale = SceneScale(scene);
     if (scale > 1 && not VFuzzyComparePossibleNulls(m_oldScale, scale))
     {
-        const QRectF nameRec = boundingRect();
-        setTransformOriginPoint(nameRec.center());
         setScale(1/scale);
+        CorrectLabelPosition();
         UpdateLine();
         m_oldScale = scale;
     }
     else if (scale <= 1 && not VFuzzyComparePossibleNulls(m_oldScale, 1.0))
     {
-        const QRectF nameRec = boundingRect();
-        setTransformOriginPoint(nameRec.center());
         setScale(1);
+        CorrectLabelPosition();
         UpdateLine();
         m_oldScale = 1;
     }
@@ -146,6 +144,34 @@ void VGraphicsSimpleTextItem::SetShowParentTooltip(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::SetRealPos(QPointF pos)
+{
+    m_realPos = pos;
+
+    CorrectLabelPosition();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::CorrectLabelPosition()
+{
+    const qreal scale = SceneScale(scene());
+    QPointF newPos = m_realPos;
+
+    if (scale > 1)
+    {
+        QLineF line(QPointF(), m_realPos);
+        line.setLength(line.length() / scale);
+        newPos = line.p2();
+    }
+
+    blockSignals(true);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    setPos(newPos);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    blockSignals(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief itemChange handle item change.
  * @param change change.
@@ -162,8 +188,6 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
          if (changeFinished)
          {
             changeFinished = false;
-            QPointF newPos = value.toPointF() + this->parentItem()->pos();
-            emit NameChangePosition(newPos);
             if (scene())
             {
                 const QList<QGraphicsView *> viewList = scene()->views();
@@ -198,6 +222,17 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                     }
                 }
             }
+
+            m_realPos = value.toPointF();
+            const qreal scale = SceneScale(scene());
+            if (scale > 1)
+            {
+                QLineF line(QPointF(), m_realPos);
+                line.setLength(line.length() * scale);
+                m_realPos = line.p2();
+            }
+            emit NameChangePosition(m_realPos + this->parentItem()->pos());
+
             changeFinished = true;
          }
      }

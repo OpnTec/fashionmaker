@@ -341,9 +341,7 @@ void VToolSinglePoint::ChangeLabelPosition(quint32 id, const QPointF &pos)
         QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->setMx(pos.x());
         point->setMy(pos.y());
-        m_namePoint->blockSignals(true);
-        m_namePoint->setPos(pos);
-        m_namePoint->blockSignals(false);
+        m_namePoint->SetRealPos(pos);
         RefreshLine();
 
         if (QGraphicsScene *sc = scene())

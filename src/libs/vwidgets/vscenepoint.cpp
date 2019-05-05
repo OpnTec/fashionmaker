@@ -105,10 +105,13 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     m_showLabel = point.IsShowLabel();
 
     m_namePoint->blockSignals(true);
-    m_namePoint->setText(point.name());
-    m_namePoint->setPos(QPointF(point.mx(), point.my()));
-    m_namePoint->setVisible(m_showLabel);
+    m_namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    m_namePoint->SetRealPos(QPointF(point.mx(), point.my()));
+    m_namePoint->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     m_namePoint->blockSignals(false);
+
+    m_namePoint->setText(point.name());
+    m_namePoint->setVisible(m_showLabel);
 
     RefreshLine();
 }
