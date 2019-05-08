@@ -57,7 +57,6 @@
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
     : QGraphicsSimpleTextItem(parent),
-      m_fontSize(0),
       selectionType(SelectionType::ByMouseRelease),
       m_oldScale(1),
       m_showParentTooltip(true)
@@ -73,7 +72,6 @@ VGraphicsSimpleTextItem::VGraphicsSimpleTextItem(QGraphicsItem * parent)
  */
 VGraphicsSimpleTextItem::VGraphicsSimpleTextItem( const QString & text, QGraphicsItem * parent )
     : QGraphicsSimpleTextItem(text, parent),
-      m_fontSize(0),
       selectionType(SelectionType::ByMouseRelease),
       m_oldScale(1),
       m_showParentTooltip(true)
@@ -91,6 +89,13 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
             parent->RefreshLine();
         }
     };
+
+    QFont font = this->font();
+    if (font.pointSize() != qApp->Settings()->GetLabelFontSize())
+    {
+        font.setPointSize(qApp->Settings()->GetLabelFontSize());
+        setFont(font);
+    }
 
     QGraphicsScene *scene = this->scene();
     const qreal scale = SceneScale(scene);
@@ -381,9 +386,8 @@ void VGraphicsSimpleTextItem::Init()
     this->setFlag(QGraphicsItem::ItemIsFocusable, true);// For keyboard input focus
     this->setAcceptHoverEvents(true);
     QFont font = this->font();
-    font.setPointSize(font.pointSize()+20);
-    m_fontSize = font.pointSize();
-    this->setFont(font);
-    m_oldScale = minVisibleFontSize / m_fontSize;
+    font.setPointSize(qApp->Settings()->GetLabelFontSize());
+    setFont(font);
+    m_oldScale = minVisibleFontSize / qApp->Settings()->GetLabelFontSize();
     setScale(m_oldScale);
 }

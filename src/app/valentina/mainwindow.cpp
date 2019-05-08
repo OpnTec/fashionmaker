@@ -2055,6 +2055,69 @@ void MainWindow::ToolBarTools()
 
     connect(ui->actionPreviousPatternPiece, &QAction::triggered, this, &MainWindow::PreviousPatternPiece);
     connect(ui->actionNextPatternPiece, &QAction::triggered, this, &MainWindow::NextPatternPiece);
+
+    ui->actionIncreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Plus));
+    connect(ui->actionIncreaseLabelFont, &QAction::triggered, this, [this]()
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        settings->SetLabelFontSize(settings->GetLabelFontSize() + 1);
+        if (sceneDraw)
+        {
+            sceneDraw->update();
+        }
+
+        if (sceneDetails)
+        {
+            sceneDetails->update();
+        }
+    });
+
+    ui->actionDecreaseLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_Minus));
+    connect(ui->actionDecreaseLabelFont, &QAction::triggered, this, [this]()
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        settings->SetLabelFontSize(settings->GetLabelFontSize() - 1);
+        if (sceneDraw)
+        {
+            sceneDraw->update();
+        }
+
+        if (sceneDetails)
+        {
+            sceneDetails->update();
+        }
+    });
+
+    ui->actionOriginalLabelFont->setShortcut(QKeySequence(Qt::ShiftModifier + Qt::Key_0));
+    connect(ui->actionOriginalLabelFont, &QAction::triggered, this, [this]()
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        settings->SetLabelFontSize(settings->GetDefLabelFontSize());
+        if (sceneDraw)
+        {
+            sceneDraw->update();
+        }
+
+        if (sceneDetails)
+        {
+            sceneDetails->update();
+        }
+    });
+
+    ui->actionHideLabels->setShortcut(QKeySequence(Qt::AltModifier + Qt::Key_L));
+    connect(ui->actionHideLabels, &QAction::triggered, this, [this](bool checked)
+    {
+        qApp->ValentinaSettings()->SetHideLabels(checked);
+        if (sceneDraw)
+        {
+            sceneDraw->update();
+        }
+
+        if (sceneDetails)
+        {
+            sceneDetails->update();
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3018,6 +3081,10 @@ void MainWindow::Clear()
     m_taskbarProgress->setVisible(false);
 #endif
     m_statusLabel->setVisible(true);
+    ui->actionIncreaseLabelFont->setEnabled(false);
+    ui->actionDecreaseLabelFont->setEnabled(false);
+    ui->actionOriginalLabelFont->setEnabled(false);
+    ui->actionHideLabels->setEnabled(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3370,6 +3437,10 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
     ui->actionPreviousPatternPiece->setEnabled(enable && drawStage);
     ui->actionNextPatternPiece->setEnabled(enable && drawStage);
+    ui->actionIncreaseLabelFont->setEnabled(enable);
+    ui->actionDecreaseLabelFont->setEnabled(enable);
+    ui->actionOriginalLabelFont->setEnabled(enable);
+    ui->actionHideLabels->setEnabled(enable);
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
     actionDockWidgetGroups->setEnabled(enable && designStage);

@@ -66,7 +66,7 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     const qreal scale = SceneScale(scene());
 
-    if (m_namePoint->BaseFontSize()*scale < minVisibleFontSize)
+    if (qApp->Settings()->GetLabelFontSize()*scale < minVisibleFontSize || qApp->Settings()->GetHideLabels())
     {
         m_namePoint->setVisible(false);
         m_lineName->setVisible(false);

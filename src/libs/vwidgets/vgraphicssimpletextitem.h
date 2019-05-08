@@ -52,7 +52,6 @@ public:
     explicit VGraphicsSimpleTextItem( const QString & text, QGraphicsItem *parent = nullptr );
     virtual ~VGraphicsSimpleTextItem() =default;
 
-    qint32       BaseFontSize()const;
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GraphicsSimpleTextItem)};
 
@@ -92,8 +91,6 @@ protected:
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * event ) override;
     virtual void keyReleaseEvent ( QKeyEvent * event ) override;
 private:
-    /** @brief fontSize label font size. */
-    qint32        m_fontSize;
     SelectionType selectionType;
     qreal         m_oldScale;
     bool          m_showParentTooltip;
@@ -104,15 +101,5 @@ private:
 
     void CorrectLabelPosition();
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief FontSize return label font size.
- * @return font size.
- */
-inline qint32 VGraphicsSimpleTextItem::BaseFontSize() const
-{
-    return m_fontSize;
-}
 
 #endif // VGRAPHICSSIMPLETEXTITEM_H

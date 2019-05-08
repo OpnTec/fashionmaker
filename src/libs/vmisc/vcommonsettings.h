@@ -181,6 +181,13 @@ public:
     QFont GetLabelFont() const;
     void  SetLabelFont(const QFont &f);
 
+    int  GetLabelFontSize() const;
+    void SetLabelFontSize(int size);
+    static int GetDefLabelFontSize();
+
+    bool GetHideLabels() const;
+    void SetHideLabels(bool value);
+
 #if !defined(Q_OS_WIN)
     static const QString unixStandardSharePath;
 #endif

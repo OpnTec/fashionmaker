@@ -76,6 +76,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, (QLatin1String("pattern/lineWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale, (QLatin1String("pattern/curveApproximationScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin1String("pattern/showCurveDetails")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRecentFileList, (QLatin1String("recentFileList")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingGeneralRestoreFileList, (QLatin1String("restoreFileList")))
@@ -104,6 +106,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLabelUserTimeFormats, (QLatin1St
 qreal curveApproximationCached = -1;
 Q_GLOBAL_STATIC(QString, localeCached)
 qreal lineWidthCached = 0;
+int labelFontSizeCached = 0;
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -960,6 +963,48 @@ QFont VCommonSettings::GetLabelFont() const
 void VCommonSettings::SetLabelFont(const QFont &f)
 {
     setValue(*settingPatternLabelFont, f);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetLabelFontSize() const
+{
+    if (labelFontSizeCached <= 0)
+    {
+        bool ok = false;
+        labelFontSizeCached = value(*settingPatternLabelFontSize, GetDefLabelFontSize()).toInt(&ok);
+        if (not ok)
+        {
+            labelFontSizeCached = GetDefLabelFontSize();
+        }
+        labelFontSizeCached = qBound(minLabelFontSize, labelFontSizeCached, maxLabelFontSize);
+    }
+    return labelFontSizeCached;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetLabelFontSize(int size)
+{
+    size = qBound(minLabelFontSize, size, maxLabelFontSize);
+    setValue(*settingPatternLabelFontSize, size);
+    labelFontSizeCached = size;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VCommonSettings::GetDefLabelFontSize()
+{
+    return 32;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VCommonSettings::GetHideLabels() const
+{
+    return value(*settingPatternHideLabels, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetHideLabels(bool value)
+{
+    setValue(*settingPatternHideLabels, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

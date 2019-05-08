@@ -75,6 +75,9 @@ extern const qreal   defCurveApproximationScale;
 extern const qreal   minCurveApproximationScale;
 extern const qreal   maxCurveApproximationScale;
 
+extern const int minLabelFontSize;
+extern const int maxLabelFontSize;
+
 enum class NodeDetail : char { Contour, Modeling };
 enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
 enum class MeasurementsType : char { Multisize, Individual , Unknown};

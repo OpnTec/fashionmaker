@@ -17,6 +17,7 @@
 - New placelabel shape Circle.
 - Two new passmark types: U and Box.
 - [#969] Fix length to label after soom.
+- [#725] Improve labels on drawing.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

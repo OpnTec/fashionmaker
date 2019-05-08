@@ -62,6 +62,9 @@ const qreal   defCurveApproximationScale = 0.5;
 const qreal   minCurveApproximationScale = 0.1;
 const qreal   maxCurveApproximationScale = 10.0;
 
+const int minLabelFontSize = 5;
+const int maxLabelFontSize = 100;
+
 //functions
 const QString degTorad_F = QStringLiteral("degTorad");
 const QString radTodeg_F = QStringLiteral("radTodeg");

@@ -1744,6 +1744,11 @@
     <addaction name="actionPreviousPatternPiece"/>
     <addaction name="actionNextPatternPiece"/>
     <addaction name="separator"/>
+    <addaction name="actionIncreaseLabelFont"/>
+    <addaction name="actionDecreaseLabelFont"/>
+    <addaction name="actionOriginalLabelFont"/>
+    <addaction name="actionHideLabels"/>
+    <addaction name="separator"/>
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
    </widget>
@@ -2758,6 +2763,56 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+PgUp</string>
+   </property>
+  </action>
+  <action name="actionIncreaseLabelFont">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-in"/>
+   </property>
+   <property name="text">
+    <string>Increase label font</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionDecreaseLabelFont">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-out"/>
+   </property>
+   <property name="text">
+    <string>Decrease label font</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionOriginalLabelFont">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="zoom-original"/>
+   </property>
+   <property name="text">
+    <string>Original label font</string>
+   </property>
+  </action>
+  <action name="actionHideLabels">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Hide labels</string>
    </property>
   </action>
  </widget>
