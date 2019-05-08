@@ -66,6 +66,8 @@ public:
 
     void SetRealPos(QPointF pos);
 
+    QColor BaseColor() const;
+    void   SetBaseColor(const QColor &BaseColor);
 
 signals:
     /**
@@ -96,6 +98,7 @@ private:
     qreal         m_oldScale;
     bool          m_showParentTooltip;
     QPointF       m_realPos{};
+    QColor        m_baseColor{Qt::black};
 
     void Init();
 

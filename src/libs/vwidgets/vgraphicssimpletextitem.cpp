@@ -278,7 +278,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
  */
 void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-    this->setBrush(Qt::black);
+    this->setBrush(m_baseColor);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 }
 
@@ -357,6 +357,19 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsSimpleTextItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QColor VGraphicsSimpleTextItem::BaseColor() const
+{
+    return m_baseColor;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::SetBaseColor(const QColor &baseColor)
+{
+    m_baseColor = baseColor;
+    setBrush(m_baseColor);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -904,7 +904,7 @@ QGraphicsItem *VLayoutPiece::GetItem(bool textAsPaths) const
     for (auto &label : d->m_placeLabels)
     {
         QGraphicsPathItem* pathItem = new QGraphicsPathItem(item);
-        pathItem->setPath(d->matrix.map(PlaceLabelImgPath(label.shape)));
+        pathItem->setPath(d->matrix.map(VPlaceLabelItem::LabelShapePath(label.shape)));
     }
 
     CreateLabelStrings(item, d->detailLabel, d->m_tmDetail, textAsPaths);

@@ -29,6 +29,7 @@
 #include "tst_vpiece.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../vgeometry/vsplinepath.h"
@@ -980,5 +981,7 @@ void TST_VPiece::TestSAPassmark()
     QFETCH(QVector<QPointF>, seamAllowance);
     QFETCH(QVector<QLineF>, expectedResult);
 
-    Comparison(VPiece::SAPassmark(passmarkData, seamAllowance), expectedResult);
+    VPassmark passmark(passmarkData);
+
+    Comparison(passmark.SAPassmark(seamAllowance, PassmarkSide::All), expectedResult);
 }

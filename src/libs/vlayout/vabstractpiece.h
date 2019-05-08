@@ -237,7 +237,6 @@ protected:
     static bool       IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint);
     static bool       IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &prevPoint, const VSAPoint &nextPoint);
 
-    static QPainterPath     PlaceLabelImgPath(const PlaceLabelImg &img);
     static bool             IsItemContained(const QRectF &parentBoundingRect, const QVector<QPointF> &shape, qreal &dX,
                                         qreal &dY);
     static QVector<QPointF> CorrectPosition(const QRectF &parentBoundingRect, QVector<QPointF> points);

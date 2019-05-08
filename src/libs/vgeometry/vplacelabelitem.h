@@ -37,6 +37,7 @@
 
 class VPlaceLabelItemData;
 class VContainer;
+class QPainterPath;
 
 class VPlaceLabelItem : public VPointF
 {
@@ -83,6 +84,9 @@ public:
     void           SetLabelType(PlaceLabelType type);
 
     PlaceLabelImg LabelShape() const;
+    QPainterPath  LabelShapePath() const;
+
+    static QPainterPath LabelShapePath(const PlaceLabelImg &shape);
 
 private:
     QSharedDataPointer<VPlaceLabelItemData> d;

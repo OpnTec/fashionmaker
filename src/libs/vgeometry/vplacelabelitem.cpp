@@ -357,30 +357,51 @@ PlaceLabelImg VPlaceLabelItem::LabelShape() const
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
-        switch(d->type)
-        {
-            case PlaceLabelType::Segment:
-                return SegmentShape();
-            case PlaceLabelType::Rectangle:
-                return RectangleShape();
-            case PlaceLabelType::Cross:
-                return CrossShape();
-            case PlaceLabelType::Tshaped:
-                return TshapedShape();
-            case PlaceLabelType::Doubletree:
-                return DoubletreeShape();
-            case PlaceLabelType::Corner:
-                return CornerShape();
-            case PlaceLabelType::Triangle:
-                return TriangleShape();
-            case PlaceLabelType::Hshaped:
-                return HshapedShape();
-            case PlaceLabelType::Button:
-                return ButtonShape();
-            case PlaceLabelType::Circle:
-                return CircleShape();
-        }
-    QT_WARNING_POP
+    switch(d->type)
+    {
+        case PlaceLabelType::Segment:
+            return SegmentShape();
+        case PlaceLabelType::Rectangle:
+            return RectangleShape();
+        case PlaceLabelType::Cross:
+            return CrossShape();
+        case PlaceLabelType::Tshaped:
+            return TshapedShape();
+        case PlaceLabelType::Doubletree:
+            return DoubletreeShape();
+        case PlaceLabelType::Corner:
+            return CornerShape();
+        case PlaceLabelType::Triangle:
+            return TriangleShape();
+        case PlaceLabelType::Hshaped:
+            return HshapedShape();
+        case PlaceLabelType::Button:
+            return ButtonShape();
+        case PlaceLabelType::Circle:
+            return CircleShape();
+    }
+QT_WARNING_POP
 
-        return PlaceLabelImg();
+    return PlaceLabelImg();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPlaceLabelItem::LabelShapePath() const
+{
+    return LabelShapePath(LabelShape());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPainterPath VPlaceLabelItem::LabelShapePath(const PlaceLabelImg &shape)
+{
+    QPainterPath path;
+    for (auto &p : shape)
+    {
+        if (not p.isEmpty())
+        {
+            path.moveTo(p.first());
+            path.addPolygon(p);
+        }
+    }
+    return path;
 }
