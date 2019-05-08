@@ -38,21 +38,14 @@ class DialogTool;
 struct VToolPlaceLabelInitData : VAbstractNodeInitData
 {
     VToolPlaceLabelInitData()
-        : VAbstractNodeInitData(),
-          width('0'),
-          height('0'),
-          angle('0'),
-          type(PlaceLabelType::Button),
-          centerPoint(NULL_ID),
-          visibilityTrigger('1')
     {}
 
-    QString width;
-    QString height;
-    QString angle;
-    PlaceLabelType type;
-    quint32 centerPoint;
-    QString visibilityTrigger;
+    QString width{'0'};
+    QString height{'0'};
+    QString angle{'0'};
+    PlaceLabelType type{PlaceLabelType::Button};
+    quint32 centerPoint{NULL_ID};
+    QString visibilityTrigger{'1'};
 };
 
 class VToolPlaceLabel : public VAbstractNode

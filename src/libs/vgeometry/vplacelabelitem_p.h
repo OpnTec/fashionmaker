@@ -41,17 +41,6 @@ class VPlaceLabelItemData : public QSharedData
 {
 public:
     VPlaceLabelItemData()
-        : width(),
-          height(),
-          angle('0'),
-          visibilityTrigger('1'),
-          type(PlaceLabelType::Button),
-          centerPoint(0),
-          wValue(0),
-          hValue(0),
-          aValue(0),
-          correctionAngle(0),
-          isVisible(1)
     {}
 
     VPlaceLabelItemData(const VPlaceLabelItemData &item)
@@ -71,18 +60,18 @@ public:
 
     virtual ~VPlaceLabelItemData();
 
-    QString width;
-    QString height;
-    QString angle;
-    QString visibilityTrigger;
-    PlaceLabelType type;
-    quint32 centerPoint;
+    QString width{};
+    QString height{};
+    QString angle{'0'};
+    QString visibilityTrigger{'1'};
+    PlaceLabelType type{PlaceLabelType::Button};
+    quint32 centerPoint{0};
 
-    qreal wValue;
-    qreal hValue;
-    qreal aValue;
-    qreal correctionAngle;
-    qreal isVisible;
+    qreal wValue{0};
+    qreal hValue{0};
+    qreal aValue{0};
+    qreal correctionAngle{0};
+    qreal isVisible{1};
 
 private:
     VPlaceLabelItemData &operator=(const VPlaceLabelItemData &) Q_DECL_EQ_DELETE;

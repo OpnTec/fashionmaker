@@ -43,25 +43,10 @@ class VPiecePathData : public QSharedData
 {
 public:
     VPiecePathData()
-        : m_nodes(),
-          m_type(PiecePathType::Unknown),
-          m_name(),
-          m_penType(Qt::SolidLine),
-          m_cut(false),
-          m_visibilityTrigger('1'),
-          m_firstToCuttingCountour(false),
-          m_lastToCuttingCountour(false)
     {}
 
     explicit VPiecePathData(PiecePathType type)
-        : m_nodes(),
-          m_type(type),
-          m_name(),
-          m_penType(Qt::SolidLine),
-          m_cut(false),
-          m_visibilityTrigger('1'),
-          m_firstToCuttingCountour(false),
-          m_lastToCuttingCountour(false)
+        : m_type(type)
     {}
 
     VPiecePathData(const VPiecePathData &path)
@@ -78,14 +63,14 @@ public:
 
     ~VPiecePathData();
 
-    QVector<VPieceNode> m_nodes;
-    PiecePathType m_type;
-    QString m_name;
-    Qt::PenStyle m_penType;
-    bool m_cut;
-    QString m_visibilityTrigger;
-    bool m_firstToCuttingCountour;
-    bool m_lastToCuttingCountour;
+    QVector<VPieceNode> m_nodes{};
+    PiecePathType m_type{PiecePathType::Unknown};
+    QString m_name{};
+    Qt::PenStyle m_penType{Qt::SolidLine};
+    bool m_cut{false};
+    QString m_visibilityTrigger{'1'};
+    bool m_firstToCuttingCountour{false};
+    bool m_lastToCuttingCountour{false};
 
 private:
     VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;

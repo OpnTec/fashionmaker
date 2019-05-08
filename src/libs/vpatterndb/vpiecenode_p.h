@@ -43,35 +43,12 @@ class VPieceNodeData : public QSharedData
 {
 public:
     VPieceNodeData()
-        : m_id(NULL_ID),
-          m_typeTool(Tool::NodePoint),
-          m_reverse(false),
-          m_excluded(false),
-          m_isPassmark(false),
-          m_isMainPathNode(true),
-          m_formulaWidthBefore(currentSeamAllowance),
-          m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength),
-          m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true),
-          m_checkUniqueness(true)
     {}
 
     VPieceNodeData(quint32 id, Tool typeTool, bool reverse)
         : m_id(id),
           m_typeTool(typeTool),
-          m_reverse(reverse),
-          m_excluded(false),
-          m_isPassmark(false),
-          m_isMainPathNode(true),
-          m_formulaWidthBefore(currentSeamAllowance),
-          m_formulaWidthAfter(currentSeamAllowance),
-          m_angleType(PieceNodeAngle::ByLength),
-          m_passmarkLineType(PassmarkLineType::OneLine),
-          m_passmarkAngleType(PassmarkAngleType::Straightforward),
-          m_isShowSecondPassmark(true),
-          m_checkUniqueness(true)
+          m_reverse(reverse)
     {
         if (m_typeTool == Tool::NodePoint)
         {
@@ -104,39 +81,39 @@ public:
     friend QDataStream& operator>>(QDataStream& in, VPieceNodeData& p);
 
     /** @brief id object id. */
-    quint32 m_id;
+    quint32 m_id{NULL_ID};
 
     /** @brief typeTool type of tool */
-    Tool m_typeTool;
+    Tool m_typeTool{Tool::NodePoint};
 
     /** @brief reverse true if need reverse points list for node. */
-    bool m_reverse;
+    bool m_reverse{false};
 
     /** @brief m_excluded true if item excluded from main path. Excluded item is not visible and also will not has
      * affect on main path. Also include to exist path items automatically setted excluded. */
-    bool m_excluded;
+    bool m_excluded{false};
 
     /** @brief m_isPassmark has sense only for points. If true to seam allowance should be added a passmark. */
-    bool m_isPassmark;
+    bool m_isPassmark{false};
 
     /** @brief m_isMainPathNode need fin know if allowed for this passmakr to be double. */
-    bool m_isMainPathNode;
+    bool m_isMainPathNode{true};
 
-    QString m_formulaWidthBefore;
-    QString m_formulaWidthAfter;
+    QString m_formulaWidthBefore{currentSeamAllowance};
+    QString m_formulaWidthAfter{currentSeamAllowance};
     QString m_formulaPassmarkLength{};
 
-    PieceNodeAngle m_angleType;
+    PieceNodeAngle m_angleType{PieceNodeAngle::ByLength};
 
-    PassmarkLineType  m_passmarkLineType;
-    PassmarkAngleType m_passmarkAngleType;
+    PassmarkLineType  m_passmarkLineType{PassmarkLineType::OneLine};
+    PassmarkAngleType m_passmarkAngleType{PassmarkAngleType::Straightforward};
 
-    bool m_isShowSecondPassmark;
+    bool m_isShowSecondPassmark{true};
 
     /** @brief m_checkUniqueness need in cases where different points have the same coordinates, become one point.
      * By default the check enabled. Disable it only if in a path cannot be used just one point. For example if
      * gradation change a piece shape and the seond point should be remaind.*/
-    bool m_checkUniqueness;
+    bool m_checkUniqueness{true};
 
     bool m_manualPassmarkLength{false};
 

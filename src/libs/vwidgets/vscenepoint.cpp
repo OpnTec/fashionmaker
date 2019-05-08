@@ -44,16 +44,14 @@
 //---------------------------------------------------------------------------------------------------------------------
 VScenePoint::VScenePoint(QGraphicsItem *parent)
     : QGraphicsEllipseItem(parent),
-      m_namePoint(nullptr),
-      m_lineName(nullptr),
+      m_namePoint(new VGraphicsSimpleTextItem(this)),
+      m_lineName(new VScaledLine(this)),
       m_onlyPoint(false),
       m_isHovered(false),
       m_showLabel(true),
       m_baseColor(Qt::black),
       m_selectedFromChild(false)
 {
-    m_namePoint = new VGraphicsSimpleTextItem(this);
-    m_lineName = new VScaledLine(this);
     m_lineName->SetBoldLine(false);
     m_lineName->setLine(QLineF(0, 0, 1, 0));
     m_lineName->setVisible(false);
