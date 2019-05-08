@@ -72,7 +72,7 @@ class VPassmark
 {
 public:
     VPassmark();
-    VPassmark(const VPiecePassmarkData &data);
+    explicit VPassmark(const VPiecePassmarkData &data);
 
     QVector<QLineF> FullPassmark(const VPiece& piece, const VContainer *data) const;
     QVector<QLineF> SAPassmark(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
