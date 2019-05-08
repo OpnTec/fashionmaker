@@ -132,10 +132,13 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
         << p.m_isPassmark
         << p.m_formulaWidthBefore
         << p.m_formulaWidthAfter
+        << p.m_formulaPassmarkLength
         << p.m_angleType
         << p.m_passmarkLineType
         << p.m_passmarkAngleType
-        << p.m_isShowSecondPassmark;
+        << p.m_isShowSecondPassmark
+        << p.m_checkUniqueness
+        << p.m_manualPassmarkLength;
     return out;
 }
 
@@ -149,10 +152,13 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
        >> p.m_isPassmark
        >> p.m_formulaWidthBefore
        >> p.m_formulaWidthAfter
+       >> p.m_formulaPassmarkLength
        >> p.m_angleType
        >> p.m_passmarkLineType
        >> p.m_passmarkAngleType
-       >> p.m_isShowSecondPassmark;
+       >> p.m_isShowSecondPassmark
+       >> p.m_checkUniqueness
+       >> p.m_manualPassmarkLength;
     return in;
 }
 
