@@ -365,72 +365,6 @@ QVector<QLineF> CreateBoxMarkPassmark(const QLineF &line, const QVector<QPointF>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QLineF> CreatePassmarkLines(PassmarkLineType lineType, PassmarkAngleType angleType, const QLineF &line,
-                                    const QVector<QPointF> &seamAllowance)
-{
-    QVector<QLineF> passmarksLines;
-
-    if (angleType == PassmarkAngleType::Straightforward
-            || angleType == PassmarkAngleType::Intersection
-            || angleType == PassmarkAngleType::IntersectionOnlyLeft
-            || angleType == PassmarkAngleType::IntersectionOnlyRight
-            || angleType == PassmarkAngleType::Intersection2
-            || angleType == PassmarkAngleType::Intersection2OnlyLeft
-            || angleType == PassmarkAngleType::Intersection2OnlyRight)
-    {
-        switch (lineType)
-        {
-            case PassmarkLineType::TwoLines:
-                passmarksLines += CreateTwoPassmarkLines(line, seamAllowance);
-                break;
-            case PassmarkLineType::ThreeLines:
-                passmarksLines += CreateThreePassmarkLines(line, seamAllowance);
-                break;
-            case PassmarkLineType::TMark:
-                passmarksLines += CreateTMarkPassmark(line);
-                break;
-            case PassmarkLineType::VMark:
-                passmarksLines += CreateVMarkPassmark(line);
-                break;
-            case PassmarkLineType::VMark2:
-                passmarksLines += CreateVMark2Passmark(line, seamAllowance);
-                break;
-            case PassmarkLineType::UMark:
-                passmarksLines += CreateUMarkPassmark(line, seamAllowance);
-                break;
-            case PassmarkLineType::BoxMark:
-                passmarksLines += CreateBoxMarkPassmark(line, seamAllowance);
-                break;
-            case PassmarkLineType::OneLine:
-            default:
-                passmarksLines.append(line);
-                break;
-        }
-    }
-    else
-    {
-        switch (lineType)
-        {
-            case PassmarkLineType::TMark:
-                passmarksLines += CreateTMarkPassmark(line);
-                break;
-            case PassmarkLineType::OneLine:
-            case PassmarkLineType::TwoLines:
-            case PassmarkLineType::ThreeLines:
-            case PassmarkLineType::VMark:
-            case PassmarkLineType::VMark2:
-            case PassmarkLineType::UMark:
-            case PassmarkLineType::BoxMark:
-            default:
-                passmarksLines.append(line);
-                break;
-        }
-    }
-
-    return passmarksLines;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool IsPassmarksPossible(const QVector<VPieceNode> &path)
 {
     int countPointNodes = 0;
@@ -447,66 +381,6 @@ bool IsPassmarksPossible(const QVector<VPieceNode> &path)
     }
 
     return countPointNodes >= 3 || (countPointNodes >= 1 && countOthers >= 1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool FixNotchPoint(const QVector<QPointF> &seamAllowance, const QPointF &notchBase, QPointF *notch)
-{
-    bool fixed = true;
-    if (not VAbstractCurve::IsPointOnCurve(seamAllowance, *notch))
-    {
-        fixed = false;
-        QLineF axis = QLineF(notchBase, *notch);
-        axis.setLength(ToPixel(50, Unit::Cm));
-        const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
-
-        if (points.size() > 0)
-        {
-            if (points.size() == 1)
-            {
-                *notch = points.at(0);
-                fixed = true;
-            }
-            else
-            {
-                QMap<qreal, int> forward;
-
-                for ( qint32 i = 0; i < points.size(); ++i )
-                {
-                    if (points.at(i) == notchBase)
-                    { // Always seek unique intersection
-                        continue;
-                    }
-
-                    const QLineF length(notchBase, points.at(i));
-                    if (qAbs(length.angle() - axis.angle()) < 0.1)
-                    {
-                        forward.insert(length.length(), i);
-                    }
-                }
-
-
-                // Closest point is not always want we need. First return point in forward direction if exists.
-                if (not forward.isEmpty())
-                {
-                    *notch = points.at(forward.first());
-                    fixed = true;
-                }
-            }
-        }
-    }
-    else
-    { // Fixing distortion
-        QLineF axis = QLineF(notchBase, *notch);
-        axis.setLength(axis.length() + accuracyPointOnLine * 10);
-        const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
-        if (points.size() == 1)
-        {
-            *notch = points.first();
-        }
-    }
-
-    return fixed;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
