@@ -66,7 +66,7 @@ public:
     void SetRealPos(QPointF pos);
 
     QColor BaseColor() const;
-    void   SetBaseColor(const QColor &BaseColor);
+    void   SetBaseColor(const QColor &baseColor);
 
 signals:
     /**
