@@ -45,6 +45,7 @@
 - [#966] Unable to control Approximation scale for arc with length.
 - [#967] Variable must not include new line character.
 - German translation for Inno setup script.
+- [#971] Group operation do not work with VCubicBezierPath.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

@@ -146,11 +146,6 @@ const VPointF &VCubicBezierPath::at(int indx) const
 //---------------------------------------------------------------------------------------------------------------------
 void VCubicBezierPath::append(const VPointF &point)
 {
-    if (d->path.size() > 0 && static_cast<QPointF>(d->path.last()) != static_cast<QPointF>(point))
-    {
-        return;
-    }
-
     d->path.append(point);
     CreateName();
 }
