@@ -164,7 +164,7 @@ void VGraphicsSimpleTextItem::CorrectLabelPosition()
 
     if (scale > 1)
     {
-        QLineF line(QPointF(), m_realPos);
+        QLineF line(m_destination, m_realPos);
         line.setLength(line.length() / scale);
         newPos = line.p2();
     }
@@ -362,6 +362,12 @@ void VGraphicsSimpleTextItem::keyReleaseEvent(QKeyEvent *event)
             break;
     }
     QGraphicsSimpleTextItem::keyReleaseEvent ( event );
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGraphicsSimpleTextItem::SetDestination(const QPointF &destination)
+{
+    m_destination = destination;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

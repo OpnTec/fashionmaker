@@ -68,6 +68,8 @@ public:
     QColor BaseColor() const;
     void   SetBaseColor(const QColor &baseColor);
 
+    void SetDestination(const QPointF &destination);
+
 signals:
     /**
      * @brief NameChangePosition emit when label change position.
@@ -96,6 +98,7 @@ private:
     bool          m_showParentTooltip;
     QPointF       m_realPos{};
     QColor        m_baseColor{Qt::black};
+    QPointF       m_destination{};
 
     void Init();
 
