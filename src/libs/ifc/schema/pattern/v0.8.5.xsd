@@ -379,7 +379,6 @@
                           <xs:attribute name="checkWidthReference" type="checkReference"/>
                           <xs:attribute name="checkHeightReference" type="checkReference"/> 
                           <xs:attribute name="checkStop" type="cuttingStop"/>
-                          <xs:attribute name="cuttingTime" type="cuttingTime"/>
                           <xs:attribute name="cuttingNumber" type="xs:unsignedInt"/>
                           <xs:attribute name="cuttingMode" type="cuttingMode"/>
                           <xs:attribute name="cuttingVelocityReduction" type="velocityReduction"/> 
@@ -445,10 +444,6 @@
                                       <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                       <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
                                       <xs:attribute name="builtInPassmarkCuttingStop" type="cuttingStop"/>
-                                      <xs:attribute name="singlePassmarkCuttingTime" type="cuttingTime"/>
-                                      <xs:attribute name="leftPassmarkCuttingTime" type="cuttingTime"/>
-                                      <xs:attribute name="rightPassmarkCuttingTime" type="cuttingTime"/>
-                                      <xs:attribute name="builtInPassmarkCuttingTime" type="cuttingTime"/>
                                       <xs:attribute name="singlePassmarkCuttingNumber" type="xs:int"/>
                                       <xs:attribute name="leftPassmarkCuttingNumber" type="xs:int"/>
                                       <xs:attribute name="rightPassmarkCuttingNumber" type="xs:int"/>
@@ -473,7 +468,6 @@
                           <xs:attribute name="visible" type="xs:string"/>
                           <xs:attribute name="firstToCountour" type="xs:boolean"/>
                           <xs:attribute name="lastToCountour" type="xs:boolean"/>
-                          <xs:attribute name="cuttingTime" type="cuttingTime"/>  
                           <xs:attribute name="cuttingNumber" type="xs:unsignedInt"/>  
                         </xs:complexType>
                       </xs:element>
@@ -511,10 +505,6 @@
                                             <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                             <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
                                             <xs:attribute name="builtInPassmarkCuttingStop" type="cuttingStop"/>
-                                            <xs:attribute name="singlePassmarkCuttingTime" type="cuttingTime"/>
-                                            <xs:attribute name="leftPassmarkCuttingTime" type="cuttingTime"/>
-                                            <xs:attribute name="rightPassmarkCuttingTime" type="cuttingTime"/>
-                                            <xs:attribute name="builtInPassmarkCuttingTime" type="cuttingTime"/>
                                             <xs:attribute name="singlePassmarkCuttingNumber" type="xs:int"/>
                                             <xs:attribute name="leftPassmarkCuttingNumber" type="xs:int"/>
                                             <xs:attribute name="rightPassmarkCuttingNumber" type="xs:int"/>
@@ -727,10 +717,6 @@
                                     <xs:attribute name="leftPassmarkCuttingStop" type="cuttingStop"/>
                                     <xs:attribute name="rightPassmarkCuttingStop" type="cuttingStop"/>
                                     <xs:attribute name="builtInPassmarkCuttingStop" type="cuttingStop"/>
-                                    <xs:attribute name="singlePassmarkCuttingTime" type="cuttingTime"/>
-                                    <xs:attribute name="leftPassmarkCuttingTime" type="cuttingTime"/>
-                                    <xs:attribute name="rightPassmarkCuttingTime" type="cuttingTime"/>
-                                    <xs:attribute name="builtInPassmarkCuttingTime" type="cuttingTime"/>
                                     <xs:attribute name="singlePassmarkCuttingNumber" type="xs:int"/>
                                     <xs:attribute name="leftPassmarkCuttingNumber" type="xs:int"/>
                                     <xs:attribute name="rightPassmarkCuttingNumber" type="xs:int"/>
@@ -805,6 +791,7 @@
                         <xs:attribute name="hideMainPath" type="xs:boolean"/>
                         <xs:attribute name="priority" type="piecePriorityType"/>
                         <xs:attribute name="gravity" type="layoutSideGravityType"/>
+                        <xs:attribute name="cuttingTime" type="cuttingTime"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
