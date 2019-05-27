@@ -249,7 +249,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 if (nodeIndex != -1)
                 {
                     layoutPassmark.lines = passmark.BuiltInSAPassmark(piece, pattern);
-                    layoutPassmark.baseLine = passmark.BuiltInSAPassmarkBaseLine(piece);
+                    layoutPassmark.baseLine = passmark.BuiltInSAPassmarkBaseLine(piece).constFirst();
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = true;
 
@@ -265,9 +265,18 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 const int nodeIndex = path.indexOfNode(pData.id);
                 if (nodeIndex != -1)
                 {
-                    layoutPassmark.lines = passmark.SAPassmark(piece, pattern, static_cast<PassmarkSide>(side));
-                    layoutPassmark.baseLine =
+                    QVector<QLineF> lines =
                             passmark.SAPassmarkBaseLine(piece, pattern, static_cast<PassmarkSide>(side));
+
+                    if (side == PassmarkSide::All || side == PassmarkSide::Right)
+                    {
+                        layoutPassmark.baseLine = lines.first();
+                    }
+                    else if (side == PassmarkSide::Right)
+                    {
+                        layoutPassmark.baseLine = lines.last();
+                    }
+                    layoutPassmark.lines = passmark.SAPassmark(piece, pattern, side);
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = false;
 
