@@ -45,7 +45,7 @@ public:
     VLayoutPiecePathData()
     {}
 
-    VLayoutPiecePathData(const QVector<QPointF> &points)
+    explicit VLayoutPiecePathData(const QVector<QPointF> &points)
         : m_points(points)
     {}
 
