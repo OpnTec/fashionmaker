@@ -31,6 +31,9 @@
 
 #include <QVector>
 #include <QPolygonF>
+#include <QTransform>
+
+#include "../ifc/ifcdef.h"
 
 enum class GOType : char
 {
@@ -74,6 +77,8 @@ struct VLayoutPlaceLabel
     QPointF        center;
     PlaceLabelType type;
     PlaceLabelImg  shape;
+    QTransform     rotationMatrix{};
+    QRectF         box{};
 };
 
 #endif // VGEOMETRYDEF_H

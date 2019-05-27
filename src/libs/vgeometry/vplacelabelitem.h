@@ -83,6 +83,9 @@ public:
     PlaceLabelType GetLabelType() const;
     void           SetLabelType(PlaceLabelType type);
 
+    QTransform RotationMatrix() const;
+    QRectF     Box() const;
+
     PlaceLabelImg LabelShape() const;
     QPainterPath  LabelShapePath() const;
 

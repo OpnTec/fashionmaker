@@ -198,6 +198,22 @@ void VPlaceLabelItem::SetLabelType(PlaceLabelType type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QTransform VPlaceLabelItem::RotationMatrix() const
+{
+    QTransform t;
+    t.translate(x(), y());
+    t.rotate(-d->aValue-d->correctionAngle);
+    t.translate(-x(), -y());
+    return t;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QRectF VPlaceLabelItem::Box() const
+{
+    return QRectF(0, 0, d->wValue, d->hValue);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
 {
     if ( &item == this )
@@ -212,10 +228,7 @@ VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
 //---------------------------------------------------------------------------------------------------------------------
 PlaceLabelImg VPlaceLabelItem::LabelShape() const
 {
-    QTransform t;
-    t.translate(x(), y());
-    t.rotate(-d->aValue-d->correctionAngle);
-    t.translate(-x(), -y());
+    QTransform t = RotationMatrix();
 
     auto SegmentShape = [t, this]()
     {

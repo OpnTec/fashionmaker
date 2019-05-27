@@ -218,6 +218,8 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
         {
             VLayoutPlaceLabel layoutLabel;
             layoutLabel.shape = label->LabelShape();
+            layoutLabel.rotationMatrix = label->RotationMatrix();
+            layoutLabel.box = label->Box();
             layoutLabel.center = label->toQPointF();
             layoutLabel.type = label->GetLabelType();
             labels.append(layoutLabel);
