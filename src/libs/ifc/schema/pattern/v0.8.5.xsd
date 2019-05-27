@@ -468,7 +468,8 @@
                           <xs:attribute name="visible" type="xs:string"/>
                           <xs:attribute name="firstToCountour" type="xs:boolean"/>
                           <xs:attribute name="lastToCountour" type="xs:boolean"/>
-                          <xs:attribute name="cuttingNumber" type="xs:unsignedInt"/>  
+                          <xs:attribute name="cuttingNumber" type="xs:unsignedInt"/>
+                          <xs:attribute name="cuttingVelocityReduction" type="velocityReduction"/>   
                         </xs:complexType>
                       </xs:element>
                       <xs:element name="tools" minOccurs="0" maxOccurs="unbounded">
