@@ -80,5 +80,15 @@ struct VLayoutPlaceLabel
     QTransform     rotationMatrix{};
     QRectF         box{};
 };
+Q_DECLARE_METATYPE(VLayoutPlaceLabel)
+
+struct VLayoutPassmark
+{
+    QVector<QLineF> lines{};
+    PassmarkLineType type{PassmarkLineType::OneLine};
+    QLineF baseLine{};
+    bool isBuiltIn{false};
+};
+Q_DECLARE_METATYPE(VLayoutPassmark)
 
 #endif // VGEOMETRYDEF_H

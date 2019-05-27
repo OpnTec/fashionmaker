@@ -103,7 +103,7 @@ public:
     QVector<QPointF>          layoutAllowance;
 
     /** @brief passmarks list of passmakrs. */
-    QVector<QLineF>           passmarks;
+    QVector<VLayoutPassmark>  passmarks;
 
     /** @brief m_internalPaths list of internal paths. */
     QVector<VLayoutPiecePath> m_internalPaths;

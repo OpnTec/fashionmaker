@@ -732,12 +732,15 @@ void VDxfEngine::ExportAAMANotch(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 {
     if (detail.IsSeamAllowance())
     {
-        const QVector<QLineF> passmarks = detail.GetPassmarks();
-        for(auto passmark : passmarks)
+        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        for(auto &passmark : passmarks)
         {
-            if (DRW_Entity *e = AAMALine(passmark, QChar('4')))
+            for (auto &line : passmark.lines)
             {
-                detailBlock->ent.push_back(e);
+                if (DRW_Entity *e = AAMALine(line, QChar('4')))
+                {
+                    detailBlock->ent.push_back(e);
+                }
             }
         }
     }

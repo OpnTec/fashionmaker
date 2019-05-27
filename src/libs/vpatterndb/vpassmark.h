@@ -79,14 +79,22 @@ public:
     QVector<QLineF> SAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
     QVector<QLineF> BuiltInSAPassmark(const VPiece &piece, const VContainer *data) const;
 
+    QLineF BuiltInSAPassmarkBaseLine(const VPiece &piece) const;
+    QLineF SAPassmarkBaseLine(const VPiece &piece, const VContainer *data, PassmarkSide side) const;
+    QLineF SAPassmarkBaseLine(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
+
     QPainterPath SAPassmarkPath(const VPiece& piece, const VContainer *data, PassmarkSide side) const;
     QPainterPath BuiltInSAPassmarkPath(const VPiece &piece, const VContainer *data) const;
 
     bool IsNull() const;
 
     VPiecePassmarkData Data() const;
+
+    static QLineF FindIntersection(const QLineF &line, const QVector<QPointF> &seamAllowance);
+
+    static const qreal passmarkRadiusFactor;
 private:
-    VPiecePassmarkData m_data;
+    VPiecePassmarkData m_data{};
     bool m_null{true};
 
     QVector<QLineF> MakeSAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const;
