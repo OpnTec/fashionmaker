@@ -318,14 +318,10 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
      // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
         if (prev == -1)
         {
-            i == 0 ? prev = buf1.size() - 1 : prev = i-1;
+            prev = (i == 0) ?  buf1.size() - 1 : i-1;
         }
 
-        int next = i+1;
-        if (i == buf1.size() - 1)
-        {
-            next = 0;
-        }
+        const int next = (i == buf1.size() - 1) ? 0 : i+1;
 
         const T &iPoint = buf1.at(i);
         const T &prevPoint = buf1.at(prev);
