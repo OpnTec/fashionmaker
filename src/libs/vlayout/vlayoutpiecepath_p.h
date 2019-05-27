@@ -43,15 +43,10 @@ class VLayoutPiecePathData : public QSharedData
 {
 public:
     VLayoutPiecePathData()
-        : m_points(),
-          m_penStyle(Qt::SolidLine),
-          m_cut(false)
     {}
 
-    VLayoutPiecePathData(const QVector<QPointF> points, bool cut, Qt::PenStyle penStyle)
-        : m_points(points),
-          m_penStyle(penStyle),
-          m_cut(cut)
+    VLayoutPiecePathData(const QVector<QPointF> &points)
+        : m_points(points)
     {}
 
     VLayoutPiecePathData(const VLayoutPiecePathData &path)
@@ -64,12 +59,12 @@ public:
     ~VLayoutPiecePathData() Q_DECL_EQ_DEFAULT;
 
     /** @brief m_points list of path points. */
-    QVector<QPointF> m_points;
+    QVector<QPointF> m_points{};
 
     /** @brief m_penStyle path pen style. */
-    Qt::PenStyle     m_penStyle;
+    Qt::PenStyle     m_penStyle{Qt::SolidLine};
 
-    bool             m_cut;
+    bool             m_cut{false};
 
 private:
     VLayoutPiecePathData &operator=(const VLayoutPiecePathData &) Q_DECL_EQ_DELETE;

@@ -39,8 +39,8 @@ VLayoutPiecePath::VLayoutPiecePath()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiecePath::VLayoutPiecePath(const QVector<QPointF> &points, bool cut, Qt::PenStyle penStyle)
-    : d(new VLayoutPiecePathData(points, cut, penStyle))
+VLayoutPiecePath::VLayoutPiecePath(const QVector<QPointF> &points)
+    : d(new VLayoutPiecePathData(points))
 {
 }
 

@@ -31,6 +31,7 @@
 
 #include <QPointF>
 #include <QSharedDataPointer>
+#include <QMetaType>
 
 class VLayoutPiecePathData;
 class QPainterPath;
@@ -39,7 +40,7 @@ class VLayoutPiecePath
 {
 public:
     VLayoutPiecePath();
-    VLayoutPiecePath(const QVector<QPointF> &points, bool cut, Qt::PenStyle penStyle = Qt::SolidLine);
+    explicit VLayoutPiecePath(const QVector<QPointF> &points);
     VLayoutPiecePath(const VLayoutPiecePath &path);
 
     virtual ~VLayoutPiecePath();
@@ -67,6 +68,7 @@ private:
     QSharedDataPointer<VLayoutPiecePathData> d;
 };
 
+Q_DECLARE_METATYPE(VLayoutPiecePath)
 Q_DECLARE_TYPEINFO(VLayoutPiecePath, Q_MOVABLE_TYPE);
 
 #endif // VLAYOUTPIECEPATH_H
