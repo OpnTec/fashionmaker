@@ -491,6 +491,12 @@ void DialogHistory::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogHistory::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent( event ); // return default behavior
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogHistory::RetranslateUi()
 {
     qint32 currentRow = cursorRow;
