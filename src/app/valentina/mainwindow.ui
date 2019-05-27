@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>243</height>
         </rect>
        </property>
@@ -743,7 +743,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -1034,7 +1034,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>102</height>
         </rect>
        </property>
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>237</height>
         </rect>
        </property>
@@ -1975,6 +1975,9 @@
        </property>
        <property name="flow">
         <enum>QListView::TopToBottom</enum>
+       </property>
+       <property name="isWrapping" stdset="0">
+        <bool>false</bool>
        </property>
        <property name="resizeMode">
         <enum>QListView::Adjust</enum>
@@ -2770,7 +2773,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-in"/>
+    <iconset theme="zoom-in">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Increase label font</string>
@@ -2784,7 +2788,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-out"/>
+    <iconset theme="zoom-out">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Decrease label font</string>
@@ -2798,7 +2803,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset theme="zoom-original"/>
+    <iconset theme="zoom-original">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Original label font</string>
