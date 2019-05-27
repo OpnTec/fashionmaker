@@ -298,7 +298,7 @@ win32:*g++* {
         $$[QT_INSTALL_BINS]/Qt5Widgets.dll \
         $$[QT_INSTALL_BINS]/Qt5Xml.dll \
         $$[QT_INSTALL_BINS]/Qt5XmlPatterns.dll \
-        $$[QT_INSTALL_BINS]/libgcc_s_dw2-1.dll \
+        $$[QT_INSTALL_BINS]/libgcc_s_*-1.dll \ # There are several different exception handler for MinGW available: sjlj, dwarf, seh
         $$[QT_INSTALL_BINS]/libstdc++-6.dll \
         $$[QT_INSTALL_BINS]/libwinpthread-1.dll \
         $$[QT_INSTALL_BINS]/libEGL.dll \
