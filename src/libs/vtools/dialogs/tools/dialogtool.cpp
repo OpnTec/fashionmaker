@@ -394,7 +394,7 @@ quint32 DialogTool::DNumber(const QString &baseName) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString DialogTool::GetNodeName(const VPieceNode &node, bool showDetails) const
+QString DialogTool::GetNodeName(const VPieceNode &node, bool showPassmarkDetails) const
 {
     const QSharedPointer<VGObject> obj = data->GetGObject(node.GetId());
     QString name = obj->name();
@@ -404,14 +404,14 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showDetails) const
         int bias = 0;
         qApp->TrVars()->VariablesToUser(name, 0, obj->name(), bias);
 
-        if (showDetails && node.GetReverse())
+        if (node.GetReverse())
         {
-            name = QLatin1String("- ") + name;
+            name = QStringLiteral("- ") + name;
         }
     }
     else
     {
-        if (showDetails && node.IsPassmark())
+        if (showPassmarkDetails && node.IsPassmark())
         {
             switch(node.GetPassmarkLineType())
             {
@@ -444,7 +444,7 @@ QString DialogTool::GetNodeName(const VPieceNode &node, bool showDetails) const
             }
         }
 
-        if (showDetails && not node.IsCheckUniqueness())
+        if (not node.IsCheckUniqueness())
         {
             name = QLatin1Char('[') + name + QLatin1Char(']');
         }
