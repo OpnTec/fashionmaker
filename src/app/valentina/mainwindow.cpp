@@ -4260,24 +4260,22 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AddDocks()
 {
+    ui->menuWindow->addSeparator();
+
     //Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetToolOptions);
+    ui->menuWindow->addAction(actionDockWidgetToolOptions);
     connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, this, [this](bool visible)
     {
         isDockToolOptionsVisible = visible;
     });
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, actionDockWidgetGroups);
+    ui->menuWindow->addAction(actionDockWidgetGroups);
     connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, this, [this](bool visible)
     {
         isDockGroupsVisible = visible;
     });
-
-    separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
