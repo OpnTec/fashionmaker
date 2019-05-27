@@ -60,7 +60,7 @@ void TST_VLayoutDetail::Case1() const
     det.SetCountourPoints(InputPointsCase1());
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase1());
+    Comparison(det.GetMappedContourPoints(), OutputPointsCase1());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ void TST_VLayoutDetail::Case2() const
     det.SetCountourPoints(InputPointsCase2());
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase2());
+    Comparison(det.GetMappedContourPoints(), OutputPointsCase2());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ void TST_VLayoutDetail::Case3() const
     det.SetCountourPoints(InputPointsCase3());
 
     // Begin comparison
-    Comparison(det.GetContourPoints(), OutputPointsCase3());
+    Comparison(det.GetMappedContourPoints(), OutputPointsCase3());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -467,9 +467,15 @@ QVector<VLayoutPassmark> VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassm
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VLayoutPiece::GetContourPoints() const
+QVector<QPointF> VLayoutPiece::GetMappedContourPoints() const
 {
     return Map(d->contour);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetContourPoints() const
+{
+    return d->contour;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -481,9 +487,15 @@ void VLayoutPiece::SetCountourPoints(const QVector<QPointF> &points, bool hideMa
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-QVector<QPointF> VLayoutPiece::GetSeamAllowancePoints() const
+QVector<QPointF> VLayoutPiece::GetMappedSeamAllowancePoints() const
 {
     return Map(d->seamAllowance);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VLayoutPiece::GetSeamAllowancePoints() const
+{
+    return d->seamAllowance;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -800,8 +812,8 @@ int VLayoutPiece::LayoutEdgeByPoint(const QPointF &p1) const
 //---------------------------------------------------------------------------------------------------------------------
 QRectF VLayoutPiece::DetailBoundingRect() const
 {
-    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetSeamAllowancePoints()) :
-                                                               BoundingRect(GetContourPoints());
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? BoundingRect(GetMappedSeamAllowancePoints()) :
+                                                               BoundingRect(GetMappedContourPoints());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -850,7 +862,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
         {
-            d->layoutAllowance = Equidistant(PrepareAllowance(GetSeamAllowancePoints()), d->layoutWidth, GetName());
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetMappedSeamAllowancePoints()), d->layoutWidth, GetName());
             if (d->layoutAllowance.isEmpty() == false)
             {
                 d->layoutAllowance.removeLast();
@@ -858,7 +870,7 @@ void VLayoutPiece::SetLayoutAllowancePoints()
         }
         else
         {
-            d->layoutAllowance = Equidistant(PrepareAllowance(GetContourPoints()), d->layoutWidth, GetName());
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetMappedContourPoints()), d->layoutWidth, GetName());
             if (d->layoutAllowance.isEmpty() == false)
             {
                 d->layoutAllowance.removeLast();
@@ -941,7 +953,7 @@ QPainterPath VLayoutPiece::ContourPath() const
     // contour
     if (not IsHideMainPath() || not IsSeamAllowance() || IsSeamAllowanceBuiltIn())
     {
-        path = PainterPath(GetContourPoints());
+        path = PainterPath(GetMappedContourPoints());
     }
 
     // seam allowance
@@ -950,7 +962,7 @@ QPainterPath VLayoutPiece::ContourPath() const
         if (not IsSeamAllowanceBuiltIn())
         {
             // Draw seam allowance
-            QVector<QPointF>points = GetSeamAllowancePoints();
+            QVector<QPointF>points = GetMappedSeamAllowancePoints();
 
             if (points.last().toPoint() != points.first().toPoint())
             {
@@ -1218,7 +1230,7 @@ QGraphicsPathItem *VLayoutPiece::GetMainPathItem() const
     QPainterPath path;
 
     // contour
-    QVector<QPointF> points = GetContourPoints();
+    QVector<QPointF> points = GetMappedContourPoints();
 
     path.moveTo(points.at(0));
     for (qint32 i = 1; i < points.count(); ++i)
