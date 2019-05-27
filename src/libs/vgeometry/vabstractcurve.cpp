@@ -263,6 +263,74 @@ bool VAbstractCurve::IsPointOnCurve(const QPointF &p) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractCurve::SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
+                                   QVector<QPointF> &sub2)
+{
+    if (points.size() < 2)
+    {
+        return false;
+    }
+
+    bool found = false;
+    sub1.clear();
+    sub2.clear();
+
+    for (qint32 i = 0; i < points.count()-1; ++i)
+    {
+        if (not found)
+        {
+            if (IsPointOnLineSegment(p, points.at(i), points.at(i+1)))
+            {
+                if (not VFuzzyComparePoints(points.at(i), p))
+                {
+                    sub1.append(points.at(i));
+                    sub1.append(p);
+                }
+                else
+                {
+                    if (not sub1.isEmpty())
+                    {
+                        sub1.append(p);
+                    }
+                }
+
+                if (not VFuzzyComparePoints(points.at(i+1), p))
+                {
+                    sub2.append(p);
+
+                    if (i+1 == points.count()-1)
+                    {
+                        sub2.append(points.at(i+1));
+                    }
+                }
+
+                found = true;
+            }
+            else
+            {
+                sub1.append(points.at(i));
+            }
+        }
+        else
+        {
+            sub2.append(points.at(i));
+
+            if (i+1 == points.count()-1)
+            {
+                sub2.append(points.at(i+1));
+            }
+        }
+    }
+
+    if (not found)
+    {
+        sub1.clear();
+    }
+
+    return found;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 quint32 VAbstractCurve::GetDuplicate() const
 {
     return d->duplicate;

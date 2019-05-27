@@ -77,6 +77,9 @@ public:
     static bool              IsPointOnCurve(const QVector<QPointF> &points, const QPointF &p);
     bool                     IsPointOnCurve(const QPointF &p) const;
 
+    static bool              SubdividePath(const QVector<QPointF> &points, QPointF p, QVector<QPointF> &sub1,
+                                           QVector<QPointF> &sub2);
+
     virtual qreal            GetStartAngle () const=0;
     virtual qreal            GetEndAngle () const=0;
 
