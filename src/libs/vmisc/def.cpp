@@ -59,7 +59,7 @@
 #include "vdatastreamenum.h"
 
 const qreal   defCurveApproximationScale = 0.5;
-const qreal   minCurveApproximationScale = 0.1;
+const qreal   minCurveApproximationScale = 0.2;
 const qreal   maxCurveApproximationScale = 10.0;
 
 const int minLabelFontSize = 5;
