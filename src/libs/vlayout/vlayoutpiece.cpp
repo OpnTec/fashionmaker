@@ -249,7 +249,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 if (nodeIndex != -1)
                 {
                     layoutPassmark.lines = passmark.BuiltInSAPassmark(piece, pattern);
-                    layoutPassmark.baseLine = passmark.BuiltInSAPassmarkBaseLine(piece).constFirst();
+                    layoutPassmark.baseLine = ConstFirst (passmark.BuiltInSAPassmarkBaseLine(piece));
                     layoutPassmark.type = pData.passmarkLineType;
                     layoutPassmark.isBuiltIn = true;
 

@@ -1010,26 +1010,11 @@ void VCommonSettings::SetHideLabels(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLabelDateFormat() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     const QString format = value(*settingLabelDateFormat,
-                                 VCommonSettings::PredefinedDateFormats().constFirst()).toString();
-#else
-    const QString format = value(*settingLabelDateFormat, VCommonSettings::PredefinedDateFormats().first()).toString(); // clazy:exclude=detaching-temporary
-#endif
+                                 ConstFirst (VCommonSettings::PredefinedDateFormats())).toString();
     const QStringList allFormats = VCommonSettings::PredefinedDateFormats() + GetUserDefinedDateFormats();
 
-    if (allFormats.contains(format))
-    {
-        return format;
-    }
-    else
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return VCommonSettings::PredefinedDateFormats().constFirst();
-#else
-        return VCommonSettings::PredefinedDateFormats().first(); // clazy:exclude=detaching-temporary
-#endif
-    }
+    return allFormats.contains(format) ? format : ConstFirst (VCommonSettings::PredefinedDateFormats());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1081,26 +1066,11 @@ void VCommonSettings::SetUserDefinedDateFormats(const QStringList &formats)
 //---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::GetLabelTimeFormat() const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     const QString format = value(*settingLabelTimeFormat,
-                                 VCommonSettings::PredefinedTimeFormats().constFirst()).toString();
-#else
-    const QString format = value(*settingLabelTimeFormat, VCommonSettings::PredefinedTimeFormats().first()).toString(); // clazy:exclude=detaching-temporary
-#endif
+                                 ConstFirst (VCommonSettings::PredefinedTimeFormats())).toString();
     const QStringList allFormats = VCommonSettings::PredefinedTimeFormats() + GetUserDefinedTimeFormats();
 
-    if (allFormats.contains(format))
-    {
-        return format;
-    }
-    else
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return VCommonSettings::PredefinedTimeFormats().constFirst();
-#else
-        return VCommonSettings::PredefinedTimeFormats().first(); // clazy:exclude=detaching-temporary
-#endif
-    }
+    return allFormats.contains(format) ? format : ConstFirst (VCommonSettings::PredefinedTimeFormats());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

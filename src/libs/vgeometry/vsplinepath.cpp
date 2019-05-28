@@ -326,18 +326,7 @@ const VSplinePoint &VSplinePath::at(int indx) const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSplinePath::GetStartAngle() const
 {
-    if (CountPoints() > 0)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constFirst().Angle2();
-#else
-        return GetSplinePath().first().Angle2(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return 0;
-    }
+    return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Angle2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -360,66 +349,27 @@ qreal VSplinePath::GetEndAngle() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSplinePath::GetC1Length() const
 {
-    if (CountPoints() > 0)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constFirst().Length2();
-#else
-        return GetSplinePath().first().Length2(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return 0;
-    }
+    return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Length2() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSplinePath::GetC2Length() const
 {
-    if (CountPoints() > 0)
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constLast().Length1();
-#else
-        return GetSplinePath().last().Length1(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return 0;
-    }
+    return CountPoints() > 0 ? ConstFirst (GetSplinePath()).Length1() : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VSplinePath::FirstPoint() const
 {
-    if (not d->path.isEmpty())
-    {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return d->path.constFirst().P();
-#else
-        return d->path.first().P(); // clazy:exclude=detaching-temporary
-#endif
-    }
-    else
-    {
-        return VPointF();
-    }
+    return not d->path.isEmpty() ? ConstFirst (d->path).P() : VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF VSplinePath::LastPoint() const
 {
     const qint32 count = CountSubSpl();
-    if (count >= 1)
-    {
-        return d->path.at(count).P();// Take last point of the last real spline
-    }
-    else
-    {
-        return VPointF();
-    }
+    return count >= 1 ? d->path.at(count).P() :// Take last point of the last real spline
+                        VPointF();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
