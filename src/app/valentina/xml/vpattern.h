@@ -138,6 +138,11 @@ private:
     VMainGraphicsScene *sceneDetail;
     QVector<VToolSeamAllowance *> updatePieces;
 
+    /**
+     * @brief m_parsing true if parsing a pattern. Helps to stop updating piece when new parsing happend before
+     * finish */
+    bool m_parsing{false};
+
     VNodeDetail    ParseDetailNode(const QDomElement &domElement) const;
 
     void           ParseDrawElement(const QDomNode& node, const Document &parse);

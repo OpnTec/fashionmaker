@@ -172,6 +172,7 @@ void VPattern::Parse(const Document &parse)
             break;
     }
 
+    m_parsing = true;
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
     static const QStringList tags({TagDraw, TagIncrements, TagPreviewCalculations});
@@ -238,6 +239,7 @@ void VPattern::Parse(const Document &parse)
         RefreshPieceGeometry();
     }
     emit CheckLayout();
+    m_parsing = false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3576,10 +3578,25 @@ quint32 VPattern::LastToolId() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshPieceGeometry()
 {
+    if (qApp->IsGUIMode() && m_parsing)
+    {
+        return;
+    }
+
     for(auto piece : qAsConst(updatePieces))
     {
+        if (qApp->IsGUIMode() && m_parsing)
+        {
+            return;
+        }
+
         piece->RefreshGeometry();
         QApplication::processEvents();
+
+        if (qApp->IsGUIMode() && m_parsing)
+        {
+            return;
+        }
     }
     updatePieces.clear();
     VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
