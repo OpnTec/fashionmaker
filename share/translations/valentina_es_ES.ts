@@ -4640,6 +4640,18 @@ Aplicar características de todos modos?</translation>
         <translation>Excluido</translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4652,6 +4664,14 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4661,6 +4681,10 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4808,6 +4832,10 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Control visibility</source>
         <translation>Control de visibilidad</translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5319,9 +5347,9 @@ Aplicar características de todos modos?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -5561,6 +5589,14 @@ Aplicar características de todos modos?</translation>
         <source>Image files</source>
         <translation>Archivos de imagen</translation>
     </message>
+    <message>
+        <source>tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Numerical control</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
@@ -5777,7 +5813,15 @@ Aplicar características de todos modos?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6226,8 +6270,8 @@ Aplicar características de todos modos?</translation>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
+            <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -8113,6 +8157,22 @@ el patrón.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Increase label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8293,6 +8353,14 @@ el patrón.</translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9035,11 +9103,35 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10389,6 +10481,34 @@ Quieres guardar los cambios?</translation>
         <translation>Intersección 2 ( solamente derecho)</translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valor</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10398,6 +10518,14 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11932,6 +12060,53 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Error</source>
         <translation>Error</translation>
+    </message>
+    <message>
+        <source>Data container is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Math parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is infinite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is NaN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result less than zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VFormulaData</name>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Error</translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

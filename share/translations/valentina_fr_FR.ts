@@ -1876,7 +1876,7 @@
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>User material</source>
@@ -2047,7 +2047,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculs préliminaires</translation>
     </message>
 </context>
 <context>
@@ -2918,7 +2918,7 @@
     </message>
     <message>
         <source>Preview calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculs préliminaires</translation>
     </message>
     <message>
         <source>Unique variable name</source>
@@ -4628,6 +4628,18 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4637,6 +4649,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4650,6 +4670,10 @@ Apply settings anyway?</source>
     <message>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The same curve repeats twice!</source>
@@ -4795,6 +4819,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Control visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Circle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5549,6 +5577,14 @@ Apply settings anyway?</source>
         <source>Image files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Numerical control</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
@@ -5761,8 +5797,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Empty&gt;</source>
         <translation type="unfinished">&lt;vide&gt;</translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The same curve repeats twice!</source>
@@ -7817,27 +7861,27 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Load Individual</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger mensurations individuelles</translation>
     </message>
     <message>
         <source>Load Individual measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger le fichier de mensurations individuelles</translation>
     </message>
     <message>
         <source>Load Multisize</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Load multisize measurements file</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger fichier de mensurations multi-tailles</translation>
     </message>
     <message>
         <source>Open Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir Tape</translation>
     </message>
     <message>
         <source>Edit Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer les mesures chargées</translation>
     </message>
     <message>
         <source>Edit linked to the pattern measurements</source>
@@ -7853,7 +7897,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Unload Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler le chargement du fichier de mesures</translation>
     </message>
     <message>
         <source>Unload measurements if they were not used in a pattern file</source>
@@ -7897,7 +7941,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export increments to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les incréments sous format CSV</translation>
     </message>
     <message>
         <source>Name</source>
@@ -7961,7 +8005,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Label template editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer les mentions du patron</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -7981,7 +8025,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export As…</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter sous …</translation>
     </message>
     <message>
         <source>Save…</source>
@@ -7993,7 +8037,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export Final Measurements to CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter les mesures finales au format CSV</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
@@ -8001,7 +8045,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;export des mesures finales.</translation>
     </message>
     <message>
         <source>Destination path is empty.</source>
@@ -8065,6 +8109,22 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8192,7 +8252,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur d&apos;export des mesures finales.</translation>
     </message>
     <message>
         <source>Value in line %1 is infinite or NaN. Please, check your calculations.</source>
@@ -8248,6 +8308,14 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8922,7 +8990,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>Visibility trigger contains error and will be ignored</source>
@@ -8973,11 +9041,35 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10189,7 +10281,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>on fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Au pli</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -10315,6 +10407,34 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Longueur:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Valeur</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10324,6 +10444,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11456,7 +11584,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Calling this command enable exporting final measurements. Specify path to csv file with final measurements. The path must contain path to directory and name of file. It can be absolute or relatetive. In case of relative path will be used current working directory to calc a destination path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette commande permet d&apos;exporter les mesures finales. Indiquez un chemin d&apos;accès pour le fichier CSV contenant les mesures à exporter. Ce chemin doit spécifier le dossier dans lequel le fichier sera enregistré, ainsi que le nom du fichier. Il peut être absolu ou relatif. Le chemin relatif pointera vers le dossier dans lequel votre patron actuel est enregistré.</translation>
     </message>
     <message>
         <source>Path to csv file</source>
@@ -11782,11 +11910,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Add to group</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter au groupe</translation>
     </message>
     <message>
         <source>Remove from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Retirer du groupe</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
@@ -11805,6 +11933,53 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Error</source>
         <translation>Erreur</translation>
+    </message>
+    <message>
+        <source>Data container is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Math parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is infinite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is NaN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result less than zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VFormulaData</name>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12246,6 +12421,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>cut</source>
         <translation type="vanished">Couper</translation>
     </message>
+    <message>
+        <source>on fold</source>
+        <translation type="vanished">Au pli</translation>
+    </message>
 </context>
 <context>
     <name>VToolAlongLine</name>
@@ -12527,7 +12706,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Line (%2;%3) doesn&apos;t have intersection with axis through point &apos;%4&apos; and angle %5°</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de calculer l&apos;emplacement du point &apos;%1&apos;. Aucun point d&apos;intersection entre la ligne (%2;%3) et l&apos;axe &apos;%4&apos; avec l&apos;angle %5°</translation>
     </message>
 </context>
 <context>

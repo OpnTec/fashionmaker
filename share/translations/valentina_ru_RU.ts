@@ -4641,6 +4641,18 @@ Apply settings anyway?</source>
         <translation>Исключенный</translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Длина:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4653,6 +4665,14 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4662,6 +4682,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4809,6 +4833,10 @@ Apply settings anyway?</source>
     <message>
         <source>Control visibility</source>
         <translation>Контроль видимости</translation>
+    </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5563,6 +5591,14 @@ Apply settings anyway?</source>
         <source>Image files</source>
         <translation>Файлы изображений</translation>
     </message>
+    <message>
+        <source>tiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Numerical control</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSeamAllowance</name>
@@ -5779,7 +5815,15 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit passmark length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8114,6 +8158,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Increase label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide labels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8294,6 +8354,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preparing details for layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot set custom printer page size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9036,11 +9104,35 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10390,6 +10482,34 @@ Do you want to save your changes?</source>
         <translation>Пересечение 2 (только справа)</translation>
     </message>
     <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished">Длина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation type="unfinished">Мастер формул</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation type="unfinished">Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10399,6 +10519,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11934,6 +12062,53 @@ Do you want to save your changes?</source>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
+    <message>
+        <source>Data container is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Math parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is infinite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is NaN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result is zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Result less than zero</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VFormulaData</name>
+    <message>
+        <source>Not evaluated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Ошибка</translation>
+    </message>
+    <message>
+        <source>Formula is empty</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VFormulaProperty</name>
@@ -12410,11 +12585,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12433,11 +12608,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
@@ -12470,11 +12645,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>start angle</source>
-        <translation>начать угол</translation>
+        <translation>начальный угол</translation>
     </message>
     <message>
         <source>end angle</source>
-        <translation>закончить угол</translation>
+        <translation>конечный угол</translation>
     </message>
     <message>
         <source>radius</source>
@@ -12585,11 +12760,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Start angle</source>
-        <translation>Начать угол</translation>
+        <translation>Начальный угол</translation>
     </message>
     <message>
         <source>End angle</source>
-        <translation>Закончить угол</translation>
+        <translation>Конечный угол</translation>
     </message>
     <message>
         <source>Label</source>
