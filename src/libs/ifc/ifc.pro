@@ -21,7 +21,12 @@ TEMPLATE = lib
 
 CONFIG += staticlib # Making static library
 
-CONFIG += c++14
+# Since Q5.12 available support for C++17
+equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 11) {
+    CONFIG += c++17
+} else {
+    CONFIG += c++14
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target

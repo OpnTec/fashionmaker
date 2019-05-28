@@ -21,7 +21,12 @@ TARGET = ParserTest
 # Console application.
 CONFIG   += console
 
-CONFIG += c++14
+# Since Q5.12 available support for C++17
+equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 11) {
+    CONFIG += c++17
+} else {
+    CONFIG += c++14
+}
 
 # CONFIG += testcase adds a  'make check' which is great. But by default it also
 # adds a 'make install' that installs the test cases, which we do not want.

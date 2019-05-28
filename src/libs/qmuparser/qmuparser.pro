@@ -19,7 +19,12 @@ TEMPLATE = lib
 # Use out-of-source builds (shadow builds)
 CONFIG -= debug_and_release debug_and_release_target
 
-CONFIG += c++14
+# Since Q5.12 available support for C++17
+equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 11) {
+    CONFIG += c++17
+} else {
+    CONFIG += c++14
+}
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings

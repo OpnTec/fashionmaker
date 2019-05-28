@@ -31,7 +31,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++14
+# Since Q5.12 available support for C++17
+equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 11) {
+    CONFIG += c++17
+} else {
+    CONFIG += c++14
+}
 
 # Use out-of-source builds (shadow builds)
 CONFIG -= app_bundle debug_and_release debug_and_release_target
