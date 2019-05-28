@@ -1041,27 +1041,29 @@ void VCommonSettings::SetLabelDateFormat(const QString &format)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::PredefinedDateFormats()
 {
-    QStringList formats = QStringList() << "MM-dd-yyyy"
-                                        << "d/M/yy"
-                                        << "ddddMMMM dd, yyyy"
-                                        << "dd/MM/yy"
-                                        << "dd/MM/yyyy"
-                                        << "MMM d, yy"
-                                        << "MMM d, yyyy"
-                                        << "d. MMM. yyyy"
-                                        << "MMMM d, yyyy"
-                                        << "d. MMMM yyyy"
-                                        << "ddd, MMM d, yy"
-                                        << "ddd dd/MMM yy"
-                                        << "ddd, MMMM d, yyyy"
-                                        << "ddddMMMM d, yyyy"
-                                        << "MM-dd"
-                                        << "yy-MM-dd"
-                                        << "yyyy-MM-dd"
-                                        << "MM/yy"
-                                        << "MMM dd"
-                                        << "MMMM";
-    return formats;
+    return QStringList
+    {
+        "MM-dd-yyyy",
+        "d/M/yy",
+        "ddddMMMM dd, yyyy",
+        "dd/MM/yy",
+        "dd/MM/yyyy",
+        "MMM d, yy",
+        "MMM d, yyyy",
+        "d. MMM. yyyy",
+        "MMMM d, yyyy",
+        "d. MMMM yyyy",
+        "ddd, MMM d, yy",
+        "ddd dd/MMM yy",
+        "ddd, MMMM d, yyyy",
+        "ddddMMMM d, yyyy",
+        "MM-dd",
+        "yy-MM-dd",
+        "yyyy-MM-dd",
+        "MM/yy",
+        "MMM dd",
+        "MMMM"
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1110,11 +1112,13 @@ void VCommonSettings::SetLabelTimeFormat(const QString &format)
 //---------------------------------------------------------------------------------------------------------------------
 QStringList VCommonSettings::PredefinedTimeFormats()
 {
-    QStringList formats = QStringList() << "hh:mm:ss"
-                                        << "hh:mm:ss AP"
-                                        << "hh:mm"
-                                        << "hh:mm AP";
-    return formats;
+    return QStringList
+    {
+        "hh:mm:ss",
+        "hh:mm:ss AP",
+        "hh:mm",
+        "hh:mm AP"
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------
