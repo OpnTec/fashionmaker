@@ -1011,10 +1011,10 @@ void VCommonSettings::SetHideLabels(bool value)
 QString VCommonSettings::GetLabelDateFormat() const
 {
     const QString format = value(*settingLabelDateFormat,
-                                 ConstFirst (VCommonSettings::PredefinedDateFormats())).toString();
+                                 ConstFirst<QString> (VCommonSettings::PredefinedDateFormats())).toString();
     const QStringList allFormats = VCommonSettings::PredefinedDateFormats() + GetUserDefinedDateFormats();
 
-    return allFormats.contains(format) ? format : ConstFirst (VCommonSettings::PredefinedDateFormats());
+    return allFormats.contains(format) ? format : ConstFirst<QString> (VCommonSettings::PredefinedDateFormats());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1067,10 +1067,10 @@ void VCommonSettings::SetUserDefinedDateFormats(const QStringList &formats)
 QString VCommonSettings::GetLabelTimeFormat() const
 {
     const QString format = value(*settingLabelTimeFormat,
-                                 ConstFirst (VCommonSettings::PredefinedTimeFormats())).toString();
+                                 ConstFirst<QString> (VCommonSettings::PredefinedTimeFormats())).toString();
     const QStringList allFormats = VCommonSettings::PredefinedTimeFormats() + GetUserDefinedTimeFormats();
 
-    return allFormats.contains(format) ? format : ConstFirst (VCommonSettings::PredefinedTimeFormats());
+    return allFormats.contains(format) ? format : ConstFirst<QString> (VCommonSettings::PredefinedTimeFormats());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

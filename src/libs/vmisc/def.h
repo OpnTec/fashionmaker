@@ -356,8 +356,8 @@ enum class GSizes : unsigned char { ALL,
 #endif // defined(__cplusplus)
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 8, 0)
 
-template <class T>
-const auto & ConstFirst (const T &container)
+template <typename T, template <typename> class Cont>
+inline const T& ConstFirst (const Cont<T> &container)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
@@ -366,6 +366,15 @@ const auto & ConstFirst (const T &container)
 #endif
 }
 
+template <typename T, typename C>
+inline const T& ConstFirst (const C &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    return container.constFirst();
+#else
+    return container.first(); // clazy:exclude=detaching-temporary
+#endif
+}
 
 bool IsOptionSet(int argc, char *argv[], const char *option);
 void InitHighDpiScaling(int argc, char *argv[]);
