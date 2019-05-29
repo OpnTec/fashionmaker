@@ -262,6 +262,8 @@ QString VToolCutArc::MakeToolTip() const
     VArc ar1;
     VArc ar2;
     arc->CutArc(qApp->toPixel(length), ar1, ar2);
+    ar1.setId(m_id + 1);
+    ar2.setId(m_id + 2);
 
     auto ArcToolTip = [arcStr, lengthStr, startAngleStr, endAngleStr, radiusStr](QString toolTip, const VArc &arc,
             const QString &arcNumber)
