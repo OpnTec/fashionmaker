@@ -94,7 +94,7 @@ QString VFormula::GetFormula(FormulaType type) const
 {
     if (type == FormulaType::ToUser)
     {
-        return qApp->TrVars()->TryFormulaToUser(d->formula, qApp->Settings()->GetOsSeparator());
+        return VTranslateVars::TryFormulaToUser(d->formula, qApp->Settings()->GetOsSeparator());
     }
     else
     {
@@ -109,7 +109,7 @@ void VFormula::SetFormula(const QString &value, FormulaType type)
     {
         if (type == FormulaType::FromUser)
         {
-            d->formula = qApp->TrVars()->FormulaFromUser(value, qApp->Settings()->GetOsSeparator());
+            d->formula = VTranslateVars::TryFormulaFromUser(value, qApp->Settings()->GetOsSeparator());
         }
         else
         {
