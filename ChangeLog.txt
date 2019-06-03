@@ -20,6 +20,7 @@
 - [#725] Improve labels on drawing.
 - Move Tool options and Group menu to Window section.
 - Raise the minimum value for curve approximation to 0.2.
+- Make piece labels transparent.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

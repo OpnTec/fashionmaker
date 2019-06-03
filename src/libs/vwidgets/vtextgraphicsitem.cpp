@@ -151,7 +151,7 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(widget)
     Q_UNUSED(option)
-    painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175));
+    painter->fillRect(m_rectBoundingBox, QColor(251, 251, 175, 128 /*50% opacity*/));
     painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 
     painter->setPen(Qt::black);
