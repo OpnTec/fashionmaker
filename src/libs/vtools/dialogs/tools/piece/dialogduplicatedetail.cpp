@@ -29,6 +29,7 @@
 #include "ui_dialogduplicatedetail.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../../../visualization/path/vistoolduplicatedetail.h"
+#include "../../../tools/vabstracttool.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, quint32 toolId, QWidget *parent)
@@ -85,6 +86,13 @@ void DialogDuplicateDetail::ChosenObject(quint32 id, const SceneObject &type)
         if (type == SceneObject::Detail && id > NULL_ID)
         {
             m_idDetail = id;
+
+            VAbstractTool *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(m_idDetail));
+            if (tool)
+            {
+                vis->SetData(tool->getData()); // Includes currentSeamAllowance variable we need
+            }
+
             emit ToolTip(tr("Click to place duplicate"));
             vis->VisualMode(id);
             prepare = true;
