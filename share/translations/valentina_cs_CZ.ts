@@ -11307,7 +11307,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>corn flower blue</source>
-        <translation type="unfinished"></translation>
+        <translation>kukuřice květina modrá</translation>
     </message>
     <message>
         <source>Edit wrong formula</source>
