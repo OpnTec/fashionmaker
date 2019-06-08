@@ -2562,86 +2562,74 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
     points += p;
 
     p = VSAPoint(320.142638433108914, 158.635688769582430);
-    p.SetSABefore(21.7826);
-    p.SetSAAfter(21.7826);
+    p.SetSABefore(21.7825);
+    p.SetSAAfter(21.7825);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(320.765122974842939, 146.512865040203337);
-    p.SetSABefore(23.2368);
-    p.SetSAAfter(23.2368);
+    p.SetSABefore(23.2367);
+    p.SetSAAfter(23.2367);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(318.807583600455132, 136.726949517032153);
-    p.SetSABefore(24.4324);
-    p.SetSAAfter(24.4324);
+    p.SetSABefore(24.4322);
+    p.SetSAAfter(24.4322);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(314.618805263606987, 129.088927339807270);
-    p.SetSABefore(25.4761);
-    p.SetSAAfter(25.4761);
+    p.SetSABefore(25.4758);
+    p.SetSAAfter(25.4758);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(308.547572917959542, 123.409783648267165);
-    p.SetSABefore(26.472);
-    p.SetSAAfter(26.472);
+    p.SetSABefore(26.4717);
+    p.SetSAAfter(26.4717);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(300.942671517174290, 119.500503582150259);
-    p.SetSABefore(27.4965);
-    p.SetSAAfter(27.4965);
+    p.SetSABefore(27.4961);
+    p.SetSAAfter(27.4961);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(292.152886014912497, 117.172072281195000);
-    p.SetSABefore(28.5858);
-    p.SetSAAfter(28.5858);
+    p.SetSABefore(28.5854);
+    p.SetSAAfter(28.5854);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(282.527001364835201, 116.235474885139837);
-    p.SetSABefore(29.7445);
-    p.SetSAAfter(29.7445);
+    p.SetSABefore(29.744);
+    p.SetSAAfter(29.744);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(272.413802520603895, 116.501696533723177);
-    p.SetSABefore(30.9565);
-    p.SetSAAfter(30.9565);
+    p.SetSABefore(30.956);
+    p.SetSAAfter(30.956);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(262.162074435879845, 117.781722366683496);
-    p.SetSABefore(32.1942);
-    p.SetSAAfter(32.1942);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(252.120602064324260, 119.886537523759216);
-    p.SetSABefore(33.4233);
-    p.SetSAAfter(33.4233);
+    p = VSAPoint(257.045176202602249, 118.651559471725193);
+    p.SetSABefore(32.815);
+    p.SetSAAfter(32.815);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(238.080312793150540, 124.132738713584303);
-    p.SetSABefore(35.1806);
-    p.SetSAAfter(35.1806);
+    p.SetSABefore(35.18);
+    p.SetSAAfter(35.18);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(226.745568765280950, 129.259570337063167);
-    p.SetSABefore(36.671);
-    p.SetSAAfter(36.671);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(221.032968783011938, 132.773394187984877);
-    p.SetSABefore(37.4745);
-    p.SetSAAfter(37.4745);
+    p = VSAPoint(223.444321772985404, 131.022926649289388);
+    p.SetSABefore(37.1179);
+    p.SetSAAfter(37.1179);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
@@ -2655,15 +2643,9 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(197.174610917946893, 151.638887884599654);
-    p.SetSABefore(32.9219);
-    p.SetSAAfter(32.9219);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(190.027023685018719, 155.744824719499547);
-    p.SetSABefore(31.4753);
-    p.SetSAAfter(31.4753);
+    p = VSAPoint(193.391595601190147, 154.054987746786708);
+    p.SetSABefore(32.1352);
+    p.SetSAAfter(32.1352);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
@@ -2680,8 +2662,8 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
     points += p;
 
     p = VSAPoint(173.237617815947488, 160.079619284747537);
-    p.SetSABefore(28.4);
-    p.SetSAAfter(28.4);
+    p.SetSABefore(28.4001);
+    p.SetSAAfter(28.4001);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
@@ -2704,74 +2686,68 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
     points += p;
 
     p = VSAPoint(158.575695647501561, 149.207322310502946);
-    p.SetSABefore(25.0517);
-    p.SetSAAfter(25.0517);
+    p.SetSABefore(25.0519);
+    p.SetSAAfter(25.0519);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(155.086603150983990, 139.745623026852769);
-    p.SetSABefore(23.282);
-    p.SetSAAfter(23.282);
+    p.SetSABefore(23.2821);
+    p.SetSAAfter(23.2821);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(152.842400845947793, 128.657470537345603);
-    p.SetSABefore(21.2966);
-    p.SetSAAfter(21.2966);
+    p.SetSABefore(21.2968);
+    p.SetSAAfter(21.2968);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(150.866158843535715, 110.747817409061298);
-    p.SetSABefore(18.1345);
-    p.SetSAAfter(18.1345);
+    p.SetSABefore(18.1347);
+    p.SetSAAfter(18.1347);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(149.373821053326026, 94.001593653555375);
-    p.SetSABefore(15.184);
-    p.SetSAAfter(15.184);
+    p.SetSABefore(15.1843);
+    p.SetSAAfter(15.1843);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(147.903865487813732, 84.774928160493630);
-    p.SetSABefore(13.5443);
-    p.SetSAAfter(13.5443);
+    p.SetSABefore(13.5447);
+    p.SetSAAfter(13.5447);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(145.576143100581845, 78.105459371511586);
-    p.SetSABefore(12.3046);
-    p.SetSAAfter(12.3046);
+    p.SetSABefore(12.305);
+    p.SetSAAfter(12.305);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(142.964662887243179, 75.410534564509078);
-    p.SetSABefore(11.6461);
-    p.SetSAAfter(11.6461);
+    p.SetSABefore(11.6464);
+    p.SetSAAfter(11.6464);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(140.763228387362460, 74.778132056190998);
-    p.SetSABefore(11.2441);
-    p.SetSAAfter(11.2441);
+    p.SetSABefore(11.2445);
+    p.SetSAAfter(11.2445);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(138.110803268066746, 75.255689338760732);
-    p.SetSABefore(10.7711);
-    p.SetSAAfter(10.7711);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(134.954821104026024, 76.947797659966710);
-    p.SetSABefore(10.1427);
-    p.SetSAAfter(10.1427);
+    p = VSAPoint(136.665272250398885, 75.785031833736099);
+    p.SetSABefore(10.5039);
+    p.SetSAAfter(10.5039);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
     p = VSAPoint(129.241060982167369, 81.807533048917350);
-    p.SetSABefore(8.82632);
-    p.SetSAAfter(8.82632);
+    p.SetSABefore(8.82629);
+    p.SetSAAfter(8.82629);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
@@ -2827,19 +2803,11 @@ QVector<VSAPoint> TST_VAbstractPiece::InputPointsCase3() const
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(35.040036121431569, 77.453667650049482);
+    p = VSAPoint(33.079189282762393, 72.987917323101186);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
-    p = VSAPoint(31.635910876104319, 68.615090715039969);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(29.286835374789483, 60.174779789545923);
-    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
-    points += p;
-
-    p = VSAPoint(28.032635377467525, 52.557572017049992);
+    p = VSAPoint(28.381038280132728, 56.107295472113094);
     p.SetAngleType(PieceNodeAngle::ByLengthCurve);
     points += p;
 
@@ -2881,33 +2849,31 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase3() const
     points += QPointF(288.703123507393855, 195.143319989158869);
     points += QPointF(293.166186492321515, 180.515626372699529);
     points += QPointF(295.670561165402944, 175.368662126210381);
-    points += QPointF(297.032789141387639, 169.787277456273927);
-    points += QPointF(298.427265336435482, 158.085347733237541);
-    points += QPointF(297.942252974132145, 150.956565035035396);
-    points += QPointF(296.912688713791681, 147.814698990664539);
-    points += QPointF(296.397246906664407, 147.094006444377413);
-    points += QPointF(294.211143469458648, 146.123700675081551);
-    points += QPointF(290.481153622471652, 145.599128854247056);
-    points += QPointF(285.006529976725062, 145.720902585837194);
-    points += QPointF(278.361635788833837, 146.694970613418548);
-    points += QPointF(271.146419906629319, 148.487066701674678);
-    points += QPointF(264.113564564717535, 150.863468795615489);
-    points += QPointF(254.197633499102608, 155.207693600770455);
-    points += QPointF(247.566503205391086, 159.218808117984338);
-    points += QPointF(246.254288772883399, 160.259875418548035);
-    points += QPointF(243.533064986225241, 163.142629256756265);
-    points += QPointF(226.130506064139297, 173.663708795026963);
-    points += QPointF(209.783463599772517, 181.559396073216902);
-    points += QPointF(198.870332140896153, 185.514532456989372);
-    points += QPointF(188.212417365369049, 188.007916133837341);
-    points += QPointF(177.315021813262121, 188.814025605756967);
-    points += QPointF(166.192147226980524, 187.373264242432697);
-    points += QPointF(155.574372252051631, 183.176300610105812);
-    points += QPointF(146.729241829004422, 176.507931056287021);
-    points += QPointF(140.168590286788287, 168.248135562217215);
-    points += QPointF(134.853805591621665, 156.677511657446274);
-    points += QPointF(132.208639285103033, 142.105067096277111);
-    points += QPointF(131.967613709020185, 132.827500480644005);
+    points += QPointF(297.032836005697561, 169.787192181154381);
+    points += QPointF(298.427368810404460, 158.085249530220608);
+    points += QPointF(297.942387105948967, 150.956429005150937);
+    points += QPointF(296.912819957584588, 147.814504880960072);
+    points += QPointF(296.397338085742149, 147.093749248063460);
+    points += QPointF(295.959645090416700, 146.772731325564138);
+    points += QPointF(294.211098898799321, 146.123357146812708);
+    points += QPointF(290.481043050038522, 145.598758393629993);
+    points += QPointF(285.006359018652802, 145.720508052838397);
+    points += QPointF(278.586587836716035, 146.661545108162670);
+    points += QPointF(267.611351780445432, 149.560217090466921);
+    points += QPointF(254.258155566962188, 155.214998010181603);
+    points += QPointF(246.441613424006931, 160.107097914151410);
+    points += QPointF(243.102668926984364, 163.402837598685920);
+    points += QPointF(225.939985502865284, 173.778976885805150);
+    points += QPointF(204.126745997020492, 183.975693844107269);
+    points += QPointF(188.539896208493161, 187.983698484313294);
+    points += QPointF(177.315121486754521, 188.814064306647623);
+    points += QPointF(166.192228902931021, 187.373339931453700);
+    points += QPointF(155.574422378957252, 183.176406510679953);
+    points += QPointF(146.729251284035655, 176.508054524108871);
+    points += QPointF(140.168555897046843, 168.248262793059951);
+    points += QPointF(134.853718310273564, 156.677629794996079);
+    points += QPointF(132.208495509666591, 142.105162309613490);
+    points += QPointF(131.967439246091402, 132.827656859895768);
     points += QPointF(129.151336777046254, 135.351860712520221);
     points += QPointF(111.113552824916056, 146.223658854871644);
     points += QPointF(91.371995199602523, 152.423346590426377);
@@ -2916,12 +2882,10 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsCase3() const
     points += QPointF(36.773898357312952, 139.523250451403811);
     points += QPointF(24.295634363907766, 128.845730621976628);
     points += QPointF(14.420075278530305, 117.169833926538999);
-    points += QPointF(6.592092174103988, 105.038289915852545);
-    points += QPointF(0.431098196206621, 92.753514068597141);
-    points += QPointF(-4.287700865002472, 80.501477043638104);
-    points += QPointF(-7.673598677574617, 68.335827074506327);
-    points += QPointF(-9.704701735666340, 56.000207529081479);
-    points += QPointF(-9.960881193587724, 42.345874603213382);
+    points += QPointF(6.418159077086557, 104.768734272561886);
+    points += QPointF(-2.435562868156214, 86.343350544456428);
+    points += QPointF(-9.171676817365769, 62.140256123241244);
+    points += QPointF(-10.080338624527474, 42.877642935055057);
     points += QPointF(-6.297329478268652, 26.037464411020956);
     points += QPointF(10.185624773347756, 2.204598425196849);
 
@@ -4120,6 +4084,210 @@ QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue880_Piece_Detail_1() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue883_Piece_ledge() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(1122.844724409448872, 91.856125984251975);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    points += VSAPoint(1122.844724409448872, -664.049385826771640);
+    points += VSAPoint(1122.844724409448872, -664.049385826771640);
+
+    p = VSAPoint(1123.260507101031408, -692.102756615184148);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1125.552134498865144, -746.904953834851995);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1129.501889709744546, -800.813185020781020);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1135.005387617497036, -854.573547056137045);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1141.958243105948213, -908.932136824086342);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1150.256071058924590, -964.635051207794959);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1164.860792708482904, -1051.940922516873343);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(1176.240685838687341, -1114.834837477910014);
+    points += VSAPoint(1176.240685838687341, -1114.834837477910014);
+
+    p = VSAPoint(1183.149091745073974, -1158.117487659903418);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1197.298845134992916, -1231.280297344683277);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1213.068331853193058, -1298.011272385507255);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1231.813333494903418, -1369.033917416923487);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(1242.934050298765897, -1410.354749999999967);
+    points += VSAPoint(1242.934050298765897, -1410.354749999999967);
+    points += VSAPoint(2006.309291338582852, -1344.364346456692829);
+
+    p = VSAPoint(2006.309291338582852, -664.049385826771640);
+    p.SetSAAfter(56.6929);
+    points += p;
+
+    p = VSAPoint(2006.309291338582852, 91.856125984251975);
+    p.SetSABefore(56.6929);
+    points += p;
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue883_Piece_ledge() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(1085.049448818897872, 129.651401574803174);
+    points += QPointF(1085.049448818897645, -664.329454817907731);
+    points += QPointF(1085.476936043251271, -693.172544862022960);
+    points += QPointF(1087.814610680723717, -749.075920183547851);
+    points += QPointF(1091.847534492653722, -804.119277961746889);
+    points += QPointF(1097.455114447215692, -858.896354932157919);
+    points += QPointF(1104.517936006646551, -914.114677877462441);
+    points += QPointF(1112.923052462069791, -970.537814745901301);
+    points += QPointF(1127.624814855215163, -1058.423787947681376);
+    points += QPointF(1138.979568121719467, -1121.178760966856998);
+    points += QPointF(1145.923845706225620, -1164.686154934395063);
+    points += QPointF(1160.338379861934300, -1239.218041820865892);
+    points += QPointF(1176.399099634731783, -1307.181413707870433);
+    points += QPointF(1195.269438012278897, -1378.678945147347804);
+    points += QPointF(1214.661499217332903, -1450.735018320358677);
+    points += QPointF(2044.104566929134307, -1379.033344213213468);
+    points += QPointF(2044.104566929134080, -664.049385826771640);
+    points += QPointF(2063.002204724409694, -664.049385826771640);
+    points += QPointF(2063.002204724409694, 129.651401574803003);
+    points += QPointF(1085.049448818897872, 129.651401574803174);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue883_Piece_prong() const
+{
+    QVector<VSAPoint> points;
+
+    VSAPoint p = VSAPoint(1122.844724409448872, 91.856125984251975);
+    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
+    points += p;
+
+    points += VSAPoint(1122.844724409448872, -664.049385826771640);
+    points += VSAPoint(1122.844724409448872, -664.049385826771640);
+
+    p = VSAPoint(1123.260507101031408, -692.102756615184148);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1125.552134498865144, -746.904953834851995);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1129.501889709744546, -800.813185020781020);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1135.005387617497036, -854.573547056137045);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1141.958243105948213, -908.932136824086342);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1150.256071058924590, -964.635051207794959);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1164.860792708482904, -1051.940922516873343);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(1176.240685838687341, -1114.834837477910014);
+    points += VSAPoint(1176.240685838687341, -1114.834837477910014);
+
+    p = VSAPoint(1183.149091745073974, -1158.117487659903418);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1197.298845134992916, -1231.280297344683277);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1213.068331853193058, -1298.011272385507255);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    p = VSAPoint(1231.813333494903418, -1369.033917416923487);
+    p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    points += p;
+
+    points += VSAPoint(1242.934050298765897, -1410.354749999999967);
+    points += VSAPoint(1242.934050298765897, -1410.354749999999967);
+    points += VSAPoint(2006.309291338582852, -1344.364346456692829);
+
+    p = VSAPoint(2006.309291338582852, -664.049385826771640);
+    p.SetSAAfter(56.6929);
+    points += p;
+
+    points += VSAPoint(2006.309291338582852, 91.856125984251975);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue883_Piece_prong() const
+{
+    QVector<QPointF> points;
+
+    points += QPointF(1085.049448818897872, 129.651401574803174);
+    points += QPointF(1085.049448818897645, -664.329454817907731);
+    points += QPointF(1085.476936043251271, -693.172544862022960);
+    points += QPointF(1087.814610680723717, -749.075920183547851);
+    points += QPointF(1091.847534492653722, -804.119277961746889);
+    points += QPointF(1097.455114447215692, -858.896354932157919);
+    points += QPointF(1104.517936006646551, -914.114677877462441);
+    points += QPointF(1112.923052462069791, -970.537814745901301);
+    points += QPointF(1127.624814855215163, -1058.423787947681376);
+    points += QPointF(1138.979568121719467, -1121.178760966856998);
+    points += QPointF(1145.923845706225620, -1164.686154934395063);
+    points += QPointF(1160.338379861934300, -1239.218041820865892);
+    points += QPointF(1176.399099634731783, -1307.181413707870433);
+    points += QPointF(1195.269438012278897, -1378.678945147347804);
+    points += QPointF(1214.661499217332903, -1450.735018320358677);
+    points += QPointF(2044.104566929134307, -1379.033344213213468);
+    points += QPointF(2044.104566929134080, -664.049385826771640);
+    points += QPointF(2063.002204724409694, -664.049385826771640);
+    points += QPointF(2043.159685039370288, 129.651401574803003);
+    points += QPointF(1085.049448818897872, 129.651401574803174);
+
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::SumTrapezoids() const
 {
     // Case3 checks that the method 'SumTrapezoids' returns negative value for three clockwise allocated points
@@ -4857,121 +5025,16 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data() const
     QTest::newRow("Issue #767.") << InputPointsIssue767_SkinFusing_TopCollar_Notch() << 37.795275590551185
                                  << OutputPointsIssue767_SkinFusing_TopCollar_Notch();
 
-    points.clear();
-    p = VSAPoint(1122.8447244094489, 91.85612598425197);
-    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
-    points.append(p);
-
-    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
-    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
-    points.append(VSAPoint(1123.2605071010314, -692.1027566151841));
-    points.append(VSAPoint(1125.5521344988651, -746.904953834852));
-    points.append(VSAPoint(1129.5018897097445, -800.813185020781));
-    points.append(VSAPoint(1135.005387617497, -854.573547056137));
-    points.append(VSAPoint(1141.9582431059482, -908.9321368240863));
-    points.append(VSAPoint(1150.2560710589246, -964.635051207795));
-    points.append(VSAPoint(1164.860792708483, -1051.9409225168733));
-    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
-    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
-    points.append(VSAPoint(1179.7035125223924, -1136.9452686438185));
-    points.append(VSAPoint(1186.627664934387, -1177.145289266175));
-    points.append(VSAPoint(1197.298845134993, -1231.2802973446833));
-    points.append(VSAPoint(1213.068331853193, -1298.0112723855073));
-    points.append(VSAPoint(1231.8133334949034, -1369.0339174169235));
-    points.append(VSAPoint(1242.934050298766, -1410.35475));
-    points.append(VSAPoint(1242.934050298766, -1410.35475));
-    points.append(VSAPoint(2006.3092913385829, -1344.3643464566928));
-
-    p = VSAPoint(2006.3092913385829, -664.0493858267716);
-    p.SetSAAfter(56.69291338582678);
-    points.append(p);
-
-    p = VSAPoint(2006.3092913385829, 91.85612598425197);
-    p.SetSABefore(56.69291338582678);
-    points.append(p);
-
-    ekvOrig.clear();
-    ekvOrig += QPointF(1085.049448818897872, 129.651401574803174);
-    ekvOrig += QPointF(1085.450358303082339, -664.069324722867464);
-    ekvOrig += QPointF(1085.476936043251271, -693.172544862022960);
-    ekvOrig += QPointF(1087.814610680723717, -749.075920183547851);
-    ekvOrig += QPointF(1091.847534492653722, -804.119277961746889);
-    ekvOrig += QPointF(1097.455114447215692, -858.896354932157919);
-    ekvOrig += QPointF(1104.517936006646551, -914.114677877462441);
-    ekvOrig += QPointF(1112.923052462069791, -970.537814745901301);
-    ekvOrig += QPointF(1127.624814855215163, -1058.423787947681376);
-    ekvOrig += QPointF(1138.622808193283390, -1121.404564318377652);
-    ekvOrig += QPointF(1142.639738372909278, -1143.124791902604784);
-    ekvOrig += QPointF(1149.458034509527806, -1184.008826193513414);
-    ekvOrig += QPointF(1160.353962465951554, -1239.283981973410164);
-    ekvOrig += QPointF(1176.399099634731783, -1307.181413707870433);
-    ekvOrig += QPointF(1195.413665418974006, -1378.710633001728411);
-    ekvOrig += QPointF(1214.661499217332903, -1450.735018320358677);
-    ekvOrig += QPointF(2044.104566929134307, -1379.033344213213468);
-    ekvOrig += QPointF(2044.104566929134080, -664.049385826771640);
-    ekvOrig += QPointF(2063.002204724409694, -664.049385826771640);
-    ekvOrig += QPointF(2063.002204724409694, 129.651401574803003);
-    ekvOrig += QPointF(1085.049448818897872, 129.651401574803174);
-
     // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "ledge"
-    QTest::newRow("Issue #883. Piece 'ledge'") << points << 37.795275590551185 << ekvOrig;
+    QTest::newRow("Issue #883. Piece 'ledge'") << InputPointsIssue883_Piece_ledge()
+                                               << 37.795275590551185
+                                               << OutputPointsIssue883_Piece_ledge();
 
-    points.clear();
-    p = VSAPoint(1122.8447244094489, 91.85612598425197);
-    p.SetAngleType(PieceNodeAngle::ByFirstEdgeSymmetry);
-    points.append(p);
-
-    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
-    points.append(VSAPoint(1122.8447244094489, -664.0493858267716));
-    points.append(VSAPoint(1123.2605071010314, -692.1027566151841));
-    points.append(VSAPoint(1125.5521344988651, -746.904953834852));
-    points.append(VSAPoint(1129.5018897097445, -800.813185020781));
-    points.append(VSAPoint(1135.005387617497, -854.573547056137));
-    points.append(VSAPoint(1141.9582431059482, -908.9321368240863));
-    points.append(VSAPoint(1150.2560710589246, -964.635051207795));
-    points.append(VSAPoint(1164.860792708483, -1051.9409225168733));
-    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
-    points.append(VSAPoint(1176.2406858386873, -1114.83483747791));
-    points.append(VSAPoint(1179.7035125223924, -1136.9452686438185));
-    points.append(VSAPoint(1186.627664934387, -1177.145289266175));
-    points.append(VSAPoint(1197.298845134993, -1231.2802973446833));
-    points.append(VSAPoint(1213.068331853193, -1298.0112723855073));
-    points.append(VSAPoint(1231.8133334949034, -1369.0339174169235));
-    points.append(VSAPoint(1242.934050298766, -1410.35475));
-    points.append(VSAPoint(1242.934050298766, -1410.35475));
-    points.append(VSAPoint(2006.3092913385829, -1344.3643464566928));
-
-    p = VSAPoint(2006.3092913385829, -664.0493858267716);
-    p.SetSAAfter(56.69291338582678);
-    points.append(p);
-
-    points.append(VSAPoint(2006.3092913385829, 91.85612598425197));
-
-    ekvOrig.clear();
-    ekvOrig += QPointF(1085.049448818897872, 129.651401574803174);
-    ekvOrig += QPointF(1085.450358303082339, -664.069324722867464);
-    ekvOrig += QPointF(1085.476936043251271, -693.172544862022960);
-    ekvOrig += QPointF(1087.814610680723717, -749.075920183547851);
-    ekvOrig += QPointF(1091.847534492653722, -804.119277961746889);
-    ekvOrig += QPointF(1097.455114447215692, -858.896354932157919);
-    ekvOrig += QPointF(1104.517936006646551, -914.114677877462441);
-    ekvOrig += QPointF(1112.923052462069791, -970.537814745901301);
-    ekvOrig += QPointF(1127.624814855215163, -1058.423787947681376);
-    ekvOrig += QPointF(1138.622808193283390, -1121.404564318377652);
-    ekvOrig += QPointF(1142.639738372909278, -1143.124791902604784);
-    ekvOrig += QPointF(1149.458034509527806, -1184.008826193513414);
-    ekvOrig += QPointF(1160.353962465951554, -1239.283981973410164);
-    ekvOrig += QPointF(1176.399099634731783, -1307.181413707870433);
-    ekvOrig += QPointF(1195.413665418974006, -1378.710633001728411);
-    ekvOrig += QPointF(1214.661499217332903, -1450.735018320358677);
-    ekvOrig += QPointF(2044.104566929134307, -1379.033344213213468);
-    ekvOrig += QPointF(2044.104566929134080, -664.049385826771640);
-    ekvOrig += QPointF(2063.002204724409694, -664.049385826771640);
-    ekvOrig += QPointF(2043.159685039370288, 129.651401574803003);
-    ekvOrig += QPointF(1085.049448818897872, 129.651401574803174);
 
     // See private test cases in file collection/bugs/Issue_#883_case1.val, piece "prong"
-    QTest::newRow("Issue #883. Piece 'prong'") << points << 37.795275590551185 << ekvOrig;
+    QTest::newRow("Issue #883. Piece 'prong'") << InputPointsIssue883_Piece_prong()
+                                               << 37.795275590551185
+                                               << OutputPointsIssue883_Piece_prong();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

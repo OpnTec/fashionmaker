@@ -100,6 +100,12 @@ private:
     QVector<VSAPoint> InputPointsIssue880_Piece_Detail_1() const;
     QVector<QPointF>  OutputPointsIssue880_Piece_Detail_1() const;
 
+    QVector<VSAPoint> InputPointsIssue883_Piece_ledge() const;
+    QVector<QPointF>  OutputPointsIssue883_Piece_ledge() const;
+
+    QVector<VSAPoint> InputPointsIssue883_Piece_prong() const;
+    QVector<QPointF>  OutputPointsIssue883_Piece_prong() const;
+
     void Case3() const;
     void Case4() const;
     void Case5() const;

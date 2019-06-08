@@ -37,6 +37,7 @@
 #include <QtGlobal>
 #include <csignal>
 #include <QMargins>
+#include <QLineF>
 #ifdef Q_OS_WIN
     #include <windows.h>
 #endif /* Q_OS_WIN */
@@ -642,10 +643,10 @@ Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1
 
 constexpr qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
 
-Q_REQUIRED_RESULT Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
-Q_DECL_CONSTEXPR static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
+Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
+static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
 {
-    return qAbs(p1.x() - p2.x()) <= accuracyPointOnLine && qAbs(p1.y() - p2.y()) <= accuracyPointOnLine;
+    return QLineF(p1, p2).length() <= accuracyPointOnLine;
 }
 
 /**
