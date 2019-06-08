@@ -50,6 +50,7 @@
 - German translation for Inno setup script.
 - [#971] Group operation do not work with VCubicBezierPath.
 - Regression in method DialogTool::GetNodeName.
+- Fix visualization for tool Point from arc and tangent.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

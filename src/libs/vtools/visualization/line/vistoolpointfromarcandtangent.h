@@ -64,7 +64,6 @@ private:
     VScaledEllipse   *point;
     VScaledEllipse   *tangent;
     VCurvePathItem   *arcPath;
-    VScaledLine      *tangentLine2;
 
     void FindRays(const QPointF &p, const VArc *arc);
 };

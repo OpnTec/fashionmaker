@@ -49,12 +49,11 @@
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointFromArcAndTangent::VisToolPointFromArcAndTangent(const VContainer *data, QGraphicsItem *parent)
     : VisLine(data, parent), arcId(NULL_ID), crossPoint(CrossCirclesPoint::FirstPoint),
-      point(nullptr), tangent(nullptr), arcPath(nullptr), tangentLine2(nullptr)
+      point(nullptr), tangent(nullptr), arcPath(nullptr)
 {
     arcPath = InitItem<VCurvePathItem>(Qt::darkGreen, this);
     point = InitPoint(mainColor, this);
     tangent = InitPoint(supportColor, this);
-    tangentLine2 = InitItem<VScaledLine>(supportColor, this);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +72,7 @@ void VisToolPointFromArcAndTangent::RefreshGeometry()
             FindRays(static_cast<QPointF>(*tan), arc.data());
 
             QPointF fPoint;
-            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(),  crossPoint, &fPoint);
+            VToolPointFromArcAndTangent::FindPoint(static_cast<QPointF>(*tan), arc.data(), crossPoint, &fPoint);
             DrawPoint(point, fPoint, mainColor);
         }
     }
@@ -110,9 +109,12 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
         case 2:
         {
             int localRes = 0;
+            bool flagP1 = false;
+
             if (arc->IsIntersectLine(r1Arc))
             {
                 ++localRes;
+                flagP1 = true;
             }
 
             if (arc->IsIntersectLine(r2Arc))
@@ -123,17 +125,14 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
             switch(localRes)
             {
                 case 2:
-                    DrawRay(this, p, p1, supportColor, Qt::DashLine);
-                    DrawRay(tangentLine2, p, p2, supportColor, Qt::DashLine);
+                    DrawRay(this, p, crossPoint == CrossCirclesPoint::FirstPoint ? p1 : p2, supportColor, Qt::DashLine);
                     break;
                 case 1:
-                    DrawRay(this, p, p1, supportColor, Qt::DashLine);
-                    tangentLine2->setVisible(false);
+                    DrawRay(this, p, flagP1 ? p1 : p2, supportColor, Qt::DashLine);
                     break;
                 case 0:
                 default:
                     this->setVisible(false);
-                    tangentLine2->setVisible(false);
                     break;
             }
 
@@ -141,13 +140,11 @@ void VisToolPointFromArcAndTangent::FindRays(const QPointF &p, const VArc *arc)
         }
         case 1:
             DrawRay(this, p, p1, supportColor, Qt::DashLine);
-            tangentLine2->setVisible(false);
             break;
         case 3:
         case 0:
         default:
             this->setVisible(false);
-            tangentLine2->setVisible(false);
             break;
     }
 }
