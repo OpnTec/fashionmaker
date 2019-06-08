@@ -244,8 +244,8 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
             {
                 VLayoutPassmark layoutPassmark;
 
-                VPiecePath path = piece.GetPath();
-                const int nodeIndex = path.indexOfNode(pData.id);
+                const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
+                const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
                     layoutPassmark.lines = passmark.BuiltInSAPassmark(piece, pattern);
@@ -255,14 +255,21 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
                     layoutPassmarks.append(layoutPassmark);
                 }
+                else
+                {
+                    const QString errorMsg =
+                            QObject::tr("Passmark '%1' is not part of piece '%2'.")
+                            .arg(pData.nodeName, piece.GetName());
+                    qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+                }
             };
 
             auto PrepareSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern](PassmarkSide side)
             {
                 VLayoutPassmark layoutPassmark;
 
-                VPiecePath path = piece.GetPath();
-                const int nodeIndex = path.indexOfNode(pData.id);
+                const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
+                const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
                 if (nodeIndex != -1)
                 {
                     QVector<QLineF> lines =
@@ -281,6 +288,13 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                     layoutPassmark.isBuiltIn = false;
 
                     layoutPassmarks.append(layoutPassmark);
+                }
+                else
+                {
+                    const QString errorMsg =
+                            QObject::tr("Passmark '%1' is not part of piece '%2'.")
+                            .arg(pData.nodeName, piece.GetName());
+                    qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
                 }
             };
 
