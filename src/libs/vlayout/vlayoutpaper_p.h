@@ -57,7 +57,6 @@ public:
           positionsCache(paper.positionsCache),
           globalContour(paper.globalContour),
           paperIndex(paper.paperIndex),
-          frame(paper.frame),
           layoutWidth(paper.layoutWidth),
           globalRotate(paper.globalRotate),
           localRotate(paper.localRotate),
@@ -79,7 +78,6 @@ public:
     VContour globalContour{};
 
     quint32 paperIndex{0};
-    quint32 frame{0};
     qreal layoutWidth{0};
     bool globalRotate{true};
     bool localRotate{true};

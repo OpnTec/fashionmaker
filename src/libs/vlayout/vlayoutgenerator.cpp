@@ -144,13 +144,6 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
         return;
     }
 
-#ifdef LAYOUT_DEBUG
-    const QString path = QDir::homePath()+QStringLiteral("/LayoutDebug");
-    QDir debugDir(path);
-    debugDir.removeRecursively();
-    debugDir.mkpath(path);
-#endif
-
     if (bank->PrepareUnsorted())
     {
         if (timer.hasExpired(timeout))

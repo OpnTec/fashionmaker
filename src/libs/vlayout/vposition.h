@@ -61,38 +61,12 @@ public:
 
     virtual void run() override;
 
-#ifdef LAYOUT_DEBUG
-    quint32 getPaperIndex() const;
-    void setPaperIndex(quint32 value);
-
-    quint32 getFrame() const;
-    void setFrame(quint32 value);
-
-    quint32 getDetailsCount() const;
-    void setDetailsCount(quint32 value);
-
-    void setDetails(const QVector<VLayoutPiece> &details);
-#endif
-
     VBestSquare getBestResult() const;
-
-#ifdef LAYOUT_DEBUG
-    static void DrawDebug(const VContour &contour, const VLayoutPiece &detail, int frame, quint32 paperIndex,
-                          int detailsCount, const QVector<VLayoutPiece> &details = QVector<VLayoutPiece>());
-
-    static int Bias(int length, int maxLength);
-#endif
 
 private:
     Q_DISABLE_COPY(VPosition)
     VBestSquare m_bestResult;
     VPositionData m_data;
-#ifdef LAYOUT_DEBUG
-    quint32 paperIndex;
-    quint32 frame;
-    quint32 detailsCount;
-    QVector<VLayoutPiece> details;
-#endif
     std::atomic_bool *stop;
     /**
      * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.

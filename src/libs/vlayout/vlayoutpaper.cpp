@@ -229,8 +229,6 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
         d->localRotationNumber = d->globalRotationNumber;
     }
 
-    d->frame = 0;
-
     return AddToSheet(detail, stop);
 }
 
@@ -268,21 +266,9 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
             data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
 
             auto *thread = new VPosition(data, &stop, d->saveLength);
-            //Info for debug
-            #ifdef LAYOUT_DEBUG
-                thread->setPaperIndex(d->paperIndex);
-                thread->setFrame(d->frame);
-                thread->setDetailsCount(d->details.count());
-                thread->setDetails(d->details);
-            #endif
-
             thread->setAutoDelete(false);
             threads.append(thread);
             thread_pool->start(thread);
-
-#ifdef LAYOUT_DEBUG
-            d->frame = d->frame + 3 + static_cast<quint32>(360/d->localRotationIncrease*2);
-#endif
         }
     }
 
@@ -341,12 +327,6 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
         positionChache.layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
-
-#ifdef LAYOUT_DEBUG
-#   ifdef SHOW_BEST
-        VPosition::DrawDebug(d->globalContour, workDetail, UINT_MAX, d->paperIndex, d->details.count(), d->details);
-#   endif
-#endif
     }
 
     return bestResult.HasValidResult(); // Do we have the best result?
