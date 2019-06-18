@@ -79,7 +79,7 @@ public:
     qreal GetShift() const;
     void  SetShift(qreal shift);
 
-    void Generate(QElapsedTimer timer, qint64 timeout);
+    void Generate(QElapsedTimer timer, qint64 timeout, LayoutErrors previousState = LayoutErrors::NoError);
 
     qreal LayoutEfficiency() const;
 

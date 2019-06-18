@@ -99,15 +99,28 @@ int VLayoutGenerator::DetailsCount()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
+void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout, LayoutErrors previousState)
 {
     stopGeneration.store(false);
     papers.clear();
     bank->Reset();
-    state = LayoutErrors::NoError;
+    state = previousState;
 
     int width = PageWidth();
     int height = PageHeight();
+
+    auto HasExpired = [this, timer, timeout]()
+    {
+        if (timer.hasExpired(timeout))
+        {
+            if (state == LayoutErrors::NoError)
+            {
+                state = LayoutErrors::Timeout;
+            }
+            return true;
+        }
+        return false;
+    };
 
     if (VFuzzyComparePossibleNulls(shift, -1))
     {
@@ -138,17 +151,15 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
         }
     }
 
-    if (timer.hasExpired(timeout))
+    if (HasExpired())
     {
-        state = LayoutErrors::Timeout;
         return;
     }
 
     if (bank->PrepareUnsorted())
     {
-        if (timer.hasExpired(timeout))
+        if (HasExpired())
         {
-            state = LayoutErrors::Timeout;
             return;
         }
 
@@ -159,9 +170,8 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
                 return;
             }
 
-            if (timer.hasExpired(timeout))
+            if (HasExpired())
             {
-                state = LayoutErrors::Timeout;
                 return;
             }
 
@@ -192,9 +202,8 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
                     break;
                 }
 
-                if (timer.hasExpired(timeout))
+                if (HasExpired())
                 {
-                    state = LayoutErrors::Timeout;
                     return;
                 }
             } while(bank->LeftToArrange() > 0);
@@ -204,9 +213,8 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
                 return;
             }
 
-            if (timer.hasExpired(timeout))
+            if (HasExpired())
             {
-                state = LayoutErrors::Timeout;
                 return;
             }
 
@@ -227,9 +235,8 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
         return;
     }
 
-    if (timer.hasExpired(timeout))
+    if (HasExpired())
     {
-        state = LayoutErrors::Timeout;
         return;
     }
 
@@ -322,7 +329,10 @@ void VLayoutGenerator::Abort()
 void VLayoutGenerator::Timeout()
 {
     stopGeneration.store(true);
-    state = LayoutErrors::Timeout;
+    if (state == LayoutErrors::NoError)
+    {
+        state = LayoutErrors::Timeout;
+    }
     QThreadPool::globalInstance()->clear();
 }
 

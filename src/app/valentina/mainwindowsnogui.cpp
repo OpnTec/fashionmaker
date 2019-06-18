@@ -283,6 +283,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
     lGenerator.SetRotate(false);
     int papersCount = INT_MAX;
     qreal efficiency = 0;
+    bool hasResult = false;
 
     QCoreApplication::processEvents();
 
@@ -293,7 +294,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
             break;
         }
 
-        lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs());
+        lGenerator.Generate(timer, lGenerator.GetNestingTimeMSecs(), nestingState);
 
         if (IsTimeout())
         {
@@ -334,6 +335,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         isAutoCrop = lGenerator.GetAutoCrop();
                         isUnitePages = lGenerator.IsUnitePages();
                         isLayoutStale = false;
+                        hasResult = true;
                     }
                 }
                 lGenerator.SetShift(lGenerator.GetShift()/2.0);
@@ -399,7 +401,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         QApplication::alert(this);
     }
 
-    if (not papers.isEmpty() && nestingState != LayoutErrors::ProcessStoped)
+    if (hasResult && nestingState != LayoutErrors::ProcessStoped)
     {
         return true;
     }
