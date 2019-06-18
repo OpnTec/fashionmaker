@@ -2105,14 +2105,6 @@
         <translation>Колір:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Помилка</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Радіус не може мати від&apos;ємне значення</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Редагувати радіус1</translation>
     </message>
@@ -2938,7 +2930,7 @@
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished">Розділювач</translation>
+        <translation>Розділювач</translation>
     </message>
 </context>
 <context>
@@ -3004,10 +2996,6 @@
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation type="vanished">Укладання деталей: %1 з %2</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Зачекайте, відбувається пошук найкращої позиції для деталі.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nesting. Please, wait.</source>
@@ -3282,6 +3270,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3303,10 +3295,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4178,7 +4166,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished">Мова назви точки:</translation>
+        <translation>Мова назви точки:</translation>
     </message>
 </context>
 <context>
@@ -4419,20 +4407,12 @@ Apply settings anyway?</source>
         <translation>Кут:</translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Виберіть об&apos;єкти основного контуру, &lt;b&gt;Shift&lt;/b&gt; - обернути напрямок кривої, &lt;b&gt;Enter&lt;/b&gt; - закінчити створення</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Протилежний напрямок</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Видалити</translation>
-    </message>
-    <message>
-        <source>Current seam aloowance</source>
-        <translation type="vanished">Поточна прибавка на шви</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4635,16 +4615,16 @@ Apply settings anyway?</source>
         <translation>Виключений</translation>
     </message>
     <message>
-        <source>Manual length</source>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished">Довжина:</translation>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Пусто&gt;</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
+        <source>Current seam allowance</source>
+        <translation>Поточна прибавка на шви</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
@@ -4659,6 +4639,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Довжина:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4667,23 +4663,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished">Поточна прибавка на шви</translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Пусто&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5613,10 +5593,6 @@ Apply settings anyway?</source>
         <translation>Нитка основи</translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Виберіть об&apos;єкти основного контуру за годиниковою стрілкою, &lt;b&gt;Shift&lt;/b&gt; - обернути напрямок кривої, &lt;b&gt;Enter&lt;/b&gt; - закінчити створення</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Протилежний напрямок</translation>
     </message>
@@ -5805,6 +5781,14 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Пусто&gt;</translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5813,15 +5797,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Пусто&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6345,14 +6321,6 @@ Apply settings anyway?</source>
     <message>
         <source>by second edge right angle</source>
         <translation>за прямим кутом другого ребра</translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="vanished">Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="vanished">Значення не може бути менше ніж 0</translation>
     </message>
 </context>
 <context>
@@ -7852,10 +7820,6 @@ Do you want to save your changes?</source>
         <translation>Виберіть основний контур за годиниковою стрілкою.</translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="vanished">Виберіть об&apos;єкти контуру, &lt;b&gt;Shift&lt;/b&gt; - обернути напрямок кривої</translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation>Документ не має прав на запис.</translation>
     </message>
@@ -7958,14 +7922,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Forum</source>
         <translation>Форум</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Виберіть один чи більше об&apos;єктів, затисніть &lt;b&gt;%1&lt;/b&gt; - масового вибору, &lt;b&gt;Enter&lt;/b&gt; - завершити створення</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="vanished">Виберіть один чи більше об&apos;єктів, затисніть &lt;b&gt;%1&lt;/b&gt; - масового вибору, &lt;b&gt;Enter&lt;/b&gt; - завершити створення</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8136,11 +8092,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point of intersection circle and segment</source>
+        <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8157,22 +8129,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8335,11 +8291,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timeout.</source>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9069,12 +9025,44 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <source>Error</source>
+        <translation>Помилка</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation>Значення не може бути 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Значення не може бути менше ніж 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Помилка синтаксичного аналізу: %1</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
@@ -9090,14 +9078,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9117,28 +9097,8 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
-    </message>
-    <message>
-        <source>Empty formula</source>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished">Недійсний результат. Значення безкінечність чи NaN, перевірте ваші розрахунки.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="unfinished">Значення не може бути 0</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished">Значення не може бути менше ніж 0</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
-        <translation type="unfinished">Помилка синтаксичного аналізу: %1</translation>
     </message>
 </context>
 <context>
@@ -10138,12 +10098,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -10151,7 +10107,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Допомога</translation>
+        <translation>&amp;Допомога</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -10163,7 +10119,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Зберегти</translation>
+        <translation>&amp;Зберегти</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -10179,7 +10135,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Новий</translation>
+        <translation>&amp;Новий</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -10451,34 +10411,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Довжина:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Значення</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Розрахунок</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10489,6 +10421,34 @@ Do you want to save your changes?</source>
     <message>
         <source>V mark 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Довжина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значення</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Розрахунок</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -10893,7 +10853,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Мої лекала</translation>
+        <translation>Мої лекала</translation>
     </message>
 </context>
 <context>
@@ -11042,12 +11002,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Letter</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Лист</translation>
+        <translation>Лист</translation>
     </message>
     <message>
         <source>Legal</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Tabloid</source>
@@ -11057,27 +11017,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Roll 24in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 24 дюйми</translation>
+        <translation>Рулон 24 дюйми</translation>
     </message>
     <message>
         <source>Roll 30in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 30 дюймів</translation>
+        <translation>Рулон 30 дюймів</translation>
     </message>
     <message>
         <source>Roll 36in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 36 дюймів</translation>
+        <translation>Рулон 36 дюймів</translation>
     </message>
     <message>
         <source>Roll 42in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 42 дюйми</translation>
+        <translation>Рулон 42 дюйми</translation>
     </message>
     <message>
         <source>Roll 44in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 44 дюйми</translation>
+        <translation>Рулон 44 дюйми</translation>
     </message>
     <message>
         <source>Roll 48in</source>
@@ -11097,7 +11057,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Користувацька</translation>
     </message>
 </context>
 <context>
@@ -11743,6 +11703,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11756,18 +11728,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The page height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order detail to follow grainline direction (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11803,7 +11763,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>patterns</source>
-        <translation type="unfinished">лекала</translation>
+        <translation>лекала</translation>
     </message>
 </context>
 <context>
@@ -11927,19 +11887,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished">Не вдалося отримати інформацію про версію.</translation>
+        <translation>Не вдалося отримати інформацію про версію.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished">За надто багато тегів &lt;%1&gt; у файлі.</translation>
+        <translation>За надто багато тегів &lt;%1&gt; у файлі.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished">Версія &quot;%1&quot; має неправильне значення.</translation>
+        <translation>Версія &quot;%1&quot; має неправильне значення.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished">Версія &quot;0.0.0&quot; не дійсне.</translation>
+        <translation>Версія &quot;0.0.0&quot; не дійсне.</translation>
     </message>
 </context>
 <context>
@@ -12027,7 +11987,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Помилка</translation>
+        <translation>Помилка</translation>
     </message>
     <message>
         <source>Formula is empty</source>
@@ -12123,7 +12083,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished">Надсічка</translation>
+        <translation>Надсічка</translation>
     </message>
 </context>
 <context>
@@ -12431,10 +12391,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VSettings</name>
-    <message>
-        <source>patterns</source>
-        <translation type="vanished">лекала</translation>
-    </message>
     <message>
         <source>layouts</source>
         <translation>розкладки</translation>

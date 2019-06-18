@@ -2061,14 +2061,6 @@
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Σφάλμα</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Επεξεργασία ακτίνας1</translation>
     </message>
@@ -2886,7 +2878,7 @@
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished">Διαχωριστής</translation>
+        <translation>Διαχωριστής</translation>
     </message>
 </context>
 <context>
@@ -3207,6 +3199,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3228,10 +3224,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4099,7 +4091,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Γλώσσα ετικέτας:</translation>
     </message>
 </context>
 <context>
@@ -4340,10 +4332,6 @@ Apply settings anyway?</source>
         <translation>Διαγραφή</translation>
     </message>
     <message>
-        <source>Current seam aloowance</source>
-        <translation type="vanished">Τρέχον περιθώριο ραφής</translation>
-    </message>
-    <message>
         <source>Edit seam allowance width</source>
         <translation>Επεξεργασία πλάτους περιθωρίου ραφής</translation>
     </message>
@@ -4544,16 +4532,16 @@ Apply settings anyway?</source>
         <translation>Εξαιρούμενο</translation>
     </message>
     <message>
-        <source>Manual length</source>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished">Μήκος:</translation>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
+        <source>Current seam allowance</source>
+        <translation>Τρέχων περιθώριο ραφής</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
@@ -4568,6 +4556,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Μήκος:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4576,23 +4580,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished">Τρέχων περιθώριο ραφής</translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Empty&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5705,6 +5693,14 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5713,15 +5709,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Empty&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6240,14 +6228,6 @@ Apply settings anyway?</source>
     <message>
         <source>by second edge right angle</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="vanished">Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="vanished">Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
     </message>
 </context>
 <context>
@@ -7988,11 +7968,27 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point of intersection circle and segment</source>
+        <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8009,22 +8005,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8187,11 +8167,11 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timeout.</source>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8862,11 +8842,43 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <source>Error</source>
+        <translation>Σφάλμα</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation>Η τιμή δεν μπορεί να είναι 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8886,14 +8898,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8910,27 +8914,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Σφάλμα</translation>
-    </message>
-    <message>
-        <source>Empty formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished">Μη έγκυρο αποτέλεσμα. Η τιμή είναι άπειρη ή NaN. Παρακαλώ, ελέγξτε τους υπολογισμούς σας.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="unfinished">Η τιμή δεν μπορεί να είναι 0</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished">Η τιμή δεν μπορεί να είναι λιγότερο από 0</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9885,12 +9869,8 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Αρχείο</translation>
+        <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -9898,7 +9878,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Βοήθεια</translation>
+        <translation>&amp;Βοήθεια</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -9910,7 +9890,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Αποθήκευση</translation>
+        <translation>&amp;Αποθήκευση</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -9926,7 +9906,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Νέο</translation>
+        <translation>&amp;Νέο</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -10198,34 +10182,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Μήκος:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished">Βοηθός φόρμουλας</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Τιμή</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Υπολογισμός</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10236,6 +10192,34 @@ Do you want to save your changes?</source>
     <message>
         <source>V mark 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Μήκος:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Βοηθός φόρμουλας</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Τιμή</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Υπολογισμός</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -10636,7 +10620,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Πατρόν μου</translation>
+        <translation>Πατρόν μου</translation>
     </message>
 </context>
 <context>
@@ -10766,12 +10750,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Letter</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Letter</translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Legal</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Tabloid</source>
@@ -10781,27 +10765,27 @@ Do you want to save your changes?</source>
     <message>
         <source>Roll 24in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Ρολό 24 ιντσών</translation>
+        <translation>Ρολό 24 ιντσών</translation>
     </message>
     <message>
         <source>Roll 30in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Ρολό 30 ιντσών</translation>
+        <translation>Ρολό 30 ιντσών</translation>
     </message>
     <message>
         <source>Roll 36in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Ρολό 36 ιντσών</translation>
+        <translation>Ρολό 36 ιντσών</translation>
     </message>
     <message>
         <source>Roll 42in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Ρολό 42 ιντσών</translation>
+        <translation>Ρολό 42 ιντσών</translation>
     </message>
     <message>
         <source>Roll 44in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Ρολό 44 ιντσών</translation>
+        <translation>Ρολό 44 ιντσών</translation>
     </message>
     <message>
         <source>Roll 48in</source>
@@ -10821,7 +10805,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Προσαρμογή</translation>
+        <translation>Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -11347,6 +11331,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11360,18 +11356,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The page height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order detail to follow grainline direction (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11502,7 +11486,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished">Δε βρέθηκαν οι πληροφορίες της έκδοσης.</translation>
+        <translation>Δε βρέθηκαν οι πληροφορίες της έκδοσης.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
@@ -11510,11 +11494,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished">Η έκδοση &quot;%1&quot; είναι άκυρη.</translation>
+        <translation>Η έκδοση &quot;%1&quot; είναι άκυρη.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished">Η έκδοση &quot;0.0.0&quot; είναι άκυρη.</translation>
+        <translation>Η έκδοση &quot;0.0.0&quot; είναι άκυρη.</translation>
     </message>
 </context>
 <context>
@@ -11602,7 +11586,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Σφάλμα</translation>
+        <translation>Σφάλμα</translation>
     </message>
     <message>
         <source>Formula is empty</source>

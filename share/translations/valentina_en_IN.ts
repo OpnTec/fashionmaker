@@ -2105,14 +2105,6 @@
         <translation>Color:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Error</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Radius can&apos;t be negative</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Edit radius1</translation>
     </message>
@@ -2938,7 +2930,7 @@
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished">Separator</translation>
+        <translation>Separator</translation>
     </message>
 </context>
 <context>
@@ -3004,10 +2996,6 @@
     <message>
         <source>Arranged workpieces: %1 from %2</source>
         <translation type="vanished">Arranged workpieces: %1 from %2</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nesting. Please, wait.</source>
@@ -3282,6 +3270,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3303,10 +3295,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4178,7 +4166,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished">Label language:</translation>
+        <translation>Label language:</translation>
     </message>
 </context>
 <context>
@@ -4419,20 +4407,12 @@ Apply settings anyway?</source>
         <translation>Angle:</translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Reverse</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Delete</translation>
-    </message>
-    <message>
-        <source>Current seam aloowance</source>
-        <translation type="vanished">Current seam aloowance</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4635,16 +4615,16 @@ Apply settings anyway?</source>
         <translation>Excluded</translation>
     </message>
     <message>
-        <source>Manual length</source>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
+        <source>Current seam allowance</source>
+        <translation>Current seam allowance</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
@@ -4659,6 +4639,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Length:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4667,23 +4663,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished">Current seam allowance</translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Empty&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5612,10 +5592,6 @@ Apply settings anyway?</source>
         <translation>Grainline</translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Reverse</translation>
     </message>
@@ -5804,6 +5780,14 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5812,15 +5796,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;Empty&gt;</translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6343,14 +6319,6 @@ Apply settings anyway?</source>
     <message>
         <source>by second edge right angle</source>
         <translation>by second edge right angle</translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="vanished">Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="vanished">Value can&apos;t be less than 0</translation>
     </message>
 </context>
 <context>
@@ -7851,10 +7819,6 @@ Do you want to save your changes?</translation>
         <translation>Select main path objects clockwise.</translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="vanished">Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation>The document has no write permissions.</translation>
     </message>
@@ -7957,14 +7921,6 @@ Do you want to save your changes?</translation>
     <message>
         <source>Forum</source>
         <translation>Forum</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="vanished">Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8135,11 +8091,27 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point of intersection circle and segment</source>
+        <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8156,22 +8128,6 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8334,11 +8290,11 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timeout.</source>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9068,12 +9024,44 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <source>Error</source>
+        <translation>Error</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation>Value can&apos;t be 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Value can&apos;t be less than 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Parser error: %1</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
@@ -9089,14 +9077,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9116,28 +9096,8 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Error</translation>
-    </message>
-    <message>
-        <source>Empty formula</source>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished">Invalid result. Value is infinite or NaN. Please, check your calculations.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="unfinished">Value can&apos;t be 0</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished">Value can&apos;t be less than 0</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
-        <translation type="unfinished">Parser error: %1</translation>
     </message>
 </context>
 <context>
@@ -10137,12 +10097,8 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;File</translation>
+        <translation>&amp;File</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -10150,7 +10106,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Help</translation>
+        <translation>&amp;Help</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -10162,7 +10118,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Save</translation>
+        <translation>&amp;Save</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -10178,7 +10134,11 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;New</translation>
+        <translation>&amp;New</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -10450,34 +10410,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Length:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished">Formula wizard</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Value</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Calculation</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10488,6 +10420,34 @@ Do you want to save your changes?</translation>
     <message>
         <source>V mark 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Length:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Formula wizard</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Value</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Calculation</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -10892,7 +10852,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">My Patterns</translation>
+        <translation>My Patterns</translation>
     </message>
 </context>
 <context>
@@ -11041,12 +11001,12 @@ Do you want to save your changes?</translation>
     <message>
         <source>Letter</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Letter</translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Legal</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Tabloid</source>
@@ -11056,27 +11016,27 @@ Do you want to save your changes?</translation>
     <message>
         <source>Roll 24in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Roll 24in</translation>
+        <translation>Roll 24in</translation>
     </message>
     <message>
         <source>Roll 30in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Roll 30in</translation>
+        <translation>Roll 30in</translation>
     </message>
     <message>
         <source>Roll 36in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Roll 36in</translation>
+        <translation>Roll 36in</translation>
     </message>
     <message>
         <source>Roll 42in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Roll 42in</translation>
+        <translation>Roll 42in</translation>
     </message>
     <message>
         <source>Roll 44in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Roll 44in</translation>
+        <translation>Roll 44in</translation>
     </message>
     <message>
         <source>Roll 48in</source>
@@ -11096,7 +11056,7 @@ Do you want to save your changes?</translation>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Custom</translation>
+        <translation>Custom</translation>
     </message>
 </context>
 <context>
@@ -11742,6 +11702,18 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11755,18 +11727,6 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The page height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order detail to follow grainline direction (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11802,7 +11762,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>patterns</source>
-        <translation type="unfinished">patterns</translation>
+        <translation>patterns</translation>
     </message>
 </context>
 <context>
@@ -11927,19 +11887,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished">Couldn&apos;t get version information.</translation>
+        <translation>Couldn&apos;t get version information.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished">Too many tags &lt;%1&gt; in file.</translation>
+        <translation>Too many tags &lt;%1&gt; in file.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished">Version &quot;%1&quot; invalid.</translation>
+        <translation>Version &quot;%1&quot; invalid.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished">Version &quot;0.0.0&quot; invalid.</translation>
+        <translation>Version &quot;0.0.0&quot; invalid.</translation>
     </message>
 </context>
 <context>
@@ -12027,7 +11987,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Error</translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Formula is empty</source>
@@ -12123,7 +12083,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished">Passmark</translation>
+        <translation>Passmark</translation>
     </message>
 </context>
 <context>
@@ -12431,10 +12391,6 @@ Do you want to save your changes?</translation>
 </context>
 <context>
     <name>VSettings</name>
-    <message>
-        <source>patterns</source>
-        <translation type="vanished">patterns</translation>
-    </message>
     <message>
         <source>layouts</source>
         <translation>layouts</translation>

@@ -2579,6 +2579,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2600,10 +2604,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3697,15 +3697,15 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Manual length</source>
+        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length:</source>
+        <source>&lt;Empty&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>=</source>
+        <source>Current seam allowance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3721,6 +3721,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3729,23 +3745,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4717,6 +4717,14 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4725,15 +4733,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6586,11 +6586,27 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point of intersection circle and segment</source>
+        <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ctrl+O</source>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6607,22 +6623,6 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6749,11 +6749,11 @@ Apakah anda ingin menyimpan perubahan anda?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Timeout.</source>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7307,27 +7307,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7339,19 +7319,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
+        <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7376,6 +7344,42 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Parser error: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8198,10 +8202,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8239,6 +8239,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8511,6 +8515,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Acute angle that looks intside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Acute angle that looks outside of piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Manual length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8536,19 +8552,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tampilkan perhitungan  penuh dalam kotak pesan&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -9561,6 +9565,18 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9574,18 +9590,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The page height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order detail to follow grainline direction (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

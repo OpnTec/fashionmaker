@@ -9311,6 +9311,10 @@ This option will take an affect after restart.</source>
         <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>

@@ -2105,14 +2105,6 @@
         <translation>Цвет:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Ошибка</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Радиус не может быть отрицательным</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Изменить радиус1</translation>
     </message>
@@ -2934,11 +2926,11 @@
     </message>
     <message>
         <source>Increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Прибавка</translation>
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished">Разделитель</translation>
+        <translation>Разделитель</translation>
     </message>
 </context>
 <context>
@@ -3006,28 +2998,20 @@
         <translation type="vanished">Размещено заготовок: %1 из %2</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Поиск лучшей позиции для детали. Пожалуйста, подождите.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation type="vanished">Одна или больше деталей выкройки превышает формат листа, который вы выбрали. Пожалуйста, выберите больший формат.</translation>
-    </message>
-    <message>
         <source>Nesting. Please, wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Осталось времени:</translation>
     </message>
     <message>
         <source>Time left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Осталось времени: %1</translation>
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент эффективности: %1%</translation>
     </message>
 </context>
 <context>
@@ -3288,12 +3272,16 @@ Apply settings anyway?</source>
 Применить настройки в любом случае?</translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation>Раскладка по долевой</translation>
+    </message>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished">Время:</translation>
+        <translation>Время:</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Время, данное алгоритму, чтобы найти лучшую раскладку.</translation>
     </message>
     <message>
         <source> min</source>
@@ -3301,7 +3289,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Эффективность:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
@@ -3309,10 +3297,6 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4184,7 +4168,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык метки точки:</translation>
     </message>
 </context>
 <context>
@@ -4425,20 +4409,12 @@ Apply settings anyway?</source>
         <translation>Угол:</translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Выберите объекты основного контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Изменить направление</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
-    </message>
-    <message>
-        <source>Current seam aloowance</source>
-        <translation type="vanished">Текущий припуск на швы</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4641,16 +4617,16 @@ Apply settings anyway?</source>
         <translation>Исключенный</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <source>The same curve repeats twice!</source>
+        <translation>Одна и та же кривая повторяется дважды!</translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished">Длина:</translation>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
+        <source>Current seam allowance</source>
+        <translation>Текущий припуск на швы</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
@@ -4665,6 +4641,22 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation>Длина, устанавливаемая вручную</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4673,24 +4665,8 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished">Текущий припуск на швы</translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить длину надсечки</translation>
     </message>
 </context>
 <context>
@@ -4836,7 +4812,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Окружность</translation>
     </message>
 </context>
 <context>
@@ -5619,10 +5595,6 @@ Apply settings anyway?</source>
         <translation>Долевая нить</translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Выберите объекты основного контура по часовой стрелке, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Изменить направление</translation>
     </message>
@@ -5811,24 +5783,24 @@ Apply settings anyway?</source>
         <translation>Для открытия всех функций детали закончите создание главного контура. Пожалуйста, нажмите ОК.</translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation>Одна и та же кривая повторяется дважды!</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;Empty&gt;</translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Окружность</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить длину надсечки</translation>
     </message>
 </context>
 <context>
@@ -6351,14 +6323,6 @@ Apply settings anyway?</source>
     <message>
         <source>by second edge right angle</source>
         <translation>по прямому углу второго ребра</translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="vanished">Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчеты.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="vanished">Значение не может быть меньше 0</translation>
     </message>
 </context>
 <context>
@@ -7858,10 +7822,6 @@ Do you want to save your changes?</source>
         <translation>Выберите объекты основного контура по часовой стрелке.</translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="vanished">Выберите объекты контура, &lt;b&gt;Shift&lt;/b&gt; - обратное направление кривой</translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation>Документ не имеет прав на запись.</translation>
     </message>
@@ -7964,14 +7924,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Forum</source>
         <translation>Форум</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Выберите один или несколько объектов, зажмите &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - закончить создание</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="vanished">Выберите один или несколько объектов, зажмите  &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;Enter&lt;/b&gt; - подтвердить выбор</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8106,10 +8058,6 @@ Do you want to save your changes?</source>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
-        <source>Point from tangent circle and segment</source>
-        <translation type="vanished">Точка пересечения круга и отрезка</translation>
-    </message>
-    <message>
         <source>Place label tool</source>
         <translation>Инструмент &quot;Метка места&quot;</translation>
     </message>
@@ -8142,35 +8090,15 @@ Do you want to save your changes?</source>
         <translation>Изменения применены.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="vanished">Невозможно прочитать настройки из некорректного .INI файла.</translation>
-    </message>
-    <message>
         <source>Cannot save settings. Access denied.</source>
         <translation>Невозможно сохранить настройки. Доступ запрещен.</translation>
-    </message>
-    <message>
-        <source>Point of intersection circle and segment</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Increase label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide labels</source>
+        <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8186,8 +8114,24 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <source>Point of intersection circle and segment</source>
+        <translation>Точка пересечения окружности и отрезка</translation>
+    </message>
+    <message>
+        <source>Increase label font</source>
+        <translation>Увеличить размер шрифта метки</translation>
+    </message>
+    <message>
+        <source>Decrease label font</source>
+        <translation>Уменьшить размер шрифта метки</translation>
+    </message>
+    <message>
+        <source>Original label font</source>
+        <translation>Первоначальный размер шрифта метки</translation>
+    </message>
+    <message>
+        <source>Hide labels</source>
+        <translation>Скрыть все метки на чертеже</translation>
     </message>
 </context>
 <context>
@@ -8349,11 +8293,11 @@ Do you want to save your changes?</source>
         <translation>Пожалуйста, дополнительно представьте: %1</translation>
     </message>
     <message>
-        <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <source>Preparing details for layout</source>
+        <translation>Подготовка деталей для раскладки</translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8691,15 +8635,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Активировать тёмный режим</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>тёмный режим</translation>
     </message>
 </context>
 <context>
@@ -9052,10 +8996,6 @@ This option will take an affect after restart.</source>
         <translation>на сгибе</translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="vanished">Деталь &apos;%1&apos; может разрушить раскладку. Пожалуйста, проверьте припуски на швы, чтобы понять поведение припусков.</translation>
-    </message>
-    <message>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation>Триггер видимости содержит ошибку и будет проигнорирован</translation>
     </message>
@@ -9088,12 +9028,44 @@ This option will take an affect after restart.</source>
         <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Невозможно скорректировать позицию надсечки.</translation>
     </message>
     <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <source>Error</source>
+        <translation>Ошибка</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Недопустимый результат. Значение бесконечность или NaN. Пожалуйста, проверьте расчёты.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation>Значение не может быть 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Значение не может быть меньше 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Ошибка синтаксического анализатора: %1</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
@@ -9109,14 +9081,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9136,27 +9100,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
-    </message>
-    <message>
-        <source>Empty formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="unfinished">Значение не может быть 0</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished">Значение не может быть меньше 0</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10089,14 +10033,6 @@ Do you want to save your changes?</source>
         <translation>Имя клиента:</translation>
     </message>
     <message>
-        <source>Open individual …</source>
-        <translation type="vanished">Открыть индивидуальные…</translation>
-    </message>
-    <message>
-        <source>Save As …</source>
-        <translation type="vanished">Сохранить как…</translation>
-    </message>
-    <message>
         <source>Open multisize …</source>
         <translation>Открыть мультиразмерные…</translation>
     </message>
@@ -10161,20 +10097,12 @@ Do you want to save your changes?</source>
         <translation>Ошибка в строке %1. Имя мерки пустое.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="vanished">Невозможно прочитать настройки из некорректного .INI файла.</translation>
-    </message>
-    <message>
         <source>Cannot save settings. Access denied.</source>
         <translation>Невозможно сохранить настройки. Доступ запрещен.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -10182,7 +10110,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Помощь</translation>
+        <translation>&amp;Помощь</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -10194,7 +10122,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сохранить</translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -10210,7 +10138,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Новый</translation>
+        <translation>&amp;Новый</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -10482,34 +10414,6 @@ Do you want to save your changes?</source>
         <translation>Пересечение 2 (только справа)</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Длина:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished">Мастер формул</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Значение</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10520,6 +10424,34 @@ Do you want to save your changes?</source>
     <message>
         <source>V mark 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation>Длина, устанавливаемая вручную</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Длина:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Мастер формул</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Значение</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Вычисление</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показать полный расчёт в окне сообщения&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
@@ -10873,15 +10805,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользовательский интерфейс</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Активировать тёмный режим</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>тёмный режим</translation>
     </message>
 </context>
 <context>
@@ -10924,7 +10856,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Мои выкройки</translation>
+        <translation>Мои выкройки</translation>
     </message>
 </context>
 <context>
@@ -11072,57 +11004,13 @@ Do you want to save your changes?</source>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation type="vanished">Letter</translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="vanished">Legal</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="vanished">Рулон 24 дюйма</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="vanished">Рулон 30 дюймов</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="vanished">Рулон 36 дюймов</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="vanished">Рулон 42 дюйма</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="vanished">Рулон 44 дюйма</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Клиент</translation>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="vanished">Рулон 44 дюйма {не 48 ли?}</translation>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="vanished">Рулон 44 дюйма {не 62 ли?}</translation>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="vanished">Рулон 44 дюйма {не 72 ли?}</translation>
-    </message>
-    <message>
-        <source>Letter</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Letter</translation>
     </message>
     <message>
         <source>Legal</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Tabloid</source>
@@ -11132,47 +11020,47 @@ Do you want to save your changes?</source>
     <message>
         <source>Roll 24in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 24 дюйма</translation>
+        <translation>Рулон 24 дюйма</translation>
     </message>
     <message>
         <source>Roll 30in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 30 дюймов</translation>
+        <translation>Рулон 30 дюймов</translation>
     </message>
     <message>
         <source>Roll 36in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 36 дюймов</translation>
+        <translation>Рулон 36 дюймов</translation>
     </message>
     <message>
         <source>Roll 42in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 42 дюйма</translation>
+        <translation>Рулон 42 дюйма</translation>
     </message>
     <message>
         <source>Roll 44in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 44 дюйма</translation>
+        <translation>Рулон 44 дюйма</translation>
     </message>
     <message>
         <source>Roll 48in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 44 дюйма {не 48 ли?}</translation>
+        <translation>Рулон 44 дюйма {не 48 ли?}</translation>
     </message>
     <message>
         <source>Roll 62in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 44 дюйма {не 62 ли?}</translation>
+        <translation>Рулон 44 дюйма {не 62 ли?}</translation>
     </message>
     <message>
         <source>Roll 72in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Рулон 44 дюйма {не 72 ли?}</translation>
+        <translation>Рулон 44 дюйма {не 72 ли?}</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Клиент</translation>
     </message>
 </context>
 <context>
@@ -11818,12 +11706,24 @@ Do you want to save your changes?</source>
         <translation>Неверный пользовательский материал &apos;%1&apos;. Неправильный номер материала.</translation>
     </message>
     <message>
+        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The page height</source>
+        <translation>Высота страницы</translation>
+    </message>
+    <message>
+        <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
@@ -11831,27 +11731,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The page height</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Order detail to follow grainline direction (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент</translation>
     </message>
     <message>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Время должно быть в диапазоне от 1 минуты до 60 минут.</translation>
     </message>
     <message>
         <source>Сoefficient must be in range from 0 to 100.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент должен быть в диапазоне от 0 до 100.</translation>
     </message>
 </context>
 <context>
@@ -11878,7 +11766,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>patterns</source>
-        <translation type="unfinished">выкройки</translation>
+        <translation>выкройки</translation>
     </message>
 </context>
 <context>
@@ -12003,19 +11891,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished">Не удалось получить информацию о версии.</translation>
+        <translation>Не удалось получить информацию о версии.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished">В файле слишком много меток &lt;%1&gt;.</translation>
+        <translation>В файле слишком много меток &lt;%1&gt;.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished">Версия &quot;%1&quot; недействительная.</translation>
+        <translation>Версия &quot;%1&quot; недействительная.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished">Версия &quot;0.0.0&quot; недействительная.</translation>
+        <translation>Версия &quot;0.0.0&quot; недействительная.</translation>
     </message>
 </context>
 <context>
@@ -12064,7 +11952,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Data container is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Контейнер данных пуст</translation>
     </message>
     <message>
         <source>Math parser error: %1</source>
@@ -12080,15 +11968,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Result is zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Результат равен нулю</translation>
     </message>
     <message>
         <source>Result less than zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Результат меньше нуля</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Формула пуста</translation>
     </message>
     <message>
         <source>Not evaluated</source>
@@ -12103,11 +11991,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Формула пуста</translation>
     </message>
 </context>
 <context>
@@ -12199,7 +12087,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished">Надсечка</translation>
+        <translation>Надсечка</translation>
     </message>
 </context>
 <context>
@@ -12507,10 +12395,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VSettings</name>
-    <message>
-        <source>patterns</source>
-        <translation type="vanished">выкройки</translation>
-    </message>
     <message>
         <source>layouts</source>
         <translation>раскладки</translation>
@@ -13563,7 +13447,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент был использован после удаления.</translation>
     </message>
 </context>
 <context>
@@ -15125,14 +15009,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation type="vanished">Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
-    </message>
-    <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="vanished">Длина = %1%2, угол = %3°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;Mouse click&lt;/b&gt; - окончание выбора позиции</translation>
-    </message>
-    <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="vanished">Длина = %1%2, угол = %3°, угол вращения = %4°, &lt;b&gt;Shift&lt;/b&gt; - фиксация угла, &lt;b&gt;%5&lt;/b&gt; - сменить координаты точки вращения, &lt;b&gt;Mouse click&lt;/b&gt; - создание</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>

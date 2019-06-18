@@ -459,7 +459,7 @@
     </message>
     <message>
         <source>Point label</source>
-        <translation type="vanished">Štítek bodu</translation>
+        <translation type="vanished">Popis bodu</translation>
     </message>
     <message>
         <source>First point</source>
@@ -2105,14 +2105,6 @@
         <translation>Barva:</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Chyba</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Poloměr nemůže být záporný</translation>
-    </message>
-    <message>
         <source>Edit radius1</source>
         <translation>Upravit poloměr 1</translation>
     </message>
@@ -2934,11 +2926,11 @@
     </message>
     <message>
         <source>Increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Přídavek</translation>
     </message>
     <message>
         <source>Separator</source>
-        <translation type="unfinished">Oddělovač</translation>
+        <translation>Oddělovač</translation>
     </message>
 </context>
 <context>
@@ -3006,28 +2998,20 @@
         <translation type="vanished">Uspořádané střihové díly: %1 z %2</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for workpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hledá se nejlepší poloha pro střihové díly. Počkejte, prosím.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>One or more pattern pieces are bigger than the paper format you selected. Please, select a bigger paper format.</source>
-        <translation type="vanished">Jeden nebo více dílů střihu je větší než formát papíru, jejž jste vybral. Vyberte, prosím, větší formát papíru.</translation>
-    </message>
-    <message>
         <source>Nesting. Please, wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnořuje se. Počkejte, prosím.</translation>
     </message>
     <message>
         <source>Time left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbývající čas:</translation>
     </message>
     <message>
         <source>Time left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbývající čas: %1</translation>
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Koeficient účinnosti: %1%</translation>
     </message>
 </context>
 <context>
@@ -3288,20 +3272,24 @@ Apply settings anyway?</source>
 Přesto použít nastavení?</translation>
     </message>
     <message>
+        <source>Follow grainline</source>
+        <translation>Následovat dráhu nitě</translation>
+    </message>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished">Čas:</translation>
+        <translation>Čas:</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas daný algoritmu k nalezení nejlepšího rozvržení.</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation> min</translation>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Účinnost:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
@@ -3309,11 +3297,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -4184,7 +4168,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished">Jazyk popisu:</translation>
+        <translation>Jazyk popisu:</translation>
     </message>
 </context>
 <context>
@@ -4425,20 +4409,12 @@ Přesto použít nastavení?</translation>
         <translation>Úhel:</translation>
     </message>
     <message>
-        <source>Select main path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Vybrat hlavní cestu předmětů, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Obrátit</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Smazat</translation>
-    </message>
-    <message>
-        <source>Current seam aloowance</source>
-        <translation type="vanished">Nynější přídavek na šev</translation>
     </message>
     <message>
         <source>Edit seam allowance width</source>
@@ -4641,16 +4617,16 @@ Přesto použít nastavení?</translation>
         <translation>Vyloučeno</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <source>The same curve repeats twice!</source>
+        <translation>Tatáž křivka se opakuje dvakrát!</translation>
     </message>
     <message>
-        <source>Length:</source>
-        <translation type="unfinished">Délka:</translation>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
+        <source>Current seam allowance</source>
+        <translation>Nynější přídavek na šev</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
@@ -4662,35 +4638,35 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U mark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka V 2</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current seam allowance</source>
-        <translation type="unfinished">Nynější přídavek na šev</translation>
+        <source>Manual length</source>
+        <translation>Ruční délka</translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;prázdné&gt;</translation>
+        <source>Length:</source>
+        <translation>Délka:</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation>=</translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation>Značka U</translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation>Značka okénko</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit délku značky sestavení</translation>
     </message>
 </context>
 <context>
@@ -4836,7 +4812,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kruh</translation>
     </message>
 </context>
 <context>
@@ -5619,10 +5595,6 @@ Přesto použít nastavení?</translation>
         <translation>Dráha nitě</translation>
     </message>
     <message>
-        <source>Select main path objects clockwise, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Vybrat hlavní cestu předmětů po směru hodinových ručiček, &lt;b&gt;Shift&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
-    </message>
-    <message>
         <source>Reverse</source>
         <translation>Převrátit</translation>
     </message>
@@ -5811,24 +5783,24 @@ Přesto použít nastavení?</translation>
         <translation>Pro otevření všech vlastností jednotlivosti (dílu střihu) dokončete vytvoření hlavní cesty. Stiskněte, prosím, OK.</translation>
     </message>
     <message>
+        <source>The same curve repeats twice!</source>
+        <translation>Tatáž křivka se opakuje dvakrát!</translation>
+    </message>
+    <message>
+        <source>&lt;Empty&gt;</source>
+        <translation>&lt;prázdné&gt;</translation>
+    </message>
+    <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="unfinished">&lt;prázdné&gt;</translation>
+        <translation>Kruh</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit délku značky sestavení</translation>
     </message>
 </context>
 <context>
@@ -6351,14 +6323,6 @@ Přesto použít nastavení?</translation>
     <message>
         <source>by second edge right angle</source>
         <translation>Podle pravého úhlu druhého okraje</translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="vanished">Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="vanished">Hodnota nemůže být menší než 0</translation>
     </message>
 </context>
 <context>
@@ -7859,10 +7823,6 @@ Chcete uložit své změny?</translation>
         <translation>Vybrat hlavní předměty cesty po směru hodinových ručiček.</translation>
     </message>
     <message>
-        <source>Select path objects, &lt;b&gt;Shift&lt;/b&gt; - reverse direction curve</source>
-        <translation type="vanished">Vyberte předměty cesty, &lt;b&gt;Shift&lt;/b&gt; - obrátitkřivku směru</translation>
-    </message>
-    <message>
         <source>The document has no write permissions.</source>
         <translation>Dokument nemá žádná oprávnění k zápisu.</translation>
     </message>
@@ -7965,14 +7925,6 @@ Chcete uložit své změny?</translation>
     <message>
         <source>Forum</source>
         <translation>Fórum</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - dokončit vytvoření</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="vanished">Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;Enter&lt;/b&gt; - potvrdit výběr</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -8107,10 +8059,6 @@ Chcete uložit své změny?</translation>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
-        <source>Point from tangent circle and segment</source>
-        <translation type="vanished">Bod z kruhu  tangenty a části</translation>
-    </message>
-    <message>
         <source>Place label tool</source>
         <translation>Nástroj Umístit popis</translation>
     </message>
@@ -8143,36 +8091,16 @@ Chcete uložit své změny?</translation>
         <translation>Změny použity.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="vanished">Nelze číst nastavení z poškozeného souboru INI.</translation>
-    </message>
-    <message>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <source>Point of intersection circle and segment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
-        <source>Increase label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Original label font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hide labels</source>
-        <translation type="unfinished"></translation>
+        <source>Cannot read settings from a malformed .INI file.</source>
+        <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -8187,7 +8115,23 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed .INI file.</source>
+        <source>Point of intersection circle and segment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase label font</source>
+        <translation>Zvětšit písmo popisu</translation>
+    </message>
+    <message>
+        <source>Decrease label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Original label font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide labels</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8350,11 +8294,11 @@ Chcete uložit své změny?</translation>
         <translation>Dodatečně, prosím, poskytněte: %1</translation>
     </message>
     <message>
-        <source>Timeout.</source>
+        <source>Preparing details for layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Preparing details for layout</source>
+        <source>Timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9053,10 +8997,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>V záhybu</translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos; may broke a layout. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="vanished">Díl &apos;%1&apos; může poškodit rozvržení. Prověřte, prosím, přídavek na šev, a tak ověřte, jak se přídavek na šev chová.</translation>
-    </message>
-    <message>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation>Spouštěč viditelnost obsahuje chybu a bude se přehlížet</translation>
     </message>
@@ -9089,12 +9029,44 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Nelze opravit polohu zářezu.</translation>
     </message>
     <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <source>Error</source>
+        <translation>Chyba</translation>
+    </message>
+    <message>
+        <source>Empty formula</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
+        <translation>Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be 0</source>
+        <translation>Hodnota nemůže být 0</translation>
+    </message>
+    <message>
+        <source>Value can&apos;t be less than 0</source>
+        <translation>Hodnota nemůže být menší než 0</translation>
+    </message>
+    <message>
+        <source>Parser error: %1</source>
+        <translation>Chyba zpracování: %1</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
@@ -9110,14 +9082,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9137,27 +9101,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
-    </message>
-    <message>
-        <source>Empty formula</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished">Neplatný výsledek. Hodnota je nekonečná nebo NaN. Prověřte, prosím, své výpočty.</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="unfinished">Hodnota nemůže být 0</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be less than 0</source>
-        <translation type="unfinished">Hodnota nemůže být menší než 0</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
+        <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10090,14 +10034,6 @@ Chcete uložit změny?</translation>
         <translation>Jméno zákazníka:</translation>
     </message>
     <message>
-        <source>Open individual …</source>
-        <translation type="vanished">Otevřít individuální...</translation>
-    </message>
-    <message>
-        <source>Save As …</source>
-        <translation type="vanished">Uložit jako...</translation>
-    </message>
-    <message>
         <source>Open multisize …</source>
         <translation>Otevřít vícevelikostní…</translation>
     </message>
@@ -10162,20 +10098,12 @@ Chcete uložit změny?</translation>
         <translation>Chyba na řádku %1. Název měření je prázdný.</translation>
     </message>
     <message>
-        <source>Cannot read settings from a malformed INI file.</source>
-        <translation type="vanished">Nelze číst nastavení z poškozeného souboru INI.</translation>
-    </message>
-    <message>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -10183,7 +10111,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished">&amp;Nápověda</translation>
+        <translation>&amp;Nápověda</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
@@ -10195,7 +10123,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Uložit</translation>
+        <translation>&amp;Uložit</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
@@ -10211,7 +10139,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished">&amp;Nový</translation>
+        <translation>&amp;Nový</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -10219,7 +10151,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
 </context>
 <context>
@@ -10483,34 +10415,6 @@ Chcete uložit změny?</translation>
         <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
     <message>
-        <source>Manual length</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="unfinished">Délka:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="unfinished">Průvodce vzorcem</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="unfinished">Výpočet</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <source>Acute angle that looks intside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10520,15 +10424,43 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka V 2</translation>
+    </message>
+    <message>
+        <source>Manual length</source>
+        <translation>Ruční délka</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation>Délka:</translation>
+    </message>
+    <message>
+        <source>Formula wizard</source>
+        <translation>Průvodce vzorcem</translation>
+    </message>
+    <message>
+        <source>=</source>
+        <translation>=</translation>
+    </message>
+    <message>
+        <source>Value</source>
+        <translation>Hodnota</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation>Výpočet</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka U</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka okénko</translation>
     </message>
 </context>
 <context>
@@ -10925,7 +10857,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>My Patterns</source>
-        <translation type="unfinished">Moje střihy</translation>
+        <translation>Moje střihy</translation>
     </message>
 </context>
 <context>
@@ -11073,57 +11005,13 @@ Chcete uložit změny?</translation>
     <name>VAbstractLayoutDialog</name>
     <message>
         <source>Letter</source>
-        <translation type="vanished">Dopis</translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="vanished">Legal</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="vanished">Role 24 palců</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="vanished">Role 30 palců</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="vanished">Role 36 palců</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="vanished">Role 42 palců</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="vanished">Role 44 palců</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Vlastní</translation>
-    </message>
-    <message>
-        <source>Roll 48in</source>
-        <translation type="vanished">Role 48 palců</translation>
-    </message>
-    <message>
-        <source>Roll 62in</source>
-        <translation type="vanished">Role 62 palců</translation>
-    </message>
-    <message>
-        <source>Roll 72in</source>
-        <translation type="vanished">Role 72 palců</translation>
-    </message>
-    <message>
-        <source>Letter</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Dopis</translation>
+        <translation>Dopis</translation>
     </message>
     <message>
         <source>Legal</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Legal</translation>
+        <translation>Legal</translation>
     </message>
     <message>
         <source>Tabloid</source>
@@ -11133,47 +11021,47 @@ Chcete uložit změny?</translation>
     <message>
         <source>Roll 24in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 24 palců</translation>
+        <translation>Role 24 palců</translation>
     </message>
     <message>
         <source>Roll 30in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 30 palců</translation>
+        <translation>Role 30 palců</translation>
     </message>
     <message>
         <source>Roll 36in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 36 palců</translation>
+        <translation>Role 36 palců</translation>
     </message>
     <message>
         <source>Roll 42in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 42 palců</translation>
+        <translation>Role 42 palců</translation>
     </message>
     <message>
         <source>Roll 44in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 44 palců</translation>
+        <translation>Role 44 palců</translation>
     </message>
     <message>
         <source>Roll 48in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 48 palců</translation>
+        <translation>Role 48 palců</translation>
     </message>
     <message>
         <source>Roll 62in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 62 palců</translation>
+        <translation>Role 62 palců</translation>
     </message>
     <message>
         <source>Roll 72in</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Role 72 palců</translation>
+        <translation>Role 72 palců</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>Paper format</comment>
-        <translation type="unfinished">Vlastní</translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -11819,22 +11707,6 @@ Chcete uložit změny?</translation>
         <translation>Neplatný uživatelský materiál &apos;%1&apos;. Špatné číslo materiálu.</translation>
     </message>
     <message>
-        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="unfinished">Čas</translation>
-    </message>
-    <message>
-        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Coefficient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11844,6 +11716,22 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Čas</translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -11879,7 +11767,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>patterns</source>
-        <translation type="unfinished">Vzory</translation>
+        <translation>Vzory</translation>
     </message>
 </context>
 <context>
@@ -12004,19 +11892,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
-        <translation type="unfinished">Nebylo možné získat informace o verzi.</translation>
+        <translation>Nebylo možné získat informace o verzi.</translation>
     </message>
     <message>
         <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="unfinished">Příliš mnoho značek &lt;%1&gt; v souboru.</translation>
+        <translation>Příliš mnoho značek &lt;%1&gt; v souboru.</translation>
     </message>
     <message>
         <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="unfinished">Verze &quot;%1&quot; neplatná.</translation>
+        <translation>Verze &quot;%1&quot; neplatná.</translation>
     </message>
     <message>
         <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="unfinished">Verze &quot;0.0.0&quot; neplatná.</translation>
+        <translation>Verze &quot;0.0.0&quot; neplatná.</translation>
     </message>
 </context>
 <context>
@@ -12104,7 +11992,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Formula is empty</source>
@@ -12200,7 +12088,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Passmark</source>
-        <translation type="unfinished">Značka sestavení</translation>
+        <translation>Značka sestavení</translation>
     </message>
 </context>
 <context>
@@ -12508,10 +12396,6 @@ Chcete uložit změny?</translation>
 </context>
 <context>
     <name>VSettings</name>
-    <message>
-        <source>patterns</source>
-        <translation type="vanished">Vzory</translation>
-    </message>
     <message>
         <source>layouts</source>
         <translation>Rozvržení</translation>
@@ -15120,14 +15004,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation type="vanished">Délka = %1%2, úhel = %3°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
-    </message>
-    <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="vanished">Délka = %1%2, úhel = %3°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit výber polohy</translation>
-    </message>
-    <message>
-        <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="vanished">Délka = %1%2, úhel = %3°, úhel otočení = %4°, &lt;b&gt;Shift&lt;/b&gt; - přilnutí úhlů, &lt;b&gt;%5&lt;/b&gt; - změnit původní bod otočení, &lt;b&gt;Klepnutí myši&lt;/b&gt; - dokončit vytváření</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
