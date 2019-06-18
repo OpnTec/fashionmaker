@@ -114,6 +114,7 @@ protected:
     bool isLayoutStale;
     bool isNeedAutosave;
     bool ignorePrinterFields;
+    bool isLayoutPortrait{true};
     QMarginsF margins;
     QSizeF paperSize;
 

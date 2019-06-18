@@ -319,6 +319,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         details = lGenerator.GetAllDetailsItems();// All details items
                         detailsOnLayout = lGenerator.GetAllDetails();// All details items
                         shadows = CreateShadows(papers);
+                        isLayoutPortrait = lGenerator.IsPortrait();
                         scenes = CreateScenes(papers, shadows, details);
                        //Uncomment to debug, shows global contour
             //            gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
@@ -1522,7 +1523,7 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     printer->setCreator(QGuiApplication::applicationDisplayName()+QChar(QChar::Space)+
                         QCoreApplication::applicationVersion());
 
-    printer->setOrientation(QPrinter::Portrait);
+    printer->setOrientation(isLayoutPortrait ? QPrinter::Portrait : QPrinter::Landscape);
 
     if (not isTiled)
     {
@@ -1532,9 +1533,22 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
             if (paper)
             {
-                size = QSizeF(FromPixel(paperSize.width(), Unit::Mm),
-                              FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm));
+                if (isLayoutPortrait)
+                {
+                    size = QSizeF(FromPixel(paperSize.width(), Unit::Mm),
+                                  FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm));
+                }
+                else
+                {
+                    size = QSizeF(FromPixel(paper->rect().width() + margins.left() + margins.right(), Unit::Mm),
+                                  FromPixel(paperSize.height(), Unit::Mm));
+                }
             }
+        }
+
+        if (not isLayoutPortrait)
+        {
+            size.transpose(); // QPrinter reverse this for landscape orientation
         }
 
         const QPageSize::PageSizeId pSZ = FindPageSizeId(size);

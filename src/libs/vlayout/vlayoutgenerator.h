@@ -122,6 +122,8 @@ public:
 
     bool IsRotationNeeded() const;
 
+    bool IsPortrait() const;
+
 public slots:
     void Abort();
     void Timeout();
@@ -152,7 +154,6 @@ private:
 
     int PageHeight() const;
     int PageWidth() const;
-    bool IsPortrait() const;
 
     void GatherPages();
     void UnitePages();
