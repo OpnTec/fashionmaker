@@ -71,9 +71,17 @@ macx{
 # Qt from scratch without OpenSSL support.
 win32 {
     INSTALL_OPENSSL += \
-                       ../../../dist/win/libeay32.dll \
-                       ../../../dist/win/ssleay32.dll \
-                       ../../../dist/win/msvcr120.dll
+        ../../../dist/win/msvcr120.dll
+
+    contains(QMAKE_HOST.arch, x86_64) {
+        INSTALL_OPENSSL += \
+            ../../../dist/win/openssl/win64/libeay32.dll \
+            ../../../dist/win/openssl/win64/ssleay32.dll
+    } else {
+        INSTALL_OPENSSL += \
+            ../../../dist/win/openssl/win32/libeay32.dll \
+            ../../../dist/win/openssl/win32/ssleay32.dll
+    }
 }
 
 DEFINES += QT_NO_FOREACH

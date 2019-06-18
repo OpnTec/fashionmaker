@@ -280,8 +280,6 @@ win32:*g++* {
         $$PWD/../../../dist/win/s-measurements.ico \
         $$PWD/../../../dist/win/pattern.ico \
         $$PWD/../../../dist/win/pdftops.exe \
-        $$PWD/../../../dist/win/libeay32.dll \
-        $$PWD/../../../dist/win/ssleay32.dll \
         $$PWD/../../../dist/win/msvcr120.dll \
         $$PWD/../../../AUTHORS.txt \
         $$PWD/../../../LICENSE_GPL.txt \
@@ -314,6 +312,16 @@ win32:*g++* {
     # For support Windows 7+
     greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 6) {
         package.files += $$[QT_INSTALL_BINS]/Qt5WinExtras.dll
+    }
+
+    contains(QMAKE_HOST.arch, x86_64) {
+        package.files += \
+            ../../../dist/win/openssl/win64/libeay32.dll \
+            ../../../dist/win/openssl/win64/ssleay32.dll
+    } else {
+        package.files += \
+            ../../../dist/win/openssl/win32/libeay32.dll \
+            ../../../dist/win/openssl/win32/ssleay32.dll
     }
 
     package.CONFIG = no_check_exist
