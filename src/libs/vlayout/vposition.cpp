@@ -136,7 +136,7 @@ QPainterPath DrawDetails(const QVector<VLayoutPiece> &details)
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
     : QRunnable(),
-      m_bestResult(VBestSquare(data.gContour.GetSize(), saveLength)),
+      m_bestResult(VBestSquare(data.gContour.GetSize(), saveLength, data.isOriginPaperOrientationPortrait)),
       m_data(data),
 #ifdef LAYOUT_DEBUG
       paperIndex(0),

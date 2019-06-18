@@ -42,8 +42,8 @@ Q_DECL_CONSTEXPR inline qint64 Square(QSizeF size)
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength)
-    : d(new VBestSquareData(sheetSize, saveLength))
+VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait)
+    : d(new VBestSquareData(sheetSize, saveLength, isPortrait))
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -190,5 +190,5 @@ bool VBestSquare::IsImprovedSidePosition(qreal sidePosition) const
 //---------------------------------------------------------------------------------------------------------------------
 bool VBestSquare::IsPortrait() const
 {
-    return d->sheetSize.height() >= d->sheetSize.width();
+    return d->isPortrait;
 }

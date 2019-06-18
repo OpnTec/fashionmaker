@@ -106,6 +106,9 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
     bank->Reset();
     state = LayoutErrors::NoError;
 
+    int width = PageWidth();
+    int height = PageHeight();
+
     if (VFuzzyComparePossibleNulls(shift, -1))
     {
         if (bank->PrepareDetails())
@@ -117,9 +120,6 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
             state = LayoutErrors::PrepareLayoutError;
             return;
         }
-
-        int width = PageWidth();
-        int height = PageHeight();
 
         if (stripOptimization)
         {
@@ -172,7 +172,7 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
                 return;
             }
 
-            VLayoutPaper paper(PageHeight(), PageWidth(), bank->GetLayoutWidth());
+            VLayoutPaper paper(height, width, bank->GetLayoutWidth());
             paper.SetShift(shift);
             paper.SetPaperIndex(static_cast<quint32>(papers.count()));
             paper.SetRotate(rotate);

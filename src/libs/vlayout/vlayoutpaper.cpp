@@ -243,7 +243,7 @@ int VLayoutPaper::Count() const
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop)
 {
-    VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength);
+    VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength, d->originPaperOrientation);
     QThreadPool *thread_pool = QThreadPool::globalInstance();
     thread_pool->setExpiryTimeout(1000);
     QVector<VPosition *> threads;

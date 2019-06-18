@@ -41,9 +41,10 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VBestSquareData : public QSharedData
 {
 public:
-    VBestSquareData(const QSizeF &sheetSize, bool saveLength)
+    VBestSquareData(const QSizeF &sheetSize, bool saveLength, bool isPortrait)
         : sheetSize(sheetSize),
-          saveLength(saveLength)
+          saveLength(saveLength),
+          isPortrait(isPortrait)
     {
         data.bestSize = QSizeF(sheetSize.width()+10, sheetSize.height()+10);
     }
@@ -54,7 +55,8 @@ public:
           valideResult(res.valideResult),
           saveLength(res.saveLength),
           depthPosition(res.depthPosition),
-          data(res.data)
+          data(res.data),
+          isPortrait(res.isPortrait)
     {}
 
     ~VBestSquareData() {}
@@ -64,6 +66,7 @@ public:
     bool saveLength;
     qreal depthPosition{INT_MAX};
     VBestSquareResData data{};
+    bool isPortrait{true};
 
 private:
     VBestSquareData &operator=(const VBestSquareData &) Q_DECL_EQ_DELETE;

@@ -42,7 +42,7 @@ class VBestSquareData;
 class VBestSquare
 {
 public:
-    VBestSquare(QSizeF sheetSize, bool saveLength);
+    VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait);
     VBestSquare(const VBestSquare &res);
     virtual ~VBestSquare();
 
