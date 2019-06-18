@@ -498,8 +498,6 @@
                                             <xs:attribute name="passmarkAngle" type="passmarkAngleType"/>
                                             <xs:attribute name="showSecondPassmark" type="xs:boolean"/>
                                             <xs:attribute name="allowCollapse" type="xs:boolean"/>
-                                            <xs:attribute name="priority" type="piecePriorityType"/>
-                                            <xs:attribute name="gravity" type="layoutSideGravityType"/>
                                             <xs:attribute name="manualPassmarkLength" type="xs:boolean"/>
                                             <xs:attribute name="passmarkLength" type="xs:string"/>
                                             <xs:attribute name="singlePassmarkCuttingStop" type="cuttingStop"/>
@@ -793,6 +791,7 @@
                         <xs:attribute name="priority" type="piecePriorityType"/>
                         <xs:attribute name="gravity" type="layoutSideGravityType"/>
                         <xs:attribute name="cuttingTime" type="cuttingTime"/>
+                        <xs:attribute name="nestTogethWithNext" type="xs:boolean"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
