@@ -51,6 +51,7 @@
 - [#971] Group operation do not work with VCubicBezierPath.
 - Regression in method DialogTool::GetNodeName.
 - Fix visualization for tool Point from arc and tangent.
+- Changing settings for move and rotate tools through property browser does not take in count previous change for label point and Show label option.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

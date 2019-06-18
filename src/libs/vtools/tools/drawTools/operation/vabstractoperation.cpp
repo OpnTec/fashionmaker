@@ -495,6 +495,12 @@ void VAbstractOperation::ChangeLabelVisibility(quint32 id, bool visible)
         VAbstractSimple *obj = operatedObjects.value(id);
         if (obj && obj->GetType() == GOType::Point)
         {
+            auto dItem = std::find_if(destination.begin(), destination.end(),
+                                    [id](const DestinationItem &dItem) { return dItem.id == id; });
+            if (dItem != destination.cend())
+            {
+                dItem->showLabel = visible;
+            }
             qApp->getUndoStack()->push(new OperationShowLabel(doc, m_id, id, visible));
         }
     }
@@ -508,6 +514,13 @@ void VAbstractOperation::UpdateNamePosition(quint32 id, const QPointF &pos)
         VAbstractSimple *obj = operatedObjects.value(id);
         if (obj && obj->GetType() == GOType::Point)
         {
+            auto dItem = std::find_if(destination.begin(), destination.end(),
+                                    [id](const DestinationItem &dItem) { return dItem.id == id; });
+            if (dItem != destination.end())
+            {
+                dItem->mx = pos.x();
+                dItem->my = pos.y();
+            }
             qApp->getUndoStack()->push(new OperationMoveLabel(m_id, doc, pos, id));
         }
     }
