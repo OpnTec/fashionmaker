@@ -181,6 +181,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
     }
     else if (not stage1 && prepare && click)
     {
+        CheckState();
         setModal(true);
         emit ToolTip(QString());
         show();
