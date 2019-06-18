@@ -63,6 +63,8 @@ public:
 
     VBestSquare getBestResult() const;
 
+    static VBestSquare ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
+
 private:
     Q_DISABLE_COPY(VPosition)
     VBestSquare m_bestResult;

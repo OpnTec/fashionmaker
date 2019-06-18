@@ -44,10 +44,17 @@
 #include <QString>
 #include <QStringData>
 #include <QStringDataPtr>
+#include <QThreadPool>
 #include <Qt>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
 
 //---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
@@ -78,6 +85,72 @@ void VPosition::run()
 VBestSquare VPosition::getBestResult() const
 {
     return m_bestResult;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
+{
+    VBestSquare bestResult(data.gContour.GetSize(), saveLength, data.isOriginPaperOrientationPortrait);
+
+    if (stop->load())
+    {
+        return bestResult;
+    }
+
+    // First need set size of paper
+    if (data.gContour.GetHeight() <= 0 || data.gContour.GetWidth() <= 0)
+    {
+        return bestResult;
+    }
+
+    const VLayoutPiece detail = data.detail;
+    const int detailEdgesCount = detail.LayoutEdgesCount();
+    if (detailEdgesCount < 3 || detail.DetailEdgesCount() < 3)
+    {
+        return bestResult;//Not enough edges
+    }
+
+    QScopedPointer<QThreadPool> thread_pool(new QThreadPool());
+    QVector<VPosition *> threads;
+
+    auto Cleanup = qScopeGuard([threads] {qDeleteAll(threads.begin(), threads.end());});
+
+    for (int j=1; j <= data.gContour.GlobalEdgesCount(); ++j)
+    {
+        QCoreApplication::processEvents();
+
+        for (int i=1; i<= detailEdgesCount; ++i)
+        {
+            VPositionData linkedData = data;
+            linkedData.i = i;
+            linkedData.j = j;
+
+            auto *thread = new VPosition(linkedData, stop, saveLength);
+            thread->setAutoDelete(false);
+            threads.append(thread);
+            thread_pool->start(thread);
+        }
+    }
+
+    // Wait for done
+    do
+    {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+    }
+    while(thread_pool->activeThreadCount() > 0 && not stop->load());
+
+    if (stop->load())
+    {
+        return bestResult;
+    }
+
+    for (auto &thread : threads)
+    {
+        bestResult.NewResult(thread->getBestResult());
+    }
+
+    return bestResult;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

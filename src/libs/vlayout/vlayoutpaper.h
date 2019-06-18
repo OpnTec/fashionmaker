@@ -109,8 +109,6 @@ public:
 private:
     QSharedDataPointer<VLayoutPaperData> d;
 
-    bool AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop);
-
     bool SaveResult(const VBestSquare &bestResult, const VLayoutPiece &detail);
 
 };

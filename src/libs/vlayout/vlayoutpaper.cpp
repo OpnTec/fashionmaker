@@ -207,12 +207,6 @@ void VLayoutPaper::SetOriginPaperPortrait(bool portrait)
 //---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop)
 {
-    // First need set size of paper
-    if (d->globalContour.GetHeight() <= 0 || d->globalContour.GetWidth() <= 0)
-    {
-        return false;
-    }
-
     if (detail.LayoutEdgesCount() < 3 || detail.DetailEdgesCount() < 3)
     {
         return false;//Not enough edges
@@ -229,73 +223,23 @@ bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &s
         d->localRotationNumber = d->globalRotationNumber;
     }
 
-    return AddToSheet(detail, stop);
+    VPositionData data;
+    data.gContour = d->globalContour;
+    data.detail = detail;
+    data.rotate = d->localRotate;
+    data.rotationNumber = d->localRotationNumber;
+    data.followGrainline = d->followGrainline;
+    data.positionsCache = d->positionsCache;
+    data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
+
+    const VBestSquare result = VPosition::ArrangeDetail(data, &stop, d->saveLength);
+    return SaveResult(result, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPaper::Count() const
 {
     return d->details.count();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop)
-{
-    VBestSquare bestResult(d->globalContour.GetSize(), d->saveLength, d->originPaperOrientation);
-    QThreadPool *thread_pool = QThreadPool::globalInstance();
-    thread_pool->setExpiryTimeout(1000);
-    QVector<VPosition *> threads;
-
-    int detailEdgesCount = detail.LayoutEdgesCount();
-
-    for (int j=1; j <= d->globalContour.GlobalEdgesCount(); ++j)
-    {
-        QCoreApplication::processEvents();
-
-        for (int i=1; i<= detailEdgesCount; ++i)
-        {
-            VPositionData data;
-            data.gContour = d->globalContour;
-            data.detail = detail;
-            data.i = i;
-            data.j = j;
-            data.rotate = d->localRotate;
-            data.rotationNumber = d->localRotationNumber;
-            data.followGrainline = d->followGrainline;
-            data.positionsCache = d->positionsCache;
-            data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
-
-            auto *thread = new VPosition(data, &stop, d->saveLength);
-            thread->setAutoDelete(false);
-            threads.append(thread);
-            thread_pool->start(thread);
-        }
-    }
-
-    // Wait for done
-    do
-    {
-        QCoreApplication::processEvents();
-        QThread::msleep(250);
-    }
-    while(thread_pool->activeThreadCount() > 0 && not stop.load());
-
-    if (stop.load())
-    {
-        qDeleteAll(threads.begin(), threads.end());
-        threads.clear();
-        return false;
-    }
-
-    for (auto thread : threads)
-    {
-        bestResult.NewResult(thread->getBestResult());
-    }
-
-    qDeleteAll(threads.begin(), threads.end());
-    threads.clear();
-
-    return SaveResult(bestResult, detail);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
