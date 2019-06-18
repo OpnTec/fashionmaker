@@ -256,7 +256,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
             {
                 // Need to create artificial loop
                 QLineF loop1(sp2, sp1);
-                loop1.setLength(loop1.length()*0.1);
+                loop1.setLength(loop1.length()*0.2);
 
                 points.append(loop1.p2()); // Need for the main path rule
 
