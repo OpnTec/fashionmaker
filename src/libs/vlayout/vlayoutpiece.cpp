@@ -51,6 +51,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpassmark.h"
+#include "../vpatterndb/vpiecenode.h"
 #include "../vgeometry/vpointf.h"
 #include "../vgeometry/vplacelabelitem.h"
 #include "vlayoutdef.h"

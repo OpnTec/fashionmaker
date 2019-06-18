@@ -315,8 +315,9 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     QVector<QPointF> newGContour = m_data.gContour.UniteWithContour(detail, globalI, detJ, type);
     newGContour.append(newGContour.first());
     const QSizeF size = QPolygonF(newGContour).boundingRect().size();
-    const qreal depthPosition = m_data.gContour.IsPortrait() ? detail.DetailBoundingRect().y() :
-                                                               detail.DetailBoundingRect().x();
+    const QRectF boundingRect = detail.DetailBoundingRect();
+    const qreal depthPosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.y() : boundingRect.x();
+    const qreal sidePosition = m_data.isOriginPaperOrientationPortrait ? boundingRect.x() : boundingRect.y();
 
     VBestSquareResData data;
     data.bestSize = size;
@@ -326,6 +327,7 @@ void VPosition::SaveCandidate(VBestSquare &bestResult, const VLayoutPiece &detai
     data.resMirror = detail.IsMirror();
     data.type = type;
     data.depthPosition = depthPosition;
+    data.sidePosition = sidePosition;
 
     bestResult.NewResult(data);
 }

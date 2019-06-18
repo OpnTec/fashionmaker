@@ -193,6 +193,18 @@ void VLayoutPaper::SetPaperIndex(quint32 index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutPaper::IsOriginPaperPortrait() const
+{
+    return d->originPaperOrientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPaper::SetOriginPaperPortrait(bool portrait)
+{
+    d->originPaperOrientation = portrait;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutPaper::ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop)
 {
     // First need set size of paper
@@ -253,6 +265,7 @@ bool VLayoutPaper::AddToSheet(const VLayoutPiece &detail, std::atomic_bool &stop
             data.rotationNumber = d->localRotationNumber;
             data.followGrainline = d->followGrainline;
             data.positionsCache = d->positionsCache;
+            data.isOriginPaperOrientationPortrait = d->originPaperOrientation;
 
             auto *thread = new VPosition(data, &stop, d->saveLength);
             //Info for debug

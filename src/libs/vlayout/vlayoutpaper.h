@@ -90,6 +90,9 @@ public:
 
     void SetPaperIndex(quint32 index);
 
+    bool IsOriginPaperPortrait() const;
+    void SetOriginPaperPortrait(bool portrait);
+
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
     Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCrop, bool textAsPaths) const;

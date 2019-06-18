@@ -28,6 +28,7 @@
 
 #include "vbestsquare.h"
 #include "vbestsquare_p.h"
+#include "../vmisc/def.h"
 
 #include <QMatrix>
 
@@ -76,21 +77,33 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
 
     const qint64 candidateSquare = Square(data.bestSize);
 
-    if (candidateSquare > 0)
+    if (candidateSquare > 0 && data.type >= d->data.type && candidateSquare <= Square(d->data.bestSize))
     {
-        if (data.type >= d->data.type && candidateSquare <= Square(d->data.bestSize)
-                && data.depthPosition <= d->data.depthPosition)
+        if (not HasValidResult())
+        {
+            SaveResult(); // First result
+        }
+        else
         {
             if (d->saveLength)
             {
-                if (data.depthPosition <= d->data.depthPosition)
+                if (VFuzzyComparePossibleNulls(data.depthPosition, d->data.depthPosition)
+                        && IsImprovedSidePosition(data.sidePosition))
+                {
+                    SaveResult();
+                }
+                else if (data.depthPosition < d->data.depthPosition)
                 {
                     SaveResult();
                 }
             }
             else
             {
-                SaveResult();
+                if (IsImprovedSidePosition(data.sidePosition)
+                        || VFuzzyComparePossibleNulls(data.sidePosition, d->data.sidePosition))
+                {
+                    SaveResult();
+                }
             }
         }
     }
@@ -163,6 +176,15 @@ VBestSquareResData VBestSquare::BestResultData() const
 bool VBestSquare::IsSaveLength() const
 {
     return d->saveLength;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VBestSquare::IsImprovedSidePosition(qreal sidePosition) const
+{
+    const bool lessThan = d->data.sidePosition < sidePosition;
+    const bool greaterThan = d->data.sidePosition > sidePosition;
+
+    return IsPortrait() ?  greaterThan : lessThan;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

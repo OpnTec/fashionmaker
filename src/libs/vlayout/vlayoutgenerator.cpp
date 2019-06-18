@@ -179,6 +179,7 @@ void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout)
             paper.SetFollowGrainline(followGrainline);
             paper.SetRotationNumber(rotationNumber);
             paper.SetSaveLength(saveLength);
+            paper.SetOriginPaperPortrait(IsPortrait());
             do
             {
                 const int index = bank->GetNext();

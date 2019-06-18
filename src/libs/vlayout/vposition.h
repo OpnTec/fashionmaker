@@ -50,6 +50,7 @@ struct VPositionData
     int rotationNumber{0};
     bool followGrainline{false};
     QVector<VCachedPositions> positionsCache{};
+    bool isOriginPaperOrientationPortrait{true};
 };
 
 class VPosition : public QRunnable
@@ -140,8 +141,7 @@ private:
  */
 inline QLineF VPosition::FabricGrainline() const
 {
-    return m_data.gContour.GetHeight() >= m_data.gContour.GetWidth() ? QLineF(10, 10, 10, 100) :
-                                                                       QLineF(10, 10, 100, 10);
+    return m_data.isOriginPaperOrientationPortrait ? QLineF(10, 10, 10, 100) : QLineF(10, 10, 100, 10);
 }
 
 #endif // VPOSITION_H

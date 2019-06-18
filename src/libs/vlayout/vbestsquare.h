@@ -69,10 +69,12 @@ public:
     VBestSquareResData BestResultData() const;
 
     bool IsSaveLength() const;
+    bool IsImprovedSidePosition(qreal sidePosition) const;
     bool IsPortrait() const;
 
 private:
     QSharedDataPointer<VBestSquareData> d;
+
 };
 
 Q_DECLARE_TYPEINFO(VBestSquare, Q_MOVABLE_TYPE);

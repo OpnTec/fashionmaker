@@ -64,7 +64,8 @@ public:
           globalRotationNumber(paper.globalRotationNumber),
           localRotationNumber(paper.localRotationNumber),
           saveLength(paper.saveLength),
-          followGrainline(paper.followGrainline)
+          followGrainline(paper.followGrainline),
+          originPaperOrientation(paper.originPaperOrientation)
     {}
 
     ~VLayoutPaperData() {}
@@ -86,6 +87,7 @@ public:
     int localRotationNumber{2};
     bool saveLength{false};
     bool followGrainline{false};
+    bool originPaperOrientation{true};
 
 private:
     VLayoutPaperData& operator=(const VLayoutPaperData&) Q_DECL_EQ_DELETE;

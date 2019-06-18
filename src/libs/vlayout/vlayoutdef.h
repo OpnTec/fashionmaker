@@ -63,6 +63,8 @@ struct VBestSquareResData
     BestFrom      type{BestFrom::Rotation};
     // cppcheck-suppress unusedStructMember
     qreal         depthPosition{INT_MAX};
+    // cppcheck-suppress unusedStructMember
+    qreal         sidePosition{0};
 };
 
 struct VCachedPositions
