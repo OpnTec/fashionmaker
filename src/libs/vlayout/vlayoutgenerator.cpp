@@ -99,7 +99,7 @@ int VLayoutGenerator::DetailsCount()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::Generate(QElapsedTimer timer, qint64 timeout, LayoutErrors previousState)
+void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, LayoutErrors previousState)
 {
     stopGeneration.store(false);
     papers.clear();
