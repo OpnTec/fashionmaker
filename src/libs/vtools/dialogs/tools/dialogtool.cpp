@@ -874,7 +874,6 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
         }
     }
     FillList(box, list);
-    box->setCurrentIndex(-1);
 
     box->blockSignals(false);
 }

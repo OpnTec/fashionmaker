@@ -77,6 +77,8 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
     FillComboBoxPoints(ui->comboBoxOriginPoint);
     FillComboBoxAxisType(ui->comboBoxAxisType);
 
+    ui->comboBoxOriginPoint->setCurrentIndex(-1);
+
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
     connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
             this, &DialogFlippingByAxis::PointChanged);
