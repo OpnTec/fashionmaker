@@ -2562,7 +2562,7 @@ void MainWindow::ActionDraw(bool checked)
         ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         ui->dockWidgetGroups->setWidget(groupsWidget);
-        ui->dockWidgetGroups->setWindowTitle(tr("Group"));
+        ui->dockWidgetGroups->setWindowTitle(tr("Groups of visibility"));
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
     }
