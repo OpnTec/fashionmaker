@@ -8124,6 +8124,10 @@ Você quer salvar suas mudanças?</translation>
         <source>Hide labels</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Groups of visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8285,6 +8289,10 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process has been stoped because of exception.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

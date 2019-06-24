@@ -8131,6 +8131,10 @@ Do you want to save your changes?</source>
         <source>Hide labels</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Groups of visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8304,6 +8308,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process has been stoped because of exception.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
