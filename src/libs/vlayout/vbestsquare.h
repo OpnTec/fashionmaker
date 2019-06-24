@@ -64,7 +64,9 @@ public:
     bool       HasValidResult() const;
     bool       Mirror() const;
     BestFrom   Type() const;
-    qreal      Position() const;
+    bool       IsTerminatedByException() const;
+    QString    ReasonTerminatedByException() const;
+    void       TerminatedByException(const QString &reason);
 
     VBestSquareResData BestResultData() const;
 

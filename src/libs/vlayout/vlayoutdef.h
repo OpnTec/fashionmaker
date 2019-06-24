@@ -41,7 +41,8 @@ enum class LayoutErrors : char
     PrepareLayoutError,
     ProcessStoped,
     EmptyPaperError,
-    Timeout
+    Timeout,
+    TerminatedByException
 };
 
 enum class BestFrom : char

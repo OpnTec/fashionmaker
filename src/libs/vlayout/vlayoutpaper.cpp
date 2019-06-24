@@ -48,6 +48,7 @@
 #include "vlayoutpiece.h"
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
+#include "../ifc/exception/vexceptionterminatedposition.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
@@ -271,6 +272,10 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
         positionChache.boundingRect = VLayoutPiece::BoundingRect(layoutPoints);
         positionChache.layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
         d->positionsCache.append(positionChache);
+    }
+    else if (bestResult.IsTerminatedByException())
+    {
+        throw VExceptionTerminatedPosition(bestResult.ReasonTerminatedByException());
     }
 
     return bestResult.HasValidResult(); // Do we have the best result?

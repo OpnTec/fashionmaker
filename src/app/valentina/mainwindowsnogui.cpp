@@ -363,6 +363,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
             case LayoutErrors::Timeout:
             case LayoutErrors::PrepareLayoutError:
             case LayoutErrors::ProcessStoped:
+            case LayoutErrors::TerminatedByException:
             default:
                 break;
         }
@@ -370,6 +371,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
         nestingState = lGenerator.State();
 
         if (nestingState == LayoutErrors::PrepareLayoutError || nestingState == LayoutErrors::ProcessStoped
+                || nestingState == LayoutErrors::TerminatedByException
                 || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
                     && efficiency >= lGenerator.GetEfficiencyCoefficient()))
         {
@@ -432,6 +434,9 @@ void MainWindowsNoGUI::ShowLayoutError(const LayoutErrors &state)
             break;
         case LayoutErrors::Timeout:
             qCritical() << tr("Timeout.");
+            break;
+        case LayoutErrors::TerminatedByException:
+            qCritical() << tr("Process has been stoped because of exception.");
             break;
         case LayoutErrors::ProcessStoped:
         default:

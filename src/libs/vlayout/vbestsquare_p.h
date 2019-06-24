@@ -54,9 +54,10 @@ public:
           sheetSize(res.sheetSize),
           valideResult(res.valideResult),
           saveLength(res.saveLength),
-          depthPosition(res.depthPosition),
           data(res.data),
-          isPortrait(res.isPortrait)
+          isPortrait(res.isPortrait),
+          terminatedByException(res.terminatedByException),
+          exceptionReason(res.exceptionReason)
     {}
 
     ~VBestSquareData() {}
@@ -64,9 +65,10 @@ public:
     QSizeF sheetSize;
     bool valideResult{false};
     bool saveLength;
-    qreal depthPosition{INT_MAX};
     VBestSquareResData data{};
     bool isPortrait{true};
+    bool terminatedByException{false};
+    QString exceptionReason{};
 
 private:
     VBestSquareData &operator=(const VBestSquareData &) Q_DECL_EQ_DELETE;

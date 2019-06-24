@@ -37,6 +37,7 @@
 #include "../vmisc/vmath.h"
 #include "vlayoutpiece.h"
 #include "vlayoutpaper.h"
+#include "../ifc/exception/vexceptionterminatedposition.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutGenerator::VLayoutGenerator(QObject *parent)
@@ -186,13 +187,22 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
             do
             {
                 const int index = bank->GetNext();
-                if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
+                try
                 {
-                    bank->Arranged(index);
+                    if (paper.ArrangeDetail(bank->GetDetail(index), stopGeneration))
+                    {
+                        bank->Arranged(index);
+                    }
+                    else
+                    {
+                        bank->NotArranged(index);
+                    }
                 }
-                else
+                catch (const VExceptionTerminatedPosition &e)
                 {
-                    bank->NotArranged(index);
+                    qCritical() << e.ErrorMessage();
+                    state = LayoutErrors::TerminatedByException;
+                    return;
                 }
 
                 QCoreApplication::processEvents();

@@ -161,9 +161,23 @@ BestFrom VBestSquare::Type() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VBestSquare::Position() const
+bool VBestSquare::IsTerminatedByException() const
 {
-    return d->depthPosition;
+    return d->terminatedByException;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VBestSquare::ReasonTerminatedByException() const
+{
+    return d->exceptionReason;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBestSquare::TerminatedByException(const QString &reason)
+{
+    d->valideResult = false;
+    d->terminatedByException = true;
+    d->exceptionReason = reason;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -78,7 +78,20 @@ void VPosition::run()
         return;
     }
 
-    FindBestPosition();
+    try
+    {
+        FindBestPosition();
+    }
+    catch (const VException &e)
+    {
+        m_bestResult.TerminatedByException(QStringLiteral("%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation()));
+        return;
+    }
+    catch (std::exception& e)
+    {
+        m_bestResult.TerminatedByException(QString::fromLatin1(e.what()));
+        return;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
