@@ -15,10 +15,10 @@
     },
 
     "version": {
-        "name": "0.6a",
+        "name": "0.6.2rc",
         "desc": "Fake release",
-        "released": "2017-12-17",
-        "vcs_tag": "0.6",
+        "released": "2019-06-24",
+        "vcs_tag": "0.6.2",
         "gpgSign": false
     },
 
