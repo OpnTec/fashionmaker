@@ -65,6 +65,12 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
+
 #include <QInputDialog>
 #include <QtDebug>
 #include <QMessageBox>
@@ -4928,11 +4934,12 @@ void MainWindow::CreateMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportLayoutAs()
 {
+    auto Uncheck = qScopeGuard([this] {ui->toolButtonLayoutExportAs->setChecked(false);});
+
     if (isLayoutStale)
     {
         if (ContinueIfLayoutStale() == QMessageBox::No)
         {
-            ui->toolButtonLayoutExportAs->setChecked(false);
             return;
         }
     }
@@ -4945,7 +4952,6 @@ void MainWindow::ExportLayoutAs()
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
             m_dialogSaveLayout.clear();
-            ui->toolButtonLayoutExportAs->setChecked(false);
             return;
         }
 
@@ -4955,17 +4961,17 @@ void MainWindow::ExportLayoutAs()
     catch (const VException &e)
     {
         m_dialogSaveLayout.clear();
-        ui->toolButtonLayoutExportAs->setChecked(false);
         qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return;
     }
-    ui->toolButtonLayoutExportAs->setChecked(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ExportDetailsAs()
 {
+    auto Uncheck = qScopeGuard([this] {ui->toolButtonDetailExportAs->setChecked(false);});
+
     QVector<DetailForLayout> detailsInLayout = SortDetailsForLayout(pattern->DataPieces());
 
     if (detailsInLayout.count() == 0)
@@ -4997,7 +5003,6 @@ void MainWindow::ExportDetailsAs()
         if (m_dialogSaveLayout->exec() == QDialog::Rejected)
         {
             m_dialogSaveLayout.clear();
-            ui->toolButtonDetailExportAs->setChecked(false);
             return;
         }
 
@@ -5007,12 +5012,10 @@ void MainWindow::ExportDetailsAs()
     catch (const VException &e)
     {
         m_dialogSaveLayout.clear();
-        ui->toolButtonDetailExportAs->setChecked(false);
         qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Export error.")),
                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
         return;
     }
-    ui->toolButtonDetailExportAs->setChecked(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
