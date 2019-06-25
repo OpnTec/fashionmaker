@@ -177,7 +177,11 @@ fi
 %{_datadir}/mime/packages/%{name}.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/tape.desktop
-%{_datadir}/pixmaps/*
+%{_datadir}/icons/hicolor/48x48/apps/*
+%{_datadir}/icons/hicolor/64x64/apps/*
+%{_datadir}/icons/hicolor/128x128/apps/*
+%{_datadir}/icons/hicolor/256x256/apps/*
+%{_datadir}/icons/hicolor/512x512/apps/*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/diagrams.rcc
 %dir %{_datadir}/%{name}/translations

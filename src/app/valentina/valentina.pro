@@ -163,13 +163,45 @@ unix{
         desktop.files += ../../../dist/tape.desktop
 
         # logo
-        pixmaps.path = $$PREFIX/share/pixmaps/
-        pixmaps.files += \
-            ../../../dist/$${TARGET}.png \
-            ../../../dist/tape.png \
-            ../../../dist/application-x-valentina-pattern.png \
-            ../../../dist/application-x-valentina-i-measurements.png \
-            ../../../dist/application-x-valentina-s-measurements.png \
+        hicolor_48.path = $$PREFIX/share/icons/hicolor/48x48/apps/
+        hicolor_48.files += \
+            ../../../share/icons/48x48/$${TARGET}.png \
+            ../../../share/icons/48x48/tape.png \
+            ../../../share/icons/48x48/application-x-valentina-pattern.png \
+            ../../../share/icons/48x48/application-x-valentina-i-measurements.png \
+            ../../../share/icons/48x48/application-x-valentina-s-measurements.png
+
+        hicolor_64.path = $$PREFIX/share/icons/hicolor/64x64/apps/
+        hicolor_64.files += \
+            ../../../share/icons/64x64/$${TARGET}.png \
+            ../../../share/icons/64x64/tape.png \
+            ../../../share/icons/64x64/application-x-valentina-pattern.png \
+            ../../../share/icons/64x64/application-x-valentina-i-measurements.png \
+            ../../../share/icons/64x64/application-x-valentina-s-measurements.png
+
+        hicolor_128.path = $$PREFIX/share/icons/hicolor/128x128/apps/
+        hicolor_128.files += \
+            ../../../share/icons/128x128/$${TARGET}.png \
+            ../../../share/icons/128x128/tape.png \
+            ../../../share/icons/128x128/application-x-valentina-pattern.png \
+            ../../../share/icons/128x128/application-x-valentina-i-measurements.png \
+            ../../../share/icons/128x128/application-x-valentina-s-measurements.png
+
+        hicolor_256.path = $$PREFIX/share/icons/hicolor/256x256/apps/
+        hicolor_256.files += \
+            ../../../share/icons/256x256/$${TARGET}.png \
+            ../../../share/icons/256x256/tape.png \
+            ../../../share/icons/256x256/application-x-valentina-pattern.png \
+            ../../../share/icons/256x256/application-x-valentina-i-measurements.png \
+            ../../../share/icons/256x256/application-x-valentina-s-measurements.png
+
+        hicolor_512.path = $$PREFIX/share/icons/hicolor/512x512/apps/
+        hicolor_512.files += \
+            ../../../share/icons/512x512/$${TARGET}.png \
+            ../../../share/icons/512x512/tape.png \
+            ../../../share/icons/512x512/application-x-valentina-pattern.png \
+            ../../../share/icons/512x512/application-x-valentina-i-measurements.png \
+            ../../../share/icons/512x512/application-x-valentina-s-measurements.png
 
         # Path to translation files after installation
         translations.path = $$PREFIX/share/$${TARGET}/translations/
@@ -191,7 +223,11 @@ unix{
             target \
             tape \
             desktop \
-            pixmaps \
+            hicolor_48 \
+            hicolor_64 \
+            hicolor_128 \
+            hicolor_256 \
+            hicolor_512 \
             translations \
             multisize \
             templates \
