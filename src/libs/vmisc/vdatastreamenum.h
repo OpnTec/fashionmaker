@@ -38,17 +38,16 @@
 //it stores the enum in a qint64
 template<typename Enum,
          typename = typename std::enable_if<std::is_enum<Enum>::value>::type>
-QDataStream& operator<<(QDataStream& stream, const Enum& e)
+inline QDataStream& operator<<(QDataStream& stream, const Enum& e)
 {
-    stream << static_cast<qint64>(e);
-    return stream;
+    return stream << static_cast<qint64>(e);
 }
 
 //a function that can deserialize any enum from QDataStream
 //it reads the enum as if it was stored in qint64
 template<typename Enum,
          typename = typename std::enable_if<std::is_enum<Enum>::value>::type>
-QDataStream& operator>>(QDataStream& stream, Enum& e)
+inline QDataStream& operator>>(QDataStream& stream, Enum& e)
 {
     qint64 v;
     stream >> v;
