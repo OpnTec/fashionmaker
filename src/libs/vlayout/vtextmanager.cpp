@@ -33,6 +33,7 @@
 #include <QRegularExpression>
 #include <QApplication>
 #include <QDebug>
+#include <QFlags> // QFlags<Qt::Alignment>
 
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
