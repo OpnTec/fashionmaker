@@ -110,7 +110,8 @@ enum class PassmarkLineType : unsigned char
     VMark,
     VMark2,
     UMark,
-    BoxMark
+    BoxMark,
+    LAST_ONE_DO_NOT_USE
 };
 
 QString          PassmarkLineTypeToString(PassmarkLineType type);
