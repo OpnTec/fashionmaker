@@ -31,6 +31,7 @@
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/typedef.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/defglobal.h"
 
 #include <QSharedData>
 #include <QCoreApplication>
@@ -82,7 +83,7 @@ public:
   QString reason{tr("Formula is empty")};
 
 private:
-    VFormulaData &operator=(const VFormulaData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VFormulaData)
 };
 
 QT_WARNING_POP

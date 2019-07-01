@@ -88,7 +88,7 @@ public:
     bool originPaperOrientation{true};
 
 private:
-    VLayoutPaperData& operator=(const VLayoutPaperData&) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VLayoutPaperData)
 };
 
 QT_WARNING_POP

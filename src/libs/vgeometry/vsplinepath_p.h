@@ -57,7 +57,7 @@ public:
     QVector<VSplinePoint> path;
 
 private:
-    VSplinePathData &operator=(const VSplinePathData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VSplinePathData)
 };
 
 VSplinePathData::~VSplinePathData()

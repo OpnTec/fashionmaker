@@ -111,7 +111,7 @@ public:
     QString nspace;
 
 private:
-    VContainerData &operator=(const VContainerData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VContainerData)
 };
 
 QT_WARNING_POP

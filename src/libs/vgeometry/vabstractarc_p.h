@@ -70,7 +70,7 @@ public:
     QString formulaLength;
 
 private:
-    VAbstractArcData &operator=(const VAbstractArcData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VAbstractArcData)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

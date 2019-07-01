@@ -80,7 +80,7 @@ public:
     bool m_showLabel;
 
 private:
-    VPointFData &operator=(const VPointFData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPointFData)
 };
 
 VPointFData::~VPointFData()

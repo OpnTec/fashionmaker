@@ -85,7 +85,7 @@ public:
     QVector<VLabelTemplateLine> m_lines;
 
 private:
-    VPieceLabelDataPrivate &operator=(const VPieceLabelDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPieceLabelDataPrivate)
 };
 
 QT_WARNING_POP

@@ -93,7 +93,7 @@ public:
     qreal   kAsm2;
 
 private:
-    VFSplinePointData &operator=(const VFSplinePointData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VFSplinePointData)
 };
 
 VFSplinePointData::~VFSplinePointData()
@@ -164,7 +164,7 @@ public:
     QString length2F;
 
 private:
-    VSplinePointData &operator=(const VSplinePointData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VSplinePointData)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

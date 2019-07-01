@@ -32,6 +32,7 @@
 #include <QSharedData>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -60,7 +61,7 @@ public:
     QString description;
 
 private:
-    VVariableData &operator=(const VVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VVariableData)
 };
 
 VVariableData::~VVariableData()

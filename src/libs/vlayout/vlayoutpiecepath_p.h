@@ -72,7 +72,7 @@ public:
     bool             m_cut{false};
 
 private:
-    VLayoutPiecePathData &operator=(const VLayoutPiecePathData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VLayoutPiecePathData)
 
     static const quint32 streamHeader;
     static const quint16 classVersion;

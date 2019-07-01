@@ -28,6 +28,7 @@
 #include <QSharedData>
 #include "qmuparserdef.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -88,7 +89,7 @@ public:
     bool  m_bAllowOpti;             ///< Flag indication optimizeability
 
 private:
-    QmuParserCallbackData &operator=(const QmuParserCallbackData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(QmuParserCallbackData)
 };
 
 }

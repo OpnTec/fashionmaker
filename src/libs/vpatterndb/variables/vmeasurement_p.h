@@ -122,7 +122,7 @@ public:
     qreal baseHeight;
 
 private:
-    VMeasurementData &operator=(const VMeasurementData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VMeasurementData)
 };
 
 VMeasurementData::~VMeasurementData()

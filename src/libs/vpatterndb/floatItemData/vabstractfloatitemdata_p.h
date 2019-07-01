@@ -33,6 +33,7 @@
 #include <QSharedData>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -60,7 +61,7 @@ public:
     bool    m_bVisible;
 
 private:
-    VAbstractFloatItemDataPrivate &operator=(const VAbstractFloatItemDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VAbstractFloatItemDataPrivate)
 };
 
 QT_WARNING_POP

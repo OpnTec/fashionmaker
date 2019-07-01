@@ -73,7 +73,7 @@ public:
     bool m_lastToCuttingCountour{false};
 
 private:
-    VPiecePathData &operator=(const VPiecePathData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPiecePathData)
 };
 
 VPiecePathData::~VPiecePathData()

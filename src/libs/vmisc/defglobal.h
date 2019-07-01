@@ -43,4 +43,9 @@ template <typename T>
 void qAsConst(const T &&) Q_DECL_EQ_DELETE;
 #endif
 
+#ifndef Q_DISABLE_ASSIGN
+#define Q_DISABLE_ASSIGN(Class) \
+    Class &operator=(const Class &) Q_DECL_EQ_DELETE;
+#endif
+
 #endif // DEFGLOBAL_H

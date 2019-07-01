@@ -101,7 +101,7 @@ public:
     QString m_formulaWidth;
 
 private:
-    VPieceData &operator=(const VPieceData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPieceData)
 };
 
 VPieceData::~VPieceData()

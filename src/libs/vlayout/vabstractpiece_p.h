@@ -34,6 +34,7 @@
 #include <QCoreApplication>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -82,7 +83,7 @@ public:
     qreal   m_my;
 
 private:
-    VAbstractPieceData &operator=(const VAbstractPieceData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VAbstractPieceData)
 };
 
 QT_WARNING_POP

@@ -60,7 +60,7 @@ public:
     quint32 parentId;
 
 private:
-    VCurveVariableData &operator=(const VCurveVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VCurveVariableData)
 };
 
 VCurveVariableData::~VCurveVariableData()

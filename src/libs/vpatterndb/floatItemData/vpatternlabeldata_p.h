@@ -81,7 +81,7 @@ public:
     quint32 m_bottomRightPin;
 
 private:
-    VPatternLabelDataPrivate &operator=(const VPatternLabelDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPatternLabelDataPrivate)
 };
 
 QT_WARNING_POP

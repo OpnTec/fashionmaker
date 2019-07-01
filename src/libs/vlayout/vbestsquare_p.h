@@ -33,6 +33,7 @@
 
 #include "vlayoutdef.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -71,7 +72,7 @@ public:
     QString exceptionReason{};
 
 private:
-    VBestSquareData &operator=(const VBestSquareData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VBestSquareData)
 };
 
 #endif // VBESTSQUARE_P_H

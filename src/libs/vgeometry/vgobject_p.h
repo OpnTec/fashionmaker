@@ -71,7 +71,7 @@ public:
     Draw    mode;
 
 private:
-    VGObjectData &operator=(const VGObjectData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VGObjectData)
 };
 
 VGObjectData::~VGObjectData()

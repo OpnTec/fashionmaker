@@ -81,7 +81,7 @@ public:
   bool        reverse;
 
 private:
-    VNodeDetailData &operator=(const VNodeDetailData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VNodeDetailData)
 };
 
 QT_WARNING_POP

@@ -118,7 +118,7 @@ public:
     bool m_manualPassmarkLength{false};
 
 private:
-    VPieceNodeData &operator=(const VPieceNodeData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPieceNodeData)
 };
 
 // Friend functions

@@ -54,7 +54,7 @@ public:
     QString            formulaRadius;
 
 private:
-    VArcData &operator=(const VArcData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VArcData)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -146,7 +146,7 @@ public:
     qint64 m_square{0};
 
 private:
-    VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VLayoutPieceData)
 
     static const quint32 streamHeader;
     static const quint16 classVersion;

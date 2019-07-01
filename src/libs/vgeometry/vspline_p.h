@@ -87,7 +87,7 @@ public:
     qreal   kCurve;
 
 private:
-    VSplineData &operator=(const VSplineData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VSplineData)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

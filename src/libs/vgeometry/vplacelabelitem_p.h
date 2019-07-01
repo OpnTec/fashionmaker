@@ -74,7 +74,7 @@ public:
     qreal isVisible{1};
 
 private:
-    VPlaceLabelItemData &operator=(const VPlaceLabelItemData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VPlaceLabelItemData)
 };
 
 VPlaceLabelItemData::~VPlaceLabelItemData()

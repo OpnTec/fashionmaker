@@ -59,7 +59,7 @@ public:
     QString name;
 
 private:
-    VInternalVariableData &operator=(const VInternalVariableData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VInternalVariableData)
 };
 
 VInternalVariableData::~VInternalVariableData()

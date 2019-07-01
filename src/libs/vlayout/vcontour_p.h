@@ -36,6 +36,7 @@
 #include <QPainterPath>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -81,7 +82,7 @@ public:
     int  m_emptySheetEdgesCount{0};
 
 private:
-    VContourData &operator=(const VContourData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VContourData)
 };
 
 QT_WARNING_POP

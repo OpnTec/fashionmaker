@@ -78,7 +78,7 @@ public:
     quint32   m_bottomPin;
 
 private:
-    VGrainlineDataPrivate &operator=(const VGrainlineDataPrivate &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VGrainlineDataPrivate)
 };
 
 QT_WARNING_POP

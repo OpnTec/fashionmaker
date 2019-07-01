@@ -84,7 +84,7 @@ public:
     IncrementType incrType{IncrementType::Increment};
 
 private:
-    VIncrementData &operator=(const VIncrementData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VIncrementData)
 };
 
 VIncrementData::~VIncrementData()

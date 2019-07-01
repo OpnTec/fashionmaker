@@ -36,7 +36,7 @@ public:
     QTransform m_transform;
 
 private:
-    VEllipticalArcData &operator=(const VEllipticalArcData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VEllipticalArcData)
 };
 
 //---------------------------------------------------------------------------------------------------------------------

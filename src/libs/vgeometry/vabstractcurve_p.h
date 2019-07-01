@@ -68,7 +68,7 @@ public:
     qreal approximationScale;
 
 private:
-    VAbstractCurveData &operator=(const VAbstractCurveData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VAbstractCurveData)
 };
 
 VAbstractCurveData::~VAbstractCurveData()

@@ -61,7 +61,7 @@ public:
     Unit    patternUnit;
 
 private:
-    VLengthLineData &operator=(const VLengthLineData &) Q_DECL_EQ_DELETE;
+    Q_DISABLE_ASSIGN(VLengthLineData)
 };
 
 VLengthLineData::~VLengthLineData()
