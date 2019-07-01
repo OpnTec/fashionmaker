@@ -56,4 +56,18 @@ QDataStream& operator>>(QDataStream& stream, Enum& e)
     return stream;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 9, 0)
+template <typename Enum>
+inline QDataStream &operator<<(QDataStream &s, QFlags<Enum> e)
+{
+    return s << e.i;
+}
+
+template <typename Enum>
+inline QDataStream &operator>>(QDataStream &s, QFlags<Enum> &e)
+{
+    return s >> e.i;
+}
+#endif
+
 #endif // DATASTREAM_ENUM_H
