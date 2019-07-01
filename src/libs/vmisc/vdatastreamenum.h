@@ -69,6 +69,7 @@ inline QDataStream &operator>>(QDataStream &s, QFlags<Enum> &e)
     int v;
     s >> v;
     e = static_cast<QFlags<Enum>>(v);
+    return s;
 }
 #endif
 
