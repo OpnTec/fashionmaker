@@ -40,6 +40,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
 QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 
+// cppcheck-suppress copyCtorAndEqOperator
 class VPatternLabelDataPrivate : public QSharedData
 {
 public:
