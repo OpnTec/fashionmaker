@@ -60,13 +60,15 @@ QDataStream& operator>>(QDataStream& stream, Enum& e)
 template <typename Enum>
 inline QDataStream &operator<<(QDataStream &s, QFlags<Enum> e)
 {
-    return s << e.i;
+    return s << static_cast<int>(e);
 }
 
 template <typename Enum>
 inline QDataStream &operator>>(QDataStream &s, QFlags<Enum> &e)
 {
-    return s >> e.i;
+    int v;
+    s >> v;
+    e = static_cast<QFlags<Enum>>(v);
 }
 #endif
 
