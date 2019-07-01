@@ -85,6 +85,9 @@ protected:
     virtual void InitTrVars() override;
     virtual bool event(QEvent *e) override;
 
+protected slots:
+    virtual void AboutToQuit() override;
+
 private slots:
     void NewLocalSocketConnection();
 

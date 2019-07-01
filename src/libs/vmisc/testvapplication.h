@@ -41,6 +41,7 @@ class VTestSettings;
 
 class TestVApplication : public VAbstractApplication
 {
+    Q_OBJECT
 public:
     TestVApplication(int &argc, char ** argv)
         : VAbstractApplication(argc, argv),
@@ -77,6 +78,11 @@ public:
     {
         m_trVars = trVars;
     }
+
+protected slots:
+    virtual void AboutToQuit() override
+    {}
+
 private:
     Q_DISABLE_COPY(TestVApplication)
     VTranslateVars *m_trVars;

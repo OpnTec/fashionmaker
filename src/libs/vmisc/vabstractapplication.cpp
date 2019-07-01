@@ -100,13 +100,7 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
     setAttribute(Qt::AA_UseHighDpiPixmaps);
 #endif
 
-    connect(this, &QApplication::aboutToQuit, this, [this]()
-    {
-        // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
-        // instance. Solution is to call sync() before quit.
-        // Connect this slot with VApplication::aboutToQuit.
-        Settings()->sync();
-    });
+    connect(this, &QApplication::aboutToQuit, this, &VAbstractApplication::AboutToQuit);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

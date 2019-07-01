@@ -487,6 +487,15 @@ bool MApplication::event(QEvent *e)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MApplication::AboutToQuit()
+{
+    // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
+    // instance. Solution is to call sync() before quit.
+    // Connect this slot with VApplication::aboutToQuit.
+    Settings()->sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MApplication::OpenSettings()
 {
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),

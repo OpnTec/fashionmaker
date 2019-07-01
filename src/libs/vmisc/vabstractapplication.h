@@ -146,6 +146,9 @@ protected:
 
     virtual void InitTrVars()=0;
 
+protected slots:
+    virtual void AboutToQuit()=0;
+
 private:
     Q_DISABLE_COPY(VAbstractApplication)
     Unit               _patternUnit;

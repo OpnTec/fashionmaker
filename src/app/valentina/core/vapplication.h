@@ -82,6 +82,9 @@ protected:
     virtual void       InitTrVars() override;
     virtual bool	   event(QEvent *e) override;
 
+protected slots:
+    virtual void AboutToQuit() override;
+
 private:
     Q_DISABLE_COPY(VApplication)
     VTranslateVars     *trVars;
