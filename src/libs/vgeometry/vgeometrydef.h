@@ -68,26 +68,32 @@ typedef QVector<QPolygonF> PlaceLabelImg;
 
 struct VLayoutPlaceLabel
 {
-    VLayoutPlaceLabel()
-        : center(),
-          type(PlaceLabelType::Button),
-          shape()
-    {}
-
-    QPointF        center;
-    PlaceLabelType type;
-    PlaceLabelImg  shape;
+    QPointF        center{};
+    PlaceLabelType type{PlaceLabelType::Button};
+    PlaceLabelImg  shape{};
     QTransform     rotationMatrix{};
     QRectF         box{};
+
+    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPlaceLabel& data);
+    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPlaceLabel& data);
+private:
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 Q_DECLARE_METATYPE(VLayoutPlaceLabel)
 
 struct VLayoutPassmark
 {
-    QVector<QLineF> lines{};
+    QVector<QLineF>  lines{};
     PassmarkLineType type{PassmarkLineType::OneLine};
-    QLineF baseLine{};
-    bool isBuiltIn{false};
+    QLineF           baseLine{};
+    bool             isBuiltIn{false};
+
+    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPassmark& data);
+    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPassmark& data);
+private:
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 Q_DECLARE_METATYPE(VLayoutPassmark)
 

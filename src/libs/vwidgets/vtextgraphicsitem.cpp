@@ -164,8 +164,8 @@ void VTextGraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
         const TextLine& tl = m_tm.GetSourceLine(i);
 
         fnt.setPixelSize(m_tm.GetFont().pixelSize() + tl.m_iFontSize);
-        fnt.setBold(tl.bold);
-        fnt.setItalic(tl.italic);
+        fnt.setBold(tl.m_bold);
+        fnt.setItalic(tl.m_italic);
 
         QString qsText = tl.m_qsText;
         QFontMetrics fm(fnt);

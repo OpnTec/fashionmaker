@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/vgeometrydef.cpp \
         $$PWD/vgobject.cpp \
         $$PWD/vabstractcurve.cpp \
         $$PWD/varc.cpp \

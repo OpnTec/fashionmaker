@@ -49,13 +49,17 @@ class VAbstractPattern;
  */
 struct TextLine
 {
-    QString             m_qsText;
-    int                 m_iFontSize;  // 0 means default
-    bool bold;
-    bool italic;
-    Qt::Alignment       m_eAlign;
+    QString       m_qsText{};
+    int           m_iFontSize{MIN_FONT_SIZE};  // 0 means default
+    bool          m_bold{false};
+    bool          m_italic{false};
+    Qt::Alignment m_eAlign{Qt::AlignCenter};
 
-    TextLine();
+    friend QDataStream& operator<<(QDataStream& dataStream, const TextLine& data);
+    friend QDataStream& operator>>(QDataStream& dataStream, TextLine& data);
+private:
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 /**
@@ -79,18 +83,23 @@ public:
     void         SetFontSize(int iFS);
     void         FitFontSize(qreal fW, qreal fH);
 
-    QList<TextLine> GetAllSourceLines() const;
-    int             GetSourceLinesCount() const;
-    const TextLine& GetSourceLine(int i) const;
+    QVector<TextLine> GetAllSourceLines() const;
+    int               GetSourceLinesCount() const;
+    const TextLine&   GetSourceLine(int i) const;
 
     void Update(const QString& qsName, const VPieceLabelData& data);
     void Update(VAbstractPattern* pDoc);
 
-private:
-    QFont           m_font;
-    QList<TextLine> m_liLines;
+    friend QDataStream& operator<<(QDataStream& dataStream, const VTextManager& data);
+    friend QDataStream& operator>>(QDataStream& dataStream, VTextManager& data);
 
-    static QList<TextLine> m_patternLabelLines;
+private:
+    QFont             m_font;
+    QVector<TextLine> m_liLines;
+
+    static QVector<TextLine> m_patternLabelLines;
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 #endif // VTEXTMANAGER_H

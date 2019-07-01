@@ -41,19 +41,122 @@
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief TextLine::TextLine default constructor
- */
-TextLine::TextLine()
-    : m_qsText(),
-      m_iFontSize(MIN_FONT_SIZE),
-      bold(false),
-      italic(false),
-      m_eAlign(Qt::AlignCenter)
-{}
+const quint32 TextLine::streamHeader = 0xA3881E49; // CRC-32Q string "TextLine"
+const quint16 TextLine::classVersion = 1;
 
-QList<TextLine> VTextManager::m_patternLabelLines = QList<TextLine>();
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator<<(QDataStream &dataStream, const TextLine &data)
+{
+    dataStream << TextLine::streamHeader << TextLine::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << data.m_qsText;
+    dataStream << data.m_iFontSize;
+    dataStream << data.m_bold;
+    dataStream << data.m_italic;
+    dataStream << data.m_eAlign;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator>>(QDataStream &dataStream, TextLine &data)
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != TextLine::streamHeader)
+    {
+        QString message = QCoreApplication::tr("TextLine prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                               "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(TextLine::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > TextLine::classVersion)
+    {
+        QString message = QCoreApplication::tr("TextLine compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(TextLine::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> data.m_qsText;
+    dataStream >> data.m_iFontSize;
+    dataStream >> data.m_bold;
+    dataStream >> data.m_italic;
+    dataStream >> data.m_eAlign;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
+    return dataStream;
+}
+
+QVector<TextLine> VTextManager::m_patternLabelLines = QVector<TextLine>();
+const quint32 VTextManager::streamHeader = 0x47E6A9EE; // CRC-32Q string "VTextManager"
+const quint16 VTextManager::classVersion = 1;
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator<<(QDataStream &dataStream, const VTextManager &data)
+{
+    dataStream << VTextManager::streamHeader << VTextManager::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << data.m_font;
+    dataStream << data.m_liLines;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator>>(QDataStream &dataStream, VTextManager &data)
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != VTextManager::streamHeader)
+    {
+        QString message = QCoreApplication::tr("VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                               "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(VTextManager::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > VTextManager::classVersion)
+    {
+        QString message = QCoreApplication::tr("VTextManager compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(VTextManager::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> data.m_font;
+    dataStream >> data.m_liLines;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
+    return dataStream;
+}
 
 namespace
 {
@@ -87,7 +190,7 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
         placeholders.insert(pl_customer, doc->GetCustomerName());
     }
 
-    placeholders.insert(pl_pExt, QString("val"));
+    placeholders.insert(pl_pExt, QStringLiteral("val"));
     placeholders.insert(pl_pFileName, QFileInfo(qApp->GetPatternPath()).baseName());
     placeholders.insert(pl_mFileName, QFileInfo(doc->MPath()).baseName());
 
@@ -98,13 +201,13 @@ QMap<QString, QString> PreparePlaceholders(const VAbstractPattern *doc)
     {
         curSize = QString::number(VContainer::size(valentinaNamespace));
         curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vst";
+        mExt = QStringLiteral("vst");
     }
     else if (qApp->patternType() == MeasurementsType::Individual)
     {
         curSize = QString::number(VContainer::size(valentinaNamespace));
         curHeight = QString::number(VContainer::height(valentinaNamespace));
-        mExt = "vit";
+        mExt = QStringLiteral("vit");
     }
 
     placeholders.insert(pl_size, curSize);
@@ -176,9 +279,9 @@ QString ReplacePlaceholders(const QMap<QString, QString> &placeholders, QString 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
+QVector<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
 {
-    QList<TextLine> textLines;
+    QVector<TextLine> textLines;
 
     for (auto &line : lines)
     {
@@ -188,8 +291,8 @@ QList<TextLine> PrepareLines(const QVector<VLabelTemplateLine> &lines)
             tl.m_qsText = line.line;
             tl.m_eAlign = static_cast<Qt::Alignment>(line.alignment);
             tl.m_iFontSize = line.fontSizeIncrement;
-            tl.bold = line.bold;
-            tl.italic = line.italic;
+            tl.m_bold = line.bold;
+            tl.m_italic = line.italic;
 
             textLines << tl;
         }
@@ -265,7 +368,7 @@ void VTextManager::SetFontSize(int iFS)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<TextLine> VTextManager::GetAllSourceLines() const
+QVector<TextLine> VTextManager::GetAllSourceLines() const
 {
     return m_liLines;
 }
@@ -323,8 +426,8 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         const TextLine& tl = GetSourceLine(i);
         fnt = m_font;
         fnt.setPixelSize(iFS + tl.m_iFontSize);
-        fnt.setBold(tl.bold);
-        fnt.setItalic(tl.italic);
+        fnt.setBold(tl.m_bold);
+        fnt.setItalic(tl.m_italic);
         QFontMetrics fm(fnt);
         const int iTW = fm.width(tl.m_qsText);
         if (iTW > iMaxLen)
@@ -336,8 +439,8 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
     if (iMaxLen > fW)
     {
         QFont fnt = m_font;
-        fnt.setBold(maxLine.bold);
-        fnt.setItalic(maxLine.italic);
+        fnt.setBold(maxLine.m_bold);
+        fnt.setItalic(maxLine.m_italic);
 
         int lineLength = 0;
         do

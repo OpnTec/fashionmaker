@@ -38,9 +38,11 @@
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vdatastreamenum.h"
 #include "vlayoutpiecepath.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "vtextmanager.h"
+#include "../ifc/exception/vexception.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -91,7 +93,10 @@ public:
           m_square(detail.m_square)
     {}
 
-    ~VLayoutPieceData() {}
+    ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
+
+    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPieceData& piece);
+    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPieceData& piece);
 
     /** @brief contour list of contour points. */
     QVector<QPointF>          contour;
@@ -142,7 +147,90 @@ public:
 
 private:
     VLayoutPieceData &operator=(const VLayoutPieceData &) Q_DECL_EQ_DELETE;
+
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &piece)
+{
+    dataStream << VLayoutPieceData::streamHeader << VLayoutPieceData::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << piece.contour;
+    dataStream << piece.seamAllowance;
+    dataStream << piece.layoutAllowance;
+    dataStream << piece.passmarks;
+    dataStream << piece.m_internalPaths;
+    dataStream << piece.matrix;
+    dataStream << piece.layoutWidth;
+    dataStream << piece.mirror;
+    dataStream << piece.detailLabel;
+    dataStream << piece.patternInfo;
+    dataStream << piece.grainlinePoints;
+    dataStream << piece.grainlineArrowType;
+    dataStream << piece.grainlineAngle;
+    dataStream << piece.grainlineEnabled;
+    dataStream << piece.m_placeLabels;
+    dataStream << piece.m_square;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != VLayoutPieceData::streamHeader)
+    {
+        QString message = QCoreApplication::tr("VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and "
+                                               "streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(VLayoutPieceData::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > VLayoutPieceData::classVersion)
+    {
+        QString message = QCoreApplication::tr("VRawLayoutData compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(VLayoutPieceData::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> piece.contour;
+    dataStream >> piece.seamAllowance;
+    dataStream >> piece.layoutAllowance;
+    dataStream >> piece.passmarks;
+    dataStream >> piece.m_internalPaths;
+    dataStream >> piece.matrix;
+    dataStream >> piece.layoutWidth;
+    dataStream >> piece.mirror;
+    dataStream >> piece.detailLabel;
+    dataStream >> piece.patternInfo;
+    dataStream >> piece.grainlinePoints;
+    dataStream >> piece.grainlineArrowType;
+    dataStream >> piece.grainlineAngle;
+    dataStream >> piece.grainlineEnabled;
+    dataStream >> piece.m_placeLabels;
+    dataStream >> piece.m_square;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
+    return dataStream;
+}
 
 QT_WARNING_POP
 

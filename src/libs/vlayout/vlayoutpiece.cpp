@@ -59,6 +59,9 @@
 #include "vtextmanager.h"
 #include "vgraphicsfillitem.h"
 
+const quint32 VLayoutPieceData::streamHeader = 0x80D7D009; // CRC-32Q string "VLayoutPieceData"
+const quint16 VLayoutPieceData::classVersion = 1;
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,6 +357,21 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
     return layoutPassmarks;
 }
+}
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiece &piece)
+{
+    dataStream << *piece.d;
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &dataStream, VLayoutPiece &piece)
+{
+    dataStream >> *piece.d;
+    return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1127,8 +1145,8 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             const TextLine& tl = tm.GetSourceLine(i);
             QFont fnt = tm.GetFont();
             fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
-            fnt.setBold(tl.bold);
-            fnt.setItalic(tl.italic);
+            fnt.setBold(tl.m_bold);
+            fnt.setItalic(tl.m_italic);
 
             QFontMetrics fm(fnt);
 

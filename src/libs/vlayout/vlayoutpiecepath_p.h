@@ -34,6 +34,8 @@
 #include <QVector>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vdatastreamenum.h"
+#include "../ifc/exception/vexception.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -58,6 +60,9 @@ public:
 
     ~VLayoutPiecePathData() Q_DECL_EQ_DEFAULT;
 
+    friend QDataStream& operator<<(QDataStream& dataStream, const VLayoutPiecePathData& path);
+    friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPiecePathData& path);
+
     /** @brief m_points list of path points. */
     QVector<QPointF> m_points{};
 
@@ -68,9 +73,66 @@ public:
 
 private:
     VLayoutPiecePathData &operator=(const VLayoutPiecePathData &) Q_DECL_EQ_DELETE;
+
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 QT_WARNING_POP
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator<<(QDataStream &dataStream, const VLayoutPiecePathData &path)
+{
+    dataStream << VLayoutPiecePathData::streamHeader << VLayoutPiecePathData::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << path.m_points;
+    dataStream << path.m_penStyle;
+    dataStream << path.m_cut;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream& operator>>(QDataStream &dataStream, VLayoutPiecePathData &path)
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != VLayoutPiecePathData::streamHeader)
+    {
+        QString message = QCoreApplication::tr("VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                               "and streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(VLayoutPiecePathData::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > VLayoutPiecePathData::classVersion)
+    {
+        QString message = QCoreApplication::tr("VLayoutPiecePathData compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(VLayoutPiecePathData::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> path.m_points;
+    dataStream >> path.m_penStyle;
+    dataStream >> path.m_cut;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
+    return dataStream;
+}
 
 #endif // VLAYOUTPIECEPATH_P_H
 

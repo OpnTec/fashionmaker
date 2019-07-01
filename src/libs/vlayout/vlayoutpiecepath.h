@@ -64,6 +64,9 @@ public:
     bool IsCutPath() const;
     void SetCutPath(bool cut);
 
+    friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiecePath& path);
+    friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiecePath& path);
+
 private:
     QSharedDataPointer<VLayoutPiecePathData> d;
 };

@@ -153,6 +153,9 @@ public:
 
     qreal BiggestEdge() const;
 
+    friend QDataStream& operator<< (QDataStream& dataStream, const VLayoutPiece& piece);
+    friend QDataStream& operator>> (QDataStream& dataStream, VLayoutPiece& piece);
+
 private:
     QSharedDataPointer<VLayoutPieceData> d;
 

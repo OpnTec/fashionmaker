@@ -32,6 +32,24 @@
 
 #include <QPainterPath>
 
+const quint32 VLayoutPiecePathData::streamHeader = 0xA53F0225; // CRC-32Q string "VLayoutPiecePathData"
+const quint16 VLayoutPiecePathData::classVersion = 1;
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiecePath &path)
+{
+    dataStream << *path.d;
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &dataStream, VLayoutPiecePath &path)
+{
+    dataStream >> *path.d;
+    return dataStream;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiecePath::VLayoutPiecePath()
     : d(new VLayoutPiecePathData)
