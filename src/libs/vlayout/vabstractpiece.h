@@ -231,6 +231,9 @@ public:
     static QVector<QPointF> GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
                                             const QRectF &boundingRect, qreal &dAng);
 
+    friend QDataStream& operator<< (QDataStream& dataStream, const VAbstractPiece& piece);
+    friend QDataStream& operator>> (QDataStream& dataStream, VAbstractPiece& piece);
+
 protected:
     template <class T>
     static QVector<T> RemoveDublicates(const QVector<T> &points, bool removeFirstAndLast = true);

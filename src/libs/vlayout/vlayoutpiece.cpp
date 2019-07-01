@@ -363,6 +363,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiece &piece)
 {
+    dataStream << static_cast<VAbstractPiece>(piece);
     dataStream << *piece.d;
     return dataStream;
 }
@@ -370,6 +371,7 @@ QDataStream &operator<<(QDataStream &dataStream, const VLayoutPiece &piece)
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream &operator>>(QDataStream &dataStream, VLayoutPiece &piece)
 {
+    dataStream >> static_cast<VAbstractPiece &>(piece);
     dataStream >> *piece.d;
     return dataStream;
 }

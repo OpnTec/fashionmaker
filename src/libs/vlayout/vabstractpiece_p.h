@@ -34,7 +34,9 @@
 #include <QCoreApplication>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/vdatastreamenum.h"
 #include "../vmisc/defglobal.h"
+#include "../ifc/exception/vexception.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")
@@ -71,6 +73,9 @@ public:
 
     ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
 
+    friend QDataStream& operator<<(QDataStream& dataStream, const VAbstractPieceData& piece);
+    friend QDataStream& operator>>(QDataStream& dataStream, VAbstractPieceData& piece);
+
     QString m_name;
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
     bool    m_forbidFlipping;
@@ -84,9 +89,78 @@ public:
 
 private:
     Q_DISABLE_ASSIGN(VAbstractPieceData)
+
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 QT_WARNING_POP
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+inline QDataStream &operator<<(QDataStream &dataStream, const VAbstractPieceData &piece)
+{
+    dataStream << VAbstractPieceData::streamHeader << VAbstractPieceData::classVersion;
+
+    // Added in classVersion = 1
+    dataStream << piece.m_name;
+    dataStream << piece.m_forbidFlipping;
+    dataStream << piece.m_forceFlipping;
+    dataStream << piece.m_seamAllowance;
+    dataStream << piece.m_seamAllowanceBuiltIn;
+    dataStream << piece.m_hideMainPath;
+    dataStream << piece.m_width;
+    dataStream << piece.m_mx;
+    dataStream << piece.m_my;
+
+    // Added in classVersion = 2
+
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline QDataStream &operator>>(QDataStream &dataStream, VAbstractPieceData &piece)
+{
+    quint32 actualStreamHeader = 0;
+    dataStream >> actualStreamHeader;
+
+    if (actualStreamHeader != VAbstractPieceData::streamHeader)
+    {
+        QString message = QCoreApplication::tr("VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                               "and streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(VAbstractPieceData::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    dataStream >> actualClassVersion;
+
+    if (actualClassVersion > VAbstractPieceData::classVersion)
+    {
+        QString message = QCoreApplication::tr("VAbstractPieceData compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(VAbstractPieceData::classVersion);
+        throw VException(message);
+    }
+
+    dataStream >> piece.m_name;
+    dataStream >> piece.m_forbidFlipping;
+    dataStream >> piece.m_forceFlipping;
+    dataStream >> piece.m_seamAllowance;
+    dataStream >> piece.m_seamAllowanceBuiltIn;
+    dataStream >> piece.m_hideMainPath;
+    dataStream >> piece.m_width;
+    dataStream >> piece.m_mx;
+    dataStream >> piece.m_my;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
+    return dataStream;
+}
 
 #endif // VABSTRACTPIECE_P_H
 

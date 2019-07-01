@@ -42,6 +42,9 @@
 #include <QPainterPath>
 #include <QTemporaryFile>
 
+const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
+const quint16 VAbstractPieceData::classVersion = 1;
+
 const qreal maxL = 2.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
@@ -765,6 +768,21 @@ QT_WARNING_POP
     }
 }
 #endif
+}
+
+// Friend functions
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator<<(QDataStream &dataStream, const VAbstractPiece &piece)
+{
+    dataStream << *piece.d;
+    return dataStream;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDataStream &operator>>(QDataStream &dataStream, VAbstractPiece &piece)
+{
+    dataStream >> *piece.d;
+    return dataStream;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
