@@ -31,7 +31,10 @@
 
 #include <QSharedData>
 #include <QDataStream>
+#include <QCoreApplication>
+
 #include "../ifc/ifcdef.h"
+#include "../ifc/exception/vexception.h"
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vdatastreamenum.h"
 
@@ -119,12 +122,18 @@ public:
 
 private:
     Q_DISABLE_ASSIGN(VPieceNodeData)
+
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 // Friend functions
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
 {
+    out << VPieceNodeData::streamHeader << VPieceNodeData::classVersion;
+
+    // Added in classVersion = 1
     out << p.m_id
         << p.m_typeTool
         << p.m_reverse
@@ -139,12 +148,38 @@ QDataStream &operator<<(QDataStream &out, const VPieceNodeData &p)
         << p.m_isShowSecondPassmark
         << p.m_checkUniqueness
         << p.m_manualPassmarkLength;
+
+    // Added in classVersion = 2
+
     return out;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
 {
+    quint32 actualStreamHeader = 0;
+    in >> actualStreamHeader;
+
+    if (actualStreamHeader != VPieceNodeData::streamHeader)
+    {
+        QString message = QCoreApplication::tr("VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 "
+                                               "and streamHeader = 0x%2")
+                .arg(actualStreamHeader, 8, 0x10, QChar('0'))
+                .arg(VPieceNodeData::streamHeader, 8, 0x10, QChar('0'));
+        throw VException(message);
+    }
+
+    quint16 actualClassVersion = 0;
+    in >> actualClassVersion;
+
+    if (actualClassVersion > VPieceNodeData::classVersion)
+    {
+        QString message = QCoreApplication::tr("VPieceNodeData compatibility error: actualClassVersion = %1 and "
+                                               "classVersion = %2")
+                .arg(actualClassVersion).arg(VPieceNodeData::classVersion);
+        throw VException(message);
+    }
+
     in >> p.m_id
        >> p.m_typeTool
        >> p.m_reverse
@@ -159,6 +194,12 @@ QDataStream &operator>>(QDataStream &in, VPieceNodeData &p)
        >> p.m_isShowSecondPassmark
        >> p.m_checkUniqueness
        >> p.m_manualPassmarkLength;
+
+//    if (actualClassVersion >= 2)
+//    {
+
+//    }
+
     return in;
 }
 

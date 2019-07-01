@@ -36,6 +36,9 @@
 #include <QDataStream>
 #include <QtNumeric>
 
+const quint32 VPieceNodeData::streamHeader = 0x2198CBC8; // CRC-32Q string "VPieceNodeData"
+const quint16 VPieceNodeData::classVersion = 1;
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::VPieceNode()
     : d(new VPieceNodeData)

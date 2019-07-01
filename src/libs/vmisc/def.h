@@ -666,11 +666,15 @@ struct CustomSARecord
     friend QDataStream& operator<<(QDataStream& out, const CustomSARecord& record);
     friend QDataStream& operator>>(QDataStream& in, CustomSARecord& record);
 
-    quint32 startPoint;
-    quint32 path;
-    quint32 endPoint;
-    bool reverse;
-    PiecePathIncludeType includeType;
+    quint32 startPoint{0};
+    quint32 path{0};
+    quint32 endPoint{0};
+    bool reverse{false};
+    PiecePathIncludeType includeType{PiecePathIncludeType::AsCustomSA};
+
+private:
+    static const quint32 streamHeader;
+    static const quint16 classVersion;
 };
 
 Q_DECLARE_METATYPE(CustomSARecord)
