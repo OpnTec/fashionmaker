@@ -38,6 +38,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/vdatastreamenum.h"
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 

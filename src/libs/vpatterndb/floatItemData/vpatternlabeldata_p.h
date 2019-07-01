@@ -33,6 +33,7 @@
 #include <QSharedData>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 #include "../ifc/ifcdef.h"
 
 QT_WARNING_PUSH

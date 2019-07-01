@@ -32,6 +32,7 @@
 #include <QSharedData>
 #include "../vmisc/def.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

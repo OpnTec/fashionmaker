@@ -34,6 +34,7 @@
 #include <QVector>
 
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/defglobal.h"
 #include "floatitemdef.h"
 #include "../ifc/ifcdef.h"
 
