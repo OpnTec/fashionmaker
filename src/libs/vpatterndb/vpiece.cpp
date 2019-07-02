@@ -903,7 +903,8 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
     do
     {
         const VSAPoint previous = points.at(nodeIndex);
-        if (not VFuzzyComparePoints(passmarkSAPoint, previous))
+        QLineF line(passmarkSAPoint, previous);
+        if (line.length() >= ToPixel(1, Unit::Mm))
         {
             point = previous;
             found = true;
@@ -940,7 +941,8 @@ bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index,
     do
     {
         const VSAPoint next = points.at(nodeIndex);
-        if (not VFuzzyComparePoints(passmarkSAPoint, next))
+        QLineF line(passmarkSAPoint, next);
+        if (line.length() >= ToPixel(1, Unit::Mm))
         {
             point = next;
             found = true;
