@@ -37,8 +37,17 @@
 #if defined __cplusplus
 /* Add C++ includes here */
 
+#include "../vmisc/diagnostic.h"
+
 #ifdef QT_CORE_LIB
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Warray-bounds")
+
 #include <QtCore>
+
+QT_WARNING_POP
+
 #endif
 
 #endif/*__cplusplus*/
