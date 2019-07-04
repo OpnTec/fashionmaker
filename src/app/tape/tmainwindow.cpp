@@ -48,6 +48,12 @@
 #include "version.h"
 #include "mapplication.h" // Should be last because of definning qApp
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
+
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
@@ -822,17 +828,16 @@ bool TMainWindow::FileSaveAs()
 
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save as"), dir + QChar('/') + fName, filters);
 
-    auto RemoveTempDir = [usedNotExistedDir, dir]()
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
     {
         if (usedNotExistedDir)
         {
             QDir(dir).rmpath(QChar('.'));
         }
-    };
+    });
 
     if (fileName.isEmpty())
     {
-        RemoveTempDir();
         return false;
     }
 
@@ -850,7 +855,6 @@ bool TMainWindow::FileSaveAs()
         {
             qCCritical(tMainWindow, "%s",
                        qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
-            RemoveTempDir();
             return false;
         }
     }
@@ -876,7 +880,6 @@ bool TMainWindow::FileSaveAs()
         // Restore previous state
         m->SetReadOnly(readOnly);
         mIsReadOnly = readOnly;
-        RemoveTempDir();
         return false;
     }
 
@@ -892,10 +895,8 @@ bool TMainWindow::FileSaveAs()
     {
         qCCritical(tMainWindow, "%s", qUtf8Printable(tr("Failed to lock. This file already opened in another window. "
                                                         "Expect collissions when run 2 copies of the program.")));
-        RemoveTempDir();
         return false;
     }
-    RemoveTempDir();
     return true;
 }
 

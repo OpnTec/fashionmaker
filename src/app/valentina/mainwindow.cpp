@@ -2809,18 +2809,17 @@ bool MainWindow::on_actionSaveAs_triggered()
 #endif
                                                     );
 
-    auto RemoveTempDir = [usedNotExistedDir, dir]()
+    auto RemoveTempDir = qScopeGuard([usedNotExistedDir, dir]()
     {
         if (usedNotExistedDir)
         {
             QDir directory(dir);
             directory.rmpath(QChar('.'));
         }
-    };
+    });
 
     if (fileName.isEmpty())
     {
-        RemoveTempDir();
         return false;
     }
 
@@ -2839,7 +2838,6 @@ bool MainWindow::on_actionSaveAs_triggered()
         {
             qCCritical(vMainWindow, "%s",
                        qUtf8Printable(tr("Failed to lock. This file already opened in another window.")));
-            RemoveTempDir();
             return false;
         }
     }
@@ -2865,7 +2863,6 @@ bool MainWindow::on_actionSaveAs_triggered()
         doc->SetReadOnly(readOnly);
         doc->SetModified(wasModified);
 
-        RemoveTempDir();
         return result;
     }
     else if (not oldFilePath.isEmpty())
@@ -2899,7 +2896,6 @@ bool MainWindow::on_actionSaveAs_triggered()
                                      "collissions when run 2 copies of the program.")));
     }
 
-    RemoveTempDir();
     return result;
 }
 
