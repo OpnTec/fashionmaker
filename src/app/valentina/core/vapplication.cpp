@@ -518,7 +518,7 @@ void VApplication::BeginLogging()
     {
         if (lockLog->GetProtected()->open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
         {
-            out.reset(new QTextStream(lockLog->GetProtected().get()));
+            out.reset(new QTextStream(lockLog->GetProtected().data()));
             qInstallMessageHandler(noisyFailureMsgHandler);
             qCDebug(vApp, "Log file %s was locked.", qUtf8Printable(LogPath()));
         }

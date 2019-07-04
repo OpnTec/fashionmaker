@@ -90,7 +90,7 @@ private:
     VTranslateVars     *trVars;
     QTimer             *autoSaveTimer;
 
-    std::shared_ptr<VLockGuard<QFile>> lockLog;
+    QSharedPointer<VLockGuard<QFile>> lockLog;
     std::shared_ptr<QTextStream> out;
 
     QString            LogDirPath()const;

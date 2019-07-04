@@ -141,7 +141,7 @@ private:
     QComboBox       *gradationSizes;
     QComboBox       *comboBoxUnits;
     int              formulaBaseHeight;
-    std::shared_ptr<VLockGuard<char>> lock;
+    QSharedPointer<VLockGuard<char>> lock;
     QSharedPointer<VTableSearch> search;
     QLabel *labelGradationHeights;
     QLabel *labelGradationSizes;

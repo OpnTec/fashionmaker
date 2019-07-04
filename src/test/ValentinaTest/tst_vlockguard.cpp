@@ -42,7 +42,7 @@ TST_VLockGuard::TST_VLockGuard(QObject *parent)
 void TST_VLockGuard::TryLock() const
 {
     QString fileName(QCoreApplication::applicationDirPath() + "/lockFile.txt");
-    std::shared_ptr<VLockGuard<char>> lock;
+    QSharedPointer<VLockGuard<char>> lock;
     VlpCreateLock(lock, fileName);
 
     fileName = lock->GetLockFile();

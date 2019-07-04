@@ -271,7 +271,7 @@ private:
     VToolOptionsPropertyBrowser *toolOptions;
     VWidgetGroups *groupsWidget;
     VWidgetDetails *detailsWidget;
-    std::shared_ptr<VLockGuard<char>> lock;
+    QSharedPointer<VLockGuard<char>> lock;
 
     QList<QToolButton*> toolButtonPointerList;
 

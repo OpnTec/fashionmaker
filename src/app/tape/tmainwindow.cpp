@@ -39,7 +39,6 @@
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
-#include "../vmisc/vlockguard.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
@@ -843,7 +842,7 @@ bool TMainWindow::FileSaveAs()
         fileName += QChar('.') + suffix;
     }
 
-    if (QFileInfo::exists(fileName))
+    if (QFileInfo::exists(fileName) && curFile != fileName)
     {
         // Temporary try to lock the file before saving
         VLockGuard<char> tmp(fileName);
@@ -884,6 +883,10 @@ bool TMainWindow::FileSaveAs()
     UpdatePadlock(false);
     UpdateWindowTitle();
 
+    if (curFile == fileName && not lock.isNull())
+    {
+        lock->Unlock();
+    }
     VlpCreateLock(lock, fileName);
     if (not lock->IsLocked())
     {

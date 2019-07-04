@@ -2830,7 +2830,7 @@ bool MainWindow::on_actionSaveAs_triggered()
         fileName += QLatin1String(".val");
     }
 
-    if (f.exists())
+    if (f.exists() && qApp->GetPatternPath() != fileName)
     {
         // Temporary try to lock the file before saving
         // Also help to rewite current read-only pattern
@@ -2880,6 +2880,10 @@ bool MainWindow::on_actionSaveAs_triggered()
     patternReadOnly = false;
 
     qCDebug(vMainWindow, "Locking file");
+    if (qApp->GetPatternPath() == fileName && not lock.isNull())
+    {
+        lock->Unlock();
+    }
     VlpCreateLock(lock, fileName);
 
     if (lock->IsLocked())
