@@ -95,6 +95,9 @@ public:
     bool IsTextAsPaths() const;
     void SetTextAsPaths(bool value);
 
+    bool IsNestQuantity() const;
+    void SetNestQuantity(bool state);
+
     QString SelectedPrinter() const;
 
     void EnableLandscapeOrientation();

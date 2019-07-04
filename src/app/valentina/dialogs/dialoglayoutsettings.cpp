@@ -329,6 +329,18 @@ void DialogLayoutSettings::SetTextAsPaths(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsNestQuantity() const
+{
+    return ui->checkBoxNestQuantity->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetNestQuantity(bool state)
+{
+    ui->checkBoxNestQuantity->setChecked(state);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString DialogLayoutSettings::SelectedPrinter() const
 {
     return ui->comboBoxPrinter->currentText();
@@ -566,6 +578,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetStripOptimization(IsStripOptimization());
     generator->SetMultiplier(GetMultiplier());
     generator->SetTextAsPaths(IsTextAsPaths());
+    generator->SetNestQuantity(IsNestQuantity());
 
     if (IsIgnoreAllFields())
     {
@@ -654,6 +667,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetMultiplier(VSettings::GetDefMultiplier());
     SetNestingTime(VSettings::GetDefNestingTime());
     SetEfficiencyCoefficient(VSettings::GetDefEfficiencyCoefficient());
+    SetNestQuantity(VSettings::GetDefLayoutNestQuantity());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -982,6 +996,7 @@ void DialogLayoutSettings::ReadSettings()
     SetStripOptimization(settings->GetStripOptimization());
     SetMultiplier(settings->GetMultiplier());
     SetTextAsPaths(settings->GetTextAsPaths());
+    SetNestQuantity(settings->GetLayoutNestQuantity());
 
     FindTemplate();
 
@@ -1008,6 +1023,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetTextAsPaths(IsTextAsPaths());
     settings->SetNestingTime(GetNestingTime());
     settings->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
+    settings->SetLayoutNestQuantity(IsNestQuantity());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

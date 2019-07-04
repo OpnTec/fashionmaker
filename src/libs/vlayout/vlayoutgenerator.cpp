@@ -729,6 +729,18 @@ void VLayoutGenerator::SetFollowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsNestQuantity() const
+{
+    return bank->IsNestQuantity();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetNestQuantity(bool value)
+{
+    bank->SetNestQuantity(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 qreal VLayoutGenerator::GetPaperWidth() const
 {
     return paperWidth;

@@ -52,23 +52,6 @@ class VLayoutPieceData : public QSharedData
 {
 public:
     VLayoutPieceData()
-        : contour(),
-          seamAllowance(),
-          layoutAllowance(),
-          passmarks(),
-          m_internalPaths(),
-          matrix(),
-          layoutWidth(0),
-          mirror(false),
-          detailLabel(),
-          patternInfo(),
-          grainlinePoints(),
-          grainlineArrowType(ArrowType::atFront),
-          grainlineAngle(0),
-          grainlineEnabled(false),
-          m_tmDetail(),
-          m_tmPattern(),
-          m_placeLabels()
     {}
 
     VLayoutPieceData(const VLayoutPieceData &detail)
@@ -90,7 +73,8 @@ public:
           m_tmDetail(detail.m_tmDetail),
           m_tmPattern(detail.m_tmPattern),
           m_placeLabels(detail.m_placeLabels),
-          m_square(detail.m_square)
+          m_square(detail.m_square),
+          m_quantity(detail.m_quantity)
     {}
 
     ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
@@ -99,51 +83,53 @@ public:
     friend QDataStream& operator>>(QDataStream& dataStream, VLayoutPieceData& piece);
 
     /** @brief contour list of contour points. */
-    QVector<QPointF>          contour;
+    QVector<QPointF>          contour{};
 
     /** @brief seamAllowance list of seam allowance points. */
-    QVector<QPointF>          seamAllowance;
+    QVector<QPointF>          seamAllowance{};
 
     /** @brief layoutAllowance list of layout allowance points. */
-    QVector<QPointF>          layoutAllowance;
+    QVector<QPointF>          layoutAllowance{};
 
     /** @brief passmarks list of passmakrs. */
-    QVector<VLayoutPassmark>  passmarks;
+    QVector<VLayoutPassmark>  passmarks{};
 
     /** @brief m_internalPaths list of internal paths. */
-    QVector<VLayoutPiecePath> m_internalPaths;
+    QVector<VLayoutPiecePath> m_internalPaths{};
 
     /** @brief matrix transformation matrix*/
-    QTransform                matrix;
+    QTransform                matrix{};
 
     /** @brief layoutWidth value layout allowance width in pixels. */
-    qreal                     layoutWidth;
+    qreal                     layoutWidth{0};
 
-    bool                      mirror;
+    bool                      mirror{false};
 
     /** @brief detailLabel detail label rectangle */
-    QVector<QPointF>          detailLabel;
+    QVector<QPointF>          detailLabel{};
 
     /** @brief patternInfo pattern info rectangle */
-    QVector<QPointF>          patternInfo;
+    QVector<QPointF>          patternInfo{};
 
     /** @brief grainlineInfo line */
-    QVector<QPointF>          grainlinePoints;
+    QVector<QPointF>          grainlinePoints{};
 
-    ArrowType                 grainlineArrowType;
-    qreal                     grainlineAngle;
-    bool                      grainlineEnabled;
+    ArrowType                 grainlineArrowType{ArrowType::atFront};
+    qreal                     grainlineAngle{0};
+    bool                      grainlineEnabled{false};
 
     /** @brief m_tmDetail text manager for laying out detail info */
-    VTextManager              m_tmDetail;
+    VTextManager              m_tmDetail{};
 
     /** @brief m_tmPattern text manager for laying out pattern info */
-    VTextManager              m_tmPattern;
+    VTextManager              m_tmPattern{};
 
     /** @brief m_placeLabels list of place labels. */
-    QVector<VLayoutPlaceLabel> m_placeLabels;
+    QVector<VLayoutPlaceLabel> m_placeLabels{};
 
     qint64 m_square{0};
+
+    quint16 m_quantity{1};
 
 private:
     Q_DISABLE_ASSIGN(VLayoutPieceData)
@@ -177,6 +163,7 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
     dataStream << piece.m_square;
 
     // Added in classVersion = 2
+    dataStream << piece.m_quantity;
 
     return dataStream;
 }
@@ -224,10 +211,10 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
     dataStream >> piece.m_placeLabels;
     dataStream >> piece.m_square;
 
-//    if (actualClassVersion >= 2)
-//    {
-
-//    }
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> piece.m_quantity;
+    }
 
     return dataStream;
 }

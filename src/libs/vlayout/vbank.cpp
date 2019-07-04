@@ -50,6 +50,24 @@ QT_WARNING_POP
 #undef small
 #endif
 
+namespace
+{
+QVector<VLayoutPiece> PrepareQuantity(const QVector<VLayoutPiece> &details)
+{
+    QVector<VLayoutPiece> withQuantity;
+    withQuantity.reserve(details.size());
+    for(auto &piece : details)
+    {
+        for (int i = 0; i < piece.GetQuantity(); ++i)
+        {
+            withQuantity.append(piece);
+        }
+    }
+
+    return withQuantity;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
     : details(),
@@ -74,6 +92,18 @@ void VBank::SetLayoutWidth(qreal value)
 {
     layoutWidth = value;
     Reset();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VBank::IsNestQuantity() const
+{
+    return m_nestQuantity;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBank::SetNestQuantity(bool value)
+{
+    m_nestQuantity = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -211,6 +241,11 @@ bool VBank::PrepareDetails()
         qCCritical(lBank, "Preparing data for layout error: List of details is empty");
         prepare = false;
         return prepare;
+    }
+
+    if (m_nestQuantity)
+    {
+        details = PrepareQuantity(details);
     }
 
     diagonal = 0;

@@ -2460,7 +2460,7 @@ VPiece DialogSeamAllowance::CreatePiece() const
     piece.GetPatternPieceData().SetRotationWay(uiTabLabels->lineEditRotation->text());
     piece.GetPatternPieceData().SetTilt(uiTabLabels->lineEditTilt->text());
     piece.GetPatternPieceData().SetFoldPosition(uiTabLabels->lineEditFoldPosition->text());
-    piece.GetPatternPieceData().SetQuantity(uiTabLabels->spinBoxQuantity->value());
+    piece.GetPatternPieceData().SetQuantity(static_cast<quint16>(uiTabLabels->spinBoxQuantity->value()));
     piece.GetPatternPieceData().SetOnFold(uiTabLabels->checkBoxFold->isChecked());
     piece.GetPatternPieceData().SetLabelTemplate(m_templateLines);
     piece.GetPatternPieceData().SetRotation(GetFormulaFromUser(uiTabLabels->lineEditDLAngleFormula));

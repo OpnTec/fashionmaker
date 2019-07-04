@@ -60,7 +60,7 @@
 #include "vgraphicsfillitem.h"
 
 const quint32 VLayoutPieceData::streamHeader = 0x80D7D009; // CRC-32Q string "VLayoutPieceData"
-const quint16 VLayoutPieceData::classVersion = 1;
+const quint16 VLayoutPieceData::classVersion = 2;
 
 namespace
 {
@@ -443,13 +443,14 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     }
 
     const VPieceLabelData& data = piece.GetPatternPieceData();
-    if (data.IsVisible() == true)
+    det.SetQuantity(data.GetQuantity());
+    if (data.IsVisible())
     {
         det.SetPieceText(piece.GetName(), data, qApp->Settings()->GetLabelFont(), pattern);
     }
 
     const VPatternLabelData& geom = piece.GetPatternInfo();
-    if (geom.IsVisible() == true)
+    if (geom.IsVisible())
     {
         VAbstractPattern* pDoc = qApp->getCurrentDocument();
         det.SetPatternInfo(pDoc, geom, qApp->Settings()->GetLabelFont(), pattern);
@@ -755,6 +756,18 @@ qreal VLayoutPiece::GetLayoutWidth() const
 void VLayoutPiece::SetLayoutWidth(qreal value)
 {
     d->layoutWidth = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint16 VLayoutPiece::GetQuantity() const
+{
+    return d->m_quantity;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetQuantity(quint16 value)
+{
+    d->m_quantity = qMax(static_cast<quint16>(1), value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

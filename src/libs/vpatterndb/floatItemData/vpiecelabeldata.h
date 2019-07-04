@@ -78,8 +78,8 @@ public:
     QString GetFoldPosition() const;
     void    SetFoldPosition(const QString &val);
 
-    int  GetQuantity() const;
-    void SetQuantity(int val);
+    quint16 GetQuantity() const;
+    void    SetQuantity(quint16 val);
 
     bool IsOnFold() const;
     void SetOnFold(bool onFold);

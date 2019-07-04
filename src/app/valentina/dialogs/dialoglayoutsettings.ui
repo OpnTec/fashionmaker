@@ -519,6 +519,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="checkBoxNestQuantity">
+          <property name="toolTip">
+           <string>Nest quantity of copies according to piece settings.</string>
+          </property>
+          <property name="text">
+           <string>Nest quantity</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="Line" name="line_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

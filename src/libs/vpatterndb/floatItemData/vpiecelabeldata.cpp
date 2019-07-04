@@ -138,18 +138,15 @@ void VPieceLabelData::SetFoldPosition(const QString &val)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-int VPieceLabelData::GetQuantity() const
+quint16 VPieceLabelData::GetQuantity() const
 {
     return d->m_quantity;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::SetQuantity(int val)
+void VPieceLabelData::SetQuantity(quint16 val)
 {
-    if (val >= 1)
-    {
-        d->m_quantity = val;
-    }
+    d->m_quantity = qMax(static_cast<quint16>(1), val);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

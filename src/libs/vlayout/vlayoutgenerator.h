@@ -99,6 +99,9 @@ public:
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool value);
 
+    bool IsNestQuantity() const;
+    void SetNestQuantity(bool value);
+
     int GetRotationNumber() const;
     void SetRotationNumber(int value);
 

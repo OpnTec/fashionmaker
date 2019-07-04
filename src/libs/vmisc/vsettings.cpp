@@ -83,6 +83,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSorting, (QLatin1String("l
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperHeight, (QLatin1String("layout/paperHeight")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String("layout/paperWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestQuantity, (QLatin1String("layout/nestQuantity")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCrop, (QLatin1String("layout/autoCrop")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))
@@ -290,6 +291,24 @@ bool VSettings::GetDefLayoutFollowGrainline()
 void VSettings::SetLayoutFollowGrainline(bool value)
 {
     setValue(*settingLayoutFollowGrainline, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetLayoutNestQuantity() const
+{
+    return value(*settingLayoutNestQuantity, GetDefLayoutNestQuantity()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutNestQuantity()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetLayoutNestQuantity(bool value)
+{
+    setValue(*settingLayoutNestQuantity, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

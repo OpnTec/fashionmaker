@@ -116,6 +116,9 @@ public:
     qreal GetLayoutWidth() const;
     void  SetLayoutWidth(qreal value);
 
+    quint16 GetQuantity() const;
+    void    SetQuantity(quint16 value);
+
     bool IsMirror() const;
     void SetMirror(bool value);
 

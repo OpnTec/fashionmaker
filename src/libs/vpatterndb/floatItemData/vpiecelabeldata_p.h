@@ -81,7 +81,7 @@ public:
     QString m_tilt;
     QString m_foldPosition;
 
-    int  m_quantity;
+    quint16 m_quantity;
     bool m_onFold;
 
     QVector<VLabelTemplateLine> m_lines;

@@ -54,6 +54,8 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(qreal value);
 
+    bool IsNestQuantity() const;
+    void SetNestQuantity(bool value);
 
     void SetDetails(const QVector<VLayoutPiece> &details);
     int  GetNext();
@@ -90,6 +92,7 @@ private:
     Cases caseType;
     bool prepare;
     qreal diagonal;
+    bool m_nestQuantity{false};
 
     void PrepareGroup();
 

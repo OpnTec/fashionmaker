@@ -92,6 +92,10 @@ public:
     static bool GetDefLayoutFollowGrainline();
     void SetLayoutFollowGrainline(bool value);
 
+    bool GetLayoutNestQuantity() const;
+    static bool GetDefLayoutNestQuantity();
+    void SetLayoutNestQuantity(bool value);
+
     bool GetLayoutAutoCrop() const;
     static bool GetDefLayoutAutoCrop();
     void SetLayoutAutoCrop(bool value);
