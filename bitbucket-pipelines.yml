@@ -7,6 +7,8 @@ pipelines:
   branches:
     develop:
       - step:
+          caches:
+            ccache
           script:
             - cat /etc/*-release
             - uname -a
@@ -15,8 +17,11 @@ pipelines:
             - mkdir build
             - cd build
             - qmake --version
-            - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings
+            - qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=checkWarnings
             - make -j$(nproc)
             - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/opt/atlassian/bitbucketci/agent/build/build/src/libs/vpropertyexplorer/bin:/opt/atlassian/bitbucketci/agent/build/build/src/libs/qmuparser/bin"
             # QTestLib require GUI support for some tests
             - xvfb-run -a make --silent check TESTARGS="-silent"
+definitions:
+  caches:
+    ccache: $HOME/.ccache
