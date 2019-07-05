@@ -44,9 +44,6 @@ class VAbstractPattern;
 #define MIN_FONT_SIZE               5
 #define MAX_FONT_SIZE               128
 
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Warray-bounds")
-
 /**
  * @brief The TextLine struct holds the information about one text line
  */
@@ -64,8 +61,6 @@ private:
     static const quint32 streamHeader;
     static const quint16 classVersion;
 };
-
-QT_WARNING_POP
 
 /**
  * @brief The VTextManager class this class is used to determine whether a collection of
