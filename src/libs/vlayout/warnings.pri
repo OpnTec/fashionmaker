@@ -11,6 +11,11 @@ unix {
             QMAKE_CXXFLAGS += -Werror
         }
 
+        win32:equals(QT_MAJOR_VERSION, 5):equals(QT_MINOR_VERSION, 6) {
+            QMAKE_CXXFLAGS += \
+                -Wno-array-bounds
+        }
+
         noAddressSanitizer{ # For enable run qmake with CONFIG+=noAddressSanitizer
             # do nothing
         } else {
