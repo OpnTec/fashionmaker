@@ -813,6 +813,11 @@ GCC_DEBUG_CXXFLAGS += \
     -Wextra \
     -fno-omit-frame-pointer # Need for exchndl.dll
 
+win32:equals(QT_MAJOR_VERSION, 5):equals(QT_MINOR_VERSION, 6) {
+    GCC_DEBUG_CXXFLAGS += \
+        -Wno-array-bounds # annoying warning
+}
+
 CLANG_DEBUG_CXXFLAGS += \
     -O0 \
     -Wall \
