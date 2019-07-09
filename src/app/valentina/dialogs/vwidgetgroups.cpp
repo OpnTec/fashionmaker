@@ -267,12 +267,8 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
-        quint32 id = item->data(Qt::UserRole).toUInt();
-        if (data.second)
-        {
-            SetIconValue(id, true, item);
-        }
-
+        (data.second) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
+                      : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
 
         item->setData(Qt::UserRole, i.key());
 
