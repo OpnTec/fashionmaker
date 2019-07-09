@@ -30,7 +30,11 @@
 #define VWIDGETGROUPS_H
 
 #include <QWidget>
+#include <QTableWidgetItem>
 #include "../ifc/xml/vabstractpattern.h"
+
+class QTableWidgetItem;
+void SetIconValue(quint32, bool visible, QTableWidgetItem *item);
 
 namespace Ui
 {
@@ -52,12 +56,14 @@ private slots:
     void GroupVisibilityChanged(int row, int column);
     void RenameGroup(int row, int column);
     void CtxMenu(const QPoint &pos);
+
 private:
     Q_DISABLE_COPY(VWidgetGroups)
     Ui::VWidgetGroups *ui;
     VAbstractPattern *doc;
 
     void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
+    void SetIconValue(quint32, bool visible, QTableWidgetItem *item)const;
 };
 
 #endif // VWIDGETGROUPS_H

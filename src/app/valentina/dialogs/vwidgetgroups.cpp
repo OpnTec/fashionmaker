@@ -33,8 +33,16 @@
 #include "../vpatterndb/vcontainer.h"
 
 #include <QMenu>
+#include <QTableWidget>
 
 //---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief
+ *
+ * @param doc
+ * @param parent
+ */
 VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
     : QWidget(parent),
       ui(new Ui::VWidgetGroups),
@@ -52,34 +60,58 @@ VWidgetGroups::VWidgetGroups(VAbstractPattern *doc, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ */
 VWidgetGroups::~VWidgetGroups()
 {
     delete ui;
 }
+//----------------------------------------------------------------------------------------------------------------------
+
+/**
+ * @brief
+ *set visibility and icon value
+ * @param id
+ * @param visible
+ * @param item
+ * @param openEye
+ * @param closedEye
+ */
+void VWidgetGroups::SetIconValue(quint32 id, bool visible, QTableWidgetItem *item) const
+{
+    doc->SetGroupVisivility(id, visible);
+    (visible) ? item->setIcon(QIcon( QStringLiteral("://icon/16x16/open_eye.png")))
+              : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
+}
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ * @param row
+ * @param column
+ */
 void VWidgetGroups::GroupVisibilityChanged(int row, int column)
 {
     if (column != 0)
     {
         return;
     }
-
     QTableWidgetItem *item = ui->tableWidget->item(row, column);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     const bool visible = not doc->GetGroupVisivility(id);
-    doc->SetGroupVisivility(id, visible);
-    if (visible)
-    {
-        item->setIcon(QIcon("://icon/16x16/open_eye.png"));
-    }
-    else
-    {
-        item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
-    }
+    SetIconValue(id, visible, item);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ * @param row
+ * @param column
+ */
 void VWidgetGroups::RenameGroup(int row, int column)
 {
     if (column != 1)
@@ -94,6 +126,11 @@ void VWidgetGroups::RenameGroup(int row, int column)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ * @param pos
+ */
 void VWidgetGroups::CtxMenu(const QPoint &pos)
 {
     QTableWidgetItem *item = ui->tableWidget->itemAt(pos);
@@ -109,7 +146,39 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     QScopedPointer<QMenu> menu(new QMenu());
     QAction *actionRename = menu->addAction(tr("Rename"));
     QAction *actionDelete = menu->addAction(tr("Delete"));
-    QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
+
+    menu->addSeparator();//add separator to context menu
+
+    QAction *actionHideAll = menu->addAction(tr("Hide All"));//add to context menu
+    QAction *actionShowAll = menu->addAction(tr("Show All"));//add to context menu
+
+    menu->addSeparator();//add separator
+
+    /*
+     * add two options to the context menu. Hide if visible row and
+     * Show if hidden one.
+     */
+    QAction *hiddenMenu = new QAction(this);
+    QAction *showMenu = new QAction(this);
+    if (doc->GetGroupVisivility(id))
+    {
+        hiddenMenu = menu->addAction(tr("Hide"));
+        showMenu = menu->addAction(tr("Show"));
+        showMenu->setDisabled(true);
+    }
+    else
+    {
+        showMenu = menu->addAction(tr("Show"));
+        hiddenMenu = menu->addAction(tr("Hide"));
+        hiddenMenu->setDisabled(true);
+    }
+
+
+    QAction *selectedAction = menu->exec(
+                ui->tableWidget->viewport()->mapToGlobal(pos));
+
+
+
     if (selectedAction == actionRename)
     {
         DialogGroup *dialog = new DialogGroup(new VContainer(qApp->TrVars(), qApp->patternUnitP(),
@@ -132,15 +201,56 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         connect(delGroup, &DelGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
         qApp->getUndoStack()->push(delGroup);
     }
+    //all groups in "group" make unvisible
+    else if (selectedAction == actionHideAll)
+    {
+        for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+        {
+            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+            quint32 i = rowItem->data(Qt::UserRole).toUInt();
+            SetIconValue(i, false, rowItem);
+        }
+    }
+
+    //all groups in "group" make visible
+    else if (selectedAction == actionShowAll)
+    {
+        for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+        {
+            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+            quint32 i = rowItem->data(Qt::UserRole).toUInt();
+            SetIconValue(i, true, rowItem);
+        }
+    }
+    //implement of Hide and Show selected row
+    else if (selectedAction == hiddenMenu)
+    {
+        SetIconValue(id, false, item);
+    }
+    else if (selectedAction == showMenu)
+    {
+        SetIconValue(id, true, item);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ */
 void VWidgetGroups::UpdateGroups()
 {
     FillTable(doc->GetGroups());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ *
+ * @param QMap<quint32
+ * @param QPair<QString
+ * @param groups
+ */
 void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups)
 {
     ui->tableWidget->blockSignals(true);
@@ -157,14 +267,9 @@ void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups
 
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setTextAlignment(Qt::AlignHCenter);
-        if (data.second)
-        {
-            item->setIcon(QIcon("://icon/16x16/open_eye.png"));
-        }
-        else
-        {
-            item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
-        }
+        (data.second) ? item->setIcon(QIcon("://icon/16x16/open_eye.png"))
+                      : item->setIcon(QIcon("://icon/16x16/closed_eye.png"));
+
         item->setData(Qt::UserRole, i.key());
 
         // set the item non-editable (view only), and non-selectable
