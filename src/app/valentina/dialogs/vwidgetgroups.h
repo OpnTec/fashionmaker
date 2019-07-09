@@ -30,11 +30,9 @@
 #define VWIDGETGROUPS_H
 
 #include <QWidget>
-#include <QTableWidgetItem>
-#include "../ifc/xml/vabstractpattern.h"
 
 class QTableWidgetItem;
-void SetIconValue(quint32, bool visible, QTableWidgetItem *item);
+class VAbstractPattern;
 
 namespace Ui
 {
