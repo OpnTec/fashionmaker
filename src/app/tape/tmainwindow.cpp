@@ -32,6 +32,7 @@
 #include "dialogs/dialognewmeasurements.h"
 #include "dialogs/dialogmdatabase.h"
 #include "dialogs/dialogtapepreferences.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/pmsystems.h"
 #include "../vpatterndb/measurements.h"

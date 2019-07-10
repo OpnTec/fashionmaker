@@ -38,6 +38,7 @@
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../qmuparser/qmuparsererror.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 
 #include <QDir>
 #include <QFileOpenEvent>

@@ -38,7 +38,8 @@
 
 #include "../ifc/xml/vdomdocument.h"
 #include "../vmisc/def.h"
-#include "../vpatterndb/vcontainer.h"
+
+class VContainer;
 
 enum class GenderType : char { Male, Female, Unknown };
 

@@ -743,6 +743,14 @@ QString VDomDocument::UnitsHelpString()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QDomElement VDomDocument::CreateElementWithText(const QString &tagName, const QString &text)
+{
+    QDomElement tag = createElement(tagName);
+    tag.appendChild(createTextNode(text));
+    return tag;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::SaveDocument(const QString &fileName, QString &error)
 {
     if (fileName.isEmpty())

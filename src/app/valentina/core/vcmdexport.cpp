@@ -35,6 +35,7 @@
 #include "../vmisc/vsettings.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vlayout/vlayoutgenerator.h"
+#include "../vpatterndb/variables/vmeasurement.h"
 #include <QDebug>
 #include <QTextCodec>
 

@@ -123,6 +123,8 @@ public:
     virtual void   setXMLContent(const QString &fileName);
     static QString UnitsHelpString();
 
+    QDomElement CreateElementWithText(const QString& tagName, const QString& text);
+
     virtual bool   SaveDocument(const QString &fileName, QString &error);
     QString        Major() const;
     QString        Minor() const;
