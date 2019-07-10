@@ -816,9 +816,7 @@ void SaveChildren(VAbstractPattern *doc, quint32 id, QDomElement section, const 
     {
         for (auto child : children)
         {
-            QDomElement tagChild = doc->createElement(VToolUnionDetails::TagChild);
-            tagChild.appendChild(doc->createTextNode(QString().setNum(child)));
-            section.appendChild(tagChild);
+            section.appendChild(doc->CreateElementWithText(VToolUnionDetails::TagChild, QString().setNum(child)));
         }
 
         GetTagChildren(doc, id).appendChild(section);

@@ -122,16 +122,8 @@ void VPattern::CreateEmptyFile()
     SetAttribute(patternElement, AttrLabelPrefix, DefLabelLanguage());
 
     patternElement.appendChild(createComment(FileComment()));
-
-    QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VPatternConverter::PatternMaxVerStr);
-    version.appendChild(newNodeText);
-    patternElement.appendChild(version);
-
-    QDomElement unit = createElement(TagUnit);
-    newNodeText = createTextNode(UnitsToStr(qApp->patternUnit()));
-    unit.appendChild(newNodeText);
-    patternElement.appendChild(unit);
+    patternElement.appendChild(CreateElementWithText(TagVersion, VPatternConverter::PatternMaxVerStr));
+    patternElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(qApp->patternUnit())));
 
     patternElement.appendChild(createElement(TagDescription));
     patternElement.appendChild(createElement(TagNotes));
