@@ -28,14 +28,14 @@
 #ifndef VPATTERNRECIPE_H
 #define VPATTERNRECIPE_H
 
-#include <QDomElement>
-
 #include "../ifc/xml/vdomdocument.h"
 
 class VContainer;
 class VAbstractPattern;
 class VMeasurement;
 class VIncrement;
+class VToolRecord;
+class VFormula;
 
 class VPatternRecipe : public VDomDocument
 {
@@ -47,17 +47,64 @@ public:
 private:
     Q_DISABLE_COPY(VPatternRecipe)
 
-    QDomElement Prerequisite(VContainer *data, VAbstractPattern *pattern);
+    VContainer *m_data;
+    VAbstractPattern *m_pattern;
 
-    QDomElement Measurements(VContainer *data);
+    QDomElement Prerequisite();
+
+    QDomElement Measurements();
     QDomElement Measurement(const QSharedPointer<VMeasurement> &m);
 
-    QDomElement Increments(VContainer *data);
-    QDomElement PreviewCalculations(VContainer *data);
+    QDomElement Increments();
+    QDomElement PreviewCalculations();
     QDomElement Increment(const QSharedPointer<VIncrement> &incr);
 
-    QDomElement Content(VContainer *data, VAbstractPattern *pattern);
+    QDomElement Content();
 
+    QDomElement Draft(const QDomElement &draft);
+    QDomElement Step(const VToolRecord &tool);
+
+    QDomElement BasePoint(const VToolRecord &record);
+    QDomElement EndLine(const VToolRecord &record);
+    QDomElement Line(const VToolRecord &record);
+    QDomElement AlongLine(const VToolRecord &record);
+    QDomElement ShoulderPoint(const VToolRecord &record);
+    QDomElement Normal(const VToolRecord &record);
+    QDomElement Bisector(const VToolRecord &record);
+    QDomElement LineIntersect(const VToolRecord &record);
+    QDomElement Spline(const VToolRecord &record);
+    QDomElement CubicBezier(const VToolRecord &record);
+    QDomElement Arc(const VToolRecord &record);
+    QDomElement ArcWithLength(const VToolRecord &record);
+    QDomElement SplinePath(const VToolRecord &record);
+    QDomElement CubicBezierPath(const VToolRecord &record);
+    QDomElement PointOfContact(const VToolRecord &record);
+    QDomElement Height(const VToolRecord &record);
+    QDomElement Triangle(const VToolRecord &record);
+    QDomElement PointOfIntersection(const VToolRecord &record);
+    QDomElement CutArc(const VToolRecord &record);
+    QDomElement CutSpline(const VToolRecord &record);
+    QDomElement CutSplinePath(const VToolRecord &record);
+    QDomElement LineIntersectAxis(const VToolRecord &record);
+    QDomElement CurveIntersectAxis(const VToolRecord &record);
+    QDomElement PointOfIntersectionArcs(const VToolRecord &record);
+    QDomElement PointOfIntersectionCircles(const VToolRecord &record);
+    QDomElement PointOfIntersectionCurves(const VToolRecord &record);
+    QDomElement PointFromCircleAndTangent(const VToolRecord &record);
+    QDomElement PointFromArcAndTangent(const VToolRecord &record);
+    QDomElement TrueDarts(const VToolRecord &record);
+    QDomElement EllipticalArc(const VToolRecord &record);
+
+    void Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr, const QString &formulaValue);
+
+    template <typename T>
+    void ToolAttributes(QDomElement &step, T* tool);
+
+    template <typename T>
+    void LineAttributes(QDomElement &step, T* tool);
+
+    template <typename T>
+    void CurveAttributes(QDomElement &step, T* tool);
 };
 
 #endif // VPATTERNRECIPE_H

@@ -90,6 +90,10 @@ public:
 
     QString name() const;
 
+    qreal GetApproximationScale() const;
+
+    quint32 GetDuplicate() const;
+
     virtual void GroupVisibility(quint32 object, bool visible) override;
 public slots:
     virtual void    FullUpdateFromFile () override;
