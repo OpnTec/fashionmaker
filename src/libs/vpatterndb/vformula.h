@@ -36,7 +36,13 @@
 #include <QString>
 #include <QtGlobal>
 
-enum class FormulaType : char{ToUser, FromUser};
+enum class FormulaType : char
+{
+    ToUser = 0,
+    FromUser = 1,
+    ToSystem = FromUser,
+    FromSystem = ToUser
+};
 
 class VContainer;
 class VFormulaData;
@@ -55,7 +61,7 @@ public:
     bool operator!=(const VFormula &formula) const;
 
     QString GetFormula(FormulaType type = FormulaType::ToUser) const;
-    void SetFormula(const QString &value, FormulaType type = FormulaType::ToUser);
+    void SetFormula(const QString &value, FormulaType type = FormulaType::FromSystem);
 
     QString getStringValue() const;
     qreal   getDoubleValue() const;

@@ -488,6 +488,18 @@ QString VAbstractSpline::name() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VAbstractSpline::GetApproximationScale() const
+{
+    return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetApproximationScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+quint32 VAbstractSpline::GetDuplicate() const
+{
+    return VAbstractTool::data.GeometricObject<VAbstractCurve>(m_id)->GetDuplicate();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractSpline::GroupVisibility(quint32 object, bool visible)
 {
     Q_UNUSED(object)

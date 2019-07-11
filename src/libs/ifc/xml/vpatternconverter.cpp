@@ -1120,12 +1120,9 @@ void VPatternConverter::TagUnitToV0_2_0()
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FORMAT_VERSION(0, 2, 0),
                       "Time to refactor the code.");
 
-    QDomElement unit = createElement(*strUnit);
-    QDomText newNodeText = createTextNode(MUnitV0_1_4());
-    unit.appendChild(newNodeText);
-
     QDomElement patternElement = documentElement();
-    patternElement.insertAfter(unit, patternElement.firstChildElement(*strVersion));
+    patternElement.insertAfter(CreateElementWithText(*strUnit, MUnitV0_1_4()),
+                               patternElement.firstChildElement(*strVersion));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1611,8 +1608,7 @@ void VPatternConverter::TagMeasurementsToV0_2_0()
     ms.removeAttribute(*strType);
     ms.removeAttribute(*strPath);
 
-    QDomText newNodeText = createTextNode(QFileInfo(m_convertedFileName).absoluteDir().relativeFilePath(path));
-    ms.appendChild(newNodeText);
+    ms.appendChild(createTextNode(QFileInfo(m_convertedFileName).absoluteDir().relativeFilePath(path)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1777,9 +1773,7 @@ void VPatternConverter::SaveChildrenToolUnionToV0_2_4(quint32 id, const QVector<
 
     for (auto child : children)
     {
-        QDomElement tagChild = createElement(*strChild);
-        tagChild.appendChild(createTextNode(QString().setNum(child)));
-        tagChildren.appendChild(tagChild);
+        tagChildren.appendChild(CreateElementWithText(*strChild, QString().setNum(child)));
     }
 
     toolUnion.appendChild(tagChildren);

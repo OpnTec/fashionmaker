@@ -168,18 +168,12 @@ void VVITConverter::AddNewTagsForV0_3_0()
                       "Time to refactor the code.");
 
     QDomElement rootElement = this->documentElement();
-    QDomNode refChild = rootElement.firstChildElement("version");
+    QDomNode refChild = rootElement.firstChildElement(QStringLiteral("version"));
 
-    QDomElement ro = createElement(QStringLiteral("read-only"));
-    const QDomText roNodeText = createTextNode(falseStr);
-    ro.appendChild(roNodeText);
-    refChild = rootElement.insertAfter(ro, refChild);
-
+    refChild = rootElement.insertAfter(CreateElementWithText(QStringLiteral("read-only"), falseStr), refChild);
     refChild = rootElement.insertAfter(createElement(QStringLiteral("notes")), refChild);
 
-    QDomElement unit = createElement("unit");
-    unit.appendChild(createTextNode(MUnitV0_2_0()));
-    rootElement.insertAfter(unit, refChild);
+    rootElement.insertAfter(CreateElementWithText(QStringLiteral("unit"), MUnitV0_2_0()), refChild);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -261,12 +255,8 @@ void VVITConverter::GenderV0_3_1()
 
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("sex"));
     QDomElement sex = nodeList.at(0).toElement();
-
-    QDomElement gender = createElement(QStringLiteral("gender"));
-    gender.appendChild(createTextNode(sex.text()));
-
     QDomElement parent = sex.parentNode().toElement();
-    parent.replaceChild(gender, sex);
+    parent.replaceChild(CreateElementWithText(QStringLiteral("gender"), sex.text()), sex);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -276,14 +266,11 @@ void VVITConverter::PM_SystemV0_3_2()
     Q_STATIC_ASSERT_X(VVITConverter::MeasurementMinVer < FORMAT_VERSION(0, 3, 2),
                       "Time to refactor the code.");
 
-    QDomElement pm_system = createElement(QStringLiteral("pm_system"));
-    pm_system.appendChild(createTextNode(QStringLiteral("998")));
-
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("personal"));
     QDomElement personal = nodeList.at(0).toElement();
 
     QDomElement parent = personal.parentNode().toElement();
-    parent.insertBefore(pm_system, personal);
+    parent.insertBefore(CreateElementWithText(QStringLiteral("pm_system"), QStringLiteral("998")), personal);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -351,8 +338,6 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
         personal.removeChild(familyNameNode);
     }
 
-    QDomElement customer = createElement(*strCustomer);
-
     QString customerName;
     if (not givenName.isEmpty() && not familyName.isEmpty())
     {
@@ -367,11 +352,8 @@ void VVITConverter::ConverCustomerNameToV0_4_0()
         customerName = familyName;
     }
 
-    if (not customerName.isEmpty())
-    {
-        customer.appendChild(createTextNode(customerName));
-    }
-    personal.insertBefore(customer, personal.firstChild());
+    personal.insertBefore(CreateElementWithText(*strCustomer, not customerName.isEmpty() ? customerName : QString()),
+                          personal.firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

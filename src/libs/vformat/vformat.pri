@@ -3,11 +3,13 @@
 
 SOURCES += \
     $$PWD/vmeasurements.cpp \
-    $$PWD/vlabeltemplate.cpp
+    $$PWD/vlabeltemplate.cpp \
+    $$PWD/vpatternrecipe.cpp
 
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
     $$PWD/vmeasurements.h \
     $$PWD/stable.h \
-    $$PWD/vlabeltemplate.h
+    $$PWD/vlabeltemplate.h \
+    $$PWD/vpatternrecipe.h

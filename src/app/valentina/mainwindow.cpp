@@ -64,6 +64,7 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
+#include "../vformat/vpatternrecipe.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -3058,6 +3059,7 @@ void MainWindow::Clear()
     ui->actionZoomFitBestCurrent->setEnabled(false);
     ui->actionZoomOriginal->setEnabled(false);
     ui->actionHistory->setEnabled(false);
+    ui->actionExportRecipe->setEnabled(false);
     ui->actionTable->setEnabled(false);
     ui->actionExportIncrementsToCSV->setEnabled(false);
     ui->actionExportFinalMeasurementsToCSV->setEnabled(false);
@@ -3426,6 +3428,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomOut->setEnabled(enable);
     ui->actionArrowTool->setEnabled(enable && designStage);
     ui->actionHistory->setEnabled(enable && drawStage);
+    ui->actionExportRecipe->setEnabled(enable && drawStage);
     ui->actionNewDraw->setEnabled(enable && drawStage);
     ui->actionDraw->setEnabled(enable);
     ui->actionDetails->setEnabled(enable);
@@ -4347,6 +4350,26 @@ void MainWindow::CreateActions()
         {
             ui->actionHistory->setChecked(true);
             dialogHistory->activateWindow();
+        }
+    });
+
+    connect(ui->actionExportRecipe, &QAction::triggered, this, [this]()
+    {
+        QString filters(tr("Recipe files") + QStringLiteral("(*.vpr)"));
+        QString fileName =
+                QFileDialog::getSaveFileName(this, tr("Export recipe"),
+                                             QDir::homePath() + '/' + tr("recipe") + QStringLiteral(".vpr"),
+                                             filters, nullptr);
+        if (fileName.isEmpty())
+        {
+            return;
+        }
+
+        VPatternRecipe recipe(pattern, doc);
+        QString error;
+        if (not recipe.SaveDocument(fileName, error))
+        {
+            qCWarning(vMainWindow, "%s", qUtf8Printable(tr("Could not save recipe. %1").arg(error)));
         }
     });
 

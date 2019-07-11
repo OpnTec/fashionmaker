@@ -22,6 +22,7 @@
 - Raise the minimum value for curve approximation to 0.2.
 - Make piece labels transparent.
 - New layout option --nestQuantity.
+- New feature Pattern recipe.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

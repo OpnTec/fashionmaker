@@ -42,16 +42,12 @@ void VLabelTemplate::CreateEmptyTemplate()
 {
     clear();
     QDomElement templateElement = this->createElement(TagTemplate);
-
-    QDomElement version = createElement(TagVersion);
-    QDomText newNodeText = createTextNode(VLabelTemplateConverter::LabelTemplateMaxVerStr);
-    version.appendChild(newNodeText);
-    templateElement.appendChild(version);
-
+    templateElement.appendChild(CreateElementWithText(TagVersion, VLabelTemplateConverter::LabelTemplateMaxVerStr));
     templateElement.appendChild(createElement(TagLines));
 
     this->appendChild(templateElement);
-    insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

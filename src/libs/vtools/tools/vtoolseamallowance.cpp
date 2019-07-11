@@ -1930,9 +1930,8 @@ void VToolSeamAllowance::AddPointRecords(VAbstractPattern *doc, QDomElement &dom
         QDomElement pinsElement = doc->createElement(tag);
         for (auto record : records)
         {
-            QDomElement recordNode = doc->createElement(VToolSeamAllowance::TagRecord);
-            recordNode.appendChild(doc->createTextNode(QString().setNum(record)));
-            pinsElement.appendChild(recordNode);
+            pinsElement.appendChild(doc->CreateElementWithText(VToolSeamAllowance::TagRecord,
+                                                               QString().setNum(record)));
         }
         domElement.appendChild(pinsElement);
     }

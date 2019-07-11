@@ -10,7 +10,8 @@ HEADERS += \
     $$PWD/vexceptionterminatedposition.h \
     $$PWD/vexceptionwrongid.h \
     $$PWD/vexceptionundo.h \
-    $$PWD/vexceptioninvalidnotch.h
+    $$PWD/vexceptioninvalidnotch.h \
+    $$PWD/vexceptioninvalidhistory.h
 
 SOURCES += \
     $$PWD/vexceptionobjecterror.cpp \
@@ -21,4 +22,5 @@ SOURCES += \
     $$PWD/vexceptionterminatedposition.cpp \
     $$PWD/vexceptionwrongid.cpp \
     $$PWD/vexceptionundo.cpp \
-    $$PWD/vexceptioninvalidnotch.cpp
+    $$PWD/vexceptioninvalidnotch.cpp \
+    $$PWD/vexceptioninvalidhistory.cpp

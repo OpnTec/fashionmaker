@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>243</height>
         </rect>
        </property>
@@ -743,7 +743,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>282</height>
         </rect>
        </property>
@@ -1034,7 +1034,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>102</height>
         </rect>
        </property>
@@ -1321,7 +1321,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>140</width>
          <height>237</height>
         </rect>
        </property>
@@ -1781,6 +1781,7 @@
      <string>History</string>
     </property>
     <addaction name="actionHistory"/>
+    <addaction name="actionExportRecipe"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
@@ -2819,6 +2820,17 @@
    </property>
    <property name="text">
     <string>Hide labels</string>
+   </property>
+  </action>
+  <action name="actionExportRecipe">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export recipe</string>
    </property>
   </action>
  </widget>

@@ -664,27 +664,11 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHe
     QDomElement mElement = this->createElement(TagVST);
 
     mElement.appendChild(createComment(FileComment()));
-
-    QDomElement version = createElement(TagVersion);
-    const QDomText newNodeText = createTextNode(VVSTConverter::MeasurementMaxVerStr);
-    version.appendChild(newNodeText);
-    mElement.appendChild(version);
-
-    QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode(falseStr);
-    ro.appendChild(roNodeText);
-    mElement.appendChild(ro);
-
+    mElement.appendChild(CreateElementWithText(TagVersion, VVSTConverter::MeasurementMaxVerStr));
+    mElement.appendChild(CreateElementWithText(TagReadOnly, falseStr));
     mElement.appendChild(createElement(TagNotes));
-
-    QDomElement mUnit = createElement(TagUnit);
-    const QDomText unitText = createTextNode(UnitsToStr(unit));
-    mUnit.appendChild(unitText);
-    mElement.appendChild(mUnit);
-
-    QDomElement system = createElement(TagPMSystem);
-    system.appendChild(createTextNode(ClearPMCode(p998_S)));
-    mElement.appendChild(system);
+    mElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(unit)));
+    mElement.appendChild(CreateElementWithText(TagPMSystem, ClearPMCode(p998_S)));
 
     QDomElement size = createElement(TagSize);
     SetAttribute(size, AttrBase, QString().setNum(baseSize));
@@ -697,7 +681,8 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHe
     mElement.appendChild(createElement(TagBodyMeasurements));
 
     this->appendChild(mElement);
-    insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -707,37 +692,16 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     QDomElement mElement = this->createElement(TagVIT);
 
     mElement.appendChild(createComment(FileComment()));
-
-    QDomElement version = createElement(TagVersion);
-    const QDomText newNodeText = createTextNode(VVITConverter::MeasurementMaxVerStr);
-    version.appendChild(newNodeText);
-    mElement.appendChild(version);
-
-    QDomElement ro = createElement(TagReadOnly);
-    const QDomText roNodeText = createTextNode(falseStr);
-    ro.appendChild(roNodeText);
-    mElement.appendChild(ro);
-
+    mElement.appendChild(CreateElementWithText(TagVersion, VVITConverter::MeasurementMaxVerStr));
+    mElement.appendChild(CreateElementWithText(TagReadOnly, falseStr));
     mElement.appendChild(createElement(TagNotes));
-
-    QDomElement mUnit = createElement(TagUnit);
-    mUnit.appendChild(createTextNode(UnitsToStr(unit)));
-    mElement.appendChild(mUnit);
-
-    QDomElement system = createElement(TagPMSystem);
-    system.appendChild(createTextNode(ClearPMCode(p998_S)));
-    mElement.appendChild(system);
+    mElement.appendChild(CreateElementWithText(TagUnit, UnitsToStr(unit)));
+    mElement.appendChild(CreateElementWithText(TagPMSystem, ClearPMCode(p998_S)));
 
     QDomElement personal = createElement(TagPersonal);
     personal.appendChild(createElement(TagCustomer));
-
-    QDomElement date = createElement(TagBirthDate);
-    date.appendChild(createTextNode(*defBirthDate));
-    personal.appendChild(date);
-
-    QDomElement gender = createElement(TagGender);
-    gender.appendChild(createTextNode(GenderToStr(GenderType::Unknown)));
-    personal.appendChild(gender);
+    personal.appendChild(CreateElementWithText(TagBirthDate, *defBirthDate));
+    personal.appendChild(CreateElementWithText(TagGender, GenderToStr(GenderType::Unknown)));
 
     personal.appendChild(createElement(TagEmail));
     mElement.appendChild(personal);
@@ -745,7 +709,8 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(createElement(TagBodyMeasurements));
 
     this->appendChild(mElement);
-    insertBefore(createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""), this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

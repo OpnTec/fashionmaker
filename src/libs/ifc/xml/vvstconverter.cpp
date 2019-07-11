@@ -158,21 +158,12 @@ void VVSTConverter::AddNewTagsForV0_4_0()
                       "Time to refactor the code.");
 
     QDomElement rootElement = this->documentElement();
-    QDomNode refChild = rootElement.firstChildElement("version");
+    QDomNode refChild = rootElement.firstChildElement(QStringLiteral("version"));
 
-    {
-        QDomElement ro = createElement(QStringLiteral("read-only"));
-        const QDomText roNodeText = createTextNode(falseStr);
-        ro.appendChild(roNodeText);
-        refChild = rootElement.insertAfter(ro, refChild);
-    }
+    refChild = rootElement.insertAfter(CreateElementWithText(QStringLiteral("read-only"), falseStr), refChild);
 
-    {
-        QDomElement notes = createElement(QStringLiteral("notes"));
-        const QDomText nodeText = createTextNode(UniqueTagText(QStringLiteral("description")));
-        notes.appendChild(nodeText);
-        rootElement.insertAfter(notes, refChild);
-    }
+    rootElement.insertAfter(CreateElementWithText(QStringLiteral("notes"),
+                                                  UniqueTagText(QStringLiteral("description"))), refChild);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -277,14 +268,11 @@ void VVSTConverter::PM_SystemV0_4_1()
     Q_STATIC_ASSERT_X(VVSTConverter::MeasurementMinVer < FORMAT_VERSION(0, 4, 1),
                       "Time to refactor the code.");
 
-    QDomElement pm_system = createElement(QStringLiteral("pm_system"));
-    pm_system.appendChild(createTextNode(QStringLiteral("998")));
-
     const QDomNodeList nodeList = this->elementsByTagName(QStringLiteral("size"));
     QDomElement personal = nodeList.at(0).toElement();
 
     QDomElement parent = personal.parentNode().toElement();
-    parent.insertBefore(pm_system, personal);
+    parent.insertBefore(CreateElementWithText(QStringLiteral("pm_system"), QStringLiteral("998")), personal);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
