@@ -135,21 +135,29 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         }
     };
 
-    CheckKey(LONG_OPTION_LEFT_MARGIN, translate("VCommandLine", "Left margin must be used together with page units."));
-    CheckKey(LONG_OPTION_RIGHT_MARGIN,
-             translate("VCommandLine", "Right margin must be used together with page units."));
-    CheckKey(LONG_OPTION_TOP_MARGIN, translate("VCommandLine", "Top margin must be used together with page units."));
-    CheckKey(LONG_OPTION_BOTTOM_MARGIN,
-             translate("VCommandLine", "Bottom margin must be used together with page units."));
+    if (not IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
+    {
+        CheckKey(LONG_OPTION_LEFT_MARGIN,
+                 translate("VCommandLine", "Left margin must be used together with page units."));
+        CheckKey(LONG_OPTION_RIGHT_MARGIN,
+                 translate("VCommandLine", "Right margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TOP_MARGIN,
+                 translate("VCommandLine", "Top margin must be used together with page units."));
+        CheckKey(LONG_OPTION_BOTTOM_MARGIN,
+                 translate("VCommandLine", "Bottom margin must be used together with page units."));
+    }
 
-    CheckKey(LONG_OPTION_TILED_PDF_LEFT_MARGIN,
-             translate("VCommandLine", "Tiled left margin must be used together with page units."));
-    CheckKey(LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
-             translate("VCommandLine", "Tiled right margin must be used together with page units."));
-    CheckKey(LONG_OPTION_TILED_PDF_TOP_MARGIN,
-             translate("VCommandLine", "Tiled top margin must be used together with page units."));
-    CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
-             translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
+    if (static_cast<LayoutExportFormats>(OptExportType()) == LayoutExportFormats::PDFTiled)
+    {
+        CheckKey(LONG_OPTION_TILED_PDF_LEFT_MARGIN,
+                 translate("VCommandLine", "Tiled left margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_RIGHT_MARGIN,
+                 translate("VCommandLine", "Tiled right margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_TOP_MARGIN,
+                 translate("VCommandLine", "Tiled top margin must be used together with page units."));
+        CheckKey(LONG_OPTION_TILED_PDF_BOTTOM_MARGIN,
+                 translate("VCommandLine", "Tiled bottom margin must be used together with page units."));
+    }
 
     // if present units MUST be set before any other to keep conversions correct
     if (!diag.SelectTemplate(OptPaperSize()))
