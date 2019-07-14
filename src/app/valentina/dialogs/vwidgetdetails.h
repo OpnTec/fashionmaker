@@ -34,6 +34,7 @@
 class VAbstractPattern;
 class VContainer;
 class VPiece;
+class VWidgetGroups;
 
 namespace Ui
 {
@@ -59,6 +60,8 @@ public slots:
 private slots:
     void InLayoutStateChanged(int row, int column);
     void ShowContextMenu(const QPoint &pos);
+
+    void on_checkBoxHideNotInLayout_stateChanged();
 
 private:
     Q_DISABLE_COPY(VWidgetDetails)

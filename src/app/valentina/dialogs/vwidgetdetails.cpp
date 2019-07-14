@@ -28,10 +28,12 @@
 
 #include "vwidgetdetails.h"
 #include "ui_vwidgetdetails.h"
+#include "vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vtools/undocommands/togglepiecestate.h"
+#include "../vtools/tools/vtoolseamallowance.h"
 
 #include <QMenu>
 #include <QUndoStack>
@@ -44,6 +46,8 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
       m_data(data)
 {
     ui->setupUi(this);
+
+    ui->checkBoxHideNotInLayout->setChecked(false);
 
     FillTable(m_data->DataPieces());
 
@@ -201,6 +205,8 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
     }
 }
 
+
+
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 {
@@ -279,3 +285,41 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         qApp->getUndoStack()->endMacro();
     }
 }
+
+//------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief
+ * enable "in layout" details visible or "not in layout" hidden
+ */
+void VWidgetDetails::on_checkBoxHideNotInLayout_stateChanged()
+{
+    //all details that were created and now they are in DocWidget
+    const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
+    //enable slot if shedule of details is not empty
+    if (not allDetails->isEmpty())
+    {//search the checked in layout items and make its visible or are not in layout make hidden once
+            for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
+            {
+                QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+                const quint32 id = item->data(Qt::UserRole).toUInt();
+                if (item != nullptr)
+                {
+                    VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
+                    if (tool != nullptr)
+                    {
+                        if (ui->checkBoxHideNotInLayout->isChecked())
+                        {
+                        (allDetails->value(id).IsInLayout())? tool->setVisible(true)
+                                                            : tool->setVisible(false);
+                        }
+                        else
+                        {
+                            tool->setVisible(true);
+                        }
+                    }
+                }
+           }
+     }
+}
+
+
