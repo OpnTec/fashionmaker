@@ -202,7 +202,6 @@ public:
     QDomElement           RemoveItemFromGroup(quint32 toolId, quint32 objectId, quint32 groupId);
     bool           GroupIsEmpty(quint32 id);
     bool           GetGroupVisivility(quint32 id);
-    void           SetGroupVisivility(quint32 id, bool visible);
 
     QString PieceDrawName(quint32 id);
 

@@ -30,6 +30,8 @@
 #include "ui_vwidgetgroups.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/delgroup.h"
+#include "../vtools/undocommands/changegroupvisivility.h"
+#include "../vtools/undocommands/changemultiplegroupsvisivility.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QMenu>
@@ -59,13 +61,72 @@ VWidgetGroups::~VWidgetGroups()
     delete ui;
 }
 //----------------------------------------------------------------------------------------------------------------------
-void VWidgetGroups::SetIconValue(quint32 id, bool visible, QTableWidgetItem *item) const
+void VWidgetGroups::SetGroupVisivility(vidtype id, bool visible) const
 {
-    SCASSERT(item != nullptr)
+    ChangeGroupVisivility *changeGroup = new ChangeGroupVisivility(doc, id, visible);
+    connect(changeGroup, &ChangeGroupVisivility::UpdateGroup, this, [this](vidtype id, bool visible)
+    {
+        int row = GroupRow(id);
+        if (row == -1)
+        {
+            return;
+        }
 
-    doc->SetGroupVisivility(id, visible);
-    (visible) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
-              : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
+        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        if (item)
+        {
+            (visible) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
+                      : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
+        }
+    });
+    qApp->getUndoStack()->push(changeGroup);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const
+{
+    auto *changeGroups = new ChangeMultipleGroupsVisivility(doc, groups, visible);
+    connect(changeGroups, &ChangeMultipleGroupsVisivility::UpdateMultipleGroups, this,
+            [this](const QMap<vidtype, bool> &groups)
+    {
+        QMap<vidtype, bool>::const_iterator i = groups.constBegin();
+        while (i != groups.constEnd())
+        {
+            int row = GroupRow(i.key());
+            if (row == -1)
+            {
+                ++i;
+                continue;
+            }
+
+            QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+            if (item)
+            {
+                (i.value()) ? item->setIcon(QIcon(QStringLiteral("://icon/16x16/open_eye.png")))
+                            : item->setIcon(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")));
+            }
+            ++i;
+        }
+
+    });
+    qApp->getUndoStack()->push(changeGroups);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VWidgetGroups::GroupRow(vidtype id) const
+{
+    for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(r, 0);
+        SCASSERT(item != nullptr)
+
+        if (id == item->data(Qt::UserRole).toUInt())
+        {
+            return r;
+        }
+    }
+
+    return -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,8 +138,7 @@ void VWidgetGroups::GroupVisibilityChanged(int row, int column)
     }
     QTableWidgetItem *item = ui->tableWidget->item(row, column);
     const quint32 id = item->data(Qt::UserRole).toUInt();
-    const bool visible = not doc->GetGroupVisivility(id);
-    SetIconValue(id, visible, item);
+    SetGroupVisivility(id, not doc->GetGroupVisivility(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -108,6 +168,20 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     item = ui->tableWidget->item(row, 0);
     const quint32 id = item->data(Qt::UserRole).toUInt();
 
+    auto MultipleChangeVisibilityTo = [this](bool visibility)
+    {
+        for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
+        {
+            QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
+            if (rowItem and visibility != doc->GetGroupVisivility(rowItem->data(Qt::UserRole).toUInt()))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
     QScopedPointer<QMenu> menu(new QMenu());
     QAction *triggerVisibilityMenu = doc->GetGroupVisivility(id) ?
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")), tr("Hide")) :
@@ -117,13 +191,15 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     QAction *actionDelete = menu->addAction(QIcon::fromTheme(editDeleteIcon), tr("Delete"));
     menu->addSeparator();
     QAction *actionHideAll = menu->addAction(tr("Hide All"));
+    actionHideAll->setEnabled(MultipleChangeVisibilityTo(false));
     QAction *actionShowAll = menu->addAction(tr("Show All"));
+    actionShowAll->setEnabled(MultipleChangeVisibilityTo(true));
 
     QAction *selectedAction = menu->exec(ui->tableWidget->viewport()->mapToGlobal(pos));
 
     if (selectedAction == triggerVisibilityMenu)
     {
-        SetIconValue(id, not doc->GetGroupVisivility(id), item);
+        SetGroupVisivility(id, not doc->GetGroupVisivility(id));
     }
     else if (selectedAction == actionRename)
     {
@@ -148,26 +224,50 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     }
     else if (selectedAction == actionHideAll)
     {//all groups in "group" make unvisible
+        if (ui->tableWidget->rowCount() < 1)
+        {
+            return;
+        }
+
+        QVector<vidtype> groups;
+        groups.reserve(ui->tableWidget->rowCount());
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
             quint32 i = rowItem->data(Qt::UserRole).toUInt();
             if (doc->GetGroupVisivility(i))
             {
-                SetIconValue(i, false, rowItem);
+                groups.append(i);
             }
+        }
+
+        if (not groups.isEmpty())
+        {
+            SetMultipleGroupsVisibility(groups, false);
         }
     }
     else if (selectedAction == actionShowAll)
     {//all groups in "group" make visible
+        if (ui->tableWidget->rowCount() < 1)
+        {
+            return;
+        }
+
+        QVector<vidtype> groups;
+        groups.reserve(ui->tableWidget->rowCount());
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
             quint32 i = rowItem->data(Qt::UserRole).toUInt();
             if (not doc->GetGroupVisivility(i))
             {
-                SetIconValue(i, true, rowItem);
+                groups.append(i);
             }
+        }
+
+        if (not groups.isEmpty())
+        {
+            SetMultipleGroupsVisibility(groups, true);
         }
     }
 }

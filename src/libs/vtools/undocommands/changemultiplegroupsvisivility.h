@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vwidgetgroups.h
+ **  @file   changemultiplegroupsvisivility.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   6 4, 2016
+ **  @date   15 7, 2019
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2016 Valentina project
+ **  Copyright (C) 2019 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,47 +25,31 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef CHANGEMULTIPLEGROUPSVISIVILITY_H
+#define CHANGEMULTIPLEGROUPSVISIVILITY_H
 
-#ifndef VWIDGETGROUPS_H
-#define VWIDGETGROUPS_H
+#include "vundocommand.h"
 
-#include <QWidget>
-#include "../vmisc/typedef.h"
-
-class QTableWidgetItem;
-class VAbstractPattern;
-
-namespace Ui
-{
-    class VWidgetGroups;
-}
-
-class VWidgetGroups : public QWidget
+class ChangeMultipleGroupsVisivility  : public VUndoCommand
 {
     Q_OBJECT
-
 public:
-    explicit VWidgetGroups(VAbstractPattern *doc, QWidget *parent = nullptr);
-    virtual ~VWidgetGroups();
+    ChangeMultipleGroupsVisivility(VAbstractPattern *doc, const QVector<vidtype> &groups, bool visible,
+                                   QUndoCommand *parent = nullptr);
+    virtual ~ChangeMultipleGroupsVisivility() =default;
+    virtual void undo() override;
+    virtual void redo() override;
 
-public slots:
-    void UpdateGroups();
-
-private slots:
-    void GroupVisibilityChanged(int row, int column);
-    void RenameGroup(int row, int column);
-    void CtxMenu(const QPoint &pos);
+signals:
+    void UpdateMultipleGroups(const QMap<vidtype, bool> &groups);
 
 private:
-    Q_DISABLE_COPY(VWidgetGroups)
-    Ui::VWidgetGroups *ui;
-    VAbstractPattern *doc;
+    Q_DISABLE_COPY(ChangeMultipleGroupsVisivility)
 
-    void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
-    void SetGroupVisivility(vidtype id, bool visible) const;
-    void SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const;
-
-    int  GroupRow(vidtype id) const;
+    QVector<vidtype> m_groups;
+    bool m_newVisibility{true};
+    QMap<vidtype, bool> m_oldVisibility{};
+    const QString m_nameActivDraw{};
 };
 
-#endif // VWIDGETGROUPS_H
+#endif // CHANGEMULTIPLEGROUPSVISIVILITY_H

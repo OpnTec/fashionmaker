@@ -2714,28 +2714,6 @@ bool VAbstractPattern::GetGroupVisivility(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::SetGroupVisivility(quint32 id, bool visible)
-{
-    QDomElement group = elementById(id, TagGroup);
-    if (group.isElement())
-    {
-        SetAttribute(group, AttrVisible, visible);
-        modified = true;
-        emit patternChanged(false);
-
-        QDomElement groups = CreateGroups();
-        if (not groups.isNull())
-        {
-            ParseGroups(groups);
-        }
-    }
-    else
-    {
-        qDebug("Can't get group by id = %u.", id);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::PieceDrawName(quint32 id)
 {
     const QDomElement detail = elementById(id, VAbstractPattern::TagDetail);

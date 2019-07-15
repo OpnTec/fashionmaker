@@ -4,6 +4,8 @@
 HEADERS += \
     $$PWD/addtocalc.h \
     $$PWD/addpatternpiece.h \
+    $$PWD/changegroupvisivility.h \
+    $$PWD/changemultiplegroupsvisivility.h \
     $$PWD/movespoint.h \
     $$PWD/movespline.h \
     $$PWD/movesplinepath.h \
@@ -34,6 +36,8 @@ HEADERS += \
 SOURCES += \
     $$PWD/addtocalc.cpp \
     $$PWD/addpatternpiece.cpp \
+    $$PWD/changegroupvisivility.cpp \
+    $$PWD/changemultiplegroupsvisivility.cpp \
     $$PWD/movespoint.cpp \
     $$PWD/movespline.cpp \
     $$PWD/movesplinepath.cpp \
