@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   changemultiplegroupsvisivility.h
+ **  @file   changegroupVisibility.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   15 7, 2019
+ **  @date   14 7, 2019
  **
  **  @brief
  **  @copyright
@@ -25,31 +25,31 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef CHANGEMULTIPLEGROUPSVISIVILITY_H
-#define CHANGEMULTIPLEGROUPSVISIVILITY_H
+#ifndef CHANGEGROUPVISIBILITY_H
+#define CHANGEGROUPVISIBILITY_H
 
 #include "vundocommand.h"
 
-class ChangeMultipleGroupsVisivility  : public VUndoCommand
+class ChangeGroupVisibility  : public VUndoCommand
 {
     Q_OBJECT
 public:
-    ChangeMultipleGroupsVisivility(VAbstractPattern *doc, const QVector<vidtype> &groups, bool visible,
-                                   QUndoCommand *parent = nullptr);
-    virtual ~ChangeMultipleGroupsVisivility() =default;
+    ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent = nullptr);
+    virtual ~ChangeGroupVisibility();
     virtual void undo() override;
     virtual void redo() override;
 
 signals:
-    void UpdateMultipleGroups(const QMap<vidtype, bool> &groups);
+    void UpdateGroup(vidtype id, bool visible);
 
 private:
-    Q_DISABLE_COPY(ChangeMultipleGroupsVisivility)
+    Q_DISABLE_COPY(ChangeGroupVisibility)
 
-    QVector<vidtype> m_groups;
+    bool m_oldVisibility{true};
     bool m_newVisibility{true};
-    QMap<vidtype, bool> m_oldVisibility{};
     const QString m_nameActivDraw{};
+
+    void Do(bool visible);
 };
 
-#endif // CHANGEMULTIPLEGROUPSVISIVILITY_H
+#endif // CHANGEGROUPVISIBILITY_H

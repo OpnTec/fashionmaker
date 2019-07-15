@@ -2699,7 +2699,7 @@ bool VAbstractPattern::GroupIsEmpty(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VAbstractPattern::GetGroupVisivility(quint32 id)
+bool VAbstractPattern::GetGroupVisibility(quint32 id)
 {
     QDomElement group = elementById(id, TagGroup);
     if (group.isElement())

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   changemultiplegroupsvisivility.cpp
+ **  @file   changemultiplegroupsVisibility.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   15 7, 2019
  **
@@ -25,12 +25,12 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "changemultiplegroupsvisivility.h"
+#include "changemultiplegroupsvisibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-ChangeMultipleGroupsVisivility::ChangeMultipleGroupsVisivility(VAbstractPattern *doc, const QVector<vidtype> &groups,
+ChangeMultipleGroupsVisibility::ChangeMultipleGroupsVisibility(VAbstractPattern *doc, const QVector<vidtype> &groups,
                                                                bool visible, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_groups(groups),
@@ -55,7 +55,7 @@ ChangeMultipleGroupsVisivility::ChangeMultipleGroupsVisivility(VAbstractPattern 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ChangeMultipleGroupsVisivility::undo()
+void ChangeMultipleGroupsVisibility::undo()
 {
     qCDebug(vUndo, "Undo.");
 
@@ -94,9 +94,9 @@ void ChangeMultipleGroupsVisivility::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ChangeMultipleGroupsVisivility::redo()
+void ChangeMultipleGroupsVisibility::redo()
 {
-    qCDebug(vUndo, "ChangeMultipleGroupsVisivility::redo");
+    qCDebug(vUndo, "ChangeMultipleGroupsVisibility::redo");
 
     doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
 

@@ -30,8 +30,8 @@
 #include "ui_vwidgetgroups.h"
 #include "../vtools/dialogs/tools/dialoggroup.h"
 #include "../vtools/undocommands/delgroup.h"
-#include "../vtools/undocommands/changegroupvisivility.h"
-#include "../vtools/undocommands/changemultiplegroupsvisivility.h"
+#include "../vtools/undocommands/changegroupvisibility.h"
+#include "../vtools/undocommands/changemultiplegroupsvisibility.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QMenu>
@@ -61,10 +61,10 @@ VWidgetGroups::~VWidgetGroups()
     delete ui;
 }
 //----------------------------------------------------------------------------------------------------------------------
-void VWidgetGroups::SetGroupVisivility(vidtype id, bool visible) const
+void VWidgetGroups::SetGroupVisibility(vidtype id, bool visible) const
 {
-    ChangeGroupVisivility *changeGroup = new ChangeGroupVisivility(doc, id, visible);
-    connect(changeGroup, &ChangeGroupVisivility::UpdateGroup, this, [this](vidtype id, bool visible)
+    ChangeGroupVisibility *changeGroup = new ChangeGroupVisibility(doc, id, visible);
+    connect(changeGroup, &ChangeGroupVisibility::UpdateGroup, this, [this](vidtype id, bool visible)
     {
         int row = GroupRow(id);
         if (row == -1)
@@ -85,8 +85,8 @@ void VWidgetGroups::SetGroupVisivility(vidtype id, bool visible) const
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const
 {
-    auto *changeGroups = new ChangeMultipleGroupsVisivility(doc, groups, visible);
-    connect(changeGroups, &ChangeMultipleGroupsVisivility::UpdateMultipleGroups, this,
+    auto *changeGroups = new ChangeMultipleGroupsVisibility(doc, groups, visible);
+    connect(changeGroups, &ChangeMultipleGroupsVisibility::UpdateMultipleGroups, this,
             [this](const QMap<vidtype, bool> &groups)
     {
         QMap<vidtype, bool>::const_iterator i = groups.constBegin();
@@ -138,7 +138,7 @@ void VWidgetGroups::GroupVisibilityChanged(int row, int column)
     }
     QTableWidgetItem *item = ui->tableWidget->item(row, column);
     const quint32 id = item->data(Qt::UserRole).toUInt();
-    SetGroupVisivility(id, not doc->GetGroupVisivility(id));
+    SetGroupVisibility(id, not doc->GetGroupVisibility(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -173,7 +173,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         for (int r = 0; r < ui->tableWidget->rowCount(); ++r)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
-            if (rowItem and visibility != doc->GetGroupVisivility(rowItem->data(Qt::UserRole).toUInt()))
+            if (rowItem and visibility != doc->GetGroupVisibility(rowItem->data(Qt::UserRole).toUInt()))
             {
                 return true;
             }
@@ -183,7 +183,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
     };
 
     QScopedPointer<QMenu> menu(new QMenu());
-    QAction *triggerVisibilityMenu = doc->GetGroupVisivility(id) ?
+    QAction *triggerVisibilityMenu = doc->GetGroupVisibility(id) ?
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/closed_eye.png")), tr("Hide")) :
                 menu->addAction(QIcon(QStringLiteral("://icon/16x16/open_eye.png")), tr("Show"));
 
@@ -199,7 +199,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
 
     if (selectedAction == triggerVisibilityMenu)
     {
-        SetGroupVisivility(id, not doc->GetGroupVisivility(id));
+        SetGroupVisibility(id, not doc->GetGroupVisibility(id));
     }
     else if (selectedAction == actionRename)
     {
@@ -235,7 +235,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
             quint32 i = rowItem->data(Qt::UserRole).toUInt();
-            if (doc->GetGroupVisivility(i))
+            if (doc->GetGroupVisibility(i))
             {
                 groups.append(i);
             }
@@ -259,7 +259,7 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
         {
             QTableWidgetItem *rowItem = ui->tableWidget->item(r, 0);
             quint32 i = rowItem->data(Qt::UserRole).toUInt();
-            if (not doc->GetGroupVisivility(i))
+            if (not doc->GetGroupVisibility(i))
             {
                 groups.append(i);
             }

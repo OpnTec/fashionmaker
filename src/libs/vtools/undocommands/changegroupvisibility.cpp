@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   changegroupvisivility.cpp
+ **  @file   changegroupVisibility.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   14 7, 2019
  **
@@ -25,12 +25,12 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#include "changegroupvisivility.h"
+#include "changegroupvisibility.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vwidgets/vmaingraphicsview.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-ChangeGroupVisivility::ChangeGroupVisivility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent)
+ChangeGroupVisibility::ChangeGroupVisibility(VAbstractPattern *doc, vidtype id, bool visible, QUndoCommand *parent)
     : VUndoCommand(QDomElement(), doc, parent),
       m_newVisibility(visible),
       m_nameActivDraw(doc->GetNameActivPP())
@@ -49,11 +49,11 @@ ChangeGroupVisivility::ChangeGroupVisivility(VAbstractPattern *doc, vidtype id, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ChangeGroupVisivility::~ChangeGroupVisivility()
+ChangeGroupVisibility::~ChangeGroupVisibility()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-void ChangeGroupVisivility::undo()
+void ChangeGroupVisibility::undo()
 {
     qCDebug(vUndo, "Undo.");
 
@@ -61,7 +61,7 @@ void ChangeGroupVisivility::undo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ChangeGroupVisivility::redo()
+void ChangeGroupVisibility::redo()
 {
     qCDebug(vUndo, "Redo.");
 
@@ -69,7 +69,7 @@ void ChangeGroupVisivility::redo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void ChangeGroupVisivility::Do(bool visible)
+void ChangeGroupVisibility::Do(bool visible)
 {
     doc->ChangeActivPP(m_nameActivDraw);//Without this user will not see this change
 

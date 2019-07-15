@@ -62,7 +62,7 @@ private:
     VAbstractPattern *doc;
 
     void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
-    void SetGroupVisivility(vidtype id, bool visible) const;
+    void SetGroupVisibility(vidtype id, bool visible) const;
     void SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const;
 
     int  GroupRow(vidtype id) const;
