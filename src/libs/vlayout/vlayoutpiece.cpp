@@ -915,22 +915,29 @@ qint64 VLayoutPiece::Square() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::SetLayoutAllowancePoints()
 {
+    d->m_square = 0;
+
     if (d->layoutWidth > 0)
     {
         if (IsSeamAllowance() && not IsSeamAllowanceBuiltIn())
         {
-            d->layoutAllowance = Equidistant(PrepareAllowance(GetMappedSeamAllowancePoints()), d->layoutWidth, GetName());
-            if (d->layoutAllowance.isEmpty() == false)
+            d->layoutAllowance = Equidistant(PrepareAllowance(GetMappedSeamAllowancePoints()), d->layoutWidth,
+                                             GetName());
+            if (not d->layoutAllowance.isEmpty())
             {
                 d->layoutAllowance.removeLast();
+
+                d->m_square = qFloor(qAbs(SumTrapezoids(GetSeamAllowancePoints())/2.0));
             }
         }
         else
         {
             d->layoutAllowance = Equidistant(PrepareAllowance(GetMappedContourPoints()), d->layoutWidth, GetName());
-            if (d->layoutAllowance.isEmpty() == false)
+            if (not d->layoutAllowance.isEmpty())
             {
                 d->layoutAllowance.removeLast();
+
+                d->m_square = qFloor(qAbs(SumTrapezoids(GetContourPoints())/2.0));
             }
         }
     }
@@ -938,13 +945,6 @@ void VLayoutPiece::SetLayoutAllowancePoints()
     {
         d->layoutAllowance.clear();
     }
-
-    if (d->layoutAllowance.isEmpty()) //-V807
-    {
-        d->m_square = 0;
-    }
-
-    d->m_square = qFloor(qAbs(SumTrapezoids(d->layoutAllowance)/2.0));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
