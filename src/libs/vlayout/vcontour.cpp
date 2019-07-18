@@ -359,8 +359,15 @@ void VContour::ResetAttributes()
 //---------------------------------------------------------------------------------------------------------------------
 int VContour::EmptySheetEdgesCount() const
 {
-    const qreal shift = qFuzzyIsNull(d->shift) ? ToPixel(0.5, Unit::Cm) : d->shift;
-    return qFloor(EmptySheetEdge().length()/shift);
+    qreal defaultShift = ToPixel(0.5, Unit::Cm);
+    const qreal emptyEdgeLength = EmptySheetEdge().length();
+    if (emptyEdgeLength < defaultShift)
+    {
+        defaultShift = emptyEdgeLength / 2.0;
+    }
+
+    const qreal shift = (qFuzzyIsNull(d->shift) || d->shift > defaultShift) ? defaultShift : d->shift;
+    return qFloor(emptyEdgeLength/shift);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
