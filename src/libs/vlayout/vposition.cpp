@@ -126,7 +126,11 @@ VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool
     QScopedPointer<QThreadPool> thread_pool(new QThreadPool());
     QVector<VPosition *> threads;
 
-    auto Cleanup = qScopeGuard([threads] {qDeleteAll(threads.begin(), threads.end());});
+    auto Cleanup = qScopeGuard([&threads]
+    {
+        Q_ASSERT(not threads.isEmpty());
+        qDeleteAll(threads.begin(), threads.end());
+    });
 
     for (int j=1; j <= data.gContour.GlobalEdgesCount(); ++j)
     {
@@ -144,6 +148,8 @@ VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool
             thread_pool->start(thread);
         }
     }
+
+    Q_ASSERT(not threads.isEmpty());
 
     // Wait for done
     do
