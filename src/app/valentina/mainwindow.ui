@@ -1751,6 +1751,7 @@
     <addaction name="separator"/>
     <addaction name="actionLast_tool"/>
     <addaction name="actionShowCurveDetails"/>
+    <addaction name="actionHideMainPath"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2831,6 +2832,20 @@
    </property>
    <property name="text">
     <string>Export recipe</string>
+   </property>
+  </action>
+  <action name="actionHideMainPath">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Hide main path</string>
+   </property>
+   <property name="toolTip">
+    <string>Globally hide pieces main path</string>
    </property>
   </action>
  </widget>

@@ -24,6 +24,7 @@
 - New layout option --nestQuantity.
 - New feature Pattern recipe.
 - New options to hide all/show all visibility groups.
+- New feature "Hide piece's main path".
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

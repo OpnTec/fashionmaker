@@ -3066,6 +3066,7 @@ void MainWindow::Clear()
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
+    ui->actionHideMainPath->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadMultisize->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
@@ -3417,7 +3418,8 @@ void MainWindow::SetEnabledGUI(bool enabled)
 void MainWindow::SetEnableWidgets(bool enable)
 {
     const bool drawStage = (qApp->GetDrawMode() == Draw::Calculation);
-    const bool designStage = (drawStage || qApp->GetDrawMode() == Draw::Modeling);
+    const bool detailsStage = (qApp->GetDrawMode() == Draw::Modeling);
+    const bool designStage = (drawStage || detailsStage);
 
     comboBoxDraws->setEnabled(enable && drawStage);
     ui->actionOptionDraw->setEnabled(enable && drawStage);
@@ -3441,6 +3443,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable && drawStage);
+    ui->actionHideMainPath->setEnabled(enable && detailsStage);
     ui->actionLoadIndividual->setEnabled(enable && designStage);
     ui->actionLoadMultisize->setEnabled(enable && designStage);
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
@@ -4491,6 +4494,28 @@ void MainWindow::CreateActions()
         emit ui->view->itemClicked(nullptr);
         sceneDraw->EnableDetailsMode(checked);
         qApp->ValentinaSettings()->SetShowCurveDetails(checked);
+    });
+
+    ui->actionHideMainPath->setChecked(qApp->ValentinaSettings()->IsPieceHideMainPath());
+    connect(ui->actionHideMainPath, &QAction::triggered, this, [this](bool checked)
+    {
+        qApp->ValentinaSettings()->SetPieceHideMainPath(checked);
+        const QList<quint32> ids = pattern->DataPieces()->keys();
+        const bool updateChildren = false;
+        QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        for(auto &id : ids)
+        {
+            try
+            {
+                if (VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id)))
+                {
+                    tool->RefreshGeometry(updateChildren);
+                }
+            }
+            catch(VExceptionBadId &)
+            {}
+        }
+        QGuiApplication::restoreOverrideCursor();
     });
 
     connect(ui->actionLoadIndividual, &QAction::triggered, this, &MainWindow::LoadIndividual);
