@@ -74,7 +74,8 @@ public:
           m_tmPattern(detail.m_tmPattern),
           m_placeLabels(detail.m_placeLabels),
           m_square(detail.m_square),
-          m_quantity(detail.m_quantity)
+          m_quantity(detail.m_quantity),
+          m_id(detail.m_id)
     {}
 
     ~VLayoutPieceData() Q_DECL_EQ_DEFAULT;
@@ -131,6 +132,9 @@ public:
 
     quint16 m_quantity{1};
 
+    /** @brief m_id keep id of original piece. */
+    vidtype                   m_id;
+
 private:
     Q_DISABLE_ASSIGN(VLayoutPieceData)
 
@@ -164,6 +168,7 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VLayoutPieceData &
 
     // Added in classVersion = 2
     dataStream << piece.m_quantity;
+    dataStream << piece.m_id;
 
     return dataStream;
 }
@@ -214,6 +219,7 @@ inline QDataStream &operator>>(QDataStream &dataStream, VLayoutPieceData &piece)
     if (actualClassVersion >= 2)
     {
         dataStream >> piece.m_quantity;
+        dataStream >> piece.m_id;
     }
 
     return dataStream;

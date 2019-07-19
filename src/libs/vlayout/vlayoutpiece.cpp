@@ -403,7 +403,7 @@ VLayoutPiece::~VLayoutPiece()
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern)
+VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern)
 {
     QFuture<QVector<QPointF> > futureSeamAllowance = QtConcurrent::run(piece, &VPiece::SeamAllowancePoints, pattern);
     QFuture<bool> futureSeamAllowanceValid = QtConcurrent::run(piece, &VPiece::IsSeamAllowanceValid, pattern);
@@ -422,6 +422,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetSAWidth(qApp->toPixel(piece.GetSAWidth()));
     det.SetForbidFlipping(piece.IsForbidFlipping());
     det.SetForceFlipping(piece.IsForceFlipping());
+    det.SetId(id);
 
     if (not futureSeamAllowanceValid.result())
     {
@@ -435,6 +436,7 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, const VContainer *pattern
     det.SetInternalPaths(futureInternalPaths.result());
     det.SetPassmarks(futurePassmarks.result());
     det.SetPlaceLabels(futurePlaceLabels.result());
+    det.SetPriority(piece.GetPriority());
 
     // Very important to set main path first!
     if (det.ContourPath().isEmpty())
@@ -768,6 +770,18 @@ quint16 VLayoutPiece::GetQuantity() const
 void VLayoutPiece::SetQuantity(quint16 value)
 {
     d->m_quantity = qMax(static_cast<quint16>(1), value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+vidtype VLayoutPiece::GetId() const
+{
+    return d->m_id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::SetId(vidtype id)
+{
+    d->m_id = id;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

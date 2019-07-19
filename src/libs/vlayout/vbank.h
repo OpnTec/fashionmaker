@@ -30,9 +30,12 @@
 #define VBANK_H
 
 #include <QHash>
+#include <QMap>
 #include <QRectF>
 #include <QVector>
 #include <QtGlobal>
+
+#include "../vmisc/typedef.h"
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
@@ -81,11 +84,15 @@ public:
 private:
     Q_DISABLE_COPY(VBank)
     QVector<VLayoutPiece> details;
-    QHash<int, qint64> unsorted;
 
-    QHash<int, qint64> big;
-    QHash<int, qint64> middle;
-    QHash<int, qint64> small;
+    QMap<uint, QHash<int, qint64>> unsorted;
+    QMap<uint, QHash<int, qint64>> big;
+    QMap<uint, QHash<int, qint64>> middle;
+    QMap<uint, QHash<int, qint64>> small;
+    QMap<uint, QMultiMap<qint64, int>> desc;
+
+    QVector<uint> groups;
+    QVector<vidtype> arranged;
 
     qreal layoutWidth;
 
@@ -96,15 +103,19 @@ private:
 
     void PrepareGroup();
 
-    void PrepareThreeGroups();
-    void PrepareTwoGroups();
-    void PrepareDescGroup();
+    void PrepareThreeGroups(uint priority);
+    void PrepareTwoGroups(uint priority);
+    void PrepareDescGroup(uint priority);
 
-    int GetNextThreeGroups() const;
-    int GetNextTwoGroups() const;
-    int GetNextDescGroup() const;
+    int GetNextThreeGroups(uint priority) const;
+    int GetNextTwoGroups(uint priority) const;
+    int GetNextDescGroup(uint priority) const;
 
-    void SqMaxMin(qint64 &sMax, qint64 &sMin) const;
+    void SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const;
+    int  TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority) const;
+
+    bool ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i);
+    bool ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i);
 };
 
 #if defined (Q_OS_WIN) && defined (Q_CC_MSVC)

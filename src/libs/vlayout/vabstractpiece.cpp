@@ -43,7 +43,7 @@
 #include <QTemporaryFile>
 
 const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
-const quint16 VAbstractPieceData::classVersion = 1;
+const quint16 VAbstractPieceData::classVersion = 2;
 
 const qreal maxL = 2.5;
 
@@ -1550,6 +1550,18 @@ qreal VAbstractPiece::GetMy() const
 void VAbstractPiece::SetMy(qreal value)
 {
     d->m_my = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+uint VAbstractPiece::GetPriority() const
+{
+    return d->m_priority;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPiece::SetPriority(uint value)
+{
+    d->m_priority = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

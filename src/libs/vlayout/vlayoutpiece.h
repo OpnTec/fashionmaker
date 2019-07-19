@@ -71,7 +71,7 @@ public:
     inline void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
     { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
 
-    static VLayoutPiece Create(const VPiece &piece, const VContainer *pattern);
+    static VLayoutPiece Create(const VPiece &piece, vidtype id, const VContainer *pattern);
 
     QVector<QPointF> GetMappedContourPoints() const;
     QVector<QPointF> GetContourPoints() const;
@@ -118,6 +118,9 @@ public:
 
     quint16 GetQuantity() const;
     void    SetQuantity(quint16 value);
+
+    vidtype GetId() const;
+    void    SetId(vidtype id);
 
     bool IsMirror() const;
     void SetMirror(bool value);

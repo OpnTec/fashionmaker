@@ -83,6 +83,7 @@ const QString VToolSeamAllowance::AttrBottomRightPin       = QStringLiteral("bot
 const QString VToolSeamAllowance::AttrCenterPin            = QStringLiteral("centerPin");
 const QString VToolSeamAllowance::AttrTopPin               = QStringLiteral("topPin");
 const QString VToolSeamAllowance::AttrBottomPin            = QStringLiteral("bottomPin");
+const QString VToolSeamAllowance::AttrPiecePriority        = QStringLiteral("priority");
 
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance *VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphicsScene *scene,
@@ -281,6 +282,7 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
                                 not piece.IsSeamAllowanceBuiltIn());
     doc->SetAttribute(domElement, AttrWidth, piece.GetFormulaSAWidth());
     doc->SetAttributeOrRemoveIf(domElement, AttrUnited, piece.IsUnited(), not piece.IsUnited());
+    doc->SetAttributeOrRemoveIf(domElement, AttrPiecePriority, piece.GetPriority(), piece.GetPriority() == 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

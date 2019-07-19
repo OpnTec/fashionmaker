@@ -87,6 +87,7 @@ public:
     static const QString AttrCenterPin;
     static const QString AttrTopPin;
     static const QString AttrBottomPin;
+    static const QString AttrPiecePriority;
 
     void RemoveWithConfirm(bool ask);
 

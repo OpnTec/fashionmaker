@@ -837,6 +837,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
                                          QString().setNum(qApp->ValentinaSettings()->GetForceWorkpieceFlipping())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
+        initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
 
         initData.width = GetParametrString(domElement, AttrWidth, QStringLiteral("0.0"));
         const QString w = initData.width;//need for saving fixed formula;

@@ -74,21 +74,38 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
+            <layout class="QFormLayout" name="formLayout">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::ExpandingFieldsGrow</enum>
+             </property>
+             <item row="0" column="0">
               <widget class="QLabel" name="labelEditName">
                <property name="text">
                 <string>Name of detail:</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item row="0" column="1">
               <widget class="VLineEdit" name="lineEditName">
                <property name="text">
                 <string>Detail</string>
                </property>
                <property name="placeholderText">
                 <string>Name can't be empty</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Priority:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSpinBox" name="spinBoxPriority">
+               <property name="toolTip">
+                <string>Controls priority in layout. 0 - no priority.</string>
                </property>
               </widget>
              </item>

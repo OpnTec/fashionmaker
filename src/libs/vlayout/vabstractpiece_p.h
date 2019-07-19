@@ -47,15 +47,6 @@ class VAbstractPieceData : public QSharedData
     Q_DECLARE_TR_FUNCTIONS(VAbstractPieceData)
 public:
     VAbstractPieceData()
-        : m_name(tr("Detail")),
-          m_forbidFlipping(false),
-          m_forceFlipping(false),
-          m_seamAllowance(false),
-          m_seamAllowanceBuiltIn(false),
-          m_hideMainPath(false),
-          m_width(0),
-          m_mx(0),
-          m_my(0)
     {}
 
     VAbstractPieceData(const VAbstractPieceData &piece)
@@ -68,7 +59,8 @@ public:
           m_hideMainPath(piece.m_hideMainPath),
           m_width(piece.m_width),
           m_mx(piece.m_mx),
-          m_my(piece.m_my)
+          m_my(piece.m_my),
+          m_priority(piece.m_priority)
     {}
 
     ~VAbstractPieceData() Q_DECL_EQ_DEFAULT;
@@ -76,16 +68,17 @@ public:
     friend QDataStream& operator<<(QDataStream& dataStream, const VAbstractPieceData& piece);
     friend QDataStream& operator>>(QDataStream& dataStream, VAbstractPieceData& piece);
 
-    QString m_name;
+    QString m_name{tr("Detail")};
     /** @brief forbidFlipping forbid piece be mirrored in a layout. */
-    bool    m_forbidFlipping;
-    bool    m_forceFlipping;
-    bool    m_seamAllowance;
-    bool    m_seamAllowanceBuiltIn;
-    bool    m_hideMainPath;
-    qreal   m_width;
-    qreal   m_mx;
-    qreal   m_my;
+    bool    m_forbidFlipping{false};
+    bool    m_forceFlipping{false};
+    bool    m_seamAllowance{false};
+    bool    m_seamAllowanceBuiltIn{false};
+    bool    m_hideMainPath{false};
+    qreal   m_width{0};
+    qreal   m_mx{0};
+    qreal   m_my{0};
+    uint    m_priority{0};
 
 private:
     Q_DISABLE_ASSIGN(VAbstractPieceData)
@@ -114,6 +107,7 @@ inline QDataStream &operator<<(QDataStream &dataStream, const VAbstractPieceData
     dataStream << piece.m_my;
 
     // Added in classVersion = 2
+    dataStream << piece.m_priority;
 
     return dataStream;
 }
@@ -154,10 +148,10 @@ inline QDataStream &operator>>(QDataStream &dataStream, VAbstractPieceData &piec
     dataStream >> piece.m_mx;
     dataStream >> piece.m_my;
 
-//    if (actualClassVersion >= 2)
-//    {
-
-//    }
+    if (actualClassVersion >= 2)
+    {
+        dataStream >> piece.m_priority;
+    }
 
     return dataStream;
 }
