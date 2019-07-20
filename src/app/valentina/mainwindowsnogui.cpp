@@ -335,6 +335,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         isAutoCrop = lGenerator.GetAutoCrop();
                         isUnitePages = lGenerator.IsUnitePages();
                         isLayoutStale = false;
+                        papersCount = lGenerator.PapersCount();
                         hasResult = true;
                     }
                 }
