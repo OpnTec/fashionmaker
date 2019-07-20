@@ -338,6 +338,24 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         papersCount = lGenerator.PapersCount();
                         hasResult = true;
                     }
+                    else
+                    {
+                        if (lGenerator.IsRotationNeeded())
+                        {
+                            lGenerator.SetRotate(true);
+                            lGenerator.SetRotationNumber(++rotatate);
+                            rotationUsed = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (lGenerator.IsRotationNeeded())
+                    {
+                        lGenerator.SetRotate(true);
+                        lGenerator.SetRotationNumber(++rotatate);
+                        rotationUsed = true;
+                    }
                 }
                 lGenerator.SetShift(lGenerator.GetShift()/2.0);
                 break;
