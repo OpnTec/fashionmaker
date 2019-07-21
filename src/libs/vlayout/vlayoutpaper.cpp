@@ -324,7 +324,6 @@ QGraphicsPathItem *VLayoutPaper::GetGlobalContour() const
         {
             path.lineTo(point);
         }
-        path.lineTo(points.at(0));
     }
 
     const qreal radius = 1;
