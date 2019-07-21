@@ -127,7 +127,7 @@ void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, Layo
     {
         if (bank->PrepareDetails())
         {
-            SetShift(bank->DetailsBiggestEdge() + 1);
+            SetShift(ToPixel(1, Unit::Cm));
         }
         else
         {

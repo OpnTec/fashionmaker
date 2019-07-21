@@ -77,7 +77,6 @@ public:
     int ArrangedCount() const;
 
     qreal GetBiggestDiagonal() const;
-    qreal DetailsBiggestEdge() const;
 
     bool IsRotationNeeded() const;
 

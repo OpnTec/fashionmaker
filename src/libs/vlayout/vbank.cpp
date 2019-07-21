@@ -666,22 +666,6 @@ bool VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VBank::DetailsBiggestEdge() const
-{
-    qreal edge = 0;
-    for(auto &piece : details)
-    {
-        const qreal pieceEdge = piece.BiggestEdge();
-        if (pieceEdge > edge)
-        {
-            edge = pieceEdge;
-        }
-    }
-
-    return edge;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 bool VBank::IsRotationNeeded() const
 {
     for(auto &piece : details)
