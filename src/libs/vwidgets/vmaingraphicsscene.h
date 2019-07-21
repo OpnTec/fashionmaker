@@ -63,6 +63,10 @@ public:
     QRectF        VisibleItemsBoundingRect() const;
     void          InitOrigins();
     void          SetOriginsVisible(bool visible);
+
+    bool          IsNonInteractive() const;
+    void          SetNonInteractive(bool nonInteractive);
+
 public slots:
     void          ChoosedItem(quint32 id, const SceneObject &type);
     void          SelectedItem(bool selected, quint32 object, quint32 tool);
@@ -145,6 +149,7 @@ signals:
     void          LanguageChanged();
 
 private:
+    Q_DISABLE_COPY(VMainGraphicsScene)
     /** @brief horScrollBar value horizontal scroll bar. */
     qint32        horScrollBar;
 
@@ -155,6 +160,9 @@ private:
     QTransform    _transform;
     QPointF       scenePos;
     QVector<QGraphicsItem *> origins;
+
+    /** @brief m_nonInteractive all item on scene in non interactive. */
+    bool          m_nonInteractive{false};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -568,9 +568,10 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
         }
         case Qt::MiddleButton:
         {
+            auto scene = qobject_cast<VMainGraphicsScene*>(this->scene());
             const QList<QGraphicsItem *> list = items(event->pos());
-            if (list.size() == 0)
-            {// Only when the user clicks on the scene background
+            if (list.isEmpty() || (scene && scene->IsNonInteractive()))
+            {// Only when the user clicks on the scene background or non interactive scene
                 m_ptStartPos = event->pos();
                 m_oldCursor = viewport()->cursor();
                 QGraphicsView::setDragMode(QGraphicsView::ScrollHandDrag);

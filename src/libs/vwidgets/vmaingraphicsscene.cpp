@@ -114,6 +114,18 @@ void VMainGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VMainGraphicsScene::IsNonInteractive() const
+{
+    return m_nonInteractive;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsScene::SetNonInteractive(bool nonInteractive)
+{
+    m_nonInteractive = nonInteractive;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::InitOrigins()
 {
     origins.clear();

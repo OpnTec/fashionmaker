@@ -1116,7 +1116,8 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
     QList<QGraphicsScene *> scenes;
     for (int i=0; i<papers.size(); ++i)
     {
-        QGraphicsScene *scene = new VMainGraphicsScene();
+        auto *scene = new VMainGraphicsScene();
+        scene->SetNonInteractive(true);
         scene->setBackgroundBrush(QBrush(QColor(Qt::gray), Qt::SolidPattern));
         scene->addItem(shadows.at(i));
         scene->addItem(papers.at(i));
