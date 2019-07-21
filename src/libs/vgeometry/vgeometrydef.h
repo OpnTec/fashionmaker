@@ -105,4 +105,10 @@ static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
     return QLineF(p1, p2).length() <= accuracyPointOnLine;
 }
 
+Q_REQUIRED_RESULT static inline bool VFuzzyOnAxis(qreal v1, qreal v2);
+static inline bool VFuzzyOnAxis(qreal v1, qreal v2)
+{
+    return qAbs(v1 - v2) <= accuracyPointOnLine;
+}
+
 #endif // VGEOMETRYDEF_H
