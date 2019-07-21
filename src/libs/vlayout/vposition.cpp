@@ -325,24 +325,17 @@ VPosition::CrossingType VPosition::Crossing(const VLayoutPiece &detail) const
         return CrossingType::NoIntersection;
     }
 
-    const QVector<QPointF> layoutPoints = detail.GetLayoutAllowancePoints();
-    const QRectF layoutBoundingRect = VLayoutPiece::BoundingRect(layoutPoints);
-    const QPainterPath layoutAllowancePath = VLayoutPiece::PainterPath(layoutPoints);
+    const QPainterPath layoutAllowancePath = VLayoutPiece::PainterPath(detail.GetLayoutAllowancePoints());
 
     const QVector<QPointF> contourPoints = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn() ?
                 detail.GetMappedSeamAllowancePoints() : detail.GetMappedContourPoints();
-    const QRectF detailBoundingRect = VLayoutPiece::BoundingRect(contourPoints);
     const QPainterPath contourPath = VLayoutPiece::PainterPath(contourPoints);
 
     for(auto &position : m_data.positionsCache)
     {
-        if (position.boundingRect.intersects(layoutBoundingRect) || position.boundingRect.contains(detailBoundingRect))
+        if (position.contains(contourPath) || position.intersects(layoutAllowancePath))
         {
-            if (position.layoutAllowancePath.contains(contourPath) ||
-                    position.layoutAllowancePath.intersects(layoutAllowancePath))
-            {
-                return CrossingType::Intersection;
-            }
+            return CrossingType::Intersection;
         }
     }
 

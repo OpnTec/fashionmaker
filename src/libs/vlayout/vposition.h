@@ -49,7 +49,7 @@ struct VPositionData
     bool rotate{false};
     int rotationNumber{0};
     bool followGrainline{false};
-    QVector<VCachedPositions> positionsCache{};
+    QVector<QPainterPath> positionsCache{};
     bool isOriginPaperOrientationPortrait{true};
 };
 
