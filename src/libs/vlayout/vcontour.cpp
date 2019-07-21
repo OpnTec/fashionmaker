@@ -179,24 +179,26 @@ QVector<QPointF> VContour::UniteWithContour(const VLayoutPiece &detail, int glob
             return QVector<QPointF>();
         }
 
-        const int i2 = globalI == d->globalContour.count() ? 0 : globalI;
-
         int i=0;
         while (i < d->globalContour.count())
         {
-            if (i == i2)
+            AppendToContour(newContour, d->globalContour.at(i));
+
+            if (type == BestFrom::Rotation)
             {
-                if (type == BestFrom::Rotation)
+                if (i == globalI)
                 {
                     AppendWhole(newContour, detail, detJ);
                 }
-                else
+            }
+            else
+            {
+                if (i == globalI-1)
                 {
                     InsertDetail(newContour, detail, detJ);
                 }
             }
 
-            AppendToContour(newContour, d->globalContour.at(i));
             ++i;
         }
     }
@@ -303,21 +305,22 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
 {
     int processedEdges = 0;
     const int nD = detail.LayoutEdgesCount();
-    int j = detJ+1;
+    int j = detJ;
     do
     {
-        if (j > nD)
+        if (j >= nD)
         {
-            j=1;
+            j=0;
         }
-        const QVector<QPointF> points = CutEdge(detail.LayoutEdge(j));
-        for (int i = 0; i < points.size()-1; ++i)
+
+        for(auto &point : CutEdge(detail.LayoutEdge(j+1)))
         {
-            contour.append(points.at(i));
+            AppendToContour(contour, point);
         }
         ++processedEdges;
         ++j;
-    }while (processedEdges < nD);
+    }
+    while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -325,16 +328,17 @@ void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detai
 {
     int processedEdges = 0;
     const int nD = detail.LayoutEdgesCount();
-    int j = detJ+1;
+    int j = detJ;
     do
     {
-        if (j > nD)
+        if (j >= nD)
         {
-            j=1;
+            j=0;
         }
-        if (j != detJ)
+
+        if (j != detJ-1)
         {
-            for(auto &point : CutEdge(detail.LayoutEdge(j)))
+            for(auto &point : CutEdge(detail.LayoutEdge(j+1)))
             {
                 AppendToContour(contour, point);
             }
@@ -342,7 +346,7 @@ void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detai
         ++processedEdges;
         ++j;
     }
-    while (processedEdges <= nD);
+    while (processedEdges < nD);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
