@@ -98,7 +98,8 @@ public:
     static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
     static bool    IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2);
     static QPointF CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2);
-    static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2);
+    static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, 
+                                       qreal accuracy = accuracyPointOnLine);
 
     template <typename T>
     static QVector<T> GetReversePoints(const QVector<T> &points);
@@ -109,7 +110,7 @@ private:
     QSharedDataPointer<VGObjectData> d;
 
     static double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
-    static double GetEpsilon(const QPointF &p1, const QPointF &p2);
+    static double GetEpsilon(const QPointF &p1, const QPointF &p2, qreal accuracy);
 
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };

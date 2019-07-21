@@ -492,10 +492,10 @@ QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const Q
  *  The pdp is zero only if the t lies on the line e1 = vector from p1 to p2.
  * @return true if point is on line
  */
-bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2)
+bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
     const double p = qAbs(PerpDotProduct(p1, p2, t));
-    const double e = GetEpsilon(p1, p2);
+    const double e = GetEpsilon(p1, p2, accuracy);
     // We can't use common "<=" here because of the floating-point accuraccy problem
     return p < e || VFuzzyComparePossibleNulls(p, e);
 }
@@ -521,11 +521,11 @@ double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPoi
  * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
  * is controled by variable accuracyPointOnLine
  */
-double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2)
+double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
     QLineF line(p1, p2);
     line.setAngle(line.angle() + 90);
-    line.setLength(accuracyPointOnLine); // less than accuracy means the same point
+    line.setLength(accuracy); // less than accuracy means the same point
 
     return qAbs(PerpDotProduct(p1, p2, line.p2()));
 }
