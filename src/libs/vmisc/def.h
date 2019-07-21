@@ -642,14 +642,6 @@ Q_DECL_RELAXED_CONSTEXPR static inline bool VFuzzyComparePossibleNulls(double p1
     }
 }
 
-constexpr qreal accuracyPointOnLine = (0.12/*mm*/ / 25.4) * PrintDPI;
-
-Q_REQUIRED_RESULT static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2);
-static inline bool VFuzzyComparePoints(const QPointF &p1, const QPointF &p2)
-{
-    return QLineF(p1, p2).length() <= accuracyPointOnLine;
-}
-
 /**
  * @brief The CustomSA struct contains record about custom seam allowanse (SA).
  */

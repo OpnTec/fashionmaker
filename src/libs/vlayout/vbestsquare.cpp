@@ -28,7 +28,7 @@
 
 #include "vbestsquare.h"
 #include "vbestsquare_p.h"
-#include "../vmisc/def.h"
+#include "../vgeometry/vgeometrydef.h"
 
 #include <QMatrix>
 
