@@ -87,7 +87,7 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
         {
             if (d->saveLength)
             {
-                if (VFuzzyComparePossibleNulls(data.depthPosition, d->data.depthPosition)
+                if (qAbs(data.depthPosition - d->data.depthPosition) <= accuracyPointOnLine
                         && IsImprovedSidePosition(data.sidePosition))
                 {
                     SaveResult();
@@ -100,7 +100,7 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
             else
             {
                 if (IsImprovedSidePosition(data.sidePosition)
-                        || VFuzzyComparePossibleNulls(data.sidePosition, d->data.sidePosition))
+                        || qAbs(data.sidePosition - d->data.sidePosition) <= accuracyPointOnLine)
                 {
                     SaveResult();
                 }
