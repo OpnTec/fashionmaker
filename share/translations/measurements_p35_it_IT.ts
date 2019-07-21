@@ -1404,13 +1404,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="829"/>
         <source>Waist arc, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Semi-circonferenza vita, dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="830"/>
         <source>From Waist Side to Waist Side across back. (&apos;Waist circumference&apos; - &apos;Waist arc, front&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Da un lato all&apos;altro della vita, passando da dietro. (&quot;Circonferenza Vita&quot; - &quot;Semi-circonferenza vita, davanti&quot;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="835"/>
@@ -3750,79 +3750,79 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1814"/>
         <source>Leg: Waist Side to Ankle</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gamba: dal Lato della Vita alla Cavilia</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1815"/>
         <source>From Waist Side to Ankle. (&apos;Leg: Waist Side to Floor&apos; - &apos;Height: Ankle&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dal Lato della Vita alla Caviglia. (&apos;Gamba: dal Lato della Vita al Pavimento&apos; -&apos;Altezza: Caviglia&apos;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1819"/>
         <source>leg_waist_side_to_knee</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>gamba_lato_vita_al_ginocchio</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1821"/>
         <source>Leg: Waist Side to Knee</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gamba:  Dal lato della Vita al Ginocchio.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1839"/>
         <source>crotch_length</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>lun_tot_cavallo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1841"/>
         <source>Crotch length</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lunghezza Totale Cavallo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1842"/>
         <source>Put tape across gap between buttocks at Hip level. Measure from Waist Front down betwen legs and up to Waist Back.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Facendo passare il metro tra le natiche e le gambe, misurare dal Centro Vita Davanti al Centro Vita Dietro.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1846"/>
         <source>crotch_length_b</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altezza_cavallo_dt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1848"/>
         <source>Crotch length, back</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altezza Cavallo, Dietro</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1849"/>
         <source>Put tape across gap between buttocks at Hip level. Measure from Waist Back to mid-Crotch, either at the vagina or between testicles and anus).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Facendo passare il metro tra le natiche, misurare dal Centro Vita Davanti al Centro Vita Dietro, ricavando la metà del Cavallo. (Arrivando alla vulva oppure tra testicoli ed ano).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1854"/>
         <source>crotch_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>altezza_cavallo_davanti</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1856"/>
         <source>Crotch length, front</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altezza Cavallo, Davanti</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1857"/>
         <source>From Waist Front to start of vagina or end of testicles. (&apos;Crotch length&apos; - &apos;Crotch length, back&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dal Centro Vita Davanti fino all&apos;inizio della vulva o alla fine dei testicoli. (&apos;Altezza Cavallo&apos; - &apos;Altezza Cavallo Dietro&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1864"/>
@@ -3840,13 +3840,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1881"/>
         <source>Vertical distance from Waist Back to Crotch level. (&apos;Height: Waist Back&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altezza dal centro Vita Dietro fino all&apos;Altezza Cavallo (&apos;Altezza: Centro Vita Dietro&apos; - &apos;Gamba: dal Cavallo al Pavimento&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1888"/>
         <source>Vertical Distance from Waist Front to Crotch level. (&apos;Height: Waist Front&apos; - &apos;Leg: Crotch to Floor&apos;)</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Altezza dal centro Vita Davanti fino all&apos;Altezza Cavall (&apos;Altezza: Centro Vita Davanti&apos; - &apos;Gamba: dal Cavallo al Pavimento&apos;)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1892"/>
@@ -3859,6 +3859,11 @@
         <source>Rise length, side</source>
         <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From Waist Side down to surface, while seated on hard surface.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="vanished">Dal Lato della Vita fino alla superficie, mentre si è seduti su una superficie dura.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1871"/>
@@ -3891,6 +3896,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Vertical distance from Waist Back to Crotch level.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="vanished">Altezza dal Centro Vita Dietro fino all&apos;Altezza Cavallo</translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1885"/>
         <source>rise_length_f</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -3901,6 +3911,11 @@
         <source>Rise length, front</source>
         <comment>Full measurement name.</comment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical Distance from Waist Front to Crotch level.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="vanished">Altezza dal Centro Vita Davanti fino all&apos;Altezza Cavallo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1911"/>
@@ -3942,13 +3957,13 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1925"/>
         <source>waist_natural_circ</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>circ_vita_naturale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1927"/>
         <source>Natural Waist circumference</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Circonferenza Vita Naturale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="1928"/>
@@ -4374,44 +4389,44 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2129"/>
         <source>dart_width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ampiezza_pince_spalla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2131"/>
         <source>Dart Width: Shoulder</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ampiezza Pince: Spalla</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2132"/>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2140"/>
         <source>This information is pulled from pattern charts in some patternmaking systems, e.g. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</source>
         <comment>Full measurement description.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Quest&apos;informazione è stata presa da modelli di alcuni sistemi di modellazione, es. Winifred P. Aldrich&apos;s &quot;Metric Pattern Cutting&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2137"/>
         <source>dart_width_bust</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ampiezza_pince_seno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2139"/>
         <source>Dart Width: Bust</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ampiezza Pince: Seno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2145"/>
         <source>dart_width_waist</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
-        <translation type="unfinished"></translation>
+        <translation>ampiezza_pince_vita</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="2147"/>
         <source>Dart Width: Waist</source>
         <comment>Full measurement name.</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ampiezza pince: Vita</translation>
     </message>
 </context>
 </TS>

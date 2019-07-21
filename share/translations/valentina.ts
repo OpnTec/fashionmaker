@@ -51,6 +51,20 @@
     </message>
 </context>
 <context>
+    <name>ChangeGroupVisibility</name>
+    <message>
+        <source>change group visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChangeMultipleGroupsVisibility</name>
+    <message>
+        <source>change multiple groups visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CommunityPage</name>
     <message>
         <source>Server</source>
@@ -3311,6 +3325,18 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nest quantity of copies according to piece settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nest quantity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8314,6 +8340,30 @@ Do you want to save your changes?</translation>
         <source>Groups of visibility</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export recipe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Globally hide pieces main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipe files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>recipe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save recipe. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -9118,6 +9168,78 @@ This option will take an affect after restart.</source>
         <source>Based on Qt %1 (%2, %3 bit)</source>
         <translation>Based on Qt %1 (%2, %3 bit)</translation>
     </message>
+    <message>
+        <source>VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VLayoutPassmark compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VRawLayoutData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLine prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLine compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VPieceNodeData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -9321,6 +9443,18 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot cast tool with id &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10896,6 +11030,14 @@ Do you want to save your changes?</translation>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Controls priority in layout. 0 - no priority.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPins</name>
@@ -12076,6 +12218,14 @@ Do you want to save your changes?</translation>
         <source>Сoefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Follow manual priority over priority by square (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nest quantity copies of each piece (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VCommonSettings</name>
@@ -12711,6 +12861,21 @@ Do you want to save your changes?</translation>
     <message>
         <source>Error restoring backup file: %1.</source>
         <translation type="vanished">Error restoring backup file: %1.</translation>
+    </message>
+</context>
+<context>
+    <name>VPatternRecipe</name>
+    <message>
+        <source>Invalid tag %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t find element by id &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15312,6 +15477,22 @@ Do you want to save your changes?</translation>
     <message>
         <source>Delete</source>
         <translation>Delete</translation>
+    </message>
+    <message>
+        <source>Hide</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
