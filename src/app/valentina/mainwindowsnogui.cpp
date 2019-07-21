@@ -1114,6 +1114,7 @@ QList<QGraphicsScene *> MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem
                                                        const QList<QList<QGraphicsItem *> > &details)
 {
     QList<QGraphicsScene *> scenes;
+    scenes.reserve(papers.size());
     for (int i=0; i<papers.size(); ++i)
     {
         auto *scene = new VMainGraphicsScene();
