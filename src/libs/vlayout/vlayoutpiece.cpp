@@ -1317,7 +1317,7 @@ void VLayoutPiece::SetMirror(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
 {
-    if (i < 1 || i > path.count())
+    if (i < 1)
     { // Doesn't exist such edge
         return QLineF();
     }
@@ -1336,11 +1336,8 @@ QLineF VLayoutPiece::Edge(const QVector<QPointF> &path, int i) const
 
     if (d->mirror)
     {
-        const int oldI1 = i1;
-        const int size = path.size()-1; //-V807
-        i1 = size - i2;
-        i2 = size - oldI1;
-        return QLineF(d->matrix.map(path.at(i2)), d->matrix.map(path.at(i1)));
+        QVector<QPointF> newPath = Map(path);
+        return QLineF(newPath.at(i1), newPath.at(i2));
     }
     else
     {
