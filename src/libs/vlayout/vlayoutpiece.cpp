@@ -1361,9 +1361,14 @@ int VLayoutPiece::EdgeByPoint(const QVector<QPointF> &path, const QPointF &p1) c
     const QVector<QPointF> points = Map(path);
     for (int i=0; i < points.size(); i++)
     {
-        if (points.at(i) == p1)
+        if (VFuzzyComparePoints(points.at(i), p1))
         {
-            return i+1;
+            int pos = i+1;
+            if (pos > points.size())
+            {
+                pos = 1;
+            }
+            return pos;
         }
     }
     return 0; // Did not find edge
