@@ -245,6 +245,18 @@ void DialogLayoutSettings::SetFollowGrainline(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::GetManualPriority() const
+{
+    return ui->checkBoxManualPriority->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetManualPriority(bool state)
+{
+    ui->checkBoxManualPriority->setChecked(state);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::GetAutoCrop() const
 {
     return ui->checkBoxAutoCrop->isChecked();
@@ -572,6 +584,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetNestingTime(GetNestingTime());
     generator->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
     generator->SetFollowGrainline(GetFollowGrainline());
+    generator->SetManualPriority(GetManualPriority());
     generator->SetAutoCrop(GetAutoCrop());
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
@@ -662,6 +675,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetLayoutWidth(VSettings::GetDefLayoutWidth());
     SetGroup(VSettings::GetDefLayoutGroup());
     SetFollowGrainline(VSettings::GetDefLayoutFollowGrainline());
+    SetManualPriority(VSettings::GetDefLayoutManualPriority());
     SetFields(GetDefPrinterFields());
     SetIgnoreAllFields(VSettings::GetDefIgnoreAllFields());
     SetMultiplier(VSettings::GetDefMultiplier());
@@ -988,6 +1002,7 @@ void DialogLayoutSettings::ReadSettings()
     SheetSize(QSizeF(width, height));
     SetGroup(settings->GetLayoutGroup());
     SetFollowGrainline(settings->GetLayoutFollowGrainline());
+    SetManualPriority(settings->GetLayoutManualPriority());
     SetAutoCrop(settings->GetLayoutAutoCrop());
     SetSaveLength(settings->GetLayoutSaveLength());
     SetUnitePages(settings->GetLayoutUnitePages());
@@ -1013,6 +1028,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutPaperHeight(GetPaperHeight());
     settings->SetLayoutPaperWidth(GetPaperWidth());
     settings->SetLayoutFollowGrainline(GetFollowGrainline());
+    settings->SetLayoutManualPriority(GetManualPriority());
     settings->SetLayoutAutoCrop(GetAutoCrop());
     settings->SetLayoutSaveLength(IsSaveLength());
     settings->SetLayoutUnitePages(IsUnitePages());

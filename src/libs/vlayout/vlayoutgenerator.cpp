@@ -729,6 +729,18 @@ void VLayoutGenerator::SetFollowGrainline(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::GetManualPriority() const
+{
+    return bank->GetManualPriority();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetManualPriority(bool value)
+{
+    bank->SetManualPriority(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::IsNestQuantity() const
 {
     return bank->IsNestQuantity();

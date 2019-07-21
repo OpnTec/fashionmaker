@@ -57,6 +57,9 @@ public:
     qreal GetLayoutWidth() const;
     void SetLayoutWidth(qreal value);
 
+    bool GetManualPriority() const;
+    void SetManualPriority(bool value);
+
     bool IsNestQuantity() const;
     void SetNestQuantity(bool value);
 
@@ -99,6 +102,7 @@ private:
     bool prepare;
     qreal diagonal;
     bool m_nestQuantity{false};
+    bool m_manualPriority{false};
 
     void PrepareGroup();
 

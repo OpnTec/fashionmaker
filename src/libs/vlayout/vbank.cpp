@@ -179,6 +179,18 @@ void VBank::SetLayoutWidth(qreal value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VBank::GetManualPriority() const
+{
+    return m_manualPriority;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VBank::SetManualPriority(bool value)
+{
+    m_manualPriority = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VBank::IsNestQuantity() const
 {
     return m_nestQuantity;
@@ -324,7 +336,7 @@ bool VBank::PrepareUnsorted()
             prepare = false;
             return prepare;
         }
-        const uint group = details.at(i).GetPriority();
+        const uint group = m_manualPriority ? details.at(i).GetPriority() : 0;
         uniqueGroup.insert(group);
         Insert(unsorted, group, i, square);
     }

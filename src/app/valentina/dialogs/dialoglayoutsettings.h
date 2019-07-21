@@ -74,6 +74,9 @@ public:
     bool GetFollowGrainline() const;
     void SetFollowGrainline(bool state);
 
+    bool GetManualPriority() const;
+    void SetManualPriority(bool state);
+
     bool GetAutoCrop() const;
     void SetAutoCrop(bool autoCrop);
 
