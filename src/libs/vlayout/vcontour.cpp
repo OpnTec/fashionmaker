@@ -221,8 +221,10 @@ QLineF VContour::GlobalEdge(int i) const
             return EmptySheetEdge();
         }
 
-        const qreal nShift = EmptySheetEdge().length()/GlobalEdgesCount();
-        edge = IsPortrait() ? QLineF(nShift*(i-1), 0, nShift*i, 0) : QLineF(0, nShift*(i-1), 0, nShift*i);
+        const QLineF emptyEdge = EmptySheetEdge();
+        const qreal nShift = emptyEdge.length()/GlobalEdgesCount();
+        edge = IsPortrait() ? QLineF(nShift*(i-1), emptyEdge.y1(), nShift*i, emptyEdge.y2()) :
+                              QLineF(emptyEdge.x1(), nShift*(i-1), emptyEdge.x2(), nShift*i);
     }
     else
     {
@@ -379,8 +381,8 @@ bool VContour::IsPortrait() const
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VContour::EmptySheetEdge() const
 {
-    static const int offset = 2;
-    const int layoutOffset = qCeil(d->layoutWidth + accuracyPointOnLine);
+    const int offset = qRound(accuracyPointOnLine*4.);
+    const int layoutOffset = qCeil(d->layoutWidth - accuracyPointOnLine*4.);
     return IsPortrait() ? QLineF(offset, -layoutOffset, d->paperWidth-offset, -layoutOffset) :
                           QLineF(-layoutOffset, offset, -layoutOffset, d->paperHeight-offset);
 }
