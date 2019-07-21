@@ -57,6 +57,43 @@ void AppendToContour(QVector<QPointF> &contour, QPointF point)
         contour.append(point);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> OptimizeCombining(const QVector<QPointF> &contour, const QPointF &withdrawEnd)
+{
+    if (contour.size() < 2)
+    {
+        return contour;
+    }
+
+    QPointF withdrawFirst = contour.last();
+    bool optimize = false;
+    int count = 0;
+    int cutIndex = -1;
+
+    for (int i = contour.size() - 2; i >= 0; --i)
+    {
+        if (not VGObject::IsPointOnLineSegment(contour.at(i), withdrawFirst, withdrawEnd, accuracyPointOnLine*2))
+        {
+            optimize = true;
+            cutIndex = i+1;
+            break;
+        }
+        else
+        {
+            ++count;
+        }
+    }
+
+    if (optimize && count > 0)
+    {
+        return contour.mid(0, cutIndex+1);
+    }
+    else
+    {
+        return contour;
+    }
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -306,6 +343,9 @@ void VContour::AppendWhole(QVector<QPointF> &contour, const VLayoutPiece &detail
     int processedEdges = 0;
     const int nD = detail.LayoutEdgesCount();
     int j = detJ;
+
+    contour = OptimizeCombining(contour, detail.LayoutEdge(j).p2());
+
     do
     {
         if (j >= nD)
@@ -329,6 +369,9 @@ void VContour::InsertDetail(QVector<QPointF> &contour, const VLayoutPiece &detai
     int processedEdges = 0;
     const int nD = detail.LayoutEdgesCount();
     int j = detJ;
+
+    contour = OptimizeCombining(contour, detail.LayoutEdge(j).p2());
+
     do
     {
         if (j >= nD)

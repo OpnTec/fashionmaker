@@ -450,12 +450,12 @@ void VGObject::LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c
  *
  * Original idea http://www.sunshine2k.de/coding/java/PointOnLine/PointOnLine.html
  */
-bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2)
+bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
-    auto InsideRange = [](qreal p1, qreal p2, qreal t)
+    auto InsideRange = [accuracy](qreal p1, qreal p2, qreal t)
     {        
         return not ( not ((p1 <= t && t <= p2) || (p2 <= t && t <= p1))
-                     && not (qAbs(p1 - t) <= accuracyPointOnLine) && not (qAbs(p2 - t) <= accuracyPointOnLine));
+                     && not (qAbs(p1 - t) <= accuracy) && not (qAbs(p2 - t) <= accuracy));
     };
 
     if (not InsideRange(p1.x(), p2.x(), t.x()))
@@ -469,7 +469,7 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
     }
 
     // Test via the perp dot product (PDP)
-    return IsPointOnLineviaPDP(t, p1, p2);
+    return IsPointOnLineviaPDP(t, p1, p2, accuracy);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
