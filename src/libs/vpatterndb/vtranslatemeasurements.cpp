@@ -362,9 +362,9 @@ void VTranslateMeasurements::InitGroupA()
     m = translate("VTranslateMeasurements", "height_waist_back",
                   "Name in a formula. Don't use math symbols and space in name!!!!");
     g = translate("VTranslateMeasurements", "Height: Waist Back", "Full measurement name.");
-    d = translate("VTranslateMeasurements", "Vertical height from Waist Back to floor. ('Height: Waist Front'' - "
-                  "'Leg: Crotch to floor'').", "Full measurement description.");
-    InitMeasurement(heightWaistBack_M, m, g, d, "A23", "(height_waist_front - leg_crotch_to_floor)");
+    d = translate("VTranslateMeasurements", "Vertical height from Waist Back to floor.", "Full measurement description.");
+    InitMeasurement(heightWaistBack_M, m, g, d, "A23");
+
     //=================================================================================================================
 }
 
