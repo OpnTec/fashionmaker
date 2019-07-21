@@ -332,7 +332,30 @@ QGraphicsPathItem *VLayoutPaper::GetGlobalContour() const
         path.addEllipse(point.x()-radius, point.y()-radius, radius*2, radius*2);
     }
 
-    return new QGraphicsPathItem(path);
+    for (int i=0; i < points.size()-1; ++i)
+    {
+        QLineF line(points.at(i), points.at(i+1));
+        line.setLength(line.length()/2);
+
+        path.moveTo(line.p2());
+        QLineF side1(line.p2(), line.p1());
+        side1.setAngle(side1.angle()+35);
+        side1.setLength(3);
+        path.lineTo(side1.p2());
+
+        path.moveTo(line.p2());
+        QLineF side2(line.p2(), line.p1());
+        side2.setAngle(side2.angle()-35);
+        side2.setLength(3);
+        path.lineTo(side2.p2());
+    }
+
+    QGraphicsPathItem *item = new QGraphicsPathItem(path);
+    QPen pen = item->pen();
+    pen.setWidthF(0.25);
+    item->setPen(pen);
+
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
