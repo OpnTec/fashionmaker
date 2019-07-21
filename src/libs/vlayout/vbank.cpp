@@ -147,6 +147,18 @@ bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint,
     }
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+int TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority)
+{
+    const QHash<int, qint64> priorityGroup = container.value(priority);
+    if (not priorityGroup.isEmpty())
+    {
+        return priorityGroup.constBegin().key();
+    }
+
+    return -1;
+}
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -541,9 +553,7 @@ void VBank::PrepareDescGroup(uint priority)
 //---------------------------------------------------------------------------------------------------------------------
 int VBank::GetNextThreeGroups(uint priority) const
 {
-    int next = -1;
-
-    next = TakeFirstForPriority(big, priority);
+    int next = TakeFirstForPriority(big, priority);
     if (next != -1)
     {
         return next;
@@ -562,9 +572,7 @@ int VBank::GetNextThreeGroups(uint priority) const
 //---------------------------------------------------------------------------------------------------------------------
 int VBank::GetNextTwoGroups(uint priority) const
 {
-    int next = -1;
-
-    next = TakeFirstForPriority(big, priority);
+    int next = TakeFirstForPriority(big, priority);
     if (next != -1)
     {
         return next;
@@ -609,18 +617,6 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const
         }
         ++i;
     }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VBank::TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority) const
-{
-    const QHash<int, qint64> priorityGroup = container.value(priority);
-    if (not priorityGroup.isEmpty())
-    {
-        return priorityGroup.constBegin().key();
-    }
-
-    return -1;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

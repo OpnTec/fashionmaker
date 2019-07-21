@@ -115,7 +115,6 @@ private:
     int GetNextDescGroup(uint priority) const;
 
     void SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const;
-    int  TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint priority) const;
 
     bool ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i);
     bool ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i);
