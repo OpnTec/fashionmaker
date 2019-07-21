@@ -240,14 +240,7 @@ bool VPosition::CheckCombineEdges(VLayoutPiece &detail, int j, int &dEdge)
 
     if (flagMirror && not detail.IsForbidFlipping())
     {
-        if (m_data.gContour.GetContour().isEmpty())
-        {
-            dEdge = detail.DetailEdgeByPoint(globalEdge.p2());
-        }
-        else
-        {
-            dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
-        }
+        dEdge = detail.LayoutEdgeByPoint(globalEdge.p2());
 
         if (dEdge <= 0)
         {
@@ -367,15 +360,7 @@ bool VPosition::SheetContains(const QRectF &rect) const
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge)
 {
-    QLineF detailEdge;
-    if (m_data.gContour.GetContour().isEmpty())
-    {
-        detailEdge = detail.DetailEdge(dEdge);
-    }
-    else
-    {
-        detailEdge = detail.LayoutEdge(dEdge);
-    }
+    QLineF detailEdge = detail.LayoutEdge(dEdge);
 
     // Find distance between two edges for two begin vertex.
     const qreal dx = globalEdge.x2() - detailEdge.x2();
@@ -396,24 +381,9 @@ void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const
 {
-    QLineF detailEdge;
-    if (m_data.gContour.GetContour().isEmpty())
-    {
-        detailEdge = detail.DetailEdge(dEdge);
-    }
-    else
-    {
-        detailEdge = detail.LayoutEdge(dEdge);
-    }
-
-    // Find distance between two edges for two begin vertex.
-    const qreal dx = globalEdge.x2() - detailEdge.x2();
-    const qreal dy = globalEdge.y2() - detailEdge.y2();
-
-    detailEdge.translate(dx, dy); // Use values for translate detail edge.
-
+    QLineF detailEdge = detail.LayoutEdge(dEdge);
     // Now we move detail to position near to global contour edge.
-    detail.Translate(dx, dy);
+    detail.Translate(globalEdge.x2() - detailEdge.x2(), globalEdge.y2() - detailEdge.y2());
     detail.Rotate(globalEdge.p2(), angle);
 }
 

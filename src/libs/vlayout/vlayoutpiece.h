@@ -133,10 +133,7 @@ public:
     int    DetailEdgesCount() const;
     int    LayoutEdgesCount() const;
 
-    QLineF DetailEdge(int i) const;
     QLineF LayoutEdge(int i) const;
-
-    int    DetailEdgeByPoint(const QPointF &p1) const;
     int    LayoutEdgeByPoint(const QPointF &p1) const;
 
     QRectF DetailBoundingRect() const;

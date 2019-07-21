@@ -857,21 +857,9 @@ int VLayoutPiece::LayoutEdgesCount() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QLineF VLayoutPiece::DetailEdge(int i) const
-{
-    return Edge(DetailPath(), i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 QLineF VLayoutPiece::LayoutEdge(int i) const
 {
     return Edge(d->layoutAllowance, i);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-int VLayoutPiece::DetailEdgeByPoint(const QPointF &p1) const
-{
-    return EdgeByPoint(DetailPath(), p1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
