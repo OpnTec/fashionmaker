@@ -49,6 +49,8 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../ifc/exception/vexception.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"

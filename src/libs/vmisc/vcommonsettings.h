@@ -38,8 +38,6 @@
 #include <QStringList>
 #include <QtGlobal>
 
-#include "../vlayout/vbank.h"
-
 class VCommonSettings : public QSettings
 {
     Q_OBJECT

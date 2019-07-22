@@ -29,10 +29,10 @@
 #ifndef VABSTRACTLAYOUTDIALOG_H
 #define VABSTRACTLAYOUTDIALOG_H
 
-#include "../ifc/ifcdef.h"
-
 #include <QComboBox>
 #include <QDialog>
+
+enum class Unit : char;
 
 class VAbstractLayoutDialog : public QDialog
 {

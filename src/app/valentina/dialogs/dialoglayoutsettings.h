@@ -33,8 +33,6 @@
 #include <QMargins>
 
 #include "vabstractlayoutdialog.h"
-#include "../vlayout/vbank.h"
-#include "../ifc/ifcdef.h"
 
 namespace Ui
 {
@@ -42,6 +40,7 @@ namespace Ui
 }
 
 class VLayoutGenerator;
+enum class Cases : char;
 
 class DialogLayoutSettings : public VAbstractLayoutDialog
 {

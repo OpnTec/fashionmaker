@@ -51,6 +51,7 @@
 #include "../vmisc/vmath.h"
 #include "dxiface.h"
 #include "../vlayout/vlayoutpiece.h"
+#include "../vgeometry/vgeometrydef.h"
 
 static const qreal AAMATextHeight = 2.5;
 

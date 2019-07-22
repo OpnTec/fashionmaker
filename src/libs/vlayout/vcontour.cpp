@@ -39,6 +39,8 @@
 #include "vcontour_p.h"
 #include "vlayoutpiece.h"
 #include "../vmisc/vmath.h"
+#include "../vgeometry/vgeometrydef.h"
+#include "../vgeometry/vgobject.h"
 
 namespace
 {

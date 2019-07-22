@@ -41,6 +41,7 @@
 class VCommandLine;
 using VCommandLinePtr = std::shared_ptr<VCommandLine>;
 using VLayoutGeneratorPtr = std::shared_ptr<VLayoutGenerator>;
+enum class PageOrientation : bool;
 
 //@brief: class used to install export command line options and parse their values
 //QCommandLineParser* object must exists until this object alive

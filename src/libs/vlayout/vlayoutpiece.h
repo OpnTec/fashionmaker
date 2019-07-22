@@ -40,19 +40,21 @@
 #include <QTypeInfo>
 #include <QVector>
 #include <QtGlobal>
+#include <QCoreApplication>
 
-#include "../ifc/xml/vabstractpattern.h"
-#include "../vpatterndb/floatItemData/vpatternlabeldata.h"
-#include "../vpatterndb/floatItemData/vpiecelabeldata.h"
-#include "../vpatterndb/vcontainer.h"
 #include "vabstractpiece.h"
-#include "../vgeometry/vgeometrydef.h"
+#include "../vmisc/typedef.h"
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
 class QGraphicsItem;
 class QGraphicsPathItem;
 class VTextManager;
+class VPiece;
+class VPieceLabelData;
+class VAbstractPattern;
+class VPatternLabelData;
+enum class ArrowType : char;
 
 class VLayoutPiece :public VAbstractPiece
 {

@@ -43,6 +43,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vlayout/vbank.h"
 
 Q_DECLARE_METATYPE(QMarginsF)
 
@@ -124,6 +125,30 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <class T>
+inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(defValue));
+    return val.canConvert<T>() ? val.value<T>() : defValue;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <>
+inline Cases VSettings::ValueOrDef<Cases>(const QString &setting, const Cases &defValue) const
+{
+    const QVariant val = value(setting, QVariant::fromValue(static_cast<int>(defValue)));
+    const int g = val.canConvert<int>() ? val.value<int>() : static_cast<int>(defValue);
+    if (g < static_cast<int>(Cases::CaseThreeGroup) || g >= static_cast<int>(Cases::UnknownCase))
+    {
+        return defValue;
+    }
+    else
+    {
+        return static_cast<Cases>(g);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetLabelLanguage() const
 {
     return value(*settingConfigurationLabelLanguage, QLocale().bcp47Name()).toString();
@@ -138,7 +163,7 @@ void VSettings::SetLabelLanguage(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QString VSettings::GetDefPathLayout()
 {
-    return QDir::homePath() + QLatin1String("/valentina/") + tr("layouts");
+    return QDir::homePath() + QStringLiteral("/valentina/") + tr("layouts");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

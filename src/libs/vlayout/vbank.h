@@ -34,6 +34,7 @@
 #include <QRectF>
 #include <QVector>
 #include <QtGlobal>
+#include <QLoggingCategory>
 
 #include "../vmisc/typedef.h"
 
@@ -44,6 +45,8 @@
 #pragma push_macro("small")
 #undef small
 #endif
+
+Q_DECLARE_LOGGING_CATEGORY(lBank)
 
 class VLayoutPiece;
 

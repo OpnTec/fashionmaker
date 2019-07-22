@@ -54,6 +54,7 @@
 #include "../vwidgets/vnobrushscalepathitem.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../qmuparser/qmutokenparser.h"
+#include "../vlayout/vlayoutdef.h"
 
 #include <QFuture>
 #include <QtConcurrent/QtConcurrentRun>

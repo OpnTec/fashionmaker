@@ -34,6 +34,8 @@
 #include "../vmisc/vabstractapplication.h"
 #include "vlayoutpiece.h"
 #include "vlayoutdef.h"
+#include "../ifc/exception/vexception.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
