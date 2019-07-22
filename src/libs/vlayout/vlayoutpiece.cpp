@@ -853,7 +853,8 @@ int VLayoutPiece::DetailEdgesCount() const
 //---------------------------------------------------------------------------------------------------------------------
 int VLayoutPiece::LayoutEdgesCount() const
 {
-    return d->layoutAllowance.count();
+    const int count = d->layoutAllowance.count();
+    return count > 2 ? count : 0;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1119,14 +1120,14 @@ qreal VLayoutPiece::BiggestEdge() const
 {
     qreal edge = 0;
 
-    if (d->layoutAllowance.size() < 2)
+    if (LayoutEdgesCount() < 1)
     {
         return edge;
     }
 
-    for (int i = 1; i < d->layoutAllowance.size() - 1; ++i)
+    for (int i = 1; i < LayoutEdgesCount(); ++i)
     {
-        const qreal length = QLineF(d->layoutAllowance.at(i-1), d->layoutAllowance.at(i)).length();
+        const qreal length = LayoutEdge(i).length();
         if (length > edge)
         {
             edge = length;
