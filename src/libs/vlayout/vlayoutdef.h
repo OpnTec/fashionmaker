@@ -108,4 +108,10 @@ struct VBestSquareResData
     qreal         sidePosition{0};
 };
 
+struct VCachedPositions
+{
+    QRectF boundingRect{};
+    QPainterPath layoutAllowancePath{};
+};
+
 #endif // VLAYOUTDEF_H

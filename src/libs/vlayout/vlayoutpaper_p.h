@@ -72,7 +72,7 @@ public:
     /** @brief details list of arranged details. */
     QVector<VLayoutPiece> details{};
 
-    QVector<QPainterPath> positionsCache{};
+    QVector<VCachedPositions> positionsCache{};
 
     /** @brief globalContour list of global points contour. */
     VContour globalContour{};
