@@ -1315,7 +1315,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 
     QPainterPath path;
 
-    if ((not qApp->Settings()->IsPieceHideMainPath() && not detail.IsHideMainPath()) || not detail.IsSeamAllowance()
+    if (qApp->Settings()->IsPieceShowMainPath() || not detail.IsHideMainPath() || not detail.IsSeamAllowance()
             || detail.IsSeamAllowanceBuiltIn())
     {
         m_mainPath = QPainterPath();

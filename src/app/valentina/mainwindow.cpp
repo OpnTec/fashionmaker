@@ -3066,7 +3066,7 @@ void MainWindow::Clear()
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
-    ui->actionHideMainPath->setEnabled(false);
+    ui->actionShowMainPath->setEnabled(false);
     ui->actionLoadIndividual->setEnabled(false);
     ui->actionLoadMultisize->setEnabled(false);
     ui->actionUnloadMeasurements->setEnabled(false);
@@ -3443,7 +3443,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBestCurrent->setEnabled(enable && drawStage);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enable && drawStage);
-    ui->actionHideMainPath->setEnabled(enable && detailsStage);
+    ui->actionShowMainPath->setEnabled(enable && detailsStage);
     ui->actionLoadIndividual->setEnabled(enable && designStage);
     ui->actionLoadMultisize->setEnabled(enable && designStage);
     ui->actionUnloadMeasurements->setEnabled(enable && designStage);
@@ -4496,10 +4496,10 @@ void MainWindow::CreateActions()
         qApp->ValentinaSettings()->SetShowCurveDetails(checked);
     });
 
-    ui->actionHideMainPath->setChecked(qApp->ValentinaSettings()->IsPieceHideMainPath());
-    connect(ui->actionHideMainPath, &QAction::triggered, this, [this](bool checked)
+    ui->actionShowMainPath->setChecked(qApp->ValentinaSettings()->IsPieceShowMainPath());
+    connect(ui->actionShowMainPath, &QAction::triggered, this, [this](bool checked)
     {
-        qApp->ValentinaSettings()->SetPieceHideMainPath(checked);
+        qApp->ValentinaSettings()->SetPieceShowMainPath(checked);
         const QList<quint32> ids = pattern->DataPieces()->keys();
         const bool updateChildren = false;
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));

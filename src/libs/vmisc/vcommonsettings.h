@@ -210,8 +210,8 @@ public:
     bool IsShowCurveDetails() const;
     void SetShowCurveDetails(bool value);
 
-    bool IsPieceHideMainPath() const;
-    void SetPieceHideMainPath(bool value);
+    bool IsPieceShowMainPath() const;
+    void SetPieceShowMainPath(bool value);
 
     static qreal DefaultLineWidth();
     static qreal MinimalLineWidth();

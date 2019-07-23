@@ -76,7 +76,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFont, (QLatin1String
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, (QLatin1String("pattern/lineWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale, (QLatin1String("pattern/curveApproximationScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, (QLatin1String("pattern/showCurveDetails")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceHideMainPath, (QLatin1String("pattern/pieceHideMainPath")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, (QLatin1String("pattern/pieceShowMainPath")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, (QLatin1String("pattern/labelFontSize")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, (QLatin1String("pattern/hideLabels")))
 
@@ -108,7 +108,7 @@ qreal curveApproximationCached = -1;
 Q_GLOBAL_STATIC(QString, localeCached)
 qreal lineWidthCached = 0;
 int labelFontSizeCached = 0;
-int pieceHideMainPath = -1;
+int pieceShowMainPath = -1;
 
 //---------------------------------------------------------------------------------------------------------------------
 QStringList ClearFormats(const QStringList &predefinedFormats, QStringList formats)
@@ -1148,20 +1148,20 @@ void VCommonSettings::SetShowCurveDetails(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VCommonSettings::IsPieceHideMainPath() const
+bool VCommonSettings::IsPieceShowMainPath() const
 {
-    if (pieceHideMainPath < 0)
+    if (pieceShowMainPath < 0)
     {
-        pieceHideMainPath = value(*settingPatternPieceHideMainPath, 0).toInt();
+        pieceShowMainPath = value(*settingPatternPieceShowMainPath, 0).toInt();
     }
-    return pieceHideMainPath;
+    return pieceShowMainPath;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetPieceHideMainPath(bool value)
+void VCommonSettings::SetPieceShowMainPath(bool value)
 {
-    pieceHideMainPath = value;
-    setValue(*settingPatternPieceHideMainPath, pieceHideMainPath);
+    pieceShowMainPath = value;
+    setValue(*settingPatternPieceShowMainPath, pieceShowMainPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
