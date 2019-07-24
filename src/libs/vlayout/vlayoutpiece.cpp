@@ -1180,7 +1180,11 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             }
 
             QString qsText = tl.m_qsText;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            if (fm.horizontalAdvance(qsText) > dW)
+#else
             if (fm.width(qsText) > dW)
+#endif
             {
                 qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
             }
@@ -1190,11 +1194,19 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             }
             else if ((tl.m_eAlign & Qt::AlignHCenter) > 0)
             {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                dX = (dW - fm.horizontalAdvance(qsText))/2;
+#else
                 dX = (dW - fm.width(qsText))/2;
+#endif
             }
             else
             {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                dX = dW - fm.horizontalAdvance(qsText);
+#else
                 dX = dW - fm.width(qsText);
+#endif
             }
 
             // set up the rotation around top-left corner matrix

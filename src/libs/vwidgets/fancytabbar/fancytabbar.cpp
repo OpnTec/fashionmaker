@@ -78,7 +78,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
     boldFont.setBold(true);
     QFontMetrics fm(boldFont);
     int spacing = 8;
-    int width = 60 + spacing + 2;
+
     int maxLabelwidth = 0;
     for (int tab=0 ; tab<Count() ;++tab)
     {
@@ -92,7 +92,11 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
             {
                 sentence = sentence.isEmpty() ? sentence = word : sentence + QLatin1Char(' ') + word;
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+                const int width = fm.horizontalAdvance(sentence);
+#else
                 const int width = fm.width(sentence);
+#endif
                 if (maxLabelwidth < width)
                 {
                     maxLabelwidth = width;
@@ -102,7 +106,11 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         }
         else
         {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            const int width = fm.horizontalAdvance(tabText);
+#else
             const int width = fm.width(tabText);
+#endif
             if (width > maxLabelwidth)
             {
                 maxLabelwidth = width;
@@ -110,6 +118,7 @@ QSize FancyTabBar::TabSizeHint(bool minimum) const
         }
 
     }
+    int width = 60 + spacing + 2;
     int iconHeight = minimum ? 0 : 32;
 
     return QSize(qMax(width, maxLabelwidth + 4), iconHeight + spacing + fm.height());

@@ -431,7 +431,11 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
         fnt.setBold(tl.m_bold);
         fnt.setItalic(tl.m_italic);
         QFontMetrics fm(fnt);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+        const int iTW = fm.horizontalAdvance(tl.m_qsText);
+#else
         const int iTW = fm.width(tl.m_qsText);
+#endif
         if (iTW > iMaxLen)
         {
             iMaxLen = iTW;
@@ -450,7 +454,11 @@ void VTextManager::FitFontSize(qreal fW, qreal fH)
             --iFS;
             fnt.setPixelSize(iFS + maxLine.m_iFontSize);
             QFontMetrics fm(fnt);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            lineLength = fm.horizontalAdvance(maxLine.m_qsText);
+#else
             lineLength = fm.width(maxLine.m_qsText);
+#endif
         }
         while (lineLength > fW && iFS > MIN_FONT_SIZE);
     }
