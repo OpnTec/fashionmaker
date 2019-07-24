@@ -60,7 +60,7 @@ namespace
  * @param dRot rectangle rotation
  * @return bounding box around rectBB rotated by dRot
  */
-QRectF GetBoundingRect(QRectF rectBB, qreal dRot)
+QRectF GetBoundingRect(const QRectF &rectBB, qreal dRot)
 {
     QPointF apt[4] = { rectBB.topLeft(), rectBB.topRight(), rectBB.bottomLeft(), rectBB.bottomRight() };
     QPointF ptCenter = rectBB.center();
