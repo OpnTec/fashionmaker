@@ -486,6 +486,7 @@ void VLayoutGenerator::GatherPages()
     }
 
     QVector<VLayoutPaper> nPapers;
+    nPapers.reserve(nDetails.size());
     for (int i = 0; i < nDetails.size(); ++i)
     {
         VLayoutPaper paper(PageHeight(), PageWidth(), bank->GetLayoutWidth());
@@ -588,6 +589,7 @@ void VLayoutGenerator::UnitePages()
     }
 
     QVector<VLayoutPaper> nPapers;
+    nPapers.reserve(nDetails.size());
     for (int i = 0; i < nDetails.size(); ++i)
     {
         const int height = IsPortrait() ? qRound(papersLength.at(i)+accuracyPointOnLine*4) : PageHeight();
