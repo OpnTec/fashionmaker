@@ -214,7 +214,7 @@ QPixmap QPixmapFromCache(const QString &pixmapPath)
 {
     QPixmap pixmap;
 
-    if (not QPixmapCache::find(pixmapPath, pixmap))
+    if (not QPixmapCache::find(pixmapPath, &pixmap))
     {
         pixmap = QPixmap(pixmapPath);
         QPixmapCache::insert(pixmapPath, pixmap);

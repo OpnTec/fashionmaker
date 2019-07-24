@@ -130,7 +130,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon, const QRect &rect, QPain
     QPixmap cache;
     QString pixmapName = QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
-    if (!QPixmapCache::find(pixmapName, cache))
+    if (!QPixmapCache::find(pixmapName, &cache))
     {
         // High-dpi support: The in parameters (rect, radius, offset) are in
         // device-independent pixels. The call to QIcon::pixmap() below might
