@@ -99,7 +99,7 @@ DialogRotation::DialogRotation(const VContainer *data, quint32 toolId, QWidget *
         timerAngle->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogRotation::DeployAngleTextEdit);
-    connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
             this, &DialogRotation::PointChanged);
 
     vis = new VisToolRotation(data);

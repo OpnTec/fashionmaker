@@ -80,7 +80,7 @@ DialogFlippingByAxis::DialogFlippingByAxis(const VContainer *data, quint32 toolI
     ui->comboBoxOriginPoint->setCurrentIndex(-1);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByAxis::SuffixChanged);
-    connect(ui->comboBoxOriginPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxOriginPoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByAxis::PointChanged);
 
     vis = new VisToolFlippingByAxis(data);

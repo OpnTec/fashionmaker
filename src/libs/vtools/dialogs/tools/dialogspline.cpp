@@ -113,9 +113,9 @@ DialogSpline::DialogSpline(const VContainer *data, quint32 toolId, QWidget *pare
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    connect(ui->comboBoxP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1, &QComboBox::currentTextChanged,
             this, &DialogSpline::PointNameChanged);
-    connect(ui->comboBoxP4, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP4, &QComboBox::currentTextChanged,
             this, &DialogSpline::PointNameChanged);
 
     connect(ui->toolButtonExprAngle1, &QPushButton::clicked, this, &DialogSpline::FXAngle1);

@@ -96,11 +96,11 @@ DialogPointOfContact::DialogPointOfContact(const VContainer *data, quint32 toolI
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogPointOfContact::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
             this, &DialogPointOfContact::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
             this, &DialogPointOfContact::PointNameChanged);
-    connect(ui->comboBoxCenter, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCenter, &QComboBox::currentTextChanged,
             this, &DialogPointOfContact::PointNameChanged);
 
     vis = new VisToolPointOfContact(data);

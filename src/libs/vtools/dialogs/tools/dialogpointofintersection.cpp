@@ -71,9 +71,9 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, qui
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersection::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersection::PointNameChanged);
 
     vis = new VisToolPointOfIntersection(data);

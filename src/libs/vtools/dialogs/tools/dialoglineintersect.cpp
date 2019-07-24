@@ -82,13 +82,13 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, quint32 toolId,
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxP1Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line1, &QComboBox::currentTextChanged,
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line1, &QComboBox::currentTextChanged,
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP1Line2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line2, &QComboBox::currentTextChanged,
             this, &DialogLineIntersect::PointNameChanged);
-    connect(ui->comboBoxP2Line2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line2, &QComboBox::currentTextChanged,
             this, &DialogLineIntersect::PointNameChanged);
 
     vis = new VisToolLineIntersect(data);

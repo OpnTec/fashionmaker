@@ -108,9 +108,9 @@ DialogNormal::DialogNormal(const VContainer *data, quint32 toolId, QWidget *pare
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
             this, &DialogNormal::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
             this, &DialogNormal::PointNameChanged);
 
     vis = new VisToolNormal(data);

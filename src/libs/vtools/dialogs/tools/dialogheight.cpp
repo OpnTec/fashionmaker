@@ -82,11 +82,11 @@ DialogHeight::DialogHeight(const VContainer *data, quint32 toolId, QWidget *pare
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxBasePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxBasePoint, &QComboBox::currentTextChanged,
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged,
             this, &DialogHeight::PointNameChanged);
-    connect(ui->comboBoxP2Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged,
             this, &DialogHeight::PointNameChanged);
 
     vis = new VisToolHeight(data);

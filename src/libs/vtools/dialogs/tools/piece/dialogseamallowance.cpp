@@ -3067,9 +3067,9 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxDLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxDLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxDLTopLeftPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxDLTopLeftPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::DetailPinPointChanged);
-    connect(uiTabLabels->comboBoxDLBottomRightPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxDLBottomRightPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::DetailPinPointChanged);
 
     connect(uiTabLabels->pushButtonDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
@@ -3098,9 +3098,9 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxPLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxPLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxPLTopLeftPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxPLTopLeftPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::PatternPinPointChanged);
-    connect(uiTabLabels->comboBoxPLBottomRightPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabLabels->comboBoxPLBottomRightPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::PatternPinPointChanged);
 
     connect(uiTabLabels->pushButtonPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
@@ -3150,9 +3150,9 @@ void DialogSeamAllowance::InitGrainlineTab()
     InitPinPoint(uiTabGrainline->comboBoxGrainlineTopPin);
     InitPinPoint(uiTabGrainline->comboBoxGrainlineBottomPin);
 
-    connect(uiTabGrainline->comboBoxGrainlineTopPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabGrainline->comboBoxGrainlineTopPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
-    connect(uiTabGrainline->comboBoxGrainlineBottomPin, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(uiTabGrainline->comboBoxGrainlineBottomPin, &QComboBox::currentTextChanged,
             this, &DialogSeamAllowance::GrainlinePinPointChanged);
 }
 

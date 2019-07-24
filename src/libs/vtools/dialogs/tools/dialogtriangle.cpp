@@ -73,13 +73,13 @@ DialogTriangle::DialogTriangle(const VContainer *data, quint32 toolId, QWidget *
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP1, &QComboBox::currentTextChanged,
             this, &DialogTriangle::PointNameChanged);
-    connect(ui->comboBoxAxisP2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxAxisP2, &QComboBox::currentTextChanged,
             this, &DialogTriangle::PointNameChanged);
 
     vis = new VisToolTriangle(data);

@@ -98,11 +98,11 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, quint32 toolId,
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogShoulderPoint::DeployFormulaTextEdit);
-    connect(ui->comboBoxP1Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged,
             this, &DialogShoulderPoint::PointNameChanged);
-    connect(ui->comboBoxP2Line, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged,
             this, &DialogShoulderPoint::PointNameChanged);
-    connect(ui->comboBoxP3, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP3, &QComboBox::currentTextChanged,
             this, &DialogShoulderPoint::PointNameChanged);
 
     vis = new VisToolShoulderPoint(data);

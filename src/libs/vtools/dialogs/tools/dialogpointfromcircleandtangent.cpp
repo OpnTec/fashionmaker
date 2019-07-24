@@ -88,7 +88,7 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxCircleCenter, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircleCenter, &QComboBox::currentTextChanged,
             this, &DialogPointFromCircleAndTangent::PointChanged);
 
     connect(ui->toolButtonExprRadius, &QPushButton::clicked, this,

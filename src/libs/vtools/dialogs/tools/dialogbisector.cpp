@@ -98,11 +98,11 @@ DialogBisector::DialogBisector(const VContainer *data, quint32 toolId, QWidget *
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogBisector::DeployFormulaTextEdit);
-    connect(ui->comboBoxFirstPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged,
             this, &DialogBisector::PointNameChanged);
-    connect(ui->comboBoxSecondPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged,
             this, &DialogBisector::PointNameChanged);
-    connect(ui->comboBoxThirdPoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxThirdPoint, &QComboBox::currentTextChanged,
             this, &DialogBisector::PointNameChanged);
 
     vis = new VisToolBisector(data);

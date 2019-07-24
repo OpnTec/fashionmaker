@@ -97,9 +97,9 @@ DialogPointOfIntersectionCircles::DialogPointOfIntersectionCircles(const VContai
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxCircle1Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircle1Center, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersectionCircles::PointChanged);
-    connect(ui->comboBoxCircle2Center, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCircle2Center, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersectionCircles::PointChanged);
 
     connect(ui->toolButtonExprCircle1Radius, &QPushButton::clicked, this,

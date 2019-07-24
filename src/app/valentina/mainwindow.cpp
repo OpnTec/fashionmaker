@@ -1939,7 +1939,7 @@ void MainWindow::ToolBarOption()
         // set default height
         SetDefaultHeight();
 
-        connect(gradationHeights.data(), QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+        connect(gradationHeights.data(), &QComboBox::currentTextChanged,
                 this, &MainWindow::ChangedHeight);
 
         gradationSizesLabel = new QLabel(tr("Size:"), this);
@@ -1948,7 +1948,7 @@ void MainWindow::ToolBarOption()
         // set default size
         SetDefaultSize();
 
-        connect(gradationSizes.data(), QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+        connect(gradationSizes.data(), &QComboBox::currentTextChanged,
                 this, &MainWindow::ChangedSize);
 
         ui->toolBarOption->addSeparator();

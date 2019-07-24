@@ -78,9 +78,9 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
-    connect(ui->comboBoxFirstLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxFirstLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
-    connect(ui->comboBoxSecondLinePoint, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
 
     vis = new VisToolFlippingByLine(data);

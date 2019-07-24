@@ -63,13 +63,13 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, quint32 toolId, QWi
 
     ui->doubleSpinBoxApproximationScale->setMaximum(maxCurveApproximationScale);
 
-    connect(ui->comboBoxP1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP1, &QComboBox::currentTextChanged,
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP2, &QComboBox::currentTextChanged,
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP3, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP3, &QComboBox::currentTextChanged,
             this, &DialogCubicBezier::PointNameChanged);
-    connect(ui->comboBoxP4, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxP4, &QComboBox::currentTextChanged,
             this, &DialogCubicBezier::PointNameChanged);
 
     vis = new VisToolCubicBezier(data);

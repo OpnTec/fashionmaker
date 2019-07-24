@@ -68,9 +68,9 @@ DialogPointOfIntersectionCurves::DialogPointOfIntersectionCurves(const VContaine
         CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
         CheckState();
     });
-    connect(ui->comboBoxCurve1, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCurve1, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersectionCurves::CurveChanged);
-    connect(ui->comboBoxCurve2, QOverload<const QString &>::of(&QComboBox::currentIndexChanged),
+    connect(ui->comboBoxCurve2, &QComboBox::currentTextChanged,
             this, &DialogPointOfIntersectionCurves::CurveChanged);
 
     vis = new VisToolPointOfIntersectionCurves(data);
