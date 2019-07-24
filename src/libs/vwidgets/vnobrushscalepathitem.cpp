@@ -63,7 +63,7 @@ void VNoBrushScalePathItem::paint(QPainter *painter, const QStyleOptionGraphicsI
      * opposite of the item.
      */
     QBrush brush = this->brush();
-    brush.setMatrix(painter->combinedMatrix().inverted());
+    brush.setTransform(painter->combinedTransform().inverted());
     this->setBrush(brush);
 
     QPen toolPen = pen();
