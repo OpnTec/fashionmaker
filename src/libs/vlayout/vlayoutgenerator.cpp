@@ -438,9 +438,10 @@ void VLayoutGenerator::GatherPages()
 
     for (int i = 0; i < papers.size(); ++i)
     {
+        const QRectF rec = papers.at(i).DetailsBoundingRect();
         if (IsPortrait())
         {
-            int paperHeight = qRound(papers.at(i).DetailsBoundingRect().height());
+            int paperHeight = qRound(rec.y() + rec.height());
 
             if (i != papers.size()-1)
             {
@@ -462,7 +463,7 @@ void VLayoutGenerator::GatherPages()
         }
         else
         {
-            int paperWidth = qRound(papers.at(i).DetailsBoundingRect().width());
+            int paperWidth = qRound(rec.x() + rec.width());
 
             if (i != papers.size()-1)
             {
@@ -523,7 +524,8 @@ void VLayoutGenerator::UnitePages()
             int paperHeight = 0;
             if (autoCrop)
             {
-                paperHeight = qCeil(papers.at(i).DetailsBoundingRect().height());
+                const QRectF rec = papers.at(i).DetailsBoundingRect();
+                paperHeight = qRound(rec.y() + rec.height());
             }
             else
             {
@@ -555,7 +557,8 @@ void VLayoutGenerator::UnitePages()
             int paperWidth = 0;
             if (autoCrop)
             {
-                paperWidth = qCeil(papers.at(i).DetailsBoundingRect().width());
+                const QRectF rec = papers.at(i).DetailsBoundingRect();
+                paperWidth = qRound(rec.x() + rec.width());
             }
             else
             {
@@ -587,8 +590,8 @@ void VLayoutGenerator::UnitePages()
     QVector<VLayoutPaper> nPapers;
     for (int i = 0; i < nDetails.size(); ++i)
     {
-        const int height = IsPortrait() ? qCeil(papersLength.at(i)) : PageHeight();
-        const int width = IsPortrait() ? PageWidth() : qCeil(papersLength.at(i));
+        const int height = IsPortrait() ? qRound(papersLength.at(i)+accuracyPointOnLine*4) : PageHeight();
+        const int width = IsPortrait() ? PageWidth() : qRound(papersLength.at(i)+accuracyPointOnLine*4);
 
         VLayoutPaper paper(height, width, bank->GetLayoutWidth());
         paper.SetShift(shift);
