@@ -482,7 +482,11 @@ QVector<T> VLayoutPiece::Map(QVector<T> points) const
         QList<T> list = points.toList();
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+            list.swapItemsAt(k, s-(1+k));
+#else
             list.swap(k, s-(1+k));
+#endif
         }
         points = list.toVector();
     }
