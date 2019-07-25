@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "30 March, 2019" "valentina man page"
+.TH valentina 1 "21 July, 2019" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -25,8 +25,8 @@ The path to output destination folder. By default the directory at which the app
 .RB "Path to custom measure file (" "export mode" ")."
 .IP "-n, --time <Time>"
 .RB "<Time> in minutes given for the algorithm to find best layout (" "export mode" "). Time must be in range from 1 minute to 60 minutes. Default value 1 minute."
-.IP "--сoefficient <Coefficient>"
-.RB "Set layout efficiency coefficient (" "export mode" "). Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0."
+.IP "--coefficient <Coefficient>"
+.RB "Set layout efficiency coefficient (" "export mode" "). Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0."
 .IP "-f, --format <Format number>" 
 .RB "Number corresponding to output format (default = 0, " "export mode" "):" 
 .RS 
@@ -188,6 +188,10 @@ The path to output destination folder. By default the directory at which the app
 .RB "Page bottom margin in current units like 3.0 (" "export mode" "). If not set will be used value from default printer. Or 0 if none printers was found."
 .IP "--followGrainline"
 .RB "Order detail to follow grainline direction (" "export mode" ").
+.IP "--manualPriority"
+.RB "Follow manual priority over priority by square (" "export mode" ").
+.IP "--nestQuantity"
+.RB "Nest quantity copies of each piece (" "export mode" ").
 .IP "-c, --crop"
 .RB "Auto crop unused length (" "export mode" ")."
 .IP "-u, --unite"
