@@ -102,7 +102,7 @@ a unique pattern making tool.
 %setup -q -n %{name}-%{version}
 
 %build
-%if 0%{?suse_version} >= 1315 && %{?suse_version} != 1550
+%if 0%{?suse_version} >= 1315 && 0%{?suse_version} != 1550
 qmake-qt5 PREFIX=%{_prefix} PREFIX_LIB=%{_prefix}/%{_lib} LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
 %else
 
