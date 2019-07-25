@@ -163,45 +163,60 @@ unix{
         desktop.files += ../../../dist/tape.desktop
 
         # logo
-        hicolor_48.path = $$PREFIX/share/icons/hicolor/48x48/apps/
-        hicolor_48.files += \
-            ../../../share/icons/48x48/$${TARGET}.png \
-            ../../../share/icons/48x48/tape.png \
-            ../../../share/icons/48x48/application-x-valentina-pattern.png \
-            ../../../share/icons/48x48/application-x-valentina-i-measurements.png \
-            ../../../share/icons/48x48/application-x-valentina-s-measurements.png
+        hicolor_48_apps.path = $$PREFIX/share/icons/hicolor/48x48/apps/
+        hicolor_48_apps.files += \
+            ../../../share/icons/48x48/apps/$${TARGET}.png \
+            ../../../share/icons/48x48/apps/tape.png
 
-        hicolor_64.path = $$PREFIX/share/icons/hicolor/64x64/apps/
-        hicolor_64.files += \
-            ../../../share/icons/64x64/$${TARGET}.png \
-            ../../../share/icons/64x64/tape.png \
-            ../../../share/icons/64x64/application-x-valentina-pattern.png \
-            ../../../share/icons/64x64/application-x-valentina-i-measurements.png \
-            ../../../share/icons/64x64/application-x-valentina-s-measurements.png
+        hicolor_48_mimetypes.path = $$PREFIX/share/icons/hicolor/48x48/mimetypes/
+        hicolor_48_mimetypes.files += \
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-pattern.png \
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-i-measurements.png \
+            ../../../share/icons/48x48/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_128.path = $$PREFIX/share/icons/hicolor/128x128/apps/
-        hicolor_128.files += \
-            ../../../share/icons/128x128/$${TARGET}.png \
-            ../../../share/icons/128x128/tape.png \
-            ../../../share/icons/128x128/application-x-valentina-pattern.png \
-            ../../../share/icons/128x128/application-x-valentina-i-measurements.png \
-            ../../../share/icons/128x128/application-x-valentina-s-measurements.png
+        hicolor_64_apps.path = $$PREFIX/share/icons/hicolor/64x64/apps/
+        hicolor_64_apps.files += \
+            ../../../share/icons/64x64/apps/$${TARGET}.png \
+            ../../../share/icons/64x64/apps/tape.png
 
-        hicolor_256.path = $$PREFIX/share/icons/hicolor/256x256/apps/
-        hicolor_256.files += \
-            ../../../share/icons/256x256/$${TARGET}.png \
-            ../../../share/icons/256x256/tape.png \
-            ../../../share/icons/256x256/application-x-valentina-pattern.png \
-            ../../../share/icons/256x256/application-x-valentina-i-measurements.png \
-            ../../../share/icons/256x256/application-x-valentina-s-measurements.png
+        hicolor_64_mimetypes.path = $$PREFIX/share/icons/hicolor/64x64/mimetypes/
+        hicolor_64_mimetypes.files += \
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-pattern.png \
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-i-measurements.png \
+            ../../../share/icons/64x64/mimetypes/application-x-valentina-s-measurements.png
 
-        hicolor_512.path = $$PREFIX/share/icons/hicolor/512x512/apps/
-        hicolor_512.files += \
-            ../../../share/icons/512x512/$${TARGET}.png \
-            ../../../share/icons/512x512/tape.png \
-            ../../../share/icons/512x512/application-x-valentina-pattern.png \
-            ../../../share/icons/512x512/application-x-valentina-i-measurements.png \
-            ../../../share/icons/512x512/application-x-valentina-s-measurements.png
+        hicolor_128_apps.path = $$PREFIX/share/icons/hicolor/128x128/apps/
+        hicolor_128_apps.files += \
+            ../../../share/icons/128x128/apps/$${TARGET}.png \
+            ../../../share/icons/128x128/apps/tape.png
+
+        hicolor_128_mimetypes.path = $$PREFIX/share/icons/hicolor/128x128/mimetypes/
+        hicolor_128_mimetypes.files += \
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-pattern.png \
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-i-measurements.png \
+            ../../../share/icons/128x128/mimetypes/application-x-valentina-s-measurements.png
+
+        hicolor_256_apps.path = $$PREFIX/share/icons/hicolor/256x256/apps/
+        hicolor_256_apps.files += \
+            ../../../share/icons/256x256/apps/$${TARGET}.png \
+            ../../../share/icons/256x256/apps/tape.png
+
+        hicolor_256_mimetypes.path = $$PREFIX/share/icons/hicolor/256x256/mimetypes/
+        hicolor_256_mimetypes.files += \
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-pattern.png \
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-i-measurements.png \
+            ../../../share/icons/256x256/mimetypes/application-x-valentina-s-measurements.png
+
+        hicolor_512_apps.path = $$PREFIX/share/icons/hicolor/512x512/apps/
+        hicolor_512_apps.files += \
+            ../../../share/icons/512x512/apps/$${TARGET}.png \
+            ../../../share/icons/512x512/apps/tape.png
+
+        hicolor_512_mimetypes.path = $$PREFIX/share/icons/hicolor/512x512/mimetypes/
+        hicolor_512_mimetypes.files += \
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-pattern.png \
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-i-measurements.png \
+            ../../../share/icons/512x512/mimetypes/application-x-valentina-s-measurements.png
 
         # Path to translation files after installation
         translations.path = $$PREFIX/share/$${TARGET}/translations/
@@ -223,11 +238,16 @@ unix{
             target \
             tape \
             desktop \
-            hicolor_48 \
-            hicolor_64 \
-            hicolor_128 \
-            hicolor_256 \
-            hicolor_512 \
+            hicolor_48_apps \
+            hicolor_48_mimetypes \
+            hicolor_64_apps \
+            hicolor_64_mimetypes \
+            hicolor_128_apps \
+            hicolor_128_mimetypes \
+            hicolor_256_apps \
+            hicolor_256_mimetypes \
+            hicolor_512_apps \
+            hicolor_512_mimetypes \
             translations \
             multisize \
             templates \

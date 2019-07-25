@@ -140,14 +140,20 @@ cp dist/debian/valentina.mime dist/debian/%{name} &&
 
 %post 
 /sbin/ldconfig
-/usr/bin/update-desktop-database &> /dev/null || :
-/bin/touch --no-create %{_datadir}/mime/packages &>/dev/null || :
+update-desktop-database &> /dev/null ||:
+update-mime-database %{_datadir}/mime &> /dev/null || :
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+fi
 
 %postun
 /sbin/ldconfig
-/usr/bin/update-desktop-database &> /dev/null || :
-if [ $1 -eq 0 ] ; then
-  /usr/bin/update-mime-database %{_datadir}/mime &> /dev/null || :
+update-desktop-database &> /dev/null ||:
+update-mime-database %{_datadir}/mime &> /dev/null || :
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+  %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
 fi
 
 %posttrans
@@ -160,7 +166,8 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc README.txt LICENSE_GPL.txt 
+%doc README.txt 
+%license LICENSE_GPL.txt 
 %doc %{_mandir}/man1/%{name}.1*
 %doc %{_mandir}/man1/tape.1*
 %{_bindir}/valentina
@@ -169,29 +176,45 @@ fi
 %{_libdir}/libvpropertyexplorer.so.*
 %{_libdir}/libqmuparser.so
 %{_libdir}/libqmuparser.so.*
-%dir %{_libdir}/mime
-%dir %{_libdir}/mime/packages
+%dir %{_libdir}/mime/
+%dir %{_libdir}/mime/packages/
 %{_libdir}/mime/packages/%{name}
-%dir %{_datadir}/mime
-%dir %{_datadir}/mime/packages
+%dir %{_datadir}/mime/
+%dir %{_datadir}/mime/packages/
 %{_datadir}/mime/packages/%{name}.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/tape.desktop
-%{_datadir}/icons/hicolor/48x48/apps/*
-%{_datadir}/icons/hicolor/64x64/apps/*
-%{_datadir}/icons/hicolor/128x128/apps/*
-%{_datadir}/icons/hicolor/256x256/apps/*
-%{_datadir}/icons/hicolor/512x512/apps/*
-%dir %{_datadir}/%{name}
+
+%dir %{_datadir}/icons/
+%dir %{_datadir}/icons/hicolor/
+%dir %{_datadir}/icons/hicolor/48x48/
+%dir %{_datadir}/icons/hicolor/48x48/apps/
+%dir %{_datadir}/icons/hicolor/48x48/mimetypes/
+%dir %{_datadir}/icons/hicolor/64x64/
+%dir %{_datadir}/icons/hicolor/64x64/apps/
+%dir %{_datadir}/icons/hicolor/64x64/mimetypes/
+%dir %{_datadir}/icons/hicolor/128x128/
+%dir %{_datadir}/icons/hicolor/128x128/apps/
+%dir %{_datadir}/icons/hicolor/128x128/mimetypes/
+%dir %{_datadir}/icons/hicolor/256x256/
+%dir %{_datadir}/icons/hicolor/256x256/apps/
+%dir %{_datadir}/icons/hicolor/256x256/mimetypes/
+%dir %{_datadir}/icons/hicolor/512x512/
+%dir %{_datadir}/icons/hicolor/512x512/apps/
+%dir %{_datadir}/icons/hicolor/512x512/mimetypes/
+%{_datadir}/icons/hicolor/*/apps/*.png
+%{_datadir}/icons/hicolor/*/mimetypes/*.png
+
+%dir %{_datadir}/%{name}/
 %{_datadir}/%{name}/diagrams.rcc
-%dir %{_datadir}/%{name}/translations
+%dir %{_datadir}/%{name}/translations/
 %{_datadir}/%{name}/translations/*.qm
-%dir %{_datadir}/%{name}/tables
-%dir %{_datadir}/%{name}/tables/multisize
+%dir %{_datadir}/%{name}/tables/
+%dir %{_datadir}/%{name}/tables/multisize/
 %{_datadir}/%{name}/tables/multisize/*.vst
-%dir %{_datadir}/%{name}/tables/templates
+%dir %{_datadir}/%{name}/tables/templates/
 %{_datadir}/%{name}/tables/templates/*.vit
-%dir %{_datadir}/%{name}/labels
+%dir %{_datadir}/%{name}/labels/
 %{_datadir}/%{name}/labels/*.xml
 
 %clean
