@@ -34,7 +34,7 @@
 class VAbstractPattern;
 class VContainer;
 class VPiece;
-class VWidgetGroups;
+class QTableWidgetItem;
 
 namespace Ui
 {
@@ -71,6 +71,7 @@ private:
 
     void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);
+    void ToggledPieceItem(QTableWidgetItem *item);
 };
 
 #endif // VWIDGETDETAILS_H

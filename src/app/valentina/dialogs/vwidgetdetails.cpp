@@ -28,7 +28,6 @@
 
 #include "vwidgetdetails.h"
 #include "ui_vwidgetdetails.h"
-#include "vwidgetdetails.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
@@ -88,19 +87,14 @@ void VWidgetDetails::SelectDetail(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ToggledPiece(quint32 id)
 {
-    const QHash<quint32, VPiece> *details = m_data->DataPieces();
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
         QTableWidgetItem *item = ui->tableWidget->item(row, 0);
 
-        if (item->data(Qt::UserRole).toUInt() == id)
+        if (item && item->data(Qt::UserRole).toUInt() == id)
         {
-            if (details->contains(id))
-            {
-                details->value(id).IsInLayout() ? item->setIcon(QIcon("://icon/16x16/allow_detail.png")) :
-                                                  item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
-            }
+            ToggledPieceItem(item);
             return;
         }
     }
@@ -205,7 +199,33 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
     }
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
+{
+    SCASSERT(item != nullptr)
 
+    quint32 id = item->data(Qt::UserRole).toUInt();
+    const QHash<quint32, VPiece> *details = m_data->DataPieces();
+
+    if (details->contains(id))
+    {
+        const bool inLayout = details->value(id).IsInLayout();
+        inLayout ? item->setIcon(QIcon("://icon/16x16/allow_detail.png"))
+                 : item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
+
+        VToolSeamAllowance *tool = nullptr;
+        try
+        {
+            tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
+        }
+        catch (VExceptionBadId &)
+        {
+            // do nothing
+        }
+
+        tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::ShowContextMenu(const QPoint &pos)
@@ -293,33 +313,11 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
  */
 void VWidgetDetails::on_checkBoxHideNotInLayout_stateChanged()
 {
-    //all details that were created and now they are in DocWidget
-    const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
-    //enable slot if shedule of details is not empty
-    if (not allDetails->isEmpty())
-    {//search the checked in layout items and make its visible or are not in layout make hidden once
-            for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
-            {
-                QTableWidgetItem *item = ui->tableWidget->item(i, 0);
-                const quint32 id = item->data(Qt::UserRole).toUInt();
-                if (item != nullptr)
-                {
-                    VToolSeamAllowance *tool = qobject_cast<VToolSeamAllowance*>(VAbstractPattern::getTool(id));
-                    if (tool != nullptr)
-                    {
-                        if (ui->checkBoxHideNotInLayout->isChecked())
-                        {
-                        (allDetails->value(id).IsInLayout())? tool->setVisible(true)
-                                                            : tool->setVisible(false);
-                        }
-                        else
-                        {
-                            tool->setVisible(true);
-                        }
-                    }
-                }
-           }
-     }
+    for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
+    {
+        if (QTableWidgetItem *item = ui->tableWidget->item(i, 0))
+        {
+            ToggledPieceItem(item);
+        }
+    }
 }
-
-
