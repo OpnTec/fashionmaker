@@ -135,27 +135,27 @@ void TST_ValentinaCommandLine::ExportMode_data() const
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
 
     QTest::newRow("Issue #372")<< "issue_372.val"
-                               << QString("-p;;0;;-d;;%1;;-b;;output;;--сoefficient;;1").arg(tmp)
+                               << QString("-p;;0;;-d;;%1;;-b;;output;;--coefficient;;1").arg(tmp)
                                << V_EX_OK;
 
     QTest::newRow("A file with limited gradation. Multisize measurements. Wrong data.")
             << "glimited_vst.val"
-            << QString("-p;;0;;-d;;%1;;--gsize;;46;;--gheight;;164;;-b;;output;;--сoefficient;;1").arg(tmp)
+            << QString("-p;;0;;-d;;%1;;--gsize;;46;;--gheight;;164;;-b;;output;;--coefficient;;1").arg(tmp)
             << V_EX_DATAERR;
 
     QTest::newRow("A file with limited gradation. Multisize measurements. Correct data.")
             << "glimited_vst.val"
-            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--сoefficient;;1").arg(tmp)
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--coefficient;;1").arg(tmp)
             << V_EX_OK;
 
     QTest::newRow("A file with limited gradation. Individual measurements.")
             << "glimited_vit.val"
-            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--сoefficient;;1").arg(tmp)
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--coefficient;;1").arg(tmp)
             << V_EX_DATAERR;
 
     QTest::newRow("A file with limited gradation. No measurements.")
             << "glimited_no_m.val"
-            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--сoefficient;;1").arg(tmp)
+            << QString("-p;;0;;-d;;%1;;--gsize;;40;;--gheight;;134;;-b;;output;;--coefficient;;1").arg(tmp)
             << V_EX_DATAERR;
 }
 

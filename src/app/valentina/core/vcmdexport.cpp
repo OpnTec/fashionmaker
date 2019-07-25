@@ -596,7 +596,7 @@ void VCommandLine::InitCommandLineOptions()
         {LONG_OPTION_EFFICIENCY_COEFFICIENT,
          translate("VCommandLine", "Set layout efficiency <coefficient>. Layout efficiency coefficient is the ratio of "
          "the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the "
-         "process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default "
+         "process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default "
          "value 0."),
          translate("VCommandLine", "Coefficient")},
         {{SINGLE_OPTION_EXP2FORMAT, LONG_OPTION_EXP2FORMAT},
@@ -795,7 +795,7 @@ qreal VCommandLine::OptEfficiencyCoefficient() const
 
         if (not ok || coefficient < 0 || coefficient > 100)
         {
-            qCritical() << translate("VCommandLine", "Сoefficient must be in range from 0 to 100.")
+            qCritical() << translate("VCommandLine", "Coefficient must be in range from 0 to 100.")
                         << "\n";
             const_cast<VCommandLine*>(this)->parser.showHelp(V_EX_USAGE);
         }

@@ -112,7 +112,7 @@ const QString SINGLE_OPTION_BOTTOM_MARGIN   = QStringLiteral("B");
 const QString LONG_OPTION_NESTING_TIME      = QStringLiteral("time");
 const QString SINGLE_OPTION_NESTING_TIME    = QStringLiteral("n");
 
-const QString LONG_OPTION_EFFICIENCY_COEFFICIENT  = QStringLiteral("сoefficient");
+const QString LONG_OPTION_EFFICIENCY_COEFFICIENT  = QStringLiteral("coefficient");
 
 const QString LONG_OPTION_CSVWITHHEADER = QStringLiteral("csvWithHeader");
 const QString LONG_OPTION_CSVCODEC      = QStringLiteral("csvCodec");
