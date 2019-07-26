@@ -72,6 +72,9 @@ private:
     void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);
     void ToggledPieceItem(QTableWidgetItem *item);
+
+    Q_REQUIRED_RESULT QTableWidgetItem *PrepareInLayoutColumnCell(const VPiece &det, quint32 id) const;
+    Q_REQUIRED_RESULT QTableWidgetItem *PreparePieceNameColumnCell(const VPiece &det) const;
 };
 
 #endif // VWIDGETDETAILS_H

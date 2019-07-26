@@ -37,6 +37,18 @@
 #include <QMenu>
 #include <QUndoStack>
 
+namespace
+{
+    enum PieceColumn
+    {
+        InLayout = 0,
+        PieceName = 1
+    };
+
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, allowDetailIcon, (QLatin1String("://icon/16x16/allow_detail.png")))
+    Q_GLOBAL_STATIC_WITH_ARGS(const QString, forbidDetailIcon, (QLatin1String("://icon/16x16/forbid_detail.png")))
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget *parent)
     : QWidget(parent),
@@ -74,7 +86,7 @@ void VWidgetDetails::SelectDetail(quint32 id)
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
 
         if (item->data(Qt::UserRole).toUInt() == id)
         {
@@ -90,7 +102,7 @@ void VWidgetDetails::ToggledPiece(quint32 id)
     const int rowCount = ui->tableWidget->rowCount();
     for (int row = 0; row < rowCount; ++row)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+        QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
 
         if (item && item->data(Qt::UserRole).toUInt() == id)
         {
@@ -103,7 +115,7 @@ void VWidgetDetails::ToggledPiece(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::InLayoutStateChanged(int row, int column)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+    QTableWidgetItem *item = ui->tableWidget->item(row, PieceColumn::InLayout);
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 
@@ -135,40 +147,11 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
         ++currentRow;
         const VPiece det = i.value();
 
-        QTableWidgetItem *item = new QTableWidgetItem();
-        item->setTextAlignment(Qt::AlignHCenter);
-        if (det.IsInLayout())
-        {
-            item->setIcon(QIcon("://icon/16x16/allow_detail.png"));
-        }
-        else
-        {
-            item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
-        }
-        item->setData(Qt::UserRole, i.key());
-        // set the item non-editable (view only), and non-selectable
-        Qt::ItemFlags flags = item->flags();
-        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
-
-        ui->tableWidget->setItem(currentRow, 0, item);
-
-        QString name = det.GetName();
-        if (name.isEmpty())
-        {
-            name = tr("Unnamed");
-        }
-
-        item = new QTableWidgetItem(name);
-        item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        flags = item->flags();
-        flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
-        item->setFlags(flags);
-
-        ui->tableWidget->setItem(currentRow, 1, item);
+        ui->tableWidget->setItem(currentRow, PieceColumn::InLayout, PrepareInLayoutColumnCell(det, i.key()));
+        ui->tableWidget->setItem(currentRow, PieceColumn::PieceName, PreparePieceNameColumnCell(det));
         ++i;
     }
-    ui->tableWidget->sortItems(1, Qt::AscendingOrder);
+    ui->tableWidget->sortItems(PieceColumn::PieceName, Qt::AscendingOrder);
     ui->tableWidget->resizeColumnsToContents();
     ui->tableWidget->resizeRowsToContents();
 
@@ -186,7 +169,7 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
 
     for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
     {
-        const quint32 id = ui->tableWidget->item(i, 0)->data(Qt::UserRole).toUInt();
+        const quint32 id = ui->tableWidget->item(i, PieceColumn::InLayout)->data(Qt::UserRole).toUInt();
         if (allDetails->contains(id))
         {
             if (not (select == allDetails->value(id).IsInLayout()))
@@ -210,8 +193,8 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
     if (details->contains(id))
     {
         const bool inLayout = details->value(id).IsInLayout();
-        inLayout ? item->setIcon(QIcon("://icon/16x16/allow_detail.png"))
-                 : item->setIcon(QIcon("://icon/16x16/forbid_detail.png"));
+        inLayout ? item->setIcon(QIcon(*allowDetailIcon))
+                 : item->setIcon(QIcon(*forbidDetailIcon));
 
         VToolSeamAllowance *tool = nullptr;
         try
@@ -225,6 +208,40 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
 
         tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTableWidgetItem *VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) const
+{
+    QTableWidgetItem *item = new QTableWidgetItem();
+    item->setTextAlignment(Qt::AlignHCenter);
+    item->setIcon(det.IsInLayout() ? QIcon(*allowDetailIcon) : QIcon(*forbidDetailIcon));
+    item->setData(Qt::UserRole, id);
+
+    // set the item non-editable (view only), and non-selectable
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTableWidgetItem *VWidgetDetails::PreparePieceNameColumnCell(const VPiece &det) const
+{
+    QString name = det.GetName();
+    if (name.isEmpty())
+    {
+        name = tr("Unnamed");
+    }
+
+    QTableWidgetItem *item = new QTableWidgetItem(name);
+    item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
+    // set the item non-editable (view only), and non-selectable
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -290,7 +307,7 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
 
         for (int i = 0; i<ui->tableWidget->rowCount(); ++i)
         {
-            QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+            QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout);
             const quint32 id = item->data(Qt::UserRole).toUInt();
             if (allDetails->contains(id))
             {
@@ -315,7 +332,7 @@ void VWidgetDetails::on_checkBoxHideNotInLayout_stateChanged()
 {
     for (int i = 0; i < ui->tableWidget->rowCount(); ++i)
     {
-        if (QTableWidgetItem *item = ui->tableWidget->item(i, 0))
+        if (QTableWidgetItem *item = ui->tableWidget->item(i, PieceColumn::InLayout))
         {
             ToggledPieceItem(item);
         }
