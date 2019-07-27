@@ -322,9 +322,11 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         shadows = CreateShadows(papers);
                         isLayoutPortrait = lGenerator.IsPortrait();
                         scenes = CreateScenes(papers, shadows, details);
+#if !defined(V_NO_ASSERT)
                        //Uncomment to debug, shows global contour
-                        gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
-                        InsertGlobalContours(scenes, gcontours); // uncomment for debugging
+//                        gcontours = lGenerator.GetGlobalContours(); // uncomment for debugging
+//                        InsertGlobalContours(scenes, gcontours); // uncomment for debugging
+#endif
                         if (VApplication::IsGUIMode())
                         {
                             PrepareSceneList(PreviewQuatilty::Fast);
