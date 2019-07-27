@@ -32,7 +32,6 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractapplication.h"
-#include "vlayoutpiece.h"
 #include "vlayoutdef.h"
 #include "../ifc/exception/vexception.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
@@ -95,7 +94,8 @@ int CountDetails(const T &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
+bool NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHash<int, qint64>> &unsorted,
+                       int i)
 {
     QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
     while (iterator.hasNext())
@@ -122,19 +122,20 @@ bool NotArrangedDetail(QMap<uint, QHash<int, qint64>> &container, QMap<uint, QHa
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint, QHash<int, qint64>> &unsorted, int i)
+bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint, QHash<int, qint64>> &unsorted,
+                       int i)
 {
     QMutableMapIterator<uint, QMultiMap<qint64, int>> iterator(container);
     while (iterator.hasNext())
     {
         iterator.next();
         auto containerGroup = container.value(iterator.key());
-        auto detailIterator = std::find(containerGroup.cbegin(), containerGroup.cend(), i);
-        if (detailIterator != containerGroup.cend())
+        auto detailIterator = std::find(containerGroup.begin(), containerGroup.end(), i);
+        if (detailIterator != containerGroup.end())
         {
             Insert(unsorted, iterator.key(), i, detailIterator.key());
+            containerGroup.erase(detailIterator);
 
-            containerGroup.remove(detailIterator.key());
             if (not containerGroup.isEmpty())
             {
                 container.insert(iterator.key(), containerGroup);
@@ -165,18 +166,6 @@ int TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint p
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
-    : details(),
-      unsorted(),
-      big(),
-      middle(),
-      small(),
-      desc(),
-      groups(),
-      arranged(),
-      layoutWidth(0),
-      caseType(Cases::CaseDesc),
-      prepare(false),
-      diagonal(0)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -622,7 +611,7 @@ void VBank::SqMaxMin(qint64 &sMax, qint64 &sMin, uint priority) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VBank::ArrangedDetail(QMap<uint, QHash<int, qint64>> &container, int i)
+bool VBank::ArrangedDetail(QMap<uint, QHash<int, qint64> > &container, int i)
 {
     QMutableMapIterator<uint, QHash<int, qint64>> iterator(container);
     while (iterator.hasNext())
@@ -655,11 +644,11 @@ bool VBank::ArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, int i)
     {
         iterator.next();
         auto containerGroup = container.value(iterator.key());
-        auto detailIterator = std::find(containerGroup.cbegin(), containerGroup.cend(), i);
-        if (detailIterator != containerGroup.cend())
+        auto detailIterator = std::find(containerGroup.begin(), containerGroup.end(), i);
+        if (detailIterator != containerGroup.end())
         {
             arranged.append(details.at(detailIterator.value()).GetId());
-            containerGroup.remove(detailIterator.key(), detailIterator.value());
+            containerGroup.erase(detailIterator);
 
             if (not containerGroup.isEmpty())
             {

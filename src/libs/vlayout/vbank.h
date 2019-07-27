@@ -37,6 +37,7 @@
 #include <QLoggingCategory>
 
 #include "../vmisc/typedef.h"
+#include "vlayoutpiece.h"
 
 // An annoying char define, from the Windows team in <rpcndr.h>
 // #define small char
@@ -47,8 +48,6 @@
 #endif
 
 Q_DECLARE_LOGGING_CATEGORY(lBank)
-
-class VLayoutPiece;
 
 enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
 
@@ -88,22 +87,22 @@ public:
 
 private:
     Q_DISABLE_COPY(VBank)
-    QVector<VLayoutPiece> details;
+    QVector<VLayoutPiece> details{};
 
-    QMap<uint, QHash<int, qint64>> unsorted;
-    QMap<uint, QHash<int, qint64>> big;
-    QMap<uint, QHash<int, qint64>> middle;
-    QMap<uint, QHash<int, qint64>> small;
-    QMap<uint, QMultiMap<qint64, int>> desc;
+    QMap<uint, QHash<int, qint64>> unsorted{};
+    QMap<uint, QHash<int, qint64>> big{};
+    QMap<uint, QHash<int, qint64>> middle{};
+    QMap<uint, QHash<int, qint64>> small{};
+    QMap<uint, QMultiMap<qint64, int>> desc{};
 
-    QVector<uint> groups;
-    QVector<vidtype> arranged;
+    QVector<uint> groups{};
+    QVector<vidtype> arranged{};
 
-    qreal layoutWidth;
+    qreal layoutWidth{0};
 
-    Cases caseType;
-    bool prepare;
-    qreal diagonal;
+    Cases caseType{Cases::CaseDesc};
+    bool prepare{false};
+    qreal diagonal{0};
     bool m_nestQuantity{false};
     bool m_manualPriority{false};
 
