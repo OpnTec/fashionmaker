@@ -146,7 +146,6 @@ bool NotArrangedDetail(QMap<uint, QMultiMap<qint64, int>> &container, QMap<uint,
             }
             return true;
         }
-        ++i;
     }
     return false;
 }
