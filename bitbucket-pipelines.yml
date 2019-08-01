@@ -8,7 +8,7 @@ pipelines:
     develop:
       - step:
           caches:
-            ccache
+            - ccache
           script:
             - cat /etc/*-release
             - uname -a
