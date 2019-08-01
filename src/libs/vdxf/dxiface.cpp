@@ -260,9 +260,9 @@ void dx_iface::AddAAMALayers()
     layer.color = DRW::black;
     cData.layers.push_back(layer);
 
-//    layer.name = "13";// DRILL
-//    layer.color = DRW::black;
-//    cData.layers.push_back(layer);
+    layer.name = "13";// DRILL
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
 
     layer.name = '4';// NOTCH
     layer.color = DRW::black;
