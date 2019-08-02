@@ -88,7 +88,7 @@ VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObj
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("0.1"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("0.1.0"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
