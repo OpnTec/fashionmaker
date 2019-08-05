@@ -26,6 +26,7 @@
 - New options to hide all/show all visibility groups.
 - New feature "Hide piece's main path".
 - Allow controlling priority selecting pieces in layout.
+- No scissors on tiled PDF bottom row.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

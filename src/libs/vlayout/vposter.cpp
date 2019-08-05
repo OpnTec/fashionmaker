@@ -80,6 +80,8 @@ QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientat
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const
 {
+    SCASSERT(parent != nullptr)
+
     QVector<QGraphicsItem *> data;
     QPen pen(Qt::NoBrush, 1, Qt::DashLine);
     pen.setColor(Qt::black);
@@ -97,7 +99,7 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
         line->setLine(rec.x(), rec.y(), rec.x(), rec.y() + rec.height());
         data.append(line);
 
-        auto *scissors = new QGraphicsPixmapItem(QPixmap("://scissors_vertical.png"), parent);
+        auto *scissors = new QGraphicsPixmapItem(QPixmap(QStringLiteral("://scissors_vertical.png")), parent);
         scissors->setPos(rec.x(), rec.y() + rec.height()-static_cast<int>(allowance));
         data.append(scissors);
     }
@@ -118,28 +120,17 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
         line->setLine(rec.x(), rec.y(), rec.x() + rec.width(), rec.y());
         data.append(line);
 
-        auto *scissors = new QGraphicsPixmapItem(QPixmap("://scissors_horizontal.png"), parent);
+        auto *scissors = new QGraphicsPixmapItem(QPixmap(QStringLiteral("://scissors_horizontal.png")), parent);
         scissors->setPos(rec.x() + rec.width()-static_cast<int>(allowance), rec.y());
         data.append(scissors);
     }
 
-    if (img.rows*img.columns > 1)
-    { // Don't show bottom border if only one page need
-        // Bottom border (mandatory)
-        auto *line = new QGraphicsLineItem(parent);
-        line->setPen(pen);
-        line->setLine(rec.x(), rec.y() + rec.height()-static_cast<int>(allowance),
-                      rec.x() + rec.width(), rec.y() + rec.height()-static_cast<int>(allowance));
-        data.append(line);
-
-        if (img.row == img.rows-1)
-        {
-            auto *scissors = new QGraphicsPixmapItem(QPixmap("://scissors_horizontal.png"), parent);
-            scissors->setPos(rec.x() + rec.width()-static_cast<int>(allowance),
-                             rec.y() + rec.height()-static_cast<int>(allowance));
-            data.append(scissors);
-        }
-    }
+    // Bottom border (mandatory)
+    auto *line = new QGraphicsLineItem(parent);
+    line->setPen(pen);
+    line->setLine(rec.x(), rec.y() + rec.height()-static_cast<int>(allowance),
+                  rec.x() + rec.width(), rec.y() + rec.height()-static_cast<int>(allowance));
+    data.append(line);
 
     // Labels
     auto *labels = new QGraphicsTextItem(parent);
