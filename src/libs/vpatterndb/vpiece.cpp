@@ -285,6 +285,15 @@ QPainterPath VPiece::SeamAllowancePath(const QVector<QPointF> &points) const
                 ekv.lineTo(points.at(i));
             }
 
+#if !defined(V_NO_ASSERT)
+            // uncomment for debug
+//            for (qint32 i = 0; i < points.count(); ++i)
+//            {
+//                ekv.addEllipse(points.at(i).x()-accuracyPointOnLine, points.at(i).y()-accuracyPointOnLine,
+//                               accuracyPointOnLine*2., accuracyPointOnLine*2.);
+//            }
+#endif
+
             ekv.setFillRule(Qt::WindingFill);
         }
     }
