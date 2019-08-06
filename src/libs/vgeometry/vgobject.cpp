@@ -473,6 +473,24 @@ bool VGObject::IsPointOnLineSegment(const QPointF &t, const QPointF &p1, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VGObject::IsLineSegmentOnLineSegment(const QLineF &seg1, const QLineF &seg2, qreal accuracy)
+{
+    const bool onLine = IsPointOnLineviaPDP(seg1.p1(), seg2.p1(), seg2.p2(), accuracy) &&
+            IsPointOnLineviaPDP(seg1.p2(), seg2.p1(), seg2.p2(), accuracy);
+    if (onLine)
+    {
+        return IsPointOnLineSegment(seg1.p1(), seg2.p1(), seg2.p2(), accuracy) ||
+                IsPointOnLineSegment(seg1.p2(), seg2.p1(), seg2.p2(), accuracy) ||
+                IsPointOnLineSegment(seg2.p1(), seg1.p1(), seg1.p2(), accuracy) ||
+                IsPointOnLineSegment(seg2.p2(), seg1.p1(), seg1.p2(), accuracy);
+    }
+    else
+    {
+        return onLine;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2)
 {
     if (not VFuzzyComparePoints(p1, p2))

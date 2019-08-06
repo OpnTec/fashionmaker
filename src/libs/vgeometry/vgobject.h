@@ -98,6 +98,8 @@ public:
     static void    LineCoefficients(const QLineF &line, qreal *a, qreal *b, qreal *c);
     static bool    IsPointOnLineSegment (const QPointF &t, const QPointF &p1, const QPointF &p2,
                                          qreal accuracy = accuracyPointOnLine);
+    static bool    IsLineSegmentOnLineSegment (const QLineF &seg1, const QLineF &seg2,
+                                               qreal accuracy = accuracyPointOnLine);
     static QPointF CorrectDistortion(const QPointF &t, const QPointF &p1, const QPointF &p2);
     static bool    IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, 
                                        qreal accuracy = accuracyPointOnLine);
