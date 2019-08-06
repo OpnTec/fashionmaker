@@ -1289,8 +1289,9 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
  * @param width global seam allowance width.
  * @return seam aloowance points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, VSAPoint p2Line1,
-                                          const VSAPoint &p1Line2, VSAPoint p2Line2, qreal width, bool *needRollback)
+QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+                                          const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
+                                          bool *needRollback)
 {
     if (width < 0)
     { // width can't be < 0
