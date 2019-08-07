@@ -801,9 +801,10 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
         if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
                 || label.type == PlaceLabelType::Circle)
         {
+            const QPointF center = detail.GetMatrix().map(label.center);
             DRW_Point *point = new DRW_Point();
-            point->basePoint = DRW_Coord(FromPixel(label.center.x(), varInsunits),
-                                         FromPixel(getSize().height() - label.center.y(), varInsunits), 0);
+            point->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
+                                         FromPixel(getSize().height() - center.y(), varInsunits), 0);
             point->layer = "13";
 
             detailBlock->ent.push_back(point);
