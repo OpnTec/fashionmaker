@@ -46,14 +46,241 @@
 #include <QVector>
 #include <QtGlobal>
 #include <QLineF>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 #include "vsysexits.h"
 #include "../vgeometry/vgobject.h"
+#include "../vlayout/vabstractpiece.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AbstractTest::AbstractTest(QObject *parent) :
     QObject(parent)
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::VectorFromJson(const QString &json, QVector<QPointF>& vector)
+{
+    QFile loadFile(json);
+    if (not loadFile.open(QIODevice::ReadOnly))
+    {
+        const QString error = QStringLiteral("Couldn't open json file. %1").arg(loadFile.errorString());
+        QFAIL(qUtf8Printable(error));
+    }
+
+    QByteArray saveData = loadFile.readAll();
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+
+    const QString vectorKey = QStringLiteral("vector");
+    const QString typeKey = QStringLiteral("type");
+    const QString xKey = QStringLiteral("x");
+    const QString yKey = QStringLiteral("y");
+
+    QJsonObject vectorObject = loadDoc.object();
+    if (not vectorObject.contains(vectorKey))
+    {
+        const QString error = QStringLiteral("Invalid json file '%1'. File doesn't contain root object.").arg(json);
+        QFAIL(qUtf8Printable(error));
+    }
+
+    QJsonArray vectorArray = loadDoc.object()[vectorKey].toArray();
+    for (int i = 0; i < vectorArray.size(); ++i)
+    {
+        QJsonObject pointObject = vectorArray[i].toObject();
+
+        if (not pointObject.contains(typeKey))
+        {
+            const QString error = QStringLiteral("Invalid json file '%1'. Json object doesn't provide class type.")
+                    .arg(json);
+            QFAIL(qUtf8Printable(error));
+        }
+
+        if (pointObject[typeKey].toString() != QLatin1String("QPointF"))
+        {
+            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
+                    .arg(json, pointObject[typeKey].toString());
+            QFAIL(qUtf8Printable(error));
+        }
+
+        QPointF point;
+
+        if (pointObject.contains(xKey))
+        {
+            QJsonValue xValue = pointObject[xKey];
+            if (xValue.isDouble())
+            {
+                point.setX(xValue.toDouble());
+            }
+            else
+            {
+                const QString error = QStringLiteral("X coordinate is not double '%1'.").arg(xValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain X coordinate.");
+            QFAIL(qUtf8Printable(error));
+        }
+
+        if (pointObject.contains(yKey))
+        {
+            QJsonValue yValue = pointObject[yKey];
+            if (yValue.isDouble())
+            {
+                point.setY(yValue.toDouble());
+            }
+            else
+            {
+                const QString error = QStringLiteral("Y coordinate is not double '%1'.").arg(yValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain Y coordinate.");
+            QFAIL(qUtf8Printable(error));
+        }
+
+        vector.append(point);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector)
+{
+    QFile loadFile(json);
+    if (not loadFile.open(QIODevice::ReadOnly))
+    {
+        const QString error = QStringLiteral("Couldn't open json file. %1").arg(loadFile.errorString());
+        QFAIL(qUtf8Printable(error));
+    }
+
+    QByteArray saveData = loadFile.readAll();
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+
+    const int defaultAngle = static_cast<int>(PieceNodeAngle::ByLength);
+
+    const QString vectorKey = QStringLiteral("vector");
+    const QString typeKey = QStringLiteral("type");
+    const QString xKey = QStringLiteral("x");
+    const QString yKey = QStringLiteral("y");
+    const QString saBeforeKey = QStringLiteral("saBefore");
+    const QString saAfterKey = QStringLiteral("saAfter");
+    const QString angleKey = QStringLiteral("angle");
+
+    QJsonObject vectorObject = loadDoc.object();
+    if (not vectorObject.contains(vectorKey))
+    {
+        const QString error = QStringLiteral("Invalid json file '%1'. File doesn't contain root object.").arg(json);
+        QFAIL(qUtf8Printable(error));
+    }
+
+    QJsonArray vectorArray = loadDoc.object()[vectorKey].toArray();
+    for (int i = 0; i < vectorArray.size(); ++i)
+    {
+        QJsonObject pointObject = vectorArray[i].toObject();
+
+        if (not pointObject.contains(typeKey))
+        {
+            const QString error = QStringLiteral("Invalid json file '%1'. Json object doesn't provide class type.")
+                    .arg(json);
+            QFAIL(qUtf8Printable(error));
+        }
+
+        if (pointObject[typeKey].toString() != QLatin1String("VSAPoint"))
+        {
+            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
+                    .arg(json, pointObject[typeKey].toString());
+            QFAIL(qUtf8Printable(error));
+        }
+
+        VSAPoint point;
+
+        if (pointObject.contains(xKey))
+        {
+            QJsonValue xValue = pointObject[xKey];
+            if (xValue.isDouble())
+            {
+                point.setX(xValue.toDouble());
+            }
+            else
+            {
+                const QString error = QStringLiteral("X coordinate is not double '%1'.").arg(xValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain X coordinate.");
+            QFAIL(qUtf8Printable(error));
+        }
+
+        if (pointObject.contains(yKey))
+        {
+            QJsonValue yValue = pointObject[yKey];
+            if (yValue.isDouble())
+            {
+                point.setY(yValue.toDouble());
+            }
+            else
+            {
+                const QString error = QStringLiteral("Y coordinate is not double '%1'.").arg(yValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain Y coordinate.");
+            QFAIL(qUtf8Printable(error));
+        }
+
+        if (pointObject.contains(saBeforeKey))
+        {
+            QJsonValue saBeforeValue = pointObject[saBeforeKey];
+            if (saBeforeValue.isDouble())
+            {
+                point.SetSABefore(saBeforeValue.toDouble(-1));
+            }
+            else
+            {
+                const QString error = QStringLiteral("SABefore is not double '%1'.").arg(saBeforeValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+
+        if (pointObject.contains(saAfterKey))
+        {
+            QJsonValue saAfterValue = pointObject[saAfterKey];
+            if (saAfterValue.isDouble())
+            {
+                point.SetSABefore(saAfterValue.toDouble(-1));
+            }
+            else
+            {
+                const QString error = QStringLiteral("SAAfter is not double '%1'.").arg(saAfterValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+
+        if (pointObject.contains(angleKey))
+        {
+            QJsonValue angleValue = pointObject[angleKey];
+            if (angleValue.isDouble())
+            {
+                point.SetAngleType(static_cast<PieceNodeAngle>(angleValue.toDouble(defaultAngle)));
+            }
+            else
+            {
+                const QString error = QStringLiteral("Angle type is not double '%1'.").arg(angleValue.toString());
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+
+        vector.append(point);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

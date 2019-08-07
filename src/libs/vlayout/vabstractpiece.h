@@ -81,6 +81,8 @@ public:
     qreal MaxLocalSA(qreal width) const;
     qreal PassmarkLength(qreal width) const;
 
+    QJsonObject toJson() const;
+
     static const qreal passmarkFactor;
     static const qreal maxPassmarkLength;
 

@@ -34,6 +34,7 @@
 #include <QString>
 
 template <class T> class QVector;
+class VSAPoint;
 
 #include <ciso646>
 
@@ -58,6 +59,9 @@ class AbstractTest : public QObject
     Q_OBJECT
 public:
     explicit AbstractTest(QObject *parent = nullptr);
+
+    void VectorFromJson(const QString &json, QVector<QPointF>& vector);
+    void VectorFromJson(const QString &json, QVector<VSAPoint>& vector);
 
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>input_loop_by_intersection.json</file>
+        <file>output_loop_by_intersection.json</file>
+    </qresource>
+</RCC>

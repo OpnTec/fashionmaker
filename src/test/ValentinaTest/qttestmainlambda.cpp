@@ -59,6 +59,7 @@
 int main(int argc, char** argv)
 {
     Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(test_data);
 
     TestVApplication app( argc, argv );// For QPrinter
 

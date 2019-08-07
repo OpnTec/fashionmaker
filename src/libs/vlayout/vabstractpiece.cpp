@@ -41,6 +41,9 @@
 #include <QVector>
 #include <QPainterPath>
 #include <QTemporaryFile>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
 const quint16 VAbstractPieceData::classVersion = 2;
@@ -532,123 +535,66 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
+void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
+{
+    QJsonArray pointsArray;
+    for (auto point: points)
+    {
+        QJsonObject pointObject;
+        pointObject[QLatin1String("type")] = "QPointF";
+        pointObject[QLatin1String("x")] = point.x();
+        pointObject[QLatin1String("y")] = point.y();
+
+        pointsArray.append(pointObject);
+    }
+    json[QLatin1String("vector")] = pointsArray;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
+{
+    QJsonArray pointsArray;
+    for (auto point: points)
+    {
+        pointsArray.append(point.toJson());
+    }
+    json[QLatin1String("vector")] = pointsArray;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DumpVector(const QVector<QPointF> &points)
-{    
+{
     QTemporaryFile temp; // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
     if (temp.open())
     {
+        QJsonObject vectorObject;
+        VectorToJson(points, vectorObject);
+        QJsonDocument vector(vectorObject);
+
         QTextStream out(&temp);
-        out << "QVector<QPointF> points;" << endl << endl;
-
-        for(auto point : points)
-        {
-            out << QString("points += QPointF(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15) << endl;
-        }
-
-        out << endl << "return points;";
+        out << vector.toJson();
+        out.flush();
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// Use for writing tests
 void DumpVector(const QVector<VSAPoint> &points)
 {
     QTemporaryFile temp; // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
     if (temp.open())
     {
+        QJsonObject vectorObject;
+        VectorToJson(points, vectorObject);
+        QJsonDocument vector(vectorObject);
+
         QTextStream out(&temp);
-
-        out << "QVector<VSAPoint> points;" << endl;
-
-        bool firstPoint = true;
-        enum PointType {Unknown, Default, Custom};
-        PointType type = Unknown;
-
-        for(auto point : points)
-        {
-            if (VFuzzyComparePossibleNulls(point.GetSAAfter(), -1)
-                    and VFuzzyComparePossibleNulls(point.GetSABefore(), -1)
-                    and point.GetAngleType() == PieceNodeAngle::ByLength)
-            {
-                if (type != Default)
-                {
-                    out << endl;
-                }
-                type = Default;
-                out << QString("points += VSAPoint(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15)
-                    << endl;
-            }
-            else
-            {
-                out << endl;
-                type = Custom;
-
-                if (firstPoint)
-                {
-                    out << "VSAPoint ";
-                    firstPoint = false;
-                }
-                out << QString("p = VSAPoint(%1, %2);").arg(point.x(), 0, 'f', 15).arg(point.y(), 0, 'f', 15) << endl;
-
-                if (not VFuzzyComparePossibleNulls(point.GetSABefore(), -1))
-                {
-                    out << QString("p.SetSABefore(%1);").arg(point.GetSABefore()) << endl;
-                }
-
-                if (not VFuzzyComparePossibleNulls(point.GetSAAfter(), -1))
-                {
-                    out << QString("p.SetSAAfter(%1);").arg(point.GetSAAfter()) << endl;
-                }
-
-                if (point.GetAngleType() != PieceNodeAngle::ByLength)
-                {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wswitch-default")
-                    // This check helps to find missed angle types in the switch
-                    Q_STATIC_ASSERT_X(static_cast<int>(PieceNodeAngle::LAST_ONE_DO_NOT_USE) == 7,
-                                      "Not all types were handled.");
-
-                    QString typeStr;
-                    switch (point.GetAngleType())
-                    {
-                        case PieceNodeAngle::LAST_ONE_DO_NOT_USE:
-                        case PieceNodeAngle::ByLength:
-                            Q_UNREACHABLE(); //-V501
-                            break;
-                        case PieceNodeAngle::ByPointsIntersection:
-                            typeStr = "ByPointsIntersection";
-                            break;
-                        case PieceNodeAngle::ByFirstEdgeSymmetry:
-                            typeStr = "ByFirstEdgeSymmetry";
-                            break;
-                        case PieceNodeAngle::BySecondEdgeSymmetry:
-                            typeStr = "BySecondEdgeSymmetry";
-                            break;
-                        case PieceNodeAngle::ByFirstEdgeRightAngle:
-                            typeStr = "ByFirstEdgeRightAngle";
-                            break;
-                        case PieceNodeAngle::BySecondEdgeRightAngle:
-                            typeStr = "BySecondEdgeRightAngle";
-                            break;
-                        case PieceNodeAngle::ByLengthCurve:
-                            typeStr = "ByLengthCurve";
-                            break;
-                    }
-QT_WARNING_POP
-
-                    out << QString("p.SetAngleType(PieceNodeAngle::%1);").arg(typeStr) << endl;
-                }
-
-                out << "points += p;" << endl;
-            }
-        }
-
-        out << endl << "return points;";
+        out << vector.toJson();
+        out.flush();
     }
 }
-#endif
+#endif // !defined(V_NO_ASSERT)
 
 //---------------------------------------------------------------------------------------------------------------------
 template<class T>
@@ -1512,6 +1458,32 @@ qreal VSAPoint::PassmarkLength(qreal width) const
     {
         return m_passmarkLength;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VSAPoint::toJson() const
+{
+    QJsonObject pointObject;
+    pointObject[QLatin1String("type")] = "VSAPoint";
+    pointObject[QLatin1String("x")] = x();
+    pointObject[QLatin1String("y")] = y();
+
+    if (not VFuzzyComparePossibleNulls(m_before, -1))
+    {
+        pointObject[QLatin1String("saBefore")] = m_before;
+    }
+
+    if (not VFuzzyComparePossibleNulls(m_after, -1))
+    {
+        pointObject[QLatin1String("saAfter")] = m_after;
+    }
+
+    if (m_angle != PieceNodeAngle::ByLength)
+    {
+        pointObject[QLatin1String("angle")] = static_cast<int>(m_angle);
+    }
+
+    return pointObject;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

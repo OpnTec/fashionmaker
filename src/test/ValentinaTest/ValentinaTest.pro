@@ -225,3 +225,6 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
+
+RESOURCES += \
+    share/test_data.qrc
