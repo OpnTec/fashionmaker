@@ -331,6 +331,7 @@ VContainer VPattern::GetCompleteData() const
     }
 
     const VDataTool *vTool = tools.value(id);
+    SCASSERT(vTool != nullptr)
     VContainer lastData = vTool->getData();
     //Delete special variables if exist
     lastData.RemoveVariable(currentLength);
