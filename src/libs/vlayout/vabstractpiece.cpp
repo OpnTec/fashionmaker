@@ -52,134 +52,11 @@ const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
 
 namespace
 {
+//---------------------------------------------------------------------------------------------------------------------
 // Do we create a point outside of a path?
 inline bool IsOutsidePoint(QPointF p1, QPointF p2, QPointF px)
 {
     return qAbs(QLineF(p1, p2).angle() - QLineF(p1, px).angle()) < 0.001;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> SubPath(const QVector<QPointF> &path, int startIndex, int endIndex)
-{
-    if (path.isEmpty()
-       || startIndex < 0 || startIndex >= path.size()
-       || endIndex < 0 || endIndex >= path.size()
-       || startIndex == endIndex)
-    {
-        return path;
-    }
-
-    QVector<QPointF> subPath;
-    int i = startIndex - 1;
-    do
-    {
-        ++i;
-        if (i >= path.size())
-        {
-            i = 0;
-        }
-        subPath.append(path.at(i));
-    } while (i != endIndex);
-
-    return subPath;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool Crossing(const QVector<QPointF> &sub1, const QVector<QPointF> &sub2)
-{
-    if (sub1.isEmpty() || sub2.isEmpty())
-    {
-        return false;
-    }
-
-    const QRectF sub1Rect = QPolygonF(sub1).boundingRect();
-    const QRectF sub2Rect = QPolygonF(sub2).boundingRect();
-    if (not sub1Rect.intersects(sub2Rect))
-    {
-        return false;
-    }
-
-    QPainterPath sub1Path;
-    sub1Path.setFillRule(Qt::WindingFill);
-    sub1Path.moveTo(sub1.at(0));
-    for (qint32 i = 1; i < sub1.count(); ++i)
-    {
-        sub1Path.lineTo(sub1.at(i));
-    }
-    sub1Path.lineTo(sub1.at(0));
-
-    QPainterPath sub2Path;
-    sub2Path.setFillRule(Qt::WindingFill);
-    sub2Path.moveTo(sub2.at(0));
-    for (qint32 i = 1; i < sub2.count(); ++i)
-    {
-        sub2Path.lineTo(sub2.at(i));
-    }
-    sub2Path.lineTo(sub2.at(0));
-
-    if (not sub1Path.intersects(sub2Path))
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool CheckIntersection(const QVector<QPointF> &points, int i, int iNext, int j, int jNext, const QPointF &crossPoint)
-{
-    QVector<QPointF> sub1 = SubPath(points, iNext, j);
-    sub1.append(crossPoint);
-    sub1 = VAbstractPiece::CorrectEquidistantPoints(sub1, false);
-    const qreal sub1Sum = VAbstractPiece::SumTrapezoids(sub1);
-
-    QVector<QPointF> sub2 = SubPath(points, jNext, i);
-    sub2.append(crossPoint);
-    sub2 = VAbstractPiece::CorrectEquidistantPoints(sub2, false);
-    const qreal sub2Sum = VAbstractPiece::SumTrapezoids(sub2);
-
-    if (sub1Sum < 0 && sub2Sum < 0)
-    {
-        if (Crossing(sub1, sub2))
-        {
-            return true;
-        }
-    }
-    else
-    {
-        if (not Crossing(sub1, sub2))
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool ParallelCrossPoint(const QLineF &line1, const QLineF &line2, QPointF &point)
-{
-    const bool l1p1el2p1 = (line1.p1() == line2.p1());
-    const bool l1p2el2p2 = (line1.p2() == line2.p2());
-    const bool l1p1el2p2 = (line1.p1() == line2.p2());
-    const bool l1p2el2p1 = (line1.p2() == line2.p1());
-
-    if (l1p2el2p2 || l1p2el2p1)
-    {
-        point = line1.p2();
-        return true;
-    }
-    else if (l1p1el2p1 || l1p1el2p2)
-    {
-        point = line1.p1();
-        return true;
-    }
-    else
-    {
-        point = QPointF();
-        return false;
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -335,7 +212,11 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     else
     {
         QLineF allowance(p2, px);
+        //allowance.setLength(allowance.length()-accuracyPointOnLine*2.);
+        //allowance.setAngle(allowance.angle()-0.1); // avoid optimization
         pointsIntr.append(allowance.p2());
+
+        //allowance = QLineF(p2, px);
         allowance.setLength(allowance.length() + localWidth * 3.);
         pointsIntr.append(allowance.p2());
         pointsIntr.append(bigLine2.p2());
@@ -652,7 +533,7 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
 void DumpVector(const QVector<QPointF> &points)
-{
+{    
     QTemporaryFile temp; // Go to tmp folder to find dump
     temp.setAutoRemove(false); // Remove dump manually
     if (temp.open())
@@ -1031,6 +912,11 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                 break;
             case PieceNodeAngle::ByPointsIntersection:
                 Rollback(QLineF(points.last(), points.at(1)));
+                if (ekvPoints.size() > 2)
+                { // Fix for the rule of main path
+                    ekvPoints.removeAt(ekvPoints.size()-1);
+                    ekvPoints.prepend(ekvPoints.at(ekvPoints.size()-1));
+                }
                 break;
             case PieceNodeAngle::BySecondEdgeRightAngle:
                 if (not ekvPoints.isEmpty())
@@ -1097,7 +983,6 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
     const bool removeFirstAndLast = false;
     ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
-    ekvPoints = CheckLoops(CorrectEquidistantPoints(ekvPoints, removeFirstAndLast));//Result path can contain loops
 //    DumpVector(ekvPoints); // Uncomment for dumping test data
     return ekvPoints;
 }
@@ -1146,6 +1031,8 @@ qreal VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points)
  */
 QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
 {
+//    DumpVector(points); // Uncomment for dumping test data
+
     int count = points.size();
     /*If we got less than 4 points no need seek loops.*/
     if (count < 4)
@@ -1164,8 +1051,8 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
     qint32 i, j, jNext = 0;
     for (i = 0; i < count; ++i)
     {
-        /*Last three points no need check.*/
-        /*Triangle has not contain loops*/
+        /*Last three points no need to check.*/
+        /*Triangle can not contain a loop*/
         if (i > count-3)
         {
             ekvPoints.append(points.at(i));
@@ -1206,53 +1093,23 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
             // For closed path last point is equal to first. Using index of the first.
             pathClosed && jNext == count-1 ? AddUniqueIndex(0) : AddUniqueIndex(jNext);
 
-            const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
-            if (intersect == QLineF::NoIntersection)
-            { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
-              // i.e. they are parallel. But parallel also mean they can be on the same line.
-              // Method IsPointOnLineviaPDP will check it.
-                if (VGObject::IsPointOnLineviaPDP(points.at(j), points.at(i), points.at(i+1))
-                    // Lines are not neighbors
-                    && uniqueVertices.size() == 4)
-                {
-                    // Left to catch case where segments are on the same line, but do not have real intersections.
-                    QLineF tmpLine1 = line1;
-                    QLineF tmpLine2 = line2;
-
-                    tmpLine1.setAngle(tmpLine1.angle()+90);
-
-                    QPointF tmpCrosPoint;
-                    const QLineF::IntersectType tmpIntrs1 = tmpLine1.intersect(tmpLine2, &tmpCrosPoint);
-
-                    tmpLine1 = line1;
-                    tmpLine2.setAngle(tmpLine2.angle()+90);
-
-                    const QLineF::IntersectType tmpIntrs2 = tmpLine1.intersect(tmpLine2, &tmpCrosPoint);
-
-                    if (tmpIntrs1 == QLineF::BoundedIntersection || tmpIntrs2 == QLineF::BoundedIntersection)
-                    { // Now we really sure that lines are on the same lines and have real intersections.
-                        QPointF cPoint;
-                        const bool caseFlag = ParallelCrossPoint(line1, line2, cPoint);
-                        if (not caseFlag || CheckIntersection(points, i, i+1, j, jNext, cPoint))
-                        {
-                            status = ParallelIntersection;
-                            break;
-                        }
-                    }
-                }
-            }
-            else if (intersect == QLineF::BoundedIntersection)
-            {
-                if (uniqueVertices.size() == 4)
-                { // Break, but not if lines are neighbors
-                    if ((line1.p1() != crosPoint
-                        && line1.p2() != crosPoint
-                        && line2.p1() != crosPoint
-                        && line2.p2() != crosPoint) || CheckIntersection(points, i, i+1, j, jNext, crosPoint))
-                    {
-                        status = BoundedIntersection;
+            if (uniqueVertices.size() == 4)
+            {// Lines are not neighbors
+                const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
+                if (intersect == QLineF::NoIntersection)
+                { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
+                  // i.e. they are parallel. But parallel also mean they can be on the same line.
+                  // Method IsLineSegmentOnLineSegment will check it.
+                    if (VGObject::IsLineSegmentOnLineSegment(line1, line2))
+                    {// Now we really sure that segments are on the same line and have real intersections.
+                        status = ParallelIntersection;
                         break;
                     }
+                }
+                else if (intersect == QLineF::BoundedIntersection)
+                {
+                    status = BoundedIntersection;
+                    break;
                 }
             }
             status = NoIntersection;
@@ -1278,7 +1135,8 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
             default:
                 break;
         }
-    }
+    }    
+//    DumpVector(ekvPoints); // Uncomment for dumping test data
     return ekvPoints;
 }
 

@@ -168,6 +168,9 @@ private:
     QVector<VSAPoint> InputPointsIssue923Test6_6();
     QVector<QPointF>  OutputPointsIssue923Test6_6();
 
+    QVector<VSAPoint> InputLoopByIntersectionTest();
+    QVector<QPointF>  OutputLoopByIntersectionTest();
+
     QVector<VSAPoint> InputPointsIssue937Case1() const;
     QVector<QPointF>  OutputPointsIssue937Case1() const;
 

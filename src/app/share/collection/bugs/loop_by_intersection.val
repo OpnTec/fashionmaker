@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v0.7.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.8.5</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Pattern piece 1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="0" basePoint="1" id="2" length="6" lineColor="black" mx="0.132292" my="0.264583" name="A1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="180" basePoint="1" id="3" length="6" lineColor="black" mx="0.132292" my="0.264583" name="A2" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="90" basePoint="1" id="4" length="3.7" lineColor="black" mx="0.132292" my="0.264583" name="A3" showLabel="true" type="endLine" typeLine="hair"/>
+            <spline aScale="0" angle1="75.4653" angle2="180.572" color="black" id="5" length1="3.44539" length2="2.79047" penStyle="hair" point1="3" point4="4" type="simpleInteractive"/>
+            <spline aScale="0" angle1="0.535754" angle2="113.25" color="black" id="6" length1="3.24281" length2="2.80818" penStyle="hair" point1="4" point4="2" type="simpleInteractive"/>
+            <operation id="7" p1Line="3" p2Line="2" suffix="a1" type="flippingByLine">
+                <source>
+                    <item idObject="5"/>
+                    <item idObject="6"/>
+                </source>
+                <destination>
+                    <item idObject="8"/>
+                    <item idObject="9"/>
+                </destination>
+            </operation>
+        </calculation>
+        <modeling>
+            <point id="10" idObject="3" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="11" idObject="5" inUse="false" type="modelingSpline"/>
+            <point id="12" idObject="4" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="13" idObject="6" inUse="false" type="modelingSpline"/>
+            <point id="14" idObject="2" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="15" idObject="9" inUse="false" type="modelingSpline"/>
+            <spline id="16" idObject="8" inUse="false" type="modelingSpline"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="17" mx="0" my="0" name="Detail" seamAllowance="true" version="2" width="1.05">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node angle="1" idObject="10" type="NodePoint"/>
+                    <node idObject="11" reverse="0" type="NodeSpline"/>
+                    <node idObject="12" type="NodePoint"/>
+                    <node idObject="13" reverse="0" type="NodeSpline"/>
+                    <node angle="1" idObject="14" type="NodePoint"/>
+                    <node idObject="15" reverse="1" type="NodeSpline"/>
+                    <node idObject="16" reverse="1" type="NodeSpline"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>
