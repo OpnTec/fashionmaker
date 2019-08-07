@@ -270,7 +270,8 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector
             QJsonValue angleValue = pointObject[angleKey];
             if (angleValue.isDouble())
             {
-                point.SetAngleType(static_cast<PieceNodeAngle>(angleValue.toDouble(defaultAngle)));
+                const int angle = static_cast<int>(angleValue.toDouble(defaultAngle));
+                point.SetAngleType(static_cast<PieceNodeAngle>(angle));
             }
             else
             {
