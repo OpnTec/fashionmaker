@@ -5364,12 +5364,6 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
     }
     listDetails = PrepareDetailsForLayout(details);
 
-    if (not VApplication::IsGUIMode())
-    {
-        sceneDraw->clear();
-        sceneDetails->clear();
-    }
-
     const bool exportOnlyDetails = expParams->IsExportOnlyDetails();
     if (exportOnlyDetails)
     {
