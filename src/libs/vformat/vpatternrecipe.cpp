@@ -497,7 +497,7 @@ QDomElement VPatternRecipe::Bisector(const VToolRecord &record)
     ToolAttributes(step, tool);
     SetAttribute(step, AttrFirstPoint, tool->FirstPointName());
     SetAttribute(step, AttrSecondPoint, tool->BasePointName());
-    SetAttribute(step, AttrSecondPoint, tool->ThirdPointName());
+    SetAttribute(step, AttrThirdPoint, tool->ThirdPointName());
     Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
     LineAttributes(step, tool);
 
@@ -514,7 +514,7 @@ QDomElement VPatternRecipe::LineIntersect(const VToolRecord &record)
     ToolAttributes(step, tool);
 
     SetAttribute(step, AttrP1Line1, tool->Line1P1Name());
-    SetAttribute(step, AttrP1Line2, tool->Line1P2Name());
+    SetAttribute(step, AttrP2Line1, tool->Line1P2Name());
     SetAttribute(step, AttrP1Line2, tool->Line2P1Name());
     SetAttribute(step, AttrP2Line2, tool->Line2P2Name());
 
@@ -529,7 +529,8 @@ QDomElement VPatternRecipe::Spline(const VToolRecord &record)
 
     QDomElement step = createElement(TagStep);
 
-    ToolAttributes(step, tool);
+    SetAttribute(step, AttrType, QStringLiteral("spline"));
+    SetAttribute(step, AttrLabel, tool->name());
 
     SetAttribute(step, AttrPoint1, spl.GetP1().name());
     SetAttribute(step, AttrPoint4, spl.GetP4().name());
@@ -577,7 +578,8 @@ QDomElement VPatternRecipe::Arc(const VToolRecord &record)
 
     QDomElement step = createElement(TagStep);
 
-    ToolAttributes(step, tool);
+    SetAttribute(step, AttrType, QStringLiteral("arc"));
+    SetAttribute(step, AttrLabel, tool->name());
     SetAttribute(step, AttrCenter, tool->CenterPointName());
     Formula(step, tool->GetFormulaRadius(), AttrRadius, AttrRadiusValue);
     Formula(step, tool->GetFormulaF1(), AttrAngle1, AttrAngle1Value);
@@ -614,7 +616,8 @@ QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
 
     QDomElement step = createElement(TagStep);
 
-    ToolAttributes(step, tool);
+    SetAttribute(step, AttrType, QStringLiteral("splinePath"));
+    SetAttribute(step, AttrLabel, tool->name());
 
     QDomElement nodes = createElement(QStringLiteral("nodes"));
     QVector<VSplinePoint> path = spl.GetSplinePath();
@@ -928,7 +931,9 @@ QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
 
     QDomElement step = createElement(TagStep);
 
-    ToolAttributes(step, tool);
+    SetAttribute(step, AttrType, QStringLiteral("ellipticalArc"));
+    SetAttribute(step, AttrLabel, tool->name());
+
     SetAttribute(step, AttrCenter, tool->CenterPointName());
     Formula(step, tool->GetFormulaRadius1(), AttrRadius1, AttrRadius1Value);
     Formula(step, tool->GetFormulaRadius2(), AttrRadius2, AttrRadius2Value);
