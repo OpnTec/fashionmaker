@@ -44,10 +44,10 @@ class QDomElement;
 class VExceptionObjectError : public VException
 {
 public:
-    VExceptionObjectError(const QString &what, const QDomElement &domElement);
-    explicit VExceptionObjectError(const QString &what);
-    VExceptionObjectError(const VExceptionObjectError &e);
-    VExceptionObjectError &operator=(const VExceptionObjectError &e);
+    VExceptionObjectError(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
+    explicit VExceptionObjectError(const QString &what) V_NOEXCEPT_EXPR (true);
+    VExceptionObjectError(const VExceptionObjectError &e) V_NOEXCEPT_EXPR (true);
+    VExceptionObjectError &operator=(const VExceptionObjectError &e) V_NOEXCEPT_EXPR (true);
     virtual ~VExceptionObjectError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

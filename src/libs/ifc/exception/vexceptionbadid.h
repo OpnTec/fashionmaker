@@ -42,10 +42,10 @@
 class VExceptionBadId : public VException
 {
 public:
-    VExceptionBadId(const QString &error, const quint32 &id);
-    VExceptionBadId(const QString &error, const QString &key);
-    VExceptionBadId(const VExceptionBadId &e);
-    VExceptionBadId &operator=(const VExceptionBadId &e);
+    VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR (true);
+    VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR (true);
+    VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
+    VExceptionBadId &operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true);
     virtual         ~VExceptionBadId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

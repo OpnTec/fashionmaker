@@ -41,9 +41,9 @@
 class VExceptionConversionError : public VException
 {
 public:
-    VExceptionConversionError(const QString &error, const QString &str);
-    VExceptionConversionError(const VExceptionConversionError &e);
-    VExceptionConversionError &operator=(const VExceptionConversionError &e);
+    VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR (true);
+    VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true);
+    VExceptionConversionError &operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true);
     virtual         ~VExceptionConversionError() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

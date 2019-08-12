@@ -28,17 +28,17 @@
 #include "vexceptioninvalidnotch.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidNotch::VExceptionInvalidNotch(const QString &error)
+VExceptionInvalidNotch::VExceptionInvalidNotch(const QString &error) V_NOEXCEPT_EXPR (true)
     :VException(error)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidNotch::VExceptionInvalidNotch(const VExceptionInvalidNotch &e)
+VExceptionInvalidNotch::VExceptionInvalidNotch(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidNotch &VExceptionInvalidNotch::operator=(const VExceptionInvalidNotch &e)
+VExceptionInvalidNotch &VExceptionInvalidNotch::operator=(const VExceptionInvalidNotch &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

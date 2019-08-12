@@ -44,9 +44,10 @@ class QDomElement;
 class VExceptionEmptyParameter : public VException
 {
 public:
-    VExceptionEmptyParameter(const QString &what, const QString &name, const QDomElement &domElement);
-    VExceptionEmptyParameter(const VExceptionEmptyParameter &e);
-    VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e);
+    VExceptionEmptyParameter(const QString &what, const QString &name,
+                             const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
+    VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
+    VExceptionEmptyParameter &operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true);
     virtual         ~VExceptionEmptyParameter() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

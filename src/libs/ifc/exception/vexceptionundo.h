@@ -38,8 +38,8 @@
 class VExceptionUndo : public VException
 {
 public:
-    explicit VExceptionUndo(const QString &what);
-    VExceptionUndo(const VExceptionUndo &e);
+    explicit VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR (true);
+    VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR (true);
     virtual ~VExceptionUndo() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

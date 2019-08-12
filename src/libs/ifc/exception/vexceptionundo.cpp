@@ -31,11 +31,11 @@
 #include "vexception.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionUndo::VExceptionUndo(const QString &what)
+VExceptionUndo::VExceptionUndo(const QString &what) V_NOEXCEPT_EXPR (true)
     :VException(what)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionUndo::VExceptionUndo(const VExceptionUndo &e)
+VExceptionUndo::VExceptionUndo(const VExceptionUndo &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {}

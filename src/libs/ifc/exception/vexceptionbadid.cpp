@@ -36,7 +36,7 @@
  * @param error string with error
  * @param id id
  */
-VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id)
+VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id) V_NOEXCEPT_EXPR (true)
     :VException(error), id(id), key(QString()){}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ VExceptionBadId::VExceptionBadId(const QString &error, const quint32 &id)
  * @param error string with error
  * @param key string key
  */
-VExceptionBadId::VExceptionBadId(const QString &error, const QString &key)
+VExceptionBadId::VExceptionBadId(const QString &error, const QString &key) V_NOEXCEPT_EXPR (true)
     :VException(error), id(NULL_ID), key(key){}
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -53,11 +53,11 @@ VExceptionBadId::VExceptionBadId(const QString &error, const QString &key)
  * @brief VExceptionBadId copy constructor
  * @param e exception
  */
-VExceptionBadId::VExceptionBadId(const VExceptionBadId &e)
+VExceptionBadId::VExceptionBadId(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true)
     :VException(e), id(e.BadId()), key(e.BadKey()){}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e)
+VExceptionBadId &VExceptionBadId::operator=(const VExceptionBadId &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

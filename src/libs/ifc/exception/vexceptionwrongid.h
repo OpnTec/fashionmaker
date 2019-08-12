@@ -44,9 +44,9 @@ class QDomElement;
 class VExceptionWrongId : public VException
 {
 public:
-    VExceptionWrongId(const QString &what, const QDomElement &domElement);
-    VExceptionWrongId(const VExceptionWrongId &e);
-    VExceptionWrongId &operator=(const VExceptionWrongId &e);
+    VExceptionWrongId(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true);
+    VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true);
+    VExceptionWrongId &operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true);
     virtual ~VExceptionWrongId() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

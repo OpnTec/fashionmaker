@@ -33,9 +33,9 @@
 class VExceptionInvalidHistory : public VException
 {
 public:
-    explicit VExceptionInvalidHistory(const QString &error);
-    VExceptionInvalidHistory(const VExceptionInvalidHistory &e);
-    VExceptionInvalidHistory &operator=(const VExceptionInvalidHistory &e);
+    explicit VExceptionInvalidHistory(const QString &error) V_NOEXCEPT_EXPR (true);
+    VExceptionInvalidHistory(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
+    VExceptionInvalidHistory &operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true);
     virtual ~VExceptionInvalidHistory() V_NOEXCEPT_EXPR (true) Q_DECL_EQ_DEFAULT;
 
     Q_NORETURN virtual void raise() const override { throw *this; }

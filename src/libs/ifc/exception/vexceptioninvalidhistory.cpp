@@ -28,17 +28,17 @@
 #include "vexceptioninvalidhistory.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidHistory::VExceptionInvalidHistory(const QString &error)
+VExceptionInvalidHistory::VExceptionInvalidHistory(const QString &error) V_NOEXCEPT_EXPR (true)
     :VException(error)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidHistory::VExceptionInvalidHistory(const VExceptionInvalidHistory &e)
+VExceptionInvalidHistory::VExceptionInvalidHistory(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true)
     :VException(e)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionInvalidHistory &VExceptionInvalidHistory::operator=(const VExceptionInvalidHistory &e)
+VExceptionInvalidHistory &VExceptionInvalidHistory::operator=(const VExceptionInvalidHistory &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

@@ -38,7 +38,7 @@
  * @param error string with error
  * @param str string, where happend error
  */
-VExceptionConversionError::VExceptionConversionError(const QString &error, const QString &str)
+VExceptionConversionError::VExceptionConversionError(const QString &error, const QString &str) V_NOEXCEPT_EXPR (true)
     :VException(error), str(str)
 {
     Q_ASSERT_X(not str.isEmpty(), Q_FUNC_INFO, "Error converting string is empty");
@@ -49,12 +49,13 @@ VExceptionConversionError::VExceptionConversionError(const QString &error, const
  * @brief VExceptionConversionError copy constructor
  * @param e exception
  */
-VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e)
+VExceptionConversionError::VExceptionConversionError(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true)
     :VException(e), str(e.String())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionConversionError &VExceptionConversionError::operator=(const VExceptionConversionError &e)
+VExceptionConversionError &
+VExceptionConversionError::operator=(const VExceptionConversionError &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

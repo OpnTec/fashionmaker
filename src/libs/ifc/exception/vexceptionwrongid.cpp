@@ -39,7 +39,7 @@
  * @param what string with error
  * @param domElement som element
  */
-VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement)
+VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &domElement) V_NOEXCEPT_EXPR (true)
     :VException(what), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -54,12 +54,12 @@ VExceptionWrongId::VExceptionWrongId(const QString &what, const QDomElement &dom
  * @brief VExceptionWrongId copy constructor
  * @param e exception
  */
-VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e)
+VExceptionWrongId::VExceptionWrongId(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true)
     :VException(e), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e)
+VExceptionWrongId &VExceptionWrongId::operator=(const VExceptionWrongId &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {

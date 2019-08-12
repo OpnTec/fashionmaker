@@ -41,7 +41,7 @@
  * @param domElement dom element
  */
 VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QString &name,
-                                                   const QDomElement &domElement)
+                                                   const QDomElement &domElement) V_NOEXCEPT_EXPR (true)
     : VException(what), name(name), tagText(QString()), tagName(QString()), lineNumber(-1)
 {
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -57,12 +57,12 @@ VExceptionEmptyParameter::VExceptionEmptyParameter(const QString &what, const QS
  * @brief VExceptionEmptyParameter copy constructor
  * @param e exception
  */
-VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e)
+VExceptionEmptyParameter::VExceptionEmptyParameter(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true)
     :VException(e), name(e.Name()), tagText(e.TagText()), tagName(e.TagName()), lineNumber(e.LineNumber())
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
-VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e)
+VExceptionEmptyParameter &VExceptionEmptyParameter::operator=(const VExceptionEmptyParameter &e) V_NOEXCEPT_EXPR (true)
 {
     if ( &e == this )
     {
