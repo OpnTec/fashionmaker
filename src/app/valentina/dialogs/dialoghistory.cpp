@@ -382,6 +382,21 @@ QString DialogHistory::Record(const VToolRecord &tool)
                         .arg(elArc->NameForHistory(tr("Elliptical arc")))
                         .arg(elArc->GetLength());
             }
+            case Tool::Rotation:
+                return tr("Rotate objects around point %1. Suffix '%2'")
+                        .arg(PointName(AttrUInt(domElem, AttrCenter)),
+                             doc->GetParametrString(domElem, AttrSuffix, QString()));
+            case Tool::FlippingByLine:
+                return tr("Flipping by line %1_%2. Suffix '%3'")
+                        .arg(PointName(AttrUInt(domElem, AttrP1Line)),
+                             PointName(AttrUInt(domElem, AttrP2Line)),
+                             doc->GetParametrString(domElem, AttrSuffix, QString()));
+            case Tool::FlippingByAxis:
+                return tr("Flipping by axis through %1 point. Suffix '%2'")
+                        .arg(PointName(AttrUInt(domElem, AttrCenter)),
+                             doc->GetParametrString(domElem, AttrSuffix, QString()));
+            case Tool::Move:
+                return tr("Move objects. Suffix '%1'").arg(doc->GetParametrString(domElem, AttrSuffix, QString()));
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
@@ -392,10 +407,6 @@ QString DialogHistory::Record(const VToolRecord &tool)
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
             case Tool::Group:
-            case Tool::Rotation:
-            case Tool::FlippingByLine:
-            case Tool::FlippingByAxis:
-            case Tool::Move:
             case Tool::PiecePath:
             case Tool::Pin:
             case Tool::PlaceLabel:
