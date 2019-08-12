@@ -85,6 +85,8 @@ public:
     QString Suffix() const;
     void    SetSuffix(const QString &suffix);
 
+    QVector<QString> SourceItems() const;
+
     virtual void GroupVisibility(quint32 object, bool visible) override;
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos) override;

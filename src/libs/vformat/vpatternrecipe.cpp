@@ -75,7 +75,7 @@ T *GetPatternTool(quint32 id)
     }
     return tool;
 }
-}
+}  // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObject *parent)
@@ -365,6 +365,14 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 return TrueDarts(tool);
             case Tool::EllipticalArc:
                 return EllipticalArc(tool);
+            case Tool::Rotation:
+                return Rotation(tool);
+            case Tool::FlippingByLine:
+                return FlippingByLine(tool);
+            case Tool::FlippingByAxis:
+                return FlippingByAxis(tool);
+            case Tool::Move:
+                return Move(tool);
             //Because "history" not only show history of pattern, but help restore current data for each pattern's
             //piece, we need add record about details and nodes, but don't show them.
             case Tool::Piece:
@@ -375,10 +383,6 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
             case Tool::NodeSpline:
             case Tool::NodeSplinePath:
             case Tool::Group:
-            case Tool::Rotation:
-            case Tool::FlippingByLine:
-            case Tool::FlippingByAxis:
-            case Tool::Move:
             case Tool::PiecePath:
             case Tool::Pin:
             case Tool::PlaceLabel:
@@ -947,6 +951,76 @@ QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::Rotation(const VToolRecord &record)
+{
+    auto *tool = GetPatternTool<VToolRotation>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    SetAttribute(step, AttrType, VToolRotation::ToolType);
+    SetAttribute(step, AttrCenter, tool->OriginPointName());
+    Formula(step, tool->GetFormulaAngle(), AttrAngle, AttrAngleValue);
+    SetAttribute(step, AttrSuffix, tool->Suffix());
+
+    step.appendChild(GroupOperationSource(tool, record.getId()));
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::FlippingByLine(const VToolRecord &record)
+{
+    auto *tool = GetPatternTool<VToolFlippingByLine>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    SetAttribute(step, AttrType, VToolFlippingByLine::ToolType);
+    SetAttribute(step, AttrP1Line, tool->FirstLinePointName());
+    SetAttribute(step, AttrP2Line, tool->SecondLinePointName());
+    SetAttribute(step, AttrSuffix, tool->Suffix());
+
+    step.appendChild(GroupOperationSource(tool, record.getId()));
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::FlippingByAxis(const VToolRecord &record)
+{
+    auto *tool = GetPatternTool<VToolFlippingByAxis>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    SetAttribute(step, AttrType, VToolFlippingByAxis::ToolType);
+    SetAttribute(step, AttrCenter, tool->OriginPointName());
+    SetAttribute(step, AttrAxisType, static_cast<int>(tool->GetAxisType()));
+    SetAttribute(step, AttrSuffix, tool->Suffix());
+
+    step.appendChild(GroupOperationSource(tool, record.getId()));
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::Move(const VToolRecord &record)
+{
+    auto *tool = GetPatternTool<VToolMove>(record.getId());
+
+    QDomElement step = createElement(TagStep);
+
+    SetAttribute(step, AttrType, VToolMove::ToolType);
+    Formula(step, tool->GetFormulaAngle(), AttrAngle, AttrAngleValue);
+    Formula(step, tool->GetFormulaRotationAngle(), AttrRotationAngle, AttrRotationAngleValue);
+    Formula(step, tool->GetFormulaLength(), AttrLength, AttrLengthValue);
+    SetAttribute(step, AttrCenter, tool->OriginPointName());
+    SetAttribute(step, AttrSuffix, tool->Suffix());
+
+    step.appendChild(GroupOperationSource(tool, record.getId()));
+
+    return step;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline void VPatternRecipe::Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr,
                              const QString &formulaValue)
 {
@@ -986,4 +1060,27 @@ inline void VPatternRecipe::ToolAttributes(QDomElement &step, T *tool)
 {
     SetAttribute(step, AttrType, T::ToolType);
     SetAttribute(step, AttrLabel, tool->name());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::GroupOperationSource(VAbstractOperation *tool, quint32 id)
+{
+    SCASSERT(tool)
+
+    QDomElement nodes = createElement(QStringLiteral("nodes"));
+    QVector<QString> names = tool->SourceItems();
+
+    if (names.isEmpty())
+    {
+        throw VExceptionInvalidHistory(QObject::tr("Empty list of nodes for tool with id '%1'.").arg(id));
+    }
+
+    for (auto &nodeName : names)
+    {
+        QDomElement node = createElement(QStringLiteral("node"));
+        SetAttribute(node, AttrItem, nodeName);
+        nodes.appendChild(node);
+    }
+
+    return nodes;
 }

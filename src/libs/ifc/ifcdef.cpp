@@ -117,6 +117,7 @@ const QString AttrTangent     = QStringLiteral("tangent");
 const QString AttrCRadius     = QStringLiteral("cRadius");
 const QString AttrArc         = QStringLiteral("arc");
 const QString AttrSuffix      = QStringLiteral("suffix");
+const QString AttrItem        = QStringLiteral("item");
 const QString AttrIdObject    = QStringLiteral("idObject");
 const QString AttrInLayout    = QStringLiteral("inLayout");
 const QString AttrForbidFlipping = QStringLiteral("forbidFlipping");

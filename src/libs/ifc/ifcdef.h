@@ -135,6 +135,7 @@ extern const QString AttrTangent;
 extern const QString AttrCRadius;
 extern const QString AttrArc;
 extern const QString AttrSuffix;
+extern const QString AttrItem;
 extern const QString AttrIdObject;
 extern const QString AttrInLayout;
 extern const QString AttrForbidFlipping;

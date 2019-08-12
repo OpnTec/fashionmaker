@@ -36,6 +36,7 @@ class VMeasurement;
 class VIncrement;
 class VToolRecord;
 class VFormula;
+class VAbstractOperation;
 
 class VPatternRecipe : public VDomDocument
 {
@@ -94,6 +95,10 @@ private:
     QDomElement PointFromArcAndTangent(const VToolRecord &record);
     QDomElement TrueDarts(const VToolRecord &record);
     QDomElement EllipticalArc(const VToolRecord &record);
+    QDomElement Rotation(const VToolRecord &record);
+    QDomElement FlippingByLine(const VToolRecord &record);
+    QDomElement FlippingByAxis(const VToolRecord &record);
+    QDomElement Move(const VToolRecord &record);
 
     void Formula(QDomElement &step, const VFormula &formula, const QString &formulaStr, const QString &formulaValue);
 
@@ -105,6 +110,8 @@ private:
 
     template <typename T>
     void CurveAttributes(QDomElement &step, T* tool);
+
+    QDomElement GroupOperationSource(VAbstractOperation *tool, quint32 id);
 };
 
 #endif // VPATTERNRECIPE_H
