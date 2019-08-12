@@ -403,7 +403,7 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::BasePoint(const VToolRecord &record)
 {
-    VToolBasePoint *tool = GetPatternTool<VToolBasePoint>(record.getId());
+    auto *tool = GetPatternTool<VToolBasePoint>(record.getId());
 
     QDomElement step = createElement(TagStep);
     ToolAttributes(step, tool);
@@ -413,7 +413,7 @@ QDomElement VPatternRecipe::BasePoint(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::EndLine(const VToolRecord &record)
 {
-    VToolEndLine *tool = GetPatternTool<VToolEndLine>(record.getId());
+    auto *tool = GetPatternTool<VToolEndLine>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -429,7 +429,7 @@ QDomElement VPatternRecipe::EndLine(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Line(const VToolRecord &record)
 {
-    VToolLine *tool = GetPatternTool<VToolLine>(record.getId());
+    auto *tool = GetPatternTool<VToolLine>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -444,7 +444,7 @@ QDomElement VPatternRecipe::Line(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::AlongLine(const VToolRecord &record)
 {
-    VToolAlongLine *tool = GetPatternTool<VToolAlongLine>(record.getId());
+    auto *tool = GetPatternTool<VToolAlongLine>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -460,7 +460,7 @@ QDomElement VPatternRecipe::AlongLine(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::ShoulderPoint(const VToolRecord &record)
 {
-    VToolShoulderPoint *tool = GetPatternTool<VToolShoulderPoint>(record.getId());
+    auto *tool = GetPatternTool<VToolShoulderPoint>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -477,7 +477,7 @@ QDomElement VPatternRecipe::ShoulderPoint(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Normal(const VToolRecord &record)
 {
-    VToolNormal *tool = GetPatternTool<VToolNormal>(record.getId());
+    auto *tool = GetPatternTool<VToolNormal>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -494,7 +494,7 @@ QDomElement VPatternRecipe::Normal(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Bisector(const VToolRecord &record)
 {
-    VToolBisector *tool = GetPatternTool<VToolBisector>(record.getId());
+    auto *tool = GetPatternTool<VToolBisector>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -511,7 +511,7 @@ QDomElement VPatternRecipe::Bisector(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::LineIntersect(const VToolRecord &record)
 {
-    VToolLineIntersect *tool = GetPatternTool<VToolLineIntersect>(record.getId());
+    auto *tool = GetPatternTool<VToolLineIntersect>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -528,7 +528,7 @@ QDomElement VPatternRecipe::LineIntersect(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Spline(const VToolRecord &record)
 {
-    VToolSpline *tool = GetPatternTool<VToolSpline>(record.getId());
+    auto *tool = GetPatternTool<VToolSpline>(record.getId());
     VSpline spl = tool->getSpline();
 
     QDomElement step = createElement(TagStep);
@@ -559,7 +559,7 @@ QDomElement VPatternRecipe::Spline(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CubicBezier(const VToolRecord &record)
 {
-    VToolCubicBezier *tool = GetPatternTool<VToolCubicBezier>(record.getId());
+    auto *tool = GetPatternTool<VToolCubicBezier>(record.getId());
     VCubicBezier spl = tool->getSpline();
 
     QDomElement step = createElement(TagStep);
@@ -578,7 +578,7 @@ QDomElement VPatternRecipe::CubicBezier(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Arc(const VToolRecord &record)
 {
-    VToolArc *tool = GetPatternTool<VToolArc>(record.getId());
+    auto *tool = GetPatternTool<VToolArc>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -597,7 +597,7 @@ QDomElement VPatternRecipe::Arc(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::ArcWithLength(const VToolRecord &record)
 {
-    VToolArcWithLength *tool = GetPatternTool<VToolArcWithLength>(record.getId());
+    auto *tool = GetPatternTool<VToolArcWithLength>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -615,7 +615,7 @@ QDomElement VPatternRecipe::ArcWithLength(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
 {
-    VToolSplinePath *tool = GetPatternTool<VToolSplinePath>(record.getId());
+    auto *tool = GetPatternTool<VToolSplinePath>(record.getId());
     VSplinePath spl = tool->getSplinePath();
 
     QDomElement step = createElement(TagStep);
@@ -662,7 +662,7 @@ QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CubicBezierPath(const VToolRecord &record)
 {
-    VToolCubicBezierPath *tool = GetPatternTool<VToolCubicBezierPath>(record.getId());
+    auto *tool = GetPatternTool<VToolCubicBezierPath>(record.getId());
     VCubicBezierPath spl = tool->getSplinePath();
 
     QDomElement step = createElement(TagStep);
@@ -696,7 +696,7 @@ QDomElement VPatternRecipe::CubicBezierPath(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointOfContact(const VToolRecord &record)
 {
-    VToolPointOfContact *tool = GetPatternTool<VToolPointOfContact>(record.getId());
+    auto *tool = GetPatternTool<VToolPointOfContact>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -712,7 +712,7 @@ QDomElement VPatternRecipe::PointOfContact(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Height(const VToolRecord &record)
 {
-    VToolHeight *tool = GetPatternTool<VToolHeight>(record.getId());
+    auto *tool = GetPatternTool<VToolHeight>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -728,7 +728,7 @@ QDomElement VPatternRecipe::Height(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::Triangle(const VToolRecord &record)
 {
-    VToolTriangle *tool = GetPatternTool<VToolTriangle>(record.getId());
+    auto *tool = GetPatternTool<VToolTriangle>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -744,7 +744,7 @@ QDomElement VPatternRecipe::Triangle(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointOfIntersection(const VToolRecord &record)
 {
-    VToolPointOfIntersection *tool = GetPatternTool<VToolPointOfIntersection>(record.getId());
+    auto *tool = GetPatternTool<VToolPointOfIntersection>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -758,7 +758,7 @@ QDomElement VPatternRecipe::PointOfIntersection(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
 {
-    VToolCutArc *tool = GetPatternTool<VToolCutArc>(record.getId());
+    auto *tool = GetPatternTool<VToolCutArc>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -772,7 +772,7 @@ QDomElement VPatternRecipe::CutArc(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
 {
-    VToolCutSpline *tool = GetPatternTool<VToolCutSpline>(record.getId());
+    auto *tool = GetPatternTool<VToolCutSpline>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -786,7 +786,7 @@ QDomElement VPatternRecipe::CutSpline(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
 {
-    VToolCutSplinePath *tool = GetPatternTool<VToolCutSplinePath>(record.getId());
+    auto *tool = GetPatternTool<VToolCutSplinePath>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -800,7 +800,7 @@ QDomElement VPatternRecipe::CutSplinePath(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::LineIntersectAxis(const VToolRecord &record)
 {
-    VToolLineIntersectAxis *tool = GetPatternTool<VToolLineIntersectAxis>(record.getId());
+    auto *tool = GetPatternTool<VToolLineIntersectAxis>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -817,7 +817,7 @@ QDomElement VPatternRecipe::LineIntersectAxis(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::CurveIntersectAxis(const VToolRecord &record)
 {
-    VToolCurveIntersectAxis *tool = GetPatternTool<VToolCurveIntersectAxis>(record.getId());
+    auto *tool = GetPatternTool<VToolCurveIntersectAxis>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -833,7 +833,7 @@ QDomElement VPatternRecipe::CurveIntersectAxis(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record)
 {
-    VToolPointOfIntersectionArcs *tool = GetPatternTool<VToolPointOfIntersectionArcs>(record.getId());
+    auto *tool = GetPatternTool<VToolPointOfIntersectionArcs>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -848,7 +848,7 @@ QDomElement VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointOfIntersectionCircles(const VToolRecord &record)
 {
-    VToolPointOfIntersectionCircles *tool = GetPatternTool<VToolPointOfIntersectionCircles>(record.getId());
+    auto *tool = GetPatternTool<VToolPointOfIntersectionCircles>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -865,7 +865,7 @@ QDomElement VPatternRecipe::PointOfIntersectionCircles(const VToolRecord &record
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record)
 {
-    VToolPointOfIntersectionCurves *tool = GetPatternTool<VToolPointOfIntersectionCurves>(record.getId());
+    auto *tool = GetPatternTool<VToolPointOfIntersectionCurves>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -881,7 +881,7 @@ QDomElement VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointFromCircleAndTangent(const VToolRecord &record)
 {
-    VToolPointFromCircleAndTangent *tool = GetPatternTool<VToolPointFromCircleAndTangent>(record.getId());
+    auto *tool = GetPatternTool<VToolPointFromCircleAndTangent>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -897,7 +897,7 @@ QDomElement VPatternRecipe::PointFromCircleAndTangent(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::PointFromArcAndTangent(const VToolRecord &record)
 {
-    VToolPointFromArcAndTangent *tool = GetPatternTool<VToolPointFromArcAndTangent>(record.getId());
+    auto *tool = GetPatternTool<VToolPointFromArcAndTangent>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -912,7 +912,7 @@ QDomElement VPatternRecipe::PointFromArcAndTangent(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::TrueDarts(const VToolRecord &record)
 {
-    VToolTrueDarts *tool = GetPatternTool<VToolTrueDarts>(record.getId());
+    auto *tool = GetPatternTool<VToolTrueDarts>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
@@ -931,7 +931,7 @@ QDomElement VPatternRecipe::TrueDarts(const VToolRecord &record)
 //---------------------------------------------------------------------------------------------------------------------
 QDomElement VPatternRecipe::EllipticalArc(const VToolRecord &record)
 {
-    VToolEllipticalArc *tool = GetPatternTool<VToolEllipticalArc>(record.getId());
+    auto *tool = GetPatternTool<VToolEllipticalArc>(record.getId());
 
     QDomElement step = createElement(TagStep);
 
