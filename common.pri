@@ -201,20 +201,21 @@ defineReplace(enable_ccache){
         } else {
             # ccache support only Unix systems.
             unix:{
-                # This need for turn on ccache.
-                *g++*{
-                    QMAKE_CC = ccache gcc
-                    export(QMAKE_CC) # export value to global variable.
+                equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 8):greaterThan(QT_PATCH_VERSION, 1) {
+                    # since Qt 5.9.2 we have built-in support for ccache
+                    CONFIG += ccache
+                    export(CONFIG) # export value to global variable.
+                } else {
+                    ccache_prefix = ccache
 
-                    QMAKE_CXX = ccache g++
-                    export(QMAKE_CXX) # export value to global variable.
-                }
-                *clang*{
-                    QMAKE_CC = ccache clang
-                    export(QMAKE_CC) # export value to global variable.
+                    for(tool, $$list(QMAKE_CC QMAKE_CXX QMAKE_LINK QMAKE_LINK_SHLIB QMAKE_LINK_C)): \
+                        $$tool = $$ccache_prefix $$eval($$tool)
 
-                    QMAKE_CXX = ccache clang++
-                    export(QMAKE_CXX) # export value to global variable.
+                    export(QMAKE_CC)
+                    export(QMAKE_CXX)
+                    export(QMAKE_LINK)
+                    export(QMAKE_LINK_SHLIB)
+                    export(QMAKE_LINK_C)
                 }
             } else {
                 $$set_PCH()
