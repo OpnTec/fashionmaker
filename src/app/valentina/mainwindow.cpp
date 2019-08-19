@@ -1487,6 +1487,18 @@ void MainWindow::changeEvent(QEvent *event)
         redoAction->setText(tr("&Redo"));
         statusBar()->showMessage(tr("Changes applied."), 5000);
         patternPieceLabel->setText(tr("Pattern Piece:"));
+
+        if (qApp->GetDrawMode() == Draw::Calculation)
+        {
+            ui->dockWidgetGroups->setWindowTitle(tr("Groups of visibility"));
+            ui->dockWidgetGroups->setToolTip(tr("Contains all visibility groups"));
+        }
+        else
+        {
+            ui->dockWidgetGroups->setWindowTitle(tr("Details"));
+            ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
+        }
+
         UpdateWindowTitle();
         emit sceneDetails->LanguageChanged();
     }
