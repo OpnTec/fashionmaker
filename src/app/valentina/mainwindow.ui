@@ -614,6 +614,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Curved path tool which uses point as control handle</string>
+          </property>
           <property name="text">
            <string notr="true">...</string>
           </property>
