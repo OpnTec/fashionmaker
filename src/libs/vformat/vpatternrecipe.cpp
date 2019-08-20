@@ -1027,12 +1027,12 @@ inline void VPatternRecipe::Formula(QDomElement &step, const VFormula &formula, 
     if (formula.error())
     {
         throw VExceptionInvalidHistory(QObject::tr("Invalid formula '%1' for tool with id '%2'. %3.")
-                                       .arg(formula.GetFormula(FormulaType::FromSystem))
+                                       .arg(formula.GetFormula(FormulaType::ToSystem))
                                        .arg(formula.getToolId())
                                        .arg(formula.Reason()));
     }
 
-    SetAttribute(step, formulaStr, formula.GetFormula(FormulaType::FromSystem));
+    SetAttribute(step, formulaStr, formula.GetFormula(FormulaType::ToSystem));
     SetAttribute(step, formulaValue, formula.getDoubleValue());
 }
 
