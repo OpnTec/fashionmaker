@@ -86,6 +86,7 @@ public:
     explicit VAbstractPattern(QObject *parent = nullptr);
     virtual ~VAbstractPattern();
 
+    bool           RequiresMeasurements() const;
     QStringList    ListMeasurements() const;
     QVector<VFormulaField> ListExpressions() const;
     QVector<VFormulaField> ListIncrementExpressions() const;

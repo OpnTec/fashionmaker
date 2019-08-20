@@ -4745,22 +4745,40 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
             m_curFileFormatVersion = converter->GetCurrentFormatVersion();
             m_curFileFormatVersionStr = converter->GetFormatVersionStr();
             doc->setXMLContent(converter->Convert());
-            if (!customMeasureFile.isEmpty())
-            {
-                doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
-            }
-            qApp->setPatternUnit(doc->MUnit());
         }
-        else
+
+        if (!customMeasureFile.isEmpty())
         {
-            if (!customMeasureFile.isEmpty())
-            {
-                doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
-            }
-            qApp->setPatternUnit(doc->MUnit());
+            doc->SetMPath(RelativeMPath(fileName, customMeasureFile));
         }
-        const QString path = AbsoluteMPath(fileName, doc->MPath());
+        qApp->setPatternUnit(doc->MUnit());
+
+        QString path = AbsoluteMPath(fileName, doc->MPath());
         QString fixedMPath;
+
+        // See issue #976. Pattern can lost link to measurements
+        if (path.isEmpty() && doc->RequiresMeasurements())
+        {
+            const QString fakeName = QStringLiteral("unknown_measurements.vit");
+            // Check if exist
+            fixedMPath = CheckPathToMeasurements(fileName, fakeName);
+            if (fixedMPath.isEmpty())
+            {
+                qApp->setOpeningPattern();// End opening file
+                Clear();
+                qCCritical(vMainWindow, "%s", qUtf8Printable(tr("The measurements file '%1' could not be found.")
+                                                             .arg(fakeName)));
+                if (not VApplication::IsGUIMode())
+                {
+                    qApp->exit(V_EX_NOINPUT);
+                }
+                return false;
+            }
+            else
+            {
+                path = AbsoluteMPath(fileName, doc->MPath());
+            }
+        }
 
         if (not path.isEmpty())
         {

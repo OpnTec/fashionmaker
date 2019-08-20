@@ -299,6 +299,12 @@ VAbstractPattern::~VAbstractPattern()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::RequiresMeasurements() const
+{
+    return not ListMeasurements().isEmpty();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QStringList VAbstractPattern::ListMeasurements() const
 {
     const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
