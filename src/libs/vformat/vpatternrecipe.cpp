@@ -118,6 +118,8 @@ QDomElement VPatternRecipe::Prerequisite()
 
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("valentina"), APP_VERSION_STR));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("unit"), UnitsToStr(qApp->patternUnit())));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("author"), m_pattern->GetCompanyName()));
+    prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("pattenName"), m_pattern->GetPatternName()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("description"), m_pattern->GetDescription()));
     prerequisiteElement.appendChild(CreateElementWithText(QStringLiteral("notes"), m_pattern->GetNotes()));
     prerequisiteElement.appendChild(Measurements());
