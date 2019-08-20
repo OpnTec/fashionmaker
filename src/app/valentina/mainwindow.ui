@@ -854,7 +854,7 @@
            <bool>false</bool>
           </property>
           <property name="toolTip">
-           <string>Point intersect arc and axis</string>
+           <string>Point of intersection arc and axis</string>
           </property>
           <property name="text">
            <string notr="true">...</string>
