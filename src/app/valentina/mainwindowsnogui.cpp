@@ -222,11 +222,11 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
         m_taskbarProgress->setVisible(true);
         m_taskbarProgress->setValue(0);
-        m_taskbarProgress->setMaximum(lGenerator.GetNestingTime());
+        m_taskbarProgress->setMaximum(lGenerator.GetNestingTime()*60);
         progressTimer = new QTimer(this);
-        connect(progressTimer, &QTimer::timeout, this, [this, timer, &lGenerator]()
+        connect(progressTimer, &QTimer::timeout, this, [this, timer]()
         {
-            m_taskbarProgress->setValue(static_cast<int>(timer.elapsed()/60000));
+            m_taskbarProgress->setValue(static_cast<int>(timer.elapsed()/1000));
         });
         progressTimer->start(1000);
 #endif
