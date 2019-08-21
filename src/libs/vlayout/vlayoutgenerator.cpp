@@ -427,11 +427,6 @@ bool VLayoutGenerator::IsPortrait() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutGenerator::GatherPages()
 {
-    if (papers.size() < 2)
-    {
-        return;
-    }
-
     QList<QList<VLayoutPiece>> nDetails;
     qreal length = 0;
     int j = 0; // papers count
