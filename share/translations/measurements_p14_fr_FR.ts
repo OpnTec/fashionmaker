@@ -400,6 +400,12 @@
         <translation>Longueur verticale de l&apos;Encolure Dos à la Taille Côté. (&apos;Hauteur: Encolure dos&apos; - &apos;Hauteur: Taille côté&apos;).</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
+        <source>Vertical height from Waist Back to floor.</source>
+        <comment>Full measurement description.</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="381"/>
         <source>width_shoulder</source>
         <comment>Name in a formula. Don&apos;t use math symbols and space in name!!!!</comment>
@@ -963,10 +969,9 @@
         <translation>Hauteur Taille Dos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="365"/>
         <source>Vertical height from Waist Back to floor. (&apos;Height: Waist Front&apos;&apos; - &apos;Leg: Crotch to floor&apos;&apos;).</source>
         <comment>Full measurement description.</comment>
-        <translation>Hauteur Verticale partant de la Taille Dos jusqu&apos;au sol. (Hauteur: Taille Devant&quot; - &quot;Jambe: Fourche jusqu&apos;au sol&quot;).</translation>
+        <translation type="vanished">Hauteur Verticale partant de la Taille Dos jusqu&apos;au sol. (Hauteur: Taille Devant&quot; - &quot;Jambe: Fourche jusqu&apos;au sol&quot;).</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="445"/>

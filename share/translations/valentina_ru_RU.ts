@@ -54,14 +54,14 @@
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить видимость группы</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить видимость нескольких групп</translation>
     </message>
 </context>
 <context>
@@ -2747,6 +2747,22 @@
         <source>Elliptical arc</source>
         <translation>Эллиптическая дуга</translation>
     </message>
+    <message>
+        <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move objects. Suffix &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -3013,7 +3029,7 @@
     </message>
     <message>
         <source>Nesting. Please, wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Создается раскладка. Пожалуйста, подождите.</translation>
     </message>
     <message>
         <source>Time left:</source>
@@ -3315,7 +3331,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Manual priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Ручной приоритет</translation>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
@@ -3323,7 +3339,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nest quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Разложить согласно количеству</translation>
     </message>
 </context>
 <context>
@@ -4616,11 +4632,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation>Введите первую точку области вырезания</translation>
+        <translation>Продлите первую точку к области вырезания</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation>Введите последнюю точку области вырезания</translation>
+        <translation>Продлите последнюю точку к области вырезания</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
@@ -7296,7 +7312,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation>Точка пересечения дуги и оси</translation>
+        <translation type="vanished">Точка пересечения дуги и оси</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -8161,19 +8177,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Groups of visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы видимости</translation>
     </message>
     <message>
         <source>Export recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать рецепт</translation>
     </message>
     <message>
         <source>Hide main path</source>
-        <translation type="unfinished">Прятать главный контур</translation>
-    </message>
-    <message>
-        <source>Globally hide pieces main path</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Прятать главный контур</translation>
     </message>
     <message>
         <source>Recipe files</source>
@@ -8185,6 +8197,22 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curved path tool which uses point as control handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection arc and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Globally show pieces main path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10756,7 +10784,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Приоритет:</translation>
     </message>
     <message>
         <source>Controls priority in layout. 0 - no priority.</source>
@@ -11876,10 +11904,6 @@ Do you want to save your changes?</source>
         <translation>Время</translation>
     </message>
     <message>
-        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Coefficient</source>
         <translation>Коэффициент</translation>
     </message>
@@ -11889,7 +11913,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Сoefficient must be in range from 0 to 100.</source>
-        <translation>Коэффициент должен быть в диапазоне от 0 до 100.</translation>
+        <translation type="vanished">Коэффициент должен быть в диапазоне от 0 до 100.</translation>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
@@ -11897,6 +11921,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15104,6 +15136,10 @@ Do you want to save your changes?</source>
         <source>invert selection</source>
         <translation>инвертировать выбор</translation>
     </message>
+    <message>
+        <source>Hide not in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VWidgetGroups</name>
@@ -15121,19 +15157,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать</translation>
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть все</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать все</translation>
     </message>
 </context>
 <context>

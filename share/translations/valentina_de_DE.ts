@@ -2747,6 +2747,22 @@
         <source>Elliptical arc</source>
         <translation>Elliptischer Bogen</translation>
     </message>
+    <message>
+        <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move objects. Suffix &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogIncrements</name>
@@ -7294,7 +7310,7 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Point intersect arc and axis</source>
-        <translation>Punkt schneidet Kreisbogen und Achse</translation>
+        <translation type="vanished">Punkt schneidet Kreisbogen und Achse</translation>
     </message>
     <message>
         <source>Seam allowance tool</source>
@@ -8166,14 +8182,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Globally hide pieces main path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8183,6 +8191,22 @@ Sollen die Änderungen gespeichert werden?</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curved path tool which uses point as control handle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Point of intersection arc and axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Globally show pieces main path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11830,10 +11854,6 @@ Do you want to save your changes?</source>
         <translation>Uhrzeit</translation>
     </message>
     <message>
-        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Сoefficient must be in range from 0 to 100. Default value 0.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Coefficient</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11842,15 +11862,19 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Сoefficient must be in range from 0 to 100.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Follow manual priority over priority by square (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coefficient must be in range from 0 to 100.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15010,6 +15034,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>invert selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide not in layout</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
