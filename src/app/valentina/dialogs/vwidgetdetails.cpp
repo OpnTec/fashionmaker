@@ -156,6 +156,8 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
     ui->tableWidget->resizeRowsToContents();
 
     ui->tableWidget->setCurrentCell(selectedRow, 0);
+
+    on_checkBoxHideNotInLayout_stateChanged(); // Trigger hide for action from context menu
 }
 
 //---------------------------------------------------------------------------------------------------------------------
