@@ -104,7 +104,7 @@ private:
     bool         SheetContains(const QRectF &rect) const;
 
     void CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge);
-    void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const;
+    static void RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle);
 
     void Rotate(int number);
     void FollowGrainline();

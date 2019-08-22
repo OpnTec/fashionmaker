@@ -414,7 +414,7 @@ void VPosition::CombineEdges(VLayoutPiece &detail, const QLineF &globalEdge, int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle) const
+void VPosition::RotateEdges(VLayoutPiece &detail, const QLineF &globalEdge, int dEdge, qreal angle)
 {
     QLineF detailEdge = detail.LayoutEdge(dEdge);
     // Now we move detail to position near to global contour edge.
