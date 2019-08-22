@@ -42,8 +42,12 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VBestSquareData : public QSharedData
 {
 public:
+    VBestSquareData()
+    {}
+
     VBestSquareData(const QSizeF &sheetSize, bool saveLength, bool isPortrait)
-        : sheetSize(sheetSize),
+        : isValid(true),
+          sheetSize(sheetSize),
           saveLength(saveLength),
           isPortrait(isPortrait)
     {
@@ -52,6 +56,7 @@ public:
 
     VBestSquareData(const VBestSquareData &res)
         : QSharedData(res),
+          isValid(res.isValid),
           sheetSize(res.sheetSize),
           valideResult(res.valideResult),
           saveLength(res.saveLength),
@@ -63,9 +68,10 @@ public:
 
     ~VBestSquareData() {}
 
-    QSizeF sheetSize;
+    bool isValid{false};
+    QSizeF sheetSize{};
     bool valideResult{false};
-    bool saveLength;
+    bool saveLength{false};
     VBestSquareResData data{};
     bool isPortrait{true};
     bool terminatedByException{false};

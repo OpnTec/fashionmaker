@@ -42,6 +42,11 @@ Q_DECL_CONSTEXPR inline qint64 Square(QSizeF size)
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+VBestSquare::VBestSquare()
+    : d(new VBestSquareData())
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VBestSquare::VBestSquare(QSizeF sheetSize, bool saveLength, bool isPortrait)
     : d(new VBestSquareData(sheetSize, saveLength, isPortrait))
 {}
@@ -111,7 +116,7 @@ void VBestSquare::NewResult(const VBestSquareResData &data)
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquare &best)
 {
-    if (best.HasValidResult() && d->saveLength == best.IsSaveLength())
+    if (best.d->isValid && best.HasValidResult() && d->saveLength == best.IsSaveLength())
     {
         NewResult(best.BestResultData());
     }

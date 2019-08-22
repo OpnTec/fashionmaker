@@ -29,6 +29,8 @@
 #include "vposition.h"
 
 #include <QDir>
+#include <QtConcurrent>
+#include <QFutureWatcher>
 #include <QImage>
 #include <QLineF>
 #include <QPainter>
@@ -59,8 +61,12 @@
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
+VPosition::VPosition()
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength)
-    : QRunnable(),
+    : m_isValid(true),
       m_bestResult(VBestSquare(data.gContour.GetSize(), saveLength, data.isOriginPaperOrientationPortrait)),
       m_data(data),
       stop(stop),
@@ -75,6 +81,11 @@ VPosition::VPosition(const VPositionData &data, std::atomic_bool *stop, bool sav
 //---------------------------------------------------------------------------------------------------------------------
 void VPosition::run()
 {
+    if (not m_isValid)
+    {
+        return;
+    }
+
     if (stop->load())
     {
         return;
@@ -82,7 +93,21 @@ void VPosition::run()
 
     try
     {
-        FindBestPosition();
+        for (int i=1; i<= m_data.detail.LayoutEdgesCount(); ++i)
+        {
+            if (stop->load())
+            {
+                return;
+            }
+
+            m_data.i = i;
+            FindBestPosition();
+
+            if (stop->load())
+            {
+                return;
+            }
+        }
     }
     catch (const VException &e)
     {
@@ -125,33 +150,33 @@ VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool
         return bestResult;//Not enough edges
     }
 
-    QScopedPointer<QThreadPool> thread_pool(new QThreadPool());
-    QVector<VPosition *> threads;
-
-    auto Cleanup = qScopeGuard([&threads]
-    {
-        Q_ASSERT(not threads.isEmpty());
-        qDeleteAll(threads.begin(), threads.end());
-    });
+    QFutureWatcher<VBestSquare> watcher;
+    QVector<VPosition> jobs;
+    jobs.reserve(data.gContour.GlobalEdgesCount());
 
     for (int j=1; j <= data.gContour.GlobalEdgesCount(); ++j)
     {
-        QCoreApplication::processEvents();
+        VPositionData linkedData = data;
+        linkedData.j = j;
 
-        for (int i=1; i<= detailEdgesCount; ++i)
-        {
-            VPositionData linkedData = data;
-            linkedData.i = i;
-            linkedData.j = j;
-
-            auto *thread = new VPosition(linkedData, stop, saveLength);
-            thread->setAutoDelete(false);
-            threads.append(thread);
-            thread_pool->start(thread);
-        }
+        jobs.append(VPosition(linkedData, stop, saveLength));
     }
 
-    Q_ASSERT(not threads.isEmpty());
+    Q_ASSERT(not jobs.isEmpty());
+
+    std::function<VBestSquare (VPosition position)> Nest = [](VPosition position)
+    {
+        position.run();
+        return position.getBestResult();
+    };
+
+    watcher.setFuture(QtConcurrent::mapped(jobs, Nest));
+
+    while(not watcher.isStarted())
+    {
+        QCoreApplication::processEvents();
+        QThread::msleep(250);
+    }
 
     // Wait for done
     do
@@ -159,16 +184,24 @@ VBestSquare VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool
         QCoreApplication::processEvents();
         QThread::msleep(250);
     }
-    while(thread_pool->activeThreadCount() > 0 && not stop->load());
+    while(watcher.isRunning() && not stop->load());
 
     if (stop->load())
     {
+        do
+        {
+            QCoreApplication::processEvents();
+            QThread::msleep(250);
+        }
+        while(watcher.isRunning());
+
         return bestResult;
     }
 
-    for (auto &thread : threads)
+    QList<VBestSquare> results = watcher.future().results();
+    for (auto &result : results)
     {
-        bestResult.NewResult(thread->getBestResult());
+        bestResult.NewResult(result);
     }
 
     return bestResult;
@@ -427,12 +460,22 @@ void VPosition::FollowGrainline()
         detailGrainline = workDetail.GetMatrix().map(detailGrainline);
     }
 
+    if (stop->load())
+    {
+        return;
+    }
+
     const qreal angle = detailGrainline.angleTo(FabricGrainline());
 
     if (m_data.detail.GrainlineArrowType() == ArrowType::atBoth ||
             m_data.detail.GrainlineArrowType() == ArrowType::atFront)
     {
         RotateOnAngle(angle);
+    }
+
+    if (stop->load())
+    {
+        return;
     }
 
     if (m_data.detail.GrainlineArrowType() == ArrowType::atBoth ||
@@ -454,6 +497,11 @@ void VPosition::FindBestPosition()
         if (CheckCombineEdges(workDetail, m_data.j, dEdge))
         {
             SaveCandidate(m_bestResult, workDetail, m_data.j, dEdge, BestFrom::Combine);
+        }
+
+        if (stop->load())
+        {
+            return;
         }
 
         if (m_data.rotate)

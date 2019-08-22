@@ -53,27 +53,28 @@ struct VPositionData
     bool isOriginPaperOrientationPortrait{true};
 };
 
-class VPosition : public QRunnable
+class VPosition
 {
 public:
+    VPosition();
     VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
-    virtual ~VPosition() override = default;
+    virtual ~VPosition()= default;
 
-    virtual void run() override;
+    virtual void run();
 
     VBestSquare getBestResult() const;
 
     static VBestSquare ArrangeDetail(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
 
 private:
-    Q_DISABLE_COPY(VPosition)
-    VBestSquare m_bestResult;
-    VPositionData m_data;
-    std::atomic_bool *stop;
+    bool m_isValid{false};
+    VBestSquare m_bestResult{};
+    VPositionData m_data{};
+    std::atomic_bool *stop{nullptr};
     /**
      * @brief angle_between keep angle between global edge and detail edge. Need for optimization rotation.
      */
-    qreal angle_between;
+    qreal angle_between{0};
 
     enum class CrossingType : char
     {
