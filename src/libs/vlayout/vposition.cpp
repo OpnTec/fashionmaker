@@ -48,6 +48,7 @@
 #include <QStringDataPtr>
 #include <QThreadPool>
 #include <Qt>
+#include <functional>
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
