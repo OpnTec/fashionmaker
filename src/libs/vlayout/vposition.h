@@ -53,6 +53,9 @@ struct VPositionData
     bool isOriginPaperOrientationPortrait{true};
 };
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Weffc++")
+
 class VPosition
 {
 public:
@@ -110,6 +113,8 @@ private:
 
     void FindBestPosition();
 };
+
+QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
