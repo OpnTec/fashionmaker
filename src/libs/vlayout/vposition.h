@@ -61,6 +61,9 @@ class VPosition
 public:
     VPosition();
     VPosition(const VPositionData &data, std::atomic_bool *stop, bool saveLength);
+    VPosition(const VPosition&) = default;
+    VPosition& operator=(const VPosition&) = default;
+    VPosition& operator=(VPosition&&) = default;
     virtual ~VPosition()= default;
 
     virtual void run();
