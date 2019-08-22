@@ -22,7 +22,7 @@ class WorkerClass : public QObject
   Q_OBJECT
 
 public:
-    WorkerClass(QThread *thread)
+    explicit WorkerClass(QThread *thread)
     {
         moveToThread(thread);
         connect(QThread::currentThread(), &QThread::finished, this, &WorkerClass::deleteLater);
