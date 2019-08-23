@@ -66,6 +66,17 @@ int main(int argc, char *argv[])
 
     app.InitOptions();
 
+    if (FvUpdater::IsStaledTestBuild())
+    {
+        qWarning() << QApplication::translate("Valentina",
+                                              "This test build is older than %1 days. To provide you with better "
+                                              "quality service we restrict the lifetime you can use a test build. "
+                                              "To continue using Valentina please update to newer test build. The "
+                                              "application will be shut down.")
+                       .arg(FvUpdater::testBuildLifetime);
+        return V_EX_UNAVAILABLE;
+    }
+
     if (VApplication::IsGUIMode())
     {
         // Set feed URL before doing anything else

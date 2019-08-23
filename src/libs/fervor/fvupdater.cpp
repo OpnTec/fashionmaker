@@ -53,6 +53,8 @@
 #include "fvavailableupdate.h"
 #include "fvupdatewindow.h"
 
+const int FvUpdater::testBuildLifetime = 90;
+
 namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, defaultFeedURL,
@@ -130,6 +132,20 @@ bool FvUpdater::IsTestBuild()
 {
     const int version = FvUpdater::CurrentVersion();
     return (version != 0x0 && version != APP_VERSION);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool FvUpdater::IsStaledTestBuild()
+{
+    if (IsTestBuild())
+    {
+        QDate builtDate = QLocale::c().toDate(QStringLiteral(__DATE__).simplified(), QStringLiteral("MMM d yyyy"));
+        return builtDate.daysTo(QDate::currentDate()) > testBuildLifetime;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
