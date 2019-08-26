@@ -62,6 +62,7 @@
 - Changing settings for move and rotate tools through property browser does not take in count previous change for label point and Show label option.
 - Fix locking file after double save as.
 - Key --ignoremargins still required margins.
+- Fix inverse trigonometric functions. Wrong work with degrees.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
