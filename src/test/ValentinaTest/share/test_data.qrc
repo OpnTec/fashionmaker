@@ -4,5 +4,7 @@
         <file>Issue_620/output.json</file>
         <file>loop_by_intersection/input.json</file>
         <file>loop_by_intersection/output.json</file>
+        <file>loop_start_point_on_line/input.json</file>
+        <file>loop_start_point_on_line/output.json</file>
     </qresource>
 </RCC>

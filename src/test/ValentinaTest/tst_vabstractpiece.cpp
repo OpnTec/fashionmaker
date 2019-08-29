@@ -202,6 +202,12 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://loop_by_intersection/input.json"),
                      QStringLiteral("://loop_by_intersection/output.json"),
                      39.685039370078741 /*seam allowance width (1.05 cm)*/);
+
+    // See file src/app/share/collection/bugs/loop_start_point_on_line.val (private collection)
+    ASSERT_TEST_CASE("Loop for start point on line",
+                     QStringLiteral("://loop_start_point_on_line/input.json"),
+                     QStringLiteral("://loop_start_point_on_line/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

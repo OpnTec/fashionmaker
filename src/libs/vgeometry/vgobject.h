@@ -114,9 +114,6 @@ protected:
 private:
     QSharedDataPointer<VGObjectData> d;
 
-    static double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t);
-    static double GetEpsilon(const QPointF &p1, const QPointF &p2, qreal accuracy);
-
     static int     PointInCircle (const QPointF &p, const QPointF &center, qreal radius);
 };
 

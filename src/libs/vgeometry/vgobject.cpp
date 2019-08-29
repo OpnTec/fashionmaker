@@ -41,6 +41,48 @@
 #include "../ifc/ifcdef.h"
 #include "vgobject_p.h"
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief PerpDotProduct Calculates the area of the parallelogram of the three points.
+ * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
+ * @return 2 * triangleArea(a,b,c)
+ */
+double PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
+{
+    return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief GetEpsilon solve the floating-point accuraccy problem.
+ *
+ * There is the floating-point accuraccy problem, so instead of checking against zero, some epsilon value has to be
+ * used. Because the size of the pdp value depends on the length of the vectors, no static value can be used. One
+ * approach is to compare the pdp/area value to the fraction of another area which also depends on the length of the
+ * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
+ * is controled by variable accuracyPointOnLine
+ */
+double GetEpsilon(const QPointF &t, QPointF p1, QPointF p2, qreal accuracy)
+{
+    QLineF edge1(p1, p2);
+    QLineF edge2(p1, t);
+    if (edge2.length() > edge1.length())
+    {
+        edge1.setLength(edge2.length());
+        p1 = edge1.p1();
+        p2 = edge1.p2();
+    }
+
+    QLineF line(p1, p2);
+    line.setAngle(line.angle() + 90);
+    line.setLength(accuracy); // less than accuracy means the same point
+
+    return qAbs(PerpDotProduct(p1, p2, line.p2()));
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VGObject default constructor.
@@ -526,39 +568,10 @@ QPointF VGObject::CorrectDistortion(const QPointF &t, const QPointF &p1, const Q
 bool VGObject::IsPointOnLineviaPDP(const QPointF &t, const QPointF &p1, const QPointF &p2, qreal accuracy)
 {
     const double p = qAbs(PerpDotProduct(p1, p2, t));
-    const double e = GetEpsilon(p1, p2, accuracy);
+    const double e = GetEpsilon(t, p1, p2, accuracy);
+
     // We can't use common "<=" here because of the floating-point accuraccy problem
     return p < e || VFuzzyComparePossibleNulls(p, e);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief PerpDotProduct Calculates the area of the parallelogram of the three points.
- * This is actually the same as the area of the triangle defined by the three points, multiplied by 2.
- * @return 2 * triangleArea(a,b,c)
- */
-double VGObject::PerpDotProduct(const QPointF &p1, const QPointF &p2, const QPointF &t)
-{
-    return (p1.x() - t.x()) * (p2.y() - t.y()) - (p1.y() - t.y()) * (p2.x() - t.x());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief GetEpsilon solve the floating-point accuraccy problem.
- *
- * There is the floating-point accuraccy problem, so instead of checking against zero, some epsilon value has to be
- * used. Because the size of the pdp value depends on the length of the vectors, no static value can be used. One
- * approach is to compare the pdp/area value to the fraction of another area which also depends on the length of the
- * line e1=(p1, p2), e.g. the minimal area calucalted with PerpDotProduc() if point still not on the line. This distance
- * is controled by variable accuracyPointOnLine
- */
-double VGObject::GetEpsilon(const QPointF &p1, const QPointF &p2, qreal accuracy)
-{
-    QLineF line(p1, p2);
-    line.setAngle(line.angle() + 90);
-    line.setLength(accuracy); // less than accuracy means the same point
-
-    return qAbs(PerpDotProduct(p1, p2, line.p2()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -279,6 +279,7 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
     }
 
     int prev = -1;
+    int next = -1;
 
     QVector<T> buf2;
     //Remove point on line
@@ -287,23 +288,51 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
      // Unfortunatelly QLineF::intersect can't be used in this case because of the floating-point accuraccy problem.
         if (prev == -1)
         {
-            prev = (i == 0) ?  buf1.size() - 1 : i-1;
+            if (i == 0)
+            {
+                prev = buf1.size() - 1;
+                const T &prevPoint = buf1.at(prev);
+                const T &iPoint = buf1.at(i);
+                if (iPoint == prevPoint)
+                {
+                    prev = buf1.size() - 2;
+                }
+            }
+            else
+            {
+                prev = i-1;
+            }
         }
 
-        const int next = (i == buf1.size() - 1) ? 0 : i+1;
+        if (i == buf1.size() - 1)
+        {
+            next = 0;
+            const T &nextPoint = buf1.at(next);
+            const T &iPoint = buf1.at(i);
+            if (iPoint == nextPoint)
+            {
+                next = 1;
+            }
+        }
+        else
+        {
+            next = i+1;
+        }
 
         const T &iPoint = buf1.at(i);
         const T &prevPoint = buf1.at(prev);
         const T &nextPoint = buf1.at(next);
 
-        if (not (IsEkvPointOnLine(iPoint, prevPoint, nextPoint) && prevPoint == nextPoint/*not zigzag*/)
-                // If RemoveDublicates does not remove these points it is a valid case.
-                // Case where last point equal first point
-                || ((i == 0 || i == buf1.size() - 1) && (iPoint == prevPoint || iPoint == nextPoint)))
+        if (not IsEkvPointOnLine(iPoint, prevPoint, nextPoint))
         {
             buf2.append(iPoint);
             prev = -1;
         }
+    }
+
+    if (buf2.first() != buf2.last())
+    {
+        buf2.append(buf2.first());
     }
 
     buf2 = RemoveDublicates(buf2, false);
