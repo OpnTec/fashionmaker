@@ -38,7 +38,6 @@ public:
     explicit TST_VPiece(QObject *parent = nullptr);
 
 private slots:
-    void ClearLoop();
     void Issue620();
     void TestSAPassmark_data();
     void TestSAPassmark();
