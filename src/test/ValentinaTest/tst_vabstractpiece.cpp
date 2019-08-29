@@ -46,6 +46,17 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     QTest::addColumn<qreal>("width");
     QTest::addColumn<QVector<QPointF>>("ekvOrig");
 
+    auto ASSERT_TEST_CASE = [this](const char *title, const QString &input, const QString &output, qreal width)
+    {
+        QVector<VSAPoint> inputPoints;
+        AbstractTest::VectorFromJson(input, inputPoints);
+
+        QVector<QPointF> outputPoints;
+        AbstractTest::VectorFromJson(output, outputPoints);
+
+        QTest::newRow(title) << inputPoints << width << outputPoints;
+    };
+
     // See file src/app/share/collection/test/seamtest1.val
     QTest::newRow("Seam test 1. Piece. By angle.") << InputPointsSeamTest1PieceByAngle()
                                                    << 37.795275590551185 // seam allowance width
@@ -187,15 +198,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                                          << OutputPointsIssue923Test6_6();
 
     // See file src/app/share/collection/bugs/loop_by_intersection.val
-    QVector<VSAPoint> input;
-    AbstractTest::VectorFromJson(QStringLiteral("://input_loop_by_intersection.json"), input);
-
-    QVector<QPointF> output;
-    AbstractTest::VectorFromJson(QStringLiteral("://output_loop_by_intersection.json"), output);
-
-    QTest::newRow("Loop for angle by intersection") << input
-                                                    << 39.685039370078741 // seam allowance width (1.05 cm)
-                                                    << output;
+    ASSERT_TEST_CASE("Loop for angle by intersection",
+                     QStringLiteral("://loop_by_intersection/input.json"),
+                     QStringLiteral("://loop_by_intersection/output.json"),
+                     39.685039370078741 /*seam allowance width (1.05 cm)*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
