@@ -28,6 +28,7 @@
 
 #include "vspline.h"
 
+#include <QJsonObject>
 #include <QLineF>
 
 #include "vabstractcurve.h"
@@ -546,6 +547,24 @@ qreal VSpline::ParamT (const QPointF &pBt) const
     }
 
     return tx;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VSpline::ToJson() const
+{
+    QJsonObject object = VAbstractCubicBezier::ToJson();
+    object[QLatin1String("aScale")] = GetApproximationScale();
+    object[QLatin1String("p1")] = GetP1().ToJson();
+    object[QLatin1String("p4")] = GetP4().ToJson();
+    object[QLatin1String("angle1")] = GetStartAngle();
+    object[QLatin1String("angle1Formula")] = GetStartAngleFormula();
+    object[QLatin1String("angle2")] = GetEndAngle();
+    object[QLatin1String("angle2Formula")] = GetEndAngleFormula();
+    object[QLatin1String("c1Length")] = GetC1Length();
+    object[QLatin1String("c1LengthFormula")] = GetC1LengthFormula();
+    object[QLatin1String("c2Length")] = GetC2Length();
+    object[QLatin1String("c2LengthFormula")] = GetC2LengthFormula();
+    return object;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -35,6 +35,7 @@
 #include "../vpatterndb/floatItemData/vgrainlinedata.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
+#include "testpath.h"
 
 #include <QLineF>
 #include <QSet>
@@ -535,21 +536,6 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
-void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
-{
-    QJsonArray pointsArray;
-    for (auto point: points)
-    {
-        QJsonObject pointObject;
-        pointObject[QLatin1String("type")] = "QPointF";
-        pointObject[QLatin1String("x")] = point.x();
-        pointObject[QLatin1String("y")] = point.y();
-
-        pointsArray.append(pointObject);
-    }
-    json[QLatin1String("vector")] = pointsArray;
-}
-
 //---------------------------------------------------------------------------------------------------------------------
 void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
 {
@@ -559,23 +545,6 @@ void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
         pointsArray.append(point.toJson());
     }
     json[QLatin1String("vector")] = pointsArray;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DumpVector(const QVector<QPointF> &points)
-{
-    QTemporaryFile temp; // Go to tmp folder to find dump
-    temp.setAutoRemove(false); // Remove dump manually
-    if (temp.open())
-    {
-        QJsonObject vectorObject;
-        VectorToJson(points, vectorObject);
-        QJsonDocument vector(vectorObject);
-
-        QTextStream out(&temp);
-        out << vector.toJson();
-        out.flush();
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

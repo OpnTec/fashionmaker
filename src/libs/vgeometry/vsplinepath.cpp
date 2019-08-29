@@ -28,6 +28,8 @@
 
 #include "vsplinepath.h"
 
+#include <QJsonArray>
+#include <QJsonObject>
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
@@ -321,6 +323,22 @@ VSplinePoint & VSplinePath::operator[](int indx)
 const VSplinePoint &VSplinePath::at(int indx) const
 {
     return d->path[indx];
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VSplinePath::ToJson() const
+{
+    QJsonObject object = VAbstractCubicBezierPath::ToJson();
+    object[QLatin1String("aScale")] = GetApproximationScale();
+
+    QJsonArray nodesArray;
+    for (auto &node: d->path)
+    {
+        nodesArray.append(node.ToJson());
+    }
+    object[QLatin1String("nodes")] = nodesArray;
+
+    return object;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

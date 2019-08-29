@@ -93,6 +93,9 @@ public:
     VSplinePoint GetSplinePoint(qint32 indexSpline, SplinePointPosition pos) const;
 
     const VSplinePoint &at(int indx) const;
+
+    virtual QJsonObject ToJson() const override;
+
 protected:
     virtual VPointF FirstPoint() const  override;
     virtual VPointF LastPoint() const  override;

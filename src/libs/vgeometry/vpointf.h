@@ -85,6 +85,8 @@ public:
     bool IsShowLabel() const;
     void SetShowLabel(bool hide);
 
+    virtual QJsonObject ToJson() const override;
+
     static QPointF RotatePF(const QPointF &originPoint, const QPointF &point, qreal degrees);
     static QPointF FlipPF(const QLineF &axis, const QPointF &point);
     static QPointF MovePF(const QPointF &originPoint, qreal length, qreal angle);

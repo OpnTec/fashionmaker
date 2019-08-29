@@ -114,6 +114,8 @@ public:
                                          qreal kAsm2, qreal kCurve, qreal approximationScale);
     qreal   ParamT(const QPointF &pBt) const;
 
+    virtual QJsonObject ToJson() const override;
+
 protected:
     virtual QPointF GetControlPoint1() const override;
     virtual QPointF GetControlPoint2() const override;

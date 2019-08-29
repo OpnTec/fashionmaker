@@ -3,6 +3,7 @@
 
 HEADERS += \
     $$PWD/stable.h \
+    $$PWD/testpath.h \
     $$PWD/vlayoutgenerator.h \
     $$PWD/vlayoutdef.h \
     $$PWD/vlayoutpaper.h \
@@ -24,6 +25,7 @@ HEADERS += \
     $$PWD/vbestsquare_p.h
 
 SOURCES += \
+    $$PWD/testpath.cpp \
     $$PWD/vlayoutgenerator.cpp \
     $$PWD/vlayoutpaper.cpp \
     $$PWD/vbank.cpp \

@@ -28,6 +28,7 @@
 
 #include "vpointf.h"
 #include "vpointf_p.h"
+#include <QJsonObject>
 #include <QLineF>
 #include <QPointF>
 #include <QString>
@@ -230,6 +231,18 @@ bool VPointF::IsShowLabel() const
 void VPointF::SetShowLabel(bool hide)
 {
     d->m_showLabel = hide;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VPointF::ToJson() const
+{
+    QJsonObject object = VGObject::ToJson();
+    object[QLatin1String("x")] = x();
+    object[QLatin1String("y")] = y();
+    object[QLatin1String("name")] = name();
+    object[QLatin1String("mx")] = mx();
+    object[QLatin1String("my")] = my();
+    return object;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

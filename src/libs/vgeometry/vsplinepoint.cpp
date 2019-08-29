@@ -28,6 +28,7 @@
 
 #include "vsplinepoint.h"
 
+#include <QJsonObject>
 #include <QLineF>
 
 #include "../qmuparser/qmutokenparser.h"
@@ -331,4 +332,22 @@ bool VSplinePoint::IsMovable() const
 {
     return qmu::QmuTokenParser::IsSingle(d->angle1F) && qmu::QmuTokenParser::IsSingle(d->angle2F) &&
            qmu::QmuTokenParser::IsSingle(d->length1F) && qmu::QmuTokenParser::IsSingle(d->length2F);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VSplinePoint::ToJson() const
+{
+    QJsonObject object
+    {
+        {"point", d->pSpline.ToJson()},
+        {"angle1", d->angle1},
+        {"angle1Formula", d->angle1F},
+        {"angle2", d->angle2},
+        {"angle2Formula", d->angle2F},
+        {"length1", d->length1},
+        {"length1Formula", d->length1F},
+        {"length2", d->length2},
+        {"length2Formula", d->length2F},
+    };
+    return object;
 }

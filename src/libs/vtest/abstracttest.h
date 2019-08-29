@@ -54,6 +54,13 @@ static const auto V_UNUSED TST_EX_CRASH = -4;    // Program crashed.
 
 enum ErrorState {ErrorLoad = 0, ErrorInstall, ErrorSize, NoError};
 
+class VPiece;
+class VContainer;
+class VPointF;
+class VSplinePoint;
+class VPieceNode;
+enum class GOType : char;
+
 class AbstractTest : public QObject
 {
     Q_OBJECT
@@ -62,6 +69,8 @@ public:
 
     void VectorFromJson(const QString &json, QVector<QPointF>& vector);
     void VectorFromJson(const QString &json, QVector<VSAPoint>& vector);
+
+    void PieceFromJson(const QString &json, VPiece &piece, QSharedPointer<VContainer> &data);
 
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
@@ -74,6 +83,28 @@ protected:
 
     int Run(int exit, const QString &program, const QStringList &arguments, QString &error, int msecs = 120000);
     bool CopyRecursively(const QString &srcFilePath, const QString &tgtFilePath) const;
+
+    void PrepareDocument(const QString &json, QByteArray &data) const;
+    void TestRoot(const QJsonObject &root, const QString &attribute, const QString &file);
+
+    template <typename T>
+    void ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
+                         const QString &defaultValue = QString());
+    void ReadStringValue(const QJsonObject &itemObject, const QString &attribute, QString &value,
+                         const QString &defaultValue = QString());
+    void ReadBooleanValue(const QJsonObject &itemObject, const QString &attribute, bool &value,
+                          const QString &defaultValue = QString());
+    void ReadPointValue(const QJsonObject &itemObject, const QString &attribute, VPointF &value);
+    void ReadSplinePointValues(const QJsonObject &itemObject, const QString &attribute, QVector<VSplinePoint> &points);
+    void ReadSplinePointValue(const QJsonObject &itemObject, VSplinePoint &point);
+    void ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode &node);
+
+    void PointFromJson(const QJsonObject &itemObject, VPointF &value);
+    void SplineFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
+    void SplinePathFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
+
+    void DBFromJson(const QJsonObject &dbObject, QSharedPointer<VContainer> &data);
+    void MainPathFromJson(const QJsonObject &pieceObject, VPiece &piece);
 };
 
 #endif // ABSTRACTTEST_H

@@ -28,6 +28,7 @@
 
 #include "vgobject.h"
 
+#include <QJsonObject>
 #include <QLine>
 #include <QLineF>
 #include <QPoint>
@@ -203,6 +204,18 @@ quint32 VGObject::getIdTool() const
     {
         return d->_id;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VGObject::ToJson() const
+{
+    QJsonObject object
+    {
+        {"id", static_cast<qint64>(id())},
+        {"type", static_cast<int>(getType())},
+    };
+
+    return object;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -136,6 +136,8 @@ public:
     QVector<VPieceNode> GetUnitedPath(const VContainer *data) const;
 
     QVector<QPointF> SeamAllowancePointsWithRotation(const VContainer *data, int makeFirst) const;
+
+    static void DumpPiece(const VPiece &piece, const VContainer *data);
 private:
     QSharedDataPointer<VPieceData> d;
 
@@ -156,6 +158,9 @@ private:
                              const VContainer *data) const;
 
     static int IsCSAStart(const QVector<CustomSARecord> &records, quint32 id);
+
+    QJsonObject MainPathToJson() const;
+    QJsonObject DBToJson(const VContainer *data) const;
 };
 
 Q_DECLARE_TYPEINFO(VPiece, Q_MOVABLE_TYPE);

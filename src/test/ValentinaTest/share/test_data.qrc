@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>input_loop_by_intersection.json</file>
         <file>output_loop_by_intersection.json</file>
+        <file>Issue_620/input.json</file>
+        <file>Issue_620/output.json</file>
     </qresource>
 </RCC>

@@ -119,6 +119,8 @@ public:
     void    SetLength2(const qreal &value, const QString &length2F);
 
     bool    IsMovable() const;
+
+    QJsonObject ToJson() const;
 protected:
     QSharedDataPointer<VSplinePointData> d;
 };

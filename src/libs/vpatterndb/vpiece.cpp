@@ -36,10 +36,15 @@
 #include "vcontainer.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexceptioninvalidnotch.h"
+#include "../vlayout/testpath.h"
 
 #include <QSharedPointer>
 #include <QDebug>
 #include <QPainterPath>
+#include <QTemporaryFile>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
 
 namespace
 {
@@ -150,8 +155,12 @@ void VPiece::SetPath(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VPiece::MainPathPoints(const VContainer *data) const
 {
+//    DumpPiece(*this, data);  // Uncomment for dumping test data
+
     QVector<QPointF> points = GetPath().PathPoints(data);
     points = CheckLoops(CorrectEquidistantPoints(points));//A path can contains loops
+
+//    DumpVector(points); // Uncomment for dumping test data
     return points;
 }
 
@@ -1077,3 +1086,77 @@ int VPiece::IsCSAStart(const QVector<CustomSARecord> &records, quint32 id)
 
     return -1;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+#if !defined(V_NO_ASSERT)
+// Use for writing tests
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VPiece::MainPathToJson() const
+{
+    QJsonObject pieceObject
+    {
+        {"seamAllowance", IsSeamAllowance()},
+        {"saWidth", GetSAWidth()},
+    };
+
+    QJsonArray nodesArray;
+    for (qint32 i = 0; i < d->m_path.CountNodes(); ++i)
+    {
+        QJsonObject nodeObject
+        {
+            {"id", static_cast<qint64>(d->m_path.at(i).GetId())},
+            {"type", static_cast<int>(d->m_path.at(i).GetTypeTool())},
+            {"reverse", d->m_path.at(i).GetReverse()},
+        };
+
+        nodesArray.append(nodeObject);
+    }
+    pieceObject[QLatin1String("nodes")] = nodesArray;
+
+    return pieceObject;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QJsonObject VPiece::DBToJson(const VContainer *data) const
+{
+    QJsonArray itemsArray;
+    for (qint32 i = 0; i < d->m_path.CountNodes(); ++i)
+    {
+        itemsArray.append(data->GetGObject(d->m_path.at(i).GetId())->ToJson());
+    }
+
+    QJsonObject dbObject
+    {
+        {"items", itemsArray}
+    };
+
+    return dbObject;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::DumpPiece(const VPiece &piece, const VContainer *data)
+{
+    SCASSERT(data != nullptr)
+    QTemporaryFile temp; // Go to tmp folder to find dump
+    temp.setAutoRemove(false); // Remove dump manually
+    if (temp.open())
+    {
+        QJsonObject testCase
+        {
+            {"bd", piece.DBToJson(data)},
+            {"piece", piece.MainPathToJson()},
+        };
+
+        QJsonObject json
+        {
+            {"testCase", testCase},
+        };
+
+        QJsonDocument document(json);
+
+        QTextStream out(&temp);
+        out << document.toJson();
+        out.flush();
+    }
+}
+#endif // !defined(V_NO_ASSERT)
