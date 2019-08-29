@@ -5158,7 +5158,6 @@ void TST_VAbstractPiece::EquidistantAngleType() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::CorrectEquidistantPoints_data() const
 {
-    // See file zigzag.val
     QTest::addColumn<QVector<QPointF>>("points");
     QTest::addColumn<QVector<QPointF>>("expect");
     QTest::addColumn<bool>("removeFirstAndLast");
@@ -5178,22 +5177,6 @@ void TST_VAbstractPiece::CorrectEquidistantPoints_data() const
     expect.append(QPointF(-741.7894588053705, 1065.7336503858917));
 
     QTest::newRow("Closed seam allowance. Last point equal first.") << points << expect << false;
-
-    points.clear();
-    points.append(QPointF(-704.5489521643801, 1028.8424328418016));
-    points.append(QPointF(-721.4335720065426, -85.24049234531904));
-    points.append(QPointF(-707.7852899705758, 755.7064514429209));
-    points.append(QPointF(-721.4335720065426, -85.24049234531904));
-    points.append(QPointF(-314.78124296268265, -170.7806167067443));
-    points.append(QPointF(-283.4579031023758, 1039.1940357173805));
-
-    expect.clear();
-    expect.append(QPointF(-704.5489521643801, 1028.8424328418016));
-    expect.append(QPointF(-721.4335720065426, -85.24049234531904));
-    expect.append(QPointF(-314.78124296268265, -170.7806167067443));
-    expect.append(QPointF(-283.4579031023758, 1039.1940357173805));
-
-    QTest::newRow("Clearing bad main path.") << points << expect << true;
 
     points.clear();
     points.append(VSAPoint(1710.822186539242, -337.9528818897638));
