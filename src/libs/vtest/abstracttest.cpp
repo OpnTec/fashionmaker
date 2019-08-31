@@ -115,13 +115,7 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector
     PrepareDocument(json, saveData);
     QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
 
-    const int defaultAngle = static_cast<int>(PieceNodeAngle::ByLength);
-
     const QString vectorKey = QStringLiteral("vector");
-    const QString typeKey = QStringLiteral("type");
-    const QString saBeforeKey = QStringLiteral("saBefore");
-    const QString saAfterKey = QStringLiteral("saAfter");
-    const QString angleKey = QStringLiteral("angle");
 
     QJsonObject vectorObject = loadDoc.object();
     TestRoot(vectorObject, vectorKey, json);
@@ -132,12 +126,11 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector
         QJsonObject pointObject = vectorArray[i].toObject();
 
         QString type;
-        AbstractTest::ReadStringValue(pointObject, typeKey, type);
+        AbstractTest::ReadStringValue(pointObject, QStringLiteral("type"), type);
 
-        if (pointObject[typeKey].toString() != QLatin1String("VSAPoint"))
+        if (type != QLatin1String("VSAPoint"))
         {
-            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
-                    .arg(json, pointObject[typeKey].toString());
+            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.").arg(json, type);
             QFAIL(qUtf8Printable(error));
         }
 
@@ -151,50 +144,18 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector
         AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("y"), y);
         point.setY(y);
 
+        qreal saBefore;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("saBefore"), saBefore, QStringLiteral("-1"));
+        point.SetSABefore(saBefore);
 
+        qreal saAfter;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("saAfter"), saAfter, QStringLiteral("-1"));
+        point.SetSAAfter(saAfter);
 
-        if (pointObject.contains(saBeforeKey))
-        {
-            QJsonValue saBeforeValue = pointObject[saBeforeKey];
-            if (saBeforeValue.isDouble())
-            {
-                point.SetSABefore(saBeforeValue.toDouble(-1));
-            }
-            else
-            {
-                const QString error = QStringLiteral("SABefore is not double '%1'.").arg(saBeforeValue.toString());
-                QFAIL(qUtf8Printable(error));
-            }
-        }
-
-        if (pointObject.contains(saAfterKey))
-        {
-            QJsonValue saAfterValue = pointObject[saAfterKey];
-            if (saAfterValue.isDouble())
-            {
-                point.SetSABefore(saAfterValue.toDouble(-1));
-            }
-            else
-            {
-                const QString error = QStringLiteral("SAAfter is not double '%1'.").arg(saAfterValue.toString());
-                QFAIL(qUtf8Printable(error));
-            }
-        }
-
-        if (pointObject.contains(angleKey))
-        {
-            QJsonValue angleValue = pointObject[angleKey];
-            if (angleValue.isDouble())
-            {
-                const int angle = static_cast<int>(angleValue.toDouble(defaultAngle));
-                point.SetAngleType(static_cast<PieceNodeAngle>(angle));
-            }
-            else
-            {
-                const QString error = QStringLiteral("Angle type is not double '%1'.").arg(angleValue.toString());
-                QFAIL(qUtf8Printable(error));
-            }
-        }
+        PieceNodeAngle angleType;
+        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("angle"), angleType,
+                                      QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
+        point.SetAngleType(angleType);
 
         vector.append(point);
     }
