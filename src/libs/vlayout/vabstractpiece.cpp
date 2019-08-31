@@ -224,15 +224,12 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     }
     else
     {
-        QLineF allowance(p2, px);
-        //allowance.setLength(allowance.length()-accuracyPointOnLine*2.);
-        //allowance.setAngle(allowance.angle()-0.1); // avoid optimization
-        pointsIntr.append(allowance.p2());
+        pointsIntr.append(px);
 
-        //allowance = QLineF(p2, px);
+        QLineF allowance(p2, px);
         allowance.setLength(allowance.length() + localWidth * 3.);
         pointsIntr.append(allowance.p2());
-        pointsIntr.append(bigLine2.p2());
+        pointsIntr.append(bigLine2.p1());
     }
 
     return pointsIntr;
