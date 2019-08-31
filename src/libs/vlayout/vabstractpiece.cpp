@@ -57,10 +57,19 @@ const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
+inline bool IsSameDirection(QPointF p1, QPointF p2, QPointF px)
+{
+    return qAbs(QLineF(p1, p2).angle() - QLineF(p1, px).angle()) < 0.001;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // Do we create a point outside of a path?
 inline bool IsOutsidePoint(QPointF p1, QPointF p2, QPointF px)
 {
-    return qAbs(QLineF(p1, p2).angle() - QLineF(p1, px).angle()) < 0.001;
+    QLineF seg1(p1, p2);
+    QLineF seg2(p1, px);
+
+    return IsSameDirection(p1, p2, px) && seg2.length() >= seg1.length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
