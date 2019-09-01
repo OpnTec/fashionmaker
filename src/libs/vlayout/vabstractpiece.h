@@ -138,6 +138,7 @@ Q_DECLARE_TYPEINFO(VAbstractPiece, Q_MOVABLE_TYPE);
 template <class T>
 QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast)
 {
+//    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
     if (points.size()<4)//Better don't check if only three points. We can destroy equidistant.
     {
         qDebug()<<"Only three points.";
@@ -211,6 +212,7 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
 
     buf2 = RemoveDublicates(buf2, false);
 
+//    DumpVector(buf2, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return buf2;
 }
 
