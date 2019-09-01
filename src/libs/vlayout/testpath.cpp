@@ -35,6 +35,8 @@
 #include <QJsonDocument>
 #include <QPointF>
 
+#include "vsapoint.h"
+
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
@@ -54,19 +56,14 @@ void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DumpVector(const QVector<QPointF> &points)
+void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
 {
-    QTemporaryFile temp; // Go to tmp folder to find dump
-    temp.setAutoRemove(false); // Remove dump manually
-    if (temp.open())
+    QJsonArray pointsArray;
+    for (auto point: points)
     {
-        QJsonObject vectorObject;
-        VectorToJson(points, vectorObject);
-        QJsonDocument vector(vectorObject);
-
-        QTextStream out(&temp);
-        out << vector.toJson();
-        out.flush();
+        pointsArray.append(point.toJson());
     }
+    json[QLatin1String("vector")] = pointsArray;
 }
+
 #endif // !defined(V_NO_ASSERT)

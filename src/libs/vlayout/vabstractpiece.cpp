@@ -540,38 +540,6 @@ qreal AngleBetweenBisectors(const QLineF &b1, const QLineF &b2)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-#if !defined(V_NO_ASSERT)
-// Use for writing tests
-//---------------------------------------------------------------------------------------------------------------------
-void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json)
-{
-    QJsonArray pointsArray;
-    for (auto point: points)
-    {
-        pointsArray.append(point.toJson());
-    }
-    json[QLatin1String("vector")] = pointsArray;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DumpVector(const QVector<VSAPoint> &points)
-{
-    QTemporaryFile temp; // Go to tmp folder to find dump
-    temp.setAutoRemove(false); // Remove dump manually
-    if (temp.open())
-    {
-        QJsonObject vectorObject;
-        VectorToJson(points, vectorObject);
-        QJsonDocument vector(vectorObject);
-
-        QTextStream out(&temp);
-        out << vector.toJson();
-        out.flush();
-    }
-}
-#endif // !defined(V_NO_ASSERT)
-
-//---------------------------------------------------------------------------------------------------------------------
 template<class T>
 QVector<T> CorrectPathDistortion(QVector<T> path)
 {

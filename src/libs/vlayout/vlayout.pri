@@ -13,6 +13,7 @@ HEADERS += \
     $$PWD/vcontour_p.h \
     $$PWD/vbestsquare.h \
     $$PWD/vposition.h \
+    $$PWD/vsapoint.h \
     $$PWD/vtextmanager.h \
     $$PWD/vposter.h \
     $$PWD/vgraphicsfillitem.h \

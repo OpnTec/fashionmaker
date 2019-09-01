@@ -28,13 +28,45 @@
 #ifndef TESTPATH_H
 #define TESTPATH_H
 
+#include <QDir>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QString>
+#include <QTemporaryFile>
+#include <QTextStream>
+
 class QPointF;
 class QJsonObject;
 template <class T> class QVector;
+class VSAPoint;
 
 #if !defined(V_NO_ASSERT)
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json);
-void DumpVector(const QVector<QPointF> &points);
+void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json);
+
+//---------------------------------------------------------------------------------------------------------------------
+template <class T>
+void DumpVector(const QVector<T> &points, const QString &templateName=QString())
+{
+    QTemporaryFile temp; // Go to tmp folder to find dump
+    temp.setAutoRemove(false); // Remove dump manually
+
+    if (not templateName.isEmpty())
+    {
+        temp.setFileTemplate(QDir::tempPath() + QDir::separator() + templateName);
+    }
+
+    if (temp.open())
+    {
+        QJsonObject vectorObject;
+        VectorToJson(points, vectorObject);
+        QJsonDocument vector(vectorObject);
+
+        QTextStream out(&temp);
+        out << vector.toJson();
+        out.flush();
+    }
+}
 #endif // !defined(V_NO_ASSERT)
 
 #endif // TESTPATH_H
