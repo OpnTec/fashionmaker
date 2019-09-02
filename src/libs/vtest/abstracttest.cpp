@@ -602,6 +602,8 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
     {
         if (not defaultValue.isEmpty())
         {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_GCC("-Wunused-but-set-variable")
             bool ok = false;
             qreal defVal = defaultValue.toDouble(&ok);
 
@@ -612,6 +614,7 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
             }
 
             value = static_cast<T>(defVal);
+QT_WARNING_POP
         }
         else
         {
