@@ -93,6 +93,7 @@ Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(qreal xpos, qreal ypos)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress passedByValue
 Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint(QPointF p)
     : QPointF(p)
 {}
