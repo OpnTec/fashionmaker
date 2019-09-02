@@ -788,23 +788,23 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
     if (needRollback)
     {
-        auto Rollback = [&ekvPoints](const QLineF &edge)
+        auto Rollback = [](QVector<QPointF> &points, const QLineF &edge)
         {
-            if (not ekvPoints.isEmpty())
+            bool success = false;
+            if (not points.isEmpty())
             {
-                ekvPoints.removeLast();
+                points.removeLast();
+                points = RollbackSeamAllowance(points, edge, &success);
 
-                bool success = false;
-                ekvPoints = RollbackSeamAllowance(ekvPoints, edge, &success);
-
-                if (not ekvPoints.isEmpty())
+                if (not points.isEmpty())
                 {
-                    if (ekvPoints.last().toPoint() != ekvPoints.first().toPoint())
+                    if (points.last().toPoint() != points.first().toPoint())
                     {
-                        ekvPoints.append(ekvPoints.first());// Should be always closed
+                        points.append(points.first());// Should be always closed
                     }
                 }
             }
+            return success;
         };
 
         QT_WARNING_PUSH
@@ -821,8 +821,15 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
             case PieceNodeAngle::ByLengthCurve:
             {
                 const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-                ekvPoints.insert(ekvPoints.size()-1, bigLine1.p2());
-                Rollback(ParallelLine(points.at(0), points.at(1), width));
+
+                QVector<QPointF> temp = ekvPoints;
+                temp.insert(ekvPoints.size()-1, bigLine1.p2());
+                bool success = Rollback(temp, ParallelLine(points.at(0), points.at(1), width));
+
+                if (success)
+                {
+                    ekvPoints = temp;
+                }
                 break;
             }
             case PieceNodeAngle::ByFirstEdgeSymmetry:
@@ -831,8 +838,15 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                 const QLineF bigLine2 = ParallelLine(points.at(points.size()-1), points.at(1), width);
                 QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
                 const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-                ekvPoints.insert(ekvPoints.size()-1, bigLine1.p2());
-                Rollback(sEdge);
+
+                QVector<QPointF> temp = ekvPoints;
+                temp.insert(ekvPoints.size()-1, bigLine1.p2());
+                bool success = Rollback(temp, sEdge);
+
+                if (success)
+                {
+                    ekvPoints = temp;
+                }
                 break;
             }
             case PieceNodeAngle::BySecondEdgeSymmetry:
@@ -840,18 +854,36 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                 const QLineF axis = QLineF(points.at(points.size()-1), points.at(1));
                 const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
                 QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
-                ekvPoints.insert(ekvPoints.size()-1, bigLine1.p2());
-                Rollback(sEdge);
+
+                QVector<QPointF> temp = ekvPoints;
+                temp.insert(ekvPoints.size()-1, bigLine1.p2());
+                bool success = Rollback(temp, sEdge);
+
+                if (success)
+                {
+                    ekvPoints = temp;
+                }
                 break;
             }
             case PieceNodeAngle::ByPointsIntersection:
-                Rollback(QLineF(points.last(), points.at(1)));
+            {
+                const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
+                QVector<QPointF> temp = ekvPoints;
+                temp.insert(ekvPoints.size()-1, bigLine1.p2());
+                bool success = Rollback(temp, QLineF(points.last(), points.at(1)));
+
+                if (success)
+                {
+                    ekvPoints = temp;
+                }
+
                 if (ekvPoints.size() > 2)
                 { // Fix for the rule of main path
                     ekvPoints.removeAt(ekvPoints.size()-1);
                     ekvPoints.prepend(ekvPoints.at(ekvPoints.size()-1));
                 }
                 break;
+            }
             case PieceNodeAngle::BySecondEdgeRightAngle:
                 if (not ekvPoints.isEmpty())
                 {
@@ -884,11 +916,13 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                     else
                     {
                         bool success = false;
-                        ekvPoints.insert(ekvPoints.size()-1, bigLine1.p2());
-                        ekvPoints = RollbackSeamAllowance(ekvPoints, edge, &success);
+                        QVector<QPointF> temp = ekvPoints;
+                        temp.insert(ekvPoints.size()-1, bigLine1.p2());
+                        temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
                         if (success)
                         {
+                            ekvPoints = temp;
                             px = ekvPoints.last();
                         }
 

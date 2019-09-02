@@ -64,6 +64,12 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
     // See file src/app/share/collection/test/seamtest1.val
+    ASSERT_TEST_CASE("Seam test 1. Piece. By angle 2.",
+                     QStringLiteral("://seamtest1_by_angle_2/input.json"),
+                     QStringLiteral("://seamtest1_by_angle_2/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/test/seamtest1.val
     ASSERT_TEST_CASE("Seam test 1. Piece. By intersection.",
                      QStringLiteral("://seamtest1_by_intersection/input.json"),
                      QStringLiteral("://seamtest1_by_intersection/output.json"),

@@ -82,5 +82,7 @@
         <file>Issue_548/output.json</file>
         <file>Issue_642/input.json</file>
         <file>Issue_642/output.json</file>
+        <file>seamtest1_by_angle_2/input.json</file>
+        <file>seamtest1_by_angle_2/output.json</file>
     </qresource>
 </RCC>
