@@ -600,6 +600,161 @@ QVector<T> CorrectPathDistortion(QVector<T> path)
 
     return path;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+bool Rollback(QVector<QPointF> &points, const QLineF &edge)
+{
+    bool success = false;
+    if (not points.isEmpty())
+    {
+        points.removeLast();
+        points = VAbstractPiece::RollbackSeamAllowance(points, edge, &success);
+
+        if (not points.isEmpty())
+        {
+            if (points.last().toPoint() != points.first().toPoint())
+            {
+                points.append(points.first());// Should be always closed
+            }
+        }
+    }
+    return success;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RollbackByLength(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+{
+    const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
+
+    QVector<QPointF> temp = ekvPoints;
+    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    bool success = Rollback(temp, VAbstractPiece::ParallelLine(points.at(0), points.at(1), width));
+
+    if (success)
+    {
+        ekvPoints = temp;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RollbackBySecondEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+{
+    const QLineF axis = QLineF(points.at(points.size()-1), points.at(1));
+    const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
+    QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
+
+    QVector<QPointF> temp = ekvPoints;
+    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    bool success = Rollback(temp, sEdge);
+
+    if (success)
+    {
+        ekvPoints = temp;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RollbackByFirstEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+{
+    const QLineF axis = QLineF(points.at(points.size()-2), points.at(points.size()-1));
+    const QLineF bigLine2 = VAbstractPiece::ParallelLine(points.at(points.size()-1), points.at(1), width);
+    QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
+    const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
+
+    QVector<QPointF> temp = ekvPoints;
+    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    bool success = Rollback(temp, sEdge);
+
+    if (success)
+    {
+        ekvPoints = temp;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RollbackByPointsIntersection(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+{
+    const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
+    QVector<QPointF> temp = ekvPoints;
+    temp.insert(ekvPoints.size()-1, bigLine1.p2());
+    bool success = Rollback(temp, QLineF(points.last(), points.at(1)));
+
+    if (success)
+    {
+        ekvPoints = temp;
+    }
+
+    if (ekvPoints.size() > 2)
+    { // Fix for the rule of main path
+        ekvPoints.removeAt(ekvPoints.size()-1);
+        ekvPoints.prepend(ekvPoints.at(ekvPoints.size()-1));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RollbackBySecondEdgeRightAngle(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+{
+    if (not ekvPoints.isEmpty())
+    {
+        const QLineF edge(points.last(), points.at(1));
+        const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
+
+        QPointF px;
+        edge.intersect(bigLine1, &px);
+
+        ekvPoints.removeLast();
+
+        if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
+        {
+            if (ekvPoints.size() > 3)
+            {
+                const QLineF edge1(ekvPoints.at(ekvPoints.size()-2), ekvPoints.last());
+                const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
+
+                QPointF crosPoint;
+                const QLineF::IntersectType type = edge1.intersect(edge2, &crosPoint );
+                if (type == QLineF::BoundedIntersection)
+                {
+                    ekvPoints.removeFirst();
+                    ekvPoints.removeLast();
+
+                    ekvPoints.append(crosPoint);
+                }
+            }
+        }
+        else
+        {
+            bool success = false;
+            QVector<QPointF> temp = ekvPoints;
+            temp.insert(ekvPoints.size()-1, bigLine1.p2());
+            temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
+
+            if (success)
+            {
+                ekvPoints = temp;
+                px = ekvPoints.last();
+            }
+
+            QLineF seam(px, points.at(1));
+            seam.setAngle(seam.angle()+90);
+            seam.setLength(points.at(0).GetSAAfter(width));
+            ekvPoints.append(seam.p2());
+
+            if (not ekvPoints.isEmpty())
+            {
+                ekvPoints.append(ekvPoints.first());
+            }
+        }
+
+        if (not ekvPoints.isEmpty())
+        {
+            if (ekvPoints.last().toPoint() != ekvPoints.first().toPoint())
+            {
+                ekvPoints.append(ekvPoints.first());// Should be always closed
+            }
+        }
+    }
+}
 }
 
 // Friend functions
@@ -788,25 +943,6 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
 
     if (needRollback)
     {
-        auto Rollback = [](QVector<QPointF> &points, const QLineF &edge)
-        {
-            bool success = false;
-            if (not points.isEmpty())
-            {
-                points.removeLast();
-                points = RollbackSeamAllowance(points, edge, &success);
-
-                if (not points.isEmpty())
-                {
-                    if (points.last().toPoint() != points.first().toPoint())
-                    {
-                        points.append(points.first());// Should be always closed
-                    }
-                }
-            }
-            return success;
-        };
-
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wswitch-default")
         // This check helps to find missed angle types in the switch
@@ -819,132 +955,19 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
                 break;
             case PieceNodeAngle::ByLength:
             case PieceNodeAngle::ByLengthCurve:
-            {
-                const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-
-                QVector<QPointF> temp = ekvPoints;
-                temp.insert(ekvPoints.size()-1, bigLine1.p2());
-                bool success = Rollback(temp, ParallelLine(points.at(0), points.at(1), width));
-
-                if (success)
-                {
-                    ekvPoints = temp;
-                }
+                RollbackByLength(ekvPoints, points, width);
                 break;
-            }
             case PieceNodeAngle::ByFirstEdgeSymmetry:
-            {
-                const QLineF axis = QLineF(points.at(points.size()-2), points.at(points.size()-1));
-                const QLineF bigLine2 = ParallelLine(points.at(points.size()-1), points.at(1), width);
-                QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
-                const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-
-                QVector<QPointF> temp = ekvPoints;
-                temp.insert(ekvPoints.size()-1, bigLine1.p2());
-                bool success = Rollback(temp, sEdge);
-
-                if (success)
-                {
-                    ekvPoints = temp;
-                }
+                RollbackByFirstEdgeSymmetry(ekvPoints, points, width);
                 break;
-            }
             case PieceNodeAngle::BySecondEdgeSymmetry:
-            {
-                const QLineF axis = QLineF(points.at(points.size()-1), points.at(1));
-                const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-                QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
-
-                QVector<QPointF> temp = ekvPoints;
-                temp.insert(ekvPoints.size()-1, bigLine1.p2());
-                bool success = Rollback(temp, sEdge);
-
-                if (success)
-                {
-                    ekvPoints = temp;
-                }
+                RollbackBySecondEdgeSymmetry(ekvPoints, points, width);
                 break;
-            }
             case PieceNodeAngle::ByPointsIntersection:
-            {
-                const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-                QVector<QPointF> temp = ekvPoints;
-                temp.insert(ekvPoints.size()-1, bigLine1.p2());
-                bool success = Rollback(temp, QLineF(points.last(), points.at(1)));
-
-                if (success)
-                {
-                    ekvPoints = temp;
-                }
-
-                if (ekvPoints.size() > 2)
-                { // Fix for the rule of main path
-                    ekvPoints.removeAt(ekvPoints.size()-1);
-                    ekvPoints.prepend(ekvPoints.at(ekvPoints.size()-1));
-                }
+                RollbackByPointsIntersection(ekvPoints, points, width);
                 break;
-            }
             case PieceNodeAngle::BySecondEdgeRightAngle:
-                if (not ekvPoints.isEmpty())
-                {
-                    const QLineF edge(points.last(), points.at(1));
-                    const QLineF bigLine1 = ParallelLine(points.at(points.size()-2), points.at(0), width);
-
-                    QPointF px;
-                    edge.intersect(bigLine1, &px);
-
-                    ekvPoints.removeLast();
-
-                    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
-                    {
-                        if (ekvPoints.size() > 3)
-                        {
-                            const QLineF edge1(ekvPoints.at(ekvPoints.size()-2), ekvPoints.last());
-                            const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
-
-                            QPointF crosPoint;
-                            const QLineF::IntersectType type = edge1.intersect(edge2, &crosPoint );
-                            if (type == QLineF::BoundedIntersection)
-                            {
-                                ekvPoints.removeFirst();
-                                ekvPoints.removeLast();
-
-                                ekvPoints.append(crosPoint);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        bool success = false;
-                        QVector<QPointF> temp = ekvPoints;
-                        temp.insert(ekvPoints.size()-1, bigLine1.p2());
-                        temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
-
-                        if (success)
-                        {
-                            ekvPoints = temp;
-                            px = ekvPoints.last();
-                        }
-
-                        QLineF seam(px, points.at(1));
-                        seam.setAngle(seam.angle()+90);
-                        seam.setLength(points.at(0).GetSAAfter(width));
-                        ekvPoints.append(seam.p2());
-
-                        if (not ekvPoints.isEmpty())
-                        {
-                            ekvPoints.append(ekvPoints.first());
-                        }
-                    }
-
-                    if (not ekvPoints.isEmpty())
-                    {
-                        if (ekvPoints.last().toPoint() != ekvPoints.first().toPoint())
-                        {
-                            ekvPoints.append(ekvPoints.first());// Should be always closed
-                        }
-                    }
-                }
+                RollbackBySecondEdgeRightAngle(ekvPoints, points, width);
                 break;
         }
         QT_WARNING_POP
