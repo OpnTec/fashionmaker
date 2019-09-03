@@ -237,6 +237,48 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://loop_start_point_on_line/input.json"),
                      QStringLiteral("://loop_start_point_on_line/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By length",
+                     QStringLiteral("://DP_6_hem_by_length/input.json"),
+                     QStringLiteral("://DP_6_hem_by_length/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By intersection",
+                     QStringLiteral("://DP_6_hem_by_intersection/input.json"),
+                     QStringLiteral("://DP_6_hem_by_intersection/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By first edge symmetry",
+                     QStringLiteral("://DP_6_hem_by_first_edge_symmetry/input.json"),
+                     QStringLiteral("://DP_6_hem_by_first_edge_symmetry/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By second edge symmetry",
+                     QStringLiteral("://DP_6_hem_by_second_edge_symmetry/input.json"),
+                     QStringLiteral("://DP_6_hem_by_second_edge_symmetry/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By first edge right angle",
+                     QStringLiteral("://DP_6_hem_by_first_edge_right_angle/input.json"),
+                     QStringLiteral("://DP_6_hem_by_first_edge_right_angle/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6_hem.val (private collection)
+    ASSERT_TEST_CASE("By second edge right angle",
+                     QStringLiteral("://DP_6_hem_by_second_edge_right_angle/input.json"),
+                     QStringLiteral("://DP_6_hem_by_second_edge_right_angle/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/DP_6.val (private collection)
+    ASSERT_TEST_CASE("Hem by seam allowance",
+                     QStringLiteral("://DP_6/input.json"),
+                     QStringLiteral("://DP_6/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

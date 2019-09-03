@@ -1,4 +1,4 @@
-/************************************************************************
+﻿/************************************************************************
  **
  **  @file
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
@@ -80,8 +80,9 @@ Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF &bigLine1, QPointF sp2,
-                               const QLineF &bigLine2, const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, QPointF p3, const QLineF &bigLine1,
+                               QPointF sp2, const QLineF &bigLine2, const VSAPoint &p, qreal width,
+                               bool *needRollback = nullptr)
 {
     if (needRollback != nullptr)
     {
@@ -127,48 +128,66 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p2, const QLineF
     }
     else
     {
-        if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
         {
-            if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
-            {
-                bool success = false;
-                QVector<QPointF> temp = points;
-                temp.append(bigLine1.p2());
-                temp = VAbstractPiece::RollbackSeamAllowance(temp, bigLine2, &success);
+            QLineF loop(sp2, bigLine1.p1());
+            loop.setLength(accuracyPointOnLine*2.);
+            points.append(loop.p2());
+            points.append(sp2);
 
-                if (success)
-                {
-                    points = temp;
-                }
-
-                if (needRollback != nullptr)
-                {
-                    *needRollback = not success;
-                }
-            }
-            else
-            {
-                points.append(sp2);
-            }
+            loop = QLineF(bigLine1.p1(), sp2);
+            loop.setLength(loop.length() + localWidth*3.);
+            points.append(loop.p2());
         }
         else
         {
-            if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+            if (not IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), sp2))
             {
-                // Need to create artificial loop
-                QLineF loop1(sp2, sp1);
-                loop1.setLength(loop1.length()*0.2);
+                if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+                {
+                    bool success = false;
+                    QVector<QPointF> temp = points;
+                    temp.append(bigLine1.p2());
+                    temp = VAbstractPiece::RollbackSeamAllowance(temp, bigLine2, &success);
 
-                points.append(loop1.p2()); // Need for the main path rule
+                    if (success)
+                    {
+                        points = temp;
+                    }
 
-                loop1.setAngle(loop1.angle() + 180);
-                loop1.setLength(localWidth);
-                points.append(loop1.p2());
-                points.append(bigLine2.p1());
+                    if (needRollback != nullptr)
+                    {
+                        *needRollback = not success;
+                    }
+                }
+                else
+                {
+                    points.append(sp2);
+                }
             }
             else
             {
-                points.append(sp2);
+                if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
+                {
+                    // Need to create artificial loop
+                    QLineF loop1(sp2, sp1);
+                    loop1.setLength(loop1.length()*0.2);
+
+                    points.append(loop1.p2()); // Need for the main path rule
+
+                    loop1.setAngle(loop1.angle() + 180);
+                    loop1.setLength(localWidth);
+                    points.append(loop1.p2());
+                    points.append(bigLine2.p1());
+                }
+                else
+                {
+                    points.append(sp2);
+                }
             }
         }
     }
@@ -180,6 +199,17 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
                                      const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                      const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
+    {
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+    }
+
     if (needRollback != nullptr)
     {
         *needRollback = false;
@@ -195,14 +225,14 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     QLineF::IntersectType type = edge2.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
         if (QLineF(p2, px).length() > localWidth*maxL)
         {
-            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
         pointsIntr.append(px);
     }
@@ -223,7 +253,7 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     type = edge1.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px))
@@ -244,10 +274,21 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2,
+QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
                                       const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                       const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
+    {
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+    }
+
     if (needRollback != nullptr)
     {
         *needRollback = false;
@@ -261,14 +302,14 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
     QLineF::IntersectType type = sEdge.intersect(bigLine1, &px1);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QPointF px2;
     type = sEdge.intersect(bigLine2, &px2);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QVector<QPointF> pointsIntr = points;
@@ -311,10 +352,21 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p2, QPointF p3,
+QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
                                        const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                        const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
+    {
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+    }
+
     if (needRollback != nullptr)
     {
         *needRollback = false;
@@ -328,14 +380,14 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
     QLineF::IntersectType type = sEdge.intersect(bigLine1, &px1);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QPointF px2;
     type = sEdge.intersect(bigLine2, &px2);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     const qreal localWidth = p.MaxLocalSA(width);
@@ -381,10 +433,21 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF p1, QPointF p2,
+QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
                                         const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
                                         const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
+    {
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+    }
+
     const qreal localWidth = p.MaxLocalSA(width);
     QVector<QPointF> pointsRA = points;
     QLineF edge(p1, p2);
@@ -393,7 +456,7 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
     QLineF::IntersectType type = edge.intersect(bigLine2, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QLineF seam(px, p1);
@@ -406,7 +469,7 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
     {
         if (QLineF(p2, px).length() > localWidth*maxL)
         {
-            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
         pointsRA.append(seam.p1());
     }
@@ -427,10 +490,21 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QPointF p3,
+QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QPointF p2, QPointF p3,
                                          const QLineF &bigLine1,  QPointF sp2, const QLineF &bigLine2,
                                          const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
+    {
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
+
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+    }
+
     if (needRollback != nullptr)
     {
         *needRollback = false;
@@ -443,14 +517,14 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p2, QP
     QLineF::IntersectType type = edge.intersect(bigLine1, &px);
     if (type == QLineF::NoIntersection)
     {
-        return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+        return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
     {
         if (QLineF(p2, px).length() > localWidth*maxL)
         {
-            return AngleByLength(points, p2, bigLine1, sp2, bigLine2, p, width, needRollback);
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
         points.append(px);
 
@@ -1177,21 +1251,21 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
         { // Most common case
             /* Case when a path has point on line (both segments lie on the same line) and seam allowance creates
              * prong. */
-            auto IsOnLine = [](const QPointF &base, const QPointF &sp1, const QPointF &sp2)
+            auto IsOnLine = [](const QPointF &base, const QPointF &sp1, const QPointF &sp2, qreal accuracy)
             {
                 if (not VFuzzyComparePoints(base, sp1))
                 {
-                    return VGObject::IsPointOnLineviaPDP(sp2, base, sp1);
+                    return VGObject::IsPointOnLineviaPDP(sp2, base, sp1, accuracy);
                 }
 
                 if (not VFuzzyComparePoints(base, sp2))
                 {
-                    return VGObject::IsPointOnLineviaPDP(sp1, base, sp2);
+                    return VGObject::IsPointOnLineviaPDP(sp1, base, sp2, accuracy);
                 }
                 return true;
             };
-            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2)
-                    && IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1()))
+            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2, ToPixel(1, Unit::Mm)) &&
+                    IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1(), ToPixel(1, Unit::Mm)))
             {
                 points.append(bigLine1.p2());
                 points.append(bigLine2.p1());
@@ -1223,22 +1297,22 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                         break;
                     case PieceNodeAngle::ByLength:
                     case PieceNodeAngle::ByLengthCurve:
-                        return AngleByLength(points, p2Line1, bigLine1, crosPoint, bigLine2, p2Line1, width,
-                                             needRollback);
+                        return AngleByLength(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2, p2Line1,
+                                             width, needRollback);
                     case PieceNodeAngle::ByPointsIntersection:
                         return AngleByIntersection(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                    p2Line1, width, needRollback);
                     case PieceNodeAngle::ByFirstEdgeSymmetry:
-                        return AngleByFirstSymmetry(points, p1Line1, p2Line1, bigLine1, crosPoint, bigLine2,
+                        return AngleByFirstSymmetry(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                     p2Line1, width, needRollback);
                     case PieceNodeAngle::BySecondEdgeSymmetry:
-                        return AngleBySecondSymmetry(points, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
+                        return AngleBySecondSymmetry(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                      p2Line1, width, needRollback);
                     case PieceNodeAngle::ByFirstEdgeRightAngle:
-                        return AngleByFirstRightAngle(points, p1Line1, p2Line1, bigLine1, crosPoint, bigLine2,
+                        return AngleByFirstRightAngle(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                       p2Line1, width, needRollback);
                     case PieceNodeAngle::BySecondEdgeRightAngle:
-                        return AngleBySecondRightAngle(points, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
+                        return AngleBySecondRightAngle(points, p1Line1, p2Line1, p1Line2, bigLine1, crosPoint, bigLine2,
                                                        p2Line1, width, needRollback);
                 }
 QT_WARNING_POP
