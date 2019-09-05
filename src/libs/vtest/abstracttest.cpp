@@ -685,19 +685,14 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
     {
         if (not defaultValue.isEmpty())
         {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_GCC("-Wunused-but-set-variable")
             bool ok = false;
-            qreal defVal = defaultValue.toDouble(&ok);
+            value = static_cast<T>(defaultValue.toDouble(&ok));
 
             if (not ok)
             {
                 const QString error = QStringLiteral("Cannot convert default value '%1' to double.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
-
-            value = static_cast<T>(defVal);
-QT_WARNING_POP
         }
         else
         {
