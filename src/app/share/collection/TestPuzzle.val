@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pattern>
-    <!--Pattern created with Valentina v0.6.0.0b (https://valentinaproject.bitbucket.io/).-->
-    <version>0.7.10</version>
+    <!--Pattern created with Valentina v0.7.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.8.5</version>
     <unit>cm</unit>
     <description/>
     <notes/>
@@ -24,38 +24,29 @@
             <line firstPoint="2" id="13" lineColor="black" secondPoint="11" typeLine="hair"/>
         </calculation>
         <modeling>
-            <point id="14" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="15" idObject="2" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="16" idObject="11" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="17" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <point id="19" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <point id="20" idObject="5" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <spline id="21" idObject="4" inUse="false" type="modelingSpline"/>
             <point id="22" idObject="2" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <point id="23" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="25" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="26" idObject="3" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="27" idObject="9" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
-            <point id="28" idObject="1" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <point id="30" idObject="3" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <spline id="31" idObject="4" inUse="false" type="modelingSpline"/>
             <point id="32" idObject="5" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
             <point id="33" idObject="9" inUse="false" mx="0.132292" my="0.264583" type="modeling"/>
         </modeling>
         <details>
-            <detail closed="1" id="24" mx="-11.7117" my="4.05406" name="Detail" seamAllowance="1" version="2" width="1">
-                <data annotation="" foldPosition="" fontSize="0" height="" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="" rotationWay="" tilt="" visible="false" width=""/>
-                <patternInfo fontSize="0" height="" mx="0" my="0" rotation="" visible="false" width=""/>
-                <grainline arrows="0" length="" mx="0" my="0" rotation="" visible="false"/>
+            <detail closed="1" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="24" mx="-11.7117" my="4.05406" name="Case 2" seamAllowance="true" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
                 <nodes>
                     <node idObject="19" type="NodePoint"/>
                     <node idObject="20" type="NodePoint"/>
                     <node idObject="21" reverse="0" type="NodeSpline"/>
                     <node idObject="22" type="NodePoint"/>
-                    <node idObject="23" type="NodePoint"/>
                 </nodes>
             </detail>
-            <detail closed="1" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="35" inLayout="true" mx="7.71397" my="-3.94145" name="Detail" seamAllowance="true" united="false" version="2" width="2">
+            <detail closed="1" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="35" mx="7.71397" my="-3.94145" name="Case 1" seamAllowance="true" version="2" width="2">
                 <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
                 <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
                 <grainline arrows="0" length="1" mx="0" my="0" rotation="0" visible="false"/>

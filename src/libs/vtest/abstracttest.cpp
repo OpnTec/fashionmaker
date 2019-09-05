@@ -59,6 +59,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiece.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpassmark.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 AbstractTest::AbstractTest(QObject *parent) :
@@ -95,15 +96,7 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<QPointF>& vector)
         }
 
         QPointF point;
-
-        qreal x = 0;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("x"), x);
-        point.setX(x);
-
-        qreal y = 0;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("y"), y);
-        point.setY(y);
-
+        QPointFromJson(pointObject, point);
         vector.append(point);
     }
 }
@@ -135,28 +128,7 @@ void AbstractTest::VectorFromJson(const QString &json, QVector<VSAPoint> &vector
         }
 
         VSAPoint point;
-
-        qreal x = 0;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("x"), x);
-        point.setX(x);
-
-        qreal y = 0;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("y"), y);
-        point.setY(y);
-
-        qreal saBefore;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("saBefore"), saBefore, QStringLiteral("-1"));
-        point.SetSABefore(saBefore);
-
-        qreal saAfter;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("saAfter"), saAfter, QStringLiteral("-1"));
-        point.SetSAAfter(saAfter);
-
-        PieceNodeAngle angleType;
-        AbstractTest::ReadDoubleValue(pointObject, QStringLiteral("angle"), angleType,
-                                      QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
-        point.SetAngleType(angleType);
-
+        SAPointFromJson(pointObject, point);
         vector.append(point);
     }
 }
@@ -195,6 +167,105 @@ void AbstractTest::PieceFromJson(const QString &json, VPiece &piece, QSharedPoin
     {
         const QString error = QStringLiteral("Test case json object does not contain piece data.");
         QFAIL(qUtf8Printable(error));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::PassmarkDataFromJson(const QString &json, VPiecePassmarkData &data)
+{
+    QByteArray saveData;
+    PrepareDocument(json, saveData);
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+
+    const QString dataKey = QStringLiteral("data");
+
+    QJsonObject dataObject = loadDoc.object();
+    TestRoot(dataObject, dataKey, json);
+
+    QJsonObject passmarkData = dataObject[dataKey].toObject();
+
+    VSAPoint previousSAPoint;
+    SAPointFromJson(passmarkData[QStringLiteral("previousSAPoint")].toObject(), previousSAPoint);
+    data.previousSAPoint = previousSAPoint;
+
+    VSAPoint passmarkSAPoint;
+    SAPointFromJson(passmarkData[QStringLiteral("passmarkSAPoint")].toObject(), passmarkSAPoint);
+    data.passmarkSAPoint = passmarkSAPoint;
+
+    VSAPoint nextSAPoint;
+    SAPointFromJson(passmarkData[QStringLiteral("nextSAPoint")].toObject(), nextSAPoint);
+    data.nextSAPoint = nextSAPoint;
+
+    qreal saWidth = 0;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("saWidth"), saWidth);
+    data.saWidth = saWidth;
+
+    QString nodeName;
+    AbstractTest::ReadStringValue(passmarkData, QStringLiteral("nodeName"), nodeName);
+    data.nodeName = nodeName;
+
+    QString pieceName;
+    AbstractTest::ReadStringValue(passmarkData, QStringLiteral("pieceName"), pieceName);
+    data.pieceName = pieceName;
+
+    PassmarkLineType passmarkLineType;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkLineType"), passmarkLineType,
+                                  QString::number(static_cast<int>(PassmarkLineType::OneLine)));
+    data.passmarkLineType = passmarkLineType;
+
+    PassmarkAngleType passmarkAngleType;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkAngleType"), passmarkAngleType,
+                                  QString::number(static_cast<int>(PassmarkAngleType::Straightforward)));
+    data.passmarkAngleType = passmarkAngleType;
+
+    bool isMainPathNode = true;
+    AbstractTest::ReadBooleanValue(passmarkData, QStringLiteral("isMainPathNode"), isMainPathNode);
+    data.isMainPathNode = isMainPathNode;
+
+    bool isShowSecondPassmark = true;
+    AbstractTest::ReadBooleanValue(passmarkData, QStringLiteral("isShowSecondPassmark"), isShowSecondPassmark);
+    data.isShowSecondPassmark = isShowSecondPassmark;
+
+    int passmarkIndex;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("passmarkIndex"), passmarkIndex, QStringLiteral("-1"));
+    data.passmarkIndex = passmarkIndex;
+
+    vidtype id;
+    AbstractTest::ReadDoubleValue(passmarkData, QStringLiteral("id"), id, QString::number(NULL_ID));
+    data.id = id;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::PassmarkShapeFromJson(const QString &json, QVector<QLineF> &shape)
+{
+    QByteArray saveData;
+    PrepareDocument(json, saveData);
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+
+    const QString shapeKey = QStringLiteral("shape");
+    const QString typeKey = QStringLiteral("type");
+
+    QJsonObject shapeObject = loadDoc.object();
+    TestRoot(shapeObject, shapeKey, json);
+
+    QJsonArray vectorArray = shapeObject[shapeKey].toArray();
+    for (int i = 0; i < vectorArray.size(); ++i)
+    {
+        QJsonObject lineObject = vectorArray[i].toObject();
+
+        QString type;
+        AbstractTest::ReadStringValue(lineObject, typeKey, type);
+
+        if (type != QLatin1String("QLineF"))
+        {
+            const QString error = QStringLiteral("Invalid json file '%1'. Unexpected class '%2'.")
+                    .arg(json, lineObject[typeKey].toString());
+            QFAIL(qUtf8Printable(error));
+        }
+
+        QLineF line;
+        QLineFromJson(lineObject, line);
+        shape.append(line);
     }
 }
 
@@ -499,7 +570,7 @@ void AbstractTest::ReadPointValue(const QJsonObject &itemObject, const QString &
     if (itemObject.contains(attribute))
     {
         QJsonObject p1Object = itemObject[attribute].toObject();
-        PointFromJson(p1Object, value);
+        VPointFromJson(p1Object, value);
     }
     else
     {
@@ -581,6 +652,18 @@ void AbstractTest::ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::QPointFromJson(const QJsonObject &itemObject, QPointF &point)
+{
+    qreal x = 0;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
+    point.setX(x);
+
+    qreal y = 0;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
+    point.setY(y);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template<typename T>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
@@ -625,7 +708,7 @@ QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void AbstractTest::PointFromJson(const QJsonObject &itemObject, VPointF &value)
+void AbstractTest::VPointFromJson(const QJsonObject &itemObject, VPointF &point)
 {
     vidtype id = NULL_ID;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("id"), id);
@@ -645,8 +728,45 @@ void AbstractTest::PointFromJson(const QJsonObject &itemObject, VPointF &value)
     qreal y = 0;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
 
-    value = VPointF(x, y, name, mx, my);
-    value.setId(id);
+    point = VPointF(x, y, name, mx, my);
+    point.setId(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::QLineFromJson(const QJsonObject &itemObject, QLineF &line)
+{
+    QPointF p1;
+    QPointFromJson(itemObject[QStringLiteral("p1")].toObject(), p1);
+
+    QPointF p2;
+    QPointFromJson(itemObject[QStringLiteral("p2")].toObject(), p2);
+
+    line = QLineF(p1, p2);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AbstractTest::SAPointFromJson(const QJsonObject &itemObject, VSAPoint &point)
+{
+    qreal x = 0;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("x"), x);
+    point.setX(x);
+
+    qreal y = 0;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("y"), y);
+    point.setY(y);
+
+    qreal saBefore;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("saBefore"), saBefore, QStringLiteral("-1"));
+    point.SetSABefore(saBefore);
+
+    qreal saAfter;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("saAfter"), saAfter, QStringLiteral("-1"));
+    point.SetSAAfter(saAfter);
+
+    PieceNodeAngle angleType;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("angle"), angleType,
+                                  QString::number(static_cast<int>(PieceNodeAngle::ByLength)));
+    point.SetAngleType(angleType);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -736,7 +856,7 @@ void AbstractTest::DBFromJson(const QJsonObject &dbObject, QSharedPointer<VConta
                 case GOType::Point:
                 {
                     VPointF point;
-                    PointFromJson(itemObject, point);
+                    VPointFromJson(itemObject, point);
                     data->UpdateGObject(point.id(), new VPointF(point));
                     break;
                 }

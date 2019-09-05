@@ -60,6 +60,7 @@ class VPointF;
 class VSplinePoint;
 class VPieceNode;
 enum class GOType : char;
+struct VPiecePassmarkData;
 
 class AbstractTest : public QObject
 {
@@ -71,6 +72,9 @@ public:
     void VectorFromJson(const QString &json, QVector<VSAPoint>& vector);
 
     void PieceFromJson(const QString &json, VPiece &piece, QSharedPointer<VContainer> &data);
+
+    void PassmarkDataFromJson(const QString &json, VPiecePassmarkData& data);
+    void PassmarkShapeFromJson(const QString &json, QVector<QLineF> &shape);
 
 protected:
     void Comparison(const QVector<QPointF> &ekv, const QVector<QPointF> &ekvOrig) const;
@@ -99,7 +103,10 @@ protected:
     void ReadSplinePointValue(const QJsonObject &itemObject, VSplinePoint &point);
     void ReadPieceNodeValue(const QJsonObject &itemObject, VPieceNode &node);
 
-    void PointFromJson(const QJsonObject &itemObject, VPointF &value);
+    void QPointFromJson(const QJsonObject &itemObject, QPointF &point);
+    void VPointFromJson(const QJsonObject &itemObject, VPointF &point);
+    void QLineFromJson(const QJsonObject &itemObject, QLineF &line);
+    void SAPointFromJson(const QJsonObject &itemObject, VSAPoint &point);
     void SplineFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
     void SplinePathFromJson(const QJsonObject &itemObject, QSharedPointer<VContainer> &data);
 

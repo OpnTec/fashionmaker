@@ -96,5 +96,10 @@
         <file>DP_6_hem_by_second_edge_right_angle/output.json</file>
         <file>DP_6_hem_by_second_edge_symmetry/input.json</file>
         <file>DP_6_hem_by_second_edge_symmetry/output.json</file>
+        <file>Issue_924_Test_1/passmarkData.json</file>
+        <file>Issue_924_Test_1/passmarkShape.json</file>
+        <file>Issue_924_Test_1/seamAllowance.json</file>
+        <file>DP_6/input.json</file>
+        <file>DP_6/output.json</file>
     </qresource>
 </RCC>

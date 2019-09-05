@@ -132,7 +132,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, 
         QLineF edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (angle > 225)
         {
             QLineF loop(sp2, bigLine1.p1());
             loop.setLength(accuracyPointOnLine*2.);

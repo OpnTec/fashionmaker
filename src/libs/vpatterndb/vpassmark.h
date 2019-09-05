@@ -59,6 +59,8 @@ struct VPiecePassmarkData
     bool isShowSecondPassmark{true};
     int passmarkIndex{-1};
     vidtype id{NULL_ID};
+
+    QJsonObject toJson() const;
 };
 
 Q_DECLARE_METATYPE(VPiecePassmarkData)

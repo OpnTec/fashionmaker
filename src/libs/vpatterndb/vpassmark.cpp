@@ -31,6 +31,7 @@
 #include "../ifc/exception/vexceptioninvalidnotch.h"
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
+#include "testpassmark.h"
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
 
@@ -602,6 +603,28 @@ QPainterPath PassmarkToPath(const QVector<QLineF> &passmark)
 }
 }
 
+//------------------------------VPiecePassmarkData---------------------------------------------------------------------
+QJsonObject VPiecePassmarkData::toJson() const
+{
+    QJsonObject dataObject
+    {
+        {"previousSAPoint", previousSAPoint.toJson()},
+        {"passmarkSAPoint", passmarkSAPoint.toJson()},
+        {"nextSAPoint", nextSAPoint.toJson()},
+        {"saWidth", saWidth},
+        {"nodeName", nodeName},
+        {"pieceName", pieceName},
+        {"passmarkLineType", static_cast<int>(passmarkLineType)},
+        {"passmarkAngleType", static_cast<int>(passmarkAngleType)},
+        {"isMainPathNode", isMainPathNode},
+        {"isShowSecondPassmark", isShowSecondPassmark},
+        {"passmarkIndex", passmarkIndex},
+        {"id", static_cast<qint64>(id)},
+    };
+
+    return dataObject;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPassmark::VPassmark()
 {}
@@ -711,13 +734,18 @@ QLineF VPassmark::FindIntersection(const QLineF &line, const QVector<QPointF> &s
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QLineF> VPassmark::MakeSAPassmark(const QVector<QPointF> &seamAllowance, PassmarkSide side) const
 {
-    const QVector<QLineF> lines = SAPassmarkBaseLine(seamAllowance, side);
+//    DumpVector(seamAllowance, QStringLiteral("seamAllowance.json.XXXXXX")); // Uncomment for dumping test data
+//    DumpPassmarkData(m_data, QStringLiteral("passmarkData.json.XXXXXX")); // Uncomment for dumping test data
+
+    QVector<QLineF> lines = SAPassmarkBaseLine(seamAllowance, side);
     if (lines.isEmpty())
     {
-        return QVector<QLineF>();
+        return lines;
     }
 
-    return CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, seamAllowance, side);
+    lines = CreatePassmarkLines(m_data.passmarkLineType, m_data.passmarkAngleType, lines, seamAllowance, side);
+//    DumpPassmarkShape(lines, QStringLiteral("passmarkShape.json.XXXXXX")); // Uncomment for dumping test data
+    return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/testpassmark.cpp \
     $$PWD/vcontainer.cpp \
     $$PWD/calculator.cpp \
     $$PWD/vnodedetail.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 HEADERS += \
+    $$PWD/testpassmark.h \
     $$PWD/vcontainer.h \
     $$PWD/stable.h \
     $$PWD/calculator.h \

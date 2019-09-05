@@ -40,17 +40,24 @@
 //---------------------------------------------------------------------------------------------------------------------
 #if !defined(V_NO_ASSERT)
 // Use for writing tests
+QJsonObject PointToJson(const QPointF &point)
+{
+    QJsonObject pointObject
+    {
+        {"type", "QPointF"},
+        {"x", point.x()},
+        {"y", point.y()},
+    };
+    return pointObject;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VectorToJson(const QVector<QPointF> &points, QJsonObject &json)
 {
     QJsonArray pointsArray;
     for (auto point: points)
     {
-        QJsonObject pointObject;
-        pointObject[QLatin1String("type")] = "QPointF";
-        pointObject[QLatin1String("x")] = point.x();
-        pointObject[QLatin1String("y")] = point.y();
-
-        pointsArray.append(pointObject);
+        pointsArray.append(PointToJson(point));
     }
     json[QLatin1String("vector")] = pointsArray;
 }

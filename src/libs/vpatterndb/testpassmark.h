@@ -1,8 +1,8 @@
 /************************************************************************
  **
- **  @file   testpath.h
+ **  @file   testpassmark.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   28 8, 2019
+ **  @date   4 9, 2019
  **
  **  @brief
  **  @copyright
@@ -25,49 +25,19 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef TESTPATH_H
-#define TESTPATH_H
+#ifndef TESTPASSMARK_H
+#define TESTPASSMARK_H
 
-#include <QDir>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QString>
-#include <QTemporaryFile>
-#include <QTextStream>
 
-class QPointF;
-class QJsonObject;
-template <class T> class QVector;
-class VSAPoint;
+struct VPiecePassmarkData;
+class QLineF;
 
 #if !defined(V_NO_ASSERT)
-QJsonObject PointToJson(const QPointF &point);
-void VectorToJson(const QVector<QPointF> &points, QJsonObject &json);
-void VectorToJson(const QVector<VSAPoint> &points, QJsonObject &json);
 
-//---------------------------------------------------------------------------------------------------------------------
-template <class T>
-void DumpVector(const QVector<T> &points, const QString &templateName=QString())
-{
-    QTemporaryFile temp; // Go to tmp folder to find dump
-    temp.setAutoRemove(false); // Remove dump manually
+void DumpPassmarkData(const VPiecePassmarkData &data, const QString &templateName=QString());
+void DumpPassmarkShape(const QVector<QLineF> &shape, const QString &templateName=QString());
 
-    if (not templateName.isEmpty())
-    {
-        temp.setFileTemplate(QDir::tempPath() + QDir::separator() + templateName);
-    }
-
-    if (temp.open())
-    {
-        QJsonObject vectorObject;
-        VectorToJson(points, vectorObject);
-        QJsonDocument vector(vectorObject);
-
-        QTextStream out(&temp);
-        out << vector.toJson();
-        out.flush();
-    }
-}
 #endif // !defined(V_NO_ASSERT)
 
-#endif // TESTPATH_H
+#endif // TESTPASSMARK_H
