@@ -664,7 +664,7 @@ void AbstractTest::QPointFromJson(const QJsonObject &itemObject, QPointF &point)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template<typename T>
+template<typename T, typename std::enable_if<std::is_floating_point<T>::value>::type*>
 void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
                                    const QString &defaultValue)
 {
@@ -691,6 +691,84 @@ void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString 
             if (not ok)
             {
                 const QString error = QStringLiteral("Cannot convert default value '%1' to double.").arg(defaultValue);
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            QFAIL(qUtf8Printable(error));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T, typename std::enable_if<std::is_enum<T>::value>::type*>
+void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
+                                   const QString &defaultValue)
+{
+    if (itemObject.contains(attribute))
+    {
+        QJsonValue attributeValue = itemObject[attribute];
+        if (attributeValue.isDouble())
+        {
+            value = static_cast<T>(static_cast<int>(attributeValue.toDouble()));
+        }
+        else
+        {
+            const QString error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
+            QFAIL(qUtf8Printable(error));
+        }
+    }
+    else
+    {
+        if (not defaultValue.isEmpty())
+        {
+            bool ok = false;
+            value = static_cast<T>(defaultValue.toInt(&ok));
+
+            if (not ok)
+            {
+                const QString error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
+                QFAIL(qUtf8Printable(error));
+            }
+        }
+        else
+        {
+            const QString error = QStringLiteral("Json object does not contain attribute '%1'.").arg(attribute);
+            QFAIL(qUtf8Printable(error));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T, typename std::enable_if<std::is_integral<T>::value>::type*>
+void AbstractTest::ReadDoubleValue(const QJsonObject &itemObject, const QString &attribute, T &value,
+                                   const QString &defaultValue)
+{
+    if (itemObject.contains(attribute))
+    {
+        QJsonValue attributeValue = itemObject[attribute];
+        if (attributeValue.isDouble())
+        {
+            value = static_cast<T>(attributeValue.toDouble());
+        }
+        else
+        {
+            const QString error = QStringLiteral("%1 is not double '%2'.").arg(attribute, attributeValue.toString());
+            QFAIL(qUtf8Printable(error));
+        }
+    }
+    else
+    {
+        if (not defaultValue.isEmpty())
+        {
+            bool ok = false;
+            value = static_cast<T>(defaultValue.toInt(&ok));
+
+            if (not ok)
+            {
+                const QString error = QStringLiteral("Cannot convert default value '%1' to int.").arg(defaultValue);
                 QFAIL(qUtf8Printable(error));
             }
         }
