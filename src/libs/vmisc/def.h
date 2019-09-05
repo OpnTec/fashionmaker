@@ -126,7 +126,8 @@ enum class PassmarkAngleType : unsigned char
     IntersectionOnlyRight,
     Intersection2,
     Intersection2OnlyLeft,
-    Intersection2OnlyRight
+    Intersection2OnlyRight,
+    LAST_ONE_DO_NOT_USE
 };
 
 QString           PassmarkAngleTypeToString(PassmarkAngleType type);

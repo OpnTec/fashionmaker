@@ -66,8 +66,10 @@ signals:
     void ToggleForceFlipping(bool checked);
     void Delete();
     void ToggleExcludeState(quint32 id);
-    void ToggleAngleType(quint32 id, PieceNodeAngle type);
+    void ToggleSeamAllowanceAngleType(quint32 id, PieceNodeAngle type);
     void TogglePassmark(quint32 id, bool toggle);
+    void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);
+    void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
 public slots:
     virtual void FullUpdateFromFile() override;
     void         NameChangePosition(const QPointF &pos);
@@ -89,6 +91,12 @@ private:
     Q_DISABLE_COPY(VNodePoint)
 
     VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr, QGraphicsItem *parent = nullptr);
+
+    QHash<int, QAction *> InitContextMenu(QMenu *menu, vidtype pieceId, quint32 referens);
+    void InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
+    void InitAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
+    void InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
+    void InitPassmarkLineTypeMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu);
 };
 
 #endif // VNODEPOINT_H

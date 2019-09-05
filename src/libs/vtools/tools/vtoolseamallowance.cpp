@@ -1527,6 +1527,46 @@ void VToolSeamAllowance::ToggleNodePointPassmark(quint32 id, bool toggle)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::TogglePassmarkAngleType(quint32 id, PassmarkAngleType type)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetPassmarkAngleType(type);
+            newDet.GetPath()[i] = node;
+
+            qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::TogglePassmarkLineType(quint32 id, PassmarkLineType type)
+{
+    const VPiece oldDet = VAbstractTool::data.GetPiece(m_id);
+    VPiece newDet = oldDet;
+
+    for (int i = 0; i< oldDet.GetPath().CountNodes(); ++i)
+    {
+        VPieceNode node = oldDet.GetPath().at(i);
+        if (node.GetId() == id && node.GetTypeTool() == Tool::NodePoint)
+        {
+            node.SetPassmarkLineType(type);
+            newDet.GetPath()[i] = node;
+
+            qApp->getUndoStack()->push(new SavePieceOptions(oldDet, newDet, doc, m_id));
+            return;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceItem::MoveTypes VToolSeamAllowance::FindLabelGeometry(const VPatternLabelData& labelData,
                                                             const QVector<quint32> &pins, qreal &rotationAngle,
                                                             qreal &labelWidth, qreal &labelHeight, QPointF &pos)
@@ -1754,11 +1794,15 @@ void VToolSeamAllowance::InitNode(const VPieceNode &node, VMainGraphicsScene *sc
                 connect(tool, &VNodePoint::Delete, parent, &VToolSeamAllowance::DeleteFromMenu, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ToggleExcludeState, parent, &VToolSeamAllowance::ToggleExcludeState,
                         Qt::UniqueConnection);
-                connect(tool, &VNodePoint::ToggleAngleType, parent, &VToolSeamAllowance::ToggleNodePointAngleType,
-                        Qt::UniqueConnection);
+                connect(tool, &VNodePoint::ToggleSeamAllowanceAngleType, parent,
+                        &VToolSeamAllowance::ToggleNodePointAngleType, Qt::UniqueConnection);
                 connect(tool, &VNodePoint::TogglePassmark, parent, &VToolSeamAllowance::ToggleNodePointPassmark,
                         Qt::UniqueConnection);
                 connect(tool, &VNodePoint::ChoosedTool, scene, &VMainGraphicsScene::ChoosedItem, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::TogglePassmarkAngleType, parent,
+                        &VToolSeamAllowance::TogglePassmarkAngleType, Qt::UniqueConnection);
+                connect(tool, &VNodePoint::TogglePassmarkLineType, parent,
+                        &VToolSeamAllowance::TogglePassmarkLineType, Qt::UniqueConnection);
                 tool->setParentItem(parent);
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());
