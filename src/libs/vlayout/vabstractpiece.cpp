@@ -132,7 +132,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, 
         QLineF edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 225)
+        if (angle > 268)
         {
             QLineF loop(sp2, bigLine1.p1());
             loop.setLength(accuracyPointOnLine*2.);
@@ -442,7 +442,7 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
         QLineF edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (angle > 270)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -463,27 +463,39 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
     seam.setAngle(seam.angle()-90);
     seam.setLength(p.GetSABefore(width));
 
-    pointsRA.append(seam.p2());
-
-    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), seam.p1()))
+    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), seam.p1()) && IsSameDirection(p1, p2, px))
     {
         if (QLineF(p2, px).length() > localWidth*maxL)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
+        pointsRA.append(seam.p2());
         pointsRA.append(seam.p1());
     }
     else
     {
-        QLineF loopLine(px, sp2);
-        const qreal length = loopLine.length()*0.98;
-        loopLine.setLength(length);
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
 
-        QLineF tmp(seam.p2(), seam.p1());
-        tmp.setLength(tmp.length()+length);
+        if (angle > 180)
+        {
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
+        }
+        else
+        {
+            pointsRA.append(seam.p2());
 
-        pointsRA.append(tmp.p2());
-        pointsRA.append(loopLine.p2());
+            QLineF loopLine(px, sp2);
+            const qreal length = loopLine.length()*0.98;
+            loopLine.setLength(length);
+
+            QLineF tmp(seam.p2(), seam.p1());
+            tmp.setLength(tmp.length()+length);
+
+            pointsRA.append(tmp.p2());
+            pointsRA.append(loopLine.p2());
+        }
     }
 
     return pointsRA;
@@ -499,7 +511,7 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QP
         QLineF edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 180)
+        if (angle > 270)
         {
             return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
@@ -520,7 +532,7 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QP
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
-    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px))
+    if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px) && IsSameDirection(p3, p2, px))
     {
         if (QLineF(p2, px).length() > localWidth*maxL)
         {
@@ -540,35 +552,46 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QP
     }
     else
     {
-        // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
-        bool success = false;
-        const int countBefore = points.size();
-        QVector<QPointF> temp = points;
-        temp.append(bigLine1.p2());
-        temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
+        QLineF edge1(p2, p1);
+        QLineF edge2(p2, p3);
+        const qreal angle = edge1.angleTo(edge2);
 
-        if (success)
+        if (angle > 180)
         {
-            points = temp;
-        }
-
-        if (success)
-        {
-            px = points.last();
-        }
-
-        if (countBefore > 0)
-        {
-            QLineF seam(px, p3);
-            seam.setAngle(seam.angle()+90);
-            seam.setLength(p.GetSAAfter(width));
-            points.append(seam.p2());
+            return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
         }
         else
         {
-            if (needRollback != nullptr)
+            // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
+            bool success = false;
+            const int countBefore = points.size();
+            QVector<QPointF> temp = points;
+            temp.append(bigLine1.p2());
+            temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
+
+            if (success)
             {
-                *needRollback = not success;
+                points = temp;
+            }
+
+            if (success)
+            {
+                px = points.last();
+            }
+
+            if (countBefore > 0)
+            {
+                QLineF seam(px, p3);
+                seam.setAngle(seam.angle()+90);
+                seam.setLength(p.GetSAAfter(width));
+                points.append(seam.p2());
+            }
+            else
+            {
+                if (needRollback != nullptr)
+                {
+                    *needRollback = not success;
+                }
             }
         }
     }
@@ -974,7 +997,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         return QVector<QPointF>();
     }
 
-//    DumpVector(points); // Uncomment for dumping test data
+//    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
     points = CorrectEquidistantPoints(points);
     if ( points.size() < 3 )
@@ -1051,7 +1074,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     ekvPoints = CheckLoops(RemoveDublicates(ekvPoints, removeFirstAndLast));//Result path can contain loops
     ekvPoints = CorrectEquidistantPoints(ekvPoints, removeFirstAndLast);
     ekvPoints = CorrectPathDistortion(ekvPoints);
-//    DumpVector(ekvPoints); // Uncomment for dumping test data
+//    DumpVector(ekvPoints, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
     return ekvPoints;
 }
 
