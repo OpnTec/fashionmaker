@@ -57,6 +57,9 @@ protected slots:
 protected:
     int     m_curFileFormatVersion;
     QString m_curFileFormatVersionStr;
+    enum { MaxRecentFiles = 5 };
+    QVector<QAction *> m_recentFileActs{QVector<QAction *>(MaxRecentFiles)};
+    QAction *m_separatorAct{nullptr};
 
     bool ContinueFormatRewrite(const QString &currentFormatVersion, const QString &maxFormatVersion);
     void ToolBarStyle(QToolBar *bar);
@@ -64,6 +67,9 @@ protected:
     QString CSVFilePath();
 
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator)=0;
+
+    virtual QStringList RecentFileList() const =0;
+    void UpdateRecentFileActions();
 
 private:
     Q_DISABLE_COPY(VAbstractMainWindow)

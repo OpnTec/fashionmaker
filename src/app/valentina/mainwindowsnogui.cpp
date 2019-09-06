@@ -1039,6 +1039,12 @@ void MainWindowsNoGUI::InitTempLayoutScene()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QStringList MainWindowsNoGUI::RecentFileList() const
+{
+    return qApp->ValentinaSettings()->GetRecentFileList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QIcon MainWindowsNoGUI::ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const
 {
     QImage image;

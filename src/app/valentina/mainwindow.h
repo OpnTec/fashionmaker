@@ -255,9 +255,6 @@ private:
     /** @brief drawMode true if we current draw scene. */
     bool               drawMode;
 
-    enum { MaxRecentFiles = 5 };
-    QAction            *recentFileActs[MaxRecentFiles];
-    QAction            *separatorAct;
     QLabel             *leftGoToStage;
     QLabel             *rightGoToStage;
     QTimer             *autoSaveTimer;
@@ -326,7 +323,6 @@ private:
     void               WriteSettings();
 
     bool               MaybeSave();
-    void               UpdateRecentFileActions();
     void               CreateMenus();
     void               CreateActions();
     void               InitAutoSave();

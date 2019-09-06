@@ -176,8 +176,7 @@ MainWindow::MainWindow(QWidget *parent)
       currentDrawIndex(0), currentToolBoxIndex(0),
       isDockToolOptionsVisible(true),
       isDockGroupsVisible(true),
-      drawMode(true), recentFileActs(),
-      separatorAct(nullptr),
+      drawMode(true),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
       gradationHeights(nullptr),
       gradationSizes(nullptr),
@@ -193,11 +192,6 @@ MainWindow::MainWindow(QWidget *parent)
       m_progressBar(new QProgressBar(this)),
       m_statusLabel(new QLabel(this))
 {
-    for (int i = 0; i < MaxRecentFiles; ++i)
-    {
-        recentFileActs[i] = nullptr;
-    }
-
     CreateActions();
     InitScenes();
 
@@ -4012,37 +4006,15 @@ bool MainWindow::MaybeSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::UpdateRecentFileActions()
-{
-    qCDebug(vMainWindow, "Updating recent file actions.");
-    const QStringList files = qApp->ValentinaSettings()->GetRecentFileList();
-    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
-
-    for (int i = 0; i < numRecentFiles; ++i)
-    {
-       QString text = QString("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
-       recentFileActs[i]->setText(text);
-       recentFileActs[i]->setData(files.at(i));
-       recentFileActs[i]->setVisible(true);
-    }
-    for (int j = numRecentFiles; j < MaxRecentFiles; ++j)
-    {
-       recentFileActs[j]->setVisible(false);
-    }
-
-    separatorAct->setVisible(numRecentFiles > 0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::CreateMenus()
 {
     for (int i = 0; i < MaxRecentFiles; ++i)
     {
-        ui->menuFile->insertAction(ui->actionPreferences, recentFileActs[i]);
+        ui->menuFile->insertAction(ui->actionPreferences, m_recentFileActs.at(i));
     }
-    separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuFile->insertAction(ui->actionPreferences, separatorAct);
+    m_separatorAct = new QAction(this);
+    m_separatorAct->setSeparator(true);
+    ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct);
     UpdateRecentFileActions();
 
     //Add Undo/Redo actions.
@@ -4060,9 +4032,9 @@ void MainWindow::CreateMenus()
     ui->menuPatternPiece->insertAction(ui->actionLast_tool, redoAction);
     ui->toolBarTools->addAction(redoAction);
 
-    separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, separatorAct);
+    m_separatorAct = new QAction(this);
+    m_separatorAct->setSeparator(true);
+    ui->menuPatternPiece->insertAction(ui->actionPattern_properties, m_separatorAct);
 
     AddDocks();
 }
@@ -4559,8 +4531,8 @@ void MainWindow::CreateActions()
     {
         QAction *action = new QAction(this);
         action->setVisible(false);
-        recentFileActs[i] = action;
-        connect(recentFileActs[i], &QAction::triggered, this, [this]()
+        m_recentFileActs[i] = action;
+        connect(m_recentFileActs[i], &QAction::triggered, this, [this]()
         {
             if (QAction *action = qobject_cast<QAction*>(sender()))
             {

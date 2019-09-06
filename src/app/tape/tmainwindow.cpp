@@ -104,8 +104,6 @@ TMainWindow::TMainWindow(QWidget *parent)
       labelPatternUnit(nullptr),
       isInitialized(false),
       mIsReadOnly(false),
-      recentFileActs(QVector<QAction *>(MaxRecentFiles)),
-      separatorAct(nullptr),
       hackedWidgets()
 {
     ui->setupUi(this);
@@ -127,7 +125,7 @@ TMainWindow::TMainWindow(QWidget *parent)
     ui->mainToolBar->setContextMenuPolicy(Qt::PreventContextMenu);
     ui->toolBarGradation->setContextMenuPolicy(Qt::PreventContextMenu);
 
-    recentFileActs.fill(nullptr);
+    m_recentFileActs.fill(nullptr);
 
     SetupMenu();
     UpdateWindowTitle();
@@ -687,6 +685,12 @@ void TMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, int 
 
     QString error;
     csv.toCSV(fileName, error, withHeader, separator, QTextCodec::codecForMib(mib));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList TMainWindow::RecentFileList() const
+{
+    return qApp->TapeSettings()->GetRecentFileList();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1940,7 +1944,7 @@ void TMainWindow::SetupMenu()
     });
     connect(ui->actionPreferences, &QAction::triggered, this, &TMainWindow::Preferences);
 
-    for (auto & recentFileAct : recentFileActs)
+    for (auto & recentFileAct : m_recentFileActs)
     {
         auto *action = new QAction(this);
         recentFileAct = action;
@@ -1959,10 +1963,10 @@ void TMainWindow::SetupMenu()
         recentFileAct->setVisible(false);
     }
 
-    separatorAct = new QAction(this);
-    separatorAct->setSeparator(true);
-    separatorAct->setVisible(false);
-    ui->menuFile->insertAction(ui->actionPreferences, separatorAct );
+    m_separatorAct = new QAction(this);
+    m_separatorAct->setSeparator(true);
+    m_separatorAct->setVisible(false);
+    ui->menuFile->insertAction(ui->actionPreferences, m_separatorAct );
 
 
     connect(ui->actionQuit, &QAction::triggered, this, &TMainWindow::close);
@@ -2915,25 +2919,6 @@ bool TMainWindow::LoadFromExistingFile(const QString &path)
     }
 
     return true;
-}
-//---------------------------------------------------------------------------------------------------------------------
-void TMainWindow::UpdateRecentFileActions()
-{
-    qCDebug(tMainWindow, "Updating recent file actions.");
-    const QStringList files = qApp->TapeSettings()->GetRecentFileList();
-    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
-    qCDebug(tMainWindow, "Updating recent file actions = %i ",numRecentFiles);
-
-    for (int i = 0; i < numRecentFiles; ++i)
-    {
-        const QString text = QStringLiteral("&%1. %2").arg(i + 1).arg(StrippedName(files.at(i)));
-        qCDebug(tMainWindow, "file %i = %s", numRecentFiles, qUtf8Printable(text));
-        recentFileActs.at(i)->setText(text);
-        recentFileActs.at(i)->setData(files.at(i));
-        recentFileActs.at(i)->setVisible(true);
-    }
-
-    separatorAct->setVisible(numRecentFiles>0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

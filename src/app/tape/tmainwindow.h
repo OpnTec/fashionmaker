@@ -72,6 +72,7 @@ protected:
     virtual bool eventFilter(QObject *object, QEvent *event) override;
     virtual void ExportToCSVData(const QString &fileName, bool withHeader, int mib,
                                  const QChar &separator) final;
+    virtual QStringList RecentFileList() const override;
 
 private slots:
     void FileNew();
@@ -148,9 +149,7 @@ private:
     QLabel *labelPatternUnit;
     bool isInitialized;
     bool mIsReadOnly;
-    enum { MaxRecentFiles = 5 };
-    QVector<QAction *> recentFileActs;
-    QAction            *separatorAct;
+
     QVector<QObject *> hackedWidgets;
 
     void SetupMenu();
@@ -164,7 +163,6 @@ private:
     void ShowNewMData(bool fresh);
     void ShowUnits();
     void ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
-    void UpdateRecentFileActions();
 
     void MeasurementsWereSaved(bool saved);
     void SetCurrentFile(const QString &fileName);

@@ -40,11 +40,137 @@
 #include <QStyleFactory>
 #endif
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+QStringList SplitFilePaths(const QString &path)
+{
+    QStringList result;
+    QString subPath = QDir::cleanPath(path);
+    QString lastFileName;
+
+    do
+    {
+        QFileInfo fileInfo(subPath);
+        lastFileName = fileInfo.fileName();
+        if (not lastFileName.isEmpty())
+        {
+            result.prepend(lastFileName);
+            subPath = fileInfo.path();
+        }
+    }
+    while(not lastFileName.isEmpty());
+
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList ReverseList(const QStringList &list)
+{
+    if (list.isEmpty())
+    {
+        return list;
+    }
+    QVector<QString> reversedList(list.size());
+    qint32 j = 0;
+    for (qint32 i = list.size() - 1; i >= 0; --i)
+    {
+        reversedList.replace(j, list.at(i));
+        ++j;
+    }
+    return reversedList.toList();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList SelectNumber(QStringList path, int number)
+{
+    path = ReverseList(path);
+    QStringList subPath = path.mid(0, number);
+    return ReverseList(subPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList RecentFiles(const QStringList &paths)
+{
+    QVector<QStringList> table;
+    table.reserve(paths.size());
+
+    for(auto &path : paths)
+    {
+        table.append(SplitFilePaths(path));
+    }
+
+    auto CreateOptimized = [table](int tableRow)
+    {
+        QStringList optimized;
+        bool isUnique = true;
+
+        QStringList path = table.at(tableRow);
+        for (int count = 1; count <= path.size(); ++count)
+        {
+            isUnique = true;
+            optimized = SelectNumber(path, count);
+
+            for (int row = 0; row < table.size(); ++row)
+            {
+                if (row == tableRow)
+                {
+                    continue;
+                }
+
+                QStringList testSubPath = SelectNumber(table.at(row), count);
+                if (optimized.join(QDir::separator()) == testSubPath.join(QDir::separator()))
+                {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            if (isUnique)
+            {
+                break;
+            }
+        }
+
+        if (optimized.size() >= 3)
+        {
+            optimized = QStringList({optimized.first(), QStringLiteral("…"), optimized.last()});
+        }
+
+        return optimized;
+    };
+
+    QVector<QStringList> optimizedPaths;
+    optimizedPaths.reserve(paths.size());
+
+    for (int row = 0; row < table.size(); ++row)
+    {
+        optimizedPaths.append(CreateOptimized(row));
+    }
+
+    QStringList recentFiles;
+    recentFiles.reserve(paths.size());
+
+    for(auto &path : optimizedPaths)
+    {
+        recentFiles.append(path.join(QDir::separator()));
+    }
+
+    return recentFiles;
+}
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractMainWindow::VAbstractMainWindow(QWidget *parent)
     : QMainWindow(parent),
       m_curFileFormatVersion(0x0),
       m_curFileFormatVersionStr(QLatin1String("0.0.0"))
-{}
+{
+    for (int i = 0; i < MaxRecentFiles; ++i)
+    {
+        m_recentFileActs[i] = nullptr;
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractMainWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
@@ -124,6 +250,28 @@ QString VAbstractMainWindow::CSVFilePath()
     }
 
     return fileName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::UpdateRecentFileActions()
+{
+    const QStringList files = RecentFileList();
+    const QStringList recentFiles = RecentFiles(files);
+    const int numRecentFiles = qMin(files.size(), static_cast<int>(MaxRecentFiles));
+
+    for (int i = 0; i < numRecentFiles; ++i)
+    {
+        QString recent = recentFiles.at(i);
+        if (not recent.isEmpty())
+        {
+            const QString text = QStringLiteral("&%1. %2").arg(i + 1).arg(recentFiles.at(i));
+            m_recentFileActs.at(i)->setText(text);
+            m_recentFileActs.at(i)->setData(files.at(i));
+            m_recentFileActs.at(i)->setVisible(true);
+        }
+    }
+
+    m_separatorAct->setVisible(numRecentFiles>0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -30,6 +30,7 @@
 - All intersections are now treaded as a loop.
 - [#558] New export: Export pattern as step-by-step text.
 - Added options to control passmark angle type and passmark mark type.
+- Improve for recent files list. Show duplicate file names with unique path section.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

@@ -135,6 +135,7 @@ protected:
     void InitTempLayoutScene();
     virtual void CleanLayout()=0;
     virtual void PrepareSceneList(PreviewQuatilty quality)=0;
+    virtual QStringList RecentFileList() const override;
     QIcon ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const;
     bool GenerateLayout(VLayoutGenerator& lGenerator);
     int ContinueIfLayoutStale();
