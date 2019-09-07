@@ -103,12 +103,10 @@ QStringList RecentFiles(const QStringList &paths)
     auto CreateOptimized = [table](int tableRow)
     {
         QStringList optimized;
-        bool isUnique = true;
-
         QStringList path = table.at(tableRow);
         for (int count = 1; count <= path.size(); ++count)
         {
-            isUnique = true;
+            bool isUnique = true;
             optimized = SelectNumber(path, count);
 
             for (int row = 0; row < table.size(); ++row)
