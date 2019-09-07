@@ -181,7 +181,13 @@ void TMainWindow::SetBaseMHeight(int height)
         {
             const int row = ui->tableWidget->currentRow();
             currentHeight = UnitConvertor(height, Unit::Cm, mUnit);
+
+            gradationHeights->blockSignals(true);
+            SetDefaultHeight(static_cast<int>(currentHeight));
+            gradationHeights->blockSignals(false);
+
             RefreshData();
+            search->RefreshList(ui->lineEditFind->text());
             ui->tableWidget->selectRow(row);
         }
     }
@@ -196,7 +202,13 @@ void TMainWindow::SetBaseMSize(int size)
         {
             const int row = ui->tableWidget->currentRow();
             currentSize = UnitConvertor(size, Unit::Cm, mUnit);
+
+            gradationSizes->blockSignals(true);
+            SetDefaultSize(static_cast<int>(currentSize));
+            gradationSizes->blockSignals(false);
+
             RefreshData();
+            search->RefreshList(ui->lineEditFind->text());
             ui->tableWidget->selectRow(row);
         }
     }
