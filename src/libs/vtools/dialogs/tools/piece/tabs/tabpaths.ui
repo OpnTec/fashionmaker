@@ -282,7 +282,7 @@
               <bool>false</bool>
              </property>
              <property name="title">
-              <string>Automatic</string>
+              <string comment="seam allowance">Automatic</string>
              </property>
              <property name="flat">
               <bool>false</bool>
@@ -949,7 +949,7 @@
               <bool>false</bool>
              </property>
              <property name="title">
-              <string>Custom</string>
+              <string comment="seam allowance">Custom</string>
              </property>
              <property name="flat">
               <bool>false</bool>
