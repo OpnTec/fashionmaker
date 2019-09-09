@@ -139,7 +139,7 @@ QDomElement VPatternRecipe::Measurements()
     // Resore order
     std::sort(patternMeasurements.begin(), patternMeasurements.end(),
               [](const QSharedPointer<VMeasurement> &a, const QSharedPointer<VMeasurement> &b)
-    {return a->Index() > b->Index();});
+    {return a->Index() < b->Index();});
 
     for(auto &m : patternMeasurements)
     {
@@ -178,7 +178,7 @@ QDomElement VPatternRecipe::Increments()
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
               [](const QSharedPointer<VIncrement> &a, const QSharedPointer<VIncrement> &b)
-    {return a->GetIndex() > b->GetIndex();});
+    {return a->GetIndex() < b->GetIndex();});
 
     for(auto &incr : patternIncrements)
     {
@@ -201,7 +201,7 @@ QDomElement VPatternRecipe::PreviewCalculations()
     // Resore order
     std::sort(patternIncrements.begin(), patternIncrements.end(),
               [](const QSharedPointer<VIncrement> &a, const QSharedPointer<VIncrement> &b)
-    {return a->GetIndex() > b->GetIndex();});
+    {return a->GetIndex() < b->GetIndex();});
 
     for(auto &incr : patternIncrements)
     {
