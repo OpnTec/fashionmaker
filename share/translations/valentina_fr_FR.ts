@@ -10129,11 +10129,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Stature:</translation>
+        <translation type="vanished">Stature:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taille :</translation>
+        <translation type="vanished">Taille :</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10297,6 +10297,14 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10636,10 +10644,6 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished">Marge de couture</translation>
     </message>
     <message>
-        <source>Automatic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Largeur :</translation>
     </message>
@@ -10686,10 +10690,6 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Angle:</source>
         <translation type="unfinished">Angle:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished">Personnalisé</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10767,12 +10767,29 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Personnalisé</translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation>Dialogue</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12213,7 +12230,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angle</translation>
+        <translation type="vanished">Angle</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12242,6 +12259,82 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Passmark</source>
         <translation>Repère de montage</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Un trait</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Deux traits</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Trois traits</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">Marque T</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">Marque V</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15116,6 +15209,13 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

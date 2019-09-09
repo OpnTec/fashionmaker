@@ -8147,10 +8147,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="vanished">Nascondi percorso primario</translation>
-    </message>
-    <message>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10115,11 +10111,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Altezza:</translation>
+        <translation type="vanished">Altezza:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taglia:</translation>
+        <translation type="vanished">Taglia:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10283,6 +10279,14 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10623,7 +10627,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automaticoc</translation>
+        <translation type="vanished">Automaticoc</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10672,10 +10676,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Angle:</source>
         <translation type="unfinished">Angolo:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="unfinished">Personalizzato</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10753,12 +10753,29 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Automaticoc</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Personalizzato</translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation type="unfinished">Finestra</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12147,7 +12164,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Angol</translation>
+        <translation type="vanished">Angol</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12176,6 +12193,82 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Passmark</source>
         <translation>Tacca</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished">Dritta</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished">Bisettrice</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished">Intersezione</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished">Intersezione (sinistra)</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished">Intersezione (destra)</translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished">Intersezione 2</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished">Intersezione 2 (solo sinistra)</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished">Intersezione 2 (solo destra)</translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Una linea</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Due linee</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Tre linee</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">Tacca a T</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">Tacca a V</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14997,6 +15090,13 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

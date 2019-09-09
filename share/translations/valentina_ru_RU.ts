@@ -2749,7 +2749,7 @@
     </message>
     <message>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Поворот объектов вокруг точки %1. Суффикс &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
@@ -2761,7 +2761,7 @@
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить объекты. Суффикс &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -4680,7 +4680,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>V метка 2</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
@@ -4700,11 +4700,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>U метка</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>П метка</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
@@ -8184,20 +8184,16 @@ Do you want to save your changes?</source>
         <translation>Экспортировать рецепт</translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="vanished">Прятать главный контур</translation>
-    </message>
-    <message>
         <source>Recipe files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы рецептов</translation>
     </message>
     <message>
         <source>recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>рецепт</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось сохранить рецепт. %1</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
@@ -8205,11 +8201,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка пересечения дуги и оси</translation>
     </message>
     <message>
         <source>Show main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать основной контур</translation>
     </message>
     <message>
         <source>Globally show pieces main path</source>
@@ -8380,7 +8376,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Закончилось время.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
@@ -9187,7 +9183,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos;. Недостаточно точек, чтобы построить припуск на шов.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
@@ -9207,7 +9203,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Empty formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустая формула</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -9231,7 +9227,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Деталь &apos;%1&apos;. Припуски на швы неправильные.</translation>
     </message>
     <message>
         <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
@@ -9239,7 +9235,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно вычислить длину надсечки у точки &apos;%1&apos; в детали &apos;%2&apos; со встроенным припуском на шов. Пользователь должен вручную указать длину.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
@@ -10152,11 +10148,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Рост:</translation>
+        <translation type="vanished">Рост:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Размер:</translation>
+        <translation type="vanished">Размер:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10276,7 +10272,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Окно</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -10284,11 +10280,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Мерки</translation>
     </message>
     <message>
         <source>&amp;Open individual …</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Открыть индивидуальные …</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -10296,7 +10292,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save &amp;As …</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить &amp;как …</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -10304,7 +10300,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;О Tape</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -10320,6 +10316,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10593,7 +10597,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>V метка 2</translation>
     </message>
     <message>
         <source>Manual length</source>
@@ -10625,11 +10629,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>U метка</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>П метка</translation>
     </message>
 </context>
 <context>
@@ -10660,7 +10664,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Автоматическая</translation>
+        <translation type="vanished">Автоматическая</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10712,7 +10716,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Пользовательская</translation>
+        <translation type="vanished">Пользовательская</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10788,6 +10792,16 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Controls priority in layout. 0 - no priority.</source>
+        <translation>Управление приоритетом в раскладке. 0 - нет приоритета.</translation>
+    </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Автоматическая</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10796,6 +10810,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Dialog</source>
         <translation>Диалог</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11885,7 +11906,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить ориентацию шаблона страницы в альбомную ориентацию (режим экспорта). Этот параметр действует только для одного из предварительно определенных шаблонов страниц.</translation>
     </message>
     <message>
         <source>The page height</source>
@@ -11897,7 +11918,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Time&gt;в минутах, приведенных для алгоритма, чтобы найти лучшую раскладку. Время должно быть в диапазоне от 1 минуты до 60 минут. Значение по умолчанию 1 минута.</translation>
     </message>
     <message>
         <source>Time</source>
@@ -11910,10 +11931,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
         <translation>Время должно быть в диапазоне от 1 минуты до 60 минут.</translation>
-    </message>
-    <message>
-        <source>Сoefficient must be in range from 0 to 100.</source>
-        <translation type="vanished">Коэффициент должен быть в диапазоне от 0 до 100.</translation>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
@@ -11929,7 +11946,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент должен быть в диапазоне от 0 до 100.</translation>
     </message>
 </context>
 <context>
@@ -12249,7 +12266,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Угол</translation>
+        <translation type="vanished">Угол</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12278,6 +12295,82 @@ Do you want to save your changes?</source>
     <message>
         <source>Passmark</source>
         <translation>Надсечка</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished">Прямой</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished">Биссектриса</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished">Пересечение</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished">Пересечение (только слева)</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished">Пересечение (только справа)</translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished">Пересечение 2</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished">Пересечение 2 (только слева)</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished">Пересечение 2 (только справа)</translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Одна линия</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Две линии</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Три линии</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">Т метка</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">V метка</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished">V метка 2</translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished">U метка</translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished">П метка</translation>
     </message>
 </context>
 <context>
@@ -15138,7 +15231,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hide not in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть не в раскладке</translation>
     </message>
 </context>
 <context>
@@ -15170,6 +15263,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Show All</source>
         <translation>Показать все</translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

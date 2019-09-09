@@ -8182,10 +8182,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="vanished">Ховати головний контур</translation>
-    </message>
-    <message>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10149,11 +10145,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Висота:</translation>
+        <translation type="vanished">Висота:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Розмір:</translation>
+        <translation type="vanished">Розмір:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10317,6 +10313,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10657,7 +10661,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Автоматична</translation>
+        <translation type="vanished">Автоматична</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10709,7 +10713,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Користувацька</translation>
+        <translation type="vanished">Користувацька</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10787,12 +10791,29 @@ Do you want to save your changes?</source>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Автоматична</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation type="unfinished">Діалог</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12241,7 +12262,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Кут</translation>
+        <translation type="vanished">Кут</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12270,6 +12291,82 @@ Do you want to save your changes?</source>
     <message>
         <source>Passmark</source>
         <translation>Надсічка</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished">Пряма</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished">Бісектриса</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished">Перетин</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Одна лінія</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Дві лінії</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Три лінії</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">Т позначка</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">V позначка</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15156,6 +15253,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

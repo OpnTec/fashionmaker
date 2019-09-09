@@ -8182,10 +8182,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="vanished">Verberg hoofdpad</translation>
-    </message>
-    <message>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10149,11 +10145,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hoogte:</translation>
+        <translation type="vanished">Hoogte:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Maat:</translation>
+        <translation type="vanished">Maat:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10317,6 +10313,14 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10657,7 +10661,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automatisch</translation>
+        <translation type="vanished">Automatisch</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10709,7 +10713,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Op maat</translation>
+        <translation type="vanished">Op maat</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10787,12 +10791,29 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Automatisch</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Op maat</translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation>Dialoog</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12242,7 +12263,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Hoek</translation>
+        <translation type="vanished">Hoek</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12271,6 +12292,82 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Passmark</source>
         <translation>Pasmarkering</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished">Rechttoe rechtaan</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished">Bisector</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished">Kruispunt van lijnen</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished">Kruispunt ( alleen links)</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished">Kruispunt ( alleen rechts)</translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Een lijn</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Twee lijnen</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Drie lijnen</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">T markering</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">V markering</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15157,6 +15254,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

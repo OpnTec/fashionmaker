@@ -8185,10 +8185,6 @@ Chcete uložit své změny?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hide main path</source>
-        <translation type="vanished">Skrýt hlavní cestu</translation>
-    </message>
-    <message>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10153,11 +10149,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Výška:</translation>
+        <translation type="vanished">Výška:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Velikost:</translation>
+        <translation type="vanished">Velikost:</translation>
     </message>
     <message>
         <source>All files</source>
@@ -10322,6 +10318,14 @@ Chcete uložit změny?</translation>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
+    </message>
+    <message>
+        <source>Height (%1):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size (%1):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10661,7 +10665,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation>Automaticky</translation>
+        <translation type="vanished">Automaticky</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10713,7 +10717,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Vlastní</translation>
+        <translation type="vanished">Vlastní</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10791,12 +10795,29 @@ Chcete uložit změny?</translation>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Automaticky</translation>
+    </message>
+    <message>
+        <source>Custom</source>
+        <comment>seam allowance</comment>
+        <translation type="unfinished">Vlastní</translation>
+    </message>
 </context>
 <context>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
         <translation>Dialog</translation>
+    </message>
+</context>
+<context>
+    <name>Tape</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12246,7 +12267,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Úhel</translation>
+        <translation type="vanished">Úhel</translation>
     </message>
     <message>
         <source>by length</source>
@@ -12275,6 +12296,82 @@ Chcete uložit změny?</translation>
     <message>
         <source>Passmark</source>
         <translation>Značka sestavení</translation>
+    </message>
+    <message>
+        <source>Seam allowance angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Passmark angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Straightforward</source>
+        <translation type="unfinished">Přímo</translation>
+    </message>
+    <message>
+        <source>Bisector</source>
+        <translation type="unfinished">Osa</translation>
+    </message>
+    <message>
+        <source>Intersection</source>
+        <translation type="unfinished">Průsečík</translation>
+    </message>
+    <message>
+        <source>Intersection (only left)</source>
+        <translation type="unfinished">Průsečík (pouze levý)</translation>
+    </message>
+    <message>
+        <source>Intersection (only right)</source>
+        <translation type="unfinished">Průsečík (pouze pravý)</translation>
+    </message>
+    <message>
+        <source>Intersection 2</source>
+        <translation type="unfinished">Průsečík 2</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only left)</source>
+        <translation type="unfinished">Průsečík 2 (pouze levý)</translation>
+    </message>
+    <message>
+        <source>Intersection 2 (only right)</source>
+        <translation type="unfinished">Průsečík 2 (pouze pravý)</translation>
+    </message>
+    <message>
+        <source>Passmark mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>One line</source>
+        <translation type="unfinished">Jedna čára</translation>
+    </message>
+    <message>
+        <source>Two lines</source>
+        <translation type="unfinished">Dvě čáry</translation>
+    </message>
+    <message>
+        <source>Three lines</source>
+        <translation type="unfinished">Tři čáry</translation>
+    </message>
+    <message>
+        <source>T mark</source>
+        <translation type="unfinished">Značka T</translation>
+    </message>
+    <message>
+        <source>V mark</source>
+        <translation type="unfinished">Značka V</translation>
+    </message>
+    <message>
+        <source>V mark 2</source>
+        <translation type="unfinished">Značka V 2</translation>
+    </message>
+    <message>
+        <source>U mark</source>
+        <translation type="unfinished">Značka U</translation>
+    </message>
+    <message>
+        <source>Box mark</source>
+        <translation type="unfinished">Značka okénko</translation>
     </message>
 </context>
 <context>
@@ -15161,6 +15258,13 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Valentina</name>
+    <message>
+        <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

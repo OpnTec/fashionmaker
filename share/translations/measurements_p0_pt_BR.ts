@@ -720,7 +720,7 @@
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="547"/>
         <source>Head: Circumference</source>
         <comment>Full measurement name.</comment>
-        <translation>Cabeça: Cicunferência</translation>
+        <translation>Cabeça: Circunferência</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatemeasurements.cpp" line="548"/>
