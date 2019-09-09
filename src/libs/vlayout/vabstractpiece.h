@@ -205,7 +205,7 @@ QVector<T> VAbstractPiece::CorrectEquidistantPoints(const QVector<T> &points, bo
         }
     }
 
-    if (buf2.first() != buf2.last())
+    if (not buf2.isEmpty() && buf2.first() != buf2.last())
     {
         buf2.append(buf2.first());
     }
