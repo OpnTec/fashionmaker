@@ -34,6 +34,7 @@
 #include <QStyle>
 #include <QToolBar>
 #include <QFileDialog>
+#include <QAction>
 
 #if defined(Q_OS_MAC)
 #include "../vwidgets/vmaingraphicsview.h"
