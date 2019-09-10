@@ -239,7 +239,14 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
-        pointsIntr = VAbstractPiece::RollbackSeamAllowance(pointsIntr, edge2, &success);
+        QVector<QPointF> temp = pointsIntr;
+        temp.append(bigLine1.p2());
+        temp = VAbstractPiece::RollbackSeamAllowance(temp, edge2, &success);
+
+        if (success)
+        {
+            pointsIntr = temp;
+        }
 
         if (needRollback != nullptr)
         {

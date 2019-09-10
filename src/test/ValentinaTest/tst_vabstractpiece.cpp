@@ -226,6 +226,24 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://Issue_923_test6_6/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
 
+    // See file src/app/share/collection/bugs/Issue_#923_test7.val
+    ASSERT_TEST_CASE("Issue 923. Test 7.1",
+                     QStringLiteral("://Issue_923_test7_1/input.json"),
+                     QStringLiteral("://Issue_923_test7_1/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/Issue_#923_test7.val
+    ASSERT_TEST_CASE("Issue 923. Test 7.2",
+                     QStringLiteral("://Issue_923_test7_2/input.json"),
+                     QStringLiteral("://Issue_923_test7_2/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/Issue_#923_test7.val
+    ASSERT_TEST_CASE("Issue 923. Test 7.3",
+                     QStringLiteral("://Issue_923_test7_3/input.json"),
+                     QStringLiteral("://Issue_923_test7_3/output.json"),
+                     37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
     // See file src/app/share/collection/bugs/loop_by_intersection.val
     ASSERT_TEST_CASE("Loop for angle by intersection",
                      QStringLiteral("://loop_by_intersection/input.json"),

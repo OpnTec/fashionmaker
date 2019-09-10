@@ -101,5 +101,11 @@
         <file>Issue_924_Test_1/seamAllowance.json</file>
         <file>DP_6/input.json</file>
         <file>DP_6/output.json</file>
+        <file>Issue_923_test7_1/input.json</file>
+        <file>Issue_923_test7_1/output.json</file>
+        <file>Issue_923_test7_2/input.json</file>
+        <file>Issue_923_test7_2/output.json</file>
+        <file>Issue_923_test7_3/input.json</file>
+        <file>Issue_923_test7_3/output.json</file>
     </qresource>
 </RCC>
