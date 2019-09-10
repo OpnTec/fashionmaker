@@ -9168,7 +9168,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
+        <translation type="vanished">Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
@@ -9181,10 +9181,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Nelze opravit polohu zářezu.</translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
@@ -10664,10 +10660,6 @@ Chcete uložit změny?</translation>
         <translation>Přídavek na šev</translation>
     </message>
     <message>
-        <source>Automatic</source>
-        <translation type="vanished">Automaticky</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Šířka:</translation>
     </message>
@@ -10714,10 +10706,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Angle:</source>
         <translation>Úhel:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Vlastní</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10798,12 +10786,12 @@ Chcete uložit změny?</translation>
     <message>
         <source>Automatic</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Automaticky</translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Vlastní</translation>
+        <translation>Vlastní</translation>
     </message>
 </context>
 <context>
@@ -11084,35 +11072,35 @@ Chcete uložit změny?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>První bod</translation>
+        <translation type="vanished">První bod</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Druhý bod</translation>
+        <translation type="vanished">Druhý bod</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Nejvyšší bod</translation>
+        <translation type="vanished">Nejvyšší bod</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Nejnižší bod</translation>
+        <translation type="vanished">Nejnižší bod</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Bod nejvíce vlevo</translation>
+        <translation type="vanished">Bod nejvíce vlevo</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Bod nejvíce vpravo</translation>
+        <translation type="vanished">Bod nejvíce vpravo</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Svislá osa</translation>
+        <translation type="vanished">Svislá osa</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Vodorovná osa</translation>
+        <translation type="vanished">Vodorovná osa</translation>
     </message>
 </context>
 <context>
@@ -11301,6 +11289,13 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -11448,7 +11443,7 @@ Chcete uložit změny?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation>Vybrat materiál</translation>
+        <translation type="vanished">Vybrat materiál</translation>
     </message>
 </context>
 <context>
@@ -12266,10 +12261,6 @@ Chcete uložit změny?</translation>
         <translation>Vynutit přetočení</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Úhel</translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation>Podle délky</translation>
     </message>
@@ -12307,35 +12298,35 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished">Přímo</translation>
+        <translation>Přímo</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished">Osa</translation>
+        <translation>Osa</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished">Průsečík</translation>
+        <translation>Průsečík</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished">Průsečík (pouze levý)</translation>
+        <translation>Průsečík (pouze levý)</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished">Průsečík (pouze pravý)</translation>
+        <translation>Průsečík (pouze pravý)</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished">Průsečík 2</translation>
+        <translation>Průsečík 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished">Průsečík 2 (pouze levý)</translation>
+        <translation>Průsečík 2 (pouze levý)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished">Průsečík 2 (pouze pravý)</translation>
+        <translation>Průsečík 2 (pouze pravý)</translation>
     </message>
     <message>
         <source>Passmark mark</source>
@@ -12343,35 +12334,35 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished">Jedna čára</translation>
+        <translation>Jedna čára</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished">Dvě čáry</translation>
+        <translation>Dvě čáry</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished">Tři čáry</translation>
+        <translation>Tři čáry</translation>
     </message>
     <message>
         <source>T mark</source>
-        <translation type="unfinished">Značka T</translation>
+        <translation>Značka T</translation>
     </message>
     <message>
         <source>V mark</source>
-        <translation type="unfinished">Značka V</translation>
+        <translation>Značka V</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished">Značka V 2</translation>
+        <translation>Značka V 2</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished">Značka U</translation>
+        <translation>Značka U</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished">Značka okénko</translation>
+        <translation>Značka okénko</translation>
     </message>
 </context>
 <context>
@@ -12675,6 +12666,13 @@ Chcete uložit změny?</translation>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished">Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
 </context>
 <context>
@@ -13202,11 +13200,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">První bod</translation>
+        <translation>První bod</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">Druhý bod</translation>
+        <translation>Druhý bod</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -13258,19 +13256,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="vanished">Nejvyšší bod</translation>
+        <translation>Nejvyšší bod</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="vanished">Nejnižší bod</translation>
+        <translation>Nejnižší bod</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Bod nejvíce vlevo</translation>
+        <translation>Bod nejvíce vlevo</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="vanished">Bod nejvíce vpravo</translation>
+        <translation>Bod nejvíce vpravo</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -13322,11 +13320,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="vanished">Svislá osa</translation>
+        <translation>Svislá osa</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="vanished">Vodorovná osa</translation>
+        <translation>Vodorovná osa</translation>
     </message>
     <message>
         <source>Tool move</source>

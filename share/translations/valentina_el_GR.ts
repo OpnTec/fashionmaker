@@ -8980,10 +8980,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8993,10 +8989,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10479,10 +10471,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished">Γωνία:</translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">Προσαρμογή</translation>
-    </message>
-    <message>
         <source>Start point:</source>
         <translation>Αρχικό σημείο:</translation>
     </message>
@@ -10566,7 +10554,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Προσαρμογή</translation>
+        <translation>Προσαρμογή</translation>
     </message>
 </context>
 <context>
@@ -10836,35 +10824,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>Πρώτο σημείο</translation>
+        <translation type="vanished">Πρώτο σημείο</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Δεύτερο σημείο</translation>
+        <translation type="vanished">Δεύτερο σημείο</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Ψηλότερο σημείο</translation>
+        <translation type="vanished">Ψηλότερο σημείο</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Χαμηλότερο σημείο</translation>
+        <translation type="vanished">Χαμηλότερο σημείο</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Σημείο στην αριστερή ακρη</translation>
+        <translation type="vanished">Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Σημείο στη δεξιά άκρη</translation>
+        <translation type="vanished">Σημείο στη δεξιά άκρη</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Κάθετος άξονας</translation>
+        <translation type="vanished">Κάθετος άξονας</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Οριζόντιος άξονας</translation>
+        <translation type="vanished">Οριζόντιος άξονας</translation>
     </message>
 </context>
 <context>
@@ -11041,6 +11029,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -11177,13 +11172,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11856,10 +11844,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Γωνία</translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation>κατά μήκος</translation>
     </message>
@@ -11901,11 +11885,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished">Διχοτόμος</translation>
+        <translation>Διχοτόμος</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished">Διατομή</translation>
+        <translation>Διατομή</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -11933,23 +11917,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished">Μια γραμμή</translation>
+        <translation>Μια γραμμή</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished">Δυο γραμμές</translation>
+        <translation>Δυο γραμμές</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished">Τρείς γραμμές</translation>
+        <translation>Τρείς γραμμές</translation>
     </message>
     <message>
         <source>T mark</source>
-        <translation type="unfinished">Σημάδι Τ</translation>
+        <translation>Σημάδι Τ</translation>
     </message>
     <message>
         <source>V mark</source>
-        <translation type="unfinished">Σημάδι V</translation>
+        <translation>Σημάδι V</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -12264,6 +12248,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12772,11 +12763,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Πρώτο σημείο</translation>
+        <translation>Πρώτο σημείο</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">Δεύτερο σημείο</translation>
+        <translation>Δεύτερο σημείο</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -12828,19 +12819,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="vanished">Ψηλότερο σημείο</translation>
+        <translation>Ψηλότερο σημείο</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="vanished">Χαμηλότερο σημείο</translation>
+        <translation>Χαμηλότερο σημείο</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Σημείο στην αριστερή ακρη</translation>
+        <translation>Σημείο στην αριστερή ακρη</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="vanished">Σημείο στη δεξιά άκρη</translation>
+        <translation>Σημείο στη δεξιά άκρη</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -12892,11 +12883,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="vanished">Κάθετος άξονας</translation>
+        <translation>Κάθετος άξονας</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="vanished">Οριζόντιος άξονας</translation>
+        <translation>Οριζόντιος άξονας</translation>
     </message>
     <message>
         <source>Tool move</source>

@@ -9163,10 +9163,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9176,10 +9172,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10660,10 +10652,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Naadtoeslag</translation>
     </message>
     <message>
-        <source>Automatic</source>
-        <translation type="vanished">Automatisch</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -10710,10 +10698,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Angle:</source>
         <translation>Hoek:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Op maat</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10794,12 +10778,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Automatic</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Automatisch</translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Op maat</translation>
+        <translation>Op maat</translation>
     </message>
 </context>
 <context>
@@ -11080,35 +11064,35 @@ Wil je deze veranderingen opslaan?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>Eerste punt</translation>
+        <translation type="vanished">Eerste punt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Tweede punt</translation>
+        <translation type="vanished">Tweede punt</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Hoogste punt</translation>
+        <translation type="vanished">Hoogste punt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Laagste punt</translation>
+        <translation type="vanished">Laagste punt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Uiterst linkerpunt</translation>
+        <translation type="vanished">Uiterst linkerpunt</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Uiterst rechterpunt</translation>
+        <translation type="vanished">Uiterst rechterpunt</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Verticale as</translation>
+        <translation type="vanished">Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Horizontale as</translation>
+        <translation type="vanished">Horizontale as</translation>
     </message>
 </context>
 <context>
@@ -11297,6 +11281,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -11444,7 +11435,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VComboBoxDelegate</name>
     <message>
         <source>Select material</source>
-        <translation>Selecteer materiaal</translation>
+        <translation type="vanished">Selecteer materiaal</translation>
     </message>
 </context>
 <context>
@@ -12262,10 +12253,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Hoek</translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation>op lengte</translation>
     </message>
@@ -12303,23 +12290,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished">Rechttoe rechtaan</translation>
+        <translation>Rechttoe rechtaan</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished">Bisector</translation>
+        <translation>Bisector</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished">Kruispunt van lijnen</translation>
+        <translation>Kruispunt van lijnen</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished">Kruispunt ( alleen links)</translation>
+        <translation>Kruispunt ( alleen links)</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished">Kruispunt ( alleen rechts)</translation>
+        <translation>Kruispunt ( alleen rechts)</translation>
     </message>
     <message>
         <source>Intersection 2</source>
@@ -12339,23 +12326,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished">Een lijn</translation>
+        <translation>Een lijn</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished">Twee lijnen</translation>
+        <translation>Twee lijnen</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished">Drie lijnen</translation>
+        <translation>Drie lijnen</translation>
     </message>
     <message>
         <source>T mark</source>
-        <translation type="unfinished">T markering</translation>
+        <translation>T markering</translation>
     </message>
     <message>
         <source>V mark</source>
-        <translation type="unfinished">V markering</translation>
+        <translation>V markering</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -12670,6 +12657,13 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13198,11 +13192,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Eerste punt</translation>
+        <translation>Eerste punt</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">Tweede punt</translation>
+        <translation>Tweede punt</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -13254,19 +13248,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="vanished">Hoogste punt</translation>
+        <translation>Hoogste punt</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="vanished">Laagste punt</translation>
+        <translation>Laagste punt</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Uiterst linkerpunt</translation>
+        <translation>Uiterst linkerpunt</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="vanished">Uiterst rechterpunt</translation>
+        <translation>Uiterst rechterpunt</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -13318,11 +13312,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="vanished">Verticale as</translation>
+        <translation>Verticale as</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="vanished">Horizontale as</translation>
+        <translation>Horizontale as</translation>
     </message>
     <message>
         <source>Tool move</source>

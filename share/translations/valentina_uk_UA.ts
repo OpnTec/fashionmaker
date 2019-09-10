@@ -9163,10 +9163,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9176,10 +9172,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10660,10 +10652,6 @@ Do you want to save your changes?</source>
         <translation>Прибавка на шви</translation>
     </message>
     <message>
-        <source>Automatic</source>
-        <translation type="vanished">Автоматична</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
@@ -10710,10 +10698,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle:</source>
         <translation>Кут:</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Користувацька</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10794,12 +10778,12 @@ Do you want to save your changes?</source>
     <message>
         <source>Automatic</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Автоматична</translation>
+        <translation>Автоматична</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished"></translation>
+        <translation>Користувацька</translation>
     </message>
 </context>
 <context>
@@ -11080,35 +11064,35 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>Перша точка</translation>
+        <translation type="vanished">Перша точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Друга точка</translation>
+        <translation type="vanished">Друга точка</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Найвища точка</translation>
+        <translation type="vanished">Найвища точка</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Найнища точка</translation>
+        <translation type="vanished">Найнища точка</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Сама ліва точка</translation>
+        <translation type="vanished">Сама ліва точка</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Сама права точка</translation>
+        <translation type="vanished">Сама права точка</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Вертикальна вісь</translation>
+        <translation type="vanished">Вертикальна вісь</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Горизонтальна вісь</translation>
+        <translation type="vanished">Горизонтальна вісь</translation>
     </message>
 </context>
 <context>
@@ -11297,6 +11281,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -11437,13 +11428,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12261,10 +12245,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Кут</translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation>за довжиною</translation>
     </message>
@@ -12302,15 +12282,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished">Пряма</translation>
+        <translation>Пряма</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished">Бісектриса</translation>
+        <translation>Бісектриса</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished">Перетин</translation>
+        <translation>Перетин</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -12338,23 +12318,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished">Одна лінія</translation>
+        <translation>Одна лінія</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished">Дві лінії</translation>
+        <translation>Дві лінії</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished">Три лінії</translation>
+        <translation>Три лінії</translation>
     </message>
     <message>
         <source>T mark</source>
-        <translation type="unfinished">Т позначка</translation>
+        <translation>Т позначка</translation>
     </message>
     <message>
         <source>V mark</source>
-        <translation type="unfinished">V позначка</translation>
+        <translation>V позначка</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -12669,6 +12649,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13197,11 +13184,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Перша точка</translation>
+        <translation>Перша точка</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">Друга точка</translation>
+        <translation>Друга точка</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -13253,19 +13240,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="vanished">Найвища точка</translation>
+        <translation>Найвища точка</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="vanished">Найнища точка</translation>
+        <translation>Найнища точка</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Сама ліва точка</translation>
+        <translation>Сама ліва точка</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="vanished">Сама права точка</translation>
+        <translation>Сама права точка</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -13317,11 +13304,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="vanished">Вертикальна вісь</translation>
+        <translation>Вертикальна вісь</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="vanished">Горизонтальна вісь</translation>
+        <translation>Горизонтальна вісь</translation>
     </message>
     <message>
         <source>Tool move</source>

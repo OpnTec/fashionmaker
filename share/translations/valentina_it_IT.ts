@@ -9129,10 +9129,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9142,10 +9138,6 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10626,10 +10618,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation type="unfinished">Margine di cucitura</translation>
     </message>
     <message>
-        <source>Automatic</source>
-        <translation type="vanished">Automaticoc</translation>
-    </message>
-    <message>
         <source>Width:</source>
         <translation type="unfinished">Larghezza:</translation>
     </message>
@@ -10756,12 +10744,12 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Automatic</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Automaticoc</translation>
+        <translation>Automatico</translation>
     </message>
     <message>
         <source>Custom</source>
         <comment>seam allowance</comment>
-        <translation type="unfinished">Personalizzato</translation>
+        <translation>Personalizzato</translation>
     </message>
 </context>
 <context>
@@ -11042,35 +11030,35 @@ Vuoi salvare le tue modifiche?</translation>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>Primo punto</translation>
+        <translation type="vanished">Primo punto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>Secondo punto</translation>
+        <translation type="vanished">Secondo punto</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation>Punto più alto</translation>
+        <translation type="vanished">Punto più alto</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation>Punto più basso</translation>
+        <translation type="vanished">Punto più basso</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation>Punto più a sinistra</translation>
+        <translation type="vanished">Punto più a sinistra</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation>Punto più a destra</translation>
+        <translation type="vanished">Punto più a destra</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation>Asse verticale</translation>
+        <translation type="vanished">Asse verticale</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation>Asse orizzontale</translation>
+        <translation type="vanished">Asse orizzontale</translation>
     </message>
 </context>
 <context>
@@ -11255,6 +11243,13 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -11395,13 +11390,6 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12163,10 +12151,6 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Forza la rotazione</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Angol</translation>
-    </message>
-    <message>
         <source>by length</source>
         <translation>per lunghezza</translation>
     </message>
@@ -12204,35 +12188,35 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Straightforward</source>
-        <translation type="unfinished">Dritta</translation>
+        <translation>Dritta</translation>
     </message>
     <message>
         <source>Bisector</source>
-        <translation type="unfinished">Bisettrice</translation>
+        <translation>Bisettrice</translation>
     </message>
     <message>
         <source>Intersection</source>
-        <translation type="unfinished">Intersezione</translation>
+        <translation>Intersezione</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
-        <translation type="unfinished">Intersezione (sinistra)</translation>
+        <translation>Intersezione (solo sinistra)</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
-        <translation type="unfinished">Intersezione (destra)</translation>
+        <translation>Intersezione (solo destra)</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished">Intersezione 2</translation>
+        <translation>Intersezione 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished">Intersezione 2 (solo sinistra)</translation>
+        <translation>Intersezione 2 (solo sinistra)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished">Intersezione 2 (solo destra)</translation>
+        <translation>Intersezione 2 (solo destra)</translation>
     </message>
     <message>
         <source>Passmark mark</source>
@@ -12240,23 +12224,23 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>One line</source>
-        <translation type="unfinished">Una linea</translation>
+        <translation>Una linea</translation>
     </message>
     <message>
         <source>Two lines</source>
-        <translation type="unfinished">Due linee</translation>
+        <translation>Due linee</translation>
     </message>
     <message>
         <source>Three lines</source>
-        <translation type="unfinished">Tre linee</translation>
+        <translation>Tre linee</translation>
     </message>
     <message>
         <source>T mark</source>
-        <translation type="unfinished">Tacca a T</translation>
+        <translation>Tacca a T</translation>
     </message>
     <message>
         <source>V mark</source>
-        <translation type="unfinished">Tacca a V</translation>
+        <translation>Tacca a V</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -12571,6 +12555,13 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13091,11 +13082,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">Primo punto</translation>
+        <translation>Primo punto</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">Secondo punto</translation>
+        <translation>Secondo punto</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -13147,19 +13138,19 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Highest point</source>
-        <translation type="vanished">Punto più alto</translation>
+        <translation>Punto più alto</translation>
     </message>
     <message>
         <source>Lowest point</source>
-        <translation type="vanished">Punto più basso</translation>
+        <translation>Punto più basso</translation>
     </message>
     <message>
         <source>Leftmost point</source>
-        <translation type="vanished">Punto più a sinistra</translation>
+        <translation>Punto più a sinistra</translation>
     </message>
     <message>
         <source>Rightmost point</source>
-        <translation type="vanished">Punto più a destra</translation>
+        <translation>Punto più a destra</translation>
     </message>
     <message>
         <source>Tool to make point from intersection two curves</source>
@@ -13207,11 +13198,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Vertical axis</source>
-        <translation type="vanished">Asse verticale</translation>
+        <translation>Asse verticale</translation>
     </message>
     <message>
         <source>Horizontal axis</source>
-        <translation type="vanished">Asse orizzontale</translation>
+        <translation>Asse orizzontale</translation>
     </message>
     <message>
         <source>Tool move</source>

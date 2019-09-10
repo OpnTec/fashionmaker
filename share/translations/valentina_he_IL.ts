@@ -7095,10 +7095,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7108,10 +7104,6 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8698,35 +8690,11 @@ Do you want to save your changes?</source>
     <name>Tool</name>
     <message>
         <source>First point</source>
-        <translation>נקודה ראשונה</translation>
+        <translation type="vanished">נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation>נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">נקודה שנייה</translation>
     </message>
 </context>
 <context>
@@ -8883,6 +8851,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VAbstractPiece</name>
+    <message>
+        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VAbstractPieceData</name>
     <message>
         <source>Detail</source>
@@ -9019,13 +8994,6 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10063,6 +10031,13 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
+    <name>VPiece</name>
+    <message>
+        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>VPoster</name>
     <message>
         <source>Grid ( %1 , %2 )</source>
@@ -10480,11 +10455,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
+        <translation>נקודה ראשונה</translation>
     </message>
     <message>
         <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
+        <translation>נקודה שנייה</translation>
     </message>
     <message>
         <source>Arc with given length</source>
@@ -10511,6 +10486,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Highest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lowest point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Leftmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rightmost point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10524,6 +10515,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tool rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical axis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
