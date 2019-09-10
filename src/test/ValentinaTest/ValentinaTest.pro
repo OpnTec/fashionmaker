@@ -226,5 +226,16 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
-RESOURCES += \
-    share/test_data.qrc
+DATA_RESOURCE = share/test_data.qrc # External Binary Resource
+
+!exists($${OUT_PWD}/$${DESTDIR}/test_data.rcc) {
+    test_data.name = resource test_data
+    test_data.CONFIG += no_link target_predeps
+    test_data.input = DATA_RESOURCE # expects the name of a variable
+    test_data.output = ${QMAKE_FILE_BASE}.rcc
+    test_data.commands = $$shell_path($$[QT_INSTALL_BINS]/rcc) -binary ${QMAKE_FILE_IN} -o $${OUT_PWD}/$${DESTDIR}/${QMAKE_FILE_OUT}
+
+QMAKE_EXTRA_COMPILERS += test_data
+}
+
+QMAKE_CLEAN += $${OUT_PWD}/$${DESTDIR}/test_data.rcc
