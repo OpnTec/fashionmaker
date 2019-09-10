@@ -149,6 +149,7 @@ void VGraphicsSimpleTextItem::SetShowParentTooltip(bool show)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress passedByValue
 void VGraphicsSimpleTextItem::SetRealPos(QPointF pos)
 {
     m_realPos = pos;
