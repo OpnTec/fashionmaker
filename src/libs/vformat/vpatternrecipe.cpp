@@ -548,10 +548,10 @@ QDomElement VPatternRecipe::Spline(const VToolRecord &record)
     SetAttribute(step, AttrAngle2Value, spl.GetEndAngle());
 
     SetAttribute(step, AttrLength1, spl.GetC1LengthFormula());
-    SetAttribute(step, AttrLength1Value, spl.GetC1Length());
+    SetAttribute(step, AttrLength1Value, qApp->fromPixel(spl.GetC1Length()));
 
     SetAttribute(step, AttrLength2, spl.GetC2LengthFormula());
-    SetAttribute(step, AttrLength2Value, spl.GetC2Length());
+    SetAttribute(step, AttrLength2Value, qApp->fromPixel(spl.GetC2Length()));
 
     CurveAttributes(step, tool);
 
@@ -646,10 +646,10 @@ QDomElement VPatternRecipe::SplinePath(const VToolRecord &record)
         SetAttribute(node, AttrAngle2Value, pathNode.Angle2());
 
         SetAttribute(node, AttrLength1, pathNode.Length1Formula());
-        SetAttribute(node, AttrLength1Value, pathNode.Length1());
+        SetAttribute(node, AttrLength1Value, qApp->fromPixel(pathNode.Length1()));
 
         SetAttribute(node, AttrLength2, pathNode.Length2Formula());
-        SetAttribute(node, AttrLength2Value, pathNode.Length2());
+        SetAttribute(node, AttrLength2Value, qApp->fromPixel(pathNode.Length2()));
 
         nodes.appendChild(node);
     }
