@@ -33,6 +33,7 @@
 
 class SavePlaceLabelOptions : public VUndoCommand
 {
+    Q_OBJECT
 public:
     SavePlaceLabelOptions(quint32 pieceId, const VPlaceLabelItem &oldLabel, const VPlaceLabelItem &newLabel,
                           VAbstractPattern *doc, VContainer *data, quint32 id, QUndoCommand *parent = nullptr);

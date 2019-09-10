@@ -41,6 +41,7 @@ enum class MoveDoublePoint: char { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {
+    Q_OBJECT
 public:
     MoveDoubleLabel(VAbstractPattern *doc, const QPointF &pos, MoveDoublePoint type,
                     quint32 toolId, quint32 pointId, QUndoCommand *parent = nullptr);

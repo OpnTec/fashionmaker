@@ -41,6 +41,7 @@ class QGraphicsScene;
 
 class MoveAbstractLabel : public VUndoCommand
 {
+    Q_OBJECT
 public:
     MoveAbstractLabel(VAbstractPattern *doc, quint32 pointId, const QPointF &pos, QUndoCommand *parent = nullptr);
     virtual ~MoveAbstractLabel()=default;

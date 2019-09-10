@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file
+ **  @file   vcomboboxdelegate.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   20 9, 2017
+ **  @date   10 9, 2019
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2017 Valentina project
+ **  Copyright (C) 2019 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,36 +25,28 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef VCOMBOBOXDELEGATE_H
+#define VCOMBOBOXDELEGATE_H
 
-#ifndef SHOWDOUBLELABEL_H
-#define SHOWDOUBLELABEL_H
+#include <QItemDelegate>
 
-#include "../vundocommand.h"
-
-class QGraphicsScene;
-
-enum class ShowDoublePoint: char { FirstPoint, SecondPoint };
-
-class ShowDoubleLabel : public VUndoCommand
+class VComboBoxDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    ShowDoubleLabel(VAbstractPattern *doc, quint32 toolId, quint32 pointId, bool visible, ShowDoublePoint type,
-                    QUndoCommand *parent = nullptr);
-    virtual ~ShowDoubleLabel()=default;
+    VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr);
 
-    virtual void undo() override;
-    virtual void redo() override;
+    virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+                                  const QModelIndex &index) const override;
+    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override;
+    virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
+                              const QModelIndex &index) const override;
+
+    virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
+                                      const QModelIndex &index) const override;
 private:
-    Q_DISABLE_COPY(ShowDoubleLabel)
-    bool m_visible;
-    bool m_oldVisible;
-    //Need for resizing scene rect
-    QGraphicsScene *m_scene;
-    ShowDoublePoint m_type;
-    quint32         m_idTool;
-
-    void Do(bool visible);
+    Q_DISABLE_COPY(VComboBoxDelegate)
+    QStringList m_items;
 };
 
-#endif // SHOWDOUBLELABEL_H
+#endif // VCOMBOBOXDELEGATE_H

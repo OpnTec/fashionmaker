@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 SOURCES += \
+    $$PWD/vcomboboxdelegate.cpp \
     $$PWD/vmaingraphicsscene.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vwidgetpopup.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/stable.h \
+    $$PWD/vcomboboxdelegate.h \
     $$PWD/vmaingraphicsscene.h \
     $$PWD/vmaingraphicsview.h \
     $$PWD/vwidgetpopup.h \

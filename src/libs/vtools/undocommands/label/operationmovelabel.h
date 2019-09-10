@@ -40,6 +40,7 @@
 
 class OperationMoveLabel : public MoveAbstractLabel
 {
+    Q_OBJECT
 public:
     OperationMoveLabel(quint32 idTool, VAbstractPattern *doc, const QPointF &pos, quint32 idPoint,
                       QUndoCommand *parent = nullptr);

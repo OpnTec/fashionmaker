@@ -37,8 +37,6 @@
 
 #include "vdomdocument.h"
 
-template <class Key, class T> class QMap;
-
 #define FORMAT_VERSION(major, minor, patch) ((major<<16)|(minor<<8)|(patch))
 
 class VAbstractConverter :public VDomDocument

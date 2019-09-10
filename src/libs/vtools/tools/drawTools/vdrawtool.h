@@ -55,8 +55,6 @@
 #include "../vtools/undocommands/additemtogroup.h"
 #include "../vtools/undocommands/removeitemfromgroup.h"
 
-template <class T> class QSharedPointer;
-
 /**
  * @brief The VDrawTool abstract class for all draw tool.
  */
@@ -114,25 +112,25 @@ protected:
     virtual void ReadToolAttributes(const QDomElement &domElement)=0;
     virtual void ChangeLabelVisibility(quint32 id, bool visible);
 
-    template <typename Dialog>
+    template <class Dialog>
     void ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemId = NULL_ID,
                      const RemoveOption &showRemove = RemoveOption::Enable,
                      const Referens &ref = Referens::Follow);
 
-    template <typename Item>
+    template <class Item>
     void ShowItem(Item *item, quint32 id, bool enable);
 
-    template <typename T>
+    template <class T>
     QString ObjectName(quint32 id) const;
 
-    template <typename T>
+    template <class T>
     static void InitDrawToolConnections(VMainGraphicsScene *scene, T *tool);
 private:
     Q_DISABLE_COPY(VDrawTool)
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Dialog>
+template <class Dialog>
 /**
  * @brief ContextMenu show context menu for tool.
  * @param event context menu event.
@@ -165,14 +163,16 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
 
     qCDebug(vTool, "Creating tool context menu.");
     QMenu menu;
-    QAction *actionOption = menu.addAction(QIcon::fromTheme("preferences-other"), tr("Options"));
+    QAction *actionOption = menu.addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
+                                           VDrawTool::tr("Options"));
 
     // add the menu "add to group" to the context menu
     QMap<quint32,QString> groupsNotContainingItem =  doc->GetGroupsContainingItem(this->getId(), itemId, false);
     QActionGroup* actionsAddToGroup = new QActionGroup(this);
     if(not groupsNotContainingItem.empty())
     {
-        QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme("list-add"), tr("Add to group"));
+        QMenu *menuAddToGroup = menu.addMenu(QIcon::fromTheme(QStringLiteral("list-add")),
+                                             VDrawTool::tr("Add to group"));
 
         QStringList list = QStringList(groupsNotContainingItem.values());
         list.sort(Qt::CaseInsensitive);
@@ -195,7 +195,8 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
     QActionGroup* actionsRemoveFromGroup = new QActionGroup(this);
     if(not groupsContainingItem.empty())
     {
-        QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme("list-remove"), tr("Remove from group"));
+        QMenu *menuRemoveFromGroup = menu.addMenu(QIcon::fromTheme(QStringLiteral("list-remove")),
+                                                  VDrawTool::tr("Remove from group"));
 
         QStringList list = QStringList(groupsContainingItem.values());
         list.sort(Qt::CaseInsensitive);
@@ -210,7 +211,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         }
     }
 
-    QAction *actionShowLabel = menu.addAction(tr("Show label"));
+    QAction *actionShowLabel = menu.addAction(VDrawTool::tr("Show label"));
     actionShowLabel->setCheckable(true);
 
     if (itemType == GOType::Point)
@@ -222,7 +223,7 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
        actionShowLabel->setVisible(false);
     }
 
-    QAction *actionRemove = menu.addAction(QIcon::fromTheme("edit-delete"), tr("Delete"));
+    QAction *actionRemove = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")), VDrawTool::tr("Delete"));
     if (showRemove == RemoveOption::Enable)
     {
         if (ref == Referens::Follow)
@@ -293,7 +294,8 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         SCASSERT(window != nullptr)
         {
             AddItemToGroup *addItemToGroup = new AddItemToGroup(item, doc, groupId);
-            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateVisibilityGroups);
+            connect(addItemToGroup, &AddItemToGroup::UpdateGroups, window,
+                    &VAbstractMainWindow::UpdateVisibilityGroups);
             qApp->getUndoStack()->push(addItemToGroup);
         }
     }
@@ -306,14 +308,15 @@ void VDrawTool::ContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 itemI
         SCASSERT(window != nullptr)
         {
             RemoveItemFromGroup *removeItemFromGroup = new RemoveItemFromGroup(item, doc, groupId);
-            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window, &VAbstractMainWindow::UpdateVisibilityGroups);
+            connect(removeItemFromGroup, &RemoveItemFromGroup::UpdateGroups, window,
+                    &VAbstractMainWindow::UpdateVisibilityGroups);
             qApp->getUndoStack()->push(removeItemFromGroup);
         }
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename Item>
+template <class Item>
 /**
  * @brief ShowItem highlight tool.
  * @param item tool.
@@ -330,7 +333,7 @@ void VDrawTool::ShowItem(Item *item, quint32 id, bool enable)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
+template <class T>
 /**
  * @brief ObjectName get object (point, curve, arc) name.
  * @param id object id in container.
@@ -351,7 +354,7 @@ QString VDrawTool::ObjectName(quint32 id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
+template <class T>
 void VDrawTool::InitDrawToolConnections(VMainGraphicsScene *scene, T *tool)
 {
     SCASSERT(scene != nullptr)

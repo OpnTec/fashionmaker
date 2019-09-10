@@ -36,6 +36,7 @@
 
 class SavePiecePathOptions : public VUndoCommand
 {
+    Q_OBJECT
 public:
     SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath, VAbstractPattern *doc,
                          VContainer *data, quint32 id, QUndoCommand *parent = nullptr);

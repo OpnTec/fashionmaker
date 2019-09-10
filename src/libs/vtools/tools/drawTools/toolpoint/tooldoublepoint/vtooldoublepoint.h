@@ -43,7 +43,6 @@
 #include "../vmisc/def.h"
 
 class VSimplePoint;
-template <class T> class QSharedPointer;
 
 class VToolDoublePoint: public VAbstractPoint, public QGraphicsPathItem
 {

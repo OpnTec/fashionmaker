@@ -35,6 +35,7 @@ class QGraphicsScene;
 
 class OperationShowLabel : public VUndoCommand
 {
+    Q_OBJECT
 public:
     OperationShowLabel(VAbstractPattern *doc, quint32 idTool, quint32 idPoint, bool visible,
                        QUndoCommand *parent = nullptr);

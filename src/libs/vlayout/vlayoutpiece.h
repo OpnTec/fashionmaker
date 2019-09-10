@@ -44,6 +44,7 @@
 
 #include "vabstractpiece.h"
 #include "../vmisc/typedef.h"
+#include "../vpatterndb/floatItemData/floatitemdef.h"
 
 class VLayoutPieceData;
 class VLayoutPiecePath;
@@ -54,7 +55,6 @@ class VPiece;
 class VPieceLabelData;
 class VAbstractPattern;
 class VPatternLabelData;
-enum class ArrowType : char;
 
 class VLayoutPiece :public VAbstractPiece
 {

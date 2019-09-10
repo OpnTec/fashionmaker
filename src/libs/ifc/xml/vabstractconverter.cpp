@@ -77,8 +77,7 @@ QString VAbstractConverter::Convert()
     }
     else
     {
-        const QString errorMsg(tr("Error openning a temp file: %1.").arg(m_tmpFile.errorString()));
-        throw VException(errorMsg);
+        throw VException(tr("Error openning a temp file: %1.").arg(m_tmpFile.errorString()));
     }
 
     m_ver < MaxVer() ? ApplyPatches() : DowngradeToCurrentMaxVersion();

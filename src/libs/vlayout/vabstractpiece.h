@@ -33,6 +33,7 @@
 #include <QSharedDataPointer>
 #include <QPointF>
 #include <QDebug>
+#include <QCoreApplication>
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/def.h"
@@ -44,11 +45,10 @@ class VAbstractPieceData;
 class QPainterPath;
 class VGrainlineData;
 class VContainer;
-enum class LayoutGravity : qint8;
-enum class CuttingTime :  unsigned char;
 
 class VAbstractPiece
 {
+    Q_DECLARE_TR_FUNCTIONS(VAbstractPiece)
 public:
     VAbstractPiece();
     VAbstractPiece(const VAbstractPiece &piece);

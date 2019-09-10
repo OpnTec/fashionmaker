@@ -39,6 +39,7 @@
 
 class MoveLabel : public MoveAbstractLabel
 {
+    Q_OBJECT
 public:
     MoveLabel(VAbstractPattern *doc, const QPointF &pos, const quint32 &id, QUndoCommand *parent = nullptr);
     virtual ~MoveLabel()=default;

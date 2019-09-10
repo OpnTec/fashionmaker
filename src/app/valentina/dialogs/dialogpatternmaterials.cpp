@@ -31,9 +31,7 @@
 
 #include "../vmisc/def.h"
 #include "../core/vapplication.h"
-
-#include <QComboBox>
-#include <QItemDelegate>
+#include "../vwidgets/vcomboboxdelegate.h"
 
 namespace
 {
@@ -55,67 +53,6 @@ QStringList PrepareKnowMaterials(const QStringList &patternMaterials, bool remem
     return knownMaterials;
 }
 }
-
-class VComboBoxDelegate : public QItemDelegate
-{
-public:
-    VComboBoxDelegate(const QStringList &items, QObject *parent = nullptr)
-        : QItemDelegate(parent),
-          m_items(items)
-    {
-        m_items.prepend(QLatin1String("--") + tr("Select material") + QLatin1String("--"));
-    }
-
-    virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
-                                  const QModelIndex &index) const override
-    {
-        Q_UNUSED(option)
-        Q_UNUSED(index)
-
-        QComboBox *editor = new QComboBox(parent);
-        editor->addItems(m_items);
-
-        return editor;
-    }
-
-    virtual void setEditorData(QWidget *editor, const QModelIndex &index) const override
-    {
-        const QString value = index.model()->data(index, Qt::EditRole).toString();
-
-        QComboBox *comboBox = static_cast<QComboBox*>(editor);
-        const int cIndex = comboBox->findText(value);
-
-        if (cIndex != -1)
-        {
-            comboBox->setCurrentIndex(cIndex);
-        }
-    }
-
-    virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
-                              const QModelIndex &index) const override
-    {
-        QComboBox *comboBox = static_cast<QComboBox*>(editor);
-        QString value;
-        const int cIndex = comboBox->currentIndex();
-
-        if (cIndex > 0)
-        {
-            value = comboBox->currentText();
-        }
-
-        model->setData(index, value, Qt::EditRole);
-    }
-
-    virtual void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
-                                      const QModelIndex &index) const override
-    {
-        Q_UNUSED(index)
-        editor->setGeometry(option.rect);
-    }
-private:
-    Q_DISABLE_COPY(VComboBoxDelegate)
-    QStringList m_items;
-};
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogPatternMaterials::DialogPatternMaterials(const QMap<int, QString> &list, bool rememberPM, QWidget *parent)

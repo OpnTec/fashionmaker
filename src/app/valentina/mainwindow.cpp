@@ -2212,10 +2212,10 @@ void MainWindow::MouseMove(const QPointF &scenePos)
 {
     if (not m_mouseCoordinate.isNull())
     {
-        //: Coords in status line: "X, Y (units)"
-        m_mouseCoordinate->setText(QString("%1, %2 (%3)").arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
-                                                         .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
-                                                         .arg(UnitsToStr(qApp->patternUnit(), true)));
+        m_mouseCoordinate->setText(QStringLiteral("%1, %2 (%3)")
+                                   .arg(static_cast<qint32>(qApp->fromPixel(scenePos.x())))
+                                   .arg(static_cast<qint32>(qApp->fromPixel(scenePos.y())))
+                                   .arg(UnitsToStr(qApp->patternUnit(), true)));
     }
 }
 

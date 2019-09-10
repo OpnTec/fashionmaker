@@ -37,11 +37,7 @@
 #include <QMargins>
 
 #include "vcommonsettings.h"
-
-template <class T> class QSharedPointer;
-enum class Cases : char;
-enum class Unit : char;
-enum class PageOrientation : bool;
+#include "../vlayout/vbank.h"
 
 class VSettings : public VCommonSettings
 {

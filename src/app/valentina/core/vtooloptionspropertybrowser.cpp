@@ -568,7 +568,8 @@ template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyCrossPoint(Tool *i, const QString &propertyName)
 {
     VPE::VEnumProperty* itemProperty = new VPE::VEnumProperty(propertyName);
-    itemProperty->setLiterals(QStringList()<< tr("First point") << tr("Second point"));
+    itemProperty->setLiterals(QStringList({VToolOptionsPropertyBrowser::tr("First point"),
+                                           VToolOptionsPropertyBrowser::tr("Second point")}));
     itemProperty->setValue(static_cast<int>(i->GetCrossCirclesPoint())-1);
     AddProperty(itemProperty, AttrCrossPoint);
 }
@@ -578,7 +579,8 @@ template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyVCrossPoint(Tool *i, const QString &propertyName)
 {
     auto itemProperty = new VPE::VEnumProperty(propertyName);
-    itemProperty->setLiterals(QStringList()<< tr("Highest point") << tr("Lowest point"));
+    itemProperty->setLiterals(QStringList({VToolOptionsPropertyBrowser::tr("Highest point"),
+                                           VToolOptionsPropertyBrowser::tr("Lowest point")}));
     itemProperty->setValue(static_cast<int>(i->GetVCrossPoint())-1);
     AddProperty(itemProperty, AttrVCrossPoint);
 }
@@ -588,7 +590,8 @@ template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyHCrossPoint(Tool *i, const QString &propertyName)
 {
     auto itemProperty = new VPE::VEnumProperty(propertyName);
-    itemProperty->setLiterals(QStringList()<< tr("Leftmost point") << tr("Rightmost point"));
+    itemProperty->setLiterals(QStringList({VToolOptionsPropertyBrowser::tr("Leftmost point"),
+                                           VToolOptionsPropertyBrowser::tr("Rightmost point")}));
     itemProperty->setValue(static_cast<int>(i->GetHCrossPoint())-1);
     AddProperty(itemProperty, AttrHCrossPoint);
 }
@@ -598,7 +601,8 @@ template<class Tool>
 void VToolOptionsPropertyBrowser::AddPropertyAxisType(Tool *i, const QString &propertyName)
 {
     auto itemProperty = new VPE::VEnumProperty(propertyName);
-    itemProperty->setLiterals(QStringList()<< tr("Vertical axis") << tr("Horizontal axis"));
+    itemProperty->setLiterals(QStringList({VToolOptionsPropertyBrowser::tr("Vertical axis"),
+                                           VToolOptionsPropertyBrowser::tr("Horizontal axis")}));
     itemProperty->setValue(static_cast<int>(i->GetAxisType())-1);
     AddProperty(itemProperty, AttrAxisType);
 }

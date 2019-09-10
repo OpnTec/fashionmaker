@@ -37,8 +37,6 @@
 
 class VPieceData;
 class VPieceNode;
-template <class T> class QVector;
-template <class T>class QSharedPointer;
 class VPiecePath;
 class VPatternLabelData;
 class VPieceLabelData;
@@ -50,6 +48,7 @@ class VPassmark;
 
 class VPiece : public VAbstractPiece
 {
+    Q_DECLARE_TR_FUNCTIONS(VPiece)
 public:
     VPiece();
     VPiece(const VPiece &piece);

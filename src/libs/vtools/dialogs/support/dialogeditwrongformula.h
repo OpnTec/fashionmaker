@@ -39,7 +39,6 @@
 
 #include "../tools/dialogtool.h"
 
-template <class T> class QSharedPointer;
 class VMeasurement;
 
 namespace Ui
