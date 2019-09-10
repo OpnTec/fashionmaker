@@ -841,7 +841,7 @@ QDomElement VPatternRecipe::PointOfIntersectionArcs(const VToolRecord &record)
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrFirstArc, tool->FirstArcName());
-    SetAttribute(step, AttrSecondArc, tool->FirstArcName());
+    SetAttribute(step, AttrSecondArc, tool->SecondArcName());
     SetAttribute(step, AttrCrossPoint, static_cast<int>(tool->GetCrossCirclesPoint()));
 
     return step;
@@ -873,7 +873,7 @@ QDomElement VPatternRecipe::PointOfIntersectionCurves(const VToolRecord &record)
 
     ToolAttributes(step, tool);
     SetAttribute(step, AttrCurve1, tool->FirstCurveName());
-    SetAttribute(step, AttrCurve2, tool->FirstCurveName());
+    SetAttribute(step, AttrCurve2, tool->SecondCurveName());
     SetAttribute(step, AttrVCrossPoint, static_cast<int>(tool->GetVCrossPoint()));
     SetAttribute(step, AttrHCrossPoint, static_cast<int>(tool->GetHCrossPoint()));
 
