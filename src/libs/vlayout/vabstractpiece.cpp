@@ -1517,10 +1517,18 @@ bool VAbstractPiece::IsEkvPointOnLine(const VSAPoint &iPoint, const VSAPoint &pr
     const QLineF bigLine1 = ParallelLine(prevPoint, iPoint, tmpWidth );
     const QLineF bigLine2 = ParallelLine(iPoint, nextPoint, tmpWidth );
 
-    return (VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint)
-            && VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2())
-            && VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2())
-            && qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < accuracyPointOnLine);
+    bool seamOnLine = VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
+    bool sa1OnLine = VGObject::IsPointOnLineviaPDP(bigLine1.p2(), bigLine1.p1(), bigLine2.p2());
+    bool sa2OnLine = VGObject::IsPointOnLineviaPDP(bigLine2.p1(), bigLine1.p1(), bigLine2.p2());
+    bool saDiff = qAbs(prevPoint.GetSAAfter(tmpWidth) - nextPoint.GetSABefore(tmpWidth)) < accuracyPointOnLine;
+
+    // left point that splits a curve
+    bool curve = (prevPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
+                  iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve) ||
+                 (nextPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve &&
+                  iPoint.GetAngleType() == PieceNodeAngle::ByLengthCurve);
+
+    return seamOnLine && sa1OnLine && sa2OnLine && saDiff && not curve;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

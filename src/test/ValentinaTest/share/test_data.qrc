@@ -107,5 +107,7 @@
         <file>Issue_923_test7_2/output.json</file>
         <file>Issue_923_test7_3/input.json</file>
         <file>Issue_923_test7_3/output.json</file>
+        <file>doll/input.json</file>
+        <file>doll/output.json</file>
     </qresource>
 </RCC>

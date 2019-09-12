@@ -969,6 +969,12 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
                      QStringLiteral("://Issue_883_prong/input.json"),
                      QStringLiteral("://Issue_883_prong/output.json"),
                      37.795275590551185 /*seam allowance width*/);
+
+    // See the file "collection/bugs/doll.val" (private collection)
+    ASSERT_TEST_CASE("Doll.",
+                     QStringLiteral("://doll/input.json"),
+                     QStringLiteral("://doll/output.json"),
+                     26.45669291338583 /*seam allowance width 0.7 cm*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
