@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pattern>
-    <!--Pattern created with Valentina v0.6.0.0b (https://valentinaproject.bitbucket.io/).-->
-    <version>0.7.10</version>
+    <!--Pattern created with Valentina v0.7.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.8.5</version>
     <unit>cm</unit>
     <description/>
     <notes/>
@@ -162,16 +162,26 @@
             <point id="206" idObject="56" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
             <spline id="207" idObject="117" inUse="false" type="modelingPath"/>
             <point id="208" idObject="29" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
-            <point id="210" idObject="4" inUse="true" mx="0.0821985" my="0.21449" showLabel="true" type="modeling"/>
-            <point id="211" idObject="1" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
-            <spline id="212" idObject="49" inUse="true" type="modelingSpline"/>
-            <point id="213" idObject="48" inUse="true" mx="-1.00881" my="-1.66652" showLabel="true" type="modeling"/>
-            <point id="214" idObject="58" inUse="true" mx="-0.423631" my="-1.63726" showLabel="true" type="modeling"/>
-            <point id="215" idObject="32" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
-            <point id="216" idObject="59" inUse="true" mx="2.30483" my="-2.89101" showLabel="true" type="modeling"/>
-            <point id="217" idObject="56" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
-            <spline id="218" idObject="117" inUse="true" type="modelingPath"/>
-            <point id="219" idObject="29" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="210" idObject="4" inUse="false" mx="0.0821985" my="0.21449" showLabel="true" type="modeling"/>
+            <point id="211" idObject="1" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="212" idObject="49" inUse="false" type="modelingSpline"/>
+            <point id="213" idObject="48" inUse="false" mx="-1.00881" my="-1.66652" showLabel="true" type="modeling"/>
+            <point id="214" idObject="58" inUse="false" mx="-0.423631" my="-1.63726" showLabel="true" type="modeling"/>
+            <point id="215" idObject="32" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="216" idObject="59" inUse="false" mx="2.30483" my="-2.89101" showLabel="true" type="modeling"/>
+            <point id="217" idObject="56" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="218" idObject="117" inUse="false" type="modelingPath"/>
+            <point id="219" idObject="29" inUse="false" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="221" idObject="4" inUse="true" mx="0.0821985" my="0.21449" showLabel="true" type="modeling"/>
+            <point id="222" idObject="1" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="223" idObject="49" inUse="true" type="modelingSpline"/>
+            <point id="224" idObject="48" inUse="true" mx="-1.00881" my="-1.66652" showLabel="true" type="modeling"/>
+            <point id="225" idObject="58" inUse="true" mx="-0.423631" my="-1.63726" showLabel="true" type="modeling"/>
+            <point id="226" idObject="32" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <point id="227" idObject="59" inUse="true" mx="2.30483" my="-2.89101" showLabel="true" type="modeling"/>
+            <point id="228" idObject="56" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
+            <spline id="229" idObject="117" inUse="true" type="modelingPath"/>
+            <point id="230" idObject="29" inUse="true" mx="0.132292" my="0.264583" showLabel="true" type="modeling"/>
         </modeling>
         <details>
             <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="165" inLayout="true" mx="1.41527" my="3.02812" name="Piece. By angle" seamAllowance="true" united="false" version="2" width="1">
@@ -274,6 +284,23 @@
                     <node after="5" before="0" idObject="217" type="NodePoint"/>
                     <node idObject="218" reverse="0" type="NodeSplinePath"/>
                     <node after="0" before="5" idObject="219" type="NodePoint"/>
+                </nodes>
+            </detail>
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="false" id="231" mx="-38.7011" my="2.53286" name="Piece. By angle 2" seamAllowance="true" version="2" width="1">
+                <data annotation="" foldPosition="" fontSize="0" height="1" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1"/>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node after="0" idObject="227" type="NodePoint"/>
+                    <node after="5" before="0" idObject="228" type="NodePoint"/>
+                    <node idObject="229" reverse="0" type="NodeSplinePath"/>
+                    <node after="0" before="5" idObject="230" type="NodePoint"/>
+                    <node after="0" before="2" idObject="221" type="NodePoint"/>
+                    <node before="0" idObject="222" type="NodePoint"/>
+                    <node idObject="223" reverse="0" type="NodeSpline"/>
+                    <node after="0.01" idObject="224" type="NodePoint"/>
+                    <node before="0.01" idObject="225" type="NodePoint"/>
+                    <node idObject="226" type="NodePoint"/>
                 </nodes>
             </detail>
         </details>
