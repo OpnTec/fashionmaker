@@ -218,7 +218,7 @@ QString DialogHistory::Record(const VToolRecord &tool)
     if (domElem.isElement() == false)
     {
         qDebug()<<"Can't find element by id"<<Q_FUNC_INFO;
-        return tr("Can't create record.");
+        return QString();
     }
     try
     {
@@ -418,10 +418,10 @@ QString DialogHistory::Record(const VToolRecord &tool)
     catch (const VExceptionBadId &e)
     {
         qDebug()<<e.ErrorMessage()<<Q_FUNC_INFO;
-        return tr("Can't create record.");
+        return QString();
     }
     qDebug()<<"Can't create history record for the tool.";
-    return tr("Can't create record.");
+    return QString();
 }
 
 QT_WARNING_POP
