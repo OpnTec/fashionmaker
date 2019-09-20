@@ -375,7 +375,7 @@ void DialogPointOfIntersectionCircles::EvalCircle2Radius()
     formulaData.formula = ui->plainTextEditCircle2Radius->toPlainText();
     formulaData.variables = data->DataVariables();
     formulaData.labelEditFormula = ui->labelEditCircle2Radius;
-    formulaData.labelResult = ui->labelResultCircle1Radius;
+    formulaData.labelResult = ui->labelResultCircle2Radius;
     formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
 
     const qreal radius = Eval(formulaData, flagCircle2Radius);
