@@ -70,16 +70,31 @@ macx{
 # Our solution was to distribute the OpenSSL DLLs along with our application (~1.65 MB). The alternative is to compile
 # Qt from scratch without OpenSSL support.
 win32 {
-    greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 11):greaterThan(QT_PATCH_VERSION, 3) {
-        # Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
-        contains(QMAKE_HOST.arch, x86_64) {
-            INSTALL_OPENSSL += \
-                ../../../dist/win/openssl/win64/libcrypto-1_1-x64.dll \
-                ../../../dist/win/openssl/win64/libssl-1_1-x64.dll
+    greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 10) {
+        versionAtLeast(QT_VERSION, 5.12.4){
+            # Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
+            contains(QMAKE_HOST.arch, x86_64) {
+                INSTALL_OPENSSL += \
+                    ../../../dist/win/openssl/win64/libcrypto-1_1-x64.dll \
+                    ../../../dist/win/openssl/win64/libssl-1_1-x64.dll
+            } else {
+                INSTALL_OPENSSL += \
+                    ../../../dist/win/openssl/win32/libcrypto-1_1.dll \
+                    ../../../dist/win/openssl/win32/libssl-1_1.dll
+            }
         } else {
             INSTALL_OPENSSL += \
-                ../../../dist/win/openssl/win32/libcrypto-1_1.dll \
-                ../../../dist/win/openssl/win32/libssl-1_1.dll
+                ../../../dist/win/msvcr120.dll
+
+            contains(QMAKE_HOST.arch, x86_64) {
+                INSTALL_OPENSSL += \
+                    ../../../dist/win/openssl/win64/libeay32.dll \
+                    ../../../dist/win/openssl/win64/ssleay32.dll
+            } else {
+                INSTALL_OPENSSL += \
+                    ../../../dist/win/openssl/win32/libeay32.dll \
+                    ../../../dist/win/openssl/win32/ssleay32.dll
+            }
         }
     } else {
         INSTALL_OPENSSL += \
