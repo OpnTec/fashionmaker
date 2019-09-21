@@ -71,7 +71,7 @@ macx{
 # Qt from scratch without OpenSSL support.
 win32 {
     greaterThan(QT_MAJOR_VERSION, 4):greaterThan(QT_MINOR_VERSION, 11):greaterThan(QT_PATCH_VERSION, 3) {
-        # Minimal supported OpenSSL version since Qt 5.12.3 is 1.1.1.
+        # Minimal supported OpenSSL version since Qt 5.12.4 is 1.1.1.
         contains(QMAKE_HOST.arch, x86_64) {
             INSTALL_OPENSSL += \
                 ../../../dist/win/openssl/win64/libcrypto-1_1-x64.dll \
