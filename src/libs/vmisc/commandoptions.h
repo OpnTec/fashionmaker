@@ -51,8 +51,10 @@ extern const QString LONG_OPTION_TEXT2PATHS;
 extern const QString LONG_OPTION_EXPORTONLYDETAILS;
 extern const QString LONG_OPTION_EXPORTSUCHDETAILS;
 
-extern const QString LONG_OPTION_CROP;
-extern const QString SINGLE_OPTION_CROP;
+extern const QString LONG_OPTION_CROP_LENGTH;
+extern const QString SINGLE_OPTION_CROP_LENGTH;
+
+extern const QString LONG_OPTION_CROP_WIDTH;
 
 extern const QString LONG_OPTION_UNITE;
 extern const QString SINGLE_OPTION_UNITE;

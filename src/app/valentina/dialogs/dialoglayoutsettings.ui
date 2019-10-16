@@ -543,9 +543,16 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxAutoCrop">
+         <widget class="QCheckBox" name="checkBoxAutoCropLength">
           <property name="text">
            <string>Auto crop unused length</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxAutoCropWidth">
+          <property name="text">
+           <string>Auto crop unused width</string>
           </property>
          </widget>
         </item>

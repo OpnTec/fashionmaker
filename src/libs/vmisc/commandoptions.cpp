@@ -54,8 +54,10 @@ const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
 const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
 const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
 
-const QString LONG_OPTION_CROP              = QStringLiteral("crop");
-const QString SINGLE_OPTION_CROP            = QStringLiteral("c");
+const QString LONG_OPTION_CROP_LENGTH       = QStringLiteral("crop");
+const QString SINGLE_OPTION_CROP_LENGTH     = QStringLiteral("c");
+
+const QString LONG_OPTION_CROP_WIDTH        = QStringLiteral("cropWidth");
 
 const QString LONG_OPTION_UNITE             = QStringLiteral("unite");
 const QString SINGLE_OPTION_UNITE           = QStringLiteral("u");
@@ -151,7 +153,8 @@ QStringList AllKeys()
         LONG_OPTION_TEXT2PATHS,
         LONG_OPTION_EXPORTONLYDETAILS,
         LONG_OPTION_EXPORTSUCHDETAILS,
-        LONG_OPTION_CROP, SINGLE_OPTION_CROP,
+        LONG_OPTION_CROP_LENGTH, SINGLE_OPTION_CROP_LENGTH,
+        LONG_OPTION_CROP_WIDTH,
         LONG_OPTION_UNITE, SINGLE_OPTION_UNITE,
         LONG_OPTION_PAGEW, SINGLE_OPTION_PAGEW,
         LONG_OPTION_PAGEH, SINGLE_OPTION_PAGEH,

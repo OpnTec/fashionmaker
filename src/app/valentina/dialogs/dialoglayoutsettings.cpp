@@ -257,15 +257,27 @@ void DialogLayoutSettings::SetManualPriority(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool DialogLayoutSettings::GetAutoCrop() const
+bool DialogLayoutSettings::GetAutoCropLength() const
 {
-    return ui->checkBoxAutoCrop->isChecked();
+    return ui->checkBoxAutoCropLength->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetAutoCrop(bool autoCrop)
+void DialogLayoutSettings::SetAutoCropLength(bool autoCropLength)
 {
-    ui->checkBoxAutoCrop->setChecked(autoCrop);
+    ui->checkBoxAutoCropLength->setChecked(autoCropLength);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::GetAutoCropWidth() const
+{
+    return ui->checkBoxAutoCropWidth->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetAutoCropWidth(bool autoCropWidth)
+{
+    ui->checkBoxAutoCropWidth->setChecked(autoCropWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -585,7 +597,8 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetEfficiencyCoefficient(GetEfficiencyCoefficient());
     generator->SetFollowGrainline(GetFollowGrainline());
     generator->SetManualPriority(GetManualPriority());
-    generator->SetAutoCrop(GetAutoCrop());
+    generator->SetAutoCropLength(GetAutoCropLength());
+    generator->SetAutoCropWidth(GetAutoCropWidth());
     generator->SetSaveLength(IsSaveLength());
     generator->SetUnitePages(IsUnitePages());
     generator->SetStripOptimization(IsStripOptimization());
@@ -1003,7 +1016,8 @@ void DialogLayoutSettings::ReadSettings()
     SetGroup(settings->GetLayoutGroup());
     SetFollowGrainline(settings->GetLayoutFollowGrainline());
     SetManualPriority(settings->GetLayoutManualPriority());
-    SetAutoCrop(settings->GetLayoutAutoCrop());
+    SetAutoCropLength(settings->GetLayoutAutoCropLength());
+    SetAutoCropWidth(settings->GetLayoutAutoCropWidth());
     SetSaveLength(settings->GetLayoutSaveLength());
     SetUnitePages(settings->GetLayoutUnitePages());
     SetFields(settings->GetFields(GetDefPrinterFields()));
@@ -1029,7 +1043,8 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutPaperWidth(GetPaperWidth());
     settings->SetLayoutFollowGrainline(GetFollowGrainline());
     settings->SetLayoutManualPriority(GetManualPriority());
-    settings->SetLayoutAutoCrop(GetAutoCrop());
+    settings->SetLayoutAutoCropLength(GetAutoCropLength());
+    settings->SetLayoutAutoCropWidth(GetAutoCropWidth());
     settings->SetLayoutSaveLength(IsSaveLength());
     settings->SetLayoutUnitePages(IsUnitePages());
     settings->SetFields(GetFields());
@@ -1059,7 +1074,8 @@ void DialogLayoutSettings::SheetSize(const QSizeF &size)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLayoutSettings::SetAdditionalOptions(bool value)
 {
-    SetAutoCrop(value);
+    SetAutoCropLength(value);
+    SetAutoCropWidth(value);
     SetSaveLength(value);
     SetUnitePages(value);
     SetStripOptimization(value);

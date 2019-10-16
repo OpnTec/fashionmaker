@@ -154,7 +154,8 @@ private:
     Q_DISABLE_COPY(MainWindowsNoGUI)
 
     bool isTiled;
-    bool isAutoCrop;
+    bool isAutoCropLength;
+    bool isAutoCropWidth;
     bool isUnitePages;
 
     QString layoutPrinterName;

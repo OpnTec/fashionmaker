@@ -157,7 +157,8 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
       m_taskbarProgress(nullptr),
 #endif
       isTiled(false),
-      isAutoCrop(false),
+      isAutoCropLength(false),
+      isAutoCropWidth(false),
       isUnitePages(false),
       layoutPrinterName()
 {
@@ -334,7 +335,8 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         ignorePrinterFields = not lGenerator.IsUsePrinterFields();
                         margins = lGenerator.GetPrinterFields();
                         paperSize = QSizeF(lGenerator.GetPaperWidth(), lGenerator.GetPaperHeight());
-                        isAutoCrop = lGenerator.GetAutoCrop();
+                        isAutoCropLength = lGenerator.GetAutoCropLength();
+                        isAutoCropWidth = lGenerator.GetAutoCropWidth();
                         isUnitePages = lGenerator.IsUnitePages();
                         isLayoutStale = false;
                         papersCount = lGenerator.PapersCount();
@@ -1563,24 +1565,42 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
 
     if (not isTiled)
     {
-        QSizeF size = QSizeF(FromPixel(paperSize.width(), Unit::Mm), FromPixel(paperSize.height(), Unit::Mm));
-        if (isAutoCrop || isUnitePages)
+        qreal width = FromPixel(paperSize.width(), Unit::Mm);
+        qreal height = FromPixel(paperSize.height(), Unit::Mm);
+
+        if (isAutoCropLength || isUnitePages)
         {
             auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
             if (paper)
             {
                 if (isLayoutPortrait)
                 {
-                    size = QSizeF(FromPixel(paperSize.width(), Unit::Mm),
-                                  FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm));
+                    height = FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm);
                 }
                 else
                 {
-                    size = QSizeF(FromPixel(paper->rect().width() + margins.left() + margins.right(), Unit::Mm),
-                                  FromPixel(paperSize.height(), Unit::Mm));
+                    width = FromPixel(paper->rect().width() + margins.left() + margins.right(), Unit::Mm);
                 }
             }
         }
+
+        if (isAutoCropWidth)
+        {
+            auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(0));
+            if (paper)
+            {
+                if (isLayoutPortrait)
+                {
+                    width = FromPixel(paper->rect().width() + margins.left() + margins.right(), Unit::Mm);
+                }
+                else
+                {
+                    height = FromPixel(paper->rect().height() + margins.top() + margins.bottom(), Unit::Mm);
+                }
+            }
+        }
+
+        QSizeF size = QSizeF(width, height);
 
         if (not isLayoutPortrait)
         {

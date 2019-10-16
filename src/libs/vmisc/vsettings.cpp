@@ -86,7 +86,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPaperWidth, (QLatin1String
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, (QLatin1String("layout/followGrainline")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutManualPriority, (QLatin1String("layout/manualPriority")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestQuantity, (QLatin1String("layout/nestQuantity")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCrop, (QLatin1String("layout/autoCrop")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropLength, (QLatin1String("layout/autoCropLength")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropWidth, (QLatin1String("layout/autoCropWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields")))
@@ -356,23 +357,38 @@ void VSettings::SetLayoutNestQuantity(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetLayoutAutoCrop() const
+bool VSettings::GetLayoutAutoCropLength() const
 {
-    return value(*settingLayoutAutoCrop, GetDefLayoutAutoCrop()).toBool();
+    return value(*settingLayoutAutoCropLength, GetDefLayoutAutoCropLength()).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VSettings::GetDefLayoutAutoCrop()
+bool VSettings::GetDefLayoutAutoCropLength()
+{
+    return false;
+}
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetLayoutAutoCropLength(bool value)
+{
+    setValue(*settingLayoutAutoCropLength, value);
+}
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetLayoutAutoCropWidth() const
+{
+    return value(*settingLayoutAutoCropWidth, GetDefLayoutAutoCropWidth()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutAutoCropWidth()
 {
     return false;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VSettings::SetLayoutAutoCrop(bool value)
+void VSettings::SetLayoutAutoCropWidth(bool value)
 {
-    setValue(*settingLayoutAutoCrop, value);
+    setValue(*settingLayoutAutoCropWidth, value);
 }
-
 //---------------------------------------------------------------------------------------------------------------------
 bool VSettings::GetLayoutSaveLength() const
 {

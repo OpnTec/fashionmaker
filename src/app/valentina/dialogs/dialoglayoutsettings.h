@@ -76,8 +76,11 @@ public:
     bool GetManualPriority() const;
     void SetManualPriority(bool state);
 
-    bool GetAutoCrop() const;
-    void SetAutoCrop(bool autoCrop);
+    bool GetAutoCropLength() const;
+    void SetAutoCropLength(bool autoCropLength);
+
+    bool GetAutoCropWidth() const;
+    void SetAutoCropWidth(bool autoCropWidth);
 
     bool IsSaveLength() const;
     void SetSaveLength(bool save);

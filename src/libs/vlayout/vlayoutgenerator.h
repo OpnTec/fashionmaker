@@ -108,8 +108,11 @@ public:
     int GetRotationNumber() const;
     void SetRotationNumber(int value);
 
-    bool GetAutoCrop() const;
-    void SetAutoCrop(bool value);
+    bool GetAutoCropLength() const;
+    void SetAutoCropLength(bool value);
+
+    bool GetAutoCropWidth() const;
+    void SetAutoCropWidth(bool value);
 
     bool IsSaveLength() const;
     void SetSaveLength(bool value);
@@ -148,7 +151,8 @@ private:
     bool rotate;
     bool followGrainline;
     int rotationNumber;
-    bool autoCrop;
+    bool autoCropLength;
+    bool autoCropWidth;
     bool saveLength;
     bool unitePages;
     bool stripOptimizationEnabled;

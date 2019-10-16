@@ -200,7 +200,8 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
         diag.SetLayoutWidth(Lo2Px(OptionValue(LONG_OPTION_GAPWIDTH), diag));
     }
 
-    diag.SetAutoCrop(IsOptionSet(LONG_OPTION_CROP));
+    diag.SetAutoCropLength(IsOptionSet(LONG_OPTION_CROP_LENGTH));
+    diag.SetAutoCropWidth(IsOptionSet(LONG_OPTION_CROP_WIDTH));
     diag.SetUnitePages(IsOptionSet(LONG_OPTION_UNITE));
     diag.SetSaveLength(IsOptionSet(LONG_OPTION_SAVELENGTH));
     diag.SetGroup(OptGroup());
@@ -670,8 +671,10 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Follow manual priority over priority by square (export mode).")},
         {LONG_OPTION_NEST_QUANTITY,
          translate("VCommandLine", "Nest quantity copies of each piece (export mode).")},
-        {{SINGLE_OPTION_CROP, LONG_OPTION_CROP},
+        {{SINGLE_OPTION_CROP_LENGTH, LONG_OPTION_CROP_LENGTH},
          translate("VCommandLine", "Auto crop unused length (export mode).")},
+        {{LONG_OPTION_CROP_WIDTH},
+         translate("VCommandLine", "Auto crop unused width (export mode).")},
         {{SINGLE_OPTION_UNITE, LONG_OPTION_UNITE},
          translate("VCommandLine", "Unite pages if possible (export mode). Maximum value limited by QImage that "
          "supports only a maximum of 32768x32768 px images.")},

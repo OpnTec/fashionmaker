@@ -282,10 +282,12 @@ bool VLayoutPaper::SaveResult(const VBestSquare &bestResult, const VLayoutPiece 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) const
+QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const
 {
-    QGraphicsRectItem *paper;
-    if (autoCrop)
+    int height = d->globalContour.GetHeight();
+    int width = d->globalContour.GetWidth();
+
+    if (autoCropLength || autoCropWidth)
     {
         QScopedPointer<QGraphicsScene> scene(new QGraphicsScene());
         QList<QGraphicsItem *> list = GetItemDetails(textAsPaths);
@@ -295,21 +297,33 @@ QGraphicsRectItem *VLayoutPaper::GetPaperItem(bool autoCrop, bool textAsPaths) c
         }
 
         const QRect boundingRect = scene->itemsBoundingRect().toRect();
-        if (d->globalContour.IsPortrait())
+
+        if (autoCropLength)
         {
-            const int height = boundingRect.height() + boundingRect.y() + 1;
-            paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), height));
+            if (d->globalContour.IsPortrait())
+            {
+                height = boundingRect.height() + boundingRect.y() + 1;
+            }
+            else
+            {
+                width = boundingRect.width() + boundingRect.x() + 1;
+            }
         }
-        else
+
+        if (autoCropWidth)
         {
-            const int width = boundingRect.width() + boundingRect.x() + 1;
-            paper = new QGraphicsRectItem(QRectF(0, 0, width, d->globalContour.GetHeight()));
+            if (d->globalContour.IsPortrait())
+            {
+                width = boundingRect.width() + boundingRect.x() + 1;
+            }
+            else
+            {
+                height = boundingRect.height() + boundingRect.y() + 1;
+            }
         }
     }
-    else
-    {
-        paper = new QGraphicsRectItem(QRectF(0, 0, d->globalContour.GetWidth(), d->globalContour.GetHeight()));
-    }
+
+    auto *paper = new QGraphicsRectItem(QRectF(0, 0, width, height));
     paper->setPen(QPen(Qt::black, 1));
     paper->setBrush(QBrush(Qt::white));
     return paper;

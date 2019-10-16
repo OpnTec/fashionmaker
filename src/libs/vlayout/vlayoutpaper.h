@@ -95,7 +95,7 @@ public:
 
     bool ArrangeDetail(const VLayoutPiece &detail, std::atomic_bool &stop);
     int  Count() const;
-    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCrop, bool textAsPaths) const;
+    Q_REQUIRED_RESULT QGraphicsRectItem *GetPaperItem(bool autoCropLength, bool autoCropWidth, bool textAsPaths) const;
     Q_REQUIRED_RESULT QGraphicsPathItem *GetGlobalContour() const;
     Q_REQUIRED_RESULT QList<QGraphicsItem *> GetItemDetails(bool textAsPaths) const;
 

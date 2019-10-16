@@ -97,9 +97,13 @@ public:
     static bool GetDefLayoutNestQuantity();
     void SetLayoutNestQuantity(bool value);
 
-    bool GetLayoutAutoCrop() const;
-    static bool GetDefLayoutAutoCrop();
-    void SetLayoutAutoCrop(bool value);
+    bool GetLayoutAutoCropLength() const;
+    static bool GetDefLayoutAutoCropLength();
+    void SetLayoutAutoCropLength(bool value);
+
+    bool GetLayoutAutoCropWidth() const;
+    static bool GetDefLayoutAutoCropWidth();
+    void SetLayoutAutoCropWidth(bool value);
 
     bool GetLayoutSaveLength() const;
     static bool GetDefLayoutSaveLength();

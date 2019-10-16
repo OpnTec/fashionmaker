@@ -59,7 +59,8 @@ VLayoutGenerator::VLayoutGenerator(QObject *parent)
       rotate(true),
       followGrainline(false),
       rotationNumber(2),
-      autoCrop(false),
+      autoCropLength(false),
+      autoCropWidth(false),
       saveLength(false),
       unitePages(false),
       stripOptimizationEnabled(false),
@@ -289,7 +290,7 @@ QList<QGraphicsItem *> VLayoutGenerator::GetPapersItems() const
     QList<QGraphicsItem *> list;
     for (auto &paper : papers)
     {
-        list.append(paper.GetPaperItem(autoCrop, IsTestAsPaths()));
+        list.append(paper.GetPaperItem(autoCropLength, autoCropWidth, IsTestAsPaths()));
     }
     return list;
 }
@@ -518,7 +519,7 @@ void VLayoutGenerator::UnitePages()
         if (IsPortrait())
         {
             int paperHeight = 0;
-            if (autoCrop)
+            if (autoCropLength)
             {
                 const QRectF rec = papers.at(i).DetailsBoundingRect();
                 paperHeight = qRound(rec.y() + rec.height());
@@ -551,7 +552,7 @@ void VLayoutGenerator::UnitePages()
         else
         {
             int paperWidth = 0;
-            if (autoCrop)
+            if (autoCropLength)
             {
                 const QRectF rec = papers.at(i).DetailsBoundingRect();
                 paperWidth = qRound(rec.x() + rec.width());
@@ -675,15 +676,26 @@ void VLayoutGenerator::SetSaveLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool VLayoutGenerator::GetAutoCrop() const
+bool VLayoutGenerator::GetAutoCropLength() const
 {
-    return autoCrop;
+    return autoCropLength;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::SetAutoCrop(bool value)
+void VLayoutGenerator::SetAutoCropLength(bool value)
 {
-    autoCrop = value;
+    autoCropLength = value;
+}
+
+bool VLayoutGenerator::GetAutoCropWidth() const
+{
+    return autoCropWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetAutoCropWidth(bool value)
+{
+    autoCropWidth = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
