@@ -17,14 +17,15 @@ VALENTINA_BRANCH=''    # for example 05x
 NUMBER=( $RESOURCES )
 NUMBER=${#NUMBER[@]}
 
+# Certant languages like he_IL and zh_CN are not supported by math parser
 for ((i=0;i<NUMBER;i++)); do
-  tx pull -r valentina-project.measurements_p${i}${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip &
+  tx pull -r valentina-project.measurements_p${i}${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip -l "ru_RU, uk, de_DE, cs, he_IL, fr_FR, it_IT, nl, id, es, fi, en_US, en_CA, en_IN, ro_RO, zh_CN, pt_BR, el_GR, pl_PL" &
   sleep 2
 done
 
 tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts --mode=developer -f --skip &
 sleep 2
-tx pull -r valentina-project.measurements_p998${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip &
+tx pull -r valentina-project.measurements_p998${MEASUREMENTS_BRANCH}ts --mode=developer -f --skip -l "ru_RU, uk, de_DE, cs, he_IL, fr_FR, it_IT, nl, id, es, fi, en_US, en_CA, en_IN, ro_RO, zh_CN, pt_BR, el_GR, pl_PL" &
 
 wait
 
