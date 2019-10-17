@@ -11060,41 +11060,6 @@ Do you want to save your changes?</translation>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">First point</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Second point</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Highest point</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Lowest point</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Leftmost point</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Rightmost point</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Vertical axis</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Horizontal axis</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -12108,7 +12073,7 @@ Do you want to save your changes?</translation>
         <translation>Delete</translation>
     </message>
     <message>
-        <source>Show label</source>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12120,7 +12085,7 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
+        <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

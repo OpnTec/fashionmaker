@@ -2753,11 +2753,11 @@
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Отражение по линии %1_%2. Суффикс &apos;%3&apos;</translation>
     </message>
     <message>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Отражение по оси через точку %1. Суффикс &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
@@ -9166,10 +9166,6 @@ This option will take an affect after restart.</source>
         <translation>Ошибка внутреннего пути  &apos;%1&apos;. Между последней точкой и областью вырезания нет пересечений</translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="vanished">Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;.</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Припуск на шов пустой.</translation>
     </message>
@@ -9180,10 +9176,6 @@ This option will take an affect after restart.</source>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
         <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;. Невозможно скорректировать позицию надсечки.</translation>
-    </message>
-    <message>
-        <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="vanished">Деталь &apos;%1&apos;. Недостаточно точек, чтобы построить припуск на шов.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
@@ -10320,11 +10312,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Height (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Рост (%1):</translation>
     </message>
     <message>
         <source>Size (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер (%1):</translation>
     </message>
 </context>
 <context>
@@ -10808,7 +10800,7 @@ Do you want to save your changes?</source>
     <name>Tape</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта тестовая сборка старше %1 дня. Чтобы предоставить вам более качественный сервис, мы ограничиваем срок службы тестовой сборки. Чтобы продолжить использовать Tape, пожалуйста, обновитесь до новой тестовой сборки. Приложение будет закрыто.</translation>
     </message>
 </context>
 <context>
@@ -11072,41 +11064,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Первая точка</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Вторая точка</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Самая высокая точка</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Самая низкая точка</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Самая левая точка</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Самая правая точка</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Вертикальные оси</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Горизонтальные оси</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -11295,7 +11252,7 @@ Do you want to save your changes?</source>
     <name>VAbstractPiece</name>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished">Деталь &apos;%1&apos;. Недостаточно точек, чтобы построить припуск на шов.</translation>
+        <translation>Деталь &apos;%1&apos;. Недостаточно точек, чтобы построить припуск на шов.</translation>
     </message>
 </context>
 <context>
@@ -11440,13 +11397,6 @@ Do you want to save your changes?</source>
     <message>
         <source>Invalid notch.</source>
         <translation>Неправильная надсечка.</translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
-        <translation type="vanished">Выбрать материал</translation>
     </message>
 </context>
 <context>
@@ -11941,7 +11891,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Задать эффективность раскладки&lt;coefficient&gt;. Коэффициент эффективности раскладки - это отношение площади, занимаемой элементами, к ограничивающему прямоугольнику всех элементов. Если раскладка достигает необходимого уровня, процесс останавливается. Если значение равно 0, проверка не производится. Коэффициент должен находиться в диапазоне от 0 до 100. Значение по умолчанию 0.</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
@@ -12127,8 +12077,8 @@ Do you want to save your changes?</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <source>Show label</source>
-        <translation>Показать метку</translation>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12139,8 +12089,8 @@ Do you want to save your changes?</source>
         <translation>Удалить из группы</translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Show label</source>
+        <translation>Показать метку</translation>
     </message>
 </context>
 <context>
@@ -12293,11 +12243,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Seam allowance angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол припуска на шов</translation>
     </message>
     <message>
         <source>Passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Угол надсечки</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -12333,7 +12283,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Passmark mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Метка надсечки</translation>
     </message>
     <message>
         <source>One line</source>
@@ -12675,7 +12625,7 @@ Do you want to save your changes?</source>
     <name>VPiece</name>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished">Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;.</translation>
+        <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;.</translation>
     </message>
 </context>
 <context>
@@ -14642,7 +14592,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Улог1Дуги_</translation>
+        <translation type="vanished">Угол1Дуги_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
@@ -14847,7 +14797,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Angle1Arc_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation>Улог1Дуги_</translation>
+        <translation>Угол1Дуги_</translation>
     </message>
     <message>
         <source>Angle2Arc_</source>
@@ -15271,7 +15221,7 @@ Do you want to save your changes?</source>
     <name>Valentina</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта тестовая сборка старше %1 дня. Чтобы предоставить вам более качественный сервис, мы ограничиваем срок службы тестовой сборки. Для продолжения работы с Валентиной, пожалуйста, обновите тестовую сборку. Приложение будет закрыто.</translation>
     </message>
 </context>
 <context>

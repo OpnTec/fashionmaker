@@ -54,14 +54,14 @@
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia la visibilità di gruppo</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia la vibilità di più gruppi</translation>
     </message>
 </context>
 <context>
@@ -266,7 +266,7 @@
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Toolbar</translation>
+        <translation type="vanished">Barra strumenti</translation>
     </message>
     <message>
         <source>The text appears under the icon. (recommended for beginners.)</source>
@@ -1355,7 +1355,7 @@
     <name>DialogDateTimeFormats</name>
     <message>
         <source>Label date time editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor dell&apos;etichetta data/ora</translation>
     </message>
     <message>
         <source>Format:</source>
@@ -1601,6 +1601,22 @@
         <translation type="vanished">Rotazione:</translation>
     </message>
     <message>
+        <source>Value</source>
+        <translation type="vanished">Valore</translation>
+    </message>
+    <message>
+        <source>Calculation</source>
+        <translation type="vanished">Calcolo</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <translation type="vanished">Lunghezza:</translation>
+    </message>
+    <message>
         <source>Infinite/undefined result</source>
         <translation type="vanished">Risultato infinito/indefinito</translation>
     </message>
@@ -1656,7 +1672,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Bold</source>
@@ -1722,23 +1738,23 @@
     </message>
     <message>
         <source>template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modello</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Impossibile salvare il file</translation>
+        <translation>Impossibile salvare il file</translation>
     </message>
     <message>
         <source>Import template</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa modello</translation>
     </message>
     <message>
         <source>Import template will overwrite the current, do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Importare un modello sovrascriverà quello attuale, vuoi continuare?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Errore nel file.</translation>
+        <translation>Errore di file.</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1778,11 +1794,11 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Taglia</translation>
+        <translation>Taglia</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation type="unfinished">Altezza</translation>
+        <translation>Altezza</translation>
     </message>
     <message>
         <source>Measurments extension</source>
@@ -1826,7 +1842,7 @@
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Tessuto</translation>
+        <translation>Tessuto</translation>
     </message>
     <message>
         <source>Material: Lining</source>
@@ -1842,7 +1858,7 @@
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Teletta</translation>
     </message>
     <message>
         <source>Material: Interlining</source>
@@ -1870,7 +1886,7 @@
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiale dell&apos;utente</translation>
     </message>
     <message>
         <source>Insert…</source>
@@ -2052,15 +2068,15 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calulation</source>
-        <translation type="unfinished">Calcolo</translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Radius2:</source>
@@ -2068,15 +2084,15 @@
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Primo angolo:</translation>
+        <translation>Primo angolo:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Secondo angolo:</translation>
+        <translation>Secondo angolo:</translation>
     </message>
     <message>
         <source>Rotation angle:</source>
@@ -2084,15 +2100,15 @@
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished">Punto centrale:</translation>
+        <translation>Punto centrale:</translation>
     </message>
     <message>
         <source>Select center point of the arc</source>
-        <translation type="unfinished">Seleziona il punto al centro dell&apos;arco</translation>
+        <translation>Seleziona il punto al centro dell&apos;arco</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Edit radius1</source>
@@ -2104,11 +2120,11 @@
     </message>
     <message>
         <source>Edit first angle</source>
-        <translation type="unfinished">Modifica primo angolo</translation>
+        <translation>Modifica primo angolo</translation>
     </message>
     <message>
         <source>Edit second angle</source>
-        <translation type="unfinished">Modifica secondo angolo</translation>
+        <translation>Modifica secondo angolo</translation>
     </message>
     <message>
         <source>Edit rotation angle</source>
@@ -2286,47 +2302,47 @@
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished">Trova:</translation>
+        <translation>Trova:</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Cerca</translation>
+        <translation>Cerca</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Valore calcolato</translation>
+        <translation>Valore calcolato</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished">Dettagli</translation>
+        <translation>Dettagli</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Calculated value:</source>
-        <translation type="unfinished">Valore calcolato:</translation>
+        <translation>Valore calcolato:</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation type="unfinished">Formula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -2334,15 +2350,15 @@
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Descrizione:</translation>
+        <translation>Descrizione:</translation>
     </message>
     <message>
         <source>Move measurement up</source>
-        <translation type="unfinished">Sposta la misura sopra</translation>
+        <translation>Sposta la misura in alto</translation>
     </message>
     <message>
         <source>Move measurement down</source>
-        <translation type="unfinished">Sposta la misura sotto</translation>
+        <translation>Sposta la misura in basso</translation>
     </message>
     <message>
         <source>measurement</source>
@@ -2350,19 +2366,19 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Empty field.</source>
-        <translation type="unfinished">Campo vuoto.</translation>
+        <translation>Campo vuoto.</translation>
     </message>
     <message>
         <source>Edit measurement</source>
-        <translation type="unfinished">Modifica misure</translation>
+        <translation>Modifica misure</translation>
     </message>
     <message>
         <source>Empty field</source>
-        <translation type="unfinished">Campo vuoto</translation>
+        <translation>Campo vuoto</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -2370,7 +2386,7 @@
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Parser error: %1</source>
@@ -2383,6 +2399,10 @@
 </context>
 <context>
     <name>DialogFlippingByAxis</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialogo</translation>
+    </message>
     <message>
         <source>Origin point:</source>
         <translation>Punto di origine:</translation>
@@ -2418,6 +2438,10 @@
 </context>
 <context>
     <name>DialogFlippingByLine</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialogo</translation>
+    </message>
     <message>
         <source>First line point:</source>
         <translation type="unfinished">Primo punto della linea:</translation>
@@ -2970,7 +2994,7 @@
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiale dell&apos;utente</translation>
     </message>
 </context>
 <context>
@@ -3662,8 +3686,12 @@ Applicare la configurazione comunque?</translation>
 <context>
     <name>DialogMove</name>
     <message>
+        <source>Dialog</source>
+        <translation type="vanished">Dialogo</translation>
+    </message>
+    <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -3671,15 +3699,15 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Lunghezza:</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Suffix:</source>
@@ -3695,7 +3723,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Move</source>
@@ -3923,7 +3951,7 @@ Applicare la configurazione comunque?</translation>
     <name>DialogPatternMaterials</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Finestra</translation>
+        <translation>Dialogo</translation>
     </message>
     <message>
         <source>Placeholder</source>
@@ -3931,7 +3959,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
 </context>
 <context>
@@ -4336,7 +4364,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Unnamed path</source>
@@ -4364,11 +4392,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Margine di cucitura</translation>
+        <translation>Margine di cucitura</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4376,15 +4404,15 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -4412,7 +4440,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Reverse</source>
@@ -4702,7 +4730,7 @@ Applicare la configurazione comunque?</translation>
     <name>DialogPlaceLabel</name>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -4710,15 +4738,15 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -4726,7 +4754,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>0</source>
@@ -5384,7 +5412,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
@@ -5589,7 +5617,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Detail</source>
@@ -5697,7 +5725,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Errore</translation>
+        <translation>Errore</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -6074,7 +6102,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -6217,7 +6245,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>Pen style:</source>
@@ -7940,15 +7968,15 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>The calculated value</source>
-        <translation type="unfinished">Valore calcolato</translation>
+        <translation>Valore calcolato</translation>
     </message>
     <message>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
@@ -8275,11 +8303,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
@@ -8711,7 +8739,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Open Directory</source>
@@ -8794,7 +8822,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Margine di cucitura</translation>
+        <translation>Margine di cucitura</translation>
     </message>
     <message>
         <source>Default value:</source>
@@ -9090,7 +9118,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Fabric</source>
-        <translation type="unfinished">Tessuto</translation>
+        <translation>Tessuto</translation>
     </message>
     <message>
         <source>Lining</source>
@@ -9098,7 +9126,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Interfacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Teletta</translation>
     </message>
     <message>
         <source>Interlining</source>
@@ -10298,19 +10326,19 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Lunghezza:</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Center pin:</source>
@@ -10357,7 +10385,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -10365,15 +10393,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Height:</source>
@@ -10393,7 +10421,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
@@ -10615,11 +10643,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Seam allowance</source>
-        <translation type="unfinished">Margine di cucitura</translation>
+        <translation>Margine di cucitura</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished">Larghezza:</translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Formula wizard</source>
@@ -10627,15 +10655,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valore</translation>
     </message>
     <message>
         <source>Calculation</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcolo</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mostra calcolo intero nella finestra di dialogo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Nodes</source>
@@ -10663,7 +10691,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>Start point:</source>
@@ -10756,7 +10784,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>TabPlaceLabels</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Finestra</translation>
+        <translation>Dialogo</translation>
     </message>
 </context>
 <context>
@@ -10982,7 +11010,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Modifica</translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Open Directory</source>
@@ -11024,41 +11052,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>detail in layout list</source>
         <translation type="unfinished">dettagli nella lista layout</translation>
-    </message>
-</context>
-<context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Primo punto</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Secondo punto</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Punto più alto</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Punto più basso</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Punto più a sinistra</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Punto più a destra</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Asse verticale</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Asse orizzontale</translation>
     </message>
 </context>
 <context>
@@ -11801,7 +11794,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>User material</source>
-        <translation type="unfinished"></translation>
+        <translation>Materiale dell&apos;utente</translation>
     </message>
     <message>
         <source>Make all parsing warnings into errors. Have effect only in console mode. Use to force Valentina to immediately terminate if a pattern contains a parsing warning.</source>
@@ -12014,8 +12007,8 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Elimina</translation>
     </message>
     <message>
-        <source>Show label</source>
-        <translation>Mostra etichetta</translation>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12026,8 +12019,8 @@ Vuoi salvare le tue modifiche?</translation>
         <translation>Rimuovi dal gruppo</translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Show label</source>
+        <translation>Mostra etichetta</translation>
     </message>
 </context>
 <context>
@@ -13242,11 +13235,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Length:</source>
-        <translation type="unfinished">Lunghezza:</translation>
+        <translation>Lunghezza:</translation>
     </message>
     <message>
         <source>Angle:</source>
-        <translation type="unfinished">Angolo:</translation>
+        <translation>Angolo:</translation>
     </message>
     <message>
         <source>First point:</source>
@@ -13258,7 +13251,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Center point:</source>
-        <translation type="unfinished">Punto centrale:</translation>
+        <translation>Punto centrale:</translation>
     </message>
     <message>
         <source>Radius:</source>
@@ -13266,15 +13259,15 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>First angle:</source>
-        <translation type="unfinished">Primo angolo:</translation>
+        <translation>Primo angolo:</translation>
     </message>
     <message>
         <source>Second angle:</source>
-        <translation type="unfinished">Secondo angolo:</translation>
+        <translation>Secondo angolo:</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished">Colore:</translation>
+        <translation>Colore:</translation>
     </message>
     <message>
         <source>Third point:</source>
@@ -13414,7 +13407,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>C1: angle:</source>

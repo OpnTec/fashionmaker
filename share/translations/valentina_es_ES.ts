@@ -54,14 +54,14 @@
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>cambiar grupo de visibilidad</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>cambiar múltiples grupos de visibilidad</translation>
     </message>
 </context>
 <context>
@@ -2402,7 +2402,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida final por termino. &lt;/p&gt;&lt;p&gt; Anteponer &amp;quot;/r/&amp;quot; al frente de la búsqueda de la cadena de las medidas finales por regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2749,15 +2749,15 @@
     </message>
     <message>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotar objetos alrededor del punto %1. Sufijo &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltear por línea %1_%2. Sufijo &apos;%3&apos;</translation>
     </message>
     <message>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Voltear por eje a través %1 punto. Sufijo  &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
@@ -9165,10 +9165,6 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Error en ruta interna &apos;%1&apos;. No hay intersección del ultimo punto con el contorno de corte</translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="vanished">No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. Margen de costura esta vacío.</translation>
     </message>
@@ -11067,41 +11063,6 @@ Quieres guardar los cambios?</translation>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Primer punto</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Segundo punto</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Punto más alto</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Punto más bajo</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Punto más a la izquierda</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Punto más a la derecha</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Eje vertical</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Eje horizontal</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -11435,13 +11396,6 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
-        <translation type="vanished">Seleccionar material</translation>
     </message>
 </context>
 <context>
@@ -12122,8 +12076,8 @@ Quieres guardar los cambios?</translation>
         <translation>Borrar</translation>
     </message>
     <message>
-        <source>Show label</source>
-        <translation>Mostrar estiqueta</translation>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12134,8 +12088,8 @@ Quieres guardar los cambios?</translation>
         <translation>Remover del grupo</translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Show label</source>
+        <translation>Mostrar estiqueta</translation>
     </message>
 </context>
 <context>
@@ -12670,7 +12624,7 @@ Quieres guardar los cambios?</translation>
     <name>VPiece</name>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished">No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
     </message>
 </context>
 <context>

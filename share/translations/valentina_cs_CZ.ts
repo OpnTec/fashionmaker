@@ -9167,10 +9167,6 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Chyba ve vnitřní cestě &apos;%1&apos;. Není tu žádný průnik posledního bodu s obrysem stříhání</translation>
     </message>
     <message>
-        <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="vanished">Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
-    </message>
-    <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;. Přídavek na šev je prázdný.</translation>
     </message>
@@ -11069,41 +11065,6 @@ Chcete uložit změny?</translation>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">První bod</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druhý bod</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Nejvyšší bod</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Nejnižší bod</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Bod nejvíce vlevo</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Bod nejvíce vpravo</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Svislá osa</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Vodorovná osa</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -11437,13 +11398,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
-        <translation type="vanished">Vybrat materiál</translation>
     </message>
 </context>
 <context>
@@ -12124,8 +12078,8 @@ Chcete uložit změny?</translation>
         <translation>Smazat</translation>
     </message>
     <message>
-        <source>Show label</source>
-        <translation>Ukázat popis</translation>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12136,8 +12090,8 @@ Chcete uložit změny?</translation>
         <translation>Odstranit ze skupiny</translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Show label</source>
+        <translation>Ukázat popis</translation>
     </message>
 </context>
 <context>
@@ -12672,7 +12626,7 @@ Chcete uložit změny?</translation>
     <name>VPiece</name>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished">Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
+        <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
 </context>
 <context>

@@ -11045,41 +11045,6 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Premier point</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Deuxième point</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Point le plus haut</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Point le plus bas</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Point le plus à gauche</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Point le plus à droite</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Axes verticaux</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Axes horizontaux</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -12084,7 +12049,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <source>Show label</source>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -12096,7 +12061,7 @@ Voulez-vous enregistrer les changements?</translation>
         <translation>Retirer du groupe</translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
+        <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

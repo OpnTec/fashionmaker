@@ -9841,17 +9841,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Ensimmäinen piste</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Toinen piste</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -10733,7 +10722,7 @@ Do you want to save your changes?</source>
         <translation>Poista</translation>
     </message>
     <message>
-        <source>Show label</source>
+        <source>This id (%1) is not unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -10745,7 +10734,7 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
+        <source>Show label</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

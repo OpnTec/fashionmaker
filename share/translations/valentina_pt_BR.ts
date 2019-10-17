@@ -11043,41 +11043,6 @@ Deseja salvar suas mudanças?</translation>
     </message>
 </context>
 <context>
-    <name>Tool</name>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Primeiro ponto</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Segundo ponto</translation>
-    </message>
-    <message>
-        <source>Highest point</source>
-        <translation type="vanished">Ponto mais alto</translation>
-    </message>
-    <message>
-        <source>Lowest point</source>
-        <translation type="vanished">Ponto mais baixo</translation>
-    </message>
-    <message>
-        <source>Leftmost point</source>
-        <translation type="vanished">Ponto mais à esquerda</translation>
-    </message>
-    <message>
-        <source>Rightmost point</source>
-        <translation type="vanished">Ponto mais à direita</translation>
-    </message>
-    <message>
-        <source>Vertical axis</source>
-        <translation type="vanished">Eixo vertical</translation>
-    </message>
-    <message>
-        <source>Horizontal axis</source>
-        <translation type="vanished">Eixo horizontal</translation>
-    </message>
-</context>
-<context>
     <name>Utils::CheckableMessageBox</name>
     <message>
         <source>Do not ask again</source>
@@ -11407,13 +11372,6 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VComboBoxDelegate</name>
-    <message>
-        <source>Select material</source>
-        <translation type="vanished">Selecionar material</translation>
     </message>
 </context>
 <context>
@@ -12050,8 +12008,8 @@ Deseja salvar suas mudanças?</translation>
         <translation>Excluir</translation>
     </message>
     <message>
-        <source>Show label</source>
-        <translation>Mostrar rótulo</translation>
+        <source>This id (%1) is not unique.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12062,8 +12020,8 @@ Deseja salvar suas mudanças?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <source>Show label</source>
+        <translation>Mostrar rótulo</translation>
     </message>
 </context>
 <context>
