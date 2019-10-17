@@ -278,9 +278,9 @@ QString VToolCutArc::MakeToolTip() const
                     .arg(UnitsToStr(qApp->patternUnit(), true), arcStr + arcNumber + QChar(QChar::Space) + radiusStr)
                     .arg(qApp->fromPixel(arc.GetRadius()))
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + startAngleStr)
-                    .arg(qApp->fromPixel(arc.GetStartAngle()))
+                    .arg(arc.GetStartAngle())
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + endAngleStr)
-                    .arg(qApp->fromPixel(arc.GetEndAngle()))
+                    .arg(arc.GetEndAngle())
                     .arg(arcStr + arcNumber + QChar(QChar::Space) + tr("label"), arc.name());
         return toolTip;
     };

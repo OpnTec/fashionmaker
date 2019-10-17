@@ -369,9 +369,9 @@ QString VToolArcWithLength::MakeToolTip() const
             .arg(UnitsToStr(qApp->patternUnit(), true), tr("Radius"))
             .arg(qApp->fromPixel(arc->GetRadius()))
             .arg(tr("Start angle"))
-            .arg(qApp->fromPixel(arc->GetStartAngle()))
+            .arg(arc->GetStartAngle())
             .arg(tr("End angle"))
-            .arg(qApp->fromPixel(arc->GetEndAngle()))
+            .arg(arc->GetEndAngle())
             .arg(tr("Label"), arc->name());
     return toolTip;
 }
