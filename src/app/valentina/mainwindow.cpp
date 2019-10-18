@@ -3043,7 +3043,8 @@ void MainWindow::Clear()
     {
         watcher->removePath(AbsoluteMPath(qApp->GetPatternPath(), doc->MPath()));
     }
-    doc->clear();
+    doc->Clear();
+    UpdateWindowTitle();
     UpdateVisibilityGroups();
     detailsWidget->UpdateList();
     qCDebug(vMainWindow, "Clearing scenes.");

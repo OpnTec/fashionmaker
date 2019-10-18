@@ -116,6 +116,8 @@ public:
 
     virtual void   UpdateToolData(const quint32 &id, VContainer *data)=0;
 
+    virtual void Clear();
+
     static VDataTool* getTool(quint32 id);
     static void       AddTool(quint32 id, VDataTool *tool);
     static void       RemoveTool(quint32 id);

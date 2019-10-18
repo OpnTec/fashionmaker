@@ -628,8 +628,14 @@ void VAbstractPattern::setCursor(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::setXMLContent(const QString &fileName)
 {
+    Clear();
     VDomDocument::setXMLContent(fileName);
+}
 
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::Clear()
+{
+    clear();
     *patternNumberCached = unknownCharacter;
     *labelDateFormatCached = unknownCharacter;
     *patternNameCached = unknownCharacter;
