@@ -103,26 +103,32 @@ int VLayoutGenerator::DetailsCount()
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutGenerator::Generate(const QElapsedTimer &timer, qint64 timeout, LayoutErrors previousState)
 {
-    stopGeneration.store(false);
+    auto HasExpired = [this, timer, timeout]()
+    {
+        if (timer.hasExpired(timeout))
+        {
+            Timeout();
+            return true;
+        }
+        return false;
+    };
+
+    if (HasExpired())
+    {
+        return;
+    }
+
+    if (state != LayoutErrors::Timeout)
+    {
+        stopGeneration.store(false);
+    }
+
     papers.clear();
     bank->Reset();
     state = previousState;
 
     int width = PageWidth();
     int height = PageHeight();
-
-    auto HasExpired = [this, timer, timeout]()
-    {
-        if (timer.hasExpired(timeout))
-        {
-            if (state == LayoutErrors::NoError)
-            {
-                state = LayoutErrors::Timeout;
-            }
-            return true;
-        }
-        return false;
-    };
 
     if (VFuzzyComparePossibleNulls(shift, -1))
     {
@@ -333,7 +339,6 @@ void VLayoutGenerator::Abort()
 {
     stopGeneration.store(true);
     state = LayoutErrors::ProcessStoped;
-    QThreadPool::globalInstance()->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -344,7 +349,6 @@ void VLayoutGenerator::Timeout()
     {
         state = LayoutErrors::Timeout;
     }
-    QThreadPool::globalInstance()->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
