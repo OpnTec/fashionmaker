@@ -2597,7 +2597,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Ne peut pat créer d&apos;enregistrement.</translation>
+        <translation type="vanished">Ne peut pat créer d&apos;enregistrement.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -3334,6 +3334,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nest quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11868,6 +11872,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2597,7 +2597,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Kan geen aantekening creeren.</translation>
+        <translation type="vanished">Kan geen aantekening creeren.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -3339,6 +3339,10 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Nest quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11892,6 +11896,10 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

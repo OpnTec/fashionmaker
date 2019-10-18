@@ -2597,7 +2597,7 @@
     </message>
     <message>
         <source>Can&apos;t create record.</source>
-        <translation>Не можу створити запис.</translation>
+        <translation type="vanished">Не можу створити запис.</translation>
     </message>
     <message>
         <source>%1 - Base point</source>
@@ -3337,6 +3337,10 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nest quantity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11892,6 +11896,10 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto crop unused width (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
