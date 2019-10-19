@@ -3343,7 +3343,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Auto crop unused width</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически обрезать неиспользуемую ширину</translation>
     </message>
 </context>
 <context>
@@ -11903,7 +11903,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматическая обрезка неиспользуемой ширины (режим экспорта).</translation>
     </message>
 </context>
 <context>
