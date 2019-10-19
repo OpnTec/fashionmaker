@@ -210,7 +210,7 @@ deploy:
   package: valentina-win_auto-upload
   publish: true
   override: true
-  version: 0.6.0
+  version: 0.7.0a
   on:
     DEPLOY: true
   artifact: valentina-win-$(QT_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(APPVEYOR_REPO_COMMIT)
