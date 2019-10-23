@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vit>
+    <!--Measurements created with Valentina v0.6.1.1 (https://valentinaproject.bitbucket.io/).-->
+    <version>0.5.0</version>
+    <read-only>false</read-only>
+    <notes/>
+    <unit>cm</unit>
+    <pm_system>998</pm_system>
+    <personal>
+        <customer/>
+        <birth-date>1800-01-01</birth-date>
+        <gender>unknown</gender>
+        <email/>
+    </personal>
+    <body-measurements>
+        <m name="height" value="74"/>
+        <m name="lowbust_circ" value="47"/>
+        <m name="waist_circ" value="45"/>
+        <m name="hip_circ" value="48"/>
+        <m name="armfold_to_armfold_b" value="19.6"/>
+        <m name="neck_circ" value="25"/>
+        <m name="shoulder_length" value="5.8"/>
+        <m name="arm_wrist_circ" value="11.7"/>
+        <m name="neck_back_to_highbust_b" value="10.8"/>
+        <m name="neck_back_to_waist_b" value="19.4"/>
+        <m name="waist_to_hip_side" value="9.6"/>
+        <m name="height_neck_back" value="59.6"/>
+        <m name="rise_length_side_sitting" value="13.4"/>
+        <m name="leg_crotch_to_floor" value="27.5"/>
+        <m name="arm_shoulder_tip_to_wrist" value="25"/>
+        <m name="head_circ" value="47.5"/>
+        <m name="leg_ankle_circ" value="13.5"/>
+        <m description="рост 80-116 см" name="@Швк" value="5"/>
+        <m description="рост 74-98 см" name="@Шманж" value="4"/>
+        <m description="рост 74-98 см" name="@Вс" value="4"/>
+        <m description="Ширина пояса" name="@Шпояс" value="3"/>
+    </body-measurements>
+</vit>

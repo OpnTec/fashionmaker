@@ -351,6 +351,7 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
     {
         QLineF allowance(px2, p2);
         allowance.setAngle(allowance.angle() + 90);
+        pointsIntr.append(px2);
         pointsIntr.append(allowance.p2());
         pointsIntr.append(bigLine2.p1());
     }

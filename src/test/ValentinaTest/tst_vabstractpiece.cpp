@@ -1026,6 +1026,12 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
                      QStringLiteral("://Issue_937_case_1/output.json"),
                      37.795275590551185 /*seam allowance width*/);
 
+    // See file src/app/share/collection/bugs/Issue_#937a.val
+    ASSERT_TEST_CASE("Issue 937. Case1a",
+                     QStringLiteral("://Issue_937_case_1a/input.json"),
+                     QStringLiteral("://Issue_937_case_1a/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
+
     // See file src/app/share/collection/bugs/Issue_#937.val
     ASSERT_TEST_CASE("Issue 937. Case2",
                      QStringLiteral("://Issue_937_case_2/input.json"),
