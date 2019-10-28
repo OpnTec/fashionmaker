@@ -369,7 +369,8 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                 const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of first "
                                                      "point with cutting countour")
                         .arg(GetName());
-                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
             }
         }
 
@@ -386,7 +387,8 @@ QVector<QPointF> VPiecePath::PathPoints(const VContainer *data, const QVector<QP
                 const QString errorMsg = QObject::tr("Error in internal path '%1'. There is no intersection of last "
                                                      "point with cutting countour")
                         .arg(GetName());
-                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+                qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                                     qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
             }
         }
 

@@ -134,7 +134,8 @@ VToolPointOfIntersectionCircles::Create(VToolPointOfIntersectionCirclesInitData 
     {
         const QString errorMsg = tr("Error calculating point '%1'. Circles with centers in points '%2' and '%3' have "
                                     "no point of intersection").arg(initData.name, c1Point.name(), c2Point.name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

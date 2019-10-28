@@ -249,8 +249,8 @@ private:
     /** @brief currentToolBoxIndex save current set of tools. */
     qint32             currentToolBoxIndex;
 
-    bool               isDockToolOptionsVisible;
-    bool               isDockGroupsVisible;
+    bool               isDockToolOptionsVisible{false};
+    bool               isDockGroupsVisible{false};
 
     /** @brief drawMode true if we current draw scene. */
     bool               drawMode;
@@ -378,6 +378,8 @@ private:
     void ToolSelectOperationObjects();
     void ToolSelectGroupObjects();
     void ToolSelectDetail();
+
+    void PrintPatternMessage(QEvent *event);
 };
 
 #endif // MAINWINDOW_H

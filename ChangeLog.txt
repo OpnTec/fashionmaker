@@ -32,6 +32,7 @@
 - Added options to control passmark angle type and passmark mark type.
 - Improve for recent files list. Show duplicate file names with unique path section.
 - New command line option --cropWidth. Helps to crop unused width of paper.
+- New feature Pattern Messages.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

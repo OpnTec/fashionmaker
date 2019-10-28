@@ -77,5 +77,7 @@
         <file>icon/32x32/passmark@2x.png</file>
         <file>icon/32x32/button.png</file>
         <file>icon/32x32/button@2x.png</file>
+        <file>icon/16x16/broom.png</file>
+        <file>icon/16x16/broom@2x.png</file>
     </qresource>
 </RCC>

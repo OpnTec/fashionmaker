@@ -385,7 +385,8 @@ bool VBank::PrepareDetails()
         {
             const QString errorMsg = QObject::tr("Piece '%1' has invalid layout allowance. Please, check seam allowance"
                                                  " to check how seam allowance behave.").arg(details.at(i).GetName());
-            qApp->IsPedantic() ? throw VException(errorMsg) : qWarning() << errorMsg;
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
         }
 
         const qreal d = details.at(i).Diagonal();

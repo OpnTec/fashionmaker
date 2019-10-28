@@ -125,7 +125,8 @@ VToolPointOfIntersectionCurves *VToolPointOfIntersectionCurves::Create(VToolPoin
     {
         const QString errorMsg = tr("Error calculating point '%1'. Curves '%2' and '%3' have no point of intersection")
                 .arg(initData.name, curve1->name(), curve2->name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

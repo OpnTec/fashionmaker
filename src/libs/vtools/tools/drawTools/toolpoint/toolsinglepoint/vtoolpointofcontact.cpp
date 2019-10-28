@@ -216,7 +216,8 @@ VToolPointOfContact* VToolPointOfContact::Create(VToolPointOfContactInitData &in
         const QString errorMsg = tr("Error calculating point '%1'. Circle with center '%2' and radius '%3' doesn't have "
                                     "intersection with line (%4;%5)")
                 .arg(initData.name, centerP->name()).arg(result).arg(firstP->name(), secondP->name());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

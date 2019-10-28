@@ -122,6 +122,7 @@ protected:
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel> m_mouseCoordinate;
+    QPointer<QLabel> m_unreadPatternMessage{};
 
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QWinTaskbarButton *m_taskbarButton;

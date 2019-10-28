@@ -145,36 +145,51 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
+    QString logMsg = msg;
+    const bool isPatternMessage = qApp->IsPatternMessage(msg);
+    if (isPatternMessage)
+    {
+        logMsg = logMsg.remove(VAbstractApplication::patternMessageSignature);
+    }
+
     {
         QString debugdate = "[" + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
 
         switch (type)
         {
             case QtDebugMsg:
-                debugdate += QString(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << msg << "\n";
+                debugdate += QStringLiteral(":DEBUG:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                             .arg(context.function, context.category, logMsg);
+                vStdOut() << QApplication::translate("vNoisyHandler", "DEBUG:") << logMsg << "\n";
                 break;
             case QtWarningMsg:
-                debugdate += QString(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << msg << "\n";
+                if (isPatternMessage)
+                {
+                    qApp->PostPatternMessage(logMsg, type);
+                }
+                debugdate += QStringLiteral(":WARNING:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                             .arg(context.function, context.category, logMsg);
+                vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << logMsg << "\n";
                 break;
             case QtCriticalMsg:
-                debugdate += QString(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << msg << "\n";
+                debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                             .arg(context.function, context.category, logMsg);
+                vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << logMsg << "\n";
                 break;
             case QtFatalMsg:
-                debugdate += QString(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << msg << "\n";
+                debugdate += QStringLiteral(":FATAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                             .arg(context.function, context.category, logMsg);
+                vStdErr() << QApplication::translate("vNoisyHandler", "FATAL:") << logMsg << "\n";
                 break;
             #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             case QtInfoMsg:
-                debugdate += QString(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
-                             .arg(context.function, context.category, msg);
-                vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << msg << "\n";
+                if (isPatternMessage)
+                {
+                    qApp->PostPatternMessage(logMsg, type);
+                }
+                debugdate += QStringLiteral(":INFO:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
+                             .arg(context.function, context.category, logMsg);
+                vStdOut() << QApplication::translate("vNoisyHandler", "INFO:") << logMsg << "\n";
                 break;
             #endif
             default:
@@ -188,44 +203,44 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     if (isGuiThread)
     {
-        //fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
-        //lead to crash
-        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                !QApplication::activeModalWidget()->inherits("QFileDialog");
-
-        QMessageBox messageBox;
-        switch (type)
-        {
-            case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
-                messageBox.setIcon(QMessageBox::Warning);
-                break;
-            case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-            case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
-                messageBox.setIcon(QMessageBox::Information);
-                break;
-            #endif
-            case QtDebugMsg:
-            default:
-                break;
-        }
-
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
             if (VApplication::IsGUIMode())
             {
-                if (topWinAllowsPop)
+                //fixme: trying to make sure there are no save/load dialogs are opened, because error message during
+                // them will lead to crash
+                const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                        !QApplication::activeModalWidget()->inherits("QFileDialog");
+
+                if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
                 {
-                    messageBox.setText(VAbstractApplication::ClearMessage(msg));
+                    QMessageBox messageBox;
+                    switch (type)
+                    {
+                        case QtWarningMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
+                            messageBox.setIcon(QMessageBox::Warning);
+                            break;
+                        case QtCriticalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        case QtFatalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+                        case QtInfoMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
+                            messageBox.setIcon(QMessageBox::Information);
+                            break;
+                        #endif
+                        case QtDebugMsg:
+                        default:
+                            break;
+                    }
+
+                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
                     messageBox.setStandardButtons(QMessageBox::Ok);
                     messageBox.setWindowModality(Qt::ApplicationModal);
                     messageBox.setModal(true);

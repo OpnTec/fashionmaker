@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1100</width>
-    <height>709</height>
+    <height>809</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -55,7 +55,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>243</height>
         </rect>
        </property>
@@ -746,7 +746,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>282</height>
         </rect>
        </property>
@@ -1120,8 +1120,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
-         <height>331</height>
+         <width>126</width>
+         <height>192</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -1324,7 +1324,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>126</width>
          <height>237</height>
         </rect>
        </property>
@@ -1590,7 +1590,7 @@
          <x>0</x>
          <y>0</y>
          <width>140</width>
-         <height>331</height>
+         <height>163</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2012,6 +2012,115 @@
     <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_2"/>
+  </widget>
+  <widget class="QDockWidget" name="dockWidgetMessages">
+   <property name="floating">
+    <bool>true</bool>
+   </property>
+   <property name="windowTitle">
+    <string>Pattern messages</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_4">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QToolButton" name="toolButtonClearMessages">
+         <property name="toolTip">
+          <string>Clear all messages</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
+           <normaloff>:/icon/16x16/broom@2x.png</normaloff>:/icon/16x16/broom@2x.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="VLineEdit" name="lineEditMessagesFilter">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>1</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>Filter</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonMessagesZoomInFont">
+         <property name="toolTip">
+          <string>Zoom in</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="zoom-in">
+           <normaloff>.</normaloff>.</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonMessagesZoomOutFont">
+         <property name="toolTip">
+          <string>Zoom out</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="zoom-out">
+           <normaloff>.</normaloff>.</iconset>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="VPlainTextEdit" name="plainTextEditPatternMessages">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="maximumBlockCount">
+        <number>500</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -2858,6 +2967,16 @@
    <class>VMainGraphicsView</class>
    <extends>QGraphicsView</extends>
    <header>vmaingraphicsview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>vplaintextedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

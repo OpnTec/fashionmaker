@@ -133,7 +133,8 @@ VToolLineIntersectAxis *VToolLineIntersectAxis::Create(VToolLineIntersectAxisIni
         const QString errorMsg = tr("Error calculating point '%1'. Line (%2;%3) doesn't have intersection with axis "
                                     "through point '%4' and angle %5°")
                       .arg(initData.name, firstPoint->name(), secondPoint->name(), basePoint->name()).arg(axis.angle());
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);

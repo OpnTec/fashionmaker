@@ -130,7 +130,8 @@ VToolPointFromCircleAndTangent *VToolPointFromCircleAndTangent::Create(VToolPoin
                                     "from point '%4' cannot be found")
                 .arg(initData.name, cPoint.name()).arg(radius).arg(tPoint.name());
 
-        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(point, initData.name, initData.mx, initData.my);

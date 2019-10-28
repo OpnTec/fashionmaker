@@ -39,8 +39,12 @@
 #include <QUndoStack>
 #include <Qt>
 #include <QtDebug>
+#include <QWidget>
 
 #include "../vmisc/def.h"
+#include "../vmisc/customevents.h"
+
+const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractApplication::VAbstractApplication(int &argc, char **argv)
@@ -255,6 +259,18 @@ const Draw &VAbstractApplication::GetDrawMode() const
 void VAbstractApplication::SetDrawMode(const Draw &value)
 {
     mode = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::PostPatternMessage(const QString &message, QtMsgType severity) const
+{
+    QApplication::postEvent(mainWindow, new PatternMessageEvent(VAbstractApplication::ClearMessage(message), severity));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VAbstractApplication::IsPatternMessage(const QString &message) const
+{
+    return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

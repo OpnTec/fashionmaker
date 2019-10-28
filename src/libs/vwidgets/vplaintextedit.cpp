@@ -50,6 +50,50 @@ VPlainTextEdit::~VPlainTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::SetFilter(const QString &filter)
+{
+    if(m_filter.isEmpty() && not filter.isEmpty())
+    {
+        QTextDocument *doc = document();
+        m_allLines.clear();
+        m_allLines.reserve(doc->lineCount());
+
+        for(int i=0; i < doc->blockCount(); ++i)
+        {
+            m_allLines.append(doc->findBlockByNumber(i).text());
+        }
+    }
+
+    m_filter = filter;
+
+    Filter();
+
+    if(m_filter.isEmpty())
+    {
+        m_allLines.clear();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::appendPlainText(const QString &text)
+{
+    if (m_filter.isEmpty())
+    {
+        QPlainTextEdit::appendPlainText(text);
+    }
+    else
+    {
+        m_allLines.append(text);
+        const int diff = m_allLines.size() - maximumBlockCount();
+        if (diff > 0)
+        {
+            m_allLines = m_allLines.mid(diff);
+        }
+        Filter();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::MatchParentheses()
 {
     QList<QTextEdit::ExtraSelection> selections;
@@ -181,4 +225,27 @@ void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
     selections.append(selection);
 
     setExtraSelections(selections);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::Filter()
+{
+    clear();
+    if(not m_filter.isEmpty())
+    {
+        for(auto &line : m_allLines)
+        {
+            if (line.contains(m_filter))
+            {
+                QPlainTextEdit::appendPlainText(line);
+            }
+        }
+    }
+    else
+    {
+        for(auto &line : m_allLines)
+        {
+            QPlainTextEdit::appendPlainText(line);
+        }
+    }
 }

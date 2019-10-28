@@ -913,7 +913,8 @@ bool VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, int in
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -951,7 +952,8 @@ bool VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, int index,
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
         return false; // Something wrong
     }
 
@@ -1034,7 +1036,8 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
     {
         const QString errorMsg = tr("Cannot calculate a notch for point '%1' in piece '%2'.")
                 .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
-        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) : qWarning() << errorMsg;
+        qApp->IsPedantic() ? throw VExceptionInvalidNotch(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
         return VPassmark();
     }
 

@@ -174,6 +174,7 @@ MainWindowsNoGUI::MainWindowsNoGUI(QWidget *parent)
 //---------------------------------------------------------------------------------------------------------------------
 MainWindowsNoGUI::~MainWindowsNoGUI()
 {
+    delete m_unreadPatternMessage;
     delete m_mouseCoordinate;
     delete tempSceneLayout;
     delete pattern;

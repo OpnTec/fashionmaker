@@ -124,6 +124,11 @@ public:
     const Draw &GetDrawMode() const;
     void        SetDrawMode(const Draw &value);
 
+    void PostPatternMessage(const QString &message, QtMsgType severity) const;
+
+    static const QString patternMessageSignature;
+    bool IsPatternMessage(const QString &message) const;
+
 protected:
     QUndoStack         *undoStack;
 

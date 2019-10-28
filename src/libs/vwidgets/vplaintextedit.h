@@ -39,15 +39,24 @@ public:
     VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
     virtual ~VPlainTextEdit();
 
+    void SetMatchParenthesesEnabled(bool enabled);
+
+    void SetFilter(const QString &filter);
+
+    void appendPlainText(const QString &text);
+
 private slots:
     void MatchParentheses();
 
 private:
     VHighlighter m_highlighter;
+    QString m_filter{};
+    QStringList m_allLines{};
 
     bool MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses);
     bool MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses);
     void CreateParenthesisSelection(int pos, bool match = true);
+    void Filter();
 };
 
 #endif // VPLAINTEXTEDIT_H

@@ -105,9 +105,17 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFOrientation, (QLatin1Str
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingDuration, (QLatin1String("scrolling/duration")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingUpdateInterval, (QLatin1String("scrolling/updateInterval")))
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale, (QLatin1String("scrolling/sensorMouseScale")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingSensorMouseScale,
+                          (QLatin1String("scrolling/sensorMouseScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingWheelMouseScale, (QLatin1String("scrolling/wheelMouseScale")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingScrollingAcceleration, (QLatin1String("scrolling/acceleration")))
+
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingdockWidgetGroupsActive, (QLatin1String("dockWidget/groupsActive")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetToolOptionsActive,
+                          (QLatin1String("dockWidget/toolOptionsActive")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
+                          (QLatin1String("dockWidget/patternMessagesActive")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
 
 // Reading settings file is very expensive, cache values to speed up getting a value
 int scrollingDurationCached = -1;
@@ -676,6 +684,87 @@ void VSettings::SetScrollingAcceleration(qreal acceleration)
 {
     scrollingAccelerationCached = qBound(scrollingAccelerationMin, acceleration, scrollingAccelerationMax);
     setValue(*settingScrollingAcceleration, scrollingAccelerationCached);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::IsDockWidgetGroupsActive() const
+{
+    return value(*settingdockWidgetGroupsActive, GetDefDockWidgetGroupsActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefDockWidgetGroupsActive()
+{
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetDockWidgetGroupsActive(bool value)
+{
+    setValue(*settingdockWidgetGroupsActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::IsDockWidgetToolOptionsActive() const
+{
+    return value(*settingDockWidgetToolOptionsActive, GetDefDockWidgetToolOptionsActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefDockWidgetToolOptionsActive()
+{
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetDockWidgetToolOptionsActive(bool value)
+{
+    setValue(*settingDockWidgetToolOptionsActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::IsDockWidgetPatternMessagesActive() const
+{
+    return value(*settingDockWidgetPatternMessagesActive, GetDefDockWidgetPatternMessagesActive()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefDockWidgetPatternMessagesActive()
+{
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetDockWidgetPatternMessagesActive(bool value)
+{
+    setValue(*settingDockWidgetPatternMessagesActive, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetPatternMessageFontSize(int fontSizeDef) const
+{
+    fontSizeDef = qBound(GetDefMinPatternMessageFontSize(), fontSizeDef, GetDefMaxPatternMessageFontSize());
+    const int fontSize = value(*settingPatternMessagesFontSize, fontSizeDef).toInt();
+    return qBound(GetDefMinPatternMessageFontSize(), fontSize, GetDefMaxPatternMessageFontSize());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetDefMinPatternMessageFontSize()
+{
+    return 5;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+int VSettings::GetDefMaxPatternMessageFontSize()
+{
+    return 40;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetPatternMessageFontSize(int size)
+{
+    setValue(*settingPatternMessagesFontSize, qBound(GetDefMinPatternMessageFontSize(), size,
+                                                             GetDefMaxPatternMessageFontSize()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

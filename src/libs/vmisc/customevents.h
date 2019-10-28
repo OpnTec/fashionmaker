@@ -31,9 +31,18 @@
 
 #include <qcompilerdetection.h>
 #include <QEvent>
+#include <QString>
 
-enum CustomEventType { UndoEventType = 1, LiteParseEventType = 2, FitBestCurrentEventType = 3 };
+#include "typedef.h"
 
+enum CustomEventType {
+    UndoEventType = 1,
+    LiteParseEventType = 2,
+    FitBestCurrentEventType = 3,
+    PatternMessageEventType = 4,
+};
+
+//---------------------------------------------------------------------------------------------------------------------
 // Define undo event identifier
 const QEvent::Type UNDO_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::UndoEventType);
 
@@ -47,6 +56,7 @@ public:
     virtual ~UndoEvent() =default;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 const QEvent::Type LITE_PARSE_EVENT = static_cast<QEvent::Type>(QEvent::User + CustomEventType::LiteParseEventType);
 
 class LiteParseEvent : public QEvent
@@ -59,6 +69,7 @@ public:
     virtual ~LiteParseEvent() =default;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
 const QEvent::Type FIT_BEST_CURRENT_EVENT = static_cast<QEvent::Type>(QEvent::User +
                                                                       CustomEventType::FitBestCurrentEventType);
 
@@ -72,4 +83,38 @@ public:
     virtual ~FitBestCurrentEvent() =default;
 };
 
+//---------------------------------------------------------------------------------------------------------------------
+const QEvent::Type PATTERN_MESSAGE_EVENT = static_cast<QEvent::Type>(QEvent::User +
+                                                                      CustomEventType::PatternMessageEventType);
+
+class PatternMessageEvent : public QEvent
+{
+public:
+    PatternMessageEvent(const QString &message, QtMsgType severity)
+        : QEvent(PATTERN_MESSAGE_EVENT),
+          m_message(message),
+          m_severity(severity)
+    {}
+
+    virtual ~PatternMessageEvent() =default;
+
+    QString Message() const;
+
+    QtMsgType Severity() const;
+
+private:
+    QString m_message;
+    QtMsgType m_severity;
+};
+
 #endif // CUSTOMEVENTS_H
+
+inline QString PatternMessageEvent::Message() const
+{
+    return m_message;
+}
+
+inline QtMsgType PatternMessageEvent::Severity() const
+{
+    return m_severity;
+}

@@ -174,8 +174,6 @@ MainWindow::MainWindow(QWidget *parent)
       dialogFMeasurements(nullptr),
       comboBoxDraws(nullptr), patternPieceLabel(nullptr),
       currentDrawIndex(0), currentToolBoxIndex(0),
-      isDockToolOptionsVisible(true),
-      isDockGroupsVisible(true),
       drawMode(true),
       leftGoToStage(nullptr), rightGoToStage(nullptr), autoSaveTimer(nullptr), guiEnabled(true),
       gradationHeights(nullptr),
@@ -300,6 +298,44 @@ MainWindow::MainWindow(QWidget *parent)
 
     menu->setAsDockMenu();
 #endif //defined(Q_OS_MAC)
+
+    connect(ui->toolButtonMessagesZoomInFont, &QToolButton::clicked, this, [this]()
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        QFont f = ui->plainTextEditPatternMessages->font();
+        if (f.pointSize() < settings->GetDefMaxPatternMessageFontSize())
+        {
+            f.setPointSize(f.pointSize()+1);
+            ui->plainTextEditPatternMessages->setFont(f);
+            settings->SetPatternMessageFontSize(f.pointSize());
+        }
+    });
+
+    connect(ui->toolButtonMessagesZoomOutFont, &QToolButton::clicked, this, [this]()
+    {
+        VSettings *settings = qApp->ValentinaSettings();
+        QFont f = ui->plainTextEditPatternMessages->font();
+        if (f.pointSize() > settings->GetDefMinPatternMessageFontSize())
+        {
+            f.setPointSize(f.pointSize()-1);
+            ui->plainTextEditPatternMessages->setFont(f);
+            settings->SetPatternMessageFontSize(f.pointSize());
+        }
+    });
+
+    connect(ui->lineEditMessagesFilter, &QLineEdit::textChanged, this, [this](const QString &text)
+    {
+        ui->plainTextEditPatternMessages->SetFilter(text);
+    });
+
+    connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, [this]()
+    {
+        ui->plainTextEditPatternMessages->clear();
+        if (not m_unreadPatternMessage.isNull())
+        {
+            m_unreadPatternMessage->setText(QString());
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1542,6 +1578,10 @@ void MainWindow::customEvent(QEvent *event)
     {
         ZoomFitBestCurrent();
     }
+    else if (event->type() == PATTERN_MESSAGE_EVENT)
+    {
+        PrintPatternMessage(event);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1975,6 +2015,10 @@ void MainWindow::ToolBarOption()
 
     m_mouseCoordinate = new QLabel(QString("0, 0 (%1)").arg(UnitsToStr(qApp->patternUnit(), true)));
     ui->toolBarOption->addWidget(m_mouseCoordinate);
+
+    ui->toolBarOption->addSeparator();
+    m_unreadPatternMessage = new QLabel();
+    ui->toolBarOption->addWidget(m_unreadPatternMessage);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2647,12 +2691,13 @@ void MainWindow::ActionDetails(bool checked)
         }
 
         ui->dockWidgetLayoutPages->setVisible(false);
-        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         ui->dockWidgetGroups->setWidget(detailsWidget);
         ui->dockWidgetGroups->setWindowTitle(tr("Details"));
         ui->dockWidgetGroups->setVisible(isDockGroupsVisible);
         ui->dockWidgetGroups->setToolTip(tr("Show which details will go in layout"));
+
+        ui->dockWidgetToolOptions->setVisible(isDockToolOptionsVisible);
 
         m_statusLabel->setText(QString());
     }
@@ -3101,6 +3146,7 @@ void MainWindow::Clear()
     ui->actionDecreaseLabelFont->setEnabled(false);
     ui->actionOriginalLabelFont->setEnabled(false);
     ui->actionHideLabels->setEnabled(false);
+    ui->plainTextEditPatternMessages->clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3921,6 +3967,10 @@ void MainWindow::ReadSettings()
         restoreState(settings->GetWindowState());
         restoreState(settings->GetToolbarsState(), APP_VERSION);
 
+        ui->dockWidgetGroups->setVisible(settings->IsDockWidgetGroupsActive());
+        ui->dockWidgetToolOptions->setVisible(settings->IsDockWidgetToolOptionsActive());
+        ui->dockWidgetMessages->setVisible(settings->IsDockWidgetPatternMessagesActive());
+
         // Scene antialiasing
         ui->view->SetAntialiasing(settings->GetGraphicalOutput());
 
@@ -3930,8 +3980,12 @@ void MainWindow::ReadSettings()
         // Text under tool buton icon
         ToolBarStyles();
 
-        isDockToolOptionsVisible = ui->dockWidgetToolOptions->isVisible();
-        isDockGroupsVisible = ui->dockWidgetGroups->isVisible();
+        isDockToolOptionsVisible = ui->dockWidgetToolOptions->isEnabled();
+        isDockGroupsVisible = ui->dockWidgetGroups->isEnabled();
+
+        QFont f = ui->plainTextEditPatternMessages->font();
+        f.setPointSize(settings->GetPatternMessageFontSize(f.pointSize()));
+        ui->plainTextEditPatternMessages->setFont(f);
     }
     else
     {
@@ -3951,6 +4005,10 @@ void MainWindow::WriteSettings()
     settings->SetGeometry(saveGeometry());
     settings->SetWindowState(saveState());
     settings->SetToolbarsState(saveState(APP_VERSION));
+
+    settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isEnabled());
+    settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isEnabled());
+    settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isEnabled());
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
@@ -4262,17 +4320,19 @@ void MainWindow::AddDocks()
     //Add dock
     actionDockWidgetToolOptions = ui->dockWidgetToolOptions->toggleViewAction();
     ui->menuWindow->addAction(actionDockWidgetToolOptions);
-    connect(ui->dockWidgetToolOptions, &QDockWidget::visibilityChanged, this, [this](bool visible)
+    connect(actionDockWidgetToolOptions, &QAction::triggered, this, [this](bool checked)
     {
-        isDockToolOptionsVisible = visible;
+        isDockToolOptionsVisible = checked;
     });
 
     actionDockWidgetGroups = ui->dockWidgetGroups->toggleViewAction();
     ui->menuWindow->addAction(actionDockWidgetGroups);
-    connect(ui->dockWidgetGroups, &QDockWidget::visibilityChanged, this, [this](bool visible)
+    connect(actionDockWidgetGroups, &QAction::triggered, this, [this](bool checked)
     {
-        isDockGroupsVisible = visible;
+        isDockGroupsVisible = checked;
     });
+
+    ui->menuWindow->addAction(ui->dockWidgetMessages->toggleViewAction());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6043,4 +6103,44 @@ void MainWindow::ToolSelectDetail()
     emit ItemsSelection(SelectionType::ByMouseRelease);
 
     ui->view->AllowRubberBand(false);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::PrintPatternMessage(QEvent *event)
+{
+    SCASSERT(event != nullptr)
+    auto *patternMessage = static_cast<PatternMessageEvent *>(event);
+
+    QString severity;
+
+    switch(patternMessage->Severity())
+    {
+        case QtDebugMsg:
+            severity = tr("DEBUG");
+            break;
+        case QtWarningMsg:
+            severity = tr("WARNING");
+            break;
+        case QtCriticalMsg:
+            severity = tr("CRITICAL");
+            break;
+        case QtFatalMsg:
+            severity = tr("FATAL");
+            break;
+        #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+        case QtInfoMsg:
+            severity = tr("INFO");
+            break;
+        #endif
+        default:
+            break;
+    }
+
+    const QString time = QDateTime::currentDateTime().toString(QStringLiteral("hh:mm:ss"));
+    const QString message = QStringLiteral("%1: [%2] %3").arg(time, severity, patternMessage->Message());
+    ui->plainTextEditPatternMessages->appendPlainText(message);
+    if (not m_unreadPatternMessage.isNull())
+    {
+        m_unreadPatternMessage->setText(DialogWarningIcon() + tr("Pattern messages"));
+    }
 }

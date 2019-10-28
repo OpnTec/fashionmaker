@@ -178,6 +178,23 @@ public:
     qreal GetScrollingAcceleration() const;
     void SetScrollingAcceleration(qreal acceleration);
 
+    bool IsDockWidgetGroupsActive() const;
+    static bool GetDefDockWidgetGroupsActive();
+    void SetDockWidgetGroupsActive(bool value);
+
+    bool IsDockWidgetToolOptionsActive() const;
+    static bool GetDefDockWidgetToolOptionsActive();
+    void SetDockWidgetToolOptionsActive(bool value);
+
+    bool IsDockWidgetPatternMessagesActive() const;
+    static bool GetDefDockWidgetPatternMessagesActive();
+    void SetDockWidgetPatternMessagesActive(bool value);
+
+    int GetPatternMessageFontSize(int fontSizeDef) const;
+    static int GetDefMinPatternMessageFontSize();
+    static int GetDefMaxPatternMessageFontSize();
+    void SetPatternMessageFontSize(int size);
+
 private:
     Q_DISABLE_COPY(VSettings)
 
