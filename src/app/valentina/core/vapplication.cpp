@@ -312,7 +312,7 @@ void VApplication::NewValentina(const QString &fileName)
     }
     else
     {
-        const QString run = QString("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
+        const QString run = QStringLiteral("\"%1\" \"%2\"").arg(QCoreApplication::applicationFilePath(), fileName);
         qCDebug(vApp, "New process with arguments. program = %s", qUtf8Printable(run));
         if (QProcess::startDetached(run))
         {
@@ -409,7 +409,7 @@ void VApplication::ActivateDarkMode()
      VSettings *settings = qApp->ValentinaSettings();
      if (settings->GetDarkMode())
      {
-         QFile f(":qdarkstyle/style.qss");
+         QFile f(QStringLiteral(":qdarkstyle/style.qss"));
          if (!f.exists())
          {
              qDebug()<<"Unable to set stylesheet, file not found\n";
@@ -495,7 +495,7 @@ QString VApplication::LogDirPath() const
 //---------------------------------------------------------------------------------------------------------------------
 QString VApplication::LogPath() const
 {
-    return QString("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
+    return QStringLiteral("%1/valentina-pid%2.log").arg(LogDirPath()).arg(applicationPid());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -615,7 +615,7 @@ void VApplication::InitOptions()
         //use an icon theme that we provide via a .qrc file
         //This case happens under Windows and Mac OS X
         //This does not happen under GNOME or KDE
-        QIcon::setThemeName("win.icon.theme");
+        QIcon::setThemeName(QStringLiteral("win.icon.theme"));
     }
     ActivateDarkMode();
 }

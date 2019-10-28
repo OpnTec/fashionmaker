@@ -73,6 +73,7 @@ QVector<VLayoutPiecePath> ConvertInternalPaths(const VPiece &piece, const VConta
     QVector<VLayoutPiecePath> paths;
     const QVector<quint32> pathsId = piece.GetInternalPaths();
     const QVector<QPointF> cuttingPath = piece.CuttingPathPoints(pattern);
+    paths.reserve(pathsId.size());
     for (auto id : pathsId)
     {
         const VPiecePath path = pattern->GetPiecePath(id);
@@ -204,6 +205,7 @@ QStringList PieceLabelText(const QVector<QPointF> &labelShape, const VTextManage
     QStringList text;
     if (labelShape.count() > 2)
     {
+        text.reserve(tm.GetSourceLinesCount());
         for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
         {
             text.append(tm.GetSourceLine(i).m_qsText);
@@ -217,6 +219,7 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
 {
     QVector<VLayoutPlaceLabel> labels;
     const QVector<quint32> placeLabels = piece.GetPlaceLabels();
+    labels.reserve(placeLabels.size());
     for(auto placeLabel : placeLabels)
     {
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
