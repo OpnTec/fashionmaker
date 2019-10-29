@@ -1,0 +1,67 @@
+#
+# Building an AppImage for Valentina in openSuse Build Service (OBS)
+#
+# Unfortunately the C++ compiler in the appimage build service is stuck with C++11
+#
+
+app: valentina
+# binpatch: true
+
+# resources required at build time
+build:
+  # packages which get installed in the build enviroment.
+  # These are NOT part of the resulting image.
+  packages:
+    - gcc-c++
+    - libqt5-qtbase-devel
+    - pkgconfig(Qt5Svg)
+    - pkgconfig(Qt5Core)
+    - pkgconfig(Qt5Gui)
+    - pkgconfig(Qt5Network)
+    - pkgconfig(Qt5PrintSupport)
+    - pkgconfig(Qt5Widgets)
+    - pkgconfig(Qt5Xml)
+    - pkgconfig(Qt5Concurrent)
+    - pkgconfig(Qt5XmlPatterns)
+    - pkgconfig(zlib)
+    - qt5-qtxmlpatterns-devel
+    - qt5-qtsvg-devel
+    - qt5-qttools-devel
+    - libQt5Core-devel
+    - libpng-devel
+    - libqt5-linguist-devel
+    - linuxdeployqt # required tooling, see script section
+
+# resources which will become available as part of the source.
+# The "appimage" source service needs to be enabled to process these.
+  git:
+    - https://github.com/dismine/Valentina_git.git
+#  hg:
+#    - ....
+#  svn:
+#    - ....
+#
+#  files:
+#    - http://myserver.org/myfile
+
+# OPTIONAL: ingredient packages are packages which become part of the AppImage.
+#           you may want to remove parts of their content in script section.
+# ingredients:
+#   packages:
+#     - xterm
+
+script:
+# OPTIONAL: compile or modify the AppDir. The environment variables:
+#           - $BUILD_SOURCE_DIR point to the source directory
+#           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
+  - cd $BUILD_SOURCE_DIR
+  - qmake-qt5 PREFIX=/usr LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+  - make -j$(nproc)
+  - make INSTALL_ROOT=$BUILD_APPDIR -j$(nproc) install
+  - mkdir -p $BUILD_APPDIR/usr/share/metainfo
+
+# create the image file
+  - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
+  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs
+# Show what we have done
+  - find $BUILD_APPDIR/
