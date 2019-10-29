@@ -24,9 +24,6 @@ build:
     - pkgconfig(Qt5Concurrent)
     - pkgconfig(Qt5XmlPatterns)
     - pkgconfig(zlib)
-    - qt5-qtxmlpatterns-devel
-    - qt5-qtsvg-devel
-    - qt5-qttools-devel
     - libQt5Core-devel
     - libpng-devel
     - libqt5-linguist-devel
@@ -34,8 +31,8 @@ build:
 
 # resources which will become available as part of the source.
 # The "appimage" source service needs to be enabled to process these.
-  git:
-    - https://github.com/dismine/Valentina_git.git
+#  git:
+#    - https://github.com/dismine/Valentina_git.git
 #  hg:
 #    - ....
 #  svn:
