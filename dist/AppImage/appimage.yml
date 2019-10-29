@@ -62,6 +62,6 @@ script:
 
 # create the image file
   - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs
+  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/*.desktop -bundle-non-qt-libs
 # Show what we have done
   - find $BUILD_APPDIR/
