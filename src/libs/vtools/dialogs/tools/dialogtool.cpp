@@ -211,7 +211,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
         }
     }
     FillList(box, list);
-
+    box->setCurrentIndex(-1); // force to select
     box->blockSignals(false);
 }
 
@@ -235,7 +235,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
         }
     }
     FillList(box, list);
-
+    box->setCurrentIndex(-1); // force to select
     box->blockSignals(false);
 }
 
@@ -874,6 +874,6 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
         }
     }
     FillList(box, list);
-
+    box->setCurrentIndex(-1); // force to select
     box->blockSignals(false);
 }

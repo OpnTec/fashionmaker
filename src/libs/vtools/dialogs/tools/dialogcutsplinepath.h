@@ -77,6 +77,8 @@ protected:
     virtual void SaveData() override;
     virtual void closeEvent(QCloseEvent *event) override;
     virtual bool IsValid() const final;
+private slots:
+    void SplinePathChanged();
 private:
     Q_DISABLE_COPY(DialogCutSplinePath)
 

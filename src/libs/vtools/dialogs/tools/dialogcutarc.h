@@ -79,6 +79,8 @@ protected:
     virtual void      SaveData() override;
     virtual void      closeEvent(QCloseEvent *event) override;
     virtual bool      IsValid() const final;
+private slots:
+    void ArcChanged();
 private:
     Q_DISABLE_COPY(DialogCutArc)
     /** @brief ui keeps information about user interface */

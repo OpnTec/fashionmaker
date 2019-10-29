@@ -128,6 +128,12 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutSplineInitData &initData)
 {
     const auto spl = initData.data->GeometricObject<VAbstractCubicBezier>(initData.splineId);
 
+    //Declare special variable "CurrentLength"
+    VCurveLength *length = new VCurveLength(initData.splineId, initData.splineId, spl.data(),
+                                            *initData.data->GetPatternUnit());
+    length->SetName(currentLength);
+    initData.data->AddVariable(currentLength, length);
+
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     QPointF spl1p2, spl1p3, spl2p2, spl2p3;
@@ -157,17 +163,19 @@ VToolCutSpline* VToolCutSpline::Create(VToolCutSplineInitData &initData)
         }
     }
 
+    VToolCutSpline *tool = nullptr;
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::CutSpline, initData.doc);
-        VToolCutSpline *point = new VToolCutSpline(initData);
-        initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
-        VAbstractPattern::AddTool(initData.id, point);
+        tool = new VToolCutSpline(initData);
+        initData.scene->addItem(tool);
+        InitToolConnections(initData.scene, tool);
+        VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(spl->getIdTool());
-        return point;
     }
-    return nullptr;
+    //Very important to delete it. Only this tool need this special variable.
+    initData.data->RemoveVariable(currentLength);
+    return tool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

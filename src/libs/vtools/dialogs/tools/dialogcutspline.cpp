@@ -38,6 +38,7 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../../visualization/path/vistoolcutspline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -46,6 +47,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutspline.h"
+#include "../vgeometry/vspline.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -89,6 +91,7 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, quint32 toolId, QWidget
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutSpline::DeployFormulaTextEdit);
+    connect(ui->comboBoxSpline, &QComboBox::currentTextChanged, this, &DialogCutSpline::SplineChanged);
 
     vis = new VisToolCutSpline(data);
 }
@@ -195,6 +198,19 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::SplineChanged()
+{
+    vidtype splId = getSplineId();
+    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splId);
+
+    VCurveLength *length = new VCurveLength(splId, splId, spl.data(), *data->GetPatternUnit());
+    length->SetName(currentLength);
+
+    VContainer *locData = const_cast<VContainer *> (data);
+    locData->AddVariable(currentLength, length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

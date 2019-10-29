@@ -38,6 +38,7 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -46,6 +47,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "ui_dialogcutarc.h"
+#include "../vgeometry/varc.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -89,6 +91,8 @@ DialogCutArc::DialogCutArc(const VContainer *data, quint32 toolId, QWidget *pare
         timerFormula->start(formulaTimerTimeout);
     });
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogCutArc::DeployFormulaTextEdit);
+
+    connect(ui->comboBoxArc, &QComboBox::currentTextChanged, this, &DialogCutArc::ArcChanged);
 
     vis = new VisToolCutArc(data);
 }
@@ -187,6 +191,19 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
 {
     ui->plainTextEditFormula->blockSignals(true);
     DialogTool::closeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::ArcChanged()
+{
+    vidtype arcId = getArcId();
+    const QSharedPointer<VAbstractCurve> arc = data->GeometricObject<VArc>(arcId);
+
+    VCurveLength *length = new VCurveLength(arcId, arcId, arc.data(), *data->GetPatternUnit());
+    length->SetName(currentLength);
+
+    VContainer *locData = const_cast<VContainer *> (data);
+    locData->AddVariable(currentLength, length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

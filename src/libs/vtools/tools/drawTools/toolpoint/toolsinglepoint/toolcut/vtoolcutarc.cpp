@@ -125,6 +125,12 @@ VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
 {
     const QSharedPointer<VArc> arc = initData.data->GeometricObject<VArc>(initData.arcId);
 
+    //Declare special variable "CurrentLength"
+    VCurveLength *length = new VCurveLength(initData.arcId, initData.arcId, arc.data(),
+                                            *initData.data->GetPatternUnit());
+    length->SetName(currentLength);
+    initData.data->AddVariable(currentLength, length);
+
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
 
     VArc arc1;
@@ -158,17 +164,19 @@ VToolCutArc* VToolCutArc::Create(VToolCutArcInitData &initData)
         }
     }
 
+    VToolCutArc *tool = nullptr;
     if (initData.parse == Document::FullParse)
     {
         VAbstractTool::AddRecord(initData.id, Tool::CutArc, initData.doc);
-        VToolCutArc *point = new VToolCutArc(initData);
-        initData.scene->addItem(point);
-        InitToolConnections(initData.scene, point);
-        VAbstractPattern::AddTool(initData.id, point);
+        tool = new VToolCutArc(initData);
+        initData.scene->addItem(tool);
+        InitToolConnections(initData.scene, tool);
+        VAbstractPattern::AddTool(initData.id, tool);
         initData.doc->IncrementReferens(arc->getIdTool());
-        return point;
     }
-    return nullptr;
+    //Very important to delete it. Only this tool need this special variable.
+    initData.data->RemoveVariable(currentLength);
+    return tool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
