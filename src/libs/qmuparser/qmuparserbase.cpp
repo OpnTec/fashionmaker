@@ -205,6 +205,7 @@ void QmuParserBase::ResetLocale()
     setLocale(QLocale::c());
     m_decimalPoint = m_locale.decimalPoint();
     m_thousandsSeparator = m_locale.groupSeparator();
+    m_cNumbers = false;
     SetArgSep(';');
 }
 
@@ -276,6 +277,18 @@ QChar QmuParserBase::getThousandsSeparator() const
 void QmuParserBase::setThousandsSeparator(const QChar &c)
 {
     m_thousandsSeparator = c;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool QmuParserBase::getCNumbers() const
+{
+    return m_cNumbers;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserBase::setCNumbers(bool cNumbers)
+{
+    m_cNumbers = cNumbers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1356,7 +1369,7 @@ void QmuParserBase::CreateRPN() const
 
     for (;;)
     {
-        opt = m_pTokenReader->ReadNextToken(m_locale, m_decimalPoint, m_thousandsSeparator);
+        opt = m_pTokenReader->ReadNextToken(m_locale, m_cNumbers, m_decimalPoint, m_thousandsSeparator);
 
         switch (opt.GetCode())
         {

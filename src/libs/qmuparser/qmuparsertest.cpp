@@ -75,11 +75,13 @@ QmuParserTester::QmuParserTester(QObject *parent)
 
 //---------------------------------------------------------------------------------------------------------------------
 int QmuParserTester::IsHexVal ( const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
-                                const QChar &decimal, const QChar &thousand )
+                                bool cNumbers, const QChar &decimal, const QChar &thousand )
 {
     Q_UNUSED(locale)
     Q_UNUSED(decimal)
     Q_UNUSED(thousand)
+    Q_UNUSED(cNumbers)
+
     if ( a_szExpr.size() <= 2 || ( a_szExpr.at(0) != '0' || a_szExpr.at(1) != 'x' ) )
     {
         return 0;

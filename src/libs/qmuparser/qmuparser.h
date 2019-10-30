@@ -58,7 +58,7 @@ namespace qmu
         virtual void OnDetectVar(const QString &pExpr, int &nStart, int &nEnd) override;
         qreal        Diff(qreal *a_Var, qreal a_fPos, qreal a_fEpsilon = 0) const;
     protected:
-        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+        static int   IsVal(const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
                            const QChar &decimal, const QChar &thousand);
         // hyperbolic functions
         static qreal Sinh(qreal);

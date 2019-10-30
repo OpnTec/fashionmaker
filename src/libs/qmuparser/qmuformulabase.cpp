@@ -118,6 +118,7 @@ void QmuFormulaBase::SetSepForTr(bool osSeparator, bool fromUser)
         const QLocale loc = QLocale();
         setLocale(loc);
         SetArgSep(';');
+        setCNumbers(not osSeparator);
         if (osSeparator)
         {
             setDecimalPoint(loc.decimalPoint());

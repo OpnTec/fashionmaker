@@ -133,6 +133,9 @@ public:
     QChar getThousandsSeparator() const;
     void  setThousandsSeparator(const QChar &c);
 
+    bool getCNumbers() const;
+    void setCNumbers(bool cNumbers);
+
 protected:
     /**
      * @brief Typedef for the token reader.
@@ -143,6 +146,7 @@ protected:
     QLocale m_locale;///< The locale used by the parser
     QChar m_decimalPoint;
     QChar m_thousandsSeparator;
+    bool m_cNumbers{false}; ///< Search numbers in c locale
     funmap_type  m_FunDef;         ///< Map of function names and pointers.
     std::unique_ptr<token_reader_type> m_pTokenReader; ///< Managed pointer to the token reader object.
     static bool g_DbgDumpCmdCode;

@@ -33,8 +33,8 @@
     @brief This file contains standard definitions used by the parser.
 */
 
-#define QMUP_VERSION "2.6.0"
-#define QMUP_VERSION_DATE "20180121; GC"
+#define QMUP_VERSION "2.7.0"
+#define QMUP_VERSION_DATE "20191030; GC"
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)
@@ -308,7 +308,7 @@ typedef qreal ( *strfun_type2 ) ( const QString &, qreal );
 typedef qreal ( *strfun_type3 ) ( const QString &, qreal, qreal );
 
 /** @brief Callback used for functions that identify values in a string. */
-typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const QLocale &locale,
+typedef int ( *identfun_type ) ( const QString &sExpr, int *nPos, qreal *fVal, const QLocale &locale, bool cNumbers,
                                  const QChar &decimal, const QChar &thousand );
 
 /** @brief Callback used for variable creation factory functions. */

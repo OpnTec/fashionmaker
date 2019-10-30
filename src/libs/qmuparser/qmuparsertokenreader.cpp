@@ -213,7 +213,8 @@ void QmuParserTokenReader::ReInit()
 /**
  * @brief Read the next token from the string.
  */
-QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLocale &locale, const QChar &decimal,
+QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLocale &locale, bool cNumbers,
+                                                                     const QChar &decimal,
                                                                      const QChar &thousand)
 {
     assert ( m_pParser );
@@ -246,7 +247,7 @@ QmuParserTokenReader::token_type QmuParserTokenReader::ReadNextToken(const QLoca
     {
         return SaveBeforeReturn ( tok ); // Check for function argument separators
     }
-    if ( IsValTok ( tok, locale, decimal, thousand ) )
+    if ( IsValTok ( tok, locale, cNumbers, decimal, thousand ) )
     {
         return SaveBeforeReturn ( tok ); // Check for values / constant tokens
     }
@@ -757,7 +758,7 @@ bool QmuParserTokenReader::IsPostOpTok ( token_type &a_Tok )
  * @param a_Tok [out] If a value token is found it will be placed here.
  * @return true if a value token has been found.
  */
-bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, const QChar &decimal,
+bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, bool cNumbers, const QChar &decimal,
                                       const QChar &thousand )
 {
     assert ( m_pConstDef );
@@ -794,7 +795,7 @@ bool QmuParserTokenReader::IsValTok ( token_type &a_Tok, const QLocale &locale, 
     for ( item = m_vIdentFun.begin(); item != m_vIdentFun.end(); ++item )
     {
         int iStart = m_iPos;
-        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, decimal, thousand ) == 1 )
+        if ( ( *item ) ( m_strFormula.mid ( m_iPos ), &m_iPos, &fVal, locale, cNumbers, decimal, thousand ) == 1 )
         {
             // 2013-11-27 Issue 2:  https://code.google.com/p/muparser/issues/detail?id=2
             strTok = m_strFormula.mid ( iStart, m_iPos-iStart );

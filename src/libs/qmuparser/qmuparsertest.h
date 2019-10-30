@@ -307,7 +307,7 @@ private:
     }
 
     // Custom value recognition
-    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale,
+    static int IsHexVal (const QString &a_szExpr, int *a_iPos, qreal *a_fVal, const QLocale &locale, bool cNumbers,
                          const QChar &decimal, const QChar &thousand);
 
     // cppcheck-suppress functionStatic
