@@ -51,7 +51,7 @@ script:
 # OPTIONAL: compile or modify the AppDir. The environment variables:
 #           - $BUILD_SOURCE_DIR point to the source directory
 #           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
-  - cd $BUILD_SOURCE_DIR
+  - cd $BUILD_SOURCE_DIR/Valentina_git
   - qmake-qt5 PREFIX=/usr LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   - make -j$(nproc)
   - make INSTALL_ROOT=$BUILD_APPDIR -j$(nproc) install
