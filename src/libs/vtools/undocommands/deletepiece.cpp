@@ -91,7 +91,7 @@ void DeletePiece::undo()
 {
     qCDebug(vUndo, "Undo.");
 
-    UndoDeleteAfterSibling(m_parentNode, m_siblingId);
+    UndoDeleteAfterSibling(m_parentNode, m_siblingId, VAbstractPattern::TagDetail);
 
     VAbstractPattern::AddTool(nodeId, m_tool);
     m_data.UpdatePiece(nodeId, m_detail);

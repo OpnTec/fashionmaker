@@ -35,6 +35,7 @@
 #include "../vtools/tools/vtoolseamallowance.h"
 
 #include <QMenu>
+#include <QTimer>
 #include <QUndoStack>
 
 namespace
@@ -54,7 +55,8 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
     : QWidget(parent),
       ui(new Ui::VWidgetDetails),
       m_doc(doc),
-      m_data(data)
+      m_data(data),
+      m_updateListTimer(new QTimer(this))
 {
     ui->setupUi(this);
 
@@ -66,6 +68,12 @@ VWidgetDetails::VWidgetDetails(VContainer *data, VAbstractPattern *doc, QWidget 
 
     connect(ui->tableWidget, &QTableWidget::cellClicked, this, &VWidgetDetails::InLayoutStateChanged);
     connect(ui->tableWidget, &QTableWidget::customContextMenuRequested, this, &VWidgetDetails::ShowContextMenu);
+
+    m_updateListTimer->setSingleShot(true);
+    connect(m_updateListTimer, &QTimer::timeout, this, [this]()
+    {
+        FillTable(m_data->DataPieces());
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -77,7 +85,10 @@ VWidgetDetails::~VWidgetDetails()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetDetails::UpdateList()
 {
-    FillTable(m_data->DataPieces());
+    // The filling table is a very expensive operation. This optimization will postpone it.
+    // Each time a new request happen we will wait 800 ms before calling it. If at this time a new request will arrive
+    // we will wait 800 ms more. And so on, until nothing happens within 800ms.
+    m_updateListTimer->start(800);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

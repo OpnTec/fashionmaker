@@ -68,6 +68,7 @@ private:
     Ui::VWidgetDetails *ui;
     VAbstractPattern   *m_doc;
     VContainer         *m_data;
+    QTimer             *m_updateListTimer;
 
     void FillTable(const QHash<quint32, VPiece> *details);
     void ToggleSectionDetails(bool select);

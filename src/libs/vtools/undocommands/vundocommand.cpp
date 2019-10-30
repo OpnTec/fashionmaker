@@ -62,7 +62,7 @@ void VUndoCommand::RedoFullParsing()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const
+void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId, const QString &tagName) const
 {
     if (siblingId == NULL_ID)
     {
@@ -70,8 +70,9 @@ void VUndoCommand::UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &s
     }
     else
     {
-        const QDomElement refElement = doc->NodeById(siblingId);
+        const QDomElement refElement = doc->NodeById(siblingId, tagName);
         parentNode.insertAfter(xml, refElement);
+        doc->RefreshElementIdCache();
     }
 }
 

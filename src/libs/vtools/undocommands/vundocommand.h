@@ -81,7 +81,8 @@ protected:
     quint32      nodeId;
     bool         redoFlag;
     virtual void RedoFullParsing();
-    void         UndoDeleteAfterSibling(QDomNode &parentNode, const quint32 &siblingId) const;
+    void         UndoDeleteAfterSibling(QDomNode &parentNode, quint32 siblingId,
+                                        const QString &tagName = QString()) const;
 
     void         IncrementReferences(const QVector<quint32> &nodes) const;
     void         DecrementReferences(const QVector<quint32> &nodes) const;

@@ -939,9 +939,9 @@ QDomElement VDomDocument::CloneNodeById(const quint32 &nodeId)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VDomDocument::NodeById(const quint32 &nodeId)
+QDomElement VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName)
 {
-    QDomElement domElement = elementById(nodeId);
+    QDomElement domElement = elementById(nodeId, tagName);
     if (domElement.isNull() || domElement.isElement() == false)
     {
         throw VExceptionBadId(tr("Couldn't get node"), nodeId);

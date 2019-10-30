@@ -135,7 +135,7 @@ public:
 
     QDomNode       ParentNodeById(const quint32 &nodeId);
     QDomElement    CloneNodeById(const quint32 &nodeId);
-    QDomElement    NodeById(const quint32 &nodeId);
+    QDomElement    NodeById(const quint32 &nodeId, const QString &tagName = QString());
 
     static bool    SafeCopy(const QString &source, const QString &destination, QString &error);
 
@@ -144,6 +144,8 @@ public:
 
     void           TestUniqueId() const;
 
+    void RefreshElementIdCache();
+
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(const QDomElement &domElement, const QString &text);
@@ -151,9 +153,6 @@ protected:
     void           CollectId(const QDomElement &node, QVector<quint32> &vector)const;
 
     static void    ValidateVersion(const QString &version);
-
-protected slots:
-    void RefreshElementIdCache();
 
 private slots:
     void CacheRefreshed();
