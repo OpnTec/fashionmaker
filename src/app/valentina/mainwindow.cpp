@@ -4889,6 +4889,7 @@ bool MainWindow::LoadPattern(QString fileName, const QString& customMeasureFile)
 
     m_progressBar->setVisible(true);
     m_statusLabel->setVisible(false);
+    m_progressBar->setValue(0);
     const int elements = doc->ElementsToParse();
     m_progressBar->setMaximum(elements);
 #if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
