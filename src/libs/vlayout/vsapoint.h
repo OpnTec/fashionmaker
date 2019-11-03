@@ -71,6 +71,7 @@ public:
 
     static const qreal passmarkFactor;
     static const qreal maxPassmarkLength;
+    static const qreal minSAWidth;
 
 private:
     qreal          m_before{-1};

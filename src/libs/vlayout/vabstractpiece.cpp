@@ -53,6 +53,7 @@ const qreal maxL = 2.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
 const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
+const qreal VSAPoint::minSAWidth = ToPixel(0.01, Unit::Mm);
 
 namespace
 {
@@ -1004,6 +1005,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         qDebug()<<"Width < 0.";
         return QVector<QPointF>();
     }
+    width = qMax(width, VSAPoint::minSAWidth);
 
 //    DumpVector(points, QStringLiteral("input.json.XXXXXX")); // Uncomment for dumping test data
 
@@ -1256,6 +1258,8 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
         return QVector<QPointF>();
     }
 
+    width = qMax(width, VSAPoint::minSAWidth);
+
     if (p2Line1 != p2Line2)
     {
         qDebug()<<"Last points of two lines must be equal.";
@@ -1417,21 +1421,8 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 QLineF VAbstractPiece::ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width)
 {
-    qreal w1 = p1.GetSAAfter();
-    if (w1 < 0)
-    {
-        w1 = width;
-    }
-
-    qreal w2 = p2.GetSABefore();
-    if (w2 < 0)
-    {
-        w2 = width;
-    }
-
-    const QLineF paralel = QLineF(SingleParallelPoint(p1, p2, 90, w1),
-                                  SingleParallelPoint(p2, p1, -90, w2));
-    return paralel;
+    return QLineF(SingleParallelPoint(p1, p2, 90, p1.GetSAAfter(width)),
+                  SingleParallelPoint(p2, p1, -90, p2.GetSABefore(width)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1576,7 +1567,7 @@ qreal VSAPoint::GetSABefore(qreal width) const
     {
         return width;
     }
-    return m_before;
+    return qMax(m_before, minSAWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1586,25 +1577,13 @@ qreal VSAPoint::GetSAAfter(qreal width) const
     {
         return width;
     }
-    return m_after;
+    return qMax(m_after, minSAWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 qreal VSAPoint::MaxLocalSA(qreal width) const
 {
-    qreal w1 = GetSAAfter();
-    if (w1 < 0)
-    {
-        w1 = width;
-    }
-
-    qreal w2 = GetSABefore();
-    if (w2 < 0)
-    {
-        w2 = width;
-    }
-
-    return qMax(w1, w2);
+    return qMax(GetSAAfter(width), GetSABefore(width));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
