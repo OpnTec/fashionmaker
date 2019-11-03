@@ -46,7 +46,7 @@ public:
     Q_DECL_CONSTEXPR VRawSAPoint(QPointF p);
 
     Q_DECL_CONSTEXPR bool LoopPoint() const;
-    Q_DECL_CONSTEXPR void SetLoopPoint(bool loopPoint);
+    Q_DECL_RELAXED_CONSTEXPR void SetLoopPoint(bool loopPoint);
 
     QJsonObject toJson() const;
 
@@ -81,7 +81,7 @@ Q_DECL_CONSTEXPR inline bool VRawSAPoint::LoopPoint() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline void VRawSAPoint::SetLoopPoint(bool loopPoint)
+Q_DECL_RELAXED_CONSTEXPR inline void VRawSAPoint::SetLoopPoint(bool loopPoint)
 {
     m_loopPoint = loopPoint;
 }
