@@ -19,7 +19,7 @@
     <name>AddItemToGroup</name>
     <message>
         <source>Add item to group</source>
-        <translation type="unfinished"></translation>
+        <translation>voeg aan groep toe</translation>
     </message>
 </context>
 <context>
@@ -54,14 +54,14 @@
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>verander zichtbaarheid groep</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>verander zichtbaarheid meerdere groepen</translation>
     </message>
 </context>
 <context>
@@ -1902,19 +1902,19 @@
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar onderaan</translation>
     </message>
 </context>
 <context>
@@ -2299,7 +2299,7 @@
     <message>
         <source>Global</source>
         <comment>Options</comment>
-        <translation type="unfinished"></translation>
+        <translation>Globaal</translation>
     </message>
 </context>
 <context>
@@ -2749,7 +2749,7 @@
     </message>
     <message>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Roteer objecten rond punt %1. Suffix &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
@@ -2761,7 +2761,7 @@
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats objecten. Suffix &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -3033,11 +3033,11 @@
     </message>
     <message>
         <source>Time left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Resterende tijd:</translation>
     </message>
     <message>
         <source>Time left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Resterende tijd: %1</translation>
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
@@ -3315,7 +3315,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Efficiency:</source>
@@ -3327,11 +3327,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Manual priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuele voorrang</translation>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
@@ -3684,7 +3684,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Search:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek:</translation>
     </message>
     <message>
         <source>Search</source>
@@ -4588,7 +4588,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaar</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -4596,7 +4596,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Control visibility</source>
@@ -4620,19 +4620,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
@@ -4838,7 +4838,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaar</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
@@ -4846,7 +4846,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -6913,7 +6913,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Tool options</source>
-        <translation>Werkbalk opties</translation>
+        <translation>Gereedschap opties</translation>
     </message>
     <message>
         <source>New</source>
@@ -8211,6 +8211,38 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Globally show pieces main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10757,19 +10789,19 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Move on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <source>Move on bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <source>Priority:</source>

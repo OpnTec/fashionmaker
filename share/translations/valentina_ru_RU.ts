@@ -3323,7 +3323,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
+        <translation>Установите коэффициент эффективности раскладки. Коэффициент эффективности раскладки - это отношение площади, занимаемой деталями, к ограничивающему прямоугольнику всех деталей. Когда раскладка достигает установленного значения, процесс останавливается. Если значение равно 0, проверка не производится. </translation>
     </message>
     <message>
         <source>%</source>
@@ -4688,7 +4688,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите объекты главного контура, &lt;b&gt;%1&lt;/b&gt; - обратное направление кривой, &lt;b&gt;%2&lt;/b&gt; - завершение создания</translation>
     </message>
     <message>
         <source>Manual length</source>
@@ -5838,7 +5838,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите объекты главного контура по часовой стрелке, &lt;b&gt;%1&lt;/b&gt; - обратное направление кривой, &lt;b&gt;%2&lt;/b&gt; - завершение создания</translation>
     </message>
     <message>
         <source>Circle</source>
@@ -8153,11 +8153,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите один или несколько объектов, удерживайте &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;%2&lt;/b&gt; - завершение создания</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите один или несколько объектов, удерживайте &lt;b&gt;%1&lt;/b&gt; - для множественного выбора, &lt;b&gt;%2&lt;/b&gt; - подтвердить выбор</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
@@ -8213,6 +8213,38 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Globally show pieces main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9227,7 +9259,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы устанавливаете надсечку у точки &apos;%1&apos; в детали &apos;%2&apos; на нулевой прибавке на шов. Длина надсечки меньше минимально допустимой. Установите длину надсечки вручную.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>

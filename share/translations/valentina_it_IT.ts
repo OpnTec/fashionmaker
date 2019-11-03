@@ -2452,7 +2452,7 @@
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished">Secondo punto della linea:</translation>
+        <translation>Punto della seconda linea:</translation>
     </message>
     <message>
         <source>Select first line point</source>
@@ -3033,7 +3033,7 @@
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Coefficiente di efficienza: %1%</translation>
     </message>
 </context>
 <context>
@@ -3295,7 +3295,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rispetta drittofilo</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -3303,19 +3303,19 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo concesso all’algoritmo per trovare il miglior piazzamento.</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficienza:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
+        <translation>Imposta coefficiente di efficienza del piazzamento. Il coefficiente di efficienza del piazzamento è la percentuale di area occupata dai pezzi all’interno dell’area delimitata. Se la loro disposizione raggiunge il livello richiesto, il processo si interrompe. Se il valore è impostato su 0 non viene effettuata nessuna verifica. </translation>
     </message>
     <message>
         <source>%</source>
@@ -4608,7 +4608,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlla unicità</translation>
     </message>
     <message>
         <source>Move on top</source>
@@ -5813,7 +5813,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
-        <translation type="unfinished"></translation>
+        <translation>Controlla unicità</translation>
     </message>
     <message>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
@@ -7956,7 +7956,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Select an item to insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona un oggetto da inserire</translation>
     </message>
     <message>
         <source>Forum</source>
@@ -7984,11 +7984,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi ancora usare la modalità Dettagli. Crea almeno un pezzo del modello.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi ancora usare la modalità Layout (Piazzamento). Crea prima almeno un pezzo del modello.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
@@ -7996,7 +7996,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi ancora usare la modalità Layout.</translation>
     </message>
     <message>
         <source>Zoom fit best current</source>
@@ -8008,7 +8008,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Export details skiping the Layout stage</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta dettagli saltando la fase di Layout</translation>
     </message>
     <message>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
@@ -8032,7 +8032,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Label template editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor dei modelli di etichetta</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
@@ -8068,7 +8068,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi esportare un file vuoto. Inserisci almeno un dettaglio nel layout.</translation>
     </message>
     <message>
         <source>Export final measurements error.</source>
@@ -8204,6 +8204,38 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Globally show pieces main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11919,11 +11951,11 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VCubicBezierPath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non ci sono abbastanza punti per creare la curva.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa curva non esiste.</translation>
     </message>
 </context>
 <context>
@@ -12129,7 +12161,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>In layout</translation>
     </message>
     <message>
         <source>Show label</source>
@@ -12592,11 +12624,11 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VSplinePath</name>
     <message>
         <source>Not enough points to create the spline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non ci sono abbastanza punti per creare la curva.</translation>
     </message>
     <message>
         <source>This spline does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa curva non esiste.</translation>
     </message>
 </context>
 <context>
@@ -12725,7 +12757,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etichetta</translation>
     </message>
 </context>
 <context>
@@ -12740,7 +12772,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etichetta</translation>
     </message>
 </context>
 <context>
@@ -12755,7 +12787,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etichetta</translation>
     </message>
 </context>
 <context>
@@ -12791,6 +12823,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>rotate pattern info label</source>
         <translation type="vanished">Ruota l&apos;etichetta info del modello</translation>
+    </message>
+    <message>
+        <source>In layout</source>
+        <translation type="vanished">In layout</translation>
     </message>
     <message>
         <source>move grainline</source>
@@ -12891,7 +12927,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error calculating point &apos;%1&apos;. Lines (%2;%3) and (%4;%5) have no point of intersection</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel calcolo del punto &apos;%1&apos;. Le linee (%2;%3) e (%4;%5) non hanno punti di intersezione</translation>
     </message>
 </context>
 <context>
@@ -13211,11 +13247,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Tool flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Capovolgi oggetto in base a una linea</translation>
     </message>
     <message>
         <source>Tool flipping by axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Capovolgi oggetto in base ad un asse</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
@@ -13315,7 +13351,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Second line point:</source>
-        <translation type="unfinished">Secondo punto della linea:</translation>
+        <translation>Punto della seconda linea:</translation>
     </message>
     <message>
         <source>First line (first point):</source>
@@ -13591,7 +13627,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>In layout</source>
-        <translation type="unfinished"></translation>
+        <translation>In layout</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -13599,7 +13635,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>apply save detail options</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva opzioni dettaglio</translation>
     </message>
     <message>
         <source>multi deletion</source>

@@ -2033,7 +2033,7 @@
           <string>Clear all messages</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset resource="../../libs/vmisc/share/resources/icon.qrc">
@@ -2069,7 +2069,7 @@
           <string>Zoom in</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="zoom-in">
@@ -2083,7 +2083,7 @@
           <string>Zoom out</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
           <iconset theme="zoom-out">

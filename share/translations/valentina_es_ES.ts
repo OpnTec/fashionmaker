@@ -2956,7 +2956,7 @@
     </message>
     <message>
         <source>Increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Incremento</translation>
     </message>
     <message>
         <source>Separator</source>
@@ -3029,19 +3029,19 @@
     </message>
     <message>
         <source>Nesting. Please, wait.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anidación. Por favor, espere.</translation>
     </message>
     <message>
         <source>Time left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo restante:</translation>
     </message>
     <message>
         <source>Time left: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo restante: %1</translation>
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Coeficiente de eficiencia: %1%</translation>
     </message>
 </context>
 <context>
@@ -3302,7 +3302,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguir hilo de la tela</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -3310,15 +3310,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Time given for the algorithm to find best layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo dado para que el algoritmo encuentre el mejor diseño.</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>minutos</translation>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eficiencia:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
@@ -3326,23 +3326,23 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>Manual priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridad manual</translation>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anidar cantidad de copias de acuerdo a la configuración de la pieza.</translation>
     </message>
     <message>
         <source>Nest quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Cantidad a anidar</translation>
     </message>
     <message>
         <source>Auto crop unused width</source>
-        <translation type="unfinished"></translation>
+        <translation>Recorte automático del ancho no utilizado</translation>
     </message>
 </context>
 <context>
@@ -4663,7 +4663,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡La misma curva se repite dos veces!</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -4675,15 +4675,15 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo agudo que se ve dentro de la pieza</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo agudo que se ve fuera de la pieza</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca V 2</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
@@ -4691,7 +4691,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud manual</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -4699,19 +4699,19 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>=</source>
-        <translation type="unfinished"></translation>
+        <translation>=</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca U</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Caja</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar largo del pique</translation>
     </message>
 </context>
 <context>
@@ -4857,7 +4857,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Circulo</translation>
     </message>
 </context>
 <context>
@@ -5427,7 +5427,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Este punto no puede ser punto de origen. Por favor, seleccione otro punto de origen</translation>
     </message>
 </context>
 <context>
@@ -5613,11 +5613,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>mosaicos</translation>
     </message>
     <message>
         <source>Numerical control</source>
-        <translation type="unfinished"></translation>
+        <translation>Control numerico</translation>
     </message>
 </context>
 <context>
@@ -5828,7 +5828,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>The same curve repeats twice!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡La misma curva se repite dos veces!</translation>
     </message>
     <message>
         <source>&lt;Empty&gt;</source>
@@ -5840,11 +5840,11 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Circulo</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar largo del pique</translation>
     </message>
 </context>
 <context>
@@ -8140,11 +8140,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer la configuración desde un archivo .INI deforme.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -8160,39 +8160,39 @@ el patrón.</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de intersección circulo y segmento</translation>
     </message>
     <message>
         <source>Increase label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumentar fuente de etiqueta</translation>
     </message>
     <message>
         <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Disminuir fuente de etiqueta</translation>
     </message>
     <message>
         <source>Original label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente de etiqueta original</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar etiquetas</translation>
     </message>
     <message>
         <source>Groups of visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupos de visibilidad</translation>
     </message>
     <message>
         <source>Export recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar receta</translation>
     </message>
     <message>
         <source>Recipe files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos receta</translation>
     </message>
     <message>
         <source>recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>receta</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
@@ -8212,6 +8212,38 @@ el patrón.</translation>
     </message>
     <message>
         <source>Globally show pieces main path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pattern messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear all messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DEBUG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CRITICAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FATAL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10311,7 +10343,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede leer la configuración desde un archivo .INI deforme.</translation>
     </message>
     <message>
         <source>Height (%1):</source>
@@ -10588,15 +10620,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo agudo que se ve fuera de la pieza</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca V 2</translation>
     </message>
     <message>
         <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud manual</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -10608,7 +10640,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>=</source>
-        <translation type="unfinished"></translation>
+        <translation>=</translation>
     </message>
     <message>
         <source>Value</source>
@@ -10624,11 +10656,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca U</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Caja</translation>
     </message>
 </context>
 <context>
@@ -12314,15 +12346,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca V 2</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca U</translation>
     </message>
     <message>
         <source>Box mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca Caja</translation>
     </message>
 </context>
 <context>
