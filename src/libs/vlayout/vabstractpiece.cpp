@@ -134,7 +134,7 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
         QLineF edge2(p2, p3);
         const qreal angle = edge1.angleTo(edge2);
 
-        if (angle > 268)
+        if (angle > 180 && p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
         {
             QLineF loop(sp2, bigLine1.p1());
             loop.setLength(accuracyPointOnLine*2.);
@@ -142,8 +142,10 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
             points.append(sp2);
 
             loop = QLineF(bigLine1.p1(), sp2);
-            loop.setLength(loop.length() + localWidth*3.);
-            points.append(loop.p2());
+            loop.setLength(loop.length() + localWidth);
+            VRawSAPoint loopPoint(loop.p2());
+            loopPoint.SetLoopPoint(true);
+            points.append(loopPoint);
         }
         else
         {
@@ -1340,8 +1342,8 @@ QVector<VRawSAPoint> VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const
                 }
                 return true;
             };
-            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2, ToPixel(1, Unit::Mm)) &&
-                    IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1(), ToPixel(1, Unit::Mm)))
+            if (VGObject::IsPointOnLineSegment(p2Line1, p1Line1, p1Line2, ToPixel(0.5, Unit::Mm)) &&
+                    IsOnLine(p2Line1, bigLine1.p2(), bigLine2.p1(), ToPixel(0.5, Unit::Mm)))
             {
                 points.append(bigLine1.p2());
                 points.append(bigLine2.p1());
@@ -1402,19 +1404,42 @@ QT_WARNING_POP
                 const qreal result2 = PointPosition(bisector.p2(), QLineF(p2Line2, p1Line2));
 
                 if ((result1 < 0 || qFuzzyIsNull(result1)) && (result2 < 0 || qFuzzyIsNull(result2)))
-                {// Dart case. A bisector watch outside. In some cases a point still valid, but ignore if going
-                 // outside of an equdistant.
+                {// Dart case. A bisector watches outside.
+                    QLineF edge1(p1Line1, p2Line1);
+                    QLineF edge2(p1Line2, p2Line2);
 
-                    const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth );
-                    QPointF px;
-                    const QLineF::IntersectType type = bigEdge.intersect(line, &px);
-                    if (type != QLineF::BoundedIntersection)
+                    if (qAbs(edge1.length() - edge2.length()) <= qMax(edge1.length(), edge2.length())*0.2)
                     {
-                        if (line.length() < QLineF(p2Line1, px).length())
+                        // Classic dart must be symmetrical.
+                        // In some cases a point still valid, but ignore if going outside of an equdistant.
+
+                        const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth );
+                        QPointF px;
+                        const QLineF::IntersectType type = bigEdge.intersect(line, &px);
+                        if (type != QLineF::BoundedIntersection && line.length() < QLineF(p2Line1, px).length())
                         {
                             points.append(crosPoint);
                             return points;
                         }
+                    }
+                    else
+                    { // Just an acute angle with big seam allowance
+                        if (IsSameDirection(bigLine2.p1(), bigLine2.p2(), crosPoint))
+                        {
+                            QLineF loop(crosPoint, bigLine1.p1());
+                            loop.setAngle(loop.angle() + 180);
+                            loop.setLength(accuracyPointOnLine*2.);
+                            points.append(loop.p2());
+                            points.append(crosPoint);
+
+                            loop = QLineF(crosPoint, bigLine1.p1());
+                            loop.setLength(loop.length() + localWidth*2.);
+                            VRawSAPoint loopPoint(loop.p2());
+                            loopPoint.SetLoopPoint(true);
+                            points.append(loopPoint);
+                        }
+
+                        return points;
                     }
                 }
                 else
