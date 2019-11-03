@@ -45,6 +45,7 @@ class VAbstractPieceData;
 class QPainterPath;
 class VGrainlineData;
 class VContainer;
+class VRawSAPoint;
 
 class VAbstractPiece
 {
@@ -95,16 +96,18 @@ public:
     static QVector<QPointF> Equidistant(QVector<VSAPoint> points, qreal width, const QString &name);
     static qreal            SumTrapezoids(const QVector<QPointF> &points);
     static QVector<QPointF> CheckLoops(const QVector<QPointF> &points);
-    static QVector<QPointF> EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                     const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
-                                     bool *needRollback = nullptr);
+    static QVector<QPointF> CheckLoops(const QVector<VRawSAPoint> &points);
+    static QVector<VRawSAPoint> EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
+                                         const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
+                                         bool *needRollback = nullptr);
     static QLineF           ParallelLine(const VSAPoint &p1, const VSAPoint &p2, qreal width);
     static bool             IsAllowanceValid(const QVector<QPointF> &base, const QVector<QPointF> &allowance);
 
     template <class T>
     static QVector<T> CorrectEquidistantPoints(const QVector<T> &points, bool removeFirstAndLast = true);
 
-    static QVector<QPointF> RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cuttingEdge, bool *success);
+    static QVector<VRawSAPoint> RollbackSeamAllowance(QVector<VRawSAPoint> points, const QLineF &cuttingEdge,
+                                                      bool *success);
 
     static QVector<QPointF> GrainlinePoints(const VGrainlineData &geom, const VContainer *pattern,
                                             const QRectF &boundingRect, qreal &dAng);

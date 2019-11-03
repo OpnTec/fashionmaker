@@ -36,6 +36,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "testpath.h"
+#include "vrawsapoint.h"
 
 #include <QLineF>
 #include <QSet>
@@ -81,9 +82,9 @@ Q_DECL_CONSTEXPR qreal PointPosition(const QPointF &p, const QLineF &line)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, QPointF p3, const QLineF &bigLine1,
-                               QPointF sp2, const QLineF &bigLine2, const VSAPoint &p, qreal width,
-                               bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF p3,
+                                   const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2, const VSAPoint &p,
+                                   qreal width, bool *needRollback = nullptr)
 {
     if (needRollback != nullptr)
     {
@@ -151,7 +152,7 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, 
                 if (p.GetAngleType() != PieceNodeAngle::ByLengthCurve)
                 {
                     bool success = false;
-                    QVector<QPointF> temp = points;
+                    QVector<VRawSAPoint> temp = points;
                     temp.append(bigLine1.p2());
                     temp = VAbstractPiece::RollbackSeamAllowance(temp, bigLine2, &success);
 
@@ -196,9 +197,9 @@ QVector<QPointF> AngleByLength(QVector<QPointF> points, QPointF p1, QPointF p2, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
-                                     const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                     const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleByIntersection(const QVector<VRawSAPoint> &points, QPointF p1, QPointF p2, QPointF p3,
+                                         const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                         const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
     {
         QLineF edge1(p2, p1);
@@ -217,7 +218,7 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     }
 
     const qreal localWidth = p.MaxLocalSA(width);
-    QVector<QPointF> pointsIntr = points;
+    QVector<VRawSAPoint> pointsIntr = points;
 
     // First point
     QLineF edge2(p2, p3);
@@ -240,7 +241,7 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
-        QVector<QPointF> temp = pointsIntr;
+        QVector<VRawSAPoint> temp = pointsIntr;
         temp.append(bigLine1.p2());
         temp = VAbstractPiece::RollbackSeamAllowance(temp, edge2, &success);
 
@@ -282,9 +283,9 @@ QVector<QPointF> AngleByIntersection(const QVector<QPointF> &points, QPointF p1,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
-                                      const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                      const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPointF p2, QPointF p3,
+                                          const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                          const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
     {
         QLineF edge1(p2, p1);
@@ -320,7 +321,7 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
-    QVector<QPointF> pointsIntr = points;
+    QVector<VRawSAPoint> pointsIntr = points;
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px1))
     {
@@ -329,7 +330,7 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
-        QVector<QPointF> temp = pointsIntr;
+        QVector<VRawSAPoint> temp = pointsIntr;
         temp.append(bigLine1.p2());
         temp = VAbstractPiece::RollbackSeamAllowance(temp, sEdge, &success);
 
@@ -361,9 +362,9 @@ QVector<QPointF> AngleByFirstSymmetry(const QVector<QPointF> &points, QPointF p1
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
-                                       const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                       const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPointF p2, QPointF p3,
+                                           const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                           const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
     {
         QLineF edge1(p2, p1);
@@ -400,7 +401,7 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
     }
 
     const qreal localWidth = p.MaxLocalSA(width);
-    QVector<QPointF> pointsIntr = points;
+    QVector<VRawSAPoint> pointsIntr = points;
 
     if (IsOutsidePoint(bigLine1.p1(), bigLine1.p2(), px1))
     {
@@ -409,7 +410,7 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
     else
     {// Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
         bool success = false;
-        QVector<QPointF> temp = pointsIntr;
+        QVector<VRawSAPoint> temp = pointsIntr;
         temp.append(bigLine1.p2());
         temp = VAbstractPiece::RollbackSeamAllowance(temp, sEdge, &success);
 
@@ -442,9 +443,9 @@ QVector<QPointF> AngleBySecondSymmetry(const QVector<QPointF> &points, QPointF p
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF p1, QPointF p2, QPointF p3,
-                                        const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
-                                        const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, QPointF p1, QPointF p2, QPointF p3,
+                                            const QLineF &bigLine1, QPointF sp2, const QLineF &bigLine2,
+                                            const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
     {
         QLineF edge1(p2, p1);
@@ -458,7 +459,7 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
     }
 
     const qreal localWidth = p.MaxLocalSA(width);
-    QVector<QPointF> pointsRA = points;
+    QVector<VRawSAPoint> pointsRA = points;
     QLineF edge(p1, p2);
 
     QPointF px;
@@ -511,9 +512,9 @@ QVector<QPointF> AngleByFirstRightAngle(const QVector<QPointF> &points, QPointF 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QPointF p2, QPointF p3,
-                                         const QLineF &bigLine1,  QPointF sp2, const QLineF &bigLine2,
-                                         const VSAPoint &p, qreal width, bool *needRollback = nullptr)
+QVector<VRawSAPoint> AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPointF p1, QPointF p2, QPointF p3,
+                                             const QLineF &bigLine1,  QPointF sp2, const QLineF &bigLine2,
+                                             const VSAPoint &p, qreal width, bool *needRollback = nullptr)
 {
     {
         QLineF edge1(p2, p1);
@@ -574,7 +575,7 @@ QVector<QPointF> AngleBySecondRightAngle(QVector<QPointF> points, QPointF p1, QP
             // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
             bool success = false;
             const int countBefore = points.size();
-            QVector<QPointF> temp = points;
+            QVector<VRawSAPoint> temp = points;
             temp.append(bigLine1.p2());
             temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
@@ -708,7 +709,7 @@ QVector<T> CorrectPathDistortion(QVector<T> path)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-bool Rollback(QVector<QPointF> &points, const QLineF &edge)
+bool Rollback(QVector<VRawSAPoint> &points, const QLineF &edge)
 {
     bool success = false;
     if (not points.isEmpty())
@@ -728,11 +729,11 @@ bool Rollback(QVector<QPointF> &points, const QLineF &edge)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RollbackByLength(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+void RollbackByLength(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
-    QVector<QPointF> temp = ekvPoints;
+    QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size()-1, bigLine1.p2());
     bool success = Rollback(temp, VAbstractPiece::ParallelLine(points.at(0), points.at(1), width));
 
@@ -743,13 +744,13 @@ void RollbackByLength(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &poin
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RollbackBySecondEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+void RollbackBySecondEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
     const QLineF axis = QLineF(points.at(points.size()-1), points.at(1));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
     QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
-    QVector<QPointF> temp = ekvPoints;
+    QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size()-1, bigLine1.p2());
     bool success = Rollback(temp, sEdge);
 
@@ -760,14 +761,14 @@ void RollbackBySecondEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RollbackByFirstEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+void RollbackByFirstEdgeSymmetry(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
     const QLineF axis = QLineF(points.at(points.size()-2), points.at(points.size()-1));
     const QLineF bigLine2 = VAbstractPiece::ParallelLine(points.at(points.size()-1), points.at(1), width);
     QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
-    QVector<QPointF> temp = ekvPoints;
+    QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size()-1, bigLine1.p2());
     bool success = Rollback(temp, sEdge);
 
@@ -778,10 +779,10 @@ void RollbackByFirstEdgeSymmetry(QVector<QPointF> &ekvPoints, const QVector<VSAP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RollbackByPointsIntersection(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+void RollbackByPointsIntersection(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
     const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
-    QVector<QPointF> temp = ekvPoints;
+    QVector<VRawSAPoint> temp = ekvPoints;
     temp.insert(ekvPoints.size()-1, bigLine1.p2());
     bool success = Rollback(temp, QLineF(points.last(), points.at(1)));
 
@@ -798,7 +799,7 @@ void RollbackByPointsIntersection(QVector<QPointF> &ekvPoints, const QVector<VSA
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void RollbackBySecondEdgeRightAngle(QVector<QPointF> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
+void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVector<VSAPoint> &points, qreal width)
 {
     if (not ekvPoints.isEmpty())
     {
@@ -831,7 +832,7 @@ void RollbackBySecondEdgeRightAngle(QVector<QPointF> &ekvPoints, const QVector<V
         else
         {
             bool success = false;
-            QVector<QPointF> temp = ekvPoints;
+            QVector<VRawSAPoint> temp = ekvPoints;
             temp.insert(ekvPoints.size()-1, bigLine1.p2());
             temp = VAbstractPiece::RollbackSeamAllowance(temp, edge, &success);
 
@@ -860,6 +861,22 @@ void RollbackBySecondEdgeRightAngle(QVector<QPointF> &ekvPoints, const QVector<V
             }
         }
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> CleanLoopArtifacts(const QVector<VRawSAPoint> &points)
+{
+    QVector<QPointF> cleaned;
+    cleaned.reserve(points.size());
+    for (auto &point : points)
+    {
+        if (not point.LoopPoint())
+        {
+            cleaned.append(point);
+        }
+    }
+
+    return cleaned;
 }
 }
 
@@ -1027,7 +1044,7 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
     }
 
     bool needRollback = false; // no need for rollback
-    QVector<QPointF> ekvPoints;
+    QVector<VRawSAPoint> ekvPoints;
     for (qint32 i = 0; i < points.size(); ++i )
     {
         if ( i == 0)
@@ -1081,12 +1098,21 @@ QVector<QPointF> VAbstractPiece::Equidistant(QVector<VSAPoint> points, qreal wid
         QT_WARNING_POP
     }
 
+//    Uncomment for debug
+//    QVector<QPointF> cleaned;
+//    cleaned.reserve(ekvPoints.size());
+//    for (auto &point : ekvPoints)
+//    {
+//        cleaned.append(point);
+//    }
+
     const bool removeFirstAndLast = false;
-    ekvPoints = CheckLoops(RemoveDublicates(ekvPoints, removeFirstAndLast));//Result path can contain loops
-    ekvPoints = CorrectEquidistantPoints(ekvPoints, removeFirstAndLast);
-    ekvPoints = CorrectPathDistortion(ekvPoints);
-//    DumpVector(ekvPoints, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
-    return ekvPoints;
+    ekvPoints = RemoveDublicates(ekvPoints, removeFirstAndLast);
+    QVector<QPointF> cleaned = CheckLoops(ekvPoints);//Result path can contain loops
+    cleaned = CorrectEquidistantPoints(cleaned, removeFirstAndLast);
+    cleaned = CorrectPathDistortion(cleaned);
+//    DumpVector(cleaned, QStringLiteral("output.json.XXXXXX")); // Uncomment for dumping test data
+    return cleaned;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1126,12 +1152,25 @@ qreal VAbstractPiece::SumTrapezoids(const QVector<QPointF> &points)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
+{
+    QVector<VRawSAPoint> rawPath;
+    rawPath.reserve(points.size());
+    for (auto &point : points)
+    {
+        rawPath.append(point);
+    }
+
+    return CheckLoops(rawPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief CheckLoops seek and delete loops in equidistant.
  * @param points vector of points of equidistant.
  * @return vector of points of equidistant.
  */
-QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
+QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points)
 {
 //    DumpVector(points); // Uncomment for dumping test data
 
@@ -1139,12 +1178,12 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
     /*If we got less than 4 points no need seek loops.*/
     if (count < 4)
     {
-        return points;
+        return CleanLoopArtifacts(points);
     }
 
     const bool pathClosed = (points.first() == points.last());
 
-    QVector<QPointF> ekvPoints;
+    QVector<VRawSAPoint> ekvPoints;
     ekvPoints.reserve(points.size());
 
     QVector<qint32> uniqueVertices;
@@ -1238,8 +1277,9 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
                 break;
         }
     }    
-//    DumpVector(ekvPoints); // Uncomment for dumping test data
-    return ekvPoints;
+    const QVector<QPointF> cleaned = CleanLoopArtifacts(ekvPoints);
+//    DumpVector(cleaned); // Uncomment for dumping test data
+    return cleaned;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1249,13 +1289,13 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<QPointF> &points)
  * @param width global seam allowance width.
  * @return seam aloowance points.
  */
-QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoint &p1Line1, const VSAPoint &p2Line1,
-                                          const VSAPoint &p1Line2, const VSAPoint &p2Line2, qreal width,
-                                          bool *needRollback)
+QVector<VRawSAPoint> VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const VSAPoint &p1Line1,
+                                              const VSAPoint &p2Line1, const VSAPoint &p1Line2, const VSAPoint &p2Line2,
+                                              qreal width, bool *needRollback)
 {
     if (width < 0)
     { // width can't be < 0
-        return QVector<QPointF>();
+        return QVector<VRawSAPoint>();
     }
 
     width = qMax(width, VSAPoint::minSAWidth);
@@ -1263,7 +1303,7 @@ QVector<QPointF> VAbstractPiece::EkvPoint(QVector<QPointF> points, const VSAPoin
     if (p2Line1 != p2Line2)
     {
         qDebug()<<"Last points of two lines must be equal.";
-        return QVector<QPointF>(); // Wrong edges
+        return QVector<VRawSAPoint>(); // Wrong edges
     }
 
     const QLineF bigLine1 = ParallelLine(p1Line1, p2Line1, width );
@@ -1629,11 +1669,11 @@ QJsonObject VSAPoint::toJson() const
 
 //---------------------------------------------------------------------------------------------------------------------
 // Because artificial loop can lead to wrong clipping we must rollback current seam allowance points
-QVector<QPointF> VAbstractPiece::RollbackSeamAllowance(QVector<QPointF> points, const QLineF &cuttingEdge,
-                                                       bool *success)
+QVector<VRawSAPoint> VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> points, const QLineF &cuttingEdge,
+                                                           bool *success)
 {
     *success = false;
-    QVector<QPointF> clipped;
+    QVector<VRawSAPoint> clipped;
     clipped.reserve(points.count()+1);
     for (int i = points.count()-1; i > 0; --i)
     {

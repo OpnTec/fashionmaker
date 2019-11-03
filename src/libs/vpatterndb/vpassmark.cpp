@@ -32,6 +32,7 @@
 #include "../vgeometry/vabstractcurve.h"
 #include "../vgeometry/varc.h"
 #include "testpassmark.h"
+#include "../vlayout/vrawsapoint.h"
 
 const qreal VPassmark::passmarkRadiusFactor = 0.45;
 
@@ -42,7 +43,7 @@ PassmarkStatus GetSeamPassmarkSAPoint(const VPiecePassmarkData &passmarkData, co
                                       QPointF &point)
 {
     bool needRollback = false; // no need for rollback
-    QVector<QPointF> ekvPoints;
+    QVector<VRawSAPoint> ekvPoints;
     ekvPoints = VAbstractPiece::EkvPoint(ekvPoints, passmarkData.previousSAPoint, passmarkData.passmarkSAPoint,
                                          passmarkData.nextSAPoint, passmarkData.passmarkSAPoint, passmarkData.saWidth,
                                          &needRollback);
