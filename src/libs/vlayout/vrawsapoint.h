@@ -42,6 +42,7 @@ class VRawSAPoint : public QPointF
 public:
     Q_DECL_CONSTEXPR VRawSAPoint();
     Q_DECL_CONSTEXPR VRawSAPoint(qreal xpos, qreal ypos);
+    // cppcheck-suppress noExplicitConstructor
     Q_DECL_CONSTEXPR VRawSAPoint(QPointF p);
 
     Q_DECL_CONSTEXPR bool LoopPoint() const;
