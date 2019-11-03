@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 
     TestVApplication app( argc, argv );// For QPrinter
 
-    QResource::registerResource(QStringLiteral("./test_data.rcc"));
+    QResource::registerResource(QCoreApplication::applicationDirPath() + QStringLiteral("/test_data.rcc"));
 
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject* obj)
