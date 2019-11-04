@@ -52,8 +52,8 @@
         <file>Issue_923_test6/output.json</file>
         <file>Issue_923_test6_6/input.json</file>
         <file>Issue_923_test6_6/output.json</file>
-        <file>Issue_927/input.json</file>
-        <file>Issue_927/output.json</file>
+        <file>Issue_627/input.json</file>
+        <file>Issue_627/output.json</file>
         <file>Issue_687/input.json</file>
         <file>Issue_687/output.json</file>
         <file>Issue_767_Fabric_TopCollar/input.json</file>
@@ -111,5 +111,7 @@
         <file>doll/output.json</file>
         <file>Issue_937_case_1a/input.json</file>
         <file>Issue_937_case_1a/output.json</file>
+        <file>Issue_604/input.json</file>
+        <file>Issue_604/output.json</file>
     </qresource>
 </RCC>

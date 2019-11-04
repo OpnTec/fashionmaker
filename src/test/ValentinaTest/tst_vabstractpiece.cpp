@@ -899,41 +899,16 @@ void TST_VAbstractPiece::BrokenDetailEquidistant_data()
     QTest::newRow("GAVAUDAN Laure.") << points << 37.795275590551185 << ekvOrig;
 #endif
 
-    points.clear();
-    p = VSAPoint(97.33089106412862, -223.03306117556497);
-    p.SetSAAfter(-1);
-    p.SetSABefore(0);
-    points.append(p);
-
-    p = VSAPoint(990.7494050554426, 2.819093995045);
-    p.SetSAAfter(-1);
-    p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(908.3966357321774, 379.5839357215547);
-    p.SetSAAfter(-1);
-    p.SetSABefore(-1);
-    points.append(p);
-
-    p = VSAPoint(-135.41154226686143, 697.6417881399819);
-    p.SetSAAfter(0);
-    p.SetSABefore(-1);
-    points.append(p);
-
-    ekvOrig.clear();
-    ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
-    ekvOrig.append(QPointF(1004.1704360325447, -5.483401649771952));
-    ekvOrig.append(QPointF(918.0553412376563, 388.4941212347381));
-    ekvOrig.append(QPointF(-138.65807550610091, 710.4843173601864));
-    ekvOrig.append(QPointF(100.10981413873267, -234.02583351343978));
-
     // See the file "collection/bugs/Issue_#604.val" (since 0.5.0)
-    QTest::newRow("Issue #604.") << points << 11.338582677165354 << ekvOrig;
+    ASSERT_TEST_CASE("Issue #604.",
+                     QStringLiteral("://Issue_604/input.json"),
+                     QStringLiteral("://Issue_604/output.json"),
+                     11.338582677165354 /*seam allowance width*/);
 
     // See the file "collection/bugs/Issue_#627.val"
     ASSERT_TEST_CASE("Issue #627.",
-                     QStringLiteral("://Issue_927/input.json"),
-                     QStringLiteral("://Issue_927/output.json"),
+                     QStringLiteral("://Issue_627/input.json"),
+                     QStringLiteral("://Issue_627/output.json"),
                      56.692913385826778 /*seam allowance width*/);
 
 #if !defined (Q_PROCESSOR_S390) && !defined(Q_PROCESSOR_S390_X)
