@@ -38,7 +38,6 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../../visualization/path/vistoolcutspline.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -203,14 +202,7 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::SplineChanged()
 {
-    vidtype splId = getSplineId();
-    const QSharedPointer<VSpline> spl = data->GeometricObject<VSpline>(splId);
-
-    VCurveLength *length = new VCurveLength(splId, splId, spl.data(), *data->GetPatternUnit());
-    length->SetName(currentLength);
-
-    VContainer *locData = const_cast<VContainer *> (data);
-    locData->AddVariable(currentLength, length);
+    CurrentCurveLength<VSpline>(getSplineId(), const_cast<VContainer *> (data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -194,14 +194,22 @@ void DialogCubicBezier::PointNameChanged()
         }
         else
         {
-            VCubicBezier spline(*GetP1(), *GetP2(), *GetP3(), *GetP4());
-
-            if (not data->IsUnique(spline.name()))
+            try
             {
-                newDuplicate = static_cast<qint32>(DNumber(spline.name()));
-                spline.SetDuplicate(static_cast<quint32>(newDuplicate));
+                VCubicBezier spline(*GetP1(), *GetP2(), *GetP3(), *GetP4());
+
+                if (not data->IsUnique(spline.name()))
+                {
+                    newDuplicate = static_cast<qint32>(DNumber(spline.name()));
+                    spline.SetDuplicate(static_cast<quint32>(newDuplicate));
+                }
+                ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spline.name()));
             }
-            ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spline.name()));
+            catch (const VExceptionBadId &)
+            {
+                flagError = false;
+                color = errorColor;
+            }
         }
     }
     ChangeColor(ui->labelName, color);

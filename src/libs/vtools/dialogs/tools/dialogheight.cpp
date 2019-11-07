@@ -268,21 +268,31 @@ void DialogHeight::PointNameChanged()
     set.insert(p1LineId);
     set.insert(p2LineId);
 
-    const QPointF basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
-    const QPointF p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
-    const QPointF p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
-
     QColor color;
-    if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
+
+    try
+    {
+        const QPointF basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
+        const QPointF p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
+        const QPointF p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
+
+        if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
+        {
+            flagError = false;
+            color = errorColor;
+        }
+        else
+        {
+            flagError = true;
+            color = OkColor(this);
+        }
+    }
+    catch (const VExceptionBadId &)
     {
         flagError = false;
         color = errorColor;
     }
-    else
-    {
-        flagError = true;
-        color = OkColor(this);
-    }
+
     ChangeColor(ui->labelBasePoint, color);
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);

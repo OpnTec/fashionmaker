@@ -261,11 +261,22 @@ void DialogAlongLine::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::SetCurrentLength()
 {
-    const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
-    const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
+    VLengthLine *length = nullptr;
+    try
+    {
+        const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
+        const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
 
-    VLengthLine *length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(),
-                                          GetSecondPointId(), *data->GetPatternUnit());
+        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data->GetPatternUnit());
+    }
+    catch (const VExceptionBadId &)
+    {
+        QScopedPointer<VPointF> p1(new VPointF());
+        QScopedPointer<VPointF> p2(new VPointF());
+        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data->GetPatternUnit());
+    }
+
+    SCASSERT(length != nullptr)
     length->SetName(currentLength);
 
     VContainer *locData = const_cast<VContainer *> (data);

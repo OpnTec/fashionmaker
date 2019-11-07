@@ -38,7 +38,6 @@
 
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vpatterndb/vcontainer.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -196,14 +195,7 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ArcChanged()
 {
-    vidtype arcId = getArcId();
-    const QSharedPointer<VAbstractCurve> arc = data->GeometricObject<VArc>(arcId);
-
-    VCurveLength *length = new VCurveLength(arcId, arcId, arc.data(), *data->GetPatternUnit());
-    length->SetName(currentLength);
-
-    VContainer *locData = const_cast<VContainer *> (data);
-    locData->AddVariable(currentLength, length);
+    CurrentCurveLength<VArc>(getArcId(), const_cast<VContainer *> (data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

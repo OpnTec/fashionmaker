@@ -487,15 +487,22 @@ void DialogSpline::PointNameChanged()
         }
         else
         {
-            VSpline spline(*GetP1(), *GetP4(), spl.GetStartAngle(), spl.GetEndAngle(), spl.GetKasm1(), spl.GetKasm2(),
-                           spl.GetKcurve());
-
-            if (not data->IsUnique(spline.name()))
+            try
             {
-                newDuplicate = static_cast<qint32>(DNumber(spline.name()));
-                spline.SetDuplicate(static_cast<quint32>(newDuplicate));
+                VSpline spline(*GetP1(), *GetP4(), spl.GetStartAngle(), spl.GetEndAngle(), spl.GetKasm1(),
+                               spl.GetKasm2(), spl.GetKcurve());
+                if (not data->IsUnique(spline.name()))
+                {
+                    newDuplicate = static_cast<qint32>(DNumber(spline.name()));
+                    spline.SetDuplicate(static_cast<quint32>(newDuplicate));
+                }
+                ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spline.name()));
             }
-            ui->lineEditSplineName->setText(qApp->TrVars()->VarToUser(spline.name()));
+            catch (const VExceptionBadId &)
+            {
+                flagError = false;
+                color = errorColor;
+            }
         }
     }
     ChangeColor(ui->labelName, color);

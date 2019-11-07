@@ -219,45 +219,57 @@ void DialogCubicBezierPath::PointChanged(int row)
 void DialogCubicBezierPath::currentPointChanged(int index)
 {
     const quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
-    QListWidgetItem *item = ui->listWidget->item( ui->listWidget->currentRow() );
-    const auto point = data->GeometricObject<VPointF>(id);
-    DataPoint(*point);
-    item->setData(Qt::UserRole, QVariant::fromValue(*point));
-
     QColor color;
-    if (not IsPathValid())
+
+    try
+    {
+        QListWidgetItem *item = ui->listWidget->item( ui->listWidget->currentRow() );
+        const auto point = data->GeometricObject<VPointF>(id);
+        DataPoint(*point);
+        item->setData(Qt::UserRole, QVariant::fromValue(*point));
+
+        if (not IsPathValid())
+        {
+            flagError = false;
+            color = errorColor;
+
+            ui->lineEditSplPathName->setText(tr("Invalid spline path"));
+        }
+        else
+        {
+            flagError = true;
+            color = OkColor(this);
+
+            auto first = qvariant_cast<VPointF>(ui->listWidget->item(0)->data(Qt::UserRole));
+            auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
+
+            if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints()-1).id())
+            {
+                newDuplicate = -1;
+                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+            }
+            else
+            {
+                VCubicBezierPath newPath = ExtractPath();
+
+                if (not data->IsUnique(newPath.name()))
+                {
+                    newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
+                    newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
+                }
+
+                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
+            }
+        }
+    }
+    catch (const VExceptionBadId &)
     {
         flagError = false;
         color = errorColor;
 
-        ui->lineEditSplPathName->setText(tr("Invalid spline path"));
+        ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
-    else
-    {
-        flagError = true;
-        color = OkColor(this);
 
-        auto first = qvariant_cast<VPointF>(ui->listWidget->item(0)->data(Qt::UserRole));
-        auto last = qvariant_cast<VPointF>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
-
-        if (first.id() == path.at(0).id() && last.id() == path.at(path.CountPoints()-1).id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
-        }
-        else
-        {
-            VCubicBezierPath newPath = ExtractPath();
-
-            if (not data->IsUnique(newPath.name()))
-            {
-                newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
-            }
-
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
-        }
-    }
     ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
     CheckState();

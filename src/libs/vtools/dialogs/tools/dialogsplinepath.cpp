@@ -617,48 +617,62 @@ void DialogSplinePath::PointChanged(int row)
 void DialogSplinePath::currentPointChanged(int index)
 {
     const quint32 id = qvariant_cast<quint32>(ui->comboBoxPoint->itemData(index));
-    QListWidgetItem *item = ui->listWidget->item( ui->listWidget->currentRow() );
-    VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
-    const auto point = data->GeometricObject<VPointF>(id);
-    p.SetP(*point);
-    DataPoint(p);
-    item->setData(Qt::UserRole, QVariant::fromValue(p));
-    ShowPointIssue(p.P().name());
-
     QColor color;
-    if (not IsPathValid())
+
+    try
+    {
+        QListWidgetItem *item = ui->listWidget->item( ui->listWidget->currentRow() );
+        VSplinePoint p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
+
+        const auto point = data->GeometricObject<VPointF>(id);
+        p.SetP(*point);
+
+        DataPoint(p);
+        item->setData(Qt::UserRole, QVariant::fromValue(p));
+        ShowPointIssue(p.P().name());
+
+        if (not IsPathValid())
+        {
+            flagError = false;
+            color = errorColor;
+
+            ui->lineEditSplPathName->setText(tr("Invalid spline path"));
+        }
+        else
+        {
+            flagError = true;
+            color = OkColor(this);
+
+            auto first = qvariant_cast<VSplinePoint>(ui->listWidget->item(0)->data(Qt::UserRole));
+            auto last = qvariant_cast<VSplinePoint>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
+
+            if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints()-1).P().id())
+            {
+                newDuplicate = -1;
+                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
+            }
+            else
+            {
+                VSplinePath newPath = ExtractPath();
+
+                if (not data->IsUnique(newPath.name()))
+                {
+                    newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
+                    newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
+                }
+
+                ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
+            }
+        }
+    }
+    catch (const VExceptionBadId &)
     {
         flagError = false;
         color = errorColor;
 
-        ui->lineEditSplPathName->setText(tr("Invalid spline path"));
+        ui->lineEditSplPathName->setText(tr("Cannot find point with id %1").arg(id));
     }
-    else
-    {
-        flagError = true;
-        color = OkColor(this);
 
-        auto first = qvariant_cast<VSplinePoint>(ui->listWidget->item(0)->data(Qt::UserRole));
-        auto last = qvariant_cast<VSplinePoint>(ui->listWidget->item(ui->listWidget->count()-1)->data(Qt::UserRole));
-
-        if (first.P().id() == path.at(0).P().id() && last.P().id() == path.at(path.CountPoints()-1).P().id())
-        {
-            newDuplicate = -1;
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(path.name()));
-        }
-        else
-        {
-            VSplinePath newPath = ExtractPath();
-
-            if (not data->IsUnique(newPath.name()))
-            {
-                newDuplicate = static_cast<qint32>(DNumber(newPath.name()));
-                newPath.SetDuplicate(static_cast<quint32>(newDuplicate));
-            }
-
-            ui->lineEditSplPathName->setText(qApp->TrVars()->VarToUser(newPath.name()));
-        }
-    }
     ChangeColor(ui->labelName, color);
     ChangeColor(ui->labelPoint, color);
     CheckState();
