@@ -1026,6 +1026,10 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
     </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
@@ -6262,6 +6266,10 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Usa una scala approssimativa per questa curva, 0 è il valore generico</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

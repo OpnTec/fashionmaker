@@ -1030,6 +1030,10 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Näherungsskala für diese Kurve einstellen, 0 - verwendet den globalen Wert</translation>
     </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
@@ -6269,6 +6273,10 @@ Einstellungen trotzdem anwenden?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Näherungsskala für diese Kurve einstellen, 0 - verwendet den globalen Wert</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

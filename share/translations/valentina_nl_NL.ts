@@ -1030,6 +1030,10 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
@@ -2402,7 +2406,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoek definitieve maat via zoekterm. &lt;/p&gt;&lt;p&gt;Plaats &amp;quot;/r/&amp;quot; aan het begin van de zoekterm om definitieve maat via regex op te zoeken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2753,11 +2757,11 @@
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegelen t.o.v. lijn %1_%2. Suffix &apos;%3&apos;</translation>
     </message>
     <message>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegelen t.o.v. aslijn door punt %1 . Suffix &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
@@ -2956,7 +2960,7 @@
     </message>
     <message>
         <source>Increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergroten of verkleinen</translation>
     </message>
     <message>
         <source>Separator</source>
@@ -3041,7 +3045,7 @@
     </message>
     <message>
         <source>Efficiency coefficient: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficiëntie coëfficiënt: %1%</translation>
     </message>
 </context>
 <context>
@@ -3303,7 +3307,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Follow grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Langs de recht-van-draad</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -3319,7 +3323,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Efficiency:</source>
-        <translation type="unfinished"></translation>
+        <translation>Efficiëntie:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
@@ -3692,7 +3696,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Select measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer maat</translation>
     </message>
 </context>
 <context>
@@ -4584,7 +4588,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Controle</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -4600,19 +4604,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid controle</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel links)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel rechts)</translation>
     </message>
     <message>
         <source>Check uniqueness</source>
@@ -4684,7 +4688,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>V markering 2</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
@@ -4692,7 +4696,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuele lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -4700,11 +4704,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>=</source>
-        <translation type="unfinished"></translation>
+        <translation>=</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>U markering</translation>
     </message>
     <message>
         <source>Box mark</source>
@@ -4712,7 +4716,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas lengte markeerpunt aan</translation>
     </message>
 </context>
 <context>
@@ -4834,7 +4838,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Controle</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -4854,11 +4858,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid controle</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cirkel</translation>
     </message>
 </context>
 <context>
@@ -5618,7 +5622,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Numerical control</source>
-        <translation type="unfinished"></translation>
+        <translation>Numerieke controle</translation>
     </message>
 </context>
 <context>
@@ -5841,11 +5845,11 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Cirkel</translation>
     </message>
     <message>
         <source>Edit passmark length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas lengte markeerpunt aan</translation>
     </message>
 </context>
 <context>
@@ -6046,7 +6050,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Control point</source>
-        <translation>Controlle punt</translation>
+        <translation>Controle punt</translation>
     </message>
     <message>
         <source>Angle:</source>
@@ -6270,6 +6274,10 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6653,7 +6661,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>%1 update is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bijwerking is gereed!</translation>
     </message>
 </context>
 <context>
@@ -8119,11 +8127,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Use these tools to create a pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik deze gereedschappen om een patroon aan te maken</translation>
     </message>
     <message>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal:</translation>
     </message>
     <message>
         <source>Create new pattern piece to start working.</source>
@@ -8135,15 +8143,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
@@ -8163,39 +8171,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Increase label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Vermeerder label fontgrootte</translation>
     </message>
     <message>
         <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Verminder label fontgrootte</translation>
     </message>
     <message>
         <source>Original label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Originele label fontgrootte</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg labels</translation>
     </message>
     <message>
         <source>Groups of visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid van groepen</translation>
     </message>
     <message>
         <source>Export recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer recept</translation>
     </message>
     <message>
         <source>Recipe files</source>
-        <translation type="unfinished"></translation>
+        <translation>Recept bestanden</translation>
     </message>
     <message>
         <source>recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Recept</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kon het recept %1 niet bewaren</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
@@ -8215,35 +8223,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroon berichten</translation>
     </message>
     <message>
         <source>Clear all messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis alle berichten</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation type="unfinished"></translation>
+        <translation>DEBUG</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>VERWITTIGING</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation type="unfinished"></translation>
+        <translation>KRITIEK</translation>
     </message>
     <message>
         <source>FATAL</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAAL</translation>
     </message>
     <message>
         <source>INFO</source>
-        <translation type="unfinished"></translation>
+        <translation>INFO</translation>
     </message>
 </context>
 <context>
@@ -8410,7 +8418,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Time-out.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
@@ -8422,7 +8430,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proces werd onderbroken ten gevolge van een uitzondering.</translation>
     </message>
 </context>
 <context>
@@ -8684,7 +8692,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"></translation>
+        <translation>standaard eenheid</translation>
     </message>
     <message>
         <source>General</source>
@@ -8696,15 +8704,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrollen</translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished"></translation>
+        <translation>Animatie</translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Duur:</translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
@@ -8713,11 +8721,11 @@ Do you want to save your changes?</source>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation>msec</translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijwerken interval:</translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
@@ -8725,12 +8733,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Muisschaal</translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sensor:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
@@ -8739,7 +8747,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished"></translation>
+        <translation>Wiel:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
@@ -8747,19 +8755,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Versnelling:</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers Interface</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer donkere modus</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>donkere modus</translation>
     </message>
 </context>
 <context>
@@ -8921,11 +8929,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Bold line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Vette lijnbreedte</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijnbreedte:</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -8938,19 +8946,20 @@ Do you want to save your changes?</source>
     <message>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik OpenGL om een scene weer te geven.
+Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Use OpenGL render</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik OpenGL weergever</translation>
     </message>
     <message>
         <source>antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>antialiasing</translation>
     </message>
     <message>
         <source>scene render</source>
-        <translation type="unfinished"></translation>
+        <translation>scene weergeven</translation>
     </message>
 </context>
 <context>
@@ -9228,7 +9237,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Empty formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Lege formule</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -9510,7 +9519,7 @@ This option will take an affect after restart.</source>
     <name>RemoveItemFromGroup</name>
     <message>
         <source>Remove item from group</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder item van groep</translation>
     </message>
 </context>
 <context>
@@ -10237,7 +10246,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Import from CSV</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeer van CSV</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
@@ -10261,7 +10270,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -10289,7 +10298,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -10297,7 +10306,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Venster</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -10325,7 +10334,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>&amp;About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Over Tape</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -10341,7 +10350,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
         <source>Height (%1):</source>
@@ -10602,15 +10611,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel links)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel rechts)</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
@@ -10622,11 +10631,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>V mark 2</translation>
     </message>
     <message>
         <source>Manual length</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuele lengte</translation>
     </message>
     <message>
         <source>Length:</source>
@@ -10638,7 +10647,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>=</source>
-        <translation type="unfinished"></translation>
+        <translation>=</translation>
     </message>
     <message>
         <source>Value</source>
@@ -10654,7 +10663,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>U markering</translation>
     </message>
     <message>
         <source>Box mark</source>
@@ -11021,15 +11030,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikers Interface</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeer donkere modus</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkere modus</translation>
     </message>
 </context>
 <context>
@@ -12308,15 +12317,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Intersection 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2</translation>
     </message>
     <message>
         <source>Intersection 2 (only left)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel links)</translation>
     </message>
     <message>
         <source>Intersection 2 (only right)</source>
-        <translation type="unfinished"></translation>
+        <translation>Intersectie 2 (enkel rechts)</translation>
     </message>
     <message>
         <source>Passmark mark</source>
@@ -12344,11 +12353,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>V mark 2</source>
-        <translation type="unfinished"></translation>
+        <translation>V mark 2</translation>
     </message>
     <message>
         <source>U mark</source>
-        <translation type="unfinished"></translation>
+        <translation>U markering</translation>
     </message>
     <message>
         <source>Box mark</source>

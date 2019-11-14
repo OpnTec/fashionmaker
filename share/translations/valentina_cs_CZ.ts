@@ -54,14 +54,14 @@
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit viditelnost skupiny</translation>
     </message>
 </context>
 <context>
     <name>ChangeMultipleGroupsVisibility</name>
     <message>
         <source>change multiple groups visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit viditelnost více skupin</translation>
     </message>
 </context>
 <context>
@@ -1029,6 +1029,10 @@
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2749,19 +2753,19 @@
     </message>
     <message>
         <source>Rotate objects around point %1. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočit předměty okolo bodu %1. Přípona &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Flipping by line %1_%2. Suffix &apos;%3&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Převrácení podle čáry %1_%2. Přípona &apos;%3&apos;</translation>
     </message>
     <message>
         <source>Flipping by axis through %1 point. Suffix &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Převrácení podle osy skrze %1 bod. Přípona &apos;%2&apos;</translation>
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout předměty. Přípona &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -3331,19 +3335,19 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Manual priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruční přednost</translation>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Množství naskládání kopií do sebe podle nastavení střihu.</translation>
     </message>
     <message>
         <source>Nest quantity</source>
-        <translation type="unfinished"></translation>
+        <translation>Množství naskládání do sebe</translation>
     </message>
     <message>
         <source>Auto crop unused width</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky ořezat nepoužívanou šířku</translation>
     </message>
 </context>
 <context>
@@ -4680,7 +4684,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrý úhel, který vypadá, že je vně střihu</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -6271,6 +6275,10 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8754,15 +8762,15 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelské rozhraní</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout tmavý vzhled</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavý vzhled</translation>
     </message>
 </context>
 <context>
@@ -10301,7 +10309,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Okno</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -10309,11 +10317,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Míry</translation>
     </message>
     <message>
         <source>&amp;Open individual …</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Otevřít individuální…</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -10321,15 +10329,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit j&amp;ako…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ukončit</translation>
     </message>
     <message>
         <source>&amp;About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O programu Tape</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -10341,7 +10349,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete změnit oprávnění?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -10349,11 +10357,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Height (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška (%1):</translation>
     </message>
     <message>
         <source>Size (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost (%1):</translation>
     </message>
 </context>
 <context>
@@ -10618,11 +10626,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrý úhel, který vypadá, že je uvnitř střihu</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrý úhel, který vypadá, že je vně střihu</translation>
     </message>
     <message>
         <source>V mark 2</source>
@@ -10809,11 +10817,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přednost:</translation>
     </message>
     <message>
         <source>Controls priority in layout. 0 - no priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovládá přednost v rozvržení. 0 - žádná přednost.</translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -11025,15 +11033,15 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelské rozhraní</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout tmavý vzhled</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tmavý vzhled</translation>
     </message>
 </context>
 <context>
@@ -11252,7 +11260,7 @@ Chcete uložit změny?</translation>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
 </context>
 <context>
@@ -11896,7 +11904,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>The page height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška strany</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
@@ -12084,7 +12092,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -12119,7 +12127,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -13734,7 +13742,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
@@ -13775,7 +13783,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
 </context>
 <context>

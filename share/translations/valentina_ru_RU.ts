@@ -1030,6 +1030,10 @@
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Установить масштаб аппроксимации для этой кривой, 0 - использовать глобальное значение</translation>
     </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogCurveIntersectAxis</name>
@@ -5615,7 +5619,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>плитка</translation>
     </message>
     <message>
         <source>Numerical control</source>
@@ -6271,6 +6275,10 @@ Apply settings anyway?</source>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Установить масштаб аппроксимации для этой кривой, 0 - использовать глобальное значение</translation>
+    </message>
+    <message>
+        <source>Cannot find point with id %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8217,35 +8225,35 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Pattern messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибки в файле</translation>
     </message>
     <message>
         <source>Clear all messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить все сообщения</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation type="unfinished"></translation>
+        <translation>ОТЛАДКА</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>ПРЕДУПРЕЖДЕНИЕ</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation type="unfinished"></translation>
+        <translation>КРИТИЧЕСКАЯ ОШИБКА</translation>
     </message>
     <message>
         <source>FATAL</source>
-        <translation type="unfinished"></translation>
+        <translation>ФАТАЛЬНАЯ ОШИБКА</translation>
     </message>
     <message>
         <source>INFO</source>
-        <translation type="unfinished"></translation>
+        <translation>ИНФОРМАЦИЯ</translation>
     </message>
 </context>
 <context>
@@ -8416,11 +8424,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно установить размер страницы принтера</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно установить пользовательский размер страницы принтера</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
