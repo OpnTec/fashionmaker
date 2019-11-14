@@ -59,6 +59,12 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../vpatterndb/vnodedetail.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#include "../vmisc/backport/qscopeguard.h"
+#else
+#include <QScopeGuard>
+#endif
+
 #include <QMessageBox>
 #include <QUndoStack>
 #include <QtNumeric>
@@ -102,7 +108,7 @@ QString DefLabelLanguage()
 
 //---------------------------------------------------------------------------------------------------------------------
 VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphicsScene *sceneDetail, QObject *parent)
-    : VAbstractPattern(parent), data(data), sceneDraw(sceneDraw), sceneDetail(sceneDetail), updatePieces()
+    : VAbstractPattern(parent), data(data), sceneDraw(sceneDraw), sceneDetail(sceneDetail)
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
@@ -851,7 +857,7 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
         VToolSeamAllowance *piece = VToolSeamAllowance::Create(initData);
         if (parse == Document::FullParse)
         {
-            updatePieces.append(piece);
+            updatePieces.append(piece->getId());
         }
         //Rewrite attribute formula. Need for situation when we have wrong formula.
         if (w != initData.width)
@@ -3569,19 +3575,36 @@ quint32 VPattern::LastToolId() const
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshPieceGeometry()
 {
+    auto CleanRefreshList = qScopeGuard([this]()
+    {
+        updatePieces.clear();
+        VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
+    });
+
     if (qApp->IsGUIMode() && m_parsing)
     {
         return;
     }
 
-    for(auto piece : qAsConst(updatePieces))
+    for(auto pieceId : qAsConst(updatePieces))
     {
         if (qApp->IsGUIMode() && m_parsing)
         {
             return;
         }
 
-        piece->RefreshGeometry();
+        try
+        {
+            if (VToolSeamAllowance *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+            {
+                piece->RefreshGeometry();
+            }
+        }
+        catch(const VExceptionBadId &)
+        {
+            // do nothing
+        }
+
         QApplication::processEvents();
 
         if (qApp->IsGUIMode() && m_parsing)
@@ -3589,8 +3612,6 @@ void VPattern::RefreshPieceGeometry()
             return;
         }
     }
-    updatePieces.clear();
-    VMainGraphicsView::NewSceneRect(sceneDetail, qApp->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

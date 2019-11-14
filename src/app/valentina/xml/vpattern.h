@@ -136,7 +136,7 @@ private:
 
     VMainGraphicsScene *sceneDraw;
     VMainGraphicsScene *sceneDetail;
-    QVector<VToolSeamAllowance *> updatePieces;
+    QVector<vidtype> updatePieces{};
 
     /**
      * @brief m_parsing true if parsing a pattern. Helps to stop updating piece when new parsing happend before
