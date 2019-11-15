@@ -33,7 +33,6 @@
 #include <QDesktopServices>
 #include <QMessageBox>
 #include <QtDebug>
-#include "../options.h"
 #include "../core/vapplication.h"
 #include "../fervor/fvupdater.h"
 

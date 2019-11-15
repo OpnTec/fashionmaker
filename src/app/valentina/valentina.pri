@@ -17,7 +17,6 @@ SOURCES += \
 # Some header files
 HEADERS  += \
         $$PWD/mainwindow.h \
-        $$PWD/options.h \
         $$PWD/stable.h \
         $$PWD/version.h \
         $$PWD/mainwindowsnogui.h

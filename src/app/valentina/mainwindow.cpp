@@ -43,7 +43,6 @@
 #include "../vmisc/vmodifierkey.h"
 #include "undocommands/renamepp.h"
 #include "core/vtooloptionspropertybrowser.h"
-#include "options.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../vformat/vmeasurements.h"
 #include "../ifc/xml/vvstconverter.h"

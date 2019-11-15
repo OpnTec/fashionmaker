@@ -30,7 +30,6 @@
 #define VAPPLICATION_H
 
 #include "../vmisc/vabstractapplication.h"
-#include "../options.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "vsettings.h"

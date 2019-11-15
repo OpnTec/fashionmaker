@@ -28,7 +28,6 @@
 
 #include "dialogsavelayout.h"
 #include "ui_dialogsavelayout.h"
-#include "../options.h"
 #include "../core/vapplication.h"
 #include "../vmisc/vsettings.h"
 #include "../ifc/exception/vexception.h"

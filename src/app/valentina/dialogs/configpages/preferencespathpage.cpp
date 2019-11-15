@@ -29,7 +29,6 @@
 #include "preferencespathpage.h"
 #include "ui_preferencespathpage.h"
 #include "../vmisc/vsettings.h"
-#include "../../options.h"
 #include "../../core/vapplication.h"
 
 #include <QDir>

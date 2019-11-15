@@ -30,8 +30,10 @@
 #define DIALOGPATTERNPROPERTIES_H
 
 #include <QDialog>
-#include "../options.h"
 #include <QMap>
+
+#include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
 
 class VPattern;
 class VContainer;

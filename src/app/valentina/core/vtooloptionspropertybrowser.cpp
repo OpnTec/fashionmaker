@@ -39,6 +39,7 @@
 #include "../vpatterndb/vformula.h"
 #include "../vgeometry/vcubicbezier.h"
 #include "../vgeometry/vcubicbezierpath.h"
+#include "../qmuparser/qmudef.h"
 
 #include <QDockWidget>
 #include <QHBoxLayout>
