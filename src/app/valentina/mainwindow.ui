@@ -2015,7 +2015,7 @@
   </widget>
   <widget class="QDockWidget" name="dockWidgetMessages">
    <property name="floating">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="windowTitle">
     <string>Pattern messages</string>
