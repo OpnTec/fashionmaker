@@ -45,7 +45,7 @@ struct PosterData;
 class QGraphicsRectItem;
 class VMeasurements;
 
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
 class QWinTaskbarButton;
 class QWinTaskbarProgress;
 #endif
@@ -124,7 +124,7 @@ protected:
     QPointer<QLabel> m_mouseCoordinate;
     QPointer<QLabel> m_unreadPatternMessage{};
 
-#if defined(Q_OS_WIN32) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+#if defined(Q_OS_WIN) && QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
     QWinTaskbarButton *m_taskbarButton;
     QWinTaskbarProgress *m_taskbarProgress;
 #endif
