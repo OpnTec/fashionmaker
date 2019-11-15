@@ -30,6 +30,11 @@
 #ifndef VLOCKGUARD_H
 #define VLOCKGUARD_H
 
+#include <QtGlobal>
+#ifdef Q_OS_WIN
+#  include <qt_windows.h>
+#endif /*Q_OS_WIN*/
+
 #include <QString>
 #include <stdint.h>
 
@@ -38,9 +43,6 @@
 #include <QFileInfo>
 #include <QLockFile>
 #include <QSharedPointer>
-#if defined(Q_OS_WIN)
-#include <windows.h>
-#endif
 
 /*@brief
  * This class creates Guarded object if and only if lock file taken. It keeps shared_ptr to object and lock-file.

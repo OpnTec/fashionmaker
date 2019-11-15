@@ -29,9 +29,14 @@
 #ifndef IFCDEF_H
 #define IFCDEF_H
 
+#include <QtGlobal>
+#ifdef Q_OS_WIN
+   extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
+#  include <qt_windows.h>
+#endif /*Q_OS_WIN*/
+
 #include <QString>
 #include <QStringList>
-#include <QtGlobal>
 
 #include "../vmisc/typedef.h"
 #include "../vmisc/def.h"
@@ -39,11 +44,6 @@
 
 extern const QString CustomMSign;
 extern const QString CustomIncrSign;
-
-#ifdef Q_OS_WIN32
-    extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-    #include <windows.h>
-#endif /*Q_OS_WIN32*/
 
 // Detect whether the compiler supports C++11 noexcept exception specifications.
 #  if   defined(__clang__)

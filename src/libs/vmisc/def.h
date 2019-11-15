@@ -29,18 +29,19 @@
 #ifndef DEF_H
 #define DEF_H
 
+#include <QtGlobal>
+#ifdef Q_OS_WIN
+#  include <qt_windows.h>
+#endif /*Q_OS_WIN*/
+
 #include <qcompilerdetection.h>
 #include <QPrinter>
 #include <QString>
 #include <QStringList>
 #include <Qt>
-#include <QtGlobal>
 #include <csignal>
 #include <QMargins>
 #include <QLineF>
-#ifdef Q_OS_WIN
-    #include <windows.h>
-#endif /* Q_OS_WIN */
 
 #include "literals.h"
 #include "debugbreak.h"
