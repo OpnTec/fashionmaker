@@ -3318,7 +3318,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source> min</source>
-        <translation>minutos</translation>
+        <translation> min</translation>
     </message>
     <message>
         <source>Efficiency:</source>
@@ -5840,7 +5840,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione los objetos de ruta principal en el sentido de las agujas del reloj,&lt;b&gt;%1&lt;/b&gt; -curva sentido inverso, &lt;b&gt;%2&lt;/b&gt; - finalizar creacion</translation>
     </message>
     <message>
         <source>Circle</source>
@@ -8204,7 +8204,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo guardar receta. %1</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
@@ -8427,7 +8427,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede establecer el tamaño de página de la impresora personalizada</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
@@ -8764,7 +8764,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar el modo oscuro</translation>
     </message>
     <message>
         <source>dark mode</source>
@@ -9238,7 +9238,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Empty formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula vacia</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -10307,7 +10307,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ventana</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -10315,7 +10315,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&amp;Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Medidas</translation>
     </message>
     <message>
         <source>&amp;Open individual …</source>
@@ -10327,7 +10327,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Save &amp;As …</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar &amp;Como…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -10343,7 +10343,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida por termino. &lt;/p&gt;&lt;p&gt; Anteponer &amp;quot;/r/&amp;quot; al frente de la búsqueda de la cadena de las medidas por regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
@@ -11035,7 +11035,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar el modo oscuro</translation>
     </message>
     <message>
         <source>dark mode</source>
@@ -12639,7 +12639,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Piece path doesn&apos;t contain nodes</source>
-        <translation type="unfinished"></translation>
+        <translation>La ruta de acceso de la pieza no contiene nodos</translation>
     </message>
 </context>
 <context>
@@ -13744,7 +13744,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
-        <translation type="unfinished"></translation>
+        <translation>La herramienta se utilizo después de eliminar.</translation>
     </message>
 </context>
 <context>
@@ -15252,7 +15252,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar todo</translation>
     </message>
     <message>
         <source>Show All</source>
@@ -15308,7 +15308,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Punto en distancia y ángulo&lt;/b&gt;: angulo = %1°, distancia = %2%3; &lt;b&gt;%4&lt;/b&gt; - angulo de adherencia, &lt;b&gt;%5&lt;/b&gt; - terminar creacion</translation>
     </message>
 </context>
 <context>
@@ -15356,7 +15356,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Use &lt;b&gt;%1&lt;/b&gt; para pegar ángulo!</translation>
     </message>
 </context>
 <context>
@@ -15375,11 +15375,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ruta curvada&lt;/b&gt;: seleccione tres o mas puntos, &lt;b&gt;%1&lt;/b&gt; - terminar la creacion</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
-        <translation type="unfinished"></translation>
+        <translation>Use &lt;b&gt;%1&lt;/b&gt; para crear ángulo!</translation>
     </message>
 </context>
 <context>
