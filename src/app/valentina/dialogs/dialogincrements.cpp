@@ -293,7 +293,8 @@ void DialogIncrements::ShowHeaderUnits(QTableWidget *table, int column, const QS
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok)
+QTableWidgetItem * DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row, int column,
+                                             int aligment, bool ok)
 {
     SCASSERT(table != nullptr)
 
@@ -313,6 +314,21 @@ void DialogIncrements::AddCell(QTableWidget *table, const QString &text, int row
     }
 
     table->setItem(row, column, item);
+
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QTableWidgetItem* DialogIncrements::AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column,
+                                                     int aligment, bool ok)
+{
+    QTableWidgetItem *item = AddCell(table, text, row, column, aligment, ok);
+
+    QFont itemFont = item->font();
+    itemFont.setBold(true);
+    itemFont.setItalic(true);
+    item->setFont(itemFont);
+    return item;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -896,8 +912,8 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         }
         else if (incr->GetType() == VarType::IncrementSeparator)
         {
-            AddCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
-            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter); // name
+            AddSeparatorCell(table, incr->GetName(), currentRow, 0, Qt::AlignVCenter); // name
+            AddCell(table, incr->GetDescription(), currentRow, 1, Qt::AlignCenter); // description
             table->setSpan(currentRow, 1, 1, 2);
         }
     }

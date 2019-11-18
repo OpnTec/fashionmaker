@@ -125,7 +125,10 @@ private:
     void                 ShowUnits();
     void                 ShowHeaderUnits(QTableWidget *table, int column, const QString &unit);
 
-    void AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment, bool ok = true);
+    QTableWidgetItem* AddCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
+                              bool ok = true);
+    QTableWidgetItem* AddSeparatorCell(QTableWidget *table, const QString &text, int row, int column, int aligment,
+                                       bool ok = true);
 
     QString GetCustomName() const;
     QString ClearIncrementName(const QString &name) const;
