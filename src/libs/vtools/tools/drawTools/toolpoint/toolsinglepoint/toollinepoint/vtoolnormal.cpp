@@ -82,6 +82,7 @@ void VToolNormal::setDialog()
     SCASSERT(not dialogTool.isNull())
     const QSharedPointer<VPointF> p = VAbstractTool::data.GeometricObject<VPointF>(m_id);
     dialogTool->SetTypeLine(m_lineType);
+    dialogTool->SetLineColor(lineColor);
     dialogTool->SetFormula(formulaLength);
     dialogTool->SetAngle(angle);
     dialogTool->SetFirstPointId(basePointId);

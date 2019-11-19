@@ -68,7 +68,8 @@
 - Fix locking file after double save as.
 - Key --ignoremargins still required margins.
 - [#978] Don't show errors in History dialog.
-- Fixed translation numbers in scientific notation. 
+- Fixed translation numbers in scientific notation.
+- Fix dialog for tool Point along perpendicular. No memory of line color settings. 
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.
