@@ -51,5 +51,9 @@
 #define M_EULER (0.57721566490153286060)
 #endif
 
+template <typename T>
+Q_DECL_CONSTEXPR inline T vRound(T d, int p)
+{ return p > 0 ? qRound(d * (p * 10.0)) / (p * 10.0) : qRound(d); }
+
 #endif // VMATH_H
 

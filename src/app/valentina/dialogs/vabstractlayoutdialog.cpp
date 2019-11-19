@@ -28,6 +28,7 @@
 
 #include "vabstractlayoutdialog.h"
 #include "../core/vapplication.h"
+#include "../vmisc/vmath.h"
 
 //must be the same order as PaperSizeTemplate constants
 const VAbstractLayoutDialog::FormatsVector VAbstractLayoutDialog::pageFormatNames
@@ -172,12 +173,12 @@ QSizeF VAbstractLayoutDialog::RoundTemplateSize(qreal width, qreal height, Unit 
         case Unit::Cm:
         case Unit::Mm:
         case Unit::Px:
-            w = qRound(width * 100.0) / 100.0;
-            h = qRound(height * 100.0) / 100.0;
+            w = vRound(width, 2);
+            h = vRound(height, 2);
             return QSizeF(w, h);
         case Unit::Inch:
-            w = qRound(width * 100000.0) / 100000.0;
-            h = qRound(height * 100000.0) / 100000.0;
+            w = vRound(width, 5);
+            h = vRound(height, 5);
             return QSizeF(w, h);
         default:
             break;
