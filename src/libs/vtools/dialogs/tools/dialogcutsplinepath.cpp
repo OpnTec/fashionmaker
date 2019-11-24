@@ -202,7 +202,7 @@ void DialogCutSplinePath::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::SplinePathChanged()
 {
-    CurrentCurveLength<VSplinePath>(getSplinePathId(), const_cast<VContainer *> (data));
+    CurrentCurveLength(getSplinePathId(), const_cast<VContainer *> (data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

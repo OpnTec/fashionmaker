@@ -33,10 +33,7 @@
 #include <QSharedPointer>
 
 #include "../vpatterndb/variables/vinternalvariable.h"
-#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vmisc/typedef.h"
-#include "../ifc/exception/vexceptionbadid.h"
-#include "../vpatterndb/vcontainer.h"
 
 class QPlainTextEdit;
 class QPushButton;
@@ -47,6 +44,7 @@ class QLabel;
 class QWidget;
 class QColor;
 class QLineEdit;
+class VContainer;
 class QListWidget;
 class VPieceNode;
 
@@ -87,33 +85,6 @@ bool   DoubleCurves(QListWidget *listWidget);
 bool   EachPointLabelIsUnique(QListWidget *listWidget);
 QString DialogWarningIcon();
 QFont  NodeFont(QFont font, bool nodeExcluded = false);
-
-template <typename T>
 void   CurrentCurveLength(vidtype curveId, VContainer *data);
-
-
-//---------------------------------------------------------------------------------------------------------------------
-template<typename T>
-void CurrentCurveLength(vidtype curveId, VContainer *data)
-{
-    SCASSERT(data != nullptr)
-    VCurveLength *length = nullptr;
-    try
-    {
-        const QSharedPointer<T> curve = data->GeometricObject<T>(curveId);
-
-        length = new VCurveLength(curveId, curveId, curve.data(), *data->GetPatternUnit());
-    }
-    catch (const VExceptionBadId &)
-    {
-        QScopedPointer<T> curve(new T());
-        length = new VCurveLength(NULL_ID, NULL_ID, curve.data(), *data->GetPatternUnit());
-    }
-
-    SCASSERT(length != nullptr)
-    length->SetName(currentLength);
-
-    data->AddVariable(currentLength, length);
-}
 
 #endif // DIALOGTOOLBOX_H

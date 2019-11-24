@@ -33,6 +33,9 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vgeometry/vpointf.h"
+#include "../vpatterndb/variables/vcurvelength.h"
+#include "../ifc/exception/vexceptionbadid.h"
+#include "../vpatterndb/vcontainer.h"
 
 #include <QDialog>
 #include <QLabel>
@@ -461,4 +464,25 @@ QFont NodeFont(QFont font, bool nodeExcluded)
     font.setWeight(QFont::Bold);
     font.setStrikeOut(nodeExcluded);
     return font;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void CurrentCurveLength(vidtype curveId, VContainer *data)
+{
+    SCASSERT(data != nullptr)
+    VCurveLength *length = nullptr;
+    try
+    {
+        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(curveId);
+        length = new VCurveLength(curveId, curveId, curve.data(), *data->GetPatternUnit());
+    }
+    catch (const VExceptionBadId &)
+    {
+        length = new VCurveLength();
+    }
+
+    SCASSERT(length != nullptr)
+    length->SetName(currentLength);
+
+    data->AddVariable(currentLength, length);
 }

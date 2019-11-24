@@ -202,7 +202,7 @@ void DialogCutSpline::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutSpline::SplineChanged()
 {
-    CurrentCurveLength<VSpline>(getSplineId(), const_cast<VContainer *> (data));
+    CurrentCurveLength(getSplineId(), const_cast<VContainer *> (data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

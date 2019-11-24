@@ -195,7 +195,7 @@ void DialogCutArc::closeEvent(QCloseEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ArcChanged()
 {
-    CurrentCurveLength<VArc>(getArcId(), const_cast<VContainer *> (data));
+    CurrentCurveLength(getArcId(), const_cast<VContainer *> (data));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
