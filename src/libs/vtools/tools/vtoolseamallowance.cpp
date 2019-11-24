@@ -1956,6 +1956,7 @@ QList<VToolSeamAllowance *> VToolSeamAllowance::SelectedTools() const
 
         if (not list.isEmpty())
         {
+            tools.reserve(list.size());
             for(auto item : list)
             {
                 VToolSeamAllowance *tool = qgraphicsitem_cast<VToolSeamAllowance *>(item);
@@ -2074,6 +2075,7 @@ QVector<CustomSARecord> VToolSeamAllowance::DuplicateCustomSARecords(const QVect
                                                                      const QMap<quint32, quint32> &replacements)
 {
     QVector<CustomSARecord> newRecords;
+    newRecords.reserve(records.size());
     for(auto record : records)
     {
         record.path = DuplicatePiecePath(record.path, initData);
@@ -2089,6 +2091,7 @@ QVector<quint32> VToolSeamAllowance::DuplicateInternalPaths(const QVector<quint3
                                                             const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPaths;
+    newPaths.reserve(iPaths.size());
     for(auto iPath : iPaths)
     {
         newPaths.append(DuplicatePiecePath(iPath, initData));
@@ -2101,6 +2104,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePins(const QVector<quint32> &pins,
                                                    const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPins;
+    newPins.reserve(pins.size());
     for(auto p : pins)
     {
         QSharedPointer<VPointF> pin = initData.data->GeometricObject<VPointF>(p);
@@ -2130,6 +2134,7 @@ QVector<quint32> VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32>
                                                           const VToolSeamAllowanceInitData &initData)
 {
     QVector<quint32> newPlaceLabels;
+    newPlaceLabels.reserve(placeLabels.size());
     for(auto placeLabel : placeLabels)
     {
         QSharedPointer<VPlaceLabelItem> label = initData.data->GeometricObject<VPlaceLabelItem>(placeLabel);
@@ -2164,6 +2169,7 @@ QVector<VPieceNode> VToolSeamAllowance::DuplicateNodes(const VPiecePath &path,
                                                        QMap<quint32, quint32> &replacements)
 {
     QVector<VPieceNode> nodes;
+    nodes.reserve(path.CountNodes());
     for (int i = 0; i< path.CountNodes(); ++i)
     {
         VPieceNode nodeD = path.at(i);
