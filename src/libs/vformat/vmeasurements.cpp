@@ -308,8 +308,8 @@ void VMeasurements::ReadMeasurements(qreal height, qreal size) const
             meash = QSharedPointer<VMeasurement>(new VMeasurement(data, static_cast<quint32>(i), name, value, formula,
                                                                   ok, fullName, description));
         }
-        tempData->AddVariable(name, tempMeash);
-        data->AddVariable(name, meash);
+        tempData->AddVariable(tempMeash);
+        data->AddVariable(meash);
     }
 }
 

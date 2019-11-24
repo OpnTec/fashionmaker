@@ -280,7 +280,7 @@ void DialogAlongLine::SetCurrentLength()
     length->SetName(currentLength);
 
     VContainer *locData = const_cast<VContainer *> (data);
-    locData->AddVariable(currentLength, length);
+    locData->AddVariable(length);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

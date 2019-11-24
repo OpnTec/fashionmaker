@@ -260,7 +260,7 @@ VToolAlongLine* VToolAlongLine::Create(VToolAlongLineInitData &initData)
     VLengthLine *length = new VLengthLine(firstPoint.data(), initData.firstPointId, secondPoint.data(),
                                           initData.secondPointId, *initData.data->GetPatternUnit());
     length->SetName(currentLength);
-    initData.data->AddVariable(currentLength, length);
+    initData.data->AddVariable(length);
 
     line.setLength(qApp->toPixel(CheckFormula(initData.id, initData.formula, initData.data)));
 

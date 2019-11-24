@@ -484,5 +484,5 @@ void CurrentCurveLength(vidtype curveId, VContainer *data)
     SCASSERT(length != nullptr)
     length->SetName(currentLength);
 
-    data->AddVariable(currentLength, length);
+    data->AddVariable(length);
 }

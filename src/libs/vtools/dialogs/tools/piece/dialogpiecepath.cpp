@@ -810,7 +810,7 @@ void DialogPiecePath::EvalWidth()
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
         currentSA->SetDescription(tr("Current seam allowance"));
 
-        locData->AddVariable(currentSeamAllowance, currentSA);
+        locData->AddVariable(currentSA);
 
         EvalWidthBefore();
         EvalWidthAfter();

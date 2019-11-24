@@ -147,7 +147,7 @@ public:
     VPiecePath         GetPiecePath(quint32 id) const;
     quint32            GetPieceForPiecePath(quint32 id) const;
     template <typename T>
-    QSharedPointer<T>  GetVariable(QString name) const;
+    QSharedPointer<T>  GetVariable(const QString &name) const;
     quint32            getId() const;
     quint32            getNextId() const;
     void               UpdateId(quint32 newId) const;
@@ -165,9 +165,9 @@ public:
                                             quint32 parentId = NULL_ID);
 
     template <typename T>
-    void               AddVariable(const QString& name, T *var);
+    void               AddVariable(T *var);
     template <typename T>
-    void               AddVariable(const QString& name, const QSharedPointer<T> &var);
+    void               AddVariable(const QSharedPointer<T> &var);
     void               RemoveVariable(const QString& name);
     void               RemovePiece(quint32 id);
 
@@ -287,7 +287,7 @@ const QSharedPointer<T> VContainer::GeometricObject(const quint32 &id) const
 * @return variable
 */
 template <typename T>
-QSharedPointer<T> VContainer::GetVariable(QString name) const
+QSharedPointer<T> VContainer::GetVariable(const QString &name) const
 {
     SCASSERT(name.isEmpty()==false)
     if (d->variables.contains(name))
@@ -311,35 +311,36 @@ QSharedPointer<T> VContainer::GetVariable(QString name) const
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void VContainer::AddVariable(const QString& name, T *var)
+void VContainer::AddVariable(T *var)
 {
-    AddVariable(name, QSharedPointer<T>(var));
+    AddVariable(QSharedPointer<T>(var));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
-void VContainer::AddVariable(const QString& name, const QSharedPointer<T> &var)
+void VContainer::AddVariable(const QSharedPointer<T> &var)
 {
-    if (d->variables.contains(name))
+    SCASSERT(not var->GetName().isEmpty())
+    if (d->variables.contains(var->GetName()))
     {
-        if (d->variables.value(name)->GetType() == var->GetType())
+        if (d->variables.value(var->GetName())->GetType() == var->GetType())
         {
-            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
+            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(var->GetName()));
             if (v.isNull())
             {
-                throw VExceptionBadId(tr("Can't cast object."), name);
+                throw VExceptionBadId(tr("Can't cast object."), var->GetName());
             }
             *v = *var;
         }
         else
         {
-            throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
+            throw VExceptionBadId(tr("Can't find object. Type mismatch."), var->GetName());
         }
     }
     else
     {
-        d->variables.insert(name, var);
-        uniqueNames[d->nspace].insert(name);
+        d->variables.insert(var->GetName(), var);
+        uniqueNames[d->nspace].insert(var->GetName());
     }
 }
 

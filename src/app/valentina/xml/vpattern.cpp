@@ -3926,7 +3926,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
                     increment->SetFormula(value, formula, ok);
                     increment->SetDescription(desc);
                     increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
-                    data->AddVariable(name, increment);
+                    data->AddVariable(increment);
                 }
             }
         }

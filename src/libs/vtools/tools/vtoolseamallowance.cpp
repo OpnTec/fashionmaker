@@ -124,7 +124,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         currentSA->SetFormula(initData.detail.GetSAWidth(), initData.width, true);
         currentSA->SetDescription(tr("Current seam allowance"));
 
-        initData.data->AddVariable(currentSeamAllowance, currentSA);
+        initData.data->AddVariable(currentSA);
         initData.id = initData.data->AddPiece(initData.detail);
     }
     else
@@ -136,7 +136,7 @@ VToolSeamAllowance *VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initD
         currentSA->SetFormula(calcWidth, initData.width, true);
         currentSA->SetDescription(tr("Current seam allowance"));
 
-        initData.data->AddVariable(currentSeamAllowance, currentSA);
+        initData.data->AddVariable(currentSA);
 
         initData.data->UpdatePiece(initData.id, initData.detail);
         if (initData.parse != Document::FullParse)
