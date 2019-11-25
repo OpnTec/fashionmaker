@@ -49,7 +49,10 @@ DialogExportToCSV::DialogExportToCSV(QWidget *parent)
     const QList<int> mibs = QTextCodec::availableMibs();
     for (auto mib : mibs)
     {
-        ui->comboBoxCodec->addItem(QTextCodec::codecForMib(mib)->name(), mib);
+        if (QTextCodec *codec = QTextCodec::codecForMib(mib))
+        {
+            ui->comboBoxCodec->addItem(codec->name(), mib);
+        }
     }
 
     ui->comboBoxCodec->setCurrentIndex(ui->comboBoxCodec->findData(VCommonSettings::GetDefCSVCodec()));
@@ -272,18 +275,18 @@ void DialogExportToCSV::ShowFilePreview(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogExportToCSV::MakeHelpCodecsList()
 {
-    QString out("\n");
+    QString out = QStringLiteral("\n");
     const QList<int> list = QTextCodec::availableMibs();
     for (int i = 0; i < list.size(); ++i)
     {
-        out += QLatin1String("\t* ") + QTextCodec::codecForMib(list.at(i))->name();
-        if (i < list.size()-1)
+        if (QTextCodec *codec = QTextCodec::codecForMib(list.at(i)))
         {
-            out += QLatin1String(",\n");
+            out += QStringLiteral("\t* ") + codec->name();
+            out += i < list.size()-1 ? QLatin1String(",\n") : QLatin1String(".\n");
         }
         else
         {
-            out += QLatin1String(".\n");
+            qDebug() << "Can't get codec for MIBenum " << i;
         }
     }
     return out;
@@ -292,7 +295,7 @@ QString DialogExportToCSV::MakeHelpCodecsList()
 //---------------------------------------------------------------------------------------------------------------------
 QString DialogExportToCSV::MakeHelpSeparatorList()
 {
-    QString out("\n");
+    QString out = QStringLiteral("\n");
     out += QLatin1String("\t* 'Tab',\n");
     out += QLatin1String("\t* ';',\n");
     out += QLatin1String("\t* 'Space',\n");
