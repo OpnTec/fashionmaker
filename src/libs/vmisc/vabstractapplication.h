@@ -129,6 +129,8 @@ public:
     static const QString patternMessageSignature;
     bool IsPatternMessage(const QString &message) const;
 
+    static void SetICUData(int &argc, char ** argv);
+
 protected:
     QUndoStack         *undoStack;
 

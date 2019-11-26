@@ -40,9 +40,76 @@
 #include <Qt>
 #include <QtDebug>
 #include <QWidget>
+#include <QStandardPaths>
 
 #include "../vmisc/def.h"
 #include "../vmisc/customevents.h"
+
+#ifdef Q_OS_UNIX
+#  include <unistd.h>
+#endif
+
+namespace
+{
+QString ApplicationFilePath(int &argc, char **argv)
+{
+    if (argc)
+    {
+        static QByteArray procName = QByteArray(argv[0]);
+        if (procName != argv[0])
+        {
+            procName = QByteArray(argv[0]);
+        }
+    }
+#if defined( Q_OS_UNIX )
+#  if defined(Q_OS_LINUX) && (!defined(Q_OS_ANDROID) || defined(Q_OS_ANDROID_EMBEDDED))
+    // Try looking for a /proc/<pid>/exe symlink first which points to
+    // the absolute path of the executable
+    QFileInfo pfi(QStringLiteral("/proc/%1/exe").arg(getpid()));
+    if (pfi.exists() && pfi.isSymLink())
+    {
+        return pfi.canonicalFilePath();
+    }
+#  endif
+    if (argc > 0)
+    {
+        QString argv0 = QFile::decodeName(argv[0]);
+        QString absPath;
+        if (not argv0.isEmpty() && argv0.at(0) == QLatin1Char('/'))
+        {
+            /*
+              If argv0 starts with a slash, it is already an absolute
+              file path.
+            */
+            absPath = argv0;
+        }
+        else if (argv0.contains(QLatin1Char('/')))
+        {
+            /*
+              If argv0 contains one or more slashes, it is a file path
+              relative to the current directory.
+            */
+            absPath = QDir::current().absoluteFilePath(argv0);
+        }
+        else
+        {
+            /*
+              Otherwise, the file path has to be determined using the
+              PATH environment variable.
+            */
+            absPath = QStandardPaths::findExecutable(argv0);
+        }
+        absPath = QDir::cleanPath(absPath);
+        QFileInfo fi(absPath);
+        if (fi.exists())
+        {
+            return fi.canonicalFilePath();
+        }
+    }
+#endif
+    return QString();
+}
+}
 
 const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
@@ -68,14 +135,6 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       openingPattern(false),
       mode(Draw::Calculation)
 {
-#if defined(APPIMAGE)
-    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
-     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
-     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
-     */
-    qputenv("ICU_DATA", QString(QCoreApplication::applicationDirPath() + QStringLiteral("/../share/icu")).toUtf8());
-#endif
-
     QString rules;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
@@ -279,6 +338,17 @@ void VAbstractApplication::PostPatternMessage(const QString &message, QtMsgType 
 bool VAbstractApplication::IsPatternMessage(const QString &message) const
 {
     return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::SetICUData(int &argc, char **argv)
+{
+    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
+     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
+     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
+     */
+    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
+    qputenv("ICU_DATA", QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

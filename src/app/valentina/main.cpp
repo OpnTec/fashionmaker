@@ -49,6 +49,14 @@ int main(int argc, char *argv[])
 
     QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
 
+#if defined(APPIMAGE)
+    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
+     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
+     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
+     */
+    VAbstractApplication::SetICUData(argc, argv);
+#endif
+
 #if defined(Q_OS_WIN)
     VAbstractApplication::WinAttachConsole();
 #endif
