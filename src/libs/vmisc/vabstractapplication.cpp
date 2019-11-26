@@ -68,6 +68,14 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
       openingPattern(false),
       mode(Draw::Calculation)
 {
+#if defined(APPIMAGE)
+    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
+     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
+     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
+     */
+    qputenv("ICU_DATA", QString(QCoreApplication::applicationDirPath() + QStringLiteral("/../share/icu")).toUtf8());
+#endif
+
     QString rules;
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
