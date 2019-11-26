@@ -75,6 +75,8 @@ int main(int argc, char *argv[])
 
     app.InitOptions();
 
+    qDebug() << "ICU_DATA: " << qgetenv("ICU_DATA");
+
     if (FvUpdater::IsStaledTestBuild())
     {
         qWarning() << QApplication::translate("Valentina",
