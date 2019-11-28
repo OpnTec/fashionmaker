@@ -8249,6 +8249,10 @@ Voulez-vous sauvegarder les changements?</translation>
         <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Auto refresh the list with each parse</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>

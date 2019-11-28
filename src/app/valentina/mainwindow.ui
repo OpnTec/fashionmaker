@@ -372,7 +372,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>104</width>
          <height>108</height>
         </rect>
        </property>
@@ -481,7 +481,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>243</height>
         </rect>
        </property>
@@ -746,7 +746,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>282</height>
         </rect>
        </property>
@@ -1037,7 +1037,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
+         <width>98</width>
          <height>102</height>
         </rect>
        </property>
@@ -1120,7 +1120,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>192</height>
         </rect>
        </property>
@@ -1324,7 +1324,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>126</width>
+         <width>104</width>
          <height>237</height>
         </rect>
        </property>
@@ -1589,8 +1589,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>140</width>
-         <height>163</height>
+         <width>104</width>
+         <height>57</height>
         </rect>
        </property>
        <attribute name="icon">
@@ -2047,10 +2047,11 @@
           <string>Auto refresh the list with each parse</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string notr="true">...</string>
          </property>
          <property name="icon">
-          <iconset theme="view-refresh"/>
+          <iconset theme="view-refresh">
+           <normaloff>.</normaloff>.</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>

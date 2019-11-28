@@ -1032,7 +1032,7 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar punto con id %1</translation>
     </message>
 </context>
 <context>
@@ -2406,7 +2406,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search final measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search final measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida final por termino. &lt;/p&gt;&lt;p&gt; Anteponer &amp;quot;/r/&amp;quot; al frente de la búsqueda de la cadena de las medidas finales por regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida final por termino. &lt;/p&gt;&lt;p&gt; Anteponer comilla;/r/comilla; al frente de la búsqueda de la cadena de las medidas finales por expresiones regulares.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2765,7 +2765,7 @@
     </message>
     <message>
         <source>Move objects. Suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover objetos. Sufijo &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -2952,11 +2952,11 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search increments by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search increments by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar incremento por termino. &lt;/p&gt;&lt;p&gt; Anteponer comilla;/r/comilla; al frente de la búsqueda de la cadena de las medidas por expresiones regulares.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search preview calculations by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search preview calculations by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar calculos previos por termino. &lt;/p&gt;&lt;p&gt; Anteponer comilla;/r/comilla; al frente de la búsqueda de la cadena de los calculos previos por expresiones regulares.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Increment</source>
@@ -3326,7 +3326,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer coeficiente de eficiencia del diseño. El coeficiente de eficiencia del diseño es el radio del área ocupada por las piezas al limite rectangular de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación. </translation>
     </message>
     <message>
         <source>%</source>
@@ -4691,7 +4691,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar objetos de trayecto principal, &lt;b&gt;%1&lt;/b&gt; - curva de sentido inverso, &lt;b&gt;%2&lt;/b&gt; - finalizar creación</translation>
     </message>
     <message>
         <source>Manual length</source>
@@ -6276,7 +6276,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar punto con id %1</translation>
     </message>
 </context>
 <context>
@@ -8156,15 +8156,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar los objetos de la ruta, &lt;b&gt;%1&lt;/b&gt; - curva de sentido inverso</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione uno o mas objetos, presionar &lt;b&gt;%1&lt;/b&gt; - para selección múltiple, &lt;b&gt;%2&lt;/b&gt; - terminar creación</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione uno o mas objetos, presionar &lt;b&gt;%1&lt;/b&gt; - para selección múltiple, &lt;b&gt;%2&lt;/b&gt; - confirmar selecciòn</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
@@ -8208,50 +8208,54 @@ el patrón.</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta de trayectoria curvada que utiliza punto como manejador de control</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de intersección de arco y eje</translation>
     </message>
     <message>
         <source>Show main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar la ruta principal</translation>
     </message>
     <message>
         <source>Globally show pieces main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar globalmente la ruta principal de las piezas</translation>
     </message>
     <message>
         <source>Pattern messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensajes de patrón</translation>
     </message>
     <message>
         <source>Clear all messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar todos los mensajes</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation type="unfinished"></translation>
+        <translation>DEPURACION</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>ADVERTENCIA</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation type="unfinished"></translation>
+        <translation>CRITICO</translation>
     </message>
     <message>
         <source>FATAL</source>
-        <translation type="unfinished"></translation>
+        <translation>FATAL</translation>
     </message>
     <message>
         <source>INFO</source>
+        <translation>INFORMACION</translation>
+    </message>
+    <message>
+        <source>Auto refresh the list with each parse</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8415,15 +8419,15 @@ el patrón.</translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparando detalles para el diseño</translation>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo agotado.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede establecer el tamaño de página de la impresora</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
@@ -8431,7 +8435,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
+        <translation>El proceso se ha detenido debido a una excepción.</translation>
     </message>
 </context>
 <context>
@@ -8760,7 +8764,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfaz de usuario</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
@@ -8768,7 +8772,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>modo oscuro</translation>
     </message>
 </context>
 <context>
@@ -9025,75 +9029,75 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>VLayoutPassmark prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de pique V de diseño: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPassmark compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en piques del diseño V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de marac del patron del diseño V: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPlaceLabel compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en marcas del patron del diseño V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VAbstractPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de datos de diseño abstracto V: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VAbstractPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en pieza de datos abstractos V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VRawLayoutData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de datos de diseño crudo V: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VRawLayoutData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en datos de diseño crudo V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de datos de ruta de pieza del diseño V: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VLayoutPiecePathData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en datos de ruta en pieza de diseño V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>TextLine prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de línea de texto: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>TextLine compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en línea de texto: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VTextManager prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de administrador de texto V:encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VTextManager compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en administrador de texto V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de registro personalizado SA: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en registro SA personalizado: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
     <message>
         <source>VPieceNodeData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de discordancia de prefijo de datos de nodos de pieza: encabezado actual de secuencia = 0x%1 y encabezado de secuencia = 0x%2</translation>
     </message>
     <message>
         <source>VPieceNodeData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de compatibilidad en datos de nodos de pieza V: Version de clase actual = %1 y version de clase = %2</translation>
     </message>
 </context>
 <context>
@@ -9222,15 +9226,15 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;. El pique colapsó.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para el punto &apos;%1&apos; en pieza &apos;%2&apos;. No se puede encontrar interseccion.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede obtener fichas desde la formula &apos;%1&apos;. Error del analizador: %2.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -9258,51 +9262,51 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos; has invalid layout allowance. Please, check seam allowance to check how seam allowance behave.</source>
-        <translation type="unfinished"></translation>
+        <translation>La pieza  &apos;%1&apos; tiene un margen de costura del diseño no válida. Por favor revise el margen de costura para comprobar la forma que se comporta.</translation>
     </message>
     <message>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieza &apos;%1&apos;. El margen de costura no es válido.</translation>
     </message>
     <message>
         <source>Found null notch for point &apos;%1&apos; in piece &apos;%2&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se encontró un pique nulo par el punto &apos;%1&apos; en la pieza &apos;%2&apos;. La longitud es inferior a la mínima permitida.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos; con margen de costura incorporada. El usuario debe proporcionar manualmente la longitud.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular el margen de costura antes del punto  &apos;%1&apos;. Razón: %2.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular el margen de costura después del punto  &apos;%1&apos;. Razón: %2.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular el margen de costura después del punto  &apos;%1&apos;. Razón: </translation>
     </message>
     <message>
         <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede calcular la longitud del pique para el punto &apos;%1&apos;. Razon: %2.</translation>
     </message>
     <message>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pique &apos;%1&apos; no es parte de la pieza &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot cast tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede lanzar la herramienta con id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista vacía de nodos para la herramienta con id &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Formula inválida &apos;%1&apos; para herramienta con id &apos;%2&apos;. %3.</translation>
     </message>
 </context>
 <context>
@@ -10319,7 +10323,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&amp;Open individual …</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir Individual …</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -10331,11 +10335,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <source>&amp;About Tape</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sobre Tape</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -10343,11 +10347,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search measurements by term. &lt;/p&gt;&lt;p&gt;Prepend &amp;quot;/r/&amp;quot; to the front of the search string to search measurements by regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida por termino. &lt;/p&gt;&lt;p&gt; Anteponer &amp;quot;/r/&amp;quot; al frente de la búsqueda de la cadena de las medidas por regex.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Buscar medida por termino. &lt;/p&gt;&lt;p&gt; Anteponer comilla;/r/comilla; al frente de la búsqueda de la cadena de las medidas por expresiones regulares.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Quieres cambiar los permisos?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -10355,11 +10359,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Height (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Altura (%1):</translation>
     </message>
     <message>
         <source>Size (%1):</source>
-        <translation type="unfinished"></translation>
+        <translation>Talla (%1):</translation>
     </message>
 </context>
 <context>
@@ -10624,7 +10628,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Acute angle that looks intside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo agudo que se ve dentro de la pieza</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -10815,11 +10819,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridad:</translation>
     </message>
     <message>
         <source>Controls priority in layout. 0 - no priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Controla la prioridad en el diseño. 0 - sin prioridad.</translation>
     </message>
     <message>
         <source>Automatic</source>
@@ -10843,7 +10847,7 @@ Quieres guardar los cambios?</translation>
     <name>Tape</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Tape please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta compilación de prueba es anterior a %1 días. Para proporcionarle un servicio de mejor calidad, restringimos la duración de la vida útil, puede usar una compilación de prueba. Para continuar usando Tape, actualice a la compilación de prueba más reciente. La aplicación se cerrará.</translation>
     </message>
 </context>
 <context>
@@ -11031,7 +11035,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfaz de usuario</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
@@ -11039,7 +11043,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>modo oscuro</translation>
     </message>
 </context>
 <context>
@@ -11206,7 +11210,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Tabloid</source>
         <comment>Paper format</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tabloide</translation>
     </message>
     <message>
         <source>Roll 24in</source>
@@ -11258,7 +11262,7 @@ Quieres guardar los cambios?</translation>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este id (%1) no es único.</translation>
     </message>
 </context>
 <context>
@@ -11295,7 +11299,7 @@ Quieres guardar los cambios?</translation>
     <name>VAbstractPiece</name>
     <message>
         <source>Piece &apos;%1&apos;. Not enough points to build seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieza &apos;%1&apos;. No hay suficientes puntos para construir margen de costura.</translation>
     </message>
 </context>
 <context>
@@ -11898,19 +11902,19 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Switch page template orientation to landscape (export mode). This option has effect only for one of predefined page templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambie la orientación de la plantilla de página a horizontal (modo de exportación). Esta opción solo tiene efecto para una de las plantillas de página predefinidas.</translation>
     </message>
     <message>
         <source>The page height</source>
-        <translation type="unfinished"></translation>
+        <translation>La altura de la pagina</translation>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordene el detalle para seguir la dirección del hilo de la tela (modo de exportación).</translation>
     </message>
     <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Time&gt; minutos dados para que el algoritmo encuentre el mejor diseño. El tiempo debe estar en el rango de 1 minuto a 60 minutos. Valor predeterminado 1 minuto.</translation>
     </message>
     <message>
         <source>Time</source>
@@ -11918,31 +11922,31 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Coefficient</source>
-        <translation type="unfinished"></translation>
+        <translation>Coeficiente</translation>
     </message>
     <message>
         <source>Time must be in range from 1 minute to 60 minutes.</source>
-        <translation type="unfinished"></translation>
+        <translation>El tiempo debe estar en el rango de 1 minuto a 60 minutos.</translation>
     </message>
     <message>
         <source>Follow manual priority over priority by square (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Siga la prioridad manual sobre la prioridad por cuadro (modo de exportación).</translation>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Anidar copias de cantidad de cada pieza (modo de exportación).</translation>
     </message>
     <message>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer coeficiente de eficiencia del diseño &lt;coefficient&gt;. El coeficiente de eficiencia del diseño es el radio del área ocupada por las piezas al limite rectangular de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación. El coeficiente debe estar en el rango de 0 a 100. Valor predeterminado 0.</translation>
     </message>
     <message>
         <source>Coefficient must be in range from 0 to 100.</source>
-        <translation type="unfinished"></translation>
+        <translation>El coeficiente debe estar en el rango de 0 a 100.</translation>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto cortar ancho sin uso (modo de exportación).</translation>
     </message>
 </context>
 <context>
@@ -12086,11 +12090,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Not unique id (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Id no es único (%1)</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este id (%1) no es único.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -12125,7 +12129,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este id (%1) no es único.</translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12155,42 +12159,42 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Data container is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>El contenedor de datos está vacío</translation>
     </message>
     <message>
         <source>Math parser error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de analizador de matemáticas: %1</translation>
     </message>
     <message>
         <source>Result is infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>El resultado es infinito</translation>
     </message>
     <message>
         <source>Result is NaN</source>
-        <translation type="unfinished"></translation>
+        <translation>El resultado no es un numero</translation>
     </message>
     <message>
         <source>Result is zero</source>
-        <translation type="unfinished"></translation>
+        <translation>El resultado es cero</translation>
     </message>
     <message>
         <source>Result less than zero</source>
-        <translation type="unfinished"></translation>
+        <translation>El resultado es inferior que cero</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La fórmula está vacía</translation>
     </message>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>No evaluado</translation>
     </message>
 </context>
 <context>
     <name>VFormulaData</name>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>No evaluado</translation>
     </message>
     <message>
         <source>Error</source>
@@ -12198,7 +12202,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>La fórmula está vacía</translation>
     </message>
 </context>
 <context>
@@ -12290,11 +12294,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Seam allowance angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo del margen de costura</translation>
     </message>
     <message>
         <source>Passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo del pique</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -12330,7 +12334,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Passmark mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca pique</translation>
     </message>
     <message>
         <source>One line</source>
@@ -12657,15 +12661,15 @@ Quieres guardar los cambios?</translation>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta invalida %1</translation>
     </message>
     <message>
         <source>Can&apos;t find element by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se pudo encontrar elemento con el id &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear un registro de historial para la herramienta.</translation>
     </message>
 </context>
 <context>
@@ -13672,7 +13676,7 @@ Quieres guardar los cambios?</translation>
     <name>VToolSeamAllowance</name>
     <message>
         <source>Current seam allowance</source>
-        <translation>Coste de costura actual</translation>
+        <translation>Margen de costura actual</translation>
     </message>
     <message>
         <source>move pattern piece label</source>
@@ -13740,7 +13744,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este id (%1) no es único.</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
@@ -13781,7 +13785,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este id (%1) no es único.</translation>
     </message>
 </context>
 <context>
@@ -14914,7 +14918,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>CurrentSeamAllowance</source>
         <comment>Do not add space between words</comment>
-        <translation>CurrentSeamAllowance</translation>
+        <translation>MargenCosturaActual</translation>
     </message>
     <message>
         <source>degTorad</source>
@@ -15225,7 +15229,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Hide not in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>No ocultar en el diseño</translation>
     </message>
 </context>
 <context>
@@ -15244,11 +15248,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Hide All</source>
@@ -15256,14 +15260,14 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Todo</translation>
     </message>
 </context>
 <context>
     <name>Valentina</name>
     <message>
         <source>This test build is older than %1 days. To provide you with better quality service we restrict the lifetime you can use a test build. To continue using Valentina please update to newer test build. The application will be shut down.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta compilación de prueba es anterior a %1 días. Para proporcionarle un servicio de mejor calidad, restringimos la duración de la vida útil, puede usar una compilación de prueba. Para continuar usando Valentina, actualice a la versión de prueba más reciente. La aplicación se cerrará.</translation>
     </message>
 </context>
 <context>
@@ -15282,7 +15286,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ruta curvada&lt;/b&gt;: seleccione siete o más puntos, &lt;b&gt;%1&lt;/b&gt; - terminar la creación</translation>
     </message>
 </context>
 <context>
@@ -15293,7 +15297,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Intersección entre curva y eje&lt;/b&gt;: angulo= %1°; &lt;b&gt;%2&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;%3&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>
@@ -15319,7 +15323,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Intersección entre línea y eje&lt;/b&gt;: angulo= %1°; &lt;b&gt;%2&lt;/b&gt; - ángulo de adherencia, &lt;b&gt;%3&lt;/b&gt; - termina la creación</translation>
     </message>
 </context>
 <context>
@@ -15330,11 +15334,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud = %1%2, ángulo = %3°, &lt;b&gt;%4&lt;/b&gt; - angulo de adherencia, &lt;b&gt;Click del raton&lt;/b&gt; - finalizar seleccionando una posicion</translation>
     </message>
     <message>
         <source>Length = %1%2, angle = %3°, rotation angle = %4°, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - change rotation origin point, &lt;b&gt;Mouse click&lt;/b&gt; - finish creating</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitu = %1%2, angulo = %3°, angulo de rotación  = %4°, &lt;b&gt;%5&lt;/b&gt; - angulo de adherencia, &lt;b&gt;%6&lt;/b&gt; - cambiar el punto de origen de rotación, &lt;b&gt;Dar click al raton&lt;/b&gt; - terminar creación</translation>
     </message>
 </context>
 <context>
@@ -15345,7 +15349,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Angulo de rotación = %1°, &lt;b&gt;%2&lt;/b&gt; - angulo de adherencia, &lt;b&gt;Click de raton&lt;/b&gt; - terminar creacion</translation>
     </message>
 </context>
 <context>
