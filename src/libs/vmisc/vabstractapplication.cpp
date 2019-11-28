@@ -49,9 +49,14 @@
 #  include <unistd.h>
 #endif
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#   include "unicode/putil.h"
+#endif
+
 namespace
 {
-QString ApplicationFilePath(int &argc, char **argv)
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+QString ApplicationFilePath(const int &argc, char **argv)
 {
     if (argc)
     {
@@ -109,6 +114,7 @@ QString ApplicationFilePath(int &argc, char **argv)
 #endif
     return QString();
 }
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 }
 
 const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
@@ -340,6 +346,7 @@ bool VAbstractApplication::IsPatternMessage(const QString &message) const
     return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
 }
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::SetICUData(int &argc, char **argv)
 {
@@ -348,8 +355,9 @@ void VAbstractApplication::SetICUData(int &argc, char **argv)
      * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
      */
     const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
-    qputenv("ICU_DATA", QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8());
+    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8());
 }
+#endif // defined(Q_OS_LINUX)
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_WIN)

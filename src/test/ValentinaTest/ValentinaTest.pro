@@ -226,6 +226,10 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
+contains(DEFINES, APPIMAGE) {
+    unix:!macx: LIBS += -licudata -licui18n -licuuc
+}
+
 DATA_RESOURCE = share/test_data.qrc # External Binary Resource
 
 !exists($${OUT_PWD}/$${DESTDIR}/test_data.rcc) {

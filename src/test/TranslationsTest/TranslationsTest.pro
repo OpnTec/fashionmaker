@@ -163,3 +163,7 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser
 
 INCLUDEPATH += $${PWD}/../../libs/qmuparser
 DEPENDPATH += $${PWD}/../../libs/qmuparser
+
+contains(DEFINES, APPIMAGE) {
+    unix:!macx: LIBS += -licudata -licui18n -licuuc
+}

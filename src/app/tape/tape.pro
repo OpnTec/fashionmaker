@@ -430,6 +430,10 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
+contains(DEFINES, APPIMAGE) {
+    unix:!macx: LIBS += -licudata -licui18n -licuuc
+}
+
 noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
     # do nothing
 } else {

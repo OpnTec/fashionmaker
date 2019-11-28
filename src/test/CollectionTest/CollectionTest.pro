@@ -188,6 +188,10 @@ else:unix: LIBS += -L$${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR} -lvpro
 INCLUDEPATH += $${PWD}/../../libs/vpropertyexplorer
 DEPENDPATH += $${PWD}/../../libs/vpropertyexplorer
 
+contains(DEFINES, APPIMAGE) {
+    unix:!macx: LIBS += -licudata -licui18n -licuuc
+}
+
 TAPE_TEST_FILES += \
     tst_tape/keiko.vit \
     tst_tape/empty.vit \

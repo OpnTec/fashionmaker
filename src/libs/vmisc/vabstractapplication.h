@@ -129,7 +129,9 @@ public:
     static const QString patternMessageSignature;
     bool IsPatternMessage(const QString &message) const;
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
     static void SetICUData(int &argc, char ** argv);
+#endif
 
 protected:
     QUndoStack         *undoStack;
