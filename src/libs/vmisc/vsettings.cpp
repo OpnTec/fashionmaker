@@ -71,6 +71,8 @@ namespace
 {
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingConfigurationLabelLanguage,
                           (QLatin1String("configuration/label_language")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAutoRefreshPatternMessage,
+                          (QLatin1String("configuration/autoRefreshPatternMessage")))
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPathsLayout, (QLatin1String("paths/layout")))
 
@@ -764,7 +766,19 @@ int VSettings::GetDefMaxPatternMessageFontSize()
 void VSettings::SetPatternMessageFontSize(int size)
 {
     setValue(*settingPatternMessagesFontSize, qBound(GetDefMinPatternMessageFontSize(), size,
-                                                             GetDefMaxPatternMessageFontSize()));
+                                                     GetDefMaxPatternMessageFontSize()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetAutoRefreshPatternMessage() const
+{
+    return value(*settingAutoRefreshPatternMessage, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetAutoRefreshPatternMessage(bool value)
+{
+    setValue(*settingAutoRefreshPatternMessage, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

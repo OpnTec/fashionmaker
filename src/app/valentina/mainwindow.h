@@ -205,6 +205,7 @@ private slots:
     void ChangedHeight(const QString &text);
 
     void ShowProgress();
+    void ClearPatternMessages();
 
 private:
     Q_DISABLE_COPY(MainWindow)

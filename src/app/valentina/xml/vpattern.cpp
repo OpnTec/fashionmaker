@@ -167,6 +167,7 @@ void VPattern::Parse(const Document &parse)
             break;
     }
 
+    emit PreParseState();
     m_parsing = true;
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)

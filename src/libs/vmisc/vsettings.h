@@ -195,6 +195,9 @@ public:
     static int GetDefMaxPatternMessageFontSize();
     void SetPatternMessageFontSize(int size);
 
+    bool GetAutoRefreshPatternMessage() const;
+    void SetAutoRefreshPatternMessage(bool value);
+
 private:
     Q_DISABLE_COPY(VSettings)
 

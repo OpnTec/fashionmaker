@@ -327,12 +327,19 @@ MainWindow::MainWindow(QWidget *parent)
         ui->plainTextEditPatternMessages->SetFilter(text);
     });
 
-    connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, [this]()
+    connect(ui->toolButtonClearMessages, &QToolButton::clicked, this, &MainWindow::ClearPatternMessages);
+
+    ui->toolButtonAutoRefresh->setChecked(qApp->ValentinaSettings()->GetAutoRefreshPatternMessage());
+    connect(ui->toolButtonAutoRefresh, &QToolButton::clicked, this, [](bool checked)
     {
-        ui->plainTextEditPatternMessages->clear();
-        if (not m_unreadPatternMessage.isNull())
+        qApp->ValentinaSettings()->SetAutoRefreshPatternMessage(checked);
+    });
+
+    connect(doc, &VPattern::PreParseState, this, [this]()
+    {
+        if (ui->toolButtonAutoRefresh->isChecked())
         {
-            m_unreadPatternMessage->setText(QString());
+            ClearPatternMessages();
         }
     });
 }
@@ -3700,6 +3707,16 @@ void MainWindow::ShowProgress()
         m_taskbarProgress->setValue(newValue);
 #endif
         qApp->processEvents();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ClearPatternMessages()
+{
+    ui->plainTextEditPatternMessages->clear();
+    if (not m_unreadPatternMessage.isNull())
+    {
+        m_unreadPatternMessage->setText(QString());
     }
 }
 

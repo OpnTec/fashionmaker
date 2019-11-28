@@ -119,6 +119,9 @@ public:
 
     int ElementsToParse() const;
 
+signals:
+    void PreParseState();
+
 public slots:
     virtual void LiteParseTree(const Document &parse) override;
 

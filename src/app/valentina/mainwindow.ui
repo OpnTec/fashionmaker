@@ -2042,6 +2042,25 @@
         </widget>
        </item>
        <item>
+        <widget class="QToolButton" name="toolButtonAutoRefresh">
+         <property name="toolTip">
+          <string>Auto refresh the list with each parse</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset theme="view-refresh"/>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="VLineEdit" name="lineEditMessagesFilter">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
