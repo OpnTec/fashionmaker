@@ -36,13 +36,6 @@
 
 int main(int argc, char *argv[])
 {
-    Q_INIT_RESOURCE(tapeicon);
-    Q_INIT_RESOURCE(theme);
-    Q_INIT_RESOURCE(icon);
-    Q_INIT_RESOURCE(schema);
-    Q_INIT_RESOURCE(flags);
-    Q_INIT_RESOURCE(style);
-
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
      * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
@@ -50,6 +43,13 @@ int main(int argc, char *argv[])
      */
     VAbstractApplication::SetICUData(argc, argv);
 #endif
+
+    Q_INIT_RESOURCE(tapeicon);
+    Q_INIT_RESOURCE(theme);
+    Q_INIT_RESOURCE(icon);
+    Q_INIT_RESOURCE(schema);
+    Q_INIT_RESOURCE(flags);
+    Q_INIT_RESOURCE(style);
 
     QT_REQUIRE_VERSION(argc, argv, "5.4.0")// clazy:exclude=qstring-arg,qstring-allocations
 
