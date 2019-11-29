@@ -51,6 +51,9 @@
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #   include "unicode/putil.h"
+extern "C" {
+#   include "../vmisc/binreloc.h"
+}
 #endif
 
 namespace
@@ -346,19 +349,25 @@ bool VAbstractApplication::IsPatternMessage(const QString &message) const
     return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
 }
 
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+//#if defined(APPIMAGE) && defined(Q_OS_LINUX)
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractApplication::SetICUData(int &argc, char **argv)
-{
-    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
-     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
-     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
-     */
-//    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
-//    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
-    u_setDataDirectory("/home/dismine");
-}
-#endif // defined(Q_OS_LINUX)
+//void VAbstractApplication::SetICUData(int &argc, char **argv)
+//{
+//    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
+//     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
+//     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
+//     */
+////    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
+////    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
+//    BrInitError error;
+//    if (br_init (&error))
+//    {
+//        exe_dir = br_find_exe_dir (nullptr);
+//        u_setDataDirectory(exe_dir);
+//    }
+
+//}
+//#endif // defined(Q_OS_LINUX)
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_WIN)

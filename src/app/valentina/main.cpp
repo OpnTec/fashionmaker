@@ -34,6 +34,18 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
+#   include "../vmisc/backport/qscopeguard.h"
+#else
+#   include <QScopeGuard>
+#endif
+#   include "unicode/putil.h"
+extern "C" {
+#   include "../vmisc/binreloc.h"
+}
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
 //---------------------------------------------------------------------------------------------------------------------
 
 int main(int argc, char *argv[])
@@ -43,8 +55,18 @@ int main(int argc, char *argv[])
      * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
      * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
      */
-    VAbstractApplication::SetICUData(argc, argv);
-#endif
+//    VAbstractApplication::SetICUData(argc, argv);
+    char *exe_dir = nullptr;
+
+    BrInitError error;
+    if (br_init (&error))
+    {
+        exe_dir = br_find_exe_dir (nullptr);
+        u_setDataDirectory(exe_dir);
+    }
+
+    auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     Q_INIT_RESOURCE(cursor);
     Q_INIT_RESOURCE(icon);
@@ -108,6 +130,13 @@ int main(int argc, char *argv[])
     }
 
     QTimer::singleShot(msec, &w, &MainWindow::ProcessCMD);
+
+#if defined(APPIMAGE) && defined(Q_OS_LINUX)
+    if (exe_dir)
+    {
+        qDebug() << "Path to exe dir:" << exe_dir;
+    }
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     return app.exec();
 }
