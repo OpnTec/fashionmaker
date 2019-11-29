@@ -59,8 +59,19 @@ int main(int argc, char *argv[])
     BrInitError error;
     if (br_init (&error))
     {
-        exe_dir = br_find_exe_dir (nullptr);
-        u_setDataDirectory(exe_dir);
+        char *path = br_find_exe_dir(nullptr);
+        if (path)
+        {
+            const char* correction = "/../share/icu";
+            exe_dir = static_cast<char *> (malloc(strlen(path)+strlen(correction)+1));
+            if(exe_dir)
+            {
+                strcpy(exe_dir, path);
+                strcat(exe_dir, correction);
+                u_setDataDirectory(exe_dir);
+            }
+            free(path);
+        }
     }
 
     auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
@@ -102,7 +113,7 @@ int main(int argc, char *argv[])
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
     if (exe_dir)
     {
-        qDebug() << "Path to exe dir:" << exe_dir;
+        qDebug() << "Path to ICU folder:" << exe_dir;
     }
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 

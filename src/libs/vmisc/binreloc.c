@@ -244,6 +244,8 @@ _br_find_exe_for_symbol (const void *symbol, BrInitError *error)
             char *new_address_string = (char *) realloc (address_string, address_string_len);
             if (new_address_string == NULL){
                 *error = BR_INIT_ERROR_NOMEM;
+                free (address_string);
+                fclose (f);
                 return (char *) NULL;
             }
             else
