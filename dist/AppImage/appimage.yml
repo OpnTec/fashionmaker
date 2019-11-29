@@ -27,6 +27,7 @@ build:
     - libQt5Core-devel
     - libpng-devel
     - libqt5-linguist-devel
+    - libicu-devel # to be able to fix the icu data path
     - linuxdeployqt # required tooling, see script section
 
 # resources which will become available as part of the source.
@@ -52,13 +53,15 @@ script:
 #           - $BUILD_SOURCE_DIR point to the source directory
 #           - $BUILD_APPDIR point to the AppDir. This directory will become the content of the AppImage
   - cd $BUILD_SOURCE_DIR/Valentina_git
-  - qmake-qt5 PREFIX=/usr LRELEASE=lrelease-qt5 Valentina.pro -r "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
+  - qmake-qt5 PREFIX=/usr PREFIX_LIB=/usr/lib LRELEASE=lrelease-qt5 Valentina.pro -r DEFINES+=APPIMAGE "CONFIG += noTests noRunPath no_ccache noDebugSymbols"
   - make -j$(nproc)
   - make INSTALL_ROOT=$BUILD_APPDIR -j$(nproc) install
-  - mkdir -p $BUILD_APPDIR/usr/share/metainfo
 
 # create the image file
   - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
-  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/*.desktop -bundle-non-qt-libs
+# bundle icu's data
+  - mkdir -p $BUILD_APPDIR/usr/share/icu
+  - cp /usr/share/icu/*/icudt*.dat $BUILD_APPDIR/usr/share/icu/
+  - linuxdeployqt $BUILD_APPDIR/usr/share/applications/valentina.desktop -bundle-non-qt-libs -verbose=2
 # Show what we have done
   - find $BUILD_APPDIR/
