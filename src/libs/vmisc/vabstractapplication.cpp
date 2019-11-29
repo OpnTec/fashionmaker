@@ -355,7 +355,7 @@ void VAbstractApplication::SetICUData(int &argc, char **argv)
      * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
      */
     const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
-    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8());
+    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
 }
 #endif // defined(Q_OS_LINUX)
 
