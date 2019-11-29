@@ -354,8 +354,9 @@ void VAbstractApplication::SetICUData(int &argc, char **argv)
      * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
      * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
      */
-    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
-    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
+//    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
+//    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
+    u_setDataDirectory("/home/dismine");
 }
 #endif // defined(Q_OS_LINUX)
 
