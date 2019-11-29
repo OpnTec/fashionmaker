@@ -79,7 +79,11 @@ CONFIG(release, debug|release){
     } else {
         # Turn on debug symbols in release mode on Unix systems.
         # On Mac OS X temporarily disabled. Need find way how to strip binary file.
-        !macx:!*msvc*:QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+        !macx:!*msvc*{
+            QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
+            QMAKE_LFLAGS_RELEASE =
+        }
     }
 }
 
@@ -90,21 +94,21 @@ else:unix: LIBS += -L$$OUT_PWD/../../libs/qmuparser/bin/ -lqmuparser
 INCLUDEPATH += $$PWD/../../libs/qmuparser
 DEPENDPATH += $$PWD/../../libs/qmuparser
 
-noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-    # do nothing
-} else {
-    noStripDebugSymbols { # For enable run qmake with CONFIG+=noStripDebugSymbols
+CONFIG(release, debug|release){
+    noStripDebugSymbols {
         # do nothing
     } else {
-        # Strip after you link all libaries.
-        CONFIG(release, debug|release){
-            unix:!macx{
+        !macx:!*msvc*{
+            noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
+                # Strip after you link all libaries.
+                QMAKE_POST_LINK += objcopy --strip-debug ${TARGET}
+            } else {
                 # Strip debug symbols.
-                QMAKE_POST_LINK += objcopy --only-keep-debug $(TARGET) $(TARGET).debug &&
-                QMAKE_POST_LINK += strip --strip-debug --strip-unneeded $(TARGET) &&
-                QMAKE_POST_LINK += objcopy --add-gnu-debuglink $(TARGET).debug $(TARGET)
+                QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
+                QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
+                QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
 
-                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
+                QMAKE_DISTCLEAN += ${TARGET}.dbg
             }
         }
     }
