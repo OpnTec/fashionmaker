@@ -18,7 +18,9 @@ SOURCES += \
 *msvc*:SOURCES += $$PWD/stable.cpp
 
 contains(DEFINES, APPIMAGE) {
-    SOURCES += $$PWD/binreloc.c
+    SOURCES += \
+        $$PWD/binreloc.c \
+        $$PWD/appimage.cpp
 }
 
 HEADERS += \
@@ -50,7 +52,9 @@ HEADERS += \
     $$PWD/backport/qscopeguard.h
 
 contains(DEFINES, APPIMAGE) {
-    SOURCES += $$PWD/binreloc.h
+    SOURCES += \
+        $$PWD/binreloc.h \
+        $$PWD/appimage.h
 }
 
 # Qt's versions

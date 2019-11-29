@@ -49,77 +49,6 @@
 #  include <unistd.h>
 #endif
 
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-#   include "unicode/putil.h"
-extern "C" {
-#   include "../vmisc/binreloc.h"
-}
-#endif
-
-namespace
-{
-#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-QString ApplicationFilePath(const int &argc, char **argv)
-{
-    if (argc)
-    {
-        static QByteArray procName = QByteArray(argv[0]);
-        if (procName != argv[0])
-        {
-            procName = QByteArray(argv[0]);
-        }
-    }
-#if defined( Q_OS_UNIX )
-#  if defined(Q_OS_LINUX) && (!defined(Q_OS_ANDROID) || defined(Q_OS_ANDROID_EMBEDDED))
-    // Try looking for a /proc/<pid>/exe symlink first which points to
-    // the absolute path of the executable
-    QFileInfo pfi(QStringLiteral("/proc/%1/exe").arg(getpid()));
-    if (pfi.exists() && pfi.isSymLink())
-    {
-        return pfi.canonicalFilePath();
-    }
-#  endif
-    if (argc > 0)
-    {
-        QString argv0 = QFile::decodeName(argv[0]);
-        QString absPath;
-        if (not argv0.isEmpty() && argv0.at(0) == QLatin1Char('/'))
-        {
-            /*
-              If argv0 starts with a slash, it is already an absolute
-              file path.
-            */
-            absPath = argv0;
-        }
-        else if (argv0.contains(QLatin1Char('/')))
-        {
-            /*
-              If argv0 contains one or more slashes, it is a file path
-              relative to the current directory.
-            */
-            absPath = QDir::current().absoluteFilePath(argv0);
-        }
-        else
-        {
-            /*
-              Otherwise, the file path has to be determined using the
-              PATH environment variable.
-            */
-            absPath = QStandardPaths::findExecutable(argv0);
-        }
-        absPath = QDir::cleanPath(absPath);
-        QFileInfo fi(absPath);
-        if (fi.exists())
-        {
-            return fi.canonicalFilePath();
-        }
-    }
-#endif
-    return QString();
-}
-#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
-}
-
 const QString VAbstractApplication::patternMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -348,26 +277,6 @@ bool VAbstractApplication::IsPatternMessage(const QString &message) const
 {
     return VAbstractApplication::ClearMessage(message).startsWith(patternMessageSignature);
 }
-
-//#if defined(APPIMAGE) && defined(Q_OS_LINUX)
-//---------------------------------------------------------------------------------------------------------------------
-//void VAbstractApplication::SetICUData(int &argc, char **argv)
-//{
-//    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
-//     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
-//     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
-//     */
-////    const QString appDirPath = QFileInfo(ApplicationFilePath(argc, argv)).path();
-////    u_setDataDirectory(QString(appDirPath + QStringLiteral("/../share/icu")).toUtf8().constData());
-//    BrInitError error;
-//    if (br_init (&error))
-//    {
-//        exe_dir = br_find_exe_dir (nullptr);
-//        u_setDataDirectory(exe_dir);
-//    }
-
-//}
-//#endif // defined(Q_OS_LINUX)
 
 //---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_WIN)

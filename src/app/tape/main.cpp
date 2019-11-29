@@ -40,42 +40,16 @@
 #else
 #   include <QScopeGuard>
 #endif
-#   include "unicode/putil.h"
-extern "C" {
-#   include "../vmisc/binreloc.h"
-}
+#   include "../vmisc/appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
 int main(int argc, char *argv[])
 {
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
-    /* When deploying with AppImage based on OpenSuse, the ICU library has a hardcoded path to the icudt*.dat file.
-     * This prevents the library from using shared in memory data. There are few ways to resolve this issue. According
-     * to documentation we can either use ICU_DATA environment variable or the function u_setDataDirectory().
-     */
-//    VAbstractApplication::SetICUData(argc, argv);
-    char *exe_dir = nullptr;
-
-    BrInitError error;
-    if (br_init (&error))
-    {
-        char *path = br_find_exe_dir(nullptr);
-        if (path)
-        {
-            const char* correction = "/../share/icu";
-            exe_dir = static_cast<char *> (malloc(strlen(path)+strlen(correction)+1));
-            if(exe_dir)
-            {
-                strcpy(exe_dir, path);
-                strcat(exe_dir, correction);
-                u_setDataDirectory(exe_dir);
-            }
-            free(path);
-        }
-    }
-
+    /* Fix path to ICU_DATA when run AppImage.*/
+    char *exe_dir = IcuDataPath("/../share/icu");
     auto FreeMemory = qScopeGuard([exe_dir] {free(exe_dir);});
-#endif
+#endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
     Q_INIT_RESOURCE(tapeicon);
     Q_INIT_RESOURCE(theme);
