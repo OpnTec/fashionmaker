@@ -8256,7 +8256,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Auto refresh the list with each parse</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar automáticamente la lista con cada análisis</translation>
     </message>
 </context>
 <context>

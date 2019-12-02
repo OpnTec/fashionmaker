@@ -8055,7 +8055,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Internal path tool</source>
-        <translation>Binnenlijnen gereedschap</translation>
+        <translation>Binnenlijnen tekenen</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -8255,7 +8255,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto refresh the list with each parse</source>
-        <translation type="unfinished"></translation>
+        <translation>Hervul de lijst automatisch na elke opsplitsing</translation>
     </message>
 </context>
 <context>
