@@ -505,22 +505,19 @@ void DialogPlaceLabel::FillPlaceLabelTypes()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::CheckPieces()
 {
-    if (not m_showMode)
+    QColor color;
+    if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
     {
-        QColor color;
-        if (ui->comboBoxPiece->count() <= 0 || ui->comboBoxPiece->currentIndex() == -1)
-        {
-            m_flagError = false;
-            color = errorColor;
-        }
-        else
-        {
-            m_flagError = true;
-            color = OkColor(this);
-        }
-        ChangeColor(ui->labelPiece, color);
-        CheckState();
+        m_flagError = false;
+        color = errorColor;
     }
+    else
+    {
+        m_flagError = true;
+        color = OkColor(this);
+    }
+    ChangeColor(ui->labelPiece, color);
+    CheckState();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

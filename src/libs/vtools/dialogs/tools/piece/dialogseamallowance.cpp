@@ -870,14 +870,14 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
     else if (selectedAction == actionOption)
     {
         auto *dialog = new DialogPlaceLabel(data, labelId, this);
-        dialog->SetCenterPoint(labelId);
+        dialog->EnbleShowMode(true);
         dialog->SetLabelType(currentLabel.GetLabelType());
         dialog->SetWidth(currentLabel.GetWidthFormula());
         dialog->SetHeight(currentLabel.GetHeightFormula());
         dialog->SetAngle(currentLabel.GetAngleFormula());
         dialog->SetFormulaVisible(currentLabel.GetVisibilityTrigger());
         dialog->SetPieceId(toolId);
-        dialog->EnbleShowMode(true);
+        dialog->SetCenterPoint(currentLabel.GetCenterPoint());
         m_dialog = dialog;
         m_dialog->setModal(true);
         connect(m_dialog.data(), &DialogTool::DialogClosed, this, &DialogSeamAllowance::PlaceLabelDialogClosed);
