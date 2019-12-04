@@ -42,7 +42,11 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="comboBoxPassmarks"/>
+          <widget class="QComboBox" name="comboBoxPassmarks">
+           <property name="toolTip">
+            <string>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
