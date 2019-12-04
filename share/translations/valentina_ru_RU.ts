@@ -1032,7 +1032,7 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается найти точку с идентификатором %1</translation>
     </message>
 </context>
 <context>
@@ -6278,7 +6278,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается найти точку с идентификатором %1</translation>
     </message>
 </context>
 <context>
@@ -8257,7 +8257,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto refresh the list with each parse</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматическое обновление списка ошибок</translation>
     </message>
 </context>
 <context>
@@ -10674,6 +10674,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Box mark</source>
         <translation>П метка</translation>
+    </message>
+    <message>
+        <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

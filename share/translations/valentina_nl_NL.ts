@@ -10673,6 +10673,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Box mark</source>
         <translation>Vierkant merkteken</translation>
     </message>
+    <message>
+        <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TabPaths</name>
