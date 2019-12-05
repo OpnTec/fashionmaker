@@ -1117,7 +1117,7 @@ void TMainWindow::Remove()
 
     if (ui->tableWidget->rowCount() > 0)
     {
-        ui->tableWidget->selectRow(row);
+        ui->tableWidget->selectRow(row >= ui->tableWidget->rowCount() ? ui->tableWidget->rowCount() - 1 : row);
     }
     else
     {
@@ -2581,6 +2581,8 @@ void TMainWindow::MFields(bool enabled)
         ui->toolButtonFindPrevious->setEnabled(false);
         ui->toolButtonFindNext->setEnabled(false);
     }
+
+    Controls();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
