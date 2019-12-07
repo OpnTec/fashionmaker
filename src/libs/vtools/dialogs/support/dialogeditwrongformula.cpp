@@ -536,7 +536,9 @@ void DialogEditWrongFormula::ShowVariable(const QMap<key, val> &var)
         {// If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
             QTableWidgetItem *item = new QTableWidgetItem(iMap.key());
-            item->setFont(QFont("Times", 12, QFont::Bold));
+            QFont font = item->font();
+            font.setBold(true);
+            item->setFont(font);
             ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
         }
     }
@@ -570,11 +572,15 @@ void DialogEditWrongFormula::ShowMeasurements(const QMap<QString, QSharedPointer
         {// If we create this variable don't show
             ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
             QTableWidgetItem *itemName = new QTableWidgetItem(iMap.key());
-            itemName->setFont(QFont("Times", 12, QFont::Bold));
+            QFont fontName = itemName->font();
+            fontName.setBold(true);
+            itemName->setFont(fontName);
             itemName->setToolTip(itemName->text());
 
             QTableWidgetItem *itemFullName = new QTableWidgetItem();
-            itemFullName->setFont(QFont("Times", 12, QFont::Bold));
+            QFont fontFullName = itemName->font();
+            fontFullName.setBold(true);
+            itemFullName->setFont(fontFullName);
             if (iMap.value()->IsCustom())
             {
                 itemFullName->setText(iMap.value()->GetGuiText());
@@ -612,7 +618,9 @@ void DialogEditWrongFormula::ShowFunctions()
     {
         ui->tableWidget->setRowCount(ui->tableWidget->rowCount() + 1);
         QTableWidgetItem *item = new QTableWidgetItem(i.value().translate(qApp->Settings()->GetLocale()));
-        item->setFont(QFont("Times", 12, QFont::Bold));
+        QFont font = item->font();
+        font.setBold(true);
+        item->setFont(font);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
         item->setToolTip(i.value().getMdisambiguation());
         ++i;

@@ -182,7 +182,9 @@ void DialogHistory::FillTable()
             }
 
             QTableWidgetItem *item = new QTableWidgetItem(historyRecord);
-            item->setFont(QFont("Times", 12, QFont::Bold));
+            QFont font = item->font();
+            font.setBold(true);
+            item->setFont(font);
             item->setFlags(item->flags() ^ Qt::ItemIsEditable);
             ui->tableWidget->setItem(currentRow, 1, item);
             ++count;

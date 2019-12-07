@@ -210,7 +210,9 @@ void DialogIncrements::FillTable(const QMap<QString, T> &varTable, QTableWidget 
 
         QTableWidgetItem *item = new QTableWidgetItem(i.key());
         item->setTextAlignment(Qt::AlignLeft);
-        item->setFont(QFont(QStringLiteral("Times"), 12, QFont::Bold));
+        QFont font = item->font();
+        font.setBold(true);
+        item->setFont(font);
         table->setItem(currentRow, 0, item);
 
         item = new QTableWidgetItem(qApp->LocaleToString(length));
