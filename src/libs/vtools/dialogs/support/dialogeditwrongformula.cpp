@@ -506,7 +506,7 @@ void DialogEditWrongFormula::InitVariables()
 void DialogEditWrongFormula::SetDescription(const QString &name, qreal value, const QString &unit,
                                             const QString &description)
 {
-    const QString desc = QString("%1(%2 %3) - %4").arg(name).arg(value).arg(unit, description);
+    const QString desc = QStringLiteral("%1(%2 %3) - %4").arg(name).arg(value).arg(unit, description);
     ui->labelDescription->setText(desc);
 }
 
