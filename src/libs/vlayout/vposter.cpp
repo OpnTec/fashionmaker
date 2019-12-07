@@ -84,7 +84,9 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
 
     QVector<QGraphicsItem *> data;
     QPen pen(Qt::NoBrush, 1, Qt::DashLine);
+    QPen rulePen(Qt::NoBrush, 1, Qt::SolidLine);
     pen.setColor(Qt::black);
+    rulePen.setColor(Qt::black);
 
     if (img.columns == 1 && img.rows == 1)
     {
@@ -131,6 +133,21 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
     line->setLine(rec.x(), rec.y() + rec.height()-static_cast<int>(allowance),
                   rec.x() + rec.width(), rec.y() + rec.height()-static_cast<int>(allowance));
     data.append(line);
+
+    double marksCount = rec.width() / ToPixel(10);
+    int i = 0;
+    while (i < marksCount)
+    {
+        auto *ruleLine = new QGraphicsLineItem(parent);
+        ruleLine->setPen(rulePen);
+        ruleLine->setLine(rec.x() + ToPixel(10) * i,
+                      rec.y() + rec.height()-static_cast<int>(allowance),
+                      rec.x() + ToPixel(10) * i,
+                      rec.y() + rec.height()-static_cast<int>(allowance) + ToPixel(2));
+        data.append(ruleLine);
+        i++;
+    }
+
 
     // Labels
     auto *labels = new QGraphicsTextItem(parent);
