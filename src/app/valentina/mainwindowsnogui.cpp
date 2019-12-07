@@ -342,6 +342,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                         isLayoutStale = false;
                         papersCount = lGenerator.PapersCount();
                         hasResult = true;
+                        qDebug() << "Layout efficiency: " << efficiency;
                     }
                     else
                     {
