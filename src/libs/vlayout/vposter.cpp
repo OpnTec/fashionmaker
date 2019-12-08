@@ -39,9 +39,21 @@
 #include <QVector>
 #include <Qt>
 #include <QDebug>
+#include <QFont>
+#include <QFontMetrics>
 
 #include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
+#include "../vmisc/vabstractapplication.h"
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+qreal ToPixel(qreal val)
+{
+    return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
+}
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPoster::VPoster(const QPrinter *printer)
@@ -84,9 +96,7 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
 
     QVector<QGraphicsItem *> data;
     QPen pen(Qt::NoBrush, 1, Qt::DashLine);
-    QPen rulePen(Qt::NoBrush, 1, Qt::SolidLine);
     pen.setColor(Qt::black);
-    rulePen.setColor(Qt::black);
 
     if (img.columns == 1 && img.rows == 1)
     {
@@ -134,20 +144,8 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
                   rec.x() + rec.width(), rec.y() + rec.height()-static_cast<int>(allowance));
     data.append(line);
 
-    double marksCount = rec.width() / ToPixel(10);
-    int i = 0;
-    while (i < marksCount)
-    {
-        auto *ruleLine = new QGraphicsLineItem(parent);
-        ruleLine->setPen(rulePen);
-        ruleLine->setLine(rec.x() + ToPixel(10) * i,
-                      rec.y() + rec.height()-static_cast<int>(allowance),
-                      rec.x() + ToPixel(10) * i,
-                      rec.y() + rec.height()-static_cast<int>(allowance) + ToPixel(2));
-        data.append(ruleLine);
-        i++;
-    }
-
+    // Ruler
+    Ruler(data, parent, rec);
 
     // Labels
     auto *labels = new QGraphicsTextItem(parent);
@@ -283,7 +281,59 @@ QRect VPoster::PageRect() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-qreal VPoster::ToPixel(qreal val)
+void VPoster::Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect rec) const
 {
-    return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
+    SCASSERT(parent != nullptr)
+
+    QPen rulePen(Qt::NoBrush, 1, Qt::SolidLine);
+    rulePen.setColor(Qt::black);
+
+    const qreal notchHeight = ToPixel(3); // mm
+    const qreal shortNotchHeight = ToPixel(1.1); // mm
+    Unit patternUnits = qApp->patternUnit();
+    const qreal step = UnitConvertor(1, patternUnits, Unit::Px);
+    double marksCount = rec.width() / step;
+    int i = 0;
+    while (i < marksCount)
+    {
+        if (i != 0)
+        { // don't need 0 notch
+            auto *middleRuleLine = new QGraphicsLineItem(parent);
+            middleRuleLine->setPen(rulePen);
+            middleRuleLine->setLine(rec.x() + step * i - step / 2.,
+                          rec.y() + rec.height()-static_cast<int>(allowance),
+                          rec.x() + step * i - step / 2.,
+                          rec.y() + rec.height()-static_cast<int>(allowance) + shortNotchHeight);
+            data.append(middleRuleLine);
+
+            auto *ruleLine = new QGraphicsLineItem(parent);
+            ruleLine->setPen(rulePen);
+            ruleLine->setLine(rec.x() + step * i,
+                          rec.y() + rec.height()-static_cast<int>(allowance),
+                          rec.x() + step * i,
+                          rec.y() + rec.height()-static_cast<int>(allowance) + notchHeight);
+            data.append(ruleLine);
+        }
+        else
+        {
+            auto *units = new QGraphicsTextItem(parent);
+            units->setPlainText(patternUnits == Unit::Cm || patternUnits == Unit::Mm ? tr("cm", "unit") :
+                                                                                       tr("in", "unit"));
+            QFont fnt = units->font();
+            fnt.setPointSize(10);
+
+            qreal unitsWidth = 0;
+            QFontMetrics fm(fnt);
+        #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+            unitsWidth = fm.horizontalAdvance(units->toPlainText());
+        #else
+            unitsWidth = fm.width(units->toPlainText());
+        #endif
+            units->setPos(rec.x() + step*0.5-unitsWidth*0.7,
+                          rec.y() + rec.height()-static_cast<int>(allowance)-shortNotchHeight);
+            units->setFont(fnt);
+            data.append(units);
+        }
+        ++i;
+    }
 }

@@ -84,7 +84,7 @@ private:
 
     QRect PageRect() const;
 
-    static qreal ToPixel(qreal val);
+    void Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect rec) const;
 };
 
 #endif // VPOSTER_H
