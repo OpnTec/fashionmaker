@@ -29,7 +29,6 @@
 #include "vposter.h"
 
 #include <QGraphicsLineItem>
-#include <QGraphicsPixmapItem>
 #include <QGraphicsTextItem>
 #include <QPen>
 #include <QPixmap>
@@ -41,10 +40,14 @@
 #include <QDebug>
 #include <QFont>
 #include <QFontMetrics>
+#include <QImageReader>
+#include <QPixmapCache>
+#include <QPainter>
 
 #include "../vmisc/vmath.h"
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../ifc/exception/vexception.h"
 
 namespace
 {
@@ -52,6 +55,65 @@ namespace
 qreal ToPixel(qreal val)
 {
     return val / 25.4 * PrintDPI; // Mm to pixels with current dpi.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QImage Grayscale(QImage image)
+{
+    for (int ii = 0; ii < image.height(); ii++)
+    {
+        uchar* scan = image.scanLine(ii);
+        int depth = 4;
+        for (int jj = 0; jj < image.width(); jj++)
+        {
+            QRgb* rgbpixel = reinterpret_cast<QRgb*>(scan + jj * depth);
+            int gray = qGray(*rgbpixel);
+            *rgbpixel = QColor(gray, gray, gray, qAlpha(*rgbpixel)).rgba();
+        }
+    }
+
+    return image;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QPixmap WatermarkImageFromCache(const VWatermarkData &watermarkData, const QString &watermarkPath, QString &error)
+{
+    QPixmap pixmap;
+    QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
+
+    if (not QPixmapCache::find(imagePath, pixmap))
+    {
+        QImageReader imageReader(imagePath);
+        QImage watermark = imageReader.read();
+        if (watermark.isNull())
+        {
+            error = imageReader.errorString();
+            return pixmap;
+        }
+
+        if (watermarkData.grayscale)
+        {
+            watermark = Grayscale(watermark);
+            watermark.save("/home/dismine/grayscale.png", "PNG");
+        }
+
+        // Workaround for QGraphicsPixmapItem opacity problem.
+        // Opacity applied only if use a cached pixmap and only after first draw. First image always has opacity 1.
+        // Preparing an image manually allows to avoid the problem.
+        QImage tmp(watermark.width(), watermark.height(), watermark.format());
+        tmp = tmp.convertToFormat(QImage::Format_ARGB32);
+        tmp.fill(Qt::transparent);
+        QPainter p;
+        p.begin(&tmp);
+        p.setOpacity(watermarkData.opacity/100.);
+        p.drawImage(QPointF(), watermark);
+        p.end();
+
+        pixmap = QPixmap::fromImage(tmp);
+
+        QPixmapCache::insert(imagePath, pixmap);
+    }
+    return pixmap;
 }
 }
 
@@ -87,6 +149,31 @@ QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientat
     }
 
     return poster;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent,
+                                       const PosterData &img,
+                                       int sheets,
+                                       const VWatermarkData &watermarkData, const QString &watermarkPath) const
+{
+    QVector<QGraphicsItem *> data;
+    data.append(Borders(parent, img, sheets));
+
+    if (watermarkData.opacity > 0)
+    {
+        if (not watermarkData.path.isEmpty())
+        {
+            data += ImageWatermark(parent, img, watermarkData, watermarkPath);
+        }
+
+        if (not watermarkData.text.isEmpty())
+        {
+            data += TextWatermark(parent, img, watermarkData);
+        }
+    }
+
+    return data;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -172,6 +259,84 @@ QVector<QGraphicsItem *> VPoster::Borders(QGraphicsItem *parent, const PosterDat
                     .arg(grid, page, sheet));
 
     data.append(labels);
+
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QGraphicsItem *> VPoster::TextWatermark(QGraphicsItem *parent, const PosterData &img,
+                                                const VWatermarkData &watermarkData) const
+{
+    SCASSERT(parent != nullptr)
+
+    QVector<QGraphicsItem *> data;
+
+    QGraphicsSimpleTextItem *text = new QGraphicsSimpleTextItem(watermarkData.text, parent);
+    text->setFont(watermarkData.font);
+    text->setOpacity(watermarkData.opacity/100.);
+    text->setTransformOriginPoint(text->boundingRect().center());
+    text->setRotation(-watermarkData.textRotation);
+
+    const QRect boundingRect = text->boundingRect().toRect();
+    int x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
+    int y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
+
+    text->setX(x);
+    text->setY(y);
+    text->setZValue(-1);
+
+    data.append(text);
+
+    return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const PosterData &img,
+                                                 const VWatermarkData &watermarkData,
+                                                 const QString &watermarkPath) const
+{
+    SCASSERT(parent != nullptr)
+
+    QVector<QGraphicsItem *> data;
+
+    QGraphicsItem *image = nullptr;
+
+    QFileInfo f(watermarkData.path);
+    if (f.suffix() == "png" || f.suffix() == "jpg" || f.suffix() == "jpeg" || f.suffix() == "bmp")
+    {
+        QString error;
+        QPixmap watermark = WatermarkImageFromCache(watermarkData, watermarkPath, error);
+
+        if (watermark.isNull())
+        {
+            const QString errorMsg = tr("Cannot open the watermark image. %1").arg(error);
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+            return data;
+        }
+
+        image = new QGraphicsPixmapItem(watermark, parent);
+    }
+    else
+    {
+        const QString errorMsg = tr("Not supported file suffix '%1'").arg(f.suffix());
+        qApp->IsPedantic() ? throw VException(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+        return data;
+    }
+
+    image->setZValue(-1);
+    image->setTransformOriginPoint(image->boundingRect().center());
+    image->setRotation(-watermarkData.imageRotation);
+
+    const QRect boundingRect = image->boundingRect().toRect();
+    int x = img.rect.x() + (img.rect.width() - boundingRect.width()) / 2;
+    int y = img.rect.y() + (img.rect.height() - boundingRect.height()) / 2;
+
+    image->setX(x);
+    image->setY(y);
+
+    data.append(image);
 
     return data;
 }

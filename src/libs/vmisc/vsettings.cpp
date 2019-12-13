@@ -119,6 +119,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDockWidgetPatternMessagesActive,
                           (QLatin1String("dockWidget/patternMessagesActive")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternMessagesFontSize, (QLatin1String("font/patternMessagesSize")))
 
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingWatermarkEditorSize, (QLatin1String("watermarkEditorSize")))
+
 // Reading settings file is very expensive, cache values to speed up getting a value
 int scrollingDurationCached = -1;
 int scrollingUpdateIntervalCached = -1;
@@ -779,6 +781,18 @@ bool VSettings::GetAutoRefreshPatternMessage() const
 void VSettings::SetAutoRefreshPatternMessage(bool value)
 {
     setValue(*settingAutoRefreshPatternMessage, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QSize VSettings::GetWatermarkEditorSize() const
+{
+    return value(*settingWatermarkEditorSize, QSize(0, 0)).toSize();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetWatermarkEditorSize(const QSize &sz)
+{
+    setValue(*settingWatermarkEditorSize, sz);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

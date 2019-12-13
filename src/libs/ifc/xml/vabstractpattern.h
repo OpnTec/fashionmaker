@@ -43,6 +43,7 @@
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
+#include "../vlayout/vtextmanager.h"
 
 class QDomElement;
 class VPiecePath;
@@ -172,6 +173,9 @@ public:
     void                        SetPatternLabelTemplate(const QVector<VLabelTemplateLine> &lines);
     QVector<VLabelTemplateLine> GetPatternLabelTemplate() const;
 
+    bool SetWatermarkPath(const QString &path);
+    QString GetWatermarkPath() const;
+
     void               SetPatternMaterials(const QMap<int, QString> &materials);
     QMap<int, QString> GetPatternMaterials() const;
 
@@ -240,6 +244,7 @@ public:
     static const QString TagCompanyName;
     static const QString TagCustomerName;
     static const QString TagPatternLabel;
+    static const QString TagWatermark;
     static const QString TagPatternMaterials;
     static const QString TagFinalMeasurements;
     static const QString TagMaterial;
@@ -282,6 +287,7 @@ public:
     static const QString AttrCheckUniqueness;
     static const QString AttrManualPassmarkLength;
     static const QString AttrPassmarkLength;
+    static const QString AttrOpacity;
 
     static const QString AttrAll;
 

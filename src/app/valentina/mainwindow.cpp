@@ -64,6 +64,7 @@
 #include "../qmuparser/qmuparsererror.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
 #include "../vformat/vpatternrecipe.h"
+#include "watermarkwindow.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
 #include "../vmisc/backport/qscopeguard.h"
@@ -1934,6 +1935,69 @@ void MainWindow::SyncMeasurements()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CreateWatermark()
+{
+    CleanWaterkmarkEditors();
+    OpenWatermark();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::EditCurrentWatermark()
+{
+    CleanWaterkmarkEditors();
+
+    QString watermarkFile = doc->GetWatermarkPath();
+    if (not watermarkFile.isEmpty())
+    {
+        OpenWatermark(watermarkFile);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::LoadWatermark()
+{
+    const QString filter(tr("Watermark files") + QLatin1String(" (*.vwm)"));
+    QString dir = QDir::homePath();
+    qDebug("Run QFileDialog::getOpenFileName: dir = %s.", qUtf8Printable(dir));
+    const QString filePath = QFileDialog::getOpenFileName(this, tr("Open file"), dir, filter, nullptr);
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    if (doc->SetWatermarkPath(filePath))
+    {
+        ui->actionRemoveWatermark->setEnabled(true);
+        ui->actionEditCurrentWatermark->setEnabled(true);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RemoveWatermark()
+{
+    if (doc->SetWatermarkPath(QString()))
+    {
+        ui->actionRemoveWatermark->setEnabled(false);
+        ui->actionEditCurrentWatermark->setEnabled(false);
+    }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::CleanWaterkmarkEditors()
+{
+    QMutableListIterator<QPointer<WatermarkWindow>> i(m_watermarkEditors);
+    while (i.hasNext())
+    {
+        QPointer<WatermarkWindow> watermarkEditor = i.next();
+        if (watermarkEditor.isNull())
+        {
+            i.remove();
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 #if defined(Q_OS_MAC)
 void MainWindow::OpenAt(QAction *where)
 {
@@ -3153,6 +3217,9 @@ void MainWindow::Clear()
     ui->actionOriginalLabelFont->setEnabled(false);
     ui->actionHideLabels->setEnabled(false);
     ui->plainTextEditPatternMessages->clear();
+    ui->actionLoadWatermark->setEnabled(false);
+    ui->actionRemoveWatermark->setEnabled(false);
+    ui->actionEditCurrentWatermark->setEnabled(false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3512,6 +3579,10 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
     ui->actionHideLabels->setEnabled(enable);
+
+    ui->actionLoadWatermark->setEnabled(enable);
+    ui->actionRemoveWatermark->setEnabled(enable && not doc->GetWatermarkPath().isEmpty());
+    ui->actionEditCurrentWatermark->setEnabled(enable && not doc->GetWatermarkPath().isEmpty());
 
     actionDockWidgetToolOptions->setEnabled(enable && designStage);
     actionDockWidgetGroups->setEnabled(enable && designStage);
@@ -4630,6 +4701,11 @@ void MainWindow::CreateActions()
         DialogEditLabel editor(doc);
         editor.exec();
     });
+
+    connect(ui->actionWatermarkEditor, &QAction::triggered, this, &MainWindow::CreateWatermark);
+    connect(ui->actionEditCurrentWatermark, &QAction::triggered, this, &MainWindow::EditCurrentWatermark);
+    connect(ui->actionLoadWatermark, &QAction::triggered, this, &MainWindow::LoadWatermark);
+    connect(ui->actionRemoveWatermark, &QAction::triggered, this, &MainWindow::RemoveWatermark);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6160,4 +6236,26 @@ void MainWindow::PrintPatternMessage(QEvent *event)
     {
         m_unreadPatternMessage->setText(DialogWarningIcon() + tr("Pattern messages"));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OpenWatermark(const QString &path)
+{
+    QList<QPointer<WatermarkWindow>>::const_iterator i;
+    for (i = m_watermarkEditors.begin(); i != m_watermarkEditors.end(); ++i)
+    {
+        if (not (*i).isNull() && not (*i)->CurrentFile().isEmpty()
+                && (*i)->CurrentFile() == AbsoluteMPath(qApp->GetPatternPath(), path))
+        {
+            (*i)->show();
+            return;
+        }
+    }
+
+    auto *watermark = new WatermarkWindow(qApp->GetPatternPath(), this);
+    connect(watermark, &WatermarkWindow::New, this, [this](){OpenWatermark();});
+    connect(watermark, &WatermarkWindow::OpenAnother, this, [this](const QString &path){OpenWatermark(path);});
+    m_watermarkEditors.append(watermark);
+    watermark->show();
+    watermark->Open(path);
 }

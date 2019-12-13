@@ -14,7 +14,7 @@
    <string>Pattern properties</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
+   <iconset>
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1220,12 +1220,25 @@
        <string>Security</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
-       <item alignment="Qt::AlignTop">
+       <item>
         <widget class="QCheckBox" name="checkBoxPatternReadOnly">
          <property name="text">
           <string>Open only for read</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -1422,19 +1435,17 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>VPlainTextEdit</class>
-   <extends>QPlainTextEdit</extends>
-   <header location="global">vplaintextedit.h</header>
-  </customwidget>
-  <customwidget>
    <class>VLineEdit</class>
    <extends>QLineEdit</extends>
    <header>vlineedit.h</header>
   </customwidget>
+  <customwidget>
+   <class>VPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>vplaintextedit.h</header>
+  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

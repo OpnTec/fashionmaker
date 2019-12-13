@@ -1,0 +1,51 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="watermark">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="formatVersion" name="version"/>
+        <xs:element name="text">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="text"/>
+                <xs:attribute type="rotationType" name="rotation"/>
+                <xs:attribute type="xs:string" name="font"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="image">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="path"/>
+                <xs:attribute type="rotationType" name="rotation"/>
+                <xs:attribute type="xs:boolean" name="grayscale"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="opacityType" name="opacity"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="formatVersion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="opacityType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="rotationType">
+    <xs:restriction base="xs:unsignedInt">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="360"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
+

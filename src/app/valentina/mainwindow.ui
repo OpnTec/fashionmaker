@@ -1795,11 +1795,22 @@
     <addaction name="actionDetails"/>
     <addaction name="actionLayout"/>
    </widget>
+   <widget class="QMenu" name="menuWatermark">
+    <property name="title">
+     <string>Watermark</string>
+    </property>
+    <addaction name="actionWatermarkEditor"/>
+    <addaction name="actionEditCurrentWatermark"/>
+    <addaction name="separator"/>
+    <addaction name="actionLoadWatermark"/>
+    <addaction name="actionRemoveWatermark"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuPatternPiece"/>
    <addaction name="menuMode"/>
    <addaction name="menuMeasurements"/>
    <addaction name="menuHistory"/>
+   <addaction name="menuWatermark"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -2978,6 +2989,50 @@
    </property>
    <property name="toolTip">
     <string>Globally show pieces main path</string>
+   </property>
+  </action>
+  <action name="actionLoadWatermark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Load</string>
+   </property>
+  </action>
+  <action name="actionRemoveWatermark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="edit-delete">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Remove</string>
+   </property>
+  </action>
+  <action name="actionEditCurrentWatermark">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Edit current</string>
+   </property>
+  </action>
+  <action name="actionWatermarkEditor">
+   <property name="icon">
+    <iconset theme="document-new">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>Editor</string>
+   </property>
+   <property name="toolTip">
+    <string>Create or edit a watermark</string>
    </property>
   </action>
  </widget>

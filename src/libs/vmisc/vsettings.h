@@ -198,6 +198,9 @@ public:
     bool GetAutoRefreshPatternMessage() const;
     void SetAutoRefreshPatternMessage(bool value);
 
+    QSize GetWatermarkEditorSize() const;
+    void SetWatermarkEditorSize(const QSize& sz);
+
 private:
     Q_DISABLE_COPY(VSettings)
 

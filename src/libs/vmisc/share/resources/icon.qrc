@@ -79,5 +79,11 @@
         <file>icon/32x32/button@2x.png</file>
         <file>icon/16x16/broom.png</file>
         <file>icon/16x16/broom@2x.png</file>
+        <file>icon/16x16/font_preferences@2x.png</file>
+        <file>icon/16x16/font_preferences.png</file>
+        <file>icon/32x32/font_preferences@2x.png</file>
+        <file>icon/32x32/font_preferences.png</file>
+        <file>icon/24x24/font_preferences@2x.png</file>
+        <file>icon/24x24/font_preferences.png</file>
     </qresource>
 </RCC>

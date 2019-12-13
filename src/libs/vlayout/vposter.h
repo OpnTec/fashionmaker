@@ -34,10 +34,12 @@
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
+#include "../vlayout/vtextmanager.h"
 
 class QGraphicsItem;
 class QPrinter;
 template <class T> class QVector;
+class VWatermarkData;
 
 struct PosterData
 {
@@ -68,7 +70,9 @@ public:
 
     QVector<PosterData> Calc(const QRect &imageRect, int page, PageOrientation orientation) const;
 
-    QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
+    QVector<QGraphicsItem *> Tile(QGraphicsItem *parent, const PosterData &img, int sheets,
+                                  const VWatermarkData &watermarkData, const QString &watermarkPath) const;
+
 private:
     const QPrinter *printer;
     /**
@@ -85,6 +89,13 @@ private:
     QRect PageRect() const;
 
     void Ruler(QVector<QGraphicsItem *> &data, QGraphicsItem *parent, QRect rec) const;
+
+    QVector<QGraphicsItem *> Borders(QGraphicsItem *parent, const PosterData &img, int sheets) const;
+
+    QVector<QGraphicsItem *> TextWatermark(QGraphicsItem *parent, const PosterData &img,
+                                           const VWatermarkData &watermarkData) const;
+    QVector<QGraphicsItem *> ImageWatermark(QGraphicsItem *parent, const PosterData &img,
+                                            const VWatermarkData &watermarkData, const QString &watermarkPath) const;
 };
 
 #endif // VPOSTER_H

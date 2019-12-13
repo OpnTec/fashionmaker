@@ -55,6 +55,7 @@
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vlayout/vtextmanager.h"
 
 class QDomElement;
 
@@ -90,6 +91,7 @@ const QString VAbstractPattern::TagPatternNum       = QStringLiteral("patternNum
 const QString VAbstractPattern::TagCustomerName     = QStringLiteral("customer");
 const QString VAbstractPattern::TagCompanyName      = QStringLiteral("company");
 const QString VAbstractPattern::TagPatternLabel     = QStringLiteral("patternLabel");
+const QString VAbstractPattern::TagWatermark        = QStringLiteral("watermark");
 const QString VAbstractPattern::TagPatternMaterials = QStringLiteral("patternMaterials");
 const QString VAbstractPattern::TagFinalMeasurements= QStringLiteral("finalMeasurements");
 const QString VAbstractPattern::TagMaterial         = QStringLiteral("material");
@@ -132,6 +134,7 @@ const QString VAbstractPattern::AttrNumber            = QStringLiteral("number")
 const QString VAbstractPattern::AttrCheckUniqueness   = QStringLiteral("checkUniqueness");
 const QString VAbstractPattern::AttrManualPassmarkLength = QStringLiteral("manualPassmarkLength");
 const QString VAbstractPattern::AttrPassmarkLength    = QStringLiteral("passmarkLength");
+const QString VAbstractPattern::AttrOpacity         = QStringLiteral("opacity");
 
 const QString VAbstractPattern::AttrAll             = QStringLiteral("all");
 
@@ -215,6 +218,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(QString, patternNumberCached, (unknownCharacter))
 Q_GLOBAL_STATIC_WITH_ARGS(QString, labelDateFormatCached, (unknownCharacter))
 Q_GLOBAL_STATIC_WITH_ARGS(QString, patternNameCached, (unknownCharacter))
 Q_GLOBAL_STATIC_WITH_ARGS(QString, MPathCached, (unknownCharacter))
+Q_GLOBAL_STATIC_WITH_ARGS(QString, WatermarkPathCached, (unknownCharacter))
 Q_GLOBAL_STATIC_WITH_ARGS(QString, companyNameCached, (unknownCharacter))
 
 void ReadExpressionAttribute(QVector<VFormulaField> &expressions, const QDomElement &element, const QString &attribute)
@@ -1526,6 +1530,48 @@ QVector<VLabelTemplateLine> VAbstractPattern::GetPatternLabelTemplate() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VAbstractPattern::SetWatermarkPath(const QString &path)
+{
+    QDomElement tag = CheckTagExists(TagWatermark);
+
+    if (path.isEmpty())
+    {
+        QDomNode parent = tag.parentNode();
+        parent.removeChild(tag);
+
+        emit patternChanged(false);
+        patternLabelWasChanged = true;
+        *WatermarkPathCached = path;
+        return true;
+    }
+    else
+    {
+        if (setTagText(tag, path))
+        {
+            emit patternChanged(false);
+            patternLabelWasChanged = true;
+            *WatermarkPathCached = path;
+            return true;
+        }
+        else
+        {
+            qDebug() << "Can't save path to watermark" << Q_FUNC_INFO;
+            return false;
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractPattern::GetWatermarkPath() const
+{
+    if (*WatermarkPathCached == unknownCharacter)
+    {
+        *WatermarkPathCached = UniqueTagText(TagWatermark);
+    }
+    return *WatermarkPathCached;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetPatternMaterials(const QMap<int, QString> &materials)
 {
     QDomElement tag = CheckTagExists(TagPatternMaterials);
@@ -1728,10 +1774,23 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
     QDomElement element;
     if (list.isEmpty())
     {
-        const QStringList tags = QStringList() << TagUnit << TagImage << TagDescription << TagNotes
-                                         << TagGradation << TagPatternName << TagPatternNum << TagCompanyName
-                                         << TagCustomerName << TagPatternLabel << TagPatternMaterials
-                                         << TagFinalMeasurements;
+        const QStringList tags
+        {
+            TagUnit, // 0
+            TagImage, // 1
+            TagDescription, // 2
+            TagNotes, // 3
+            TagGradation, // 4
+            TagPatternName, // 5
+            TagPatternNum, // 6
+            TagCompanyName, // 7
+            TagCustomerName, // 8
+            TagPatternLabel, // 9
+            TagWatermark, // 10
+            TagPatternMaterials, // 11
+            TagFinalMeasurements // 12
+        };
+
         switch (tags.indexOf(tag))
         {
             case 1: //TagImage
@@ -1771,10 +1830,13 @@ QDomElement VAbstractPattern::CheckTagExists(const QString &tag)
             case 9: // TagPatternLabel
                 element = createElement(TagPatternLabel);
                 break;
-            case 10: // TagPatternMaterials
+            case 10: // TagWatermark
+                element = createElement(TagWatermark);
+                break;
+            case 11: // TagPatternMaterials
                 element = createElement(TagPatternMaterials);
                 break;
-            case 11: // TagFinalMeasurements
+            case 12: // TagFinalMeasurements
                 element = createElement(TagFinalMeasurements);
                 break;
             case 0: //TagUnit (Mandatory tag)

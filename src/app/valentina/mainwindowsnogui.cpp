@@ -36,6 +36,7 @@
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vformat/vmeasurements.h"
+#include "../vformat/vwatermark.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "dialogs/dialoglayoutprogress.h"
 #include "dialogs/dialogsavelayout.h"
@@ -49,6 +50,7 @@
 #include "../vtools/tools/vtoolseamallowance.h"
 #include "../ifc/xml/vvstconverter.h"
 #include "../ifc/xml/vvitconverter.h"
+#include "../ifc/xml/vwatermarkconverter.h"
 
 #include <QFileDialog>
 #include <QFileInfo>
@@ -876,6 +878,31 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
         copyCount = printer->copyCount();
     }
 
+    VWatermarkData data;
+    const QString watermarkPath = AbsoluteMPath(qApp->GetPatternPath(), doc->GetWatermarkPath());
+    if (not watermarkPath.isEmpty())
+    {
+        try
+        {
+            VWatermarkConverter converter(watermarkPath);
+            VWatermark watermark;
+            watermark.setXMLContent(converter.Convert());
+            data = watermark.GetWatermark();
+
+            if (not data.path.isEmpty())
+            {
+                // Clean previous cache
+                QPixmapCache::remove(AbsoluteMPath(watermarkPath, data.path));
+            }
+        }
+        catch (VException &e)
+        {
+            const QString errorMsg = tr("File error.\n\n%1\n\n%2").arg(e.ErrorMessage(), e.DetailedInformation());
+            qApp->IsPedantic() ? throw VException(errorMsg) :
+                                 qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+        }
+    }
+
     for (int i = 0; i < copyCount; ++i)
     {
         for (int j = 0; j < numPages; ++j)
@@ -905,10 +932,11 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
             if (paper)
             {
                 QVector<QGraphicsItem *> posterData;
+
                 if (isTiled)
                 {
-                    // Draw borders
-                    posterData = posterazor->Borders(paper, poster->at(index), scenes.size());
+                    // Draw tile
+                    posterData = posterazor->Tile(paper, poster->at(index), scenes.size(), data, watermarkPath);
                 }
 
                 PreparePaper(paperIndex);
@@ -1408,7 +1436,6 @@ void MainWindowsNoGUI::PreparePaper(int index) const
         shadows.at(index)->setVisible(false);
         paper->setPen(QPen(Qt::white, 0.1, Qt::NoPen));// border
     }
-
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1718,43 +1745,6 @@ void MainWindowsNoGUI::SetPrinterSettings(QPrinter *printer, const PrintType &pr
     }
 
     printer->setDocName(FileName());
-
-    IsLayoutGrayscale() ? printer->setColorMode(QPrinter::GrayScale) : printer->setColorMode(QPrinter::Color);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-bool MainWindowsNoGUI::IsLayoutGrayscale() const
-{
-    const QRect target = QRect(0, 0, 100, 100);//Small image less memory need
-
-    for (int i=0; i < scenes.size(); ++i)
-    {
-        if (auto *paper = qgraphicsitem_cast<QGraphicsRectItem *>(papers.at(i)))
-        {
-            // Hide shadow and paper border
-            PreparePaper(i);
-
-            // Render png
-            QImage image(target.size(), QImage::Format_RGB32);
-            image.fill(Qt::white);
-            QPainter painter(&image);
-            painter.setPen(QPen(Qt::black, qApp->Settings()->WidthMainLine(), Qt::SolidLine, Qt::RoundCap,
-                                Qt::RoundJoin));
-            painter.setBrush ( QBrush ( Qt::NoBrush ) );
-            scenes.at(i)->render(&painter, target, paper->rect(), Qt::KeepAspectRatio);
-            painter.end();
-
-            // Restore
-            RestorePaper(i);
-
-            if (not image.isGrayscale())
-            {
-                return false;
-            }
-        }
-    }
-
-    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

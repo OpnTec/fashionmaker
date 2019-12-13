@@ -39,6 +39,7 @@
 #include "dialogs/dialogsavelayout.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vwidgets/vabstractmainwindow.h"
+#include "../vlayout/vtextmanager.h"
 
 class QGraphicsScene;
 struct PosterData;
@@ -194,7 +195,6 @@ private:
     enum class PrintType : char {PrintPDF, PrintPreview, PrintNative};
 
     void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
-    bool IsLayoutGrayscale() const;
     QPageSize::PageSizeId FindPageSizeId(const QSizeF &size) const;
 
     bool isPagesUniform() const;

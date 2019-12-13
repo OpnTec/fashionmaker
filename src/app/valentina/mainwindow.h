@@ -53,6 +53,7 @@ class VWidgetDetails;
 class QToolButton;
 class QDoubleSpinBox;
 class QProgressBar;
+class WatermarkWindow;
 
 /**
  * @brief The MainWindow class main windows.
@@ -197,6 +198,11 @@ private slots:
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
     void SyncMeasurements();
+
+    void CreateWatermark();
+    void EditCurrentWatermark();
+    void LoadWatermark();
+    void RemoveWatermark();
 #if defined(Q_OS_MAC)
     void OpenAt(QAction *where);
 #endif //defined(Q_OS_MAC)
@@ -275,6 +281,8 @@ private:
 
     QProgressBar *m_progressBar;
     QLabel       *m_statusLabel;
+
+    QList<QPointer<WatermarkWindow>> m_watermarkEditors{};
 
     void               SetDefaultHeight();
     void               SetDefaultSize();
@@ -381,6 +389,9 @@ private:
     void ToolSelectDetail();
 
     void PrintPatternMessage(QEvent *event);
+
+    void OpenWatermark(const QString &path = QString());
+    void CleanWaterkmarkEditors();
 };
 
 #endif // MAINWINDOW_H

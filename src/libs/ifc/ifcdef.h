@@ -35,6 +35,7 @@
 #  include <qt_windows.h>
 #endif /*Q_OS_WIN*/
 
+#include <QFont>
 #include <QString>
 #include <QStringList>
 
@@ -235,6 +236,17 @@ struct VLabelTemplateLine
     bool    italic;
     int     alignment;
     int     fontSizeIncrement;
+};
+
+struct VWatermarkData
+{
+    int     opacity{20};
+    QString text{};
+    int     textRotation{0};
+    QFont   font{};
+    QString path{};
+    int     imageRotation{0};
+    bool    grayscale{false};
 };
 
 QT_WARNING_POP
