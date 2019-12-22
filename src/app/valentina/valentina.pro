@@ -715,7 +715,7 @@ CONFIG(release, debug|release){
                     # Strip debug symbols.
                     QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
                     QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
-                    QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" bin/${TARGET}
+                    QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
 
                     QMAKE_DISTCLEAN += ${TARGET}.dbg
                 }
