@@ -97,22 +97,39 @@ CONFIG(release, debug|release){
     } else {
         !macx:!*msvc*{
             noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-                # Strip after you link all libaries.
-                QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET}
+                win32{
+                    # Strip debug symbols.
+                    QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET}
+                }
+
+                unix{
+                    # Strip after you link all libaries.
+                    QMAKE_POST_LINK += objcopy --strip-debug ${TARGET}
+                }
             } else {
-                # Strip after you link all libaries.
                 # Turn on debug symbols in release mode on Unix systems.
                 # On Mac OS X temporarily disabled. TODO: find way how to strip binary file.
                 QMAKE_CXXFLAGS_RELEASE += -g -gdwarf-3
                 QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
                 QMAKE_LFLAGS_RELEASE =
 
-                # Strip debug symbols.
-                QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
-                QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
-                QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
+                win32{
+                    # Strip debug symbols.
+                    QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
+                    QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
+                    QMAKE_POST_LINK += objcopy --add-gnu-debuglink="bin/${TARGET}.dbg" bin/${TARGET}
 
-                QMAKE_DISTCLEAN += bin/${TARGET}.dbg
+                    QMAKE_DISTCLEAN += bin/${TARGET}.dbg
+                }
+
+                unix{
+                    # Strip debug symbols.
+                    QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
+                    QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
+                    QMAKE_POST_LINK += objcopy --add-gnu-debuglink="${TARGET}.dbg" ${TARGET}
+
+                    QMAKE_DISTCLEAN += ${TARGET}.dbg
+                }
             }
         }
     }

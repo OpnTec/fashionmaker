@@ -100,17 +100,17 @@ CONFIG(release, debug|release){
     } else {
         !macx:!*msvc*{
             noDebugSymbols{ # For enable run qmake with CONFIG+=noDebugSymbols
-                win32:!*msvc*{
+                win32{
                     # Strip debug symbols.
                     QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET}
                 }
 
-                unix:!macx{
+                unix{
                     # Strip debug symbols.
                     QMAKE_POST_LINK += objcopy --strip-debug ${TARGET}
                 }
             } else {
-                win32:!*msvc*{
+                win32{
                     # Strip debug symbols.
                     QMAKE_POST_LINK += objcopy --only-keep-debug bin/${TARGET} bin/${TARGET}.dbg &&
                     QMAKE_POST_LINK += objcopy --strip-debug bin/${TARGET} &&
@@ -119,7 +119,7 @@ CONFIG(release, debug|release){
                     QMAKE_DISTCLEAN += bin/${TARGET}.dbg
                 }
 
-                unix:!macx{
+                unix{
                     # Strip debug symbols.
                     QMAKE_POST_LINK += objcopy --only-keep-debug ${TARGET} ${TARGET}.dbg &&
                     QMAKE_POST_LINK += objcopy --strip-debug ${TARGET} &&
