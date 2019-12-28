@@ -34,7 +34,6 @@ const QString VWatermark::TagText      = QStringLiteral("text");
 const QString VWatermark::TagImage     = QStringLiteral("image");
 
 const QString VWatermark::AttrOpacity   = QStringLiteral("opacity");
-const QString VWatermark::AttrText      = QStringLiteral("text");
 const QString VWatermark::AttrRotation  = QStringLiteral("rotation");
 const QString VWatermark::AttrFont      = QStringLiteral("font");
 const QString VWatermark::AttrPath      = QStringLiteral("path");

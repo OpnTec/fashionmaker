@@ -50,7 +50,6 @@ public:
     static const QString TagImage;
 
     static const QString AttrOpacity;
-    static const QString AttrText;
     static const QString AttrRotation;
     static const QString AttrFont;
     static const QString AttrPath;
