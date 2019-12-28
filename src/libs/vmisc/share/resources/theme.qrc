@@ -99,5 +99,8 @@
         <file alias="32x32/actions/format-justify-right.png">icons/win.icon.theme/32x32/actions/format-justify-right.png</file>
         <file alias="32x32/actions/format-text-bold.png">icons/win.icon.theme/32x32/actions/format-text-bold.png</file>
         <file alias="32x32/actions/format-text-italic.png">icons/win.icon.theme/32x32/actions/format-text-italic.png</file>
+        <file alias="16x16/actions/view-refresh.png">icons/win.icon.theme/16x16/actions/view-refresh.png</file>
+        <file alias="24x24/actions/view-refresh.png">icons/win.icon.theme/24x24/actions/view-refresh.png</file>
+        <file alias="32x32/actions/view-refresh.png">icons/win.icon.theme/32x32/actions/view-refresh.png</file>
     </qresource>
 </RCC>
