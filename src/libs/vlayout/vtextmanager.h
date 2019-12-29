@@ -37,6 +37,7 @@
 #include <Qt>
 #include <QtGlobal>
 #include <QCoreApplication>
+#include <QVector>
 
 class VPieceLabelData;
 class VAbstractPattern;
