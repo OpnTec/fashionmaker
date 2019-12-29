@@ -81,7 +81,7 @@ QPixmap WatermarkImageFromCache(const VWatermarkData &watermarkData, const QStri
     QPixmap pixmap;
     QString imagePath = AbsoluteMPath(watermarkPath, watermarkData.path);
 
-    if (not QPixmapCache::find(imagePath, pixmap))
+    if (not QPixmapCache::find(imagePath, &pixmap))
     {
         QImageReader imageReader(imagePath);
         QImage watermark = imageReader.read();
