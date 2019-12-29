@@ -39,7 +39,7 @@
 class QGraphicsItem;
 class QPrinter;
 template <class T> class QVector;
-class VWatermarkData;
+struct VWatermarkData;
 
 struct PosterData
 {
