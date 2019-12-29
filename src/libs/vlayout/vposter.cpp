@@ -152,9 +152,7 @@ QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientat
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent,
-                                       const PosterData &img,
-                                       int sheets,
+QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &img, int sheets,
                                        const VWatermarkData &watermarkData, const QString &watermarkPath) const
 {
     QVector<QGraphicsItem *> data;
