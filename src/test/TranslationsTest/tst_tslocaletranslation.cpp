@@ -215,7 +215,18 @@ void TST_TSLocaleTranslation::TestPunctuation()
         {
             testFail = true;
 
-            if (locale == QLatin1String("el_GR") && cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';'))
+            if (locale == QLatin1String("el_GR")
+                    // Greek question mark
+                    // https://en.wikipedia.org/wiki/Question_mark#Greek_question_mark
+                    && (cSource == QLatin1Char('?') && cTranslation == QLatin1Char(';')))
+            {
+                testFail = false;
+            }
+            else if (locale == QLatin1String("zh_CN")
+                     // Beside usage similar to that of English, the colon has other functions. Several compatibility
+                     // forms for Chinese and Japanese typography are encoded in Unicode.
+                     // https://en.wikipedia.org/wiki/Colon_(punctuation)#Usage_in_other_languages
+                     && (cSource == QLatin1Char(':') && cTranslation == QString("：")))
             {
                 testFail = false;
             }
