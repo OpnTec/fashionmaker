@@ -412,6 +412,7 @@ quint32 AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &in
 
     const quint32 idObject = initData.data->AddGObject(point.take());
     children.append(idObject);
+    point1->setIdObject(idObject);
     point1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(point1.take());
 
@@ -539,6 +540,7 @@ quint32 AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &init
     const quint32 idObject = initData.data->AddGObject(arc1.take());
     children.append(idObject);
 
+    arc2->setIdObject(idObject);
     arc2->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(arc2.take());
 
@@ -592,6 +594,7 @@ quint32 AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &in
     const quint32 idObject = initData.data->AddGObject(arc1.take());
     children.append(idObject);
 
+    arc2->setIdObject(idObject);
     arc2->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(arc2.take());
 
@@ -637,6 +640,7 @@ quint32 AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &i
     children.append(idObject);
 
     VSpline *spl1 = new VSpline(*spl);
+    spl1->setIdObject(idObject);
     spl1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(spl1);
 
@@ -710,6 +714,7 @@ quint32 AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitDat
     const quint32 idObject = initData.data->AddGObject(path.take());
     children.append(idObject);
 
+    path1->setIdObject(idObject);
     path1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(path1.take());
 
