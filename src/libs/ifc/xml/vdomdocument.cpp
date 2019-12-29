@@ -378,6 +378,35 @@ quint32 VDomDocument::GetParametrUInt(const QDomElement &domElement, const QStri
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+int VDomDocument::GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue)
+{
+    Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");
+    Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null"); //-V591
+
+    bool ok = false;
+    QString parametr;
+    int value = 0;
+
+    try
+    {
+        parametr = GetParametrString(domElement, name, defValue);
+        value = parametr.toInt(&ok);
+        if (ok == false)
+        {
+            throw VExceptionConversionError(QObject::tr("Can't convert toInt parameter"), name);
+        }
+    }
+    catch (const VExceptionEmptyParameter &e)
+    {
+        VExceptionConversionError excep(QObject::tr("Can't convert toInt parameter"), name);
+        excep.AddMoreInformation(e.ErrorMessage());
+        throw excep;
+    }
+
+    return value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDomDocument::GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue)
 {
     Q_ASSERT_X(not name.isEmpty(), Q_FUNC_INFO, "name of parametr is empty");

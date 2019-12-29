@@ -106,6 +106,7 @@ public:
                                 bool removeCondition) const;
 
     static quint32 GetParametrUInt(const QDomElement& domElement, const QString &name, const QString &defValue);
+    static int     GetParametrInt(const QDomElement& domElement, const QString &name, const QString &defValue);
     static bool    GetParametrBool(const QDomElement& domElement, const QString &name, const QString &defValue);
 
     static NodeUsage GetParametrUsage(const QDomElement& domElement, const QString &name);

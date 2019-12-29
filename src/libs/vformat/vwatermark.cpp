@@ -92,13 +92,13 @@ VWatermarkData VWatermark::GetWatermark() const
     if (not root.isNull() && root.isElement())
     {
         const QDomElement rootElement = root.toElement();
-        data.opacity = GetParametrUInt(rootElement, AttrOpacity, QChar('2'));
+        data.opacity = GetParametrInt(rootElement, AttrOpacity, QChar('2'));
 
         QDomElement text = rootElement.firstChildElement(TagText);
         if (not text.isNull())
         {
             data.text = GetParametrEmptyString(text, AttrText);
-            data.textRotation = GetParametrUInt(text, AttrRotation, QChar('0'));
+            data.textRotation = GetParametrInt(text, AttrRotation, QChar('0'));
             data.font.fromString(GetParametrEmptyString(text, AttrFont));
         }
 
@@ -106,7 +106,7 @@ VWatermarkData VWatermark::GetWatermark() const
         if (not image.isNull())
         {
             data.path = GetParametrEmptyString(image, AttrPath);
-            data.imageRotation = GetParametrUInt(image, AttrRotation, QChar('0'));
+            data.imageRotation = GetParametrInt(image, AttrRotation, QChar('0'));
             data.grayscale = GetParametrBool(image, AttrGrayscale, falseStr);
         }
     }
