@@ -509,7 +509,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Lijn kleur</translation>
+        <translation type="vanished">Lijnkleur</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -521,7 +521,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -644,7 +644,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -767,7 +767,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -870,7 +870,7 @@
     </message>
     <message>
         <source>Line color</source>
-        <translation type="vanished">Lijn kleur</translation>
+        <translation type="vanished">Lijnkleur</translation>
     </message>
     <message>
         <source>Edit length</source>
@@ -882,7 +882,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1000,7 +1000,7 @@
     </message>
     <message>
         <source>List of points</source>
-        <translation>Puntenlijst</translation>
+        <translation>Lijst van de punten</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -1095,7 +1095,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1178,7 +1178,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1253,7 +1253,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1328,7 +1328,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -1610,7 +1610,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation type="vanished">Formule wizard</translation>
+        <translation type="vanished">Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2076,7 +2076,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2215,7 +2215,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -2358,7 +2358,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Description:</source>
@@ -2912,7 +2912,7 @@
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Invalid value</source>
@@ -3532,7 +3532,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3711,7 +3711,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -3920,7 +3920,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4416,7 +4416,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4750,7 +4750,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -4976,7 +4976,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5063,7 +5063,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5272,7 +5272,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5392,7 +5392,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -5916,7 +5916,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6078,7 +6078,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -6217,7 +6217,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -8257,6 +8257,34 @@ Do you want to save your changes?</source>
         <source>Auto refresh the list with each parse</source>
         <translation>Hervul de lijst automatisch na elke opsplitsing</translation>
     </message>
+    <message>
+        <source>Watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Verwijder</translation>
+    </message>
+    <message>
+        <source>Edit current</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create or edit a watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Watermark files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindowsNoGUI</name>
@@ -8435,6 +8463,14 @@ Do you want to save your changes?</source>
     <message>
         <source>Process has been stoped because of exception.</source>
         <translation>Proces werd onderbroken ten gevolge van een uitzondering.</translation>
+    </message>
+    <message>
+        <source>File error.
+
+%1
+
+%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10019,7 +10055,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Function Wizard</source>
-        <translation>Functie Wizard</translation>
+        <translation>Functie assistent</translation>
     </message>
     <message>
         <source>Move measurement top</source>
@@ -10377,7 +10413,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -10444,7 +10480,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -10647,7 +10683,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>=</source>
@@ -10675,7 +10711,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijst van alle gedefiniëerde markeerpunten. Om een markeerpunt te definiëren ga terug naar de hoofdpad tab, roep de context menu op (rechter muisknop) voor een punt en maak er een markeerpunt.</translation>
     </message>
 </context>
 <context>
@@ -10710,7 +10746,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Formula wizard</source>
-        <translation>Formule wizard</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <source>Value</source>
@@ -12695,6 +12731,24 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Sheet %1 of %2</source>
         <translation>Blad %1 van %2</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image. %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not supported file suffix &apos;%1&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <comment>unit</comment>
+        <translation type="unfinished">cm</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <comment>unit</comment>
+        <translation type="unfinished">in</translation>
     </message>
 </context>
 <context>
@@ -15387,6 +15441,199 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
         <translation>Gebruik &lt;b&gt;%1&lt;/b&gt; voor steekhoek!</translation>
+    </message>
+</context>
+<context>
+    <name>WatermarkWindow</name>
+    <message>
+        <source>Watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opacity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Tekst</translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished">Tekst:</translation>
+    </message>
+    <message>
+        <source>watermark text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation:</source>
+        <translation type="unfinished">Draaiing:</translation>
+    </message>
+    <message>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <extracomment>Use native text to test a font options</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Path:</source>
+        <translation type="unfinished">Pad:</translation>
+    </message>
+    <message>
+        <source>path to image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse…</source>
+        <translation type="unfinished">Doorbladeren…</translation>
+    </message>
+    <message>
+        <source>Gray color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation type="unfinished">&amp;Bestand</translation>
+    </message>
+    <message>
+        <source>Operations</source>
+        <translation type="unfinished">Operaties</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Opslaan</translation>
+    </message>
+    <message>
+        <source>Save &amp;As…</source>
+        <translation type="unfinished">Opslaan &amp;als…</translation>
+    </message>
+    <message>
+        <source>E&amp;xit</source>
+        <translation type="unfinished">E&amp;xit</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished">Open</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>Images</source>
+        <translation type="unfinished">Afbeeldingen</translation>
+    </message>
+    <message>
+        <source>Watermark image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File error.</source>
+        <translation type="unfinished">Bestandsfout.</translation>
+    </message>
+    <message>
+        <source>Watermark files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished">Opslaan als</translation>
+    </message>
+    <message>
+        <source>watermark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window.</source>
+        <translation type="unfinished">Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
+    </message>
+    <message>
+        <source>Could not save file</source>
+        <translation type="unfinished">Kon bestand niet opslaan</translation>
+    </message>
+    <message>
+        <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
+        <translation type="unfinished">Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
+    </message>
+    <message>
+        <source>The document has no write permissions.</source>
+        <translation type="unfinished">Dit document kan niet gewijzigd worden.</translation>
+    </message>
+    <message>
+        <source>Cannot set permissions for %1 to writable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not save the file.</source>
+        <translation type="unfinished">Het bestand is niet bewaard.</translation>
+    </message>
+    <message>
+        <source>Could not save the file</source>
+        <translation type="unfinished">Het bestand is niet bewaard</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished">Open bestand</translation>
+    </message>
+    <message>
+        <source>Unsaved changes</source>
+        <translation type="unfinished">Niet opgeslagen veranderingen</translation>
+    </message>
+    <message>
+        <source>The watermark has been modified.
+Do you want to save your changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished">Niet opslaan</translation>
+    </message>
+    <message>
+        <source>read only</source>
+        <translation type="unfinished">alleen lezen</translation>
+    </message>
+    <message>
+        <source>untitled.vwm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm format rewriting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation type="unfinished">Bestand opgeslagen</translation>
+    </message>
+    <message>
+        <source>Locking file</source>
+        <translation type="unfinished">Vergrendelingsbestand</translation>
+    </message>
+    <message>
+        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Dit bestand is al geopend in een ander venster. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+    </message>
+    <message>
+        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Het vergrendelingsbestand kon niet worden aangemaakt, wegens het ontbreken van machtigingen. Negeren als u wilt doorgaan  (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+    </message>
+    <message>
+        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
+        <translation type="unfinished">Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
     </message>
 </context>
 <context>
