@@ -124,6 +124,21 @@ VContour &VContour::operator=(const VContour &contour)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VContour &VContour::operator=(VContour &&contour) Q_DECL_NOTHROW
+{
+    Swap(contour);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContour::Swap(VContour &contour) Q_DECL_NOTHROW
+{
+    std::swap(d, contour.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VContour::~VContour()
 {}

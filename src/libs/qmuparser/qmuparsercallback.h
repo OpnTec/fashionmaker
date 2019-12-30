@@ -86,11 +86,10 @@ public:
     QmuParserCallback &operator=(const QmuParserCallback &a_Fun);
 
 #ifdef Q_COMPILER_RVALUE_REFS
-    QmuParserCallback &operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW { Swap(a_Fun); return *this; }
+    QmuParserCallback &operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(QmuParserCallback &a_Fun) Q_DECL_NOTHROW
-    { std::swap(d, a_Fun.d); }
+    void Swap(QmuParserCallback &a_Fun) Q_DECL_NOTHROW;
 
     Q_REQUIRED_RESULT QmuParserCallback* Clone() const;
 

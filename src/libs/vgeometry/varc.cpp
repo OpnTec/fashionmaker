@@ -116,6 +116,23 @@ VArc &VArc::operator =(const VArc &arc)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VArc &VArc::operator=(VArc &&arc) Q_DECL_NOTHROW
+{
+    Swap(arc);
+    return *this;
+}
+#endif
+
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VArc::Swap(VArc &arc) Q_DECL_NOTHROW
+{
+    VAbstractArc::Swap(arc);
+    std::swap(d, arc.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
 {

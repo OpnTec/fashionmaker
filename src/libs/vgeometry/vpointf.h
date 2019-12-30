@@ -62,11 +62,10 @@ public:
 
     VPointF &operator=(const VPointF &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+    VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VPointF &point) Q_DECL_NOTHROW
-    { VGObject::Swap(point); std::swap(d, point.d); }
+    void Swap(VPointF &point) Q_DECL_NOTHROW;
 
     explicit operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;

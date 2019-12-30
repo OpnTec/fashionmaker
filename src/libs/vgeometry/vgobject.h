@@ -59,11 +59,10 @@ public:
 
     VGObject& operator= (const VGObject &obj);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW { Swap(obj); return *this; }
+    VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VGObject &obj) Q_DECL_NOTHROW
-    { std::swap(d, obj.d); }
+    void Swap(VGObject &obj) Q_DECL_NOTHROW;
 
     quint32         getIdObject() const;
     void            setIdObject(const quint32 &value);

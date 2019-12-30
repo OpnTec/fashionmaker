@@ -127,6 +127,22 @@ VGObject &VGObject::operator=(const VGObject &obj)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+
+//---------------------------------------------------------------------------------------------------------------------
+VGObject &VGObject::operator=(VGObject &&obj) Q_DECL_NOTHROW
+{
+    Swap(obj);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGObject::Swap(VGObject &obj) Q_DECL_NOTHROW
+{
+    std::swap(d, obj.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VGObject::~VGObject()
 {}

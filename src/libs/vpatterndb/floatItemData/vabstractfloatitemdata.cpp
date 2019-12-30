@@ -50,6 +50,21 @@ VAbstractFloatItemData &VAbstractFloatItemData::operator=(const VAbstractFloatIt
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractFloatItemData &VAbstractFloatItemData::operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW
+{
+    Swap(data);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractFloatItemData::Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
+{
+    std::swap(d, data.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractFloatItemData::~VAbstractFloatItemData()
 {}

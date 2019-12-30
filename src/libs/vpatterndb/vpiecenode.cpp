@@ -65,6 +65,21 @@ VPieceNode &VPieceNode::operator=(const VPieceNode &node)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VPieceNode &VPieceNode::operator=(VPieceNode &&node) Q_DECL_NOTHROW
+{
+    Swap(node);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceNode::Swap(VPieceNode &node) Q_DECL_NOTHROW
+{
+    std::swap(d, node.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VPieceNode::~VPieceNode()
 {}

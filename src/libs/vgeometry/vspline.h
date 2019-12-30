@@ -67,11 +67,10 @@ public:
 
     VSpline &operator=(const VSpline &spline);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSpline &operator=(VSpline &&spline) Q_DECL_NOTHROW { Swap(spline); return *this; }
+    VSpline &operator=(VSpline &&spline) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VSpline &spline) Q_DECL_NOTHROW
-    { VAbstractCubicBezier::Swap(spline); std::swap(d, spline.d); }
+    void Swap(VSpline &spline) Q_DECL_NOTHROW;
 
     virtual VPointF GetP1 () const override;
     void            SetP1 (const VPointF &p);

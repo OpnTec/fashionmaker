@@ -51,11 +51,10 @@ public:
 
     VPieceLabelData &operator=(const VPieceLabelData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+    VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VPieceLabelData &data) Q_DECL_NOTHROW
-    { VPatternLabelData::Swap(data); std::swap(d, data.d); }
+    void Swap(VPieceLabelData &data) Q_DECL_NOTHROW;
 
     void Clear();
 

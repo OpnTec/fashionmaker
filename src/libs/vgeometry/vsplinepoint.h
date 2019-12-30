@@ -53,11 +53,10 @@ public:
 
     VFSplinePoint &operator=(const VFSplinePoint &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+    VFSplinePoint &operator=(VFSplinePoint &&point) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VFSplinePoint &point) Q_DECL_NOTHROW
-    { std::swap(d, point.d); }
+    void Swap(VFSplinePoint &point) Q_DECL_NOTHROW;
 
     VPointF P() const;
     void    SetP(const VPointF &value);
@@ -93,11 +92,10 @@ public:
 
     VSplinePoint &operator=(const VSplinePoint &point);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW { Swap(point); return *this; }
+    VSplinePoint &operator=(VSplinePoint &&point) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VSplinePoint &point) Q_DECL_NOTHROW
-    { std::swap(d, point.d); }
+    void Swap(VSplinePoint &point) Q_DECL_NOTHROW;
 
     VPointF P() const;
     void    SetP(const VPointF &value);

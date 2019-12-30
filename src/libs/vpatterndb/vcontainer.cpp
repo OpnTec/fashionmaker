@@ -130,6 +130,21 @@ VContainer &VContainer::operator =(const VContainer &data)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VContainer &VContainer::operator=(VContainer &&data) Q_DECL_NOTHROW
+{
+    Swap(data);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::Swap(VContainer &data) Q_DECL_NOTHROW
+{
+    std::swap(d, data.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VContainer create container from another container

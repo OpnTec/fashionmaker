@@ -44,11 +44,10 @@ public:
 
     VAbstractFloatItemData &operator=(const VAbstractFloatItemData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+    VAbstractFloatItemData &operator=(VAbstractFloatItemData &&data) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW
-    { std::swap(d, data.d); }
+    void Swap(VAbstractFloatItemData &data) Q_DECL_NOTHROW;
 
     // methods, which set and return values of different parameters
     QPointF GetPos() const;

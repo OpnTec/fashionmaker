@@ -57,11 +57,10 @@ public:
 
     VAbstractPiece &operator=(const VAbstractPiece &piece);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
+    VAbstractPiece &operator=(VAbstractPiece &&piece) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW
-    { std::swap(d, piece.d); }
+    void Swap(VAbstractPiece &piece) Q_DECL_NOTHROW;
 
     QString GetName() const;
     void    SetName(const QString &value);

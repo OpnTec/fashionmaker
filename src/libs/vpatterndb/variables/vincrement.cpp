@@ -70,6 +70,22 @@ VIncrement &VIncrement::operator=(const VIncrement &incr)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VIncrement &VIncrement::operator=(VIncrement &&incr) Q_DECL_NOTHROW
+{
+    Swap(incr);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VIncrement::Swap(VIncrement &incr) Q_DECL_NOTHROW
+{
+    VVariable::Swap(incr);
+    std::swap(d, incr.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VIncrement::~VIncrement()
 {}

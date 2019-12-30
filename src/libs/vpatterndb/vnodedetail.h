@@ -74,11 +74,10 @@ public:
      */
     VNodeDetail &operator=(const VNodeDetail &node);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW { Swap(node); return *this; }
+    VNodeDetail &operator=(VNodeDetail &&node) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VNodeDetail &node) Q_DECL_NOTHROW
-    { std::swap(d, node.d); }
+    void Swap(VNodeDetail &node) Q_DECL_NOTHROW;
 
     /**
      * @brief getId return object id.

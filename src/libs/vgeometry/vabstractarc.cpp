@@ -78,6 +78,22 @@ VAbstractArc &VAbstractArc::operator=(const VAbstractArc &arc)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VAbstractArc &VAbstractArc::operator=(VAbstractArc &&arc) Q_DECL_NOTHROW
+{
+    Swap(arc);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractArc::Swap(VAbstractArc &arc) Q_DECL_NOTHROW
+{
+    VAbstractCurve::Swap(arc);
+    std::swap(d, arc.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractArc::~VAbstractArc()
 {}

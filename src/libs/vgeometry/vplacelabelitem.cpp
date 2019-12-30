@@ -225,6 +225,22 @@ VPlaceLabelItem &VPlaceLabelItem::operator=(const VPlaceLabelItem &item)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VPlaceLabelItem &VPlaceLabelItem::operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW
+{
+    Swap(item);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlaceLabelItem::Swap(VPlaceLabelItem &item) Q_DECL_NOTHROW
+{
+    VPointF::Swap(item);
+    std::swap(d, item.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 PlaceLabelImg VPlaceLabelItem::LabelShape() const
 {

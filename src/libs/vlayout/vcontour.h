@@ -55,11 +55,10 @@ public:
 
     VContour &operator=(const VContour &contour);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW { Swap(contour); return *this; }
+    VContour &operator=(VContour &&contour) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VContour &contour) Q_DECL_NOTHROW
-    { std::swap(d, contour.d); }
+    void Swap(VContour &contour) Q_DECL_NOTHROW;
 
     void CeateEmptySheetContour();
 

@@ -54,11 +54,10 @@ public:
 
     VIncrement &operator=(const VIncrement &incr);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW { Swap(incr); return *this; }
+    VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VIncrement &incr) Q_DECL_NOTHROW
-    { VVariable::Swap(incr); std::swap(d, incr.d); }
+    void Swap(VIncrement &incr) Q_DECL_NOTHROW;
 
     void    SetFormula(qreal base, const QString &formula, bool ok);
     QString GetFormula() const;

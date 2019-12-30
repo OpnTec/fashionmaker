@@ -48,11 +48,10 @@ public:
 
     VPatternLabelData &operator=(const VPatternLabelData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+    VPatternLabelData &operator=(VPatternLabelData &&data) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VPatternLabelData &data) Q_DECL_NOTHROW
-    { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
+    void Swap(VPatternLabelData &data) Q_DECL_NOTHROW;
 
     // methods, which set up label parameters
     QString GetLabelWidth() const;

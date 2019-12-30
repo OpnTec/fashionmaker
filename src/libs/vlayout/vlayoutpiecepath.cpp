@@ -79,6 +79,21 @@ VLayoutPiecePath &VLayoutPiecePath::operator=(const VLayoutPiecePath &path)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VLayoutPiecePath &VLayoutPiecePath::operator=(VLayoutPiecePath &&path) Q_DECL_NOTHROW
+{
+    Swap(path);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiecePath::Swap(VLayoutPiecePath &path) Q_DECL_NOTHROW
+{
+    std::swap(d, path.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiecePath::~VLayoutPiecePath()
 {

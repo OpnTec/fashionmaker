@@ -67,11 +67,10 @@ public:
 
     VLayoutPiece &operator=(const VLayoutPiece &detail);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW { Swap(detail); return *this; }
+    VLayoutPiece &operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
-    { VAbstractPiece::Swap(detail); std::swap(d, detail.d); }
+    void Swap(VLayoutPiece &detail) Q_DECL_NOTHROW;
 
     static VLayoutPiece Create(const VPiece &piece, vidtype id, const VContainer *pattern);
 

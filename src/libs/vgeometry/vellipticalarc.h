@@ -69,11 +69,10 @@ public:
 
     VEllipticalArc& operator= (const VEllipticalArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW { Swap(arc); return *this; }
+    VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW
-    { VAbstractArc::Swap(arc); std::swap(d, arc.d); }
+    void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW;
 
     QString GetFormulaRotationAngle () const;
     void    SetFormulaRotationAngle (const QString &formula, qreal value);

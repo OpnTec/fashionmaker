@@ -51,11 +51,10 @@ public:
 
     VGrainlineData &operator=(const VGrainlineData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VGrainlineData &operator=(VGrainlineData &&data) Q_DECL_NOTHROW { Swap(data); return *this; }
+    VGrainlineData &operator=(VGrainlineData &&data) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VGrainlineData &data) Q_DECL_NOTHROW
-    { VAbstractFloatItemData::Swap(data); std::swap(d, data.d); }
+    void Swap(VGrainlineData &data) Q_DECL_NOTHROW;
 
     // methods, which set and return values of different parameters
     QString GetLength() const;

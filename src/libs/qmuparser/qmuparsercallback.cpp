@@ -208,6 +208,21 @@ QmuParserCallback &QmuParserCallback::operator=(const QmuParserCallback &a_Fun)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+QmuParserCallback &QmuParserCallback::operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
+{
+    Swap(a_Fun);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void QmuParserCallback::Swap(QmuParserCallback &a_Fun) Q_DECL_NOTHROW
+{
+    std::swap(d, a_Fun.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Return true if the function is conservative.

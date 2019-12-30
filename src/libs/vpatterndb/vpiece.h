@@ -57,11 +57,10 @@ public:
 
     VPiece &operator=(const VPiece &piece);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VPiece &operator=(VPiece &&piece) Q_DECL_NOTHROW { Swap(piece); return *this; }
+    VPiece &operator=(VPiece &&piece) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VPiece &piece) Q_DECL_NOTHROW
-    { VAbstractPiece::Swap(piece); std::swap(d, piece.d); }
+    void Swap(VPiece &piece) Q_DECL_NOTHROW;
 
     VPiecePath GetPath() const;
     VPiecePath &GetPath();

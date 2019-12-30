@@ -57,11 +57,10 @@ public:
 
     VAbstractCurve& operator= (const VAbstractCurve &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW { Swap(curve); return *this; }
+    VAbstractCurve &operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
-    { VGObject::Swap(curve); std::swap(d, curve.d); }
+    void Swap(VAbstractCurve &curve) Q_DECL_NOTHROW;
 
     virtual QVector<QPointF> GetPoints() const =0;
     static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,

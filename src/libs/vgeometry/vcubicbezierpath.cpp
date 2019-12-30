@@ -78,6 +78,22 @@ VCubicBezierPath &VCubicBezierPath::operator=(const VCubicBezierPath &curve)
     return *this;
 }
 
+#ifdef Q_COMPILER_RVALUE_REFS
+//---------------------------------------------------------------------------------------------------------------------
+VCubicBezierPath &VCubicBezierPath::operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW
+{
+    Swap(curve);
+    return *this;
+}
+#endif
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCubicBezierPath::Swap(VCubicBezierPath &curve) Q_DECL_NOTHROW
+{
+    VAbstractCubicBezierPath::Swap(curve);
+    std::swap(d, curve.d);
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VCubicBezierPath VCubicBezierPath::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const
 {

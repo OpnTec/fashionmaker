@@ -49,11 +49,10 @@ public:
 
     VCurveVariable &operator=(const VCurveVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
+    VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VCurveVariable &var) Q_DECL_NOTHROW
-    { VInternalVariable::Swap(var); std::swap(d, var.d); }
+    void Swap(VCurveVariable &var) Q_DECL_NOTHROW;
 
     virtual bool Filter(quint32 id) override;
 

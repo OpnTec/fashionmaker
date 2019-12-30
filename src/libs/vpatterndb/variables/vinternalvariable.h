@@ -48,11 +48,10 @@ public:
 
     VInternalVariable &operator=(const VInternalVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
-    VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW { Swap(var); return *this; }
+    VInternalVariable &operator=(VInternalVariable &&var) Q_DECL_NOTHROW;
 #endif
 
-    inline void Swap(VInternalVariable &var) Q_DECL_NOTHROW
-    { std::swap(d, var.d); }
+    void Swap(VInternalVariable &var) Q_DECL_NOTHROW;
 
     virtual qreal  GetValue() const;
     virtual qreal* GetValue();
