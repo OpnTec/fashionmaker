@@ -68,7 +68,7 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
         WatermarkChangesWereSaved(false);
     });
 
-    connect(ui->spinBoxTextRotation, QOverload<int>::of(&QSpinBox::valueChanged),this,
+    connect(ui->spinBoxTextRotation, QOverload<int>::of(&QSpinBox::valueChanged), this,
             [this](){WatermarkChangesWereSaved(false);});
 
     connect(ui->toolButtonFont, &QToolButton::clicked, this, [this]()
@@ -104,6 +104,9 @@ WatermarkWindow::WatermarkWindow(const QString &patternPath, QWidget *parent) :
             [this](){WatermarkChangesWereSaved(false);});
 
     connect(ui->checkBoxGrayColor, &QCheckBox::stateChanged, this, [this](){WatermarkChangesWereSaved(false);});
+
+    connect(ui->groupBoxWatermarkText, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
+    connect(ui->groupBoxWatermarkImage, &QGroupBox::toggled, this, [this](){WatermarkChangesWereSaved(false);});
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -385,13 +388,13 @@ bool WatermarkWindow::on_actionSave_triggered()
 
                 if (not changed)
                 {
-                    QMessageBox messageBox(this);
-                    messageBox.setIcon(QMessageBox::Warning);
-                    messageBox.setText(tr("Cannot set permissions for %1 to writable.").arg(m_curFile));
-                    messageBox.setInformativeText(tr("Could not save the file."));
-                    messageBox.setDefaultButton(QMessageBox::Ok);
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.exec();
+                    QMessageBox messageBoxWarning(this);
+                    messageBoxWarning.setIcon(QMessageBox::Warning);
+                    messageBoxWarning.setText(tr("Cannot set permissions for %1 to writable.").arg(m_curFile));
+                    messageBoxWarning.setInformativeText(tr("Could not save the file."));
+                    messageBoxWarning.setDefaultButton(QMessageBox::Ok);
+                    messageBoxWarning.setStandardButtons(QMessageBox::Ok);
+                    messageBoxWarning.exec();
                     return false;
                 }
             }
@@ -581,8 +584,10 @@ bool WatermarkWindow::ContinueFormatRewrite(const QString &currentFormatVersion,
 bool WatermarkWindow::SaveWatermark(const QString &fileName, QString &error)
 {
     m_data.opacity = ui->spinBoxOpacity->value();
+    m_data.showText = ui->groupBoxWatermarkText->isChecked();
     m_data.text = ui->lineEditText->text();
     m_data.textRotation = ui->spinBoxTextRotation->value();
+    m_data.showImage = ui->groupBoxWatermarkImage->isChecked();
     m_data.path = RelativeMPath(fileName, ui->lineEditPath->text());
     m_data.imageRotation = ui->spinBoxImageRotation->value();
     m_data.grayscale = ui->checkBoxGrayColor->isChecked();
@@ -677,6 +682,10 @@ void WatermarkWindow::ShowWatermark()
     ui->spinBoxOpacity->setValue(m_data.opacity);
     ui->spinBoxOpacity->blockSignals(false);
 
+    ui->groupBoxWatermarkText->blockSignals(true);
+    ui->groupBoxWatermarkText->setChecked(m_data.showText);
+    ui->groupBoxWatermarkText->blockSignals(false);
+
     ui->lineEditText->blockSignals(true);
     ui->lineEditText->setText(m_data.text);
     ui->lineEditText->blockSignals(false);
@@ -688,6 +697,10 @@ void WatermarkWindow::ShowWatermark()
     ui->lineEditFontSample->blockSignals(true);
     ui->lineEditFontSample->setFont(m_data.font);
     ui->lineEditFontSample->blockSignals(false);
+
+    ui->groupBoxWatermarkImage->blockSignals(true);
+    ui->groupBoxWatermarkImage->setChecked(m_data.showImage);
+    ui->groupBoxWatermarkImage->blockSignals(false);
 
     ui->lineEditPath->blockSignals(true);
     ui->lineEditPath->setText(AbsoluteMPath(m_curFile, m_data.path));

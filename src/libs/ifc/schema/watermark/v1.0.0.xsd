@@ -7,6 +7,7 @@
           <xs:complexType>
             <xs:simpleContent>
               <xs:extension base="xs:string">
+                <xs:attribute type="xs:boolean" name="show"/>
                 <xs:attribute type="xs:string" name="text"/>
                 <xs:attribute type="rotationType" name="rotation"/>
                 <xs:attribute type="xs:string" name="font"/>
@@ -18,6 +19,7 @@
           <xs:complexType>
             <xs:simpleContent>
               <xs:extension base="xs:string">
+                <xs:attribute type="xs:boolean" name="show"/>
                 <xs:attribute type="xs:string" name="path"/>
                 <xs:attribute type="rotationType" name="rotation"/>
                 <xs:attribute type="xs:boolean" name="grayscale"/>

@@ -241,9 +241,11 @@ struct VLabelTemplateLine
 struct VWatermarkData
 {
     int     opacity{20};
+    bool    showText{true};
     QString text{};
     int     textRotation{0};
     QFont   font{};
+    bool    showImage{true};
     QString path{};
     int     imageRotation{0};
     bool    grayscale{false};

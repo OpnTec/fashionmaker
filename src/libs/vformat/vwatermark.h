@@ -54,6 +54,7 @@ public:
     static const QString AttrFont;
     static const QString AttrPath;
     static const QString AttrGrayscale;
+    static const QString AttrShow;
 
 private:
     Q_DISABLE_COPY(VWatermark)

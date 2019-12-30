@@ -38,6 +38,7 @@ const QString VWatermark::AttrRotation  = QStringLiteral("rotation");
 const QString VWatermark::AttrFont      = QStringLiteral("font");
 const QString VWatermark::AttrPath      = QStringLiteral("path");
 const QString VWatermark::AttrGrayscale = QStringLiteral("grayscale");
+const QString VWatermark::AttrShow      = QStringLiteral("show");
 
 namespace
 {
@@ -97,6 +98,7 @@ VWatermarkData VWatermark::GetWatermark() const
         QDomElement text = rootElement.firstChildElement(TagText);
         if (not text.isNull())
         {
+            data.showText = GetParametrBool(text, AttrShow, trueStr);
             data.text = GetParametrEmptyString(text, AttrText);
             data.textRotation = GetParametrInt(text, AttrRotation, QChar('0'));
             data.font.fromString(GetParametrEmptyString(text, AttrFont));
@@ -105,6 +107,7 @@ VWatermarkData VWatermark::GetWatermark() const
         QDomElement image = rootElement.firstChildElement(TagImage);
         if (not image.isNull())
         {
+            data.showImage = GetParametrBool(image, AttrShow, trueStr);
             data.path = GetParametrEmptyString(image, AttrPath);
             data.imageRotation = GetParametrInt(image, AttrRotation, QChar('0'));
             data.grayscale = GetParametrBool(image, AttrGrayscale, falseStr);
@@ -126,6 +129,7 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         QDomElement text = rootElement.firstChildElement(TagText);
         if (not text.isNull())
         {
+            SetAttribute(text, AttrShow, data.showText);
             SetAttributeOrRemoveIf(text, AttrText, data.text, data.text.isEmpty());
             SetAttributeOrRemoveIf(text, AttrRotation, data.textRotation, data.textRotation == 0);
             const QString fontString = data.font.toString();
@@ -135,6 +139,7 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         QDomElement image = rootElement.firstChildElement(TagImage);
         if (not image.isNull())
         {
+            SetAttribute(image, AttrShow, data.showImage);
             SetAttributeOrRemoveIf(image, AttrPath, data.path, data.path.isEmpty());
             SetAttributeOrRemoveIf(image, AttrRotation, data.imageRotation, data.imageRotation == 0);
             SetAttributeOrRemoveIf(image, AttrGrayscale, data.grayscale, data.grayscale == false);

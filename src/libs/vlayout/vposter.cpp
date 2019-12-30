@@ -160,12 +160,12 @@ QVector<QGraphicsItem *> VPoster::Tile(QGraphicsItem *parent, const PosterData &
 
     if (watermarkData.opacity > 0)
     {
-        if (not watermarkData.path.isEmpty())
+        if (watermarkData.showImage && not watermarkData.path.isEmpty())
         {
             data += ImageWatermark(parent, img, watermarkData, watermarkPath);
         }
 
-        if (not watermarkData.text.isEmpty())
+        if (watermarkData.showText && not watermarkData.text.isEmpty())
         {
             data += TextWatermark(parent, img, watermarkData);
         }
