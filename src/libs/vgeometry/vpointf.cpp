@@ -104,19 +104,18 @@ VPointF &VPointF::operator =(const VPointF &point)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VPointF::VPointF(const VPointF &&point) Q_DECL_NOTHROW
+    :VGObject(point), d(point.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPointF &VPointF::operator=(VPointF &&point) Q_DECL_NOTHROW
 {
-    Swap(point);
+    VGObject::operator=(point);
+    std::swap(d, point.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPointF::Swap(VPointF &point) Q_DECL_NOTHROW
-{
-    VGObject::Swap(point);
-    std::swap(d, point.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPointF::operator QPointF() const

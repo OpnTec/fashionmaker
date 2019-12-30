@@ -124,18 +124,17 @@ VNodeDetail &VNodeDetail::operator =(const VNodeDetail &node)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VNodeDetail::VNodeDetail(const VNodeDetail &&node) Q_DECL_NOTHROW
+    :d (node.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VNodeDetail &VNodeDetail::operator=(VNodeDetail &&node) Q_DECL_NOTHROW
 {
-    Swap(node);
+    std::swap(d, node.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNodeDetail::Swap(VNodeDetail &node) Q_DECL_NOTHROW
-{
-    std::swap(d, node.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VNodeDetail::~VNodeDetail()

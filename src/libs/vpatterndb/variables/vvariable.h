@@ -52,10 +52,9 @@ public:
 
     VVariable &operator=(const VVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VVariable(const VVariable &&var) Q_DECL_NOTHROW;
     VVariable &operator=(VVariable &&var) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VVariable &var) Q_DECL_NOTHROW;
 
     QString GetDescription() const;
     void    SetDescription(const QString &desc);

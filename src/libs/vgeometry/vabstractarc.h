@@ -58,10 +58,9 @@ public:
 
     VAbstractArc& operator= (const VAbstractArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VAbstractArc(VAbstractArc &&arc) Q_DECL_NOTHROW;
     VAbstractArc &operator=(VAbstractArc &&arc) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VAbstractArc &arc) Q_DECL_NOTHROW;
 
     QString       GetFormulaF1 () const;
     void          SetFormulaF1 (const QString &formula, qreal value);

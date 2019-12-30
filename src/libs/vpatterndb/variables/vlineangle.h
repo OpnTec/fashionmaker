@@ -50,10 +50,9 @@ public:
 
     VLineAngle &operator=(const VLineAngle &var);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VLineAngle(const VLineAngle &&var) Q_DECL_NOTHROW;
     VLineAngle &operator=(VLineAngle &&var) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VLineAngle &var) Q_DECL_NOTHROW;
 
     virtual bool Filter(quint32 id) override;
     void         SetValue(const VPointF *p1, const VPointF *p2);

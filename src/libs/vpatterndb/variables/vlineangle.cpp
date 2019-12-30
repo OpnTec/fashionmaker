@@ -77,21 +77,20 @@ VLineAngle &VLineAngle::operator=(const VLineAngle &var)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VLineAngle::VLineAngle(const VLineAngle &&var) Q_DECL_NOTHROW
+    :VInternalVariable(var), d(var.d)
+{}
+
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle &VLineAngle::operator=(VLineAngle &&var) Q_DECL_NOTHROW
 {
-    Swap(var);
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLineAngle::Swap(VLineAngle &var) Q_DECL_NOTHROW
-{
-    VInternalVariable::Swap(var);
-    std::swap(d, var.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLineAngle::~VLineAngle()

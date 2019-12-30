@@ -50,20 +50,19 @@ VInternalVariable &VInternalVariable::operator=(const VInternalVariable &var)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VInternalVariable::VInternalVariable(const VInternalVariable &&var) Q_DECL_NOTHROW
+    :d(var.d)
+{}
+
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable &VInternalVariable::operator=(VInternalVariable &&var) Q_DECL_NOTHROW
 {
-    Swap(var);
+    std::swap(d, var.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VInternalVariable::Swap(VInternalVariable &var) Q_DECL_NOTHROW
-{
-    std::swap(d, var.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VInternalVariable::~VInternalVariable()

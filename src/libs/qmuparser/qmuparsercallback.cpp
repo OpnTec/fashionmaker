@@ -210,18 +210,17 @@ QmuParserCallback &QmuParserCallback::operator=(const QmuParserCallback &a_Fun)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+QmuParserCallback::QmuParserCallback(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
+    : d (a_Fun.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 QmuParserCallback &QmuParserCallback::operator=(QmuParserCallback &&a_Fun) Q_DECL_NOTHROW
 {
-    Swap(a_Fun);
+    std::swap(d, a_Fun.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void QmuParserCallback::Swap(QmuParserCallback &a_Fun) Q_DECL_NOTHROW
-{
-    std::swap(d, a_Fun.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

@@ -220,18 +220,17 @@ VPiecePath &VPiecePath::operator=(const VPiecePath &path)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VPiecePath::VPiecePath(const VPiecePath &&path) Q_DECL_NOTHROW
+    : d (path.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiecePath &VPiecePath::operator=(VPiecePath &&path) Q_DECL_NOTHROW
 {
-    Swap(path);
+    std::swap(d, path.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPiecePath::Swap(VPiecePath &path) Q_DECL_NOTHROW
-{
-    std::swap(d, path.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiecePath::~VPiecePath()

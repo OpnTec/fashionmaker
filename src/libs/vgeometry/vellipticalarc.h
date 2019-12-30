@@ -69,10 +69,9 @@ public:
 
     VEllipticalArc& operator= (const VEllipticalArc &arc);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VEllipticalArc(const VEllipticalArc &&arc) Q_DECL_NOTHROW;
     VEllipticalArc &operator=(VEllipticalArc &&arc) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VEllipticalArc &arc) Q_DECL_NOTHROW;
 
     QString GetFormulaRotationAngle () const;
     void    SetFormulaRotationAngle (const QString &formula, qreal value);

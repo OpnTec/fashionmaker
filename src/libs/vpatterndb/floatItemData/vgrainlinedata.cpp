@@ -57,19 +57,19 @@ VGrainlineData &VGrainlineData::operator=(const VGrainlineData &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VGrainlineData::VGrainlineData(const VGrainlineData &&data) Q_DECL_NOTHROW
+    : VAbstractFloatItemData(data),
+      d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VGrainlineData &VGrainlineData::operator=(VGrainlineData &&data) Q_DECL_NOTHROW
 {
-    Swap(data);
+    VAbstractFloatItemData::operator=(data);
+    std::swap(d, data.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::Swap(VGrainlineData &data) Q_DECL_NOTHROW
-{
-    VAbstractFloatItemData::Swap(data);
-    std::swap(d, data.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VGrainlineData::~VGrainlineData()

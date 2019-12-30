@@ -118,20 +118,18 @@ VArc &VArc::operator =(const VArc &arc)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VArc::VArc(VArc &&arc) Q_DECL_NOTHROW
+    : VAbstractArc(arc), d (arc.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VArc &VArc::operator=(VArc &&arc) Q_DECL_NOTHROW
 {
-    Swap(arc);
+    VAbstractArc::operator=(arc);
+    std::swap(d, arc.d);
     return *this;
 }
 #endif
-
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VArc::Swap(VArc &arc) Q_DECL_NOTHROW
-{
-    VAbstractArc::Swap(arc);
-    std::swap(d, arc.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VArc VArc::Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix) const

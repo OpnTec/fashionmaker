@@ -62,10 +62,9 @@ public:
 
     VPointF &operator=(const VPointF &point);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VPointF(const VPointF &&point) Q_DECL_NOTHROW;
     VPointF &operator=(VPointF &&point) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VPointF &point) Q_DECL_NOTHROW;
 
     explicit operator QPointF() const;
     VPointF Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const;

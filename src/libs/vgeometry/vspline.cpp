@@ -249,19 +249,18 @@ VSpline &VSpline::operator =(const VSpline &spline)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VSpline::VSpline(const VSpline &&spline) Q_DECL_NOTHROW
+    :VAbstractCubicBezier(spline), d(spline.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSpline &VSpline::operator=(VSpline &&spline) Q_DECL_NOTHROW
 {
-    Swap(spline);
+    VAbstractCubicBezier::operator=(spline);
+    std::swap(d, spline.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSpline::Swap(VSpline &spline) Q_DECL_NOTHROW
-{
-    VAbstractCubicBezier::Swap(spline);
-    std::swap(d, spline.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

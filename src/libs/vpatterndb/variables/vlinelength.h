@@ -52,10 +52,9 @@ public:
 
     VLengthLine &operator=(const VLengthLine &var);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VLengthLine(const VLengthLine &&var) Q_DECL_NOTHROW;
     VLengthLine &operator=(VLengthLine &&var) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VLengthLine &var) Q_DECL_NOTHROW;
 
     virtual bool Filter(quint32 id) override;
     void         SetValue(const VPointF *p1, const VPointF *p2);

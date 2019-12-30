@@ -133,19 +133,18 @@ VPiece &VPiece::operator=(const VPiece &piece)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VPiece::VPiece(const VPiece &&piece) Q_DECL_NOTHROW
+    : VAbstractPiece(piece), d (piece.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPiece &VPiece::operator=(VPiece &&piece) Q_DECL_NOTHROW
 {
-    Swap(piece);
+    VAbstractPiece::operator=(piece);
+    std::swap(d, piece.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPiece::Swap(VPiece &piece) Q_DECL_NOTHROW
-{
-    VAbstractPiece::Swap(piece);
-    std::swap(d, piece.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPiece::~VPiece()

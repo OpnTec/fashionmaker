@@ -58,10 +58,9 @@ public:
 
     VCubicBezierPath &operator=(const VCubicBezierPath &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VCubicBezierPath(const VCubicBezierPath &&curve) Q_DECL_NOTHROW;
     VCubicBezierPath &operator=(VCubicBezierPath &&curve) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VCubicBezierPath &curve) Q_DECL_NOTHROW;
 
     VPointF &operator[](int indx);
 

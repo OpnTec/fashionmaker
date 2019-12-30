@@ -67,10 +67,9 @@ public:
     VSplinePoint &operator[](int indx);
     VSplinePath  &operator=(const VSplinePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VSplinePath(const VSplinePath&& splPath) Q_DECL_NOTHROW;
     VSplinePath &operator=(VSplinePath &&path) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VSplinePath &path) Q_DECL_NOTHROW;
 
     void   append(const VSplinePoint &point);
 

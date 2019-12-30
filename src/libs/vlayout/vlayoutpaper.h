@@ -58,10 +58,9 @@ public:
 
     VLayoutPaper &operator=(const VLayoutPaper &paper);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VLayoutPaper(const VLayoutPaper &&paper) Q_DECL_NOTHROW;
     VLayoutPaper &operator=(VLayoutPaper &&paper) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VLayoutPaper &paper) Q_DECL_NOTHROW;
 
     int  GetHeight() const;
     void SetHeight(int height);

@@ -62,10 +62,9 @@ public:
 
     VMeasurement &operator=(const VMeasurement &m);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VMeasurement(const VMeasurement &&m) Q_DECL_NOTHROW;
     VMeasurement &operator=(VMeasurement &&m) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VMeasurement &m) Q_DECL_NOTHROW;
 
     QString GetGuiText() const;
 

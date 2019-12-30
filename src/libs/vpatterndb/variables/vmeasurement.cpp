@@ -94,19 +94,18 @@ VMeasurement &VMeasurement::operator=(const VMeasurement &m)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VMeasurement::VMeasurement(const VMeasurement &&m) Q_DECL_NOTHROW
+    :VVariable(m), d(m.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VMeasurement &VMeasurement::operator=(VMeasurement &&m) Q_DECL_NOTHROW
 {
-    Swap(m);
+    VVariable::operator=(m);
+    std::swap(d, m.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VMeasurement::Swap(VMeasurement &m) Q_DECL_NOTHROW
-{
-    VVariable::Swap(m);
-    std::swap(d, m.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VMeasurement::~VMeasurement()

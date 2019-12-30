@@ -51,10 +51,9 @@ public:
 
     VPieceLabelData &operator=(const VPieceLabelData &data);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VPieceLabelData(const VPieceLabelData &&data) Q_DECL_NOTHROW;
     VPieceLabelData &operator=(VPieceLabelData &&data) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VPieceLabelData &data) Q_DECL_NOTHROW;
 
     void Clear();
 

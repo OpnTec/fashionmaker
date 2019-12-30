@@ -54,10 +54,9 @@ public:
 
     VIncrement &operator=(const VIncrement &incr);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VIncrement(const VIncrement &&incr) Q_DECL_NOTHROW;
     VIncrement &operator=(VIncrement &&incr) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VIncrement &incr) Q_DECL_NOTHROW;
 
     void    SetFormula(qreal base, const QString &formula, bool ok);
     QString GetFormula() const;

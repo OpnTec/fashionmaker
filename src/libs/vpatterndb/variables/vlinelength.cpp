@@ -75,21 +75,20 @@ VLengthLine &VLengthLine::operator=(const VLengthLine &var)
     return *this;
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+VLengthLine::VLengthLine(const VLengthLine &&var) Q_DECL_NOTHROW
+    :VInternalVariable(var), d(var.d)
+{}
+
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine &VLengthLine::operator=(VLengthLine &&var) Q_DECL_NOTHROW
 {
-    Swap(var);
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLengthLine::Swap(VLengthLine &var) Q_DECL_NOTHROW
-{
-    VInternalVariable::Swap(var);
-    std::swap(d, var.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLengthLine::~VLengthLine()

@@ -49,10 +49,9 @@ public:
 
     VBestSquare &operator=(const VBestSquare &res);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VBestSquare(const VBestSquare &&res) Q_DECL_NOTHROW;
     VBestSquare &operator=(VBestSquare &&res) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VBestSquare &res) Q_DECL_NOTHROW;
 
     void NewResult(const VBestSquareResData &data);
     void NewResult(const VBestSquare &best);

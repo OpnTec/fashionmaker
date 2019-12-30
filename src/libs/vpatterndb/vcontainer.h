@@ -131,10 +131,9 @@ public:
 
     VContainer &operator=(const VContainer &data);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VContainer(const VContainer &&data) Q_DECL_NOTHROW;
     VContainer &operator=(VContainer &&data) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VContainer &data) Q_DECL_NOTHROW;
 
     static QString UniqueNamespace();
 

@@ -77,17 +77,17 @@ VFSplinePoint &VFSplinePoint::operator=(const VFSplinePoint &point)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VFSplinePoint::VFSplinePoint(const VFSplinePoint &&point) Q_DECL_NOTHROW
+    :d(point.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VFSplinePoint &VFSplinePoint::operator=(VFSplinePoint &&point) Q_DECL_NOTHROW
 {
-    Swap(point);
+    std::swap(d, point.d);
     return *this;
 }
 #endif
-
-void VFSplinePoint::Swap(VFSplinePoint &point) Q_DECL_NOTHROW
-{
-    std::swap(d, point.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VFSplinePoint::~VFSplinePoint()
@@ -236,18 +236,17 @@ VSplinePoint &VSplinePoint::operator=(const VSplinePoint &point)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VSplinePoint::VSplinePoint(const VSplinePoint &&point) Q_DECL_NOTHROW
+    : d(point.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VSplinePoint &VSplinePoint::operator=(VSplinePoint &&point) Q_DECL_NOTHROW
 {
-    Swap(point);
+    std::swap(d, point.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VSplinePoint::Swap(VSplinePoint &point) Q_DECL_NOTHROW
-{
-    std::swap(d, point.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VSplinePoint::~VSplinePoint()

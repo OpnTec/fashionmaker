@@ -48,10 +48,9 @@ public:
 
     VPlaceLabelItem &operator=(const VPlaceLabelItem &item);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VPlaceLabelItem(const VPlaceLabelItem &&item) Q_DECL_NOTHROW;
     VPlaceLabelItem &operator=(VPlaceLabelItem &&item) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VPlaceLabelItem &item) Q_DECL_NOTHROW;
 
     QString  GetWidthFormula() const;
     QString& GetWidthFormula();

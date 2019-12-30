@@ -61,19 +61,18 @@ VAbstractCurve &VAbstractCurve::operator=(const VAbstractCurve &curve)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VAbstractCurve::VAbstractCurve(VAbstractCurve &&curve) Q_DECL_NOTHROW
+    :VGObject(curve), d (curve.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve &VAbstractCurve::operator=(VAbstractCurve &&curve) Q_DECL_NOTHROW
 {
-    Swap(curve);
+    VGObject::operator=(curve);
+    std::swap(d, curve.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VAbstractCurve::Swap(VAbstractCurve &curve) Q_DECL_NOTHROW
-{
-    VGObject::Swap(curve);
-    std::swap(d, curve.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractCurve::~VAbstractCurve()

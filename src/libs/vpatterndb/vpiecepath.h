@@ -54,10 +54,9 @@ public:
 
     VPiecePath &operator=(const VPiecePath &path);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VPiecePath(const VPiecePath &&path) Q_DECL_NOTHROW;
     VPiecePath &operator=(VPiecePath &&path) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VPiecePath &path) Q_DECL_NOTHROW;
 
     void   Append(const VPieceNode &node);
     void   Clear();

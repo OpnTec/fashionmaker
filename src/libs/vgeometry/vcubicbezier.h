@@ -57,10 +57,9 @@ public:
 
     VCubicBezier &operator=(const VCubicBezier &curve);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VCubicBezier(const VCubicBezier &&curve) Q_DECL_NOTHROW;
     VCubicBezier &operator=(VCubicBezier &&curve) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VCubicBezier &curve) Q_DECL_NOTHROW;
 
     virtual VPointF GetP1() const override;
     void            SetP1(const VPointF &p);

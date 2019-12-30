@@ -49,10 +49,9 @@ public:
 
     VCurveVariable &operator=(const VCurveVariable &var);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VCurveVariable(const VCurveVariable &&var) Q_DECL_NOTHROW;
     VCurveVariable &operator=(VCurveVariable &&var) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VCurveVariable &var) Q_DECL_NOTHROW;
 
     virtual bool Filter(quint32 id) override;
 

@@ -57,19 +57,19 @@ VPieceLabelData &VPieceLabelData::operator=(const VPieceLabelData &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VPieceLabelData::VPieceLabelData(const VPieceLabelData &&data) Q_DECL_NOTHROW
+    : VPatternLabelData(data),
+      d (data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData &VPieceLabelData::operator=(VPieceLabelData &&data) Q_DECL_NOTHROW
 {
-    Swap(data);
+    VPatternLabelData::operator=(data);
+    std::swap(d, data.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPieceLabelData::Swap(VPieceLabelData &data) Q_DECL_NOTHROW
-{
-    VPatternLabelData::Swap(data);
-    std::swap(d, data.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VPieceLabelData::~VPieceLabelData()

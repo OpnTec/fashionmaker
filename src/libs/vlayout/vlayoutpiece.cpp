@@ -406,19 +406,18 @@ VLayoutPiece &VLayoutPiece::operator=(const VLayoutPiece &detail)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VLayoutPiece::VLayoutPiece(const VLayoutPiece &&detail) Q_DECL_NOTHROW
+    :VAbstractPiece(detail), d(detail.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece &VLayoutPiece::operator=(VLayoutPiece &&detail) Q_DECL_NOTHROW
 {
-    Swap(detail);
+    VAbstractPiece::operator=(detail);
+    std::swap(d, detail.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::Swap(VLayoutPiece &detail) Q_DECL_NOTHROW
-{
-    VAbstractPiece::Swap(detail);
-    std::swap(d, detail.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPiece::~VLayoutPiece()

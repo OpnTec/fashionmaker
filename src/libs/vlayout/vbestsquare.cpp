@@ -73,18 +73,17 @@ VBestSquare &VBestSquare::operator=(const VBestSquare &res)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VBestSquare::VBestSquare(const VBestSquare &&res) Q_DECL_NOTHROW
+    : d(res.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VBestSquare &VBestSquare::operator=(VBestSquare &&res) Q_DECL_NOTHROW
 {
-    Swap(res);
+    std::swap(d, res.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VBestSquare::Swap(VBestSquare &res) Q_DECL_NOTHROW
-{
-    std::swap(d, res.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VBestSquare::NewResult(const VBestSquareResData &data)

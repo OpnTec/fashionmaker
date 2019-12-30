@@ -66,19 +66,18 @@ VCurveVariable &VCurveVariable::operator=(const VCurveVariable &var)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VCurveVariable::VCurveVariable(const VCurveVariable &&var) Q_DECL_NOTHROW
+    :VInternalVariable(var), d(var.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VCurveVariable &VCurveVariable::operator=(VCurveVariable &&var) Q_DECL_NOTHROW
 {
-    Swap(var);
+    VInternalVariable::operator=(var);
+    std::swap(d, var.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VCurveVariable::Swap(VCurveVariable &var) Q_DECL_NOTHROW
-{
-    VInternalVariable::Swap(var);
-    std::swap(d, var.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 VCurveVariable::~VCurveVariable()

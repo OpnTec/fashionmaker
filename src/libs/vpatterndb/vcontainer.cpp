@@ -132,18 +132,17 @@ VContainer &VContainer::operator =(const VContainer &data)
 
 #ifdef Q_COMPILER_RVALUE_REFS
 //---------------------------------------------------------------------------------------------------------------------
+VContainer::VContainer(const VContainer &&data) Q_DECL_NOTHROW
+    :d(data.d)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 VContainer &VContainer::operator=(VContainer &&data) Q_DECL_NOTHROW
 {
-    Swap(data);
+    std::swap(d, data.d);
     return *this;
 }
 #endif
-
-//---------------------------------------------------------------------------------------------------------------------
-void VContainer::Swap(VContainer &data) Q_DECL_NOTHROW
-{
-    std::swap(d, data.d);
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 /**

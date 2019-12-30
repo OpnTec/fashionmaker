@@ -59,10 +59,9 @@ public:
 
     VGObject& operator= (const VGObject &obj);
 #ifdef Q_COMPILER_RVALUE_REFS
+    VGObject(const VGObject &&obj) Q_DECL_NOTHROW;
     VGObject &operator=(VGObject &&obj) Q_DECL_NOTHROW;
 #endif
-
-    void Swap(VGObject &obj) Q_DECL_NOTHROW;
 
     quint32         getIdObject() const;
     void            setIdObject(const quint32 &value);
