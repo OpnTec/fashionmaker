@@ -107,7 +107,6 @@ QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QLi
 bool SaveToolOptions::mergeWith(const QUndoCommand *command)
 {
     const SaveToolOptions *saveCommand = static_cast<const SaveToolOptions *>(command);
-    SCASSERT(saveCommand != nullptr)
 
     if (saveCommand->getToolId() != nodeId)
     {
