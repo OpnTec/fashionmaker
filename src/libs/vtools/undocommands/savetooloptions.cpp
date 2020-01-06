@@ -95,7 +95,12 @@ QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QLi
 {
     QSet<quint32> set1 = QSet<quint32>::fromList(list1);
     QSet<quint32> set2 = QSet<quint32>::fromList(list2);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QSet<quint32> substracted = set1.subtract(set2);
+    return QVector<quint32>(substracted.begin(), substracted.end());
+#else
     return set1.subtract(set2).toList().toVector();
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

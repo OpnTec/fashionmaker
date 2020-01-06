@@ -67,7 +67,7 @@ QVector<quint32> PieceMissingNodes(const QVector<quint32> &d1Nodes, const QVecto
         set2.insert(d2Nodes.at(j));
     }
 
-    const QList<quint32> set3 = set1.subtract(set2).toList();
+    const QList<quint32> set3 = set1.subtract(set2).values();
     QVector<quint32> r;
     r.reserve(set3.size());
     for (qint32 i = 0; i < set3.size(); ++i)

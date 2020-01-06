@@ -629,7 +629,7 @@ QVector<quint32> VPiecePath::MissingNodes(const VPiecePath &path) const
         set2.insert(path.at(j).GetId());
     }
 
-    const QList<quint32> set3 = set1.subtract(set2).toList();
+    const QList<quint32> set3 = set1.subtract(set2).values();
     QVector<quint32> nodes;
     nodes.reserve(set3.size());
     for (qint32 i = 0; i < set3.size(); ++i)

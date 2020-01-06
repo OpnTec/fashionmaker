@@ -659,7 +659,7 @@ QStringList VContainer::AllUniqueNames(const QString &nspace)
     if (uniqueNames.contains(nspace))
     {
         QStringList names = builInFunctions;
-        names.append(uniqueNames.value(nspace).toList());
+        names.append(uniqueNames.value(nspace).values());
         return names;
     }
     else
@@ -707,7 +707,7 @@ void VContainer::ClearUniqueNames() const
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::ClearUniqueIncrementNames() const
 {
-    const QList<QString> list = uniqueNames.value(d->nspace).toList();
+    const QList<QString> list = uniqueNames.value(d->nspace).values();
     ClearUniqueNames();
 
     for(auto &name : list)
@@ -810,7 +810,11 @@ const QHash<QString, QSharedPointer<VInternalVariable> > *VContainer::DataVariab
 //---------------------------------------------------------------------------------------------------------------------
 VContainerData::~VContainerData()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    if (ref.loadRelaxed() == 0)
+#else
     if (ref.load() == 0)
+#endif
     {
         --VContainer::copyCounter[nspace];
     }

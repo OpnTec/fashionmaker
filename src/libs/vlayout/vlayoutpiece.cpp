@@ -500,7 +500,11 @@ QVector<T> VLayoutPiece::Map(QVector<T> points) const
 
     if (d->mirror)
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        auto list = QList<T>(p.begin(), p.end());
+#else
         QList<T> list = points.toList();
+#endif
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)

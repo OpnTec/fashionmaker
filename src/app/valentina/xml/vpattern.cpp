@@ -98,7 +98,12 @@ void GatherCount(int &count, const int nodes)
 QString DefLabelLanguage()
 {
     QString def = qApp->ValentinaSettings()->GetLabelLanguage();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QStringList languages = VApplication::LabelLanguages();
+    if (not QSet<QString>(languages.begin(), languages.end()).contains(def));
+#else
     if (not VApplication::LabelLanguages().toSet().contains(def))
+#endif
     {
         def = QStringLiteral("en");
     }
@@ -4376,7 +4381,12 @@ void VPattern::SetLabelPrefix(const QString &prefix)
 
     if (not pattern.isNull())
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        QStringList languages = VApplication::LabelLanguages();
+        if (QSet<QString>(languages.begin(), languages.end()).contains(prefix));
+#else
         if (VApplication::LabelLanguages().toSet().contains(prefix))
+#endif
         {
             SetAttribute(pattern, AttrLabelPrefix, prefix);
             modified = true;

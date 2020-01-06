@@ -642,7 +642,11 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
 {
     if (qFuzzyIsNull(length))
     {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        return QList<VLayoutPiece>(details.begin(), details.end());
+#else
         return details.toList();
+#endif
     }
 
     QList<VLayoutPiece> newDetails;

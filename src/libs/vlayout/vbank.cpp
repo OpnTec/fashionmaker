@@ -343,7 +343,11 @@ bool VBank::PrepareUnsorted()
         Insert(unsorted, group, i, square);
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    groups = QVector<uint>(uniqueGroup.begin(), uniqueGroup.end());
+#else
     groups = QVector<uint>::fromList(uniqueGroup.toList());
+#endif
     std::sort(groups.begin(), groups.end());
 
     PrepareGroup();
