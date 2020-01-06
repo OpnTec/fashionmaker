@@ -401,7 +401,12 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
     for ( auto i = 0; i < points.count()-1; ++i )
     {
         QPointF crosPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        const auto type = line.intersects(QLineF(points.at(i), points.at(i+1)), &crosPoint);
+#else
         const auto type = line.intersect(QLineF(points.at(i), points.at(i+1)), &crosPoint);
+#endif
+
         if ( type == QLineF::BoundedIntersection )
         {
             intersections.append(crosPoint);

@@ -180,7 +180,12 @@ bool VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF fPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType intersect = axis.intersects(line, &fPoint);
+#else
     QLineF::IntersectType intersect = axis.intersect(line, &fPoint);
+#endif
+
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {
         if(VFuzzyComparePossibleNulls(axis.angle(), line.angle())

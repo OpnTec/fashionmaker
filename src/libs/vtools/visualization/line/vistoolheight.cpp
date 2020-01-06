@@ -116,7 +116,12 @@ void VisToolHeight::setLineP2Id(const quint32 &value)
 void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &base_line)
 {
     QPointF p;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType intersect = height_line.intersects(base_line, &p);
+#else
     QLineF::IntersectType intersect = height_line.intersect(base_line, &p);
+#endif
+
     if (intersect == QLineF::UnboundedIntersection)
     {
         line_intersection->setVisible(true);

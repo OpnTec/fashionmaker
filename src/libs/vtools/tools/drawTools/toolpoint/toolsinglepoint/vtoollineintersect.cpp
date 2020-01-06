@@ -140,7 +140,12 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
     QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
     QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
+#else
     const QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
+#endif
+
     if (intersect == QLineF::NoIntersection)
     {
         qWarning() << tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of intersection")

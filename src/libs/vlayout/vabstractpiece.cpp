@@ -108,7 +108,12 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
             // We do not check intersection type because intersection must alwayse exist
             QPointF px;
             cutLine.setAngle(cutLine.angle()+90);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            QLineF::IntersectType type = QLineF(sp1, sp2).intersects(cutLine, &px);
+#else
             QLineF::IntersectType type = QLineF(sp1, sp2).intersect(cutLine, &px);
+#endif
+
             if (type == QLineF::NoIntersection)
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
@@ -116,7 +121,12 @@ QVector<VRawSAPoint> AngleByLength(QVector<VRawSAPoint> points, QPointF p1, QPoi
             points.append(px);
 
             cutLine.setAngle(cutLine.angle()-180);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            type = QLineF(sp2, sp3).intersects(cutLine, &px);
+#else
             type = QLineF(sp2, sp3).intersect(cutLine, &px);
+#endif
+
             if (type == QLineF::NoIntersection)
             {
                 qDebug()<<"Couldn't find intersection with cut line.";
@@ -226,7 +236,12 @@ QVector<VRawSAPoint> AngleByIntersection(const QVector<VRawSAPoint> &points, QPo
     QLineF edge2(p2, p3);
 
     QPointF px;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType type = edge2.intersects(bigLine1, &px);
+#else
     QLineF::IntersectType type = edge2.intersect(bigLine1, &px);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -261,7 +276,12 @@ QVector<VRawSAPoint> AngleByIntersection(const QVector<VRawSAPoint> &points, QPo
     // Second point
     QLineF edge1(p1, p2);
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    type = edge1.intersects(bigLine2, &px);
+#else
     type = edge1.intersect(bigLine2, &px);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -310,14 +330,24 @@ QVector<VRawSAPoint> AngleByFirstSymmetry(const QVector<VRawSAPoint> &points, QP
     QLineF sEdge(VPointF::FlipPF(axis, bigLine2.p1()), VPointF::FlipPF(axis, bigLine2.p2()));
 
     QPointF px1;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType type = sEdge.intersects(bigLine1, &px1);
+#else
     QLineF::IntersectType type = sEdge.intersect(bigLine1, &px1);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QPointF px2;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    type = sEdge.intersects(bigLine2, &px2);
+#else
     type = sEdge.intersect(bigLine2, &px2);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -389,14 +419,24 @@ QVector<VRawSAPoint> AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, Q
     QLineF sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
     QPointF px1;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType type = sEdge.intersects(bigLine1, &px1);
+#else
     QLineF::IntersectType type = sEdge.intersect(bigLine1, &px1);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
 
     QPointF px2;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    type = sEdge.intersects(bigLine2, &px2);
+#else
     type = sEdge.intersect(bigLine2, &px2);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -465,7 +505,12 @@ QVector<VRawSAPoint> AngleByFirstRightAngle(const QVector<VRawSAPoint> &points, 
     QLineF edge(p1, p2);
 
     QPointF px;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType type = edge.intersects(bigLine2, &px);
+#else
     QLineF::IntersectType type = edge.intersect(bigLine2, &px);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -538,7 +583,12 @@ QVector<VRawSAPoint> AngleBySecondRightAngle(QVector<VRawSAPoint> points, QPoint
     QLineF edge(p2, p3);
 
     QPointF px;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QLineF::IntersectType type = edge.intersects(bigLine1, &px);
+#else
     QLineF::IntersectType type = edge.intersect(bigLine1, &px);
+#endif
+
     if (type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
@@ -809,7 +859,11 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
         const QLineF bigLine1 = VAbstractPiece::ParallelLine(points.at(points.size()-2), points.at(0), width);
 
         QPointF px;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        edge.intersects(bigLine1, &px);
+#else
         edge.intersect(bigLine1, &px);
+#endif
 
         ekvPoints.removeLast();
 
@@ -821,7 +875,12 @@ void RollbackBySecondEdgeRightAngle(QVector<VRawSAPoint> &ekvPoints, const QVect
                 const QLineF edge2(ekvPoints.at(0), ekvPoints.at(1));
 
                 QPointF crosPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                const QLineF::IntersectType type = edge1.intersects(edge2, &crosPoint );
+#else
                 const QLineF::IntersectType type = edge1.intersect(edge2, &crosPoint );
+#endif
+
                 if (type == QLineF::BoundedIntersection)
                 {
                     ekvPoints.removeFirst();
@@ -1252,7 +1311,11 @@ QVector<QPointF> VAbstractPiece::CheckLoops(const QVector<VRawSAPoint> &points)
 
             if (uniqueVertices.size() == 4)
             {// Lines are not neighbors
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
+#else
                 const QLineF::IntersectType intersect = line1.intersect(line2, &crosPoint);
+#endif
                 if (intersect == QLineF::NoIntersection)
                 { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
                   // i.e. they are parallel. But parallel also mean they can be on the same line.
@@ -1332,7 +1395,12 @@ QVector<VRawSAPoint> VAbstractPiece::EkvPoint(QVector<VRawSAPoint> points, const
     }
 
     QPointF crosPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    const QLineF::IntersectType type = bigLine1.intersects( bigLine2, &crosPoint );
+#else
     const QLineF::IntersectType type = bigLine1.intersect( bigLine2, &crosPoint );
+#endif
+
     switch (type)
     {// There are at least three big cases
         case (QLineF::BoundedIntersection):
@@ -1429,7 +1497,11 @@ QT_WARNING_POP
 
                         const QLineF bigEdge = ParallelLine(p1Line1, p1Line2, localWidth );
                         QPointF px;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                        const QLineF::IntersectType type = bigEdge.intersects(line, &px);
+#else
                         const QLineF::IntersectType type = bigEdge.intersect(line, &px);
+#endif
                         if (type != QLineF::BoundedIntersection && line.length() < QLineF(p2Line1, px).length())
                         {
                             points.append(crosPoint);
@@ -1560,7 +1632,12 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
             }
 
             QPointF crosPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+            const auto type = baseSegment.intersects(allowanceSegment, &crosPoint);
+#else
             const auto type = baseSegment.intersect(allowanceSegment, &crosPoint);
+#endif
+
             if (type == QLineF::BoundedIntersection
                     && not VFuzzyComparePoints(baseSegment.p1(), crosPoint)
                     && not VFuzzyComparePoints(baseSegment.p2(), crosPoint)
@@ -1718,7 +1795,12 @@ QVector<VRawSAPoint> VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> 
     {
         QLineF segment(points.at(i), points.at(i-1));
         QPointF crosPoint;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        const QLineF::IntersectType type = cuttingEdge.intersects(segment, &crosPoint);
+#else
         const QLineF::IntersectType type = cuttingEdge.intersect(segment, &crosPoint);
+#endif
+
         if (type != QLineF::NoIntersection
                 && VGObject::IsPointOnLineSegment(crosPoint, segment.p1(), segment.p2())
                 && IsSameDirection(cuttingEdge.p2(), cuttingEdge.p1(), crosPoint))
@@ -1738,7 +1820,12 @@ QVector<VRawSAPoint> VAbstractPiece::RollbackSeamAllowance(QVector<VRawSAPoint> 
     {
         QPointF crosPoint;
         QLineF secondLast(points.at(points.size()-2), points.at(points.size()-1));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        QLineF::IntersectType type = secondLast.intersects(cuttingEdge, &crosPoint);
+#else
         QLineF::IntersectType type = secondLast.intersect(cuttingEdge, &crosPoint);
+#endif
+
         if (type != QLineF::NoIntersection && IsOutsidePoint(secondLast.p1(), secondLast.p2(), crosPoint))
         {
             points.append(crosPoint);
