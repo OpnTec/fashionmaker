@@ -242,16 +242,8 @@ void DialogLineIntersect::PointNameChanged()
         QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
 
 
-        if (set.size() < 3 || intersect == QLineF::NoIntersection)
-        {
-            flagError = false;
-            color = errorColor;
-        }
-        else
-        {
-            flagError = true;
-            color = OkColor(this);
-        }
+        flagError = not (set.size() < 3 || intersect == QLineF::NoIntersection);
+        color = flagError ? OkColor(this) : errorColor;
     }
     catch (const VExceptionBadId &)
     {
