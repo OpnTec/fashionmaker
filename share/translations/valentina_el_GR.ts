@@ -8143,7 +8143,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Αφαίρεση</translation>
+        <translation>Αφαίρεση</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -9157,6 +9157,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12330,22 +12334,22 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">εκ</translation>
+        <translation>εκ</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">ίντσες</translation>
+        <translation>ίντσες</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -14954,7 +14958,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Κείμενο</translation>
+        <translation>Κείμενο</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -14966,7 +14970,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Περιστροφή:</translation>
+        <translation>Περιστροφή:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -14987,7 +14991,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Διαδρομή:</translation>
+        <translation>Διαδρομή:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -15003,15 +15007,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Αρχείο</translation>
+        <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Λειτουργίες</translation>
+        <translation>Λειτουργίες</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Αποθήκευση</translation>
+        <translation>Αποθήκευση</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -15019,19 +15023,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">Έ&amp;ξοδος</translation>
+        <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Άνοιγμα</translation>
+        <translation>Άνοιγμα</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Νέο</translation>
+        <translation>Νέο</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Εικόνες</translation>
+        <translation>Εικόνες</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -15039,7 +15043,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Σφάλμα στο αρχείο.</translation>
+        <translation>Σφάλμα στο αρχείο.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15047,7 +15051,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Αποθήκευση ως</translation>
+        <translation>Αποθήκευση ως</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -15055,15 +15059,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
+        <translation>Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
+        <translation>Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
+        <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
@@ -15075,19 +15079,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Could not save the file.</translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
+        <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Άνοιγμα αρχείου</translation>
+        <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Αλλαγές χωρίς αποθήκευση</translation>
+        <translation>Αλλαγές χωρίς αποθήκευση</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15096,11 +15100,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Χωρίς αποθήκευση</translation>
+        <translation>Χωρίς αποθήκευση</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">μόνο για ανάγνωση</translation>
+        <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -15116,15 +15120,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Αποθηκευμένο αρχείο</translation>
+        <translation>Αποθηκευμένο αρχείο</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Κλείδωμα αρχείου</translation>
+        <translation>Κλείδωμα αρχείου</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
+        <translation>Αυτό το αρχείο είναι ήδη ανοιχτό σε άλλο παράθυρο. Αγνοήστε αν θέλετε να συνεχίσετε (δε συνιστάται, μπορεί να προκαλέσει καταστροφή δεδομένων).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>

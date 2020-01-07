@@ -8282,6 +8282,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -11254,21 +11258,21 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13726,7 +13730,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Rută:</translation>
+        <translation>Rută:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -13742,7 +13746,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp; Fișier</translation>
+        <translation>&amp; Fișier</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -13750,7 +13754,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Salvează</translation>
+        <translation>Salvează</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -13758,15 +13762,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">E&amp;xit</translation>
+        <translation>E&amp;xit</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Deschide</translation>
+        <translation>Deschide</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nou</translation>
+        <translation>Nou</translation>
     </message>
     <message>
         <source>Images</source>
@@ -13778,7 +13782,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Eroare de fișier.</translation>
+        <translation>Eroare de fișier.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -13786,7 +13790,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Salvează ca și</translation>
+        <translation>Salvează ca și</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -13798,7 +13802,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Fișierul nu a putut fii salvat</translation>
+        <translation>Fișierul nu a putut fii salvat</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -13822,7 +13826,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Deschide fișier</translation>
+        <translation>Deschide fișier</translation>
     </message>
     <message>
         <source>Unsaved changes</source>

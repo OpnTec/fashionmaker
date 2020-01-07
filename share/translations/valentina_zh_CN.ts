@@ -7402,6 +7402,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -10330,10 +10334,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10345,6 +10345,10 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12758,7 +12762,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">保存</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -12774,7 +12778,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">新</translation>
+        <translation>新</translation>
     </message>
     <message>
         <source>Images</source>
@@ -12830,7 +12834,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">打开文件</translation>
+        <translation>打开文件</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -12843,7 +12847,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">不保存</translation>
+        <translation>不保存</translation>
     </message>
     <message>
         <source>read only</source>

@@ -8266,7 +8266,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Remove</translation>
+        <translation>Remove</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -9339,6 +9339,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12731,22 +12735,22 @@ Do you want to save your changes?</translation>
         <translation>Sheet %1 of %2</translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">in</translation>
+        <translation>in</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15465,7 +15469,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation:</translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -15486,7 +15490,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Path:</translation>
+        <translation>Path:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -15502,15 +15506,15 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;File</translation>
+        <translation>&amp;File</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Operations</translation>
+        <translation>Operations</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Save</translation>
+        <translation>Save</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -15518,19 +15522,19 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">E&amp;xit</translation>
+        <translation>E&amp;xit</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Open</translation>
+        <translation>Open</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">New</translation>
+        <translation>New</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -15538,7 +15542,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">File error.</translation>
+        <translation>File error.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15546,7 +15550,7 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Save as</translation>
+        <translation>Save as</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -15554,39 +15558,39 @@ Do you want to save your changes?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Failed to lock. This file already opened in another window.</translation>
+        <translation>Failed to lock. This file already opened in another window.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Could not save file</translation>
+        <translation>Could not save file</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</translation>
+        <translation>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">The document has no write permissions.</translation>
+        <translation>The document has no write permissions.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Cannot set permissions for %1 to writable.</translation>
+        <translation>Cannot set permissions for %1 to writable.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Could not save the file.</translation>
+        <translation>Could not save the file.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Could not save the file</translation>
+        <translation>Could not save the file</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Open file</translation>
+        <translation>Open file</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Unsaved changes</translation>
+        <translation>Unsaved changes</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15595,11 +15599,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Don&apos;t Save</translation>
+        <translation>Don&apos;t Save</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">read only</translation>
+        <translation>read only</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -15615,23 +15619,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">File saved</translation>
+        <translation>File saved</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Locking file</translation>
+        <translation>Locking file</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
+        <translation>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
+        <translation>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
+        <translation>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</translation>
     </message>
 </context>
 <context>

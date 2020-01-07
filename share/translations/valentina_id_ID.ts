@@ -7616,6 +7616,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -10513,21 +10517,21 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12962,7 +12966,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Simpan</translation>
+        <translation>Simpan</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -13034,7 +13038,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Buka File</translation>
+        <translation>Buka File</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -13067,7 +13071,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">File telah disimpan</translation>
+        <translation>File telah disimpan</translation>
     </message>
     <message>
         <source>Locking file</source>

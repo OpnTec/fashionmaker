@@ -8394,6 +8394,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -11512,21 +11516,21 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -14011,11 +14015,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Tekst:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>watermark text</source>
@@ -14023,7 +14027,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Obrót:</translation>
+        <translation>Obrót:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -14044,7 +14048,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Ścieżka:</translation>
+        <translation>Ścieżka:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -14060,7 +14064,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Plik</translation>
+        <translation>&amp;Plik</translation>
     </message>
     <message>
         <source>Operations</source>
@@ -14068,7 +14072,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Zapisz</translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -14080,15 +14084,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Otwórz</translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nowy</translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Obrazy</translation>
+        <translation>Obrazy</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -14104,7 +14108,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Zapisz jako</translation>
+        <translation>Zapisz jako</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -14116,7 +14120,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Nie można zapisać pliku</translation>
+        <translation>Nie można zapisać pliku</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
@@ -14140,7 +14144,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Otwórz plik</translation>
+        <translation>Otwórz plik</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
@@ -14153,11 +14157,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Nie zapisuj</translation>
+        <translation>Nie zapisuj</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">tylko do odczytu</translation>
+        <translation>tylko do odczytu</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -14173,7 +14177,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Plik zapisany</translation>
+        <translation>Plik zapisany</translation>
     </message>
     <message>
         <source>Locking file</source>

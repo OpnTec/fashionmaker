@@ -9561,6 +9561,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QSaveFile</name>
@@ -13127,10 +13131,6 @@ Do you want to save your changes?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13143,6 +13143,10 @@ Do you want to save your changes?</translation>
         <source>in</source>
         <comment>unit</comment>
         <translation type="unfinished">in</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

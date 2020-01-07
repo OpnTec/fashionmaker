@@ -307,7 +307,7 @@ QVector<QGraphicsItem *> VPoster::ImageWatermark(QGraphicsItem *parent, const Po
 
         if (watermark.isNull())
         {
-            const QString errorMsg = tr("Cannot open the watermark image. %1").arg(error);
+            const QString errorMsg = tr("Cannot open the watermark image.") + QChar(' ') + error;
             qApp->IsPedantic() ? throw VException(errorMsg) :
                                  qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
             return data;

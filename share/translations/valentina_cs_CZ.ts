@@ -1032,7 +1032,7 @@
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít bod s ID %1</translation>
     </message>
 </context>
 <context>
@@ -1582,7 +1582,7 @@
     </message>
     <message>
         <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="vanished">Zamezit zrcadlení dílu střihu v rozložení.</translation>
+        <translation type="vanished">Zamezit zrcadlení dílu střihu v rozvržení.</translation>
     </message>
     <message>
         <source>Forbid flipping</source>
@@ -4146,7 +4146,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Show date of layout creation (%1)</source>
-        <translation type="vanished">Ukázat datum vytvoření rozložení (%1)</translation>
+        <translation type="vanished">Ukázat datum vytvoření rozvržení (%1)</translation>
     </message>
     <message>
         <source>Show measurements file</source>
@@ -4680,7 +4680,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Acute angle that looks inside of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostrý úhel, který vypadá, že je uvnitř dílu</translation>
     </message>
     <message>
         <source>Acute angle that looks outside of piece</source>
@@ -5433,7 +5433,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento bod nemůže být původní bod. Vyberte, prosím, jiný původní bod</translation>
     </message>
 </context>
 <context>
@@ -5623,7 +5623,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Numerical control</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslicové ovládání</translation>
     </message>
 </context>
 <context>
@@ -6278,7 +6278,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít bod s ID %1</translation>
     </message>
 </context>
 <context>
@@ -8170,7 +8170,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Průsečík kruhu a části</translation>
     </message>
     <message>
         <source>Increase label font</source>
@@ -8178,115 +8178,115 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Decrease label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšit písmo popisu</translation>
     </message>
     <message>
         <source>Original label font</source>
-        <translation type="unfinished"></translation>
+        <translation>Původní písmo popisu</translation>
     </message>
     <message>
         <source>Hide labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt popisy</translation>
     </message>
     <message>
         <source>Groups of visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupiny viditelnosti</translation>
     </message>
     <message>
         <source>Export recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyvést Recipe</translation>
     </message>
     <message>
         <source>Recipe files</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory Recipe</translation>
     </message>
     <message>
         <source>recipe</source>
-        <translation type="unfinished"></translation>
+        <translation>Recipe</translation>
     </message>
     <message>
         <source>Could not save recipe. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se uložit Recipe. %1</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj zakřivené cesty, který jako ovládací úchop používá bod</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku oblouku a osy</translation>
     </message>
     <message>
         <source>Show main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat hlavní cestu</translation>
     </message>
     <message>
         <source>Globally show pieces main path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat celkově hlavní cestu dílu</translation>
     </message>
     <message>
         <source>Pattern messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zprávy střihu</translation>
     </message>
     <message>
         <source>Clear all messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat všechny zprávy</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtr</translation>
     </message>
     <message>
         <source>DEBUG</source>
-        <translation type="unfinished"></translation>
+        <translation>LADĚNÍ</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>VAROVÁNÍ</translation>
     </message>
     <message>
         <source>CRITICAL</source>
-        <translation type="unfinished"></translation>
+        <translation>ZÁSADNÍ</translation>
     </message>
     <message>
         <source>FATAL</source>
-        <translation type="unfinished"></translation>
+        <translation>VELMI ZÁVAŽNÉ</translation>
     </message>
     <message>
         <source>INFO</source>
-        <translation type="unfinished"></translation>
+        <translation>INFORMACE</translation>
     </message>
     <message>
         <source>Auto refresh the list with each parse</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky při každém zpracování obnovit seznam</translation>
     </message>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodoznak</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrát</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Odstranit</translation>
+        <translation>Odstranit</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit nynější</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nebo upravit vodoznak</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory vodoznaku</translation>
     </message>
 </context>
 <context>
@@ -8449,23 +8449,23 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Preparing details for layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Připravují se podrobnosti pro rozvržení</translation>
     </message>
     <message>
         <source>Timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypršení času.</translation>
     </message>
     <message>
         <source>Cannot set printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze nastavit velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Cannot set custom printer page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze nastavit vlastní velikost strany tiskárny</translation>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
+        <translation>Postup byl kvůli výjimce zastaven.</translation>
     </message>
     <message>
         <source>File error.
@@ -8473,7 +8473,11 @@ Chcete uložit své změny?</translation>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba souboru.
+
+%1
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -9280,7 +9284,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Empty formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdný vzorec</translation>
     </message>
     <message>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
@@ -9344,6 +9348,10 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12209,34 +12217,34 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Result is infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledek je nekonečno</translation>
     </message>
     <message>
         <source>Result is NaN</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledek je NaN</translation>
     </message>
     <message>
         <source>Result is zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledek je nula</translation>
     </message>
     <message>
         <source>Result less than zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Výsledek je menší než nula</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorec je prázdný</translation>
     </message>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevyhodnoceno</translation>
     </message>
 </context>
 <context>
     <name>VFormulaData</name>
     <message>
         <source>Not evaluated</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevyhodnoceno</translation>
     </message>
     <message>
         <source>Error</source>
@@ -12244,7 +12252,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Formula is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorec je prázdný</translation>
     </message>
 </context>
 <context>
@@ -12340,7 +12348,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Úhel značky sestavení</translation>
     </message>
     <message>
         <source>Straightforward</source>
@@ -12376,7 +12384,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Passmark mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka značky sestavení</translation>
     </message>
     <message>
         <source>One line</source>
@@ -12703,15 +12711,15 @@ Chcete uložit změny?</translation>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatná značka %1</translation>
     </message>
     <message>
         <source>Can&apos;t find element by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze najít prvek podle ID &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit záznam historie pro nástroj.</translation>
     </message>
 </context>
 <context>
@@ -12737,21 +12745,25 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Nelze otevřít obrázek vodoznaku. %1</translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodporovaná souborová přípona &apos;%1&apos;</translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">palce</translation>
+        <translation>palce</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13808,7 +13820,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj byl použit po smazání.</translation>
     </message>
 </context>
 <context>
@@ -15289,7 +15301,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Hide not in layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt ne v rozvržení</translation>
     </message>
 </context>
 <context>
@@ -15308,19 +15320,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat</translation>
     </message>
     <message>
         <source>Hide All</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrýt vše</translation>
     </message>
     <message>
         <source>Show All</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat vše</translation>
     </message>
 </context>
 <context>
@@ -15450,148 +15462,148 @@ Chcete uložit změny?</translation>
     <name>WatermarkWindow</name>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodoznak</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neprůhlednost:</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Text</translation>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Text:</translation>
+        <translation>Text:</translation>
     </message>
     <message>
         <source>watermark text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text vodoznaku</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Otočení:</translation>
+        <translation>Otočení:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo:</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Hnědý kůň běží, žabička vesele zpívá</translation>
     </message>
     <message>
         <source>Edit font</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit písmo</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Cesta:</translation>
+        <translation>Cesta:</translation>
     </message>
     <message>
         <source>path to image</source>
-        <translation type="unfinished"></translation>
+        <translation>Cesta k obrázku</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished">Procházet…</translation>
+        <translation>Procházet…</translation>
     </message>
     <message>
         <source>Gray color</source>
-        <translation type="unfinished"></translation>
+        <translation>Šedá barva</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Operace</translation>
+        <translation>Operace</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Uložit</translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished">Uložit j&amp;ako…</translation>
+        <translation>Uložit j&amp;ako…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Ukončit</translation>
+        <translation>&amp;Ukončit</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Otevřít</translation>
+        <translation>Otevřít</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nový</translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Obrázky</translation>
+        <translation>Obrázky</translation>
     </message>
     <message>
         <source>Watermark image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázek vodoznaku</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Chyba souboru.</translation>
+        <translation>Chyba souboru.</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory vodoznaku</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Uložit jako</translation>
+        <translation>Uložit jako</translation>
     </message>
     <message>
         <source>watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodoznak</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
+        <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Nepodařilo se uložit soubor</translation>
+        <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
+        <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">Dokument nemá žádná oprávnění k zápisu.</translation>
+        <translation>Dokument nemá žádná oprávnění k zápisu.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Nelze nastavit oprávnění pro %1 na zapisovatelný.</translation>
+        <translation>Nelze nastavit oprávnění pro %1 na zapisovatelný.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Nepodařilo se uložit soubor.</translation>
+        <translation>Nepodařilo se uložit soubor.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Nepodařilo se uložit soubor</translation>
+        <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Otevřít soubor</translation>
+        <translation>Otevřít soubor</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Neuložené změny</translation>
+        <translation>Neuložené změny</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15600,19 +15612,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Neukládat</translation>
+        <translation>Neukládat</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">Pouze pro čtení</translation>
+        <translation>Pouze pro čtení</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation type="unfinished"></translation>
+        <translation>nepojmenovaný.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Potvrdit přepsání formátu</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
@@ -15620,23 +15632,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Soubor uložen</translation>
+        <translation>Soubor uložen</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Uzamyká se soubor</translation>
+        <translation>Uzamyká se soubor</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Tento soubor je již otevřen v jiném okně. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
+        <translation>Tento soubor je již otevřen v jiném okně. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Soubor se zámkem se nepodařilo vytvořit kvůli nedostatku oprávnění. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
+        <translation>Soubor se zámkem se nepodařilo vytvořit kvůli nedostatku oprávnění. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
+        <translation>Vyskytla se neznámá chyba. Například plný disk zabránil tomu, aby byl soubor se zámkem zapsán. Nevšímejte si této zprávy, pokud chcete pokračovat (nedoporučuje se, může vést k poškození dat).</translation>
     </message>
 </context>
 <context>

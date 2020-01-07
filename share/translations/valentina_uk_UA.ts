@@ -8267,7 +8267,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -9340,6 +9340,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12731,22 +12735,22 @@ Do you want to save your changes?</source>
         <translation>Аркуш %1 з %2</translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">дюйм</translation>
+        <translation>дюйм</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15465,7 +15469,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Обертання:</translation>
+        <translation>Обертання:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -15486,7 +15490,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Шлях:</translation>
+        <translation>Шлях:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -15502,15 +15506,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Операції</translation>
+        <translation>Операції</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Зберегти</translation>
+        <translation>Зберегти</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -15518,19 +15522,19 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Вихід</translation>
+        <translation>&amp;Вихід</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Відкрити</translation>
+        <translation>Відкрити</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Новий</translation>
+        <translation>Новий</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Зображення</translation>
+        <translation>Зображення</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -15538,7 +15542,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Помилка файла.</translation>
+        <translation>Помилка файла.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15546,7 +15550,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Зберегти як</translation>
+        <translation>Зберегти як</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -15554,39 +15558,39 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Не вдалося зберегти файл</translation>
+        <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено кілька екземплярів програми.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">Документ не має прав на запис.</translation>
+        <translation>Документ не має прав на запис.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Не вдалося встановити права для %1 на запис.</translation>
+        <translation>Не вдалося встановити права для %1 на запис.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Не вдалося зберегти файл.</translation>
+        <translation>Не вдалося зберегти файл.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Не вдалося зберегти файл</translation>
+        <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Відкрити файл</translation>
+        <translation>Відкрити файл</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не збереженні змінення</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15595,11 +15599,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Не зберігати</translation>
+        <translation>Не зберігати</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">тільки читання</translation>
+        <translation>тільки читання</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -15615,23 +15619,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Файл збережено</translation>
+        <translation>Файл збережено</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Блокування файлу</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Цей файл вже відкритий в іншому вікні. Ігноруйте якщо ви хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Не вдалося створити lock файл через відсутність дозволів. Ігноруйте якщо хочете продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Сталася невідома помилка, наприклад переповнення розділу попередило запис lock файлу. Ігноруйте якщо бажаєте продовжити (не рекомендується, може призвести до втрати даних).</translation>
     </message>
 </context>
 <context>

@@ -7270,6 +7270,10 @@ This option will take an affect after restart.</source>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QmuParser</name>
@@ -10129,10 +10133,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10144,6 +10144,10 @@ Do you want to save your changes?</source>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12561,7 +12565,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">שמור</translation>
+        <translation>שמור</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -12577,7 +12581,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">חדש</translation>
+        <translation>חדש</translation>
     </message>
     <message>
         <source>Images</source>
@@ -12597,7 +12601,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">שמירה בשם</translation>
+        <translation>שמירה בשם</translation>
     </message>
     <message>
         <source>watermark</source>

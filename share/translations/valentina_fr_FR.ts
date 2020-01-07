@@ -723,7 +723,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="vanished">Longueur d&apos;arc</translation>
+        <translation type="vanished">Longueur de l&apos;arc</translation>
     </message>
     <message>
         <source>Center point</source>
@@ -1158,7 +1158,7 @@
     </message>
     <message>
         <source>Segment an arc</source>
-        <translation>Segmenter un arc</translation>
+        <translation>Diviser un arc</translation>
     </message>
     <message>
         <source>Selected arc</source>
@@ -1997,7 +1997,7 @@
     </message>
     <message>
         <source>Arc length</source>
-        <translation type="vanished">Longueur d&apos;arc</translation>
+        <translation type="vanished">Longueur de l&apos;arc</translation>
     </message>
     <message>
         <source>Curve length</source>
@@ -2009,7 +2009,7 @@
     </message>
     <message>
         <source>Radius of arcs</source>
-        <translation>Rayon des arcs</translation>
+        <translation>Rayons des arcs</translation>
     </message>
     <message>
         <source>Angles of arcs</source>
@@ -2637,7 +2637,7 @@
     </message>
     <message>
         <source>Arc with center in point %1</source>
-        <translation type="vanished">Arc centré sur le point %1</translation>
+        <translation type="vanished">Arc de centre %1</translation>
     </message>
     <message>
         <source>Curve point %1</source>
@@ -2645,7 +2645,7 @@
     </message>
     <message>
         <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
-        <translation>%4 - point de contact de l&apos;arc avec le centre au point %1 et à la ligne %2_%3</translation>
+        <translation>%4 - point de contact entre l&apos;arc de centre %1 et la ligne %2_%3</translation>
     </message>
     <message>
         <source>Point of perpendicular from point %1 to line %2_%3</source>
@@ -2681,7 +2681,7 @@
     </message>
     <message>
         <source>Arc with center in point %1 and length %2</source>
-        <translation type="vanished">Arc centré sur le point %1 et de longueur %2</translation>
+        <translation type="vanished">Arc de centre %1 et de longueur %2</translation>
     </message>
     <message>
         <source>%1 - point of arcs intersection</source>
@@ -5732,7 +5732,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes</translation>
     </message>
     <message>
         <source>Error</source>
@@ -7859,7 +7859,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Elliptical Arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Arc elliptique</translation>
     </message>
     <message>
         <source>Select point of center of elliptical arc</source>
@@ -8203,7 +8203,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Curved path tool which uses point as control handle</source>
-        <translation type="unfinished"></translation>
+        <translation>Courbe utilisant les points comme poignées de contrôle</translation>
     </message>
     <message>
         <source>Point of intersection arc and axis</source>
@@ -8263,7 +8263,7 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Retirer</translation>
+        <translation>Retirer</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -8624,99 +8624,99 @@ Voulez-vous sauvegarder les changements?</translation>
     <name>PreferencesConfigurationPage</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Auto-save modified pattern</source>
-        <translation type="unfinished">Sauvegarde automatique des changements du patron</translation>
+        <translation>Sauvegarde automatique des modifications du patron</translation>
     </message>
     <message>
         <source>Interval:</source>
-        <translation type="unfinished">Intervalle :</translation>
+        <translation>Intervalle :</translation>
     </message>
     <message>
         <source>min</source>
-        <translation type="unfinished">minimum</translation>
+        <translation>minimum</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Langue</translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Langue de l&apos;interface:</translation>
+        <translation>Langue de l&apos;interface:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished">Séparateur de décimale:</translation>
+        <translation>Séparateur de décimale:</translation>
     </message>
     <message>
         <source>Default unit:</source>
-        <translation type="unfinished">Unité par défaut:</translation>
+        <translation>Unité par défaut:</translation>
     </message>
     <message>
         <source>Label language:</source>
-        <translation type="unfinished">Langue:</translation>
+        <translation>Langue des libellés:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Programme de réalisation de patrons</translation>
+        <translation>Programme de réalisation de patrons</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Programme de réalisation de patrons:</translation>
+        <translation>Programme de réalisation de patrons:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Auteur:</translation>
+        <translation>Auteur:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Livre:</translation>
+        <translation>Source:</translation>
     </message>
     <message>
         <source>Pattern editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Révision du patron</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher à nouveau les messages d&apos;avertissement</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Barre d&apos;outils</translation>
+        <translation>Barre d&apos;outils</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Le texte apparait sous l&apos;icone (recommandé pour les débutants).</translation>
+        <translation>Un libellé accompagne les icônes (recommandé pour les débutants).</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Celui du système</translation>
     </message>
     <message>
         <source>Centimeters</source>
-        <translation type="unfinished">Centimètres</translation>
+        <translation>Centimètres</translation>
     </message>
     <message>
         <source>Millimiters</source>
-        <translation type="unfinished">Millimètres</translation>
+        <translation>Millimètres</translation>
     </message>
     <message>
         <source>Inches</source>
-        <translation type="unfinished">Pouces</translation>
+        <translation>Pouces</translation>
     </message>
     <message>
         <source>Update a pattern only after a curve release</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne mettre à jour le patron qu&apos;une fois la courbe relâchée</translation>
     </message>
     <message>
         <source>Free curve mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode &quot;courbe libre&quot;</translation>
     </message>
     <message>
         <source>default unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Unité par défaut</translation>
     </message>
     <message>
         <source>General</source>
@@ -8724,74 +8724,74 @@ Voulez-vous sauvegarder les changements?</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Double-clic = zoom optimal sur la pièce en cours de travail</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Défilement</translation>
     </message>
     <message>
         <source>Animation</source>
-        <translation type="unfinished"></translation>
+        <translation>Animation</translation>
     </message>
     <message>
         <source>Duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée:</translation>
     </message>
     <message>
         <source>Scrolling animation duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée de l&apos;animation de défilement</translation>
     </message>
     <message>
         <source>ms</source>
         <comment>milliseconds</comment>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <source>Update interval:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalle de rafraîchissement:</translation>
     </message>
     <message>
         <source>Time in milliseconds between each animation update</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée en millisecondes entre chaque rafraîchissement de l&apos;animation</translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de la souris</translation>
     </message>
     <message>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
-        <translation type="unfinished"></translation>
+        <translation>Capteur:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de défilement pour souris optique</translation>
     </message>
     <message>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
-        <translation type="unfinished"></translation>
+        <translation>Molette:</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Echelle de défilement pour souris à molette</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Accélération:</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème de l&apos;interface</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode nuit</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode nuit</translation>
     </message>
 </context>
 <context>
@@ -9324,6 +9324,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10435,27 +10439,27 @@ Voulez-vous enregistrer les changements?</translation>
     <name>TabLabels</name>
     <message>
         <source>Piece label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Données de l&apos;étiquette</translation>
     </message>
     <message>
         <source>Letter:</source>
-        <translation type="unfinished">Lettre :</translation>
+        <translation>Lettre :</translation>
     </message>
     <message>
         <source>Letter of pattern piece</source>
-        <translation type="unfinished">Lettre de l&apos;élément de patron</translation>
+        <translation>Lettre de la pièce de patron</translation>
     </message>
     <message>
         <source>Placement:</source>
-        <translation type="unfinished">Placement:</translation>
+        <translation>Placement:</translation>
     </message>
     <message>
         <source>Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquettes</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished">étiquette pièce de patron visible</translation>
+        <translation>étiquette pièce de patron visible</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10499,7 +10503,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished">étiquette élément de patron visible</translation>
+        <translation>Etiquette de patron visible</translation>
     </message>
     <message>
         <source>Label template:</source>
@@ -10515,7 +10519,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Quantity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantité :</translation>
     </message>
     <message>
         <source>on fold</source>
@@ -10997,75 +11001,75 @@ Voulez-vous enregistrer les changements?</translation>
     <name>TapePreferencesConfigurationPage</name>
     <message>
         <source>Language</source>
-        <translation type="unfinished">Langue</translation>
+        <translation>Langue</translation>
     </message>
     <message>
         <source>GUI language:</source>
-        <translation type="unfinished">Langue de l&apos;interface:</translation>
+        <translation>Langue de l&apos;interface:</translation>
     </message>
     <message>
         <source>Decimal separator parts:</source>
-        <translation type="unfinished">Séparateur de décimale:</translation>
+        <translation>Séparateur de décimale:</translation>
     </message>
     <message>
         <source>Pattern making system</source>
-        <translation type="unfinished">Programme de réalisation de patrons</translation>
+        <translation>Programme de réalisation de patrons</translation>
     </message>
     <message>
         <source>Pattern making system:</source>
-        <translation type="unfinished">Programme de réalisation de patrons:</translation>
+        <translation>Programme de réalisation de patrons:</translation>
     </message>
     <message>
         <source>Author:</source>
-        <translation type="unfinished">Auteur:</translation>
+        <translation>Auteur:</translation>
     </message>
     <message>
         <source>Book:</source>
-        <translation type="unfinished">Livre:</translation>
+        <translation>Source:</translation>
     </message>
     <message>
         <source>Measurements editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Révision des mensurations</translation>
     </message>
     <message>
         <source>Reset warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher à nouveau les messages d&apos;avertissement</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="unfinished">Barre d&apos;outils</translation>
+        <translation>Barre d&apos;outils</translation>
     </message>
     <message>
         <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="unfinished">Le texte apparait sous l&apos;icone (recommandé pour les débutants).</translation>
+        <translation>Un libellé accompagne les icônes (recommandé pour les débutants).</translation>
     </message>
     <message>
         <source>Default height and size</source>
-        <translation type="unfinished">Taille et stature par défaut</translation>
+        <translation>Taille et stature par défaut</translation>
     </message>
     <message>
         <source>Default height:</source>
-        <translation type="unfinished">Stature par défaut:</translation>
+        <translation>Stature par défaut:</translation>
     </message>
     <message>
         <source>Default size:</source>
-        <translation type="unfinished">Taille par défaut:</translation>
+        <translation>Taille par défaut:</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Celui du système</translation>
     </message>
     <message>
         <source>User Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème de l&apos;interface</translation>
     </message>
     <message>
         <source>Activate dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode nuit</translation>
     </message>
     <message>
         <source>dark mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode nuit</translation>
     </message>
 </context>
 <context>
@@ -12707,22 +12711,22 @@ Voulez-vous enregistrer les changements?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">in</translation>
+        <translation>in</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13367,7 +13371,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Elliptical arc</source>
-        <translation>Arc éliptique</translation>
+        <translation>Arc elliptique</translation>
     </message>
     <message>
         <source>Point label:</source>
@@ -15409,11 +15413,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texte</translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Texte:</translation>
+        <translation>Texte:</translation>
     </message>
     <message>
         <source>watermark text</source>
@@ -15421,7 +15425,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotation:</translation>
+        <translation>Rotation:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -15442,7 +15446,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Chemin:</translation>
+        <translation>Chemin:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -15458,15 +15462,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Fichier</translation>
+        <translation>&amp;Fichier</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Opérations</translation>
+        <translation>Opérations</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -15474,19 +15478,19 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Quitter</translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Ouvrir</translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -15494,7 +15498,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Erreur de fichier.</translation>
+        <translation>Erreur de fichier.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15502,7 +15506,7 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Enregistrer sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -15510,15 +15514,15 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Impossible à verrouiller. Le fichier est déjà ouvert dans une autre fenêtre.</translation>
+        <translation>Impossible à verrouiller. Le fichier est déjà ouvert dans une autre fenêtre.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de sauvegarder le fichier</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Impossible à verrouiller. Le fichier est déjà ouvert dans une autre fenêtre. cela arrive quand 2 copie du programme, tournent.</translation>
+        <translation>Impossible à verrouiller. Le fichier est déjà ouvert dans une autre fenêtre. cela arrive quand 2 copie du programme, tournent.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
@@ -15538,11 +15542,11 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Ouvrir fichier</translation>
+        <translation>Ouvrir fichier</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Changements non enregistrés</translation>
+        <translation>Changements non enregistrés</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15551,11 +15555,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Ne pas sauvegarder</translation>
+        <translation>Ne pas sauvegarder</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">Lecture seule</translation>
+        <translation>Lecture seule</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -15571,23 +15575,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Fichier sauvegardé</translation>
+        <translation>Fichier sauvegardé</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouiller le fichier (lecture seule)</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Le fichier est déjà ouvert dans une autre fenêtre. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
+        <translation>Le fichier est déjà ouvert dans une autre fenêtre. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Le fichier en lecture seule ne peut être créer par manque de permission. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
+        <translation>Le fichier en lecture seule ne peut être créer par manque de permission. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Une erreur inconnue s&apos;est produite, par exemple une partition pleine empêche d&apos;écrire le fichier en lecture seule. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
+        <translation>Une erreur inconnue s&apos;est produite, par exemple une partition pleine empêche d&apos;écrire le fichier verrouillé. Ignorer pour continuer (déconseillé car pouvant causer une corruption de données).</translation>
     </message>
 </context>
 <context>

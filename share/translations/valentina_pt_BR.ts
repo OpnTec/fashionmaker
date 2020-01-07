@@ -8260,7 +8260,7 @@ Você quer salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Remover</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Edit current</source>
@@ -9322,6 +9322,10 @@ Esta opção terá um efeito após o reinício.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12666,21 +12670,21 @@ Deseja salvar suas mudanças?</translation>
         <translation>Folha %1 de %2</translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15323,11 +15327,11 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Texto:</translation>
+        <translation>Texto:</translation>
     </message>
     <message>
         <source>watermark text</source>
@@ -15335,7 +15339,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Rotação:</translation>
+        <translation>Rotação:</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -15356,7 +15360,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Caminho:</translation>
+        <translation>Caminho:</translation>
     </message>
     <message>
         <source>path to image</source>
@@ -15364,7 +15368,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished">Navegar…</translation>
+        <translation>Navegar…</translation>
     </message>
     <message>
         <source>Gray color</source>
@@ -15372,35 +15376,35 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Arquivo</translation>
+        <translation>&amp;Arquivo</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Operações</translation>
+        <translation>Operações</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Salvar</translation>
+        <translation>Salvar</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished">Salvar &amp;Como…</translation>
+        <translation>Salvar &amp;Como…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">S&amp;air</translation>
+        <translation>S&amp;air</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Abrir</translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Novo</translation>
+        <translation>Novo</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Imagens</translation>
+        <translation>Imagens</translation>
     </message>
     <message>
         <source>Watermark image</source>
@@ -15408,7 +15412,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Erro de arquivo.</translation>
+        <translation>Erro de arquivo.</translation>
     </message>
     <message>
         <source>Watermark files</source>
@@ -15416,7 +15420,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Salvar como</translation>
+        <translation>Salvar como</translation>
     </message>
     <message>
         <source>watermark</source>
@@ -15424,39 +15428,39 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Falha ao bloquear. Este arquivo já foi aberto em outra janela.</translation>
+        <translation>Falha ao bloquear. Este arquivo já foi aberto em outra janela.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Não foi possível salvar o arquivo</translation>
+        <translation>Não foi possível salvar o arquivo</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Falha ao bloquear. Este arquivo já foi aberto em outra janela. Expectativa de colisão ao executar 2 cópias do programa.</translation>
+        <translation>Falha ao bloquear. Este arquivo já foi aberto em outra janela. Expectativa de colisão ao executar 2 cópias do programa.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">O documento não tem permissões para gravação.</translation>
+        <translation>O documento não tem permissões para gravação.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Não é possível definir permissões para %1 para gravável.</translation>
+        <translation>Não é possível definir permissões para %1 para gravável.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Não foi possível salvar o arquivo.</translation>
+        <translation>Não foi possível salvar o arquivo.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Não foi possível salvar o arquivo</translation>
+        <translation>Não foi possível salvar o arquivo</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Abrir arquivo</translation>
+        <translation>Abrir arquivo</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Alterações não salvas</translation>
+        <translation>Alterações não salvas</translation>
     </message>
     <message>
         <source>The watermark has been modified.
@@ -15465,11 +15469,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Não salvar</translation>
+        <translation>Não salvar</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">somente leitura</translation>
+        <translation>somente leitura</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
@@ -15485,23 +15489,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Arquivo Salvo</translation>
+        <translation>Arquivo Salvo</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Arquivo bloqueado</translation>
+        <translation>Arquivo bloqueado</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished"></translation>
+        <translation>Este arquivo já foi aberto em outra janela. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation>Não foi possível criar o arquivo blequado, por falta de permissões. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
+        <translation>Ocorreu um erro desconhecido, como por exemplo, uma partição cheia impediu a gravação do arquivo bloqueado. Ignore caso deseje continuar (não recomendado, pode causar uma corrupção de dados).</translation>
     </message>
 </context>
 <context>

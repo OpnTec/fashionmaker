@@ -8261,31 +8261,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Водяной знак</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать текущий</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать или редактировать водяной знак</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы водяных знаков</translation>
     </message>
 </context>
 <context>
@@ -8472,7 +8472,11 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка файла.
+
+%1
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -9343,6 +9347,10 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10372,7 +10380,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выйти</translation>
     </message>
     <message>
         <source>&amp;About Tape</source>
@@ -10388,7 +10396,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Do you want to change the premissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите изменить настройки?</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -12735,22 +12743,22 @@ Do you want to save your changes?</source>
         <translation>Лист %1 из %2</translation>
     </message>
     <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">дюйм</translation>
+        <translation>дюйм</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15455,193 +15463,194 @@ Do you want to save your changes?</source>
     <name>WatermarkWindow</name>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Водяной знак</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрозрачность:</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Текст:</translation>
+        <translation>Текст:</translation>
     </message>
     <message>
         <source>watermark text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст водяного знака</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Вращение:</translation>
+        <translation>Вращение:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт:</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Южно-эфиопский грач увёл мышь за хобот на съезд ящериц</translation>
     </message>
     <message>
         <source>Edit font</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить шрифт</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Путь:</translation>
+        <translation>Путь:</translation>
     </message>
     <message>
         <source>path to image</source>
-        <translation type="unfinished"></translation>
+        <translation>путь к изображению</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished">Обзор…</translation>
+        <translation>Обзор…</translation>
     </message>
     <message>
         <source>Gray color</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение в оттенках серого цвета</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Файл</translation>
+        <translation>&amp;Файл</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Операции</translation>
+        <translation>Операции</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished">Сохранить как…</translation>
+        <translation>Сохранить как…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">&amp;Выход</translation>
+        <translation>&amp;Выход</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Открыть</translation>
+        <translation>Открыть</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Новый</translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Изображения</translation>
+        <translation>Изображения</translation>
     </message>
     <message>
         <source>Watermark image</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение водяного знака</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Ошибка файла.</translation>
+        <translation>Ошибка файла.</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы водяных знаков</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Сохранить как</translation>
+        <translation>Сохранить как</translation>
     </message>
     <message>
         <source>watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Водяной знак</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Невозможно заблокировать. Этот файл уже открыт в другом окне.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно сохранить файл</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
+        <translation>Невозможно заблокировать. Этот файл уже открыт в другом окне. Возможны конфликты, если одновременно запущено несколько экземпляров программы.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">Документ не имеет прав на запись.</translation>
+        <translation>Документ не имеет прав на запись.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished">Невозможно установить разрешения для %1 для записи.</translation>
+        <translation>Невозможно установить разрешения для %1 для записи.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Не удалось сохранить файл.</translation>
+        <translation>Не удалось сохранить файл.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Не удалось сохранить файл</translation>
+        <translation>Не удалось сохранить файл</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Открыть файл</translation>
+        <translation>Открыть файл</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Несохранённые изменения</translation>
     </message>
     <message>
         <source>The watermark has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Водяной знак был изменен.
+Вы хотите сохранить свои изменения?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Не сохранять</translation>
+        <translation>Не сохранять</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">только для чтения</translation>
+        <translation>только для чтения</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation type="unfinished"></translation>
+        <translation>Без названия.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердите изменение формата</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот файл использует предыдущую версию формата v%1. Текущая версия -  v%2. При сохранении файла с этой версией приложения будет обновлена ​​версия формата для этого файла. Это может помешать вам открыть файл со старыми версиями приложения. Вы действительно хотите продолжить?</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Файл сохранен</translation>
+        <translation>Файл сохранен</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл блокировки</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Этот файл уже открыт в другом окне. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Этот файл уже открыт в другом окне. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Файл блокировки не может быть создан из-за отсутствия разрешений. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Файл блокировки не может быть создан из-за отсутствия разрешений. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
+        <translation>Произошла неизвестная ошибка, например, полностью заполненный раздел предотвращает запись файла блокировки. Игнорируйте, если вы хотите продолжить (не рекомендуется, может привести к повреждению данных).</translation>
     </message>
 </context>
 <context>

@@ -8259,31 +8259,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Laden</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk huidig</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak of wijzig een watermerk</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk bestanden</translation>
     </message>
 </context>
 <context>
@@ -8470,7 +8470,11 @@ Do you want to save your changes?</source>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsfout.
+
+%1
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -9342,6 +9346,10 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
         <translation>Ongeldige formule &apos;%1&apos; voor gereedschap met id &apos;%2&apos;. %3.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t convert toInt parameter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -12734,21 +12742,25 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot open the watermark image. %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Kan watermerk afbeelding niet openen. %1 </translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-ondersteunde bestandsextentie &apos;%1&apos;</translation>
     </message>
     <message>
         <source>cm</source>
         <comment>unit</comment>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>in</source>
         <comment>unit</comment>
-        <translation type="unfinished">in</translation>
+        <translation>in</translation>
+    </message>
+    <message>
+        <source>Cannot open the watermark image.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15447,193 +15459,194 @@ Wil je deze veranderingen opslaan?</translation>
     <name>WatermarkWindow</name>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Doorzichtigheid:</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Text:</source>
-        <translation type="unfinished">Tekst:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <source>watermark text</source>
-        <translation type="unfinished"></translation>
+        <translation>watermerk tekst</translation>
     </message>
     <message>
         <source>Rotation:</source>
-        <translation type="unfinished">Draaiing:</translation>
+        <translation>Draaiing:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype:</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Pa&apos;s wijze lynx bezag vroom het fikse aquaduct</translation>
     </message>
     <message>
         <source>Edit font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype wijzigen</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding</translation>
     </message>
     <message>
         <source>Path:</source>
-        <translation type="unfinished">Pad:</translation>
+        <translation>Pad:</translation>
     </message>
     <message>
         <source>path to image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeeldingen pad</translation>
     </message>
     <message>
         <source>Browse…</source>
-        <translation type="unfinished">Doorbladeren…</translation>
+        <translation>Doorbladeren…</translation>
     </message>
     <message>
         <source>Gray color</source>
-        <translation type="unfinished"></translation>
+        <translation>Grijze kleur</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished">&amp;Bestand</translation>
+        <translation>&amp;Bestand</translation>
     </message>
     <message>
         <source>Operations</source>
-        <translation type="unfinished">Operaties</translation>
+        <translation>Operaties</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Opslaan</translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
-        <translation type="unfinished">Opslaan &amp;als…</translation>
+        <translation>Opslaan &amp;als…</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished">E&amp;xit</translation>
+        <translation>E&amp;xit</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Open</translation>
+        <translation>Open</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nieuw</translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Images</source>
-        <translation type="unfinished">Afbeeldingen</translation>
+        <translation>Afbeeldingen</translation>
     </message>
     <message>
         <source>Watermark image</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk afbeelding</translation>
     </message>
     <message>
         <source>File error.</source>
-        <translation type="unfinished">Bestandsfout.</translation>
+        <translation>Bestandsfout.</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk bestanden</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished">Opslaan als</translation>
+        <translation>Opslaan als</translation>
     </message>
     <message>
         <source>watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>watermerk</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation type="unfinished">Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
+        <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
         <source>Could not save file</source>
-        <translation type="unfinished">Kon bestand niet opslaan</translation>
+        <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation type="unfinished">Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
+        <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
     <message>
         <source>The document has no write permissions.</source>
-        <translation type="unfinished">Dit document kan niet gewijzigd worden.</translation>
+        <translation>Dit document kan niet gewijzigd worden.</translation>
     </message>
     <message>
         <source>Cannot set permissions for %1 to writable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen schrijftoestemming geven voor %1.</translation>
     </message>
     <message>
         <source>Could not save the file.</source>
-        <translation type="unfinished">Het bestand is niet bewaard.</translation>
+        <translation>Het bestand is niet bewaard.</translation>
     </message>
     <message>
         <source>Could not save the file</source>
-        <translation type="unfinished">Het bestand is niet bewaard</translation>
+        <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished">Open bestand</translation>
+        <translation>Open bestand</translation>
     </message>
     <message>
         <source>Unsaved changes</source>
-        <translation type="unfinished">Niet opgeslagen veranderingen</translation>
+        <translation>Niet opgeslagen veranderingen</translation>
     </message>
     <message>
         <source>The watermark has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het watermerk is veranderd.
+Deze wijziging opslaan?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished">Niet opslaan</translation>
+        <translation>Niet opslaan</translation>
     </message>
     <message>
         <source>read only</source>
-        <translation type="unfinished">alleen lezen</translation>
+        <translation>alleen lezen</translation>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation type="unfinished"></translation>
+        <translation>untitled.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevestig herschrijven formaat</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit bestand gebruikt een vorig formaat versie v%1. De huidige versie is v%2. Het opslaan van het bestand met deze applicatie zal het formaat voor dit bestand bijwerken. Dat kan je beletten om dit bestand met een oudere applicatie te openen. Verder gaan?</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation type="unfinished">Bestand opgeslagen</translation>
+        <translation>Bestand opgeslagen</translation>
     </message>
     <message>
         <source>Locking file</source>
-        <translation type="unfinished">Vergrendelingsbestand</translation>
+        <translation>Vergrendelingsbestand</translation>
     </message>
     <message>
         <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Dit bestand is al geopend in een ander venster. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+        <translation>Dit bestand is al geopend in een ander venster. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
     </message>
     <message>
         <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Het vergrendelingsbestand kon niet worden aangemaakt, wegens het ontbreken van machtigingen. Negeren als u wilt doorgaan  (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+        <translation>Het vergrendelingsbestand kon niet worden aangemaakt, wegens het ontbreken van machtigingen. Negeren als u wilt doorgaan  (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
     </message>
     <message>
         <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="unfinished">Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
+        <translation>Onbekende fout gebeurd, bijvoorbeeld een volledige partitie voorkomt het schrijven uit het vergrendelingsbestand. Negeren als u wilt doorgaan (niet aanbevolen, kan leiden tot gegevensbeschadiging).</translation>
     </message>
 </context>
 <context>
