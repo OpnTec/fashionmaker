@@ -49,14 +49,14 @@ class QDomElement;
 class VPiecePath;
 class VPieceNode;
 
-enum class Document : char { FullLiteParse, LiteParse, LitePPParse, FullParse };
-enum class LabelType : char {NewPatternPiece, NewLabel};
+enum class Document : qint8 { FullLiteParse, LiteParse, LitePPParse, FullParse };
+enum class LabelType : qint8 {NewPatternPiece, NewLabel};
 
 // Don't touch values!!!. Same values stored in xml.
-enum class CrossCirclesPoint : char {FirstPoint = 1, SecondPoint = 2};
-enum class VCrossCurvesPoint : char {HighestPoint = 1, LowestPoint = 2};
-enum class HCrossCurvesPoint : char {LeftmostPoint = 1, RightmostPoint = 2};
-enum class AxisType : char {VerticalAxis = 1, HorizontalAxis = 2};
+enum class CrossCirclesPoint : qint8 {FirstPoint = 1, SecondPoint = 2};
+enum class VCrossCurvesPoint : qint8 {HighestPoint = 1, LowestPoint = 2};
+enum class HCrossCurvesPoint : qint8 {LeftmostPoint = 1, RightmostPoint = 2};
+enum class AxisType : qint8 {VerticalAxis = 1, HorizontalAxis = 2};
 
 class VContainer;
 class VDataTool;

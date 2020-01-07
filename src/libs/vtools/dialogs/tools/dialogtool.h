@@ -68,7 +68,7 @@ class QLabel;
 class QPlainTextEdit;
 class VAbstractTool;
 
-enum class FillComboBox : char { Whole, NoChildren};
+enum class FillComboBox : qint8 { Whole, NoChildren};
 
 /**
  * @brief The DialogTool class parent for all dialog of tools.

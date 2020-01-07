@@ -59,7 +59,7 @@ class VContainer;
 class VPointF;
 class VSplinePoint;
 class VPieceNode;
-enum class GOType : char;
+enum class GOType : qint8;
 struct VPiecePassmarkData;
 
 class AbstractTest : public QObject

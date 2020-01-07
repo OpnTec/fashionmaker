@@ -80,17 +80,17 @@ extern const qreal   maxCurveApproximationScale;
 extern const int minLabelFontSize;
 extern const int maxLabelFontSize;
 
-enum class NodeDetail : char { Contour, Modeling };
-enum class SceneObject : char { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
-enum class MeasurementsType : char { Multisize, Individual , Unknown};
-enum class Unit : char { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
-enum class Source : char { FromGui, FromFile, FromTool };
+enum class NodeDetail : qint8 { Contour, Modeling };
+enum class SceneObject : qint8 { Point, Line, Spline, Arc, ElArc, SplinePath, Detail, Unknown };
+enum class MeasurementsType : qint8 { Multisize, Individual , Unknown};
+enum class Unit : qint8 { Mm = 0, Cm, Inch, Px, LAST_UNIT_DO_NOT_USE};
+enum class Source : qint8 { FromGui, FromFile, FromTool };
 enum class NodeUsage : bool {NotInUse = false, InUse = true};
 enum class SelectionType : bool {ByMousePress, ByMouseRelease};
 enum class PageOrientation : bool {Portrait = true, Landscape = false};
-enum class Draw : char { Calculation, Modeling, Layout };
+enum class Draw : qint8 { Calculation, Modeling, Layout };
 
-enum class PieceNodeAngle : unsigned char
+enum class PieceNodeAngle : quint8
 {
     ByLength = 0,
     ByPointsIntersection = 1,
@@ -102,7 +102,7 @@ enum class PieceNodeAngle : unsigned char
     LAST_ONE_DO_NOT_USE
 };
 
-enum class PassmarkLineType : unsigned char
+enum class PassmarkLineType : quint8
 {
     OneLine = 0, // Default
     TwoLines,
@@ -118,7 +118,7 @@ enum class PassmarkLineType : unsigned char
 QString          PassmarkLineTypeToString(PassmarkLineType type);
 PassmarkLineType StringToPassmarkLineType(const QString &value);
 
-enum class PassmarkAngleType : unsigned char
+enum class PassmarkAngleType : quint8
 {
     Straightforward = 0, // Default
     Bisector,
@@ -139,13 +139,13 @@ Unit    StrToUnits(const QString &unit);
 QString UnitsToStr(const Unit &unit, const bool translate = false);
 
 
-enum class PiecePathIncludeType : unsigned char
+enum class PiecePathIncludeType : quint8
 {
     AsMainPath = 0,
     AsCustomSA = 1
 };
 
-enum class PiecePathType :  unsigned char {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
+enum class PiecePathType :  quint8 {PiecePath = 0, CustomSeamAllowance = 1, InternalPath = 2, Unknown = 3};
 
 typedef int ToolVisHolderType;
 enum class Tool : ToolVisHolderType
@@ -267,26 +267,26 @@ enum class Vis : ToolVisHolderType
     LAST_ONE_DO_NOT_USE //add new stuffs above this, this constant must be last and never used
 };
 
-enum class VarType : char { Measurement, Increment, IncrementSeparator, LineLength, CurveLength, CurveCLength,
-                            LineAngle, CurveAngle, ArcRadius, Unknown };
+enum class VarType : qint8 { Measurement, Increment, IncrementSeparator, LineLength, CurveLength, CurveCLength,
+                             LineAngle, CurveAngle, ArcRadius, Unknown };
 
-enum class IncrementType : char { Increment, Separator };
+enum class IncrementType : qint8 { Increment, Separator };
 
 QString       IncrementTypeToString(IncrementType type);
 IncrementType StringToIncrementType(const QString &value);
 
 static const int heightStep = 6;
-enum class GHeights : unsigned char { ALL,
-                                      H50=50,   H56=56,   H62=62,   H68=68,   H74=74,   H80=80,   H86=86,   H92=92,
-                                      H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134, H140=140,
-                                      H146=146, H152=152, H158=158, H164=164, H170=170, H176=176, H182=182, H188=188,
-                                      H194=194, H200=200};
+enum class GHeights : quint8 { ALL,
+                               H50=50,   H56=56,   H62=62,   H68=68,   H74=74,   H80=80,   H86=86,   H92=92,
+                               H98=98,   H104=104, H110=110, H116=116, H122=122, H128=128, H134=134, H140=140,
+                               H146=146, H152=152, H158=158, H164=164, H170=170, H176=176, H182=182, H188=188,
+                               H194=194, H200=200};
 
 static const int sizeStep = 2;
-enum class GSizes : unsigned char { ALL,
-                                    S22=22, S24=24, S26=26, S28=28, S30=30, S32=32, S34=34, S36=36, S38=38, S40=40,
-                                    S42=42, S44=44, S46=46, S48=48, S50=50, S52=52, S54=54, S56=56, S58=58, S60=60,
-                                    S62=62, S64=64, S66=66, S68=68, S70=70, S72=72 };
+enum class GSizes : quint8 { ALL,
+                             S22=22, S24=24, S26=26, S28=28, S30=30, S32=32, S34=34, S36=36, S38=38, S40=40,
+                             S42=42, S44=44, S46=46, S48=48, S50=50, S52=52, S54=54, S56=56, S58=58, S60=60,
+                             S62=62, S64=64, S66=66, S68=68, S70=70, S72=72 };
 
 /* QImage supports a maximum of 32768x32768 px images (signed short).
  * This follows from the condition: width * height * colordepth < INT_MAX (4 billion) -> 32768 * 32768 * 4 = 4 billion.

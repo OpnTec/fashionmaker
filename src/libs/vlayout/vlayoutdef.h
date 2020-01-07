@@ -35,7 +35,7 @@
 
 #include "../vmisc/typedef.h"
 
-enum class LayoutExportFormats : char
+enum class LayoutExportFormats : qint8
 {
     SVG = 0,
     PDF = 1,
@@ -75,7 +75,7 @@ enum class LayoutExportFormats : char
     COUNT                 /*Use only for validation*/
 };
 
-enum class LayoutErrors : char
+enum class LayoutErrors : qint8
 {
     NoError,
     PrepareLayoutError,
@@ -85,7 +85,7 @@ enum class LayoutErrors : char
     TerminatedByException
 };
 
-enum class BestFrom : char
+enum class BestFrom : qint8
 {
     Rotation = 0,
     Combine = 1

@@ -33,7 +33,7 @@
 #include <QString>
 
 // denotes the type of arrow for the grainline
-enum class ArrowType : char
+enum class ArrowType : qint8
 {
     atBoth,
     atFront,

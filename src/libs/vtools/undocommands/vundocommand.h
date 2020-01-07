@@ -42,7 +42,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(vUndo)
 
-enum class UndoCommand: char
+enum class UndoCommand: qint8
 {
     AddPatternPiece,
     AddToCalc,

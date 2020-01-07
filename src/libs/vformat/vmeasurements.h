@@ -41,7 +41,7 @@
 
 class VContainer;
 
-enum class GenderType : char { Male, Female, Unknown };
+enum class GenderType : qint8 { Male, Female, Unknown };
 
 class VMeasurements : public VDomDocument
 {

@@ -43,7 +43,7 @@ template <typename T> class QList;
 namespace VPE
 {
 
-enum class Property : char{Simple, Complex};
+enum class Property : qint8 {Simple, Complex};
 
 static const int MyCustomEventType = 1099;
 

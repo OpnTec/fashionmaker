@@ -36,7 +36,7 @@
 #include <QString>
 #include <QtGlobal>
 
-enum class FormulaType : char
+enum class FormulaType : qint8
 {
     ToUser = 0,
     FromUser = 1,

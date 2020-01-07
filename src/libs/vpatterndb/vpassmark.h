@@ -68,7 +68,7 @@ Q_DECLARE_TYPEINFO(VPiecePassmarkData, Q_MOVABLE_TYPE);
 
 QT_WARNING_POP
 
-enum class PassmarkSide : char { All=0, Left=1, Right=2 };
+enum class PassmarkSide : qint8 { All=0, Left=1, Right=2 };
 
 class VPassmark
 {

@@ -35,7 +35,7 @@
 
 #include "../ifc/ifcdef.h"
 
-enum class GOType : char
+enum class GOType : qint8
 {
     Point,
     Arc,
@@ -47,10 +47,10 @@ enum class GOType : char
     PlaceLabel,
     Unknown
 };
-enum class SplinePointPosition : char { FirstPoint, LastPoint };
+enum class SplinePointPosition : qint8 { FirstPoint, LastPoint };
 
 // Keep synchronized with XSD schema
-enum class PlaceLabelType :  unsigned char
+enum class PlaceLabelType :  quint8
 {
     Segment= 0,
     Rectangle = 1,

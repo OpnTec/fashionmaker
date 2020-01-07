@@ -32,10 +32,10 @@
 #include <QtGlobal>
 #include <ciso646>
 
-enum class VarMeasurement : unsigned char { English=0, Metric=1 };
+enum class VarMeasurement : quint8 { English=0, Metric=1 };
 
 //Default drawing units for AutoCAD DesignCenter blocks:
-enum class VarInsunits : unsigned char { Inches=1, Millimeters=4, Centimeters=5 };
+enum class VarInsunits : quint8 { Inches=1, Millimeters=4, Centimeters=5 };
 
 // Helps mark end of string. See VDxfEngine::drawTextItem for more details
 extern const QString endStringPlaceholder;

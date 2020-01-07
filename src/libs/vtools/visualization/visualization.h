@@ -49,7 +49,7 @@ class VScaledLine;
 class VContainer;
 class VInternalVariable;
 
-enum class Mode : char {Creation, Show};
+enum class Mode : qint8 {Creation, Show};
 
 class Visualization : public QObject
 {

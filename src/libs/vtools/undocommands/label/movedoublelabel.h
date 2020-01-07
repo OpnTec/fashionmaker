@@ -37,7 +37,7 @@
 
 #include "moveabstractlabel.h"
 
-enum class MoveDoublePoint: char { FirstPoint, SecondPoint };
+enum class MoveDoublePoint: qint8 { FirstPoint, SecondPoint };
 
 class MoveDoubleLabel : public MoveAbstractLabel
 {

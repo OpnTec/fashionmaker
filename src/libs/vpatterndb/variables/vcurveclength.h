@@ -35,7 +35,7 @@
 
 #include "vcurvevariable.h"
 
-enum class CurveCLength : char { C1, C2 };
+enum class CurveCLength : qint8 { C1, C2 };
 
 class VAbstractBezier;
 class VSpline;

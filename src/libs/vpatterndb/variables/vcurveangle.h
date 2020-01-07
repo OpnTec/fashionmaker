@@ -39,7 +39,7 @@ class VAbstractCurve;
 class VSpline;
 class VEllipticalArc;
 
-enum class CurveAngle : char { StartAngle, EndAngle };
+enum class CurveAngle : qint8 { StartAngle, EndAngle };
 
 class VCurveAngle : public VCurveVariable
 {

@@ -82,14 +82,14 @@ private:
      */
     qreal angle_between{0};
 
-    enum class CrossingType : char
+    enum class CrossingType : qint8
     {
         NoIntersection = 0,
         Intersection = 1,
         EdgeError = 2
     };
 
-    enum class InsideType : char
+    enum class InsideType : qint8
     {
         Outside = 0,
         Inside = 1,

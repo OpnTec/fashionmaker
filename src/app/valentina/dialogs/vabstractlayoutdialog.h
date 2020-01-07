@@ -32,28 +32,30 @@
 #include <QComboBox>
 #include <QDialog>
 
-enum class Unit : char;
+enum class Unit : qint8;
 
 class VAbstractLayoutDialog : public QDialog
 {
 public:
-    enum class PaperSizeTemplate : char { A0 = 0,
-                                          A1,
-                                          A2,
-                                          A3,
-                                          A4,
-                                          Letter,
-                                          Legal,
-                                          Tabloid,
-                                          Roll24in, // Be carefull when change order for roll types
-                                          Roll30in, // Used also for showing icon
-                                          Roll36in,
-                                          Roll42in,
-                                          Roll44in,
-                                          Roll48in,
-                                          Roll62in,
-                                          Roll72in,
-                                          Custom};
+    enum class PaperSizeTemplate : qint8 {
+        A0 = 0,
+        A1,
+        A2,
+        A3,
+        A4,
+        Letter,
+        Legal,
+        Tabloid,
+        Roll24in, // Be carefull when change order for roll types
+        Roll30in, // Used also for showing icon
+        Roll36in,
+        Roll42in,
+        Roll44in,
+        Roll48in,
+        Roll62in,
+        Roll72in,
+        Custom
+    };
 
     explicit VAbstractLayoutDialog(QWidget *parent = nullptr);
 

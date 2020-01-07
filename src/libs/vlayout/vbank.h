@@ -49,7 +49,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(lBank)
 
-enum class Cases : char { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
+enum class Cases : qint8 { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCase};
 
 class VBank
 {

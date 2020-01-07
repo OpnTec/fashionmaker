@@ -192,7 +192,7 @@ private:
     void PrintPreview();
     void LayoutPrint();
 
-    enum class PrintType : char {PrintPDF, PrintPreview, PrintNative};
+    enum class PrintType : qint8 {PrintPDF, PrintPreview, PrintNative};
 
     void SetPrinterSettings(QPrinter *printer, const PrintType &printType);
     QPageSize::PageSizeId FindPageSizeId(const QSizeF &size) const;

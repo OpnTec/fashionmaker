@@ -33,7 +33,7 @@
 
 class QGraphicsScene;
 
-enum class ShowDoublePoint: char { FirstPoint, SecondPoint };
+enum class ShowDoublePoint: qint8 { FirstPoint, SecondPoint };
 
 class ShowDoubleLabel : public VUndoCommand
 {
