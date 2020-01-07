@@ -22,7 +22,7 @@ jobs:
     osx_image: xcode11
     addons:
         homebrew:
-          packages: qt5 --HEAD
+          packages: qt5
   - os: osx
     compiler: clang
     env: 
