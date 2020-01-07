@@ -61,10 +61,10 @@ before_install:
     sudo dpkg -i ccache_3.3.4-1_amd64.deb;
   else
     brew update > /dev/null;
-    unset SSL_CERT_FILE;
     if [[ "$LEGACY" = false ]]; then
-      brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/master/Formula/qt.rb;
+      brew install qt5;
     else
+      unset SSL_CERT_FILE;
       brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/20544ac8e68ef3523f92e15f432bbaf9a6aa2c22/qt5.rb;
     fi
     chmod -R 755 /usr/local/opt/qt5/*
