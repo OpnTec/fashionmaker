@@ -62,6 +62,7 @@ before_install:
   else
     brew update > /dev/null;
     if [[ "$LEGACY" = false ]]; then
+      brew uninstall qt5;
       brew install qt5;
     else
       unset SSL_CERT_FILE;
