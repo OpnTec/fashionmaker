@@ -62,8 +62,8 @@ before_install:
   else
     brew update > /dev/null;
     if [[ "$LEGACY" = false ]]; then
-      brew uninstall qt5;
       brew install qt5;
+      brew upgrade qt5;
     else
       unset SSL_CERT_FILE;
       brew install https://gist.githubusercontent.com/dismine/c3ac01de38e12edcf22d9e05791adf82/raw/20544ac8e68ef3523f92e15f432bbaf9a6aa2c22/qt5.rb;
