@@ -36,7 +36,9 @@
 #include "../ifc/ifcdef.h"
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/vdatastreamenum.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#   include "../vmisc/vdatastreamenum.h"
+#endif
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Weffc++")

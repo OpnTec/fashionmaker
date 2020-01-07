@@ -39,7 +39,9 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vmath.h"
-#include "../vmisc/vdatastreamenum.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#   include "../vmisc/vdatastreamenum.h"
+#endif
 #include "../vpatterndb/vcontainer.h"
 #include "vtextmanager.h"
 

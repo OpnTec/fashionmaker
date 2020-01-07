@@ -56,7 +56,9 @@
 #include <QGlobalStatic>
 
 #include "vabstractapplication.h"
-#include "vdatastreamenum.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#   include "vdatastreamenum.h"
+#endif
 #include "../ifc/exception/vexception.h"
 
 const qreal   defCurveApproximationScale = 0.5;

@@ -34,7 +34,9 @@
 #include <QVector>
 
 #include "../vmisc/diagnostic.h"
-#include "../vmisc/vdatastreamenum.h"
+#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#   include "../vmisc/vdatastreamenum.h"
+#endif
 #include "../ifc/exception/vexception.h"
 
 QT_WARNING_PUSH
