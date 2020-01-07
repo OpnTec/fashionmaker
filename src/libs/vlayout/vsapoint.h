@@ -30,6 +30,7 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/def.h"
+#include "../ifc/ifcdef.h"
 
 #include <QPointF>
 
@@ -43,7 +44,7 @@ QT_WARNING_DISABLE_GCC("-Wnon-virtual-dtor")
 class VSAPoint : public QPointF
 {
 public:
-    Q_DECL_CONSTEXPR VSAPoint();
+    Q_DECL_CONSTEXPR VSAPoint() V_NOEXCEPT_EXPR (true);
     Q_DECL_CONSTEXPR VSAPoint(qreal xpos, qreal ypos);
     Q_DECL_CONSTEXPR explicit VSAPoint(QPointF p);
 
@@ -85,7 +86,7 @@ Q_DECLARE_METATYPE(VSAPoint)
 Q_DECLARE_TYPEINFO(VSAPoint, Q_MOVABLE_TYPE);
 
 //---------------------------------------------------------------------------------------------------------------------
-Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint()
+Q_DECL_CONSTEXPR inline VSAPoint::VSAPoint() V_NOEXCEPT_EXPR (true)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
