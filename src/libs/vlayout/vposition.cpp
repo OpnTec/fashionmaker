@@ -468,8 +468,8 @@ void VPosition::FollowGrainline()
 
     const qreal angle = detailGrainline.angleTo(FabricGrainline());
 
-    if (m_data.detail.GrainlineArrowType() == ArrowType::atBoth ||
-            m_data.detail.GrainlineArrowType() == ArrowType::atFront)
+    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atBoth ||
+            m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atFront)
     {
         RotateOnAngle(angle);
     }
@@ -479,8 +479,8 @@ void VPosition::FollowGrainline()
         return;
     }
 
-    if (m_data.detail.GrainlineArrowType() == ArrowType::atBoth ||
-            m_data.detail.GrainlineArrowType() == ArrowType::atRear)
+    if (m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atBoth ||
+            m_data.detail.GrainlineArrowType() == GrainlineArrowDirection::atRear)
     {
         RotateOnAngle(angle+180);
     }

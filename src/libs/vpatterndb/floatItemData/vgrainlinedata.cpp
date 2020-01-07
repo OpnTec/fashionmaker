@@ -100,13 +100,13 @@ void VGrainlineData::SetRotation(const QString& qsRot)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ArrowType VGrainlineData::GetArrowType() const
+GrainlineArrowDirection VGrainlineData::GetArrowType() const
 {
     return d->m_eArrowType;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VGrainlineData::SetArrowType(ArrowType eAT)
+void VGrainlineData::SetArrowType(GrainlineArrowDirection eAT)
 {
     d->m_eArrowType = eAT;
 }

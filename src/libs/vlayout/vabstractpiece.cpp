@@ -2004,7 +2004,7 @@ QVector<QPointF> VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, con
     QVector<QPointF> v;
     v << pt1;
 
-    if (geom.GetArrowType() != ArrowType::atFront)
+    if (geom.GetArrowType() != GrainlineArrowDirection::atFront)
     {
         v << QPointF(pt1.x() + dArrowLen * qCos(rotation + dArrowAng),
                      pt1.y() - dArrowLen * qSin(rotation + dArrowAng));
@@ -2015,7 +2015,7 @@ QVector<QPointF> VAbstractPiece::GrainlinePoints(const VGrainlineData &geom, con
 
     v << pt2;
 
-    if (geom.GetArrowType() != ArrowType::atRear)
+    if (geom.GetArrowType() != GrainlineArrowDirection::atRear)
     {
         rotation += M_PI;
 

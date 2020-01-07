@@ -68,7 +68,7 @@ VGrainlineItem::VGrainlineItem(QGraphicsItem* pParent)
       m_ptFinish(),
       m_ptCenter(),
       m_dAngle(0),
-      m_eArrowType(ArrowType::atBoth),
+      m_eArrowType(GrainlineArrowDirection::atBoth),
       m_penWidth(LINE_PEN_WIDTH)
 {
     setAcceptHoverEvents(true);
@@ -116,12 +116,12 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
 
     m_dScale = GetScale();
     qreal dArrLen = ARROW_LENGTH*m_dScale;
-    if (m_eArrowType != ArrowType::atRear)
+    if (m_eArrowType != GrainlineArrowDirection::atRear)
     {
         // first arrow
         pP->drawPolygon(FirstArrow(dArrLen));
     }
-    if (m_eArrowType != ArrowType::atFront)
+    if (m_eArrowType != GrainlineArrowDirection::atFront)
     {
         // second arrow
         pP->drawPolygon(SecondArrow(dArrLen));
@@ -181,7 +181,7 @@ void VGrainlineItem::paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption
  * @param dRotation rotation of the grainline in [degrees]
  * @param dLength length of the grainline in user's units
  */
-void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT)
+void VGrainlineItem::UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT)
 {
     m_dRotation = qDegreesToRadians(dRotation);
     m_dLength = dLength;
@@ -691,7 +691,7 @@ QPainterPath VGrainlineItem::MainShape() const
     path.closeSubpath();
 
     const qreal dArrLen = ARROW_LENGTH*GetScale();
-    if (m_eArrowType != ArrowType::atRear)
+    if (m_eArrowType != GrainlineArrowDirection::atRear)
     {
         // first arrow
         QPainterPath polyPath;
@@ -700,7 +700,7 @@ QPainterPath VGrainlineItem::MainShape() const
         path.closeSubpath();
     }
 
-    if (m_eArrowType != ArrowType::atFront)
+    if (m_eArrowType != GrainlineArrowDirection::atFront)
     {
         // second arrow
         QPainterPath polyPath;

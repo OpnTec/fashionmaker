@@ -2506,7 +2506,8 @@ VPiece DialogSeamAllowance::CreatePiece() const
     }
 
     piece.GetGrainlineGeometry().SetVisible(uiTabGrainline->groupBoxGrainline->isChecked());
-    piece.GetGrainlineGeometry().SetArrowType(static_cast<ArrowType>(uiTabGrainline->comboBoxArrow->currentIndex()));
+    piece.GetGrainlineGeometry().SetArrowType(
+                static_cast<GrainlineArrowDirection>(uiTabGrainline->comboBoxArrow->currentIndex()));
 
     if (not flagGPin)
     {

@@ -48,7 +48,7 @@ public:
     VGrainlineDataPrivate()
         : m_qsLength(),
           m_dRotation(),
-          m_eArrowType(ArrowType::atBoth),
+          m_eArrowType(GrainlineArrowDirection::atBoth),
           m_centerPin(NULL_ID),
           m_topPin(NULL_ID),
           m_bottomPin(NULL_ID)
@@ -71,7 +71,7 @@ public:
     /** @brief m_dRotation formula to calculate the rotation of grainline in [degrees] */
     QString   m_dRotation;
     /** @brief m_eArrowType type of arrow on the grainline */
-    ArrowType m_eArrowType;
+    GrainlineArrowDirection m_eArrowType;
     /** @brief m_centerPin center pin id */
     quint32   m_centerPin;
     /** @brief m_topPin top pin id */

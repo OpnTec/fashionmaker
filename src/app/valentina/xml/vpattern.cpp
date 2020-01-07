@@ -1100,7 +1100,7 @@ VGrainlineData VPattern::ParsePieceGrainline(const QDomElement &domElement, VGra
     gGeometry.SetVisible(GetParametrBool(domElement, AttrVisible, falseStr));
     gGeometry.SetPos(QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')),
                              GetParametrDouble(domElement, AttrMy, QChar('0'))));
-    gGeometry.SetArrowType(static_cast<ArrowType>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
+    gGeometry.SetArrowType(static_cast<GrainlineArrowDirection>(GetParametrUInt(domElement, AttrArrows, QChar('0'))));
 
     const quint32 topPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrTopPin, NULL_ID_STR);
     const quint32 bottomPin = GetParametrUInt(domElement, VToolSeamAllowance::AttrBottomPin, NULL_ID_STR);

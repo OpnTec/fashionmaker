@@ -773,7 +773,7 @@ qreal VLayoutPiece::GrainlineAngle() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-ArrowType VLayoutPiece::GrainlineArrowType() const
+GrainlineArrowDirection VLayoutPiece::GrainlineArrowType() const
 {
     return d->grainlineArrowType;
 }

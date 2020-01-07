@@ -62,8 +62,8 @@ public:
     QString GetRotation() const;
     void    SetRotation(const QString& qsRot);
 
-    ArrowType GetArrowType() const;
-    void      SetArrowType(ArrowType eAT);
+    GrainlineArrowDirection GetArrowType() const;
+    void      SetArrowType(GrainlineArrowDirection eAT);
 
     quint32 CenterPin() const;
     void    SetCenterPin(quint32 centerPin);

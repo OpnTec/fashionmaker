@@ -43,7 +43,7 @@ public:
     virtual QPainterPath shape() const override;
 
     virtual void paint(QPainter* pP, const QStyleOptionGraphicsItem* pOption, QWidget* pWidget) override;
-    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, ArrowType eAT);
+    void         UpdateGeometry(const QPointF& ptPos, qreal dRotation, qreal dLength, GrainlineArrowDirection eAT);
 
     virtual int  type() const override {return Type;}
     enum { Type = UserType + static_cast<int>(Vis::GrainlineItem)};
@@ -83,7 +83,7 @@ private:
     QPointF                       m_ptFinish;
     QPointF                       m_ptCenter;
     qreal                         m_dAngle;
-    ArrowType                     m_eArrowType;
+    GrainlineArrowDirection                     m_eArrowType;
     int                           m_penWidth;
 
     qreal GetScale() const;
