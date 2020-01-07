@@ -225,6 +225,10 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
         const auto label = pattern->GeometricObject<VPlaceLabelItem>(placeLabel);
         if (label->IsVisible())
         {
+            QT_WARNING_PUSH
+            QT_WARNING_DISABLE_GCC("-Wnoexcept")
+            // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
             VLayoutPlaceLabel layoutLabel;
             layoutLabel.shape = label->LabelShape();
             layoutLabel.rotationMatrix = label->RotationMatrix();
@@ -232,6 +236,8 @@ QVector<VLayoutPlaceLabel> ConvertPlaceLabels(const VPiece &piece, const VContai
             layoutLabel.center = label->toQPointF();
             layoutLabel.type = label->GetLabelType();
             labels.append(layoutLabel);
+
+            QT_WARNING_POP
         }
     }
     return labels;
@@ -275,7 +281,13 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
 
             auto PrepareSAPassmark = [pData, passmark, piece, &layoutPassmarks, pattern](PassmarkSide side)
             {
+                QT_WARNING_PUSH
+                QT_WARNING_DISABLE_GCC("-Wnoexcept")
+                // noexcept-expression evaluates to 'false' because of a call to 'constexpr QPointF::QPointF()'
+
                 VLayoutPassmark layoutPassmark;
+
+                QT_WARNING_POP
 
                 const QVector<VPieceNode> path = piece.GetUnitedPath(pattern);
                 const int nodeIndex = VPiecePath::indexOfNode(path, pData.id);
