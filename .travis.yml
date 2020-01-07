@@ -20,6 +20,9 @@ jobs:
     - DEPLOY=true
     - LEGACY=false
     osx_image: xcode11
+    addons:
+        homebrew:
+          packages: qt5 --HEAD
   - os: osx
     compiler: clang
     env: 
