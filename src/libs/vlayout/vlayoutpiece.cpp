@@ -513,7 +513,7 @@ QVector<T> VLayoutPiece::Map(QVector<T> points) const
     if (d->mirror)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        auto list = QList<T>(p.begin(), p.end());
+        auto list = QList<T>(points.begin(), points.end());
 #else
         QList<T> list = points.toList();
 #endif
