@@ -34,7 +34,7 @@
 #include <QCoreApplication>
 
 #include "../vmisc/diagnostic.h"
-#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 #   include "../vmisc/vdatastreamenum.h"
 #endif
 #include "../vmisc/defglobal.h"

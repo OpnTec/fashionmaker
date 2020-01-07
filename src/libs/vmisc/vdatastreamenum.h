@@ -34,7 +34,7 @@
 
 // (de)serialize enums into QDataStream
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
 //a function that can serialize any enum into QDataStream
 //it stores the enum in a qint64
 template<typename Enum,
