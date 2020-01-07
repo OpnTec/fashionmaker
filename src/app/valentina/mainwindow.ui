@@ -1727,7 +1727,6 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionForum"/>
     <addaction name="actionReportBug"/>
     <addaction name="actionAbout_Qt"/>
     <addaction name="actionAbout_Valentina"/>
@@ -2829,14 +2828,6 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::NoRole</enum>
-   </property>
-  </action>
-  <action name="actionForum">
-   <property name="text">
-    <string>Forum</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
