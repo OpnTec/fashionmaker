@@ -115,10 +115,13 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
         QList<quint32> newDependencies;
         SaveDialog(newDomElement, oldDependencies, newDependencies);
 
-        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
-                                                           newDependencies, doc, m_id);
-        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-        qApp->getUndoStack()->push(saveOptions);
+        if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
+        {
+            SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
+                                                               newDependencies, doc, m_id);
+            connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+            qApp->getUndoStack()->push(saveOptions);
+        }
     }
     else
     {

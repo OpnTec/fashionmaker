@@ -50,6 +50,7 @@
 #include "tst_readval.h"
 #include "tst_vtranslatevars.h"
 #include "tst_vtooluniondetails.h"
+#include "tst_vdomdocument.h"
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"

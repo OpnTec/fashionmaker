@@ -147,6 +147,8 @@ public:
 
     void RefreshElementIdCache();
 
+    static bool Compare(const QDomElement &element1, const QDomElement &element2);
+
 protected:
     bool           setTagText(const QString &tag, const QString &text);
     bool           setTagText(const QDomElement &domElement, const QString &text);

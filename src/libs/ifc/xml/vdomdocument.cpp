@@ -120,6 +120,122 @@ void SaveNodeCanonically(QXmlStreamWriter &stream, const QDomNode &domNode)
         stream.writeCharacters(domNode.nodeValue());
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QDomNode> GetChildElements(const QDomNode& e)
+{
+    QDomNodeList children = e.childNodes();
+    QList<QDomNode> r;
+    r.reserve(children.size());
+    for (int k = 0; k < children.size(); ++k)
+    {
+        r << children.at(k);
+    }
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QList<QDomNode> GetElementAttributes(const QDomNode& e)
+{
+    QDomNamedNodeMap attributes = e.attributes();
+    QList<QDomNode> r;
+    r.reserve(attributes.size());
+    for (int k = 0; k < attributes.size(); ++k)
+    {
+        r << attributes.item(k);
+    }
+    return r;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool LessThen(const QDomNode &element1, const QDomNode &element2)
+{
+    if (element1.nodeType() != element2.nodeType())
+    {
+        return element1.nodeType() < element2.nodeType();
+    }
+
+    QString tag1 = element1.nodeName();
+    QString tag2 = element2.nodeName();
+
+    //qDebug() << tag1 <<tag2;
+    if (tag1 != tag2)
+    {
+        return tag1 < tag2;
+    }
+
+    // Compare attributes
+    QList<QDomNode> attributes1 = GetElementAttributes(element1);
+    QList<QDomNode> attributes2 = GetElementAttributes(element2);
+
+    if(attributes1.size() != attributes2.size())
+    {
+        return attributes1.size() < attributes2.size();
+    }
+
+    bool stop = false;
+
+    auto CompareDomNodeLists = [&stop](QList<QDomNode> list1, QList<QDomNode> list2)
+    {
+        stop = false;
+        std::sort(list1.begin(), list1.end(), LessThen);
+        std::sort(list2.begin(), list2.end(), LessThen);
+        //qDebug() << "comparing sorted lists";
+        for(int k = 0; k < list1.size(); ++k)
+        {
+            if (!LessThen(list1[k], list2[k]))
+            {
+                if (LessThen(list2[k], list1[k]))
+                {
+                    stop = true;
+                    //qDebug() << "false!";
+                    return false;
+                }
+            }
+            else
+            {
+                stop = true;
+                //qDebug() << "true!";
+                return true;
+            }
+        }
+        return false;
+    };
+
+    bool result = CompareDomNodeLists(attributes1, attributes2);
+    if (stop)
+    {
+        return result;
+    }
+
+    // Compare children
+    QList<QDomNode> elts1 = GetChildElements(element1);
+    QList<QDomNode> elts2 = GetChildElements(element2);
+
+    QString value1, value2;
+
+    if(elts1.size() != elts2.size())
+    {
+        return elts1.size() < elts2.size();
+    }
+
+    if(elts1.isEmpty())
+    {
+        value1 = element1.nodeValue();
+        value2 = element2.nodeValue();
+
+        //qDebug() <<value1 << value2 << (value1 < value2);
+        return value1 < value2;
+    }
+
+    result = CompareDomNodeLists(elts1, elts2);
+    // cppcheck-suppress identicalConditionAfterEarlyExit
+    if (stop)
+    {
+        return result;
+    }
+    return false;
+}
 }
 
 //This class need for validation pattern file using XSD shema
@@ -656,6 +772,13 @@ void VDomDocument::RefreshElementIdCache()
     {
         m_watcher->setFuture(QtConcurrent::run(this, &VDomDocument::RefreshCache, documentElement()));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDomDocument::Compare(const QDomElement &element1, const QDomElement &element2)
+{
+    QFuture<bool> lessThen2 = QtConcurrent::run(LessThen, element2, element1);
+    return !LessThen(element1, element2) && !lessThen2.result();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
