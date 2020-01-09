@@ -173,11 +173,9 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
         return attributes1.size() < attributes2.size();
     }
 
-    bool stop = false;
-
-    auto CompareDomNodeLists = [&stop](QList<QDomNode> list1, QList<QDomNode> list2)
+    auto CompareDomNodeLists = [](QList<QDomNode> list1, QList<QDomNode> list2, bool *stop)
     {
-        stop = false;
+        *stop = false;
         std::sort(list1.begin(), list1.end(), LessThen);
         std::sort(list2.begin(), list2.end(), LessThen);
         //qDebug() << "comparing sorted lists";
@@ -187,14 +185,14 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
             {
                 if (LessThen(list2[k], list1[k]))
                 {
-                    stop = true;
+                    *stop = true;
                     //qDebug() << "false!";
                     return false;
                 }
             }
             else
             {
-                stop = true;
+                *stop = true;
                 //qDebug() << "true!";
                 return true;
             }
@@ -202,7 +200,8 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
         return false;
     };
 
-    bool result = CompareDomNodeLists(attributes1, attributes2);
+    bool stop = false;
+    bool result = CompareDomNodeLists(attributes1, attributes2, &stop);
     if (stop)
     {
         return result;
@@ -228,8 +227,7 @@ bool LessThen(const QDomNode &element1, const QDomNode &element2)
         return value1 < value2;
     }
 
-    result = CompareDomNodeLists(elts1, elts2);
-    // cppcheck-suppress identicalConditionAfterEarlyExit
+    result = CompareDomNodeLists(elts1, elts2, &stop);
     if (stop)
     {
         return result;
