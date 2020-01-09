@@ -63,6 +63,8 @@ public:
     void MoveDown(const QString &name);
     void MoveBottom(const QString &name);
 
+    void StoreNames(bool store);
+
     void ReadMeasurements(qreal height, qreal size) const;
     void ClearForExport();
 
@@ -142,6 +144,9 @@ private:
     /** @brief data container with data. */
     VContainer     *data;
     MeasurementsType type;
+
+    /** @brief m_keepNames store names in container to check uniqueness. */
+    bool m_keepNames{true};
 
     void CreateEmptyMultisizeFile(Unit unit, int baseSize, int baseHeight);
     void CreateEmptyIndividualFile(Unit unit);

@@ -511,6 +511,7 @@ bool MainWindow::LoadMeasurements(const QString &path)
         }
         ToolBarOption();
         pattern->ClearVariables(VarType::Measurement);
+        m->StoreNames(false);
         m->ReadMeasurements(height, size);
     }
     catch (VExceptionEmptyParameter &e)
@@ -563,6 +564,7 @@ bool MainWindow::UpdateMeasurements(const QString &path, int size, int height)
     try
     {
         pattern->ClearVariables(VarType::Measurement);
+        m->StoreNames(false);
         m->ReadMeasurements(height, size);
         if (m->Type() == MeasurementsType::Individual)
         {

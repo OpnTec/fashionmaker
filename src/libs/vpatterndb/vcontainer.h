@@ -163,6 +163,10 @@ public:
                                             quint32 parentId = NULL_ID);
 
     template <typename T>
+    void               AddUniqueVariable(T *var);
+    template <typename T>
+    void               AddUniqueVariable(const QSharedPointer<T> &var);
+    template <typename T>
     void               AddVariable(T *var);
     template <typename T>
     void               AddVariable(const QSharedPointer<T> &var);
@@ -184,6 +188,7 @@ public:
     void               ClearVariables(const QVector<VarType> &types);
     void               ClearUniqueNames() const;
     void               ClearUniqueIncrementNames() const;
+    void               ClearExceptUniqueIncrementNames() const;
 
     void               SetSize(qreal size) const;
     void               SetHeight(qreal height) const;
@@ -309,6 +314,25 @@ QSharedPointer<T> VContainer::GetVariable(const QString &name) const
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
+void VContainer::AddUniqueVariable(T *var)
+{
+    AddUniqueVariable(QSharedPointer<T>(var));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+void VContainer::AddUniqueVariable(const QSharedPointer<T> &var)
+{
+    AddVariable(var);
+
+    if (d->variables.contains(var->GetName()))
+    {
+        uniqueNames[d->nspace].insert(var->GetName());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
 void VContainer::AddVariable(T *var)
 {
     AddVariable(QSharedPointer<T>(var));
@@ -338,7 +362,6 @@ void VContainer::AddVariable(const QSharedPointer<T> &var)
     else
     {
         d->variables.insert(var->GetName(), var);
-        uniqueNames[d->nspace].insert(var->GetName());
     }
 }
 

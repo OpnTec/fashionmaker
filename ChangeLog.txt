@@ -36,6 +36,7 @@
 - [#984] Special variable "CurrentLength" for tools Cut Arc, Cut Spline and Cut Spline Path.
 - Added a ruler at the bottom of a tiled PDF document.
 - Export tiled PDF with watermark.
+- [#984] Issue with up to date list of unique names.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

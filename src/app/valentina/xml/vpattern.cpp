@@ -3932,7 +3932,7 @@ void VPattern::ParseIncrementsElement(const QDomNode &node, const Document &pars
                     increment->SetFormula(value, formula, ok);
                     increment->SetDescription(desc);
                     increment->SetPreviewCalculation(node.toElement().tagName() == TagPreviewCalculations);
-                    data->AddVariable(increment);
+                    data->AddUniqueVariable(increment);
                 }
             }
         }
@@ -4433,6 +4433,7 @@ void VPattern::PrepareForParse(const Document &parse)
         }
 
         data->ClearVariables(types);
+        parse == Document::FullLiteParse ? data->ClearUniqueNames() : data->ClearExceptUniqueIncrementNames();
     }
 }
 

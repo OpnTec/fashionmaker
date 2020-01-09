@@ -720,6 +720,21 @@ void VContainer::ClearUniqueIncrementNames() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VContainer::ClearExceptUniqueIncrementNames() const
+{
+    const QList<QString> list = uniqueNames.value(d->nspace).values();
+    ClearUniqueNames();
+
+    for(auto &name : list)
+    {
+        if (name.startsWith('#'))
+        {
+            uniqueNames[d->nspace].insert(name);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief SetSize set value of size
  * @param size value of size

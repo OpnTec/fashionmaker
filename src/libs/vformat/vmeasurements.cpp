@@ -250,6 +250,12 @@ void VMeasurements::MoveBottom(const QString &name)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VMeasurements::StoreNames(bool store)
+{
+    m_keepNames = store;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::ReadMeasurements(qreal height, qreal size) const
 {
     // For conversion values we must first calculate all data in measurement file's unit.
@@ -308,8 +314,11 @@ void VMeasurements::ReadMeasurements(qreal height, qreal size) const
             meash = QSharedPointer<VMeasurement>(new VMeasurement(data, static_cast<quint32>(i), name, value, formula,
                                                                   ok, fullName, description));
         }
-        tempData->AddVariable(tempMeash);
-        data->AddVariable(meash);
+        if (m_keepNames)
+        {
+            tempData->AddUniqueVariable(tempMeash);
+            data->AddUniqueVariable(meash);
+        }
     }
 }
 
