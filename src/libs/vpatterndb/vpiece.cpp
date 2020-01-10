@@ -1075,6 +1075,16 @@ VPassmark VPiece::CreatePassmark(const QVector<VPieceNode> &path, int previousIn
         return VPassmark();
     }
 
+    if (passmarkSAPoint.IsManualPasskmarkLength()
+            && passmarkSAPoint.GetPasskmarkLength() <= accuracyPointOnLine)
+    {
+        const QString infoMsg = tr("Notch for point '%1' in piece '%2' will be disabled. Manual length is less than "
+                                    "allowed value.")
+                .arg(VPiecePath::NodeName(path, passmarkIndex, data), GetName());
+        qInfo() << VAbstractApplication::patternMessageSignature + infoMsg;
+        return VPassmark();
+    }
+
     VPiecePassmarkData passmarkData;
     passmarkData.previousSAPoint = previousSAPoint;
     passmarkData.passmarkSAPoint = passmarkSAPoint;
