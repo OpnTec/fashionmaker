@@ -319,6 +319,11 @@ void VMeasurements::ReadMeasurements(qreal height, qreal size) const
             tempData->AddUniqueVariable(tempMeash);
             data->AddUniqueVariable(meash);
         }
+        else
+        {
+            tempData->AddVariable(tempMeash);
+            data->AddVariable(meash);
+        }
     }
 }
 
