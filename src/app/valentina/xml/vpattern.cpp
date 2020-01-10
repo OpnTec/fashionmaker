@@ -2469,7 +2469,7 @@ void VPattern::ParseToolTrueDarts(VMainGraphicsScene *scene, const QDomElement &
 
 //---------------------------------------------------------------------------------------------------------------------
 // TODO. Delete if minimal supported version is 0.2.7
-void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2505,6 +2505,9 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, const QDomElement &
         spline->SetColor(color);
 
         VToolSpline::Create(initData, spline);
+
+        // Convert to newer format
+        SetAttribute(domElement, AttrType, VToolSpline::ToolType);
     }
     catch (const VExceptionBadId &e)
     {
@@ -2637,7 +2640,7 @@ void VPattern::ParseToolCubicBezier(VMainGraphicsScene *scene, const QDomElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomElement &domElement, const Document &parse)
+void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &domElement, const Document &parse)
 {
     SCASSERT(scene != nullptr)
     Q_ASSERT_X(not domElement.isNull(), Q_FUNC_INFO, "domElement is null");
@@ -2696,6 +2699,9 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, const QDomEleme
         path->SetApproximationScale(approximationScale);
 
         VToolSplinePath::Create(initData, path);
+
+        // Convert to newer format
+        SetAttribute(domElement, AttrType, VToolSplinePath::ToolType);
     }
     catch (const VExceptionBadId &e)
     {
