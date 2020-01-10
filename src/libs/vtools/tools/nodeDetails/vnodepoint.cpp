@@ -359,24 +359,18 @@ QHash<int, QAction *> VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, 
 //---------------------------------------------------------------------------------------------------------------------
 void VNodePoint::InitPassmarkMenu(QMenu *menu, vidtype pieceId, QHash<int, QAction *> &contextMenu)
 {
-    QAction *actionPassmark = menu->addAction(tr("Passmark"));
-    actionPassmark->setCheckable(true);
+    SCASSERT(menu != nullptr)
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
     const int nodeIndex = detail.GetPath().indexOfNode(m_id);
     if (nodeIndex != -1)
     {
-        const VPieceNode &node = detail.GetPath().at(nodeIndex);
+        QAction *actionPassmark = menu->addAction(tr("Passmark"));
+        actionPassmark->setCheckable(true);
+        actionPassmark->setChecked(detail.GetPath().at(nodeIndex).IsPassmark());
 
-        actionPassmark->setChecked(node.IsPassmark());
-        actionPassmark->setVisible(node.IsPassmark());
+        contextMenu.insert(static_cast<int>(ContextMenuOption::Passmark), actionPassmark);
     }
-    else
-    {
-        actionPassmark->setVisible(false);
-    }
-
-    contextMenu.insert(static_cast<int>(ContextMenuOption::Passmark), actionPassmark);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -537,6 +531,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         PieceNodeAngle angleCurType = PieceNodeAngle::ByLength;
         PassmarkAngleType passmarkAngleCurType = PassmarkAngleType::Straightforward;
         PassmarkLineType passmarkLineCurType = PassmarkLineType::OneLine;
+        bool isPassmark = false;
 
         const VPiece detail = VAbstractTool::data.GetPiece(piece->getId());
         const int nodeIndex = detail.GetPath().indexOfNode(m_id);
@@ -546,6 +541,7 @@ void VNodePoint::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
             angleCurType = node.GetAngleType();
             passmarkAngleCurType = node.GetPassmarkAngleType();
             passmarkLineCurType = node.GetPassmarkLineType();
+            isPassmark = node.IsPassmark();
         }
 
         auto SelectSeamAllowanceAngle = [angleCurType, this](PieceNodeAngle type)
@@ -635,7 +631,7 @@ QT_WARNING_DISABLE_GCC("-Wswitch-default")
                 SelectSeamAllowanceAngle(PieceNodeAngle::BySecondEdgeRightAngle);
                 break;
             case ContextMenuOption::Passmark:
-                emit TogglePassmark(m_id, false);
+                emit TogglePassmark(m_id, not isPassmark);
                 break;
             case ContextMenuOption::Straightforward:
                 SelectPassmarkAngle(PassmarkAngleType::Straightforward);
