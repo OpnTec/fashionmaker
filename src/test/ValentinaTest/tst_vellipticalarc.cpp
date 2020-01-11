@@ -83,8 +83,9 @@ void TST_VEllipticalArc::CompareTwoWays()
 
     VEllipticalArc arc2(length, center, radius1, radius2, f1, rotationAngle);
 
-    const qreal lengthEps = ToPixel(0.4, Unit::Mm); // computing error
-    const QString errorLengthMsg =
+    const qreal lengthEps = ToPixel(0.45, Unit::Mm); // computing error
+
+    QString errorLengthMsg =
             QString("Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3");
     QVERIFY2(qAbs(arc2.GetLength() - length) <= lengthEps,
              qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(arc2.GetLength()).arg(length)));
@@ -116,12 +117,16 @@ void TST_VEllipticalArc::NegativeArc()
     const qreal length = M_PI*(radius1+radius2)*(1+3*h/(10+qSqrt(4-3*h)))/2;
     VEllipticalArc arc(-length, center, radius1, radius2, f1, rotationAngle);
 
-    const qreal eps = 1; // computing error
+    const qreal eps = ToPixel(0.45, Unit::Mm); // computing error
     const QString errorMsg =
-            QString("Difference between real and computing lengthes bigger than eps = %1.").number(eps);
+            QString("Difference between real and computing lengthes bigger than eps = %1.  v1 = %2; v2 = %3");
 
-    QVERIFY2(qAbs(arc.GetLength() + length) <= eps, qUtf8Printable(errorMsg));
-    QVERIFY2(arc.GetEndAngle() - f2 <= eps, qUtf8Printable(errorMsg));
+    QVERIFY2(qAbs(arc.GetLength() + length) <= eps,
+             qUtf8Printable(errorMsg.arg(eps).arg(arc.GetLength()).arg(length)));
+
+    const qreal angleEps = 0.4;
+    QVERIFY2(arc.GetEndAngle() - f2 <= angleEps,
+             qUtf8Printable(errorMsg.arg(eps).arg(arc.GetEndAngle()).arg(f2)));
 }
 
 // cppcheck-suppress unusedFunction
@@ -501,7 +506,14 @@ void TST_VEllipticalArc::TestRotation()
 
     QVERIFY2(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 1.6,
             qUtf8Printable(QString("a1 = %1, a2 - %2").arg(arcOrigin.AngleArc()).arg(rotatedArc.AngleArc())));
-    QVERIFY(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm));
+
+    QString errorLengthMsg =
+            QString("Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3");
+    QVERIFY2(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm))
+                            .arg(arcOrigin.GetLength())
+                            .arg(rotatedArc.GetLength())));
+
     QCOMPARE(arcOrigin.GetRadius1(), rotatedArc.GetRadius1());
     QCOMPARE(arcOrigin.GetRadius2(), rotatedArc.GetRadius2());
     QCOMPARE(arcOrigin.GetRotationAngle(), rotatedArc.GetRotationAngle());
