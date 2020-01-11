@@ -664,11 +664,11 @@ void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiec
     QVector<QPointF> outline;
     if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
     {
-        outline = detail.GetSeamAllowancePoints();
+        outline = detail.GetMappedSeamAllowancePoints();
     }
     else
     {
-        outline = detail.GetContourPoints();
+        outline = detail.GetMappedContourPoints();
     }
 
     DRW_Entity *e = AAMAPolygon(outline, QChar('1'), true);
@@ -683,7 +683,7 @@ void VDxfEngine::ExportAAMADraw(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 {
     if (not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
     {
-        if (DRW_Entity *e = AAMAPolygon(detail.GetContourPoints(), QChar('8'), true))
+        if (DRW_Entity *e = AAMAPolygon(detail.GetMappedContourPoints(), QChar('8'), true))
         {
             detailBlock->ent.push_back(e);
         }
