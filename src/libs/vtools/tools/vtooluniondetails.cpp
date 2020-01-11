@@ -1647,10 +1647,19 @@ void UniteDetails(const VToolUnionDetailsInitData &initData)
     }
     else
     {
-        const VPiecePath d1Path = GetPiece1MainPath(initData.doc, initData.id);
-        const VPiecePath d2Path = GetPiece2MainPath(initData.doc, initData.id);
-        UnionInitParameters(initData, d1Path, d2Path, det1p1, dx, dy, angle);
-        UpdateUnitedDetail(initData, dx, dy, det1p1.GetId(), angle);
+        try
+        {
+            const VPiecePath d1Path = GetPiece1MainPath(initData.doc, initData.id);
+            const VPiecePath d2Path = GetPiece2MainPath(initData.doc, initData.id);
+            UnionInitParameters(initData, d1Path, d2Path, det1p1, dx, dy, angle);
+            UpdateUnitedDetail(initData, dx, dy, det1p1.GetId(), angle);
+        }
+        catch (const VExceptionBadId &)
+        {
+            // There is a chance that the tool depends on an already deleted object. We can skip updating in this case.
+            // We still can get error in child in case we should not get an error here. Debug will be a little bit
+            // obscured. But if this happened something really bad happened.
+        }
     }
 }
 } // static functions
