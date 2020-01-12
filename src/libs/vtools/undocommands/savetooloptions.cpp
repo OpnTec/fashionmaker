@@ -93,12 +93,14 @@ void SaveToolOptions::redo()
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> SaveToolOptions::Missing(const QList<quint32> &list1, const QList<quint32> &list2) const
 {
-    QSet<quint32> set1 = QSet<quint32>::fromList(list1);
-    QSet<quint32> set2 = QSet<quint32>::fromList(list2);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    auto set1 = QSet<quint32>(list1.begin(), list1.end());
+    auto set2 = QSet<quint32>(list2.begin(), list2.end());
     QSet<quint32> substracted = set1.subtract(set2);
     return QVector<quint32>(substracted.begin(), substracted.end());
 #else
+    auto set1 = QSet<quint32>::fromList(list1);
+    auto set2 = QSet<quint32>::fromList(list2);
     return set1.subtract(set2).toList().toVector();
 #endif
 }
@@ -114,11 +116,13 @@ bool SaveToolOptions::mergeWith(const QUndoCommand *command)
     }
     else
     {
-        const QSet<quint32> currentSet;
-        currentSet.fromList(newDependencies);
-
-        const QSet<quint32> candidateSet;
-        candidateSet.fromList(saveCommand->NewDependencies());
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        auto currentSet = QSet<quint32>(newDependencies.begin(), newDependencies.end());
+        auto candidateSet = QSet<quint32>(saveCommand->NewDependencies().begin(), saveCommand->NewDependencies().end());
+#else
+        auto currentSet = QSet<quint32>::fromList(newDependencies);
+        auto candidateSet = QSet<quint32>::fromList(saveCommand->NewDependencies());
+#endif
 
         if (currentSet != candidateSet)
         {
