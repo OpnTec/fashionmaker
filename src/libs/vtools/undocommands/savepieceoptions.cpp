@@ -160,12 +160,18 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
     }
     else
     {
-        const QSet<quint32> currentSet;
-        currentSet.fromList(m_newDet.Dependencies());
-
         const VPiece candidate = saveCommand->NewDet();
-        const QSet<quint32> candidateSet;
-        candidateSet.fromList(candidate.Dependencies());
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+        QList<quint32> currentDependencies = m_newDet.Dependencies();
+        QList<quint32> candidateDependencies = candidate.Dependencies();
+
+        auto currentSet = QSet<quint32>(currentDependencies.begin(), currentDependencies.end());
+        auto candidateSet = QSet<quint32>(candidateDependencies.begin(), candidateDependencies.end());
+#else
+        auto currentSet = QSet<quint32>::fromList(m_newDet.Dependencies());
+        auto candidateSet = QSet<quint32>::fromList(candidate.Dependencies());
+#endif
 
         if (currentSet != candidateSet)
         {
