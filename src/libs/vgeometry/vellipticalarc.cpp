@@ -296,7 +296,7 @@ QVector<QPointF> VEllipticalArc::GetPoints() const
     {
         polygon = ConstFirst (path.toSubpathPolygons());
 
-        if (not polygon.isEmpty() && not VFuzzyComparePoints(GetP1(), ConstFirst (polygon)))
+        if (not polygon.isEmpty() && not VFuzzyComparePoints(GetP1(), ConstFirst<QPointF> (polygon)))
         {
             polygon.removeFirst(); // remove point (0;0)
         }
