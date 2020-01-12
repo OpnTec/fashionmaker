@@ -371,7 +371,7 @@ inline const T& ConstFirst (const Cont<T> &container)
 }
 
 template <typename T, typename C>
-inline const T& ConstFirst (const C &container)
+inline const auto& ConstFirst (const C &container)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     return container.constFirst();
