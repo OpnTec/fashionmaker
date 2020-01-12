@@ -12,11 +12,6 @@
 # version format
 version: '{build}-{branch}'
 
-image:
-  - Visual Studio 2019
-  - Visual Studio 2017
-  - Visual Studio 2015
-
 # branches to build
 branches:
   # whitelist
