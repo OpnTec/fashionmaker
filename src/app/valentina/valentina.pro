@@ -344,9 +344,6 @@ win32:*g++* {
         $$PWD/../../libs/qmuparser/LICENSE_BSD.txt \
         $${OUT_PWD}/../../libs/qmuparser/$${DESTDIR}/qmuparser2.dll \
         $${OUT_PWD}/../../libs/vpropertyexplorer/$${DESTDIR}/vpropertyexplorer.dll \
-        $$[QT_INSTALL_BINS]/icudt*.dll \ # Different name for different Qt releases
-        $$[QT_INSTALL_BINS]/icuin*.dll \ # Different name for different Qt releases
-        $$[QT_INSTALL_BINS]/icuuc*.dll \ # Different name for different Qt releases
         $$[QT_INSTALL_BINS]/Qt5Core.dll \
         $$[QT_INSTALL_BINS]/Qt5Concurrent.dll \
         $$[QT_INSTALL_BINS]/Qt5Gui.dll \
