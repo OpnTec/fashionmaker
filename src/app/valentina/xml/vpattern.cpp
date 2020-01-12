@@ -4389,7 +4389,7 @@ void VPattern::SetLabelPrefix(const QString &prefix)
     {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
         QStringList languages = VApplication::LabelLanguages();
-        if (QSet<QString>(languages.begin(), languages.end()).contains(prefix));
+        if (QSet<QString>(languages.begin(), languages.end()).contains(prefix))
 #else
         if (VApplication::LabelLanguages().toSet().contains(prefix))
 #endif
