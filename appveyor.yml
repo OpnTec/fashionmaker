@@ -159,15 +159,13 @@ init:
   - path
   - set QTDIR=C:\%QT5%
   - set PATH=%QTDIR%\bin;%QTDIR%\include;C:\Tools\PsTools;C:\Windows\system32;C:\Windows;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Mercurial\
-  - ps: $env:VSCOMNTOOLS=(Get-Content ("env:VS" + "$env:VSVER" + "0COMNTOOLS"))
-  - if NOT "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using Visual Studio %VSVER%.0 at %VSCOMNTOOLS%"
+  - if NOT "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using Visual Studio %VSVER%.0"
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using MinGW"
   # Set VC variables for the platform
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if %PLATFORM% == x64 call "%VSCOMNTOOLS%\..\..\VC\bin\x86_amd64\vcvarsx86_amd64.bat"
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if %PLATFORM% == x86 call "%VSCOMNTOOLS%\..\..\VC\bin\vcvars32.bat"
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "x86" call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat"
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "x64" "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
-  - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" if "%PLATFORM%" == "x64" call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat" x86_amd64
+  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x86" IF "%VSVER%" == "15" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd.bat" -arch=x86 -host_arch=x64
+  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "15" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\vsdevcmd.bat" -arch=x64 -host_arch=x64
+  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x86" IF "%VSVER%" == "14" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\vsvars32.bat"
+  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "14" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\vcvarsx86_amd64.bat"
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" set PATH=%MINGW_PATH%;%PATH%
   - if "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" set PATH=C:\Qt\Tools\QtCreator\bin;%PATH%
   - set PATH=C:\projects\valentina\build\src\libs\vpropertyexplorer\bin;C:\projects\valentina\build\src\libs\qmuparser\bin;%PATH%
