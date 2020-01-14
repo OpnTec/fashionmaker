@@ -163,7 +163,7 @@ init:
   - if "%QMAKE_GENERATOR%" == "MinGW Makefiles" echo "Using MinGW"
   # Set VC variables for the platform
   - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x86" IF "%VSVER%" == "15" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
-  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "15" Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+  - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "15" call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
   - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x86" IF "%VSVER%" == "14" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
   - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "14" call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64
   - IF "%QMAKE_GENERATOR%" == "NMake Makefiles JOM" IF "%PLATFORM%" == "x64" IF "%VSVER%" == "14" call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86_amd64
