@@ -908,5 +908,6 @@ MSVC_DEBUG_CXXFLAGS += \
     -wd4371 \
     -wd4718 \
     -wd4946 \
-    -wd4868   # compiler may not enforce left-to-right evaluation order in braced initializer list
+    -wd4868 \ # compiler may not enforce left-to-right evaluation order in braced initializer list
+    -wd4866 # compiler may not enforce left-to-right evaluation order for call to 'C++17 operator'
 }
