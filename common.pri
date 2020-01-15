@@ -909,5 +909,10 @@ MSVC_DEBUG_CXXFLAGS += \
     -wd4718 \
     -wd4946 \
     -wd4868 \ # compiler may not enforce left-to-right evaluation order in braced initializer list
-    -wd4866 # compiler may not enforce left-to-right evaluation order for call to 'C++17 operator'
+    -wd4866 \ # compiler may not enforce left-to-right evaluation order for call to 'C++17 operator'
+    -wd4571 \ # catch(...) semantics changed since Visual C++ 7.1; structured exceptions (SEH) are no longer caught
+    -wd5026 \ # move constructor was implicitly defined as deleted
+    -wd5027 \ # move assignment operator was implicitly defined as deleted
+    -wd5039 \ # pointer or reference to potentially throwing function passed to extern C function under -EHc.
+    -wd4774 # format string expected in argument 3 is not a string literal
 }
