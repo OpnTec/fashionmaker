@@ -40,6 +40,7 @@
 #include "../../../../dialogs/tools/dialoglineintersect.h"
 #include "../../../../visualization/line/vistoollineintersect.h"
 #include "../ifc/exception/vexception.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
@@ -148,8 +149,11 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
 
     if (intersect == QLineF::NoIntersection)
     {
-        qWarning() << tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of intersection")
-                      .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
+        const QString errorMsg = tr("Error calculating point '%1'. Lines (%2;%3) and (%4;%5) have no point of "
+                                    "intersection")
+                .arg(initData.name, p1Line1->name(), p2Line1->name(), p1Line2->name(), p2Line2->name());
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                             qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
     VPointF *p = new VPointF(fPoint, initData.name, initData.mx, initData.my);
