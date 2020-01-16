@@ -7975,7 +7975,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forum</source>
-        <translation>Forum</translation>
+        <translation type="vanished">Forum</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -9349,7 +9349,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan toInt parameter niet omzetten</translation>
     </message>
 </context>
 <context>
@@ -12725,6 +12725,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Kan geen inkeping berekenen voor punt &apos;%1&apos; in werkstuk &apos;%2&apos;.</translation>
     </message>
+    <message>
+        <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPoster</name>
@@ -12739,10 +12743,6 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Sheet %1 of %2</source>
         <translation>Blad %1 van %2</translation>
-    </message>
-    <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="vanished">Kan watermerk afbeelding niet openen. %1 </translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
@@ -12760,7 +12760,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Cannot open the watermark image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de watermerk afbeelding niet openen.</translation>
     </message>
 </context>
 <context>

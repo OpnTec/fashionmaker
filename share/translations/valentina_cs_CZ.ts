@@ -7978,7 +7978,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Forum</source>
-        <translation>Fórum</translation>
+        <translation type="vanished">Fórum</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -12728,6 +12728,10 @@ Chcete uložit změny?</translation>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Nelze spočítat zářez pro bod &apos;%1&apos; v dílu &apos;%2&apos;.</translation>
     </message>
+    <message>
+        <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VPoster</name>
@@ -12742,10 +12746,6 @@ Chcete uložit změny?</translation>
     <message>
         <source>Sheet %1 of %2</source>
         <translation>List %1 z %2</translation>
-    </message>
-    <message>
-        <source>Cannot open the watermark image. %1</source>
-        <translation type="vanished">Nelze otevřít obrázek vodoznaku. %1</translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>

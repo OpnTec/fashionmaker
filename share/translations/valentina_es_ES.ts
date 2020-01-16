@@ -7976,7 +7976,7 @@ el patrón.</translation>
     </message>
     <message>
         <source>Forum</source>
-        <translation>Foro</translation>
+        <translation type="vanished">Foro</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -12721,6 +12721,10 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>No se puede calcular un pique para un punto &apos;%1&apos; en pieza &apos;%2&apos;.</translation>
+    </message>
+    <message>
+        <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

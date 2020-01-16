@@ -7977,7 +7977,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Forum</source>
-        <translation>Форум</translation>
+        <translation type="vanished">Форум</translation>
     </message>
     <message>
         <source>Open Tape app for creating or editing measurements file</source>
@@ -9335,7 +9335,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Надсечка &apos;%1&apos; не является частью детали &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Cannot cast tool with id &apos;%1&apos;.</source>
@@ -12726,6 +12726,10 @@ Do you want to save your changes?</source>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Невозможно вычислить надсечку от точки &apos;%1&apos; до &apos;%2&apos;.</translation>
+    </message>
+    <message>
+        <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
