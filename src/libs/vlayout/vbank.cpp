@@ -32,6 +32,7 @@
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "vlayoutdef.h"
 #include "../ifc/exception/vexception.h"
 #include "../vpatterndb/floatItemData/floatitemdef.h"
@@ -343,11 +344,7 @@ bool VBank::PrepareUnsorted()
         Insert(unsorted, group, i, square);
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    groups = QVector<uint>(uniqueGroup.begin(), uniqueGroup.end());
-#else
-    groups = QVector<uint>::fromList(uniqueGroup.toList());
-#endif
+    groups = ConvertToVector(uniqueGroup);
     std::sort(groups.begin(), groups.end());
 
     PrepareGroup();

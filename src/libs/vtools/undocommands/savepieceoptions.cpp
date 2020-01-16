@@ -36,6 +36,7 @@
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/ifcdef.h"
 #include "../vmisc/def.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/floatItemData/vpatternlabeldata.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
@@ -162,16 +163,8 @@ bool SavePieceOptions::mergeWith(const QUndoCommand *command)
     {
         const VPiece candidate = saveCommand->NewDet();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QList<quint32> currentDependencies = m_newDet.Dependencies();
-        QList<quint32> candidateDependencies = candidate.Dependencies();
-
-        auto currentSet = QSet<quint32>(currentDependencies.begin(), currentDependencies.end());
-        auto candidateSet = QSet<quint32>(candidateDependencies.begin(), candidateDependencies.end());
-#else
-        auto currentSet = QSet<quint32>::fromList(m_newDet.Dependencies());
-        auto candidateSet = QSet<quint32>::fromList(candidate.Dependencies());
-#endif
+        auto currentSet = ConvertToSet(m_newDet.Dependencies());
+        auto candidateSet = ConvertToSet(candidate.Dependencies());
 
         if (currentSet != candidateSet)
         {

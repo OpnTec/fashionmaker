@@ -31,6 +31,7 @@
 #include "../qmuparser/qmuformulabase.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../ifc/ifcdef.h"
+#include "../vmisc/compatibility.h"
 
 #include <QtTest>
 #include <QTranslator>
@@ -185,11 +186,7 @@ void TST_AbstractRegExp::CallTestCheckNoOriginalNamesInTranslation()
     QFETCH(QString, originalName);
 
     static const QStringList originalNames = AllNames();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    static const auto names = QSet<QString>(originalNames.begin(), originalNames.end());
-#else
-    static const auto names = QSet<QString>::fromList(originalNames);
-#endif
+    static const auto names = ConvertToSet<QString>(originalNames);
 
     const QString translated = m_trMs->VarToUser(originalName);
     if (names.contains(translated))

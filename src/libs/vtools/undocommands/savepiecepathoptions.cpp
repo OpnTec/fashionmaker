@@ -36,6 +36,7 @@
 #include "../tools/nodeDetails/vtoolpiecepath.h"
 #include "../tools/vtoolseamallowance.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId, const VPiecePath &oldPath, const VPiecePath &newPath,
@@ -129,16 +130,8 @@ bool SavePiecePathOptions::mergeWith(const QUndoCommand *command)
     {
         const VPiecePath candidate = saveCommand->NewPath();
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QList<quint32> currentDependencies = m_newPath.Dependencies();
-        QList<quint32> candidateDependencies = candidate.Dependencies();
-
-        auto currentSet = QSet<quint32>(currentDependencies.begin(), currentDependencies.end());
-        auto candidateSet = QSet<quint32>(candidateDependencies.begin(), candidateDependencies.end());
-#else
-        auto currentSet = QSet<quint32>::fromList(m_newPath.Dependencies());
-        auto candidateSet = QSet<quint32>::fromList(candidate.Dependencies());
-#endif
+        auto currentSet = ConvertToSet(m_newPath.Dependencies());
+        auto candidateSet = ConvertToSet(candidate.Dependencies());
 
         if (currentSet != candidateSet)
         {
