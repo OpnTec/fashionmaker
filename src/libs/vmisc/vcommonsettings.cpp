@@ -44,6 +44,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/pmsystems.h"
 
 namespace

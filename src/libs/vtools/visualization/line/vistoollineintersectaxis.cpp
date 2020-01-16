@@ -43,6 +43,7 @@
 #include "../visualization.h"
 #include "visline.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLineIntersectAxis::VisToolLineIntersectAxis(const VContainer *data, QGraphicsItem *parent)
@@ -140,11 +141,7 @@ void VisToolLineIntersectAxis::setAxisPointId(const quint32 &value)
 void VisToolLineIntersectAxis::ShowIntersection(const QLineF &axis_line, const QLineF &base_line)
 {
     QPointF p;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QLineF::IntersectType intersect = axis_line.intersects(base_line, &p);
-#else
-    QLineF::IntersectType intersect = axis_line.intersect(base_line, &p);
-#endif
+    QLineF::IntersectType intersect = Intersects(axis_line, base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

@@ -24,6 +24,7 @@ contains(DEFINES, APPIMAGE) {
 }
 
 HEADERS += \
+    $$PWD/compatibility.h \
     $$PWD/stable.h \
     $$PWD/def.h \
     $$PWD/vmath.h \

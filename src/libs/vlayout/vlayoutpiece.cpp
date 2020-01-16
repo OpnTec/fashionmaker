@@ -49,6 +49,7 @@
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/vpassmark.h"

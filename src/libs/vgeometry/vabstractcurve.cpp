@@ -37,6 +37,7 @@
 
 #include "vabstractcurve_p.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
@@ -401,13 +402,9 @@ QVector<QPointF> VAbstractCurve::CurveIntersectLine(const QVector<QPointF> &poin
     for ( auto i = 0; i < points.count()-1; ++i )
     {
         QPointF crosPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        const auto type = line.intersects(QLineF(points.at(i), points.at(i+1)), &crosPoint);
-#else
-        const auto type = line.intersect(QLineF(points.at(i), points.at(i+1)), &crosPoint);
-#endif
+        auto type = Intersects(line, QLineF(points.at(i), points.at(i+1)), &crosPoint);
 
-        if ( type == QLineF::BoundedIntersection )
+        if (type == QLineF::BoundedIntersection)
         {
             intersections.append(crosPoint);
         }

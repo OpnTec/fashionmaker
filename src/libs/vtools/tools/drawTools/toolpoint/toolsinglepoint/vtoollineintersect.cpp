@@ -51,6 +51,7 @@
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
+#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
@@ -141,11 +142,7 @@ VToolLineIntersect* VToolLineIntersect::Create(VToolLineIntersectInitData initDa
     QLineF line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
     QLineF line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
     QPointF fPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    const QLineF::IntersectType intersect = line1.intersects(line2, &fPoint);
-#else
-    const QLineF::IntersectType intersect = line1.intersect(line2, &fPoint);
-#endif
+    const QLineF::IntersectType intersect = Intersects(line1, line2, &fPoint);
 
     if (intersect == QLineF::NoIntersection)
     {

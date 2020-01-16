@@ -51,6 +51,7 @@
 #include "../../vdrawtool.h"
 #include "vtoolsinglepoint.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
@@ -201,11 +202,7 @@ bool VToolTriangle::FindPoint(const QPointF &axisP1, const QPointF &axisP2, cons
     QLineF hypotenuse(firstPoint, secondPoint);
 
     QPointF startPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QLineF::IntersectType intersect = axis.intersects(hypotenuse, &startPoint);
-#else
-    QLineF::IntersectType intersect = axis.intersect(hypotenuse, &startPoint);
-#endif
+    QLineF::IntersectType intersect = Intersects(axis, hypotenuse, &startPoint);
 
     if (intersect != QLineF::UnboundedIntersection && intersect != QLineF::BoundedIntersection)
     {

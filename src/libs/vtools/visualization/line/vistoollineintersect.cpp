@@ -40,6 +40,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolLineIntersect::VisToolLineIntersect(const VContainer *data, QGraphicsItem *parent)
@@ -87,11 +88,7 @@ void VisToolLineIntersect::RefreshGeometry()
                     QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
                     QLineF l2(static_cast<QPointF>(*third), Visualization::scenePos);
                     QPointF fPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-                    QLineF::IntersectType intersect = l1.intersects(l2, &fPoint);
-#else
-                    QLineF::IntersectType intersect = l1.intersect(l2, &fPoint);
-#endif
+                    QLineF::IntersectType intersect = Intersects(l1, l2, &fPoint);
 
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
                     {
@@ -108,11 +105,7 @@ void VisToolLineIntersect::RefreshGeometry()
                     QLineF l1(static_cast<QPointF>(*first), static_cast<QPointF>(*second));
                     QLineF l2(static_cast<QPointF>(*third), static_cast<QPointF>(*forth));
                     QPointF fPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-                    QLineF::IntersectType intersect = l1.intersects(l2, &fPoint);
-#else
-                    QLineF::IntersectType intersect = l1.intersect(l2, &fPoint);
-#endif
+                    QLineF::IntersectType intersect = Intersects(l1, l2, &fPoint);
 
                     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
                     {

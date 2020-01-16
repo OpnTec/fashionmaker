@@ -41,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolHeight::VisToolHeight(const VContainer *data, QGraphicsItem *parent)
@@ -116,11 +117,7 @@ void VisToolHeight::setLineP2Id(const quint32 &value)
 void VisToolHeight::ShowIntersection(const QLineF &height_line, const QLineF &base_line)
 {
     QPointF p;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QLineF::IntersectType intersect = height_line.intersects(base_line, &p);
-#else
-    QLineF::IntersectType intersect = height_line.intersect(base_line, &p);
-#endif
+    QLineF::IntersectType intersect = Intersects(height_line, base_line, &p);
 
     if (intersect == QLineF::UnboundedIntersection)
     {

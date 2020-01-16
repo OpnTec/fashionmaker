@@ -34,6 +34,7 @@
 
 #include "../ifc/exception/vexception.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
 

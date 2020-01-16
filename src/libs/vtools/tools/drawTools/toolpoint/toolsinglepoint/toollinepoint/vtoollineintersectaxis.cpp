@@ -51,6 +51,7 @@
 #include "../../../../vabstracttool.h"
 #include "../../../vdrawtool.h"
 #include "vtoollinepoint.h"
+#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
@@ -180,11 +181,7 @@ bool VToolLineIntersectAxis::FindPoint(const QLineF &axis, const QLineF &line, Q
     SCASSERT(intersectionPoint != nullptr)
 
     QPointF fPoint;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QLineF::IntersectType intersect = axis.intersects(line, &fPoint);
-#else
-    QLineF::IntersectType intersect = axis.intersect(line, &fPoint);
-#endif
+    QLineF::IntersectType intersect = Intersects(axis, line, &fPoint);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {

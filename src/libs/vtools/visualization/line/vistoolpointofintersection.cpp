@@ -41,6 +41,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../visualization.h"
 #include "visline.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VisToolPointOfIntersection::VisToolPointOfIntersection(const VContainer *data, QGraphicsItem *parent)
@@ -97,11 +98,7 @@ void VisToolPointOfIntersection::setPoint2Id(const quint32 &value)
 void VisToolPointOfIntersection::ShowIntersection(const QLineF &axis1, const QLineF &axis2, const QColor &color)
 {
     QPointF p;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QLineF::IntersectType intersect = axis1.intersects(axis2, &p);
-#else
-    QLineF::IntersectType intersect = axis1.intersect(axis2, &p);
-#endif
+    QLineF::IntersectType intersect = Intersects(axis1, axis2, &p);
 
     if (intersect == QLineF::UnboundedIntersection || intersect == QLineF::BoundedIntersection)
     {

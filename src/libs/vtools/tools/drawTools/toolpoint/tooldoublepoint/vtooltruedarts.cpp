@@ -49,6 +49,7 @@
 #include "../../../vabstracttool.h"
 #include "../../vdrawtool.h"
 #include "vtooldoublepoint.h"
+#include "../vmisc/compatibility.h"
 
 template <class T> class QSharedPointer;
 
@@ -78,11 +79,7 @@ void VToolTrueDarts::FindPoint(const QPointF &baseLineP1, const QPointF &baseLin
     QLineF d2blP2(dartP2, baseLineP2);
     d2blP2.setAngle(d2blP2.angle()+degrees);
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    if (QLineF(baseLineP1, d2blP2.p2()).intersects(d2d1, &p1) == QLineF::NoIntersection)
-#else
-    if (QLineF(baseLineP1, d2blP2.p2()).intersect(d2d1, &p1) == QLineF::NoIntersection)
-#endif
+    if (Intersects(QLineF(baseLineP1, d2blP2.p2()), d2d1, &p1) == QLineF::NoIntersection)
     {
         p1 = QPointF(0, 0);
         p2 = QPointF(0, 0);
