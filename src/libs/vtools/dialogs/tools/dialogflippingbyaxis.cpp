@@ -52,6 +52,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -143,7 +144,7 @@ void DialogFlippingByAxis::SetSuffix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> DialogFlippingByAxis::GetObjects() const
 {
-    return objects.toVector();
+    return ConvertToVector(objects);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -164,7 +165,7 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(objects.toVector());
+        operation->SetObjects(ConvertToVector(objects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -290,7 +291,7 @@ void DialogFlippingByAxis::SaveData()
     VisToolFlippingByAxis *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(objects.toVector());
+    operation->SetObjects(ConvertToVector(objects));
     operation->SetOriginPointId(GetOriginPointId());
     operation->SetAxisType(GetAxisType());
     operation->RefreshGeometry();

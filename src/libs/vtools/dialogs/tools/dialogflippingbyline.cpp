@@ -52,6 +52,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vwidgets/vmaingraphicsscene.h"
@@ -138,7 +139,7 @@ void DialogFlippingByLine::SetSuffix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> DialogFlippingByLine::GetObjects() const
 {
-    return objects.toVector();
+    return ConvertToVector(objects);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -159,7 +160,7 @@ void DialogFlippingByLine::ShowDialog(bool click)
 
         VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(objects.toVector());
+        operation->SetObjects(ConvertToVector(objects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -314,7 +315,7 @@ void DialogFlippingByLine::SaveData()
     VisToolFlippingByLine *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(objects.toVector());
+    operation->SetObjects(ConvertToVector(objects));
     operation->SetFirstLinePointId(GetFirstLinePointId());
     operation->SetSecondLinePointId(GetSecondLinePointId());
     operation->RefreshGeometry();

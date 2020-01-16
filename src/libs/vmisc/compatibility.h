@@ -103,6 +103,17 @@ inline QSet<T> ConvertToSet(const C &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename T, template <typename> class C>
+inline QVector<T> ConvertToVector(const C<T> &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return QVector<T>(container.begin(), container.end());
+#else
+    return container.toVector();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline void SwapItemsAt(T &container, int i, int j)
 {

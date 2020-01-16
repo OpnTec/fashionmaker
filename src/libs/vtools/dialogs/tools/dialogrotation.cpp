@@ -56,6 +56,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -166,7 +167,7 @@ void DialogRotation::SetSuffix(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> DialogRotation::GetObjects() const
 {
-    return objects.toVector();
+    return ConvertToVector(objects);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -187,7 +188,7 @@ void DialogRotation::ShowDialog(bool click)
 
         VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(objects.toVector());
+        operation->SetObjects(ConvertToVector(objects));
         operation->VisualMode();
 
         scene->ToggleArcSelection(false);
@@ -261,7 +262,7 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
                     // It's not really logical for a user that a center of rotation no need to select.
                     // To fix this issue we just silently remove it from the list.
                     objects.removeOne(id);
-                    operation->SetObjects(objects.toVector());
+                    operation->SetObjects(ConvertToVector(objects));
                 }
                 else
                 {
@@ -380,7 +381,7 @@ void DialogRotation::SaveData()
     VisToolRotation *operation = qobject_cast<VisToolRotation *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(objects.toVector());
+    operation->SetObjects(ConvertToVector(objects));
     operation->SetOriginPointId(GetOrigPointId());
     operation->SetAngle(formulaAngle);
     operation->RefreshGeometry();

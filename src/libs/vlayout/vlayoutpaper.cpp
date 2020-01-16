@@ -49,6 +49,7 @@
 #include "vlayoutpaper_p.h"
 #include "vposition.h"
 #include "../ifc/exception/vexceptionterminatedposition.h"
+#include "../vmisc/compatibility.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VLayoutPaper::VLayoutPaper()
@@ -411,7 +412,7 @@ QVector<VLayoutPiece> VLayoutPaper::GetDetails() const
 //---------------------------------------------------------------------------------------------------------------------
 void VLayoutPaper::SetDetails(const QList<VLayoutPiece> &details)
 {
-    d->details = details.toVector();
+    d->details = ConvertToVector(details);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

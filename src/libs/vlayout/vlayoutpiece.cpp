@@ -519,7 +519,7 @@ QVector<T> VLayoutPiece::Map(QVector<T> points) const
         {
             SwapItemsAt(list, k, s-(1+k));
         }
-        points = list.toVector();
+        points = ConvertToVector(list);
     }
     return points;
 }

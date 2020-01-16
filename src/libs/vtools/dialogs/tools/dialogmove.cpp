@@ -56,6 +56,7 @@
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vwidgets/vabstractmainwindow.h"
@@ -253,7 +254,7 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 QVector<quint32> DialogMove::GetObjects() const
 {
-    return objects.toVector();
+    return ConvertToVector(objects);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,7 +276,7 @@ void DialogMove::ShowDialog(bool click)
 
         VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(objects.toVector());
+        operation->SetObjects(ConvertToVector(objects));
         operation->VisualMode();
 
         VAbstractMainWindow *window = qobject_cast<VAbstractMainWindow *>(qApp->getMainWindow());
@@ -497,7 +498,7 @@ void DialogMove::SaveData()
     VisToolMove *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
 
-    operation->SetObjects(objects.toVector());
+    operation->SetObjects(ConvertToVector(objects));
     operation->SetAngle(formulaAngle);
     operation->SetLength(formulaLength);
     operation->SetRotationAngle(formulaRotationAngle);
