@@ -5,6 +5,7 @@
 #include <QtGlobal>
 
 class QTextCodec;
+class QStringList;
 
 class DRW_TextCodec
 {
@@ -18,6 +19,9 @@ public:
     void setCodePage(const std::string *c, bool dxfFormat);
     void setCodePage(const std::string &c, bool dxfFormat){setCodePage(&c, dxfFormat);}
     std::string getCodePage() const {return cp;}
+
+    static QMap<QString, QStringList> DXFCodePageMap();
+    static QTextCodec* CodecForName(const QString &name);
 
 private:
     std::string correctCodePage(const std::string& s);

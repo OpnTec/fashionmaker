@@ -51,6 +51,7 @@
 #include "tst_vtranslatevars.h"
 #include "tst_vtooluniondetails.h"
 #include "tst_vdomdocument.h"
+#include "tst_dxf.h"
 
 #include "../vmisc/def.h"
 #include "../qmuparser/qmudef.h"
@@ -94,6 +95,7 @@ int main(int argc, char** argv)
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_VTranslateVars());
     ASSERT_TEST(new TST_VToolUnionDetails());
+    ASSERT_TEST(new TST_DXF());
 
     return status;
 }

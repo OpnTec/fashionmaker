@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   dxfdef.h
+ **  @file   tst_dxf.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   31 8, 2015
+ **  @date   15 1, 2020
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2015 Valentina project
+ **  Copyright (C) 2020 Valentina project
  **  <https://bitbucket.org/dismine/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,38 +25,25 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
+#ifndef TST_DXF_H
+#define TST_DXF_H
 
-#ifndef DXFDEF_H
-#define DXFDEF_H
+#include <QObject>
 
-#include <QtGlobal>
-#include <ciso646>
 
-enum class VarMeasurement : quint8 { English=0, Metric=1 };
-
-//Default drawing units for AutoCAD DesignCenter blocks:
-enum class VarInsunits : quint8 { Inches=1, Millimeters=4, Centimeters=5 };
-
-// Helps mark end of string. See VDxfEngine::drawTextItem for more details
-extern const QString endStringPlaceholder;
-
-Q_REQUIRED_RESULT static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2);
-static inline bool DL_FuzzyComparePossibleNulls(double p1, double p2)
+class TST_DXF :public QObject
 {
-    if(qFuzzyIsNull(p1))
-    {
-        return qFuzzyIsNull(p2);
-    }
-    else if(qFuzzyIsNull(p2))
-    {
-        return false;
-    }
-    else
-    {
-        return qFuzzyCompare(p1, p2);
-    }
-}
+    Q_OBJECT
+public:
+    explicit TST_DXF(QObject *parent = nullptr);
 
-QMap <QString, QString> LocaleMap();
+private slots:
+    void initTestCase();
+    void TestCodecPage_data();
+    void TestCodecPage();
 
-#endif // DXFDEF_H
+private:
+    Q_DISABLE_COPY(TST_DXF)
+};
+
+#endif // TST_DXF_H

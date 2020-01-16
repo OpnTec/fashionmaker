@@ -8,6 +8,41 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../ifc/exception/vexception.h"
 
+namespace
+{
+QMap<QString, QStringList> QtCodecs()
+{
+    return QMap<QString, QStringList>
+    {
+        {"ANSI_874", {"ANSI_874", "CP874", "windows-874", "MS874", "x-windows-874", "TIS-620", "IBM1162",
+                "x-IBM874"}}, // Latin/Thai
+        {"ANSI_932", {"ANSI_932", "CP932", "SHIFT-JIS", "SHIFT_JIS", "CSSHIFTJIS", "CSWINDOWS31J", "MS_KANJI",
+                "X-MS-CP932", "X-SJIS", "EUCJP", "EUC-JP", "CSEUCPKDFMTJAPANESE", "X-EUC", "X-EUC-JP", "IBM-943",
+                "JIS7"}}, // Japanese
+        {"ANSI_936", {"ANSI_936", "GBK", "CP936", "MS936", "Windows-936", "GB2312",
+                "CHINESE"}}, // Chinese PRC GBK (XGB) simplified
+        {"ANSI_949", {"ANSI_949", "Windows-949", "MS949", "CP949"}}, // Korean
+        {"ANSI_950", {"ANSI_950", "BIG5", "windows-950-2000", "csBig5", "windows-950", "x-windows-950", "x-big5",
+                "ms950"}}, // Chinese Big5 (Taiwan, Hong Kong SAR)
+        {"ANSI_1250", {"ANSI_1250", "CP1250", "windows-1250", "ibm-1250_P100-1995",
+                "ibm-1250"}}, //Central Europe and Eastern Europe
+        {"ANSI_1251", {"ANSI_1251", "CP1251", "windows-1251", "ANSI1251", "ibm-5347_P100-1998",
+                "ibm-5347"}}, // Cyrillic script
+        {"ANSI_1252", {"ANSI_1252", "CP1252", "windows-1252", "LATIN1", "ISO-8859-1", "CP819", "CSISO", "IBM819",
+                "ISO_8859-1", "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1",
+                "IBM 850", "850"}}, // Western Europe
+        {"ANSI_1253", {"ANSI_1253", "CP1253", "windows-1253"}}, // Greek
+        {"ANSI_1254", {"ANSI_1254", "CP1254", "windows-1254"}}, // Turkish
+        {"ANSI_1255", {"ANSI_1255", "CP1255", "windows-1255"}}, // Hebrew
+        {"ANSI_1256", {"ANSI_1256", "CP1256", "windows-1256", "x-windows-1256S"}}, // Arabic
+        {"ANSI_1257", {"ANSI_1257", "CP1257", "windows-1257"}}, // Baltic
+        {"ANSI_1258", {"ANSI_1258", "CP1258", "windows-1258"}}, // Vietnamese
+        {"UTF-8", {"UTF-8", "UTF8", "UTF8-BIT"}},
+        {"UTF-16", {"UTF-16", "UTF16", "UTF16-BIT"}},
+    };
+}
+}
+
 DRW_TextCodec::DRW_TextCodec()
     : version(DRW::AC1021),
       cp(),
@@ -58,17 +93,17 @@ void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
         { //DXF older than 2007 are write in win codepages
             cp = "ANSI_1252";
         }
-        conv = QTextCodec::codecForName(cp.c_str());
+        conv = DRW_TextCodec::CodecForName(QString::fromStdString(cp));
     }
     else
     {
         if (dxfFormat)
         {
-            conv = QTextCodec::codecForName("UTF-8");
+            conv = DRW_TextCodec::CodecForName(QString::fromStdString("UTF-8"));
         }
         else
         {
-            conv = QTextCodec::codecForName("UTF-16");
+            conv = DRW_TextCodec::CodecForName(QString::fromStdString("UTF-16"));
         }
     }
 
@@ -78,7 +113,59 @@ void DRW_TextCodec::setCodePage(const std::string *c, bool dxfFormat){
                 .arg(cp.c_str());
         qApp->IsPedantic() ? throw VException(errorMsg) :
                              qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+
+        if (version < DRW::AC1021 && cp == "UTF-8")
+        {
+            cp = "ANSI_1252";
+            conv = DRW_TextCodec::CodecForName(QString::fromStdString(cp)); // Fallback to latin
+        }
     }
+}
+
+QMap<QString, QStringList> DRW_TextCodec::DXFCodePageMap()
+{
+    return QMap<QString, QStringList>
+    {
+        {"ANSI_874", {"ANSI_874", "CP874", "ISO8859-11", "TIS-620"}}, // Latin/Thai
+        {"ANSI_932", {"ANSI_932", "SHIFT-JIS", "SHIFT_JIS", "CSSHIFTJIS", "CSWINDOWS31J", "MS_KANJI", "X-MS-CP932",
+                "X-SJIS", "EUCJP", "EUC-JP", "CSEUCPKDFMTJAPANESE", "X-EUC", "X-EUC-JP", "CP932",
+                "JIS7"}}, // Japanese
+        {"ANSI_936", {"ANSI_936", "GBK", "GB2312", "CHINESE", "CN-GB", "CSGB2312", "CSGB231280", "CSISO58BG231280",
+                "GB_2312-80", "GB231280", "GB2312-80", "ISO-IR-58", "GB18030"}}, // Chinese PRC GBK (XGB) simplified
+        {"ANSI_949", {"ANSI_949", "EUCKR"}}, // Korean
+        {"ANSI_950", {"ANSI_950", "BIG5", "CN-BIG5", "CSBIG5", "X-X-BIG5",
+                "BIG5-HKSCS"}}, // Chinese Big5 (Taiwan, Hong Kong SAR)
+        {"ANSI_1250", {"ANSI_1250", "CP1250", "ISO8859-2"}}, //Central Europe and Eastern Europe
+        {"ANSI_1251", {"ANSI_1251", "CP1251", "ISO8859-5", "KOI8-R", "KOI8-U", "IBM 866"}}, // Cyrillic script
+        {"ANSI_1252", {"ANSI_1252", "CP1252", "LATIN1", "ISO-8859-1", "CP819", "CSISO", "IBM819", "ISO_8859-1",
+                "APPLE ROMAN", "ISO8859-1", "ISO8859-15", "ISO-IR-100", "L1", "IBM 850"}}, // Western Europe
+        {"ANSI_1253", {"ANSI_1253", "CP1253", "ISO8859-7"}}, // Greek
+        {"ANSI_1254", {"ANSI_1254", "CP1254", "ISO8859-9", "iso8859-3"}}, // Turkish
+        {"ANSI_1255", {"ANSI_1255", "CP1255", "ISO8859-8"}}, // Hebrew
+        {"ANSI_1256", {"ANSI_1256", "CP1256", "ISO8859-6"}}, // Arabic
+        {"ANSI_1257", {"ANSI_1257", "CP1257", "ISO8859-4", "ISO8859-10", "ISO8859-13"}}, // Baltic
+        {"ANSI_1258", {"ANSI_1258", "CP1258"}}, // Vietnamese
+        {"UTF-8", {"UTF-8", "UTF8", "UTF8-BIT"}},
+        {"UTF-16", {"UTF-16", "UTF16", "UTF16-BIT"}},
+    };
+}
+
+QTextCodec *DRW_TextCodec::CodecForName(const QString &name)
+{
+    QMap<QString, QStringList> knownCodecs = QtCodecs();
+    if (knownCodecs.contains(name))
+    {
+        QStringList aliases = knownCodecs.value(name);
+        for (auto &alias : aliases)
+        {
+            if (QTextCodec *codec = QTextCodec::codecForName(alias.toLatin1()))
+            {
+                return codec;
+            }
+        }
+    }
+
+    return nullptr;
 }
 
 std::string DRW_TextCodec::toUtf8(const std::string &s) {
@@ -103,73 +190,18 @@ std::string DRW_TextCodec::fromUtf8(const std::string &s) {
 
 std::string DRW_TextCodec::correctCodePage(const std::string& s) {
     //stringstream cause crash in OS/X, bug#3597944
-    std::string cp=s;
-    transform(cp.begin(), cp.end(), cp.begin(), toupper);
-    //Latin/Thai
-    if (cp=="ANSI_874" || cp=="CP874" || cp=="ISO8859-11" || cp=="TIS-620") {
-        return "ANSI_874";
-        //Central Europe and Eastern Europe
-    } else if (cp=="ANSI_1250" || cp=="CP1250" || cp=="ISO8859-2") {
-        return "ANSI_1250";
-        //Cyrillic script
-    } else if (cp=="ANSI_1251" || cp=="CP1251" || cp=="ISO8859-5" || cp=="KOI8-R" ||
-               cp=="KOI8-U" || cp=="IBM 866") {
-        return "ANSI_1251";
-        //Western Europe
-    } else if (cp=="ANSI_1252" || cp=="CP1252" || cp=="LATIN1" || cp=="ISO-8859-1" ||
-               cp=="CP819" || cp=="CSISO" || cp=="IBM819" || cp=="ISO_8859-1" || cp=="APPLE ROMAN" ||
-               cp=="ISO8859-1" || cp=="ISO8859-15" || cp=="ISO-IR-100" || cp=="L1" || cp=="IBM 850") {
-        return "ANSI_1252";
-        //Greek
-    } else if (cp=="ANSI_1253" || cp=="CP1253" || cp=="iso8859-7") {
-        return "ANSI_1253";
-        //Turkish
-    } else if (cp=="ANSI_1254" || cp=="CP1254" || cp=="iso8859-9" || cp=="iso8859-3") {
-        return "ANSI_1254";
-        //Hebrew
-    } else if (cp=="ANSI_1255" || cp=="CP1255" || cp=="iso8859-8") {
-        return "ANSI_1255";
-        //Arabic
-    } else if (cp=="ANSI_1256" || cp=="CP1256" || cp=="ISO8859-6") {
-        return "ANSI_1256";
-        //Baltic
-    } else if (cp=="ANSI_1257" || cp=="CP1257" || cp=="ISO8859-4" || cp=="ISO8859-10" || cp=="ISO8859-13") {
-        return "ANSI_1257";
-        //Vietnamese
-    } else if (cp=="ANSI_1258" || cp=="CP1258") {
-        return "ANSI_1258";
+    QString cp = QString::fromStdString(s);
+    cp = cp.toUpper();
+    QMap<QString, QStringList> codeMap = DRW_TextCodec::DXFCodePageMap();
 
-        //Japanese
-    } else if (cp=="ANSI_932" || cp=="SHIFT-JIS" || cp=="SHIFT_JIS" || cp=="CSSHIFTJIS" ||
-               cp=="CSWINDOWS31J" || cp=="MS_KANJI" || cp=="X-MS-CP932" || cp=="X-SJIS" ||
-               cp=="EUCJP" || cp=="EUC-JP" || cp=="CSEUCPKDFMTJAPANESE" || cp=="X-EUC" ||
-               cp=="X-EUC-JP" || cp=="JIS7") {
-        return "ANSI_932";
-        //Chinese PRC GBK (XGB) simplified
-    } else if (cp=="ANSI_936" || cp=="GBK" || cp=="GB2312" || cp=="CHINESE" || cp=="CN-GB" ||
-               cp=="CSGB2312" || cp=="CSGB231280" || cp=="CSISO58BG231280" ||
-               cp=="GB_2312-80" || cp=="GB231280" || cp=="GB2312-80" ||
-               cp=="ISO-IR-58" || cp=="GB18030") {
-        return "ANSI_936";
-        //Korean
-    } else if (cp=="ANSI_949" || cp=="EUCKR") {
-        return "ANSI_949";
-        //Chinese Big5 (Taiwan, Hong Kong SAR)
-    } else if (cp=="ANSI_950" || cp=="BIG5" || cp=="CN-BIG5" || cp=="CSBIG5" ||
-               cp=="X-X-BIG5" || cp=="BIG5-HKSCS") {
-        return "ANSI_950";
-
-//celtic
-/*    } else if (cp=="ISO8859-14") {
-       return "ISO8859-14";
-    } else if (cp=="TSCII") {
-        return "TSCII"; //tamil
-    }*/
-
-    } else if (cp=="UTF-8" || cp=="UTF8" || cp=="UTF8-BIT") {
-        return "UTF-8";
-    } else if (cp=="UTF-16" || cp=="UTF16" || cp=="UTF16-BIT") {
-        return "UTF-16";
+    auto i = codeMap.constBegin();
+    while (i != codeMap.constEnd())
+    {
+        if (i.value().contains(cp))
+        {
+            return i.key().toStdString();
+        }
+        ++i;
     }
 
     return "ANSI_1252";

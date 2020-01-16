@@ -241,27 +241,28 @@ void SetItemOverrideCursor(QGraphicsItem *item, const QString &pixmapPath, int h
 //---------------------------------------------------------------------------------------------------------------------
 QStringList SupportedLocales()
 {
-    const QStringList locales = QStringList() << QStringLiteral("ru_RU")
-                                              << QStringLiteral("uk_UA")
-                                              << QStringLiteral("de_DE")
-                                              << QStringLiteral("cs_CZ")
-                                              << QStringLiteral("he_IL")
-                                              << QStringLiteral("fr_FR")
-                                              << QStringLiteral("it_IT")
-                                              << QStringLiteral("nl_NL")
-                                              << QStringLiteral("id_ID")
-                                              << QStringLiteral("es_ES")
-                                              << QStringLiteral("fi_FI")
-                                              << QStringLiteral("en_US")
-                                              << QStringLiteral("en_CA")
-                                              << QStringLiteral("en_IN")
-                                              << QStringLiteral("ro_RO")
-                                              << QStringLiteral("zh_CN")
-                                              << QStringLiteral("pt_BR")
-                                              << QStringLiteral("el_GR")
-                                              << QStringLiteral("pl_PL");
-
-    return locales;
+    return QStringList
+    {
+        "ru_RU",
+        "uk_UA",
+        "de_DE",
+        "cs_CZ",
+        "he_IL",
+        "fr_FR",
+        "it_IT",
+        "nl_NL",
+        "id_ID",
+        "es_ES",
+        "fi_FI",
+        "en_US",
+        "en_CA",
+        "en_IN",
+        "ro_RO",
+        "zh_CN",
+        "pt_BR",
+        "el_GR",
+        "pl_PL"
+    };
 }
 
 //---------------------------------------------------------------------------------------------------------------------

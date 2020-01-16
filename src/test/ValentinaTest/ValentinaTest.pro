@@ -52,6 +52,7 @@ DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 SOURCES += \
     qttestmainlambda.cpp \
+    tst_dxf.cpp \
     tst_vdomdocument.cpp \
     tst_vposter.cpp \
     tst_vspline.cpp \
@@ -79,6 +80,7 @@ SOURCES += \
 *msvc*:SOURCES += stable.cpp
 
 HEADERS += \
+    tst_dxf.h \
     tst_vdomdocument.h \
     tst_vposter.h \
     tst_vspline.h \
@@ -210,6 +212,15 @@ DEPENDPATH += $$PWD/../../libs/vgeometry
 
 win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/vgeometry.lib
 else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vgeometry/$${DESTDIR}/libvgeometry.a
+
+# VDxf static library
+unix|win32: LIBS += -L$$OUT_PWD/../../libs/vdxf/$${DESTDIR}/ -lvdxf
+
+INCLUDEPATH += $$PWD/../../libs/vdxf
+DEPENDPATH += $$PWD/../../libs/vdxf
+
+win32:!win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/vdxf.lib
+else:unix|win32-g++: PRE_TARGETDEPS += $$OUT_PWD/../../libs/vdxf/$${DESTDIR}/libvdxf.a
 
 # QMuParser library
 win32:CONFIG(release, debug|release): LIBS += -L$${OUT_PWD}/../../libs/qmuparser/$${DESTDIR} -lqmuparser2
