@@ -55,6 +55,7 @@
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "../vlayout/vtextmanager.h"
 
 class QDomElement;
@@ -256,11 +257,7 @@ QList<QString> GetTokens(const VFormulaField &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void GatherTokens(QSet<QString> &tokens, const QList<QString> &tokenList)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    tokens = tokens.unite(QSet<QString>(tokenList.begin(), tokenList.end()));
-#else
-    tokens = tokens.unite(tokenList.toSet());
-#endif
+    tokens = tokens.unite(ConvertToSet(tokenList));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -316,22 +313,11 @@ bool VAbstractPattern::RequiresMeasurements() const
 QStringList VAbstractPattern::ListMeasurements() const
 {
     const QFuture<QStringList> futureIncrements = QtConcurrent::run(this, &VAbstractPattern::ListIncrements);
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QSet<QString> results = QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens, GatherTokens);
-    const auto tokens = QList<QString>(results.begin(), results.end());
-#else
-    const QList<QString> tokens = QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens,
-                                                                      GatherTokens).toList();
-#endif
+    const QList<QString> tokens = ConvertToList(QtConcurrent::blockingMappedReduced(ListExpressions(), GetTokens,
+                                                                                    GatherTokens));
 
     QSet<QString> measurements;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QStringList result = futureIncrements.result();
-    QSet<QString> others = QSet<QString>(result.begin(), result.end());
-#else
-    QSet<QString> others = futureIncrements.result().toSet();
-#endif
+    QSet<QString> others = ConvertToSet<QString>(futureIncrements.result());
 
     for (const auto &token : tokens)
     {

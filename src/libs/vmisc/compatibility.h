@@ -69,4 +69,48 @@ inline typename T::IntersectType Intersects(const T &l1, const T &l2, QPointF *i
 #endif
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, template <typename> class C>
+inline QList<T> ConvertToList(const C<T> &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return T(container.begin(), container.end());
+#else
+    return container.toList();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, template <typename> class C>
+inline QSet<T> ConvertToSet(const C<T> &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return T(container.begin(), container.end());
+#else
+    return container.toSet();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename C>
+inline QSet<T> ConvertToSet(const C &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    return T(container.begin(), container.end());
+#else
+    return container.toSet();
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void SwapItemsAt(T &container, int i, int j)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
+    container.swapItemsAt(i, j);
+#else
+    container.swap(i, j);
+#endif
+}
+
 #endif // COMPATIBILITY_H

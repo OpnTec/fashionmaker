@@ -43,6 +43,7 @@
 #include "../vmisc/vsettings.h"
 #include "../vmisc/vmath.h"
 #include "../vmisc/projectversion.h"
+#include "../vmisc/compatibility.h"
 #include "../qmuparser/qmuparsererror.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vgeometry/varc.h"
@@ -98,12 +99,7 @@ void GatherCount(int &count, const int nodes)
 QString DefLabelLanguage()
 {
     QString def = qApp->ValentinaSettings()->GetLabelLanguage();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QStringList languages = VApplication::LabelLanguages();
-    if (not QSet<QString>(languages.begin(), languages.end()).contains(def))
-#else
-    if (not VApplication::LabelLanguages().toSet().contains(def))
-#endif
+    if (not ConvertToSet<QString>(VApplication::LabelLanguages()).contains(def))
     {
         def = QStringLiteral("en");
     }
@@ -4387,12 +4383,7 @@ void VPattern::SetLabelPrefix(const QString &prefix)
 
     if (not pattern.isNull())
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QStringList languages = VApplication::LabelLanguages();
-        if (QSet<QString>(languages.begin(), languages.end()).contains(prefix))
-#else
-        if (VApplication::LabelLanguages().toSet().contains(prefix))
-#endif
+        if (ConvertToSet<QString>(VApplication::LabelLanguages()).contains(prefix))
         {
             SetAttribute(pattern, AttrLabelPrefix, prefix);
             modified = true;

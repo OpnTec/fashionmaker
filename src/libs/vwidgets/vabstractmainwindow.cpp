@@ -29,6 +29,7 @@
 #include "vabstractmainwindow.h"
 #include "../vpropertyexplorer/checkablemessagebox.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vmisc/compatibility.h"
 #include "dialogs/dialogexporttocsv.h"
 
 #include <QStyle>
@@ -79,7 +80,7 @@ QStringList ReverseList(const QStringList &list)
         reversedList.replace(j, list.at(i));
         ++j;
     }
-    return reversedList.toList();
+    return ConvertToList(reversedList);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

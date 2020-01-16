@@ -35,6 +35,7 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
+#include "../vmisc/compatibility.h"
 #include "../vformat/vmeasurements.h"
 #include "../vformat/vwatermark.h"
 #include "../vlayout/vlayoutgenerator.h"
@@ -2116,22 +2117,12 @@ QSharedPointer<VMeasurements> MainWindowsNoGUI::OpenMeasurementFile(const QStrin
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindowsNoGUI::CheckRequiredMeasurements(const VMeasurements *m) const
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    QStringList patternMeasurments = doc->ListMeasurements();
-    QStringList bodyMeasurments = m->ListAll();
-    const auto match = QSet<QString>(patternMeasurments.begin(), patternMeasurments.end())
-            .subtract(QSet<QString>(bodyMeasurments.begin(), bodyMeasurments.end()));
-#else
-    const QSet<QString> match = doc->ListMeasurements().toSet().subtract(m->ListAll().toSet());
-#endif
+    const QSet<QString> match = ConvertToSet<QString>(doc->ListMeasurements())
+            .subtract(ConvertToSet<QString>(m->ListAll()));
 
     if (not match.isEmpty())
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        QList<QString> list = QList<QString>(match.begin(), match.end());
-#else
-        QList<QString> list = match.toList();
-#endif
+        QList<QString> list = ConvertToList(match);
         for (int i = 0; i < list.size(); ++i)
         {
             list[i] = qApp->TrVars()->MToUser(list.at(i));

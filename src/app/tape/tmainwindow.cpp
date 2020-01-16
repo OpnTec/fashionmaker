@@ -43,6 +43,7 @@
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
+#include "../vmisc/compatibility.h"
 #include "vlitepattern.h"
 #include "../qmuparser/qmudef.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
@@ -2795,13 +2796,7 @@ void TMainWindow::WriteSettings()
 //---------------------------------------------------------------------------------------------------------------------
 QStringList TMainWindow::FilterMeasurements(const QStringList &mNew, const QStringList &mFilter)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    const auto import = QSet<QString>(mNew.begin(), mNew.end()).subtract(QSet<QString>(mFilter.begin(), mFilter.end()));
-    return QStringList(import.begin(), import.end());
-#else
-    const QSet<QString> import = mNew.toSet().subtract(mFilter.toSet());
-    return QStringList(import.toList());
-#endif
+    return ConvertToList(ConvertToSet<QString>(mNew).subtract(ConvertToSet<QString>(mFilter)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3070,12 +3065,7 @@ QString TMainWindow::CheckMName(const QString &name, const QSet<QString> &import
     }
     else
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        const QStringList allGroupNames = AllGroupNames();
-        if (not QSet<QString>(allGroupNames.begin(), allGroupNames.end()).contains(name))
-#else
-        if (not AllGroupNames().toSet().contains(name))
-#endif
+        if (not ConvertToSet<QString>(AllGroupNames()).contains(name))
         {
             throw VException(tr("Measurement '%1' is not one of known measurements.").arg(name));
         }

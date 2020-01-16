@@ -30,6 +30,7 @@
 #include <QtTest>
 
 #include "../vmisc/def.h"
+#include "../vmisc/compatibility.h"
 #include "../vdxf/dxfdef.h"
 #include "../vdxf/libdxfrw/intern/drw_textcodec.h"
 
@@ -45,11 +46,7 @@ QStringList AvailableCodecs()
         uniqueNames.insert(codec);
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return QStringList(uniqueNames.begin(), uniqueNames.end());
-#else
-    return QStringList(uniqueNames.toList());
-#endif
+    return ConvertToList(uniqueNames);
 }
 }
 

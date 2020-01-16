@@ -513,18 +513,11 @@ QVector<T> VLayoutPiece::Map(QVector<T> points) const
 
     if (d->mirror)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        auto list = QList<T>(points.begin(), points.end());
-#else
-        QList<T> list = points.toList();
-#endif
+        QList<T> list = ConvertToList(points);
+
         for (int k=0, s=list.size(), max=(s/2); k<max; k++)
         {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 13, 0)
-            list.swapItemsAt(k, s-(1+k));
-#else
-            list.swap(k, s-(1+k));
-#endif
+            SwapItemsAt(list, k, s-(1+k));
         }
         points = list.toVector();
     }

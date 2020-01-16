@@ -35,6 +35,7 @@
 
 #include "../vmisc/def.h"
 #include "../vmisc/vmath.h"
+#include "../vmisc/compatibility.h"
 #include "vlayoutpiece.h"
 #include "vlayoutpaper.h"
 #include "../ifc/exception/vexceptionterminatedposition.h"
@@ -642,11 +643,7 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
 {
     if (qFuzzyIsNull(length))
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-        return QList<VLayoutPiece>(details.begin(), details.end());
-#else
-        return details.toList();
-#endif
+        return ConvertToList(details);
     }
 
     QList<VLayoutPiece> newDetails;
