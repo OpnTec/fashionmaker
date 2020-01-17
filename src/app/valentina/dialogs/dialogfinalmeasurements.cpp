@@ -29,6 +29,7 @@
 #include "dialogfinalmeasurements.h"
 #include "ui_dialogfinalmeasurements.h"
 #include "../vmisc/vsettings.h"
+#include "../vmisc/compatibility.h"
 #include "../qmuparser/qmudef.h"
 #include "../qmuparser/qmutokenparser.h"
 #include "../vpatterndb/vtranslatevars.h"
@@ -37,31 +38,6 @@
 #include <qnumeric.h>
 
 #define DIALOG_MAX_FORMULA_HEIGHT 64
-
-namespace
-{
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-template <typename T>
-void Move(QVector<T> &vector, int from, int to)
-{
-    Q_ASSERT_X(from >= 0 && from < vector.size(), "QVector::move(int,int)", "'from' is out-of-range");
-    Q_ASSERT_X(to >= 0 && to < vector.size(), "QVector::move(int,int)", "'to' is out-of-range");
-    if (from == to) // don't detach when no-op
-    {
-        return;
-    }
-    T * const b = vector.begin();
-    if (from < to)
-    {
-        std::rotate(b + from, b + from + 1, b + to + 1);
-    }
-    else
-    {
-        std::rotate(b + to, b + from, b + from + 1);
-    }
-}
-#endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-}
 
 //---------------------------------------------------------------------------------------------------------------------
 DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
@@ -314,12 +290,7 @@ void DialogFinalMeasurements::MoveUp()
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     Move(m_measurements, row, row-1);
-#else
-    m_measurements.move(row, row-1);
-#endif
-
     UpdateTree();
 
     ui->tableWidget->selectRow(row-1);
@@ -336,12 +307,7 @@ void DialogFinalMeasurements::MoveDown()
         return;
     }
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     Move(m_measurements, row, row+1);
-#else
-    m_measurements.move(row, row+1);
-#endif
-
     UpdateTree();
 
     ui->tableWidget->selectRow(row+1);

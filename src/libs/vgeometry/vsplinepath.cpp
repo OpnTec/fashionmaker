@@ -369,11 +369,7 @@ qreal VSplinePath::GetEndAngle() const
 {
     if (CountPoints() > 0)
     {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-        return GetSplinePath().constLast().Angle1();
-#else
-        return GetSplinePath().last().Angle1(); // clazy:exclude=detaching-temporary
-#endif
+        return ConstLast(GetSplinePath()).Angle1();
     }
     else
     {

@@ -59,6 +59,28 @@ inline const T& ConstFirst (const C &container)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+template <typename T, template <typename> class Cont>
+inline const T& ConstLast (const Cont<T> &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    return container.constLast();
+#else
+    return container.last(); // clazy:exclude=detaching-temporary
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T, typename C>
+inline const T& ConstLast (const C &container)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    return container.constLast();
+#else
+    return container.last(); // clazy:exclude=detaching-temporary
+#endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <typename T>
 inline typename T::IntersectType Intersects(const T &l1, const T &l2, QPointF *intersectionPoint)
 {
@@ -133,6 +155,39 @@ inline void SwapItemsAt(T &container, int i, int j)
 #else
     container.swap(i, j);
 #endif
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline void Move(T &vector, int from, int to)
+{
+#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+    Q_ASSERT_X(from >= 0 && from < vector.size(), "QVector::move(int,int)", "'from' is out-of-range");
+    Q_ASSERT_X(to >= 0 && to < vector.size(), "QVector::move(int,int)", "'to' is out-of-range");
+    if (from == to) // don't detach when no-op
+    {
+        return;
+    }
+    T * const b = vector.begin();
+    from < to ? std::rotate(b + from, b + from + 1, b + to + 1):
+                std::rotate(b + to, b + from, b + from + 1);
+#else
+    vector.move(from, to);
+#endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template <typename Cont, typename Input>
+inline void AppendTo(Cont &container, const Input &input)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+    container.append(input);
+#else
+    for (auto &item : input)
+    {
+        container.append(item);
+    }
+#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
 }
 
 #endif // COMPATIBILITY_H

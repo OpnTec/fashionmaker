@@ -59,6 +59,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/diagnostic.h"
+#include "../vmisc/compatibility.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../ifc/ifcdef.h"
@@ -99,18 +100,8 @@ QPointF GetOriginPoint(const QVector<quint32> objects, const VContainer *data, q
             case GOType::SplinePath:
             case GOType::CubicBezier:
             case GOType::CubicBezierPath:
-            {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
-                originObjects.append(data->GeometricObject<VAbstractCurve>(id)->GetPoints());
-#else
-                const QVector<QPointF> points = data->GeometricObject<VAbstractCurve>(id)->GetPoints();
-                for (auto &point : points)
-                {
-                    originObjects.append(point);
-                }
-#endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
+                AppendTo(originObjects, data->GeometricObject<VAbstractCurve>(id)->GetPoints());
                 break;
-            }
             case GOType::Unknown:
             case GOType::PlaceLabel:
                 Q_UNREACHABLE();
