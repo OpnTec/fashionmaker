@@ -74,7 +74,7 @@ template <typename T, template <typename> class C>
 inline QList<T> ConvertToList(const C<T> &container)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return T(container.begin(), container.end());
+    return QList<T>(container.begin(), container.end());
 #else
     return container.toList();
 #endif
@@ -85,7 +85,7 @@ template <typename T, template <typename> class C>
 inline QSet<T> ConvertToSet(const C<T> &container)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return T(container.begin(), container.end());
+    return QSet<T>(container.begin(), container.end());
 #else
     return container.toSet();
 #endif
@@ -96,7 +96,7 @@ template <typename T, typename C>
 inline QSet<T> ConvertToSet(const C &container)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    return T(container.begin(), container.end());
+    return QSet<T>(container.begin(), container.end());
 #else
     return container.toSet();
 #endif
