@@ -32,6 +32,8 @@
 #include <QtGlobal>
 #include <ciso646>
 
+template <class Key, class T> class QMap;
+
 enum class VarMeasurement : quint8 { English=0, Metric=1 };
 
 //Default drawing units for AutoCAD DesignCenter blocks:
