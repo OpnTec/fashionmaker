@@ -6,6 +6,7 @@
 
 class QTextCodec;
 class QStringList;
+template <class Key, class T> class QMap;
 
 class DRW_TextCodec
 {
