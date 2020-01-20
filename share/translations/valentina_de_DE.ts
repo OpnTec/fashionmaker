@@ -7974,10 +7974,6 @@ Sollen die Änderungen gespeichert werden?</translation>
         <translation>Wählen Sie ein Item zum Einfügen aus</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Forum</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation type="unfinished"></translation>
     </message>

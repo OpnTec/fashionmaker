@@ -7850,10 +7850,6 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Φόρουμ</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
     </message>

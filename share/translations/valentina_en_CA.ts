@@ -7973,10 +7973,6 @@ Do you want to save your changes?</translation>
         <translation>Select an item to insert</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Forum</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open Tape app for creating or editing measurements file</translation>
     </message>

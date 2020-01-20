@@ -7967,10 +7967,6 @@ Vuoi salvare i cambiamenti?</translation>
         <translation>Seleziona un oggetto da inserire</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Forum</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Apri Tape per creare o modificare un file di misure</translation>
     </message>

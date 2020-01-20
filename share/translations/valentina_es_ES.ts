@@ -7975,10 +7975,6 @@ el patrón.</translation>
         <translation>Seleccionar un elemento para insertar</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Foro</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Abrir aplicación Tape para crear o editar archivo de medidas</translation>
     </message>

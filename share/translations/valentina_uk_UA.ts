@@ -7974,10 +7974,6 @@ Do you want to save your changes?</source>
         <translation>Виберіть обєкт для вставки</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Форум</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Відкрити програму Tape для створення чи редагування файлу мірок</translation>
     </message>

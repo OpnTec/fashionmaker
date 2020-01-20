@@ -7977,10 +7977,6 @@ Chcete uložit své změny?</translation>
         <translation>Vyberte položku k vložení</translation>
     </message>
     <message>
-        <source>Forum</source>
-        <translation type="vanished">Fórum</translation>
-    </message>
-    <message>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Otevřít program Tape pro vytvoření nebo upravení souboru s rozměry</translation>
     </message>
