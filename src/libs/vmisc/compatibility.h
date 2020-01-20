@@ -168,7 +168,7 @@ inline void Move(T &vector, int from, int to)
     {
         return;
     }
-    T * const b = vector.begin();
+    T::iterator b = vector.begin();
     from < to ? std::rotate(b + from, b + from + 1, b + to + 1):
                 std::rotate(b + to, b + from, b + from + 1);
 #else
