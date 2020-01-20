@@ -14,6 +14,18 @@ jobs:
     - ccache
     directories:
       - '$HOME/.sonar/cache'
+  - os: linux
+    dist: bionic
+    sudo: required
+    compiler: clang
+    env: 
+    - DEPLOY=false
+    - CCACHE_CPP2=yes
+    - RUN_TESTS=true
+    cache:
+    - ccache
+    directories:
+      - '$HOME/.sonar/cache'
   - os: osx
     compiler: clang
     env: 
