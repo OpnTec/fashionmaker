@@ -86,6 +86,11 @@ VAbstractApplication::VAbstractApplication(int &argc, char **argv)
 #endif //defined(V_NO_ASSERT)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 4, 1)
 
+#if defined(V_NO_ASSERT)
+    // See issue #992: QXcbConnection: XCB Error.
+    rules += QLatin1String("qt.qpa.*=false\n");
+#endif
+
     // cppcheck-suppress reademptycontainer
     if (not rules.isEmpty())
     {
