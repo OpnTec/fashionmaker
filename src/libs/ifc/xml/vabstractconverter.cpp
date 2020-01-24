@@ -229,16 +229,14 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 {
     qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(m_convertedFileName));
     QFile pattern(m_convertedFileName);
-    // cppcheck-suppress ConfigurationNotChecked
-    if (pattern.open(QIODevice::ReadOnly) == false)
+    if (not pattern.open(QIODevice::ReadOnly))
     {
         const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
         throw VException(errorMsg);
     }
 
     QFile fileSchema(schema);
-    // cppcheck-suppress ConfigurationNotChecked
-    if (fileSchema.open(QIODevice::ReadOnly) == false)
+    if (not fileSchema.open(QIODevice::ReadOnly))
     {
         pattern.close();
         const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
