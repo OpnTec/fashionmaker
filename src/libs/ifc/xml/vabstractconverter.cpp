@@ -28,6 +28,7 @@
 
 #include "vabstractconverter.h"
 
+#include <QAbstractMessageHandler>
 #include <QDir>
 #include <QDomElement>
 #include <QDomNode>
@@ -38,19 +39,81 @@
 #include <QMap>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QSourceLocation>
 #include <QStaticStringData>
 #include <QStringData>
 #include <QStringDataPtr>
 #include <QStringList>
+#include <QTextDocument>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
 
 #include "../exception/vexception.h"
 #include "../exception/vexceptionwrongid.h"
 #include "vdomdocument.h"
 
+//This class need for validation pattern file using XSD shema
+class MessageHandler : public QAbstractMessageHandler
+{
+public:
+    MessageHandler()
+        : QAbstractMessageHandler(),
+          m_messageType(QtMsgType()),
+          m_description(),
+          m_sourceLocation(QSourceLocation())
+    {}
+
+    QString statusMessage() const;
+    qint64  line() const;
+    qint64  column() const;
+protected:
+    // cppcheck-suppress unusedFunction
+    virtual void handleMessage(QtMsgType type, const QString &description,
+                               const QUrl &identifier, const QSourceLocation &sourceLocation) override;
+private:
+    QtMsgType       m_messageType;
+    QString         m_description;
+    QSourceLocation m_sourceLocation;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MessageHandler::statusMessage() const
+{
+    QTextDocument doc;
+    doc.setHtml(m_description);
+    return doc.toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qint64  MessageHandler::line() const
+{
+    return m_sourceLocation.line();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline qint64  MessageHandler::column() const
+{
+    return m_sourceLocation.column();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void MessageHandler::handleMessage(QtMsgType type, const QString &description, const QUrl &identifier,
+                                   const QSourceLocation &sourceLocation)
+{
+    Q_UNUSED(type)
+    Q_UNUSED(identifier)
+
+    m_messageType = type;
+    m_description = description;
+    m_sourceLocation = sourceLocation;
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractConverter::VAbstractConverter(const QString &fileName)
     : VDomDocument(),
       m_ver(0x0),
+      m_originalFileName(fileName),
       m_convertedFileName(fileName),
       m_tmpFile()
 {
@@ -158,6 +221,71 @@ void VAbstractConverter::BiasTokens(int position, int bias, QMap<int, QString> &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValidateXML validate xml file by xsd schema.
+ * @param schema path to schema file.
+ */
+void VAbstractConverter::ValidateXML(const QString &schema) const
+{
+    qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(m_convertedFileName));
+    QFile pattern(m_convertedFileName);
+    // cppcheck-suppress ConfigurationNotChecked
+    if (pattern.open(QIODevice::ReadOnly) == false)
+    {
+        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
+        throw VException(errorMsg);
+    }
+
+    QFile fileSchema(schema);
+    // cppcheck-suppress ConfigurationNotChecked
+    if (fileSchema.open(QIODevice::ReadOnly) == false)
+    {
+        pattern.close();
+        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
+        throw VException(errorMsg);
+    }
+
+    MessageHandler messageHandler;
+    QXmlSchema sch;
+    sch.setMessageHandler(&messageHandler);
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName()))==false)
+    {
+        pattern.close();
+        fileSchema.close();
+        VException e(messageHandler.statusMessage());
+        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
+        throw e;
+    }
+    qCDebug(vXML, "Schema loaded.");
+
+    bool errorOccurred = false;
+    if (sch.isValid() == false)
+    {
+        errorOccurred = true;
+    }
+    else
+    {
+        QXmlSchemaValidator validator(sch);
+        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
+        {
+            errorOccurred = true;
+        }
+    }
+
+    if (errorOccurred)
+    {
+        pattern.close();
+        fileSchema.close();
+        VException e(messageHandler.statusMessage());
+        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2").arg(messageHandler.line())
+                             .arg(messageHandler.column()).arg(m_originalFileName));
+        throw e;
+    }
+    pattern.close();
+    fileSchema.close();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 Q_NORETURN void VAbstractConverter::InvalidVersion(int ver) const
 {
     if (ver < MinVer())
@@ -194,7 +322,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
         { // Version bigger than maximum supported version. We still have a chance to open the file.
             try
             { // Try to open like the current version.
-                ValidateXML(currentSchema, m_convertedFileName);
+                ValidateXML(currentSchema);
             }
             catch(const VException &exp)
             { // Nope, we can't.
@@ -210,7 +338,7 @@ void VAbstractConverter::ValidateInputFile(const QString &currentSchema) const
         return; // All is fine and we can try to convert to current max version.
     }
 
-    ValidateXML(schema, m_convertedFileName);
+    ValidateXML(schema);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

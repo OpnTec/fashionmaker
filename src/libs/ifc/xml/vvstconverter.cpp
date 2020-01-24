@@ -103,23 +103,23 @@ void VVSTConverter::ApplyPatches()
     {
         case (0x000300):
             ToV0_4_0();
-            ValidateXML(XSDSchema(0x000400), m_convertedFileName);
+            ValidateXML(XSDSchema(0x000400));
             Q_FALLTHROUGH();
         case (0x000400):
             ToV0_4_1();
-            ValidateXML(XSDSchema(0x000401), m_convertedFileName);
+            ValidateXML(XSDSchema(0x000401));
             Q_FALLTHROUGH();
         case (0x000401):
             ToV0_4_2();
-            ValidateXML(XSDSchema(0x000402), m_convertedFileName);
+            ValidateXML(XSDSchema(0x000402));
             Q_FALLTHROUGH();
         case (0x000402):
             ToV0_4_3();
-            ValidateXML(XSDSchema(0x000403), m_convertedFileName);
+            ValidateXML(XSDSchema(0x000403));
             Q_FALLTHROUGH();
         case (0x000403):
             ToV0_4_4();
-            ValidateXML(XSDSchema(0x000404), m_convertedFileName);
+            ValidateXML(XSDSchema(0x000404));
             Q_FALLTHROUGH();
         case (0x000404):
             break;

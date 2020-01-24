@@ -81,7 +81,7 @@ void TST_VMeasurements::CreateEmptyMultisizeFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
+        VVSTConverter converter(fileName);
     }
     catch (VException &e)
     {
@@ -122,7 +122,7 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
 
     try
     {
-        VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
+        VVITConverter converter(fileName);
     }
     catch (VException &e)
     {
@@ -176,7 +176,7 @@ void TST_VMeasurements::ValidPMCodesMultisizeFile()
 
         try
         {
-            VDomDocument::ValidateXML(VVSTConverter::CurrentSchema, fileName);
+            VVSTConverter converter(fileName);
         }
         catch (VException &e)
         {
@@ -228,7 +228,7 @@ void TST_VMeasurements::ValidPMCodesIndividualFile()
 
         try
         {
-            VDomDocument::ValidateXML(VVITConverter::CurrentSchema, fileName);
+            VVITConverter converter(fileName);
         }
         catch (VException &e)
         {

@@ -52,6 +52,7 @@ public:
 
 protected:
     int     m_ver;
+    QString m_originalFileName;
     QString m_convertedFileName;
 
     void ValidateInputFile(const QString &currentSchema) const;
@@ -74,6 +75,8 @@ protected:
     void Replace(QString &formula, const QString &newName, int position, const QString &token, int &bias) const;
     void CorrectionsPositions(int position, int bias, QMap<int, QString> &tokens) const;
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
+
+    void ValidateXML(const QString &schema) const;
 
 private:
     Q_DISABLE_COPY(VAbstractConverter)
