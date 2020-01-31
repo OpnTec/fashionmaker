@@ -161,6 +161,9 @@ inline void SwapItemsAt(T &container, int i, int j)
 template <typename T>
 inline void Move(T &vector, int from, int to)
 {
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wstrict-overflow")
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
     Q_ASSERT_X(from >= 0 && from < vector.size(), "QVector::move(int,int)", "'from' is out-of-range");
     Q_ASSERT_X(to >= 0 && to < vector.size(), "QVector::move(int,int)", "'to' is out-of-range");
@@ -174,6 +177,8 @@ inline void Move(T &vector, int from, int to)
 #else
     vector.move(from, to);
 #endif // QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
+
+    QT_WARNING_POP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
