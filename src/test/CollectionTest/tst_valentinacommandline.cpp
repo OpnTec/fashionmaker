@@ -249,15 +249,15 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
 #ifdef Q_OS_WIN
     Q_UNUSED(testGOST)
 #else
-    QTest::newRow("jacketМ1_52-176")   << "jacketМ1_52-176.val"   << testGOST << V_EX_OK;
-    QTest::newRow("jacketМ2_40-146")   << "jacketМ2_40-146.val"   << testGOST << V_EX_OK;
-    QTest::newRow("jacketМ3_40-146")   << "jacketМ3_40-146.val"   << testGOST << V_EX_OK;
-    QTest::newRow("jacketМ4_40-146")   << "jacketМ4_40-146.val"   << testGOST << V_EX_OK;
-    QTest::newRow("jacketМ5_30-110")   << "jacketМ5_30-110.val"   << testGOST << V_EX_OK;
-    QTest::newRow("jacketМ6_30-110")   << "jacketМ6_30-110.val"   << testGOST << V_EX_OK;
-    QTest::newRow("pantsМ1_52-176")    << "pantsМ1_52-176.val"    << testGOST << V_EX_OK;
-    QTest::newRow("pantsМ2_40-146")    << "pantsМ2_40-146.val"    << testGOST << V_EX_OK;
-    QTest::newRow("pantsМ7")           << "pantsМ7.val"           << testGOST << V_EX_OK;
+    QTest::newRow("jacketM1_52-176")   << "jacketM1_52-176.val"   << testGOST << V_EX_OK;
+    QTest::newRow("jacketM2_40-146")   << "jacketM2_40-146.val"   << testGOST << V_EX_OK;
+    QTest::newRow("jacketM3_40-146")   << "jacketM3_40-146.val"   << testGOST << V_EX_OK;
+    QTest::newRow("jacketM4_40-146")   << "jacketM4_40-146.val"   << testGOST << V_EX_OK;
+    QTest::newRow("jacketM5_30-110")   << "jacketM5_30-110.val"   << testGOST << V_EX_OK;
+    QTest::newRow("jacketM6_30-110")   << "jacketM6_30-110.val"   << testGOST << V_EX_OK;
+    QTest::newRow("pantsM1_52-176")    << "pantsM1_52-176.val"    << testGOST << V_EX_OK;
+    QTest::newRow("pantsM2_40-146")    << "pantsM2_40-146.val"    << testGOST << V_EX_OK;
+    QTest::newRow("pantsM7")           << "pantsM7.val"           << testGOST << V_EX_OK;
 #endif
     QTest::newRow("TShirt_test")       << "TShirt_test.val"       << keyTest  << V_EX_OK;
     QTest::newRow("TestDart")          << "TestDart.val"          << keyTest  << V_EX_OK;
@@ -267,7 +267,7 @@ void TST_ValentinaCommandLine::TestOpenCollection_data() const
     QTest::newRow("Gent Jacket with tummy") << "Gent_Jacket_with_tummy.val" << keyTest << V_EX_OK;
     QTest::newRow("Steampunk_trousers")     << "Steampunk_trousers.val"     << keyTest << V_EX_OK;
 #ifndef Q_OS_WIN
-    QTest::newRow("patrón_blusa")      << "patrón_blusa.val"      << keyTest  << V_EX_OK;
+    QTest::newRow("pattern_blusa")     << "patten_blusa.val"      << keyTest  << V_EX_OK;
     QTest::newRow("PajamaTopWrap2")    << "PajamaTopWrap2.val"    << keyTest  << V_EX_OK;
     QTest::newRow("Keiko_skirt")       << "Keiko_skirt.val"       << keyTest  << V_EX_OK;
     QTest::newRow("pantalon_base_Eli") << "pantalon_base_Eli.val" << keyTest  << V_EX_OK;

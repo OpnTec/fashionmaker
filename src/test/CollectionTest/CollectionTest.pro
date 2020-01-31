@@ -242,7 +242,7 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/collection/pantsM7.val \
     $${PWD}/../../app/share/collection/TShirt_test.val \
     $${PWD}/../../app/share/collection/TestDart.val \
-    $${PWD}/../../app/share/collection/patrón_blusa.val \
+    $${PWD}/../../app/share/collection/pattern_blusa.val \
     $${PWD}/../../app/share/collection/blusa.vit \
     $${PWD}/../../app/share/collection/PajamaTopWrap2.val \
     $${PWD}/../../app/share/collection/Susan.vit \
