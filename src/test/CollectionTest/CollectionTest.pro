@@ -231,15 +231,15 @@ COLLECTION_FILES += \
     $${PWD}/../../app/share/tables/multisize/GOST_man_ru.vst \
     $${PWD}/../../app/share/collection/bra.val \
     $${PWD}/../../app/share/collection/bra.vit \
-    $${PWD}/../../app/share/collection/jacketМ1_52-176.val \
-    $${PWD}/../../app/share/collection/jacketМ2_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ3_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ4_40-146.val \
-    $${PWD}/../../app/share/collection/jacketМ5_30-110.val \
-    $${PWD}/../../app/share/collection/jacketМ6_30-110.val \
-    $${PWD}/../../app/share/collection/pantsМ1_52-176.val \
-    $${PWD}/../../app/share/collection/pantsМ2_40-146.val \
-    $${PWD}/../../app/share/collection/pantsМ7.val \
+    $${PWD}/../../app/share/collection/jacketM1_52-176.val \
+    $${PWD}/../../app/share/collection/jacketM2_40-146.val \
+    $${PWD}/../../app/share/collection/jacketM3_40-146.val \
+    $${PWD}/../../app/share/collection/jacketM4_40-146.val \
+    $${PWD}/../../app/share/collection/jacketM5_30-110.val \
+    $${PWD}/../../app/share/collection/jacketM6_30-110.val \
+    $${PWD}/../../app/share/collection/pantsM1_52-176.val \
+    $${PWD}/../../app/share/collection/pantsM2_40-146.val \
+    $${PWD}/../../app/share/collection/pantsM7.val \
     $${PWD}/../../app/share/collection/TShirt_test.val \
     $${PWD}/../../app/share/collection/TestDart.val \
     $${PWD}/../../app/share/collection/patrón_blusa.val \
