@@ -70,14 +70,14 @@ BuildRequires: libqt5-qtxmlpatterns-devel
 %endif # %if 0%{?suse_version} > 0
 
 # CentOS 7.0 specifics
-%if 0%{?centos_version} >= 700 && 0%{?centos_version} < 800
-BuildRequires: llvm-private
-%endif
+#%if 0%{?centos_version} >= 700 && 0%{?centos_version} < 800
+#BuildRequires: llvm-private
+#%endif
 
 # CentOS 8.0 specifics
-%if 0%{?centos_version} >= 800
-BuildRequires: clang-libs
-%endif
+#%if 0%{?centos_version} >= 800
+#BuildRequires: clang-libs
+#%endif
 
 Requires:   poppler-utils
 
