@@ -49,7 +49,7 @@ BuildRequires: pkgconfig(openssl)
 BuildRequires: openssl-devel
 %endif
 
-%endif
+%endif # %if 0%{?mageia} > 0
 
 # SUSE Specifics
 %if 0%{?suse_version} > 0
