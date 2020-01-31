@@ -4590,7 +4590,7 @@ void MainWindow::CreateActions()
     connect(ui->actionReportBug, &QAction::triggered, this, []()
     {
         qCDebug(vMainWindow, "Reporting bug");
-        QDesktopServices::openUrl(QUrl(QStringLiteral("https://bitbucket.org/dismine/valentina/issues/new")));
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://gitlab.com/smart-pattern/valentina/issues/new")));
     });
 
     connect(ui->actionLast_tool, &QAction::triggered, this, &MainWindow::LastUsedTool);
