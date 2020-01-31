@@ -1,56 +1,56 @@
 language: cpp
 jobs:
   include:
-  - stage: "main test"
+  - stage: main test
     os: linux
     dist: xenial
     sudo: required
     compiler: clang
-    env: 
+    env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
     cache:
     - ccache
     directories:
-      - '$HOME/.sonar/cache'
+    - "$HOME/.sonar/cache"
   - os: linux
     dist: bionic
     sudo: required
     compiler: clang
-    env: 
+    env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
     cache:
     - ccache
     directories:
-      - '$HOME/.sonar/cache'
+    - "$HOME/.sonar/cache"
   - os: osx
     compiler: clang
-    env: 
+    env:
     - DEPLOY=true
     - LEGACY=false
     osx_image: xcode11
   - os: osx
     compiler: clang
-    env: 
+    env:
     - DEPLOY=true
     - LEGACY=true
     osx_image: xcode8
-  - stage: "sonarcloud"
+  - stage: sonarcloud
     os: linux
     dist: xenial
     sudo: required
     compiler: clang
-    env: 
+    env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=false
     cache:
     - ccache
     directories:
-      - '$HOME/.sonar/cache'
+    - "$HOME/.sonar/cache"
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -108,7 +108,7 @@ before_script:
     qmake ../Valentina.pro -r CONFIG+=noDebugSymbols CONFIG+=no_ccache CONFIG+=checkWarnings CONFIG+=noTests;
   fi
 script:
-- $CXX --version
+- "$CXX --version"
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     if [[ "$RUN_TESTS" == "true" ]]; then
@@ -144,15 +144,15 @@ deploy:
     branch: v1.8.47
   provider: bintray
   skip_cleanup: true
-  file: ../share/bintray.json
+  file: "../share/bintray.json"
   user: dismine
   key:
     secure: "OQoNH6agiZaDC0HhEHGkBT/6xOrQ07tY2S8AL85y3+QT2/EMsEUPz60dHAF13kKkPHbzkPHE4gBf5hxCnhGsXzu5vktkAFX/CBUZ4Qv1ca0gIsZqq4zNdFt8Uu/1gKMZ7L/6iwwCi2z+/L/3glzzMuHSZX2Y5kpiIcsZWrFo3F5V3998oEw7ZEj/Ms1cGOxg+EaqkX9BeqtlvWd2P/6ocgbHTzAwFVmsM2v2YkIYu7RFUKFNuIELgQLrBq1+q9vJXrSAjai7HflPKwUTjh1izN2lVogle1KlVExJID/tF9BQSgpDSgjJw79JtLnJb5lvFzRHfnnyl0OAbPpq6faGQMGwRoCUL6DRzNtO6OPxVUtQRn+0gXdzVUdF38jhXv7MZ5k7Ctf4xmOhiDPsf/JSoyvpdbg841cj/21qBuMWy12ntvfbdl2RmOV1zBNDHKXOQya4d2uoLBpIfD+7P87CPHwcyzuqaWb+8BXKTOdUKwkdDVUU+xz+K6gwFzmfNofhStTueioKQb77GvhGVMRvn7+/2b2zY8skFcGGeQdkJWXL7dyxmJ8L5SiwwGuhBy8nZWxGR7T0hoR9NFNVL43yFGqoqAI+VdVnbCp4TmcuI6YYHxD73tFI/ieFWXdakiBZcMW7VVJ07DsMawpMOHKXd/uxOoIR/N237RREToLMVT4="
   dry-run: false
   on:
     all_branches: true
-    condition: $DEPLOY = true
+    condition: "$DEPLOY = true"
 addons:
   sonarcloud:
     token:
-      secure: "re+Ddh0uhun8Sj4ibGR4D9wTQlIMyl3UaXvoWtn4TTkuKQpiOPjbqDbNRuPLkwjFk+5GqVKeCMkBBPx7o3aJ6dYaurJpNpVKLG3e3cMWmCEqP3O38JRVa8EZQ1R0hIz6eJS2BNAwF8aOR5zHmQQ2lPrKQzawMsry4TK22jpxNs8g4WEOrxEVVH/oJh8q/cB/k3nKUvy47EHVQ/jLj6Sq5821Ktm3KjAGsw/wuYWy7GTG1tKL4/N7C0IeUsRu3022kN8w1LJf7WXXLGDON3k+Ui6G4nqwbFH+Jftx3oMqY4hauz4PXUx6Nx3zCvv6BqC83qm8p5yovuHy1IOqPbKiaDPDp9VmbQxtLVe1me6Z0smNPoqmxwtUvub+cKAymZ5SVfhpZT1PcIB0xuHPi/FOWvKoqXhiyBoQxF8cGerSfCruWJKChQgY0ysTbIRqT4MM7seYib7AW68QCle61/q6vPjEm5tdCzvmJvZURtb+Q4qVLzuOEL/QqTN1lNO2b4HBMPOGj0MGG4dMYZ8XTEITFnETeF7O2wZ+HvvLi/TExI+Wfhm28mofXBAHwvdSXqNTSynPfC1H26xHf09ApumjixbZBcZUaaDc6K2ne3i/DU/ZgoovOIyduxmF/HFp836yKIvcJr+18j42rcUyTq2qSOQHdsttM4fy7ZnK8b7sQc8="
+      secure: re+Ddh0uhun8Sj4ibGR4D9wTQlIMyl3UaXvoWtn4TTkuKQpiOPjbqDbNRuPLkwjFk+5GqVKeCMkBBPx7o3aJ6dYaurJpNpVKLG3e3cMWmCEqP3O38JRVa8EZQ1R0hIz6eJS2BNAwF8aOR5zHmQQ2lPrKQzawMsry4TK22jpxNs8g4WEOrxEVVH/oJh8q/cB/k3nKUvy47EHVQ/jLj6Sq5821Ktm3KjAGsw/wuYWy7GTG1tKL4/N7C0IeUsRu3022kN8w1LJf7WXXLGDON3k+Ui6G4nqwbFH+Jftx3oMqY4hauz4PXUx6Nx3zCvv6BqC83qm8p5yovuHy1IOqPbKiaDPDp9VmbQxtLVe1me6Z0smNPoqmxwtUvub+cKAymZ5SVfhpZT1PcIB0xuHPi/FOWvKoqXhiyBoQxF8cGerSfCruWJKChQgY0ysTbIRqT4MM7seYib7AW68QCle61/q6vPjEm5tdCzvmJvZURtb+Q4qVLzuOEL/QqTN1lNO2b4HBMPOGj0MGG4dMYZ8XTEITFnETeF7O2wZ+HvvLi/TExI+Wfhm28mofXBAHwvdSXqNTSynPfC1H26xHf09ApumjixbZBcZUaaDc6K2ne3i/DU/ZgoovOIyduxmF/HFp836yKIvcJr+18j42rcUyTq2qSOQHdsttM4fy7ZnK8b7sQc8=
