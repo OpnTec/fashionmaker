@@ -258,37 +258,56 @@ defineReplace(enable_ccache){
 }
 
 defineReplace(FindBuildRevision){
-CONFIG(debug, debug|release){
-    # Debug mode
-    return(\\\"unknown\\\")
-}else{
-    # Release mode
+    CONFIG(debug, debug|release){
+        # Debug mode
+        return(\\\"unknown\\\")
+    }else{
+        # Release mode
+        macx{
+            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
+        }else {
+            GIT = git # All other platforms are OK.
+        }
 
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms are OK.
-    }
-
-    #build revision number for using in version
-    unix {
-        DVCS_HESH=$$system("$${HG} log -r. --template '{node|short}'")
-    } else {
-        # Use escape character before "|" on Windows
-        DVCS_HESH=$$system($${HG} log -r. --template "{node^|short}")
-    }
-    isEmpty(DVCS_HESH){
         DVCS_HESH=$$system("git rev-parse --short HEAD")
         isEmpty(DVCS_HESH){
             DVCS_HESH = \\\"unknown\\\" # if we can't find build revision left unknown.
         } else {
             DVCS_HESH=\\\"Git:$${DVCS_HESH}\\\"
         }
-    } else {
-        DVCS_HESH=\\\"Hg:$${DVCS_HESH}\\\"
+        return($${DVCS_HESH})
     }
-    return($${DVCS_HESH})
 }
+
+defineReplace(FindLatestTagDistance){
+    CONFIG(debug, debug|release){
+        # Debug mode
+        return(0)
+    }else{
+        # Release mode
+        #get latest git tag and it's distance from HEAD
+        macx{
+            GIT = /usr/local/bin/git # Can't defeat PATH variable on Mac OS.
+        }else {
+            GIT = GIT # All other platforms all OK.
+        }
+
+        # tag is formatted as TAG-N-gSHA:
+        # 1. latest stable version is TAG, or vX.Y.Z
+        # 2. number of commits since latest stable version is N
+        # 3. latest commit is gSHA
+        tag_all = $$system(git describe --tags)
+        tag_split = $$split(tag_all, "-") #split at the dashes
+        GIT_DISTANCE = $$member(tag_split,1) #get 2nd element of results
+
+        isEmpty(GIT_DISTANCE){
+            GIT_DISTANCE = 0 # if we can't find local revision left 0.
+        }
+
+        message("Latest tag distance:" $${GIT_DISTANCE})
+
+        return($${GIT_DISTANCE})
+    }
 }
 
 # Default prefix. Use for creation install path.

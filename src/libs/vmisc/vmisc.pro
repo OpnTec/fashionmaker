@@ -69,9 +69,6 @@ include(warnings.pri)
 
 CONFIG(debug, debug|release){
     # Debug mode
-    #Calculate latest tag distance and build revision only in release mode. Change number each time requare
-    #recompilation precompiled headers file.
-    DEFINES += "LATEST_TAG_DISTANCE=0"
 }else{
     # Release mode
     !*msvc*:CONFIG += silent
@@ -90,20 +87,9 @@ CONFIG(debug, debug|release){
             QMAKE_CFLAGS_RELEASE += -g -gdwarf-3
             QMAKE_LFLAGS_RELEASE =
         }
-    }
-
-    macx{
-        HG = /usr/local/bin/hg # Can't defeat PATH variable on Mac OS.
-    }else {
-        HG = hg # All other platforms all OK.
-    }
-    #latest tag distance number for using in version
-    HG_DISTANCE=$$system($${HG} log -r. --template '{latesttagdistance}')
-    isEmpty(HG_DISTANCE){
-        HG_DISTANCE = 0 # if we can't find local revision left 0.
-    }
-    message("Latest tag distance:" $${HG_DISTANCE})
-    DEFINES += "LATEST_TAG_DISTANCE=$${HG_DISTANCE}" # Make available latest tag distance number in sources.
+    } 
 }
+
+DEFINES += "LATEST_TAG_DISTANCE=$$FindLatestTagDistance()" # Make available latest tag distance number in sources.
 
 include (../libs.pri)
