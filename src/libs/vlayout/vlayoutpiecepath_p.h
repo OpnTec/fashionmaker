@@ -32,6 +32,7 @@
 #include <QSharedData>
 #include <QPointF>
 #include <QVector>
+#include <QDataStream>
 
 #include "../vmisc/diagnostic.h"
 #if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
