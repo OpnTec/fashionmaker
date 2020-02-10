@@ -68,9 +68,6 @@ private:
     void Case4() const;
     void Case5() const;
 
-    QVector<VSAPoint> InputPointsIssue548Case1() const;
-    QVector<QPointF> OutputPointsIssue548Case1() const;
-
     QVector<VSAPoint> InputPointsIssue548Case2() const;
     QVector<QPointF> OutputPointsIssue548Case2() const;
 

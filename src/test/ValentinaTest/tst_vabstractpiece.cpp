@@ -133,9 +133,10 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
     // Files: Steampunk_trousers.val and marie.vit
     // Actually buggy detail see in file src/app/share/collection/bugs/Steampunk_trousers_issue_#548.val
     // Code should clean loops in path.
-    QTest::newRow("Issue 548. Case1") << InputPointsIssue548Case1()
-                                      << 11.338582677165354 // seam allowance width (0.3 cm)
-                                      << OutputPointsIssue548Case1();
+    ASSERT_TEST_CASE("Issue 548. Case1",
+                     QStringLiteral("://Issue_548_case1/input.json"),
+                     QStringLiteral("://Issue_548_case1/output.json"),
+                     11.338582677165354 /*seam allowance width (0.3 cm)*/);
 
     // Disabled due to "undefined behavior" problem
 #if !defined(Q_OS_WIN) && !defined(Q_CC_CLANG) && !defined(Q_PROCESSOR_X86_64)
@@ -1264,38 +1265,6 @@ void TST_VAbstractPiece::Case5() const
 
     const qreal result = VAbstractPiece::SumTrapezoids(points);
     QVERIFY(qFuzzyIsNull(result));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<VSAPoint> TST_VAbstractPiece::InputPointsIssue548Case1() const
-{
-    QVector<VSAPoint> points;
-
-    points += VSAPoint(236.97989607468364, 65.89325192030674);
-    points += VSAPoint(198.93409106041895, 172.04876297154925);
-    points += VSAPoint(260.32251114299453, 75.38027418944861);
-    points += VSAPoint(324.54110236213444, 101.48031496062993);
-    points += VSAPoint(29.858267716535437, 300.85039370078744);
-    points += VSAPoint(99.86433649395013, 10.166060970128015);
-
-    return points;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-QVector<QPointF> TST_VAbstractPiece::OutputPointsIssue548Case1() const
-{
-    QVector<QPointF> points;
-
-    points += QPointF(251.32210577118798, 59.48301432799721);
-    points += QPointF(243.9841262159756, 79.95746530820585);
-    points += QPointF(255.82424817748586, 61.31279754390509);
-    points += QPointF(348.48337789725855, 98.9717841021069);
-    points += QPointF(29.780382054543473, 314.59289909613994);
-    points += QPointF(17.01672179602679, 305.7450049304056);
-    points += QPointF(91.92616539550944, -5.299480329501037);
-    points += QPointF(251.32210577118798, 59.48301432799721);
-
-    return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

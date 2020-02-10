@@ -1591,7 +1591,7 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
 //---------------------------------------------------------------------------------------------------------------------
 bool VAbstractPiece::IsEkvPointOnLine(const QPointF &iPoint, const QPointF &prevPoint, const QPointF &nextPoint)
 {
-    return VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint);
+    return VGObject::IsPointOnLineviaPDP(iPoint, prevPoint, nextPoint, accuracyPointOnLine/4.);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
