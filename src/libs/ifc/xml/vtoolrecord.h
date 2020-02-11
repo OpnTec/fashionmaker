@@ -56,6 +56,8 @@ public:
     QString getNameDraw() const;
     void    setNameDraw(const QString &value);
 
+    bool IsMandatory() const;
+
 private:
     /** @brief id tool id. */
     quint32 id;

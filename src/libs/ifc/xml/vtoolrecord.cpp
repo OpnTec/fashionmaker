@@ -66,3 +66,15 @@ VToolRecord &VToolRecord::operator=(const VToolRecord &record)
 VToolRecord::VToolRecord(const VToolRecord &record)
     :id(record.getId()), typeTool(record.getTypeTool()), nameDraw(record.getNameDraw())
 {}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VToolRecord::IsMandatory() const
+{
+    return typeTool != Tool::Pin
+            && typeTool != Tool::NodePoint
+            && typeTool != Tool::NodeArc
+            && typeTool != Tool::NodeElArc
+            && typeTool != Tool::NodeSpline
+            && typeTool != Tool::NodeSplinePath
+            && typeTool != Tool::PiecePath;
+}

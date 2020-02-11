@@ -286,7 +286,7 @@ QDomElement VPatternRecipe::Step(const VToolRecord &tool)
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 55, "Not all tools were used in history.");
 
     const QDomElement domElem = m_pattern->elementById(tool.getId());
-    if (not domElem.isElement())
+    if (not domElem.isElement() && tool.IsMandatory())
     {
         throw VExceptionInvalidHistory(tr("Can't find element by id '%1'").arg(tool.getId()));
     }
