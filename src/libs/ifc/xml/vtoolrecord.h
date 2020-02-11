@@ -45,13 +45,17 @@ public:
     bool operator==(const VToolRecord &record) const;
     VToolRecord &operator=(const VToolRecord &record);
     VToolRecord(const VToolRecord &record);
+    ~VToolRecord() Q_DECL_EQ_DEFAULT;
+
     quint32 getId() const;
     void    setId(const quint32 &value);
+
     Tool    getTypeTool() const;
     void    setTypeTool(const Tool &value);
+
     QString getNameDraw() const;
     void    setNameDraw(const QString &value);
-    ~VToolRecord() Q_DECL_EQ_DEFAULT;
+
 private:
     /** @brief id tool id. */
     quint32 id;
