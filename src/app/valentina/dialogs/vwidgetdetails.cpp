@@ -263,11 +263,43 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
     QAction *actionSelectAll = menu->addAction(tr("Select all"));
     QAction *actionSelectNone = menu->addAction(tr("Select none"));
 
-    QAction *actionSeparator = new QAction(this);
-    actionSeparator->setSeparator(true);
-    menu->addAction(actionSeparator);
+    menu->addSeparator();
 
     QAction *actionInvertSelection = menu->addAction(tr("Invert selection"));
+
+    bool pieceMode = false;
+    QAction *actionPieceOptions = nullptr;
+    QAction *actionDeletePiece = nullptr;
+    VToolSeamAllowance *toolPiece = nullptr;
+
+    QTableWidgetItem *selectedItem = ui->tableWidget->itemAt(pos);
+    if (selectedItem)
+    {
+        QTableWidgetItem *item = ui->tableWidget->item(selectedItem->row(), PieceColumn::InLayout);
+        const quint32 id = item->data(Qt::UserRole).toUInt();
+
+        try
+        {
+            toolPiece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
+            if (toolPiece)
+            {
+                pieceMode = true;
+                menu->addSeparator();
+
+                actionPieceOptions = menu->addAction(QIcon::fromTheme(QStringLiteral("preferences-other")),
+                                                     tr("Piece options"));
+
+                actionDeletePiece = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+                                                     tr("Delete piece"));
+                actionDeletePiece->setDisabled(toolPiece->referens() > 0);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            const QString errorMsg = tr("Cannot find piece by id '%1'").arg(id);
+            qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+        }
+    }
 
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
     if (allDetails->count() == 0)
@@ -332,6 +364,23 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         }
 
         qApp->getUndoStack()->endMacro();
+    }
+    else if (pieceMode && selectedAction == actionPieceOptions)
+    {
+        toolPiece->ShowOptions();
+    }
+    else if (pieceMode && selectedAction == actionDeletePiece)
+    {
+        try
+        {
+            toolPiece->DeleteFromMenu();
+        }
+        catch(const VExceptionToolWasDeleted &e)
+        {
+            Q_UNUSED(e);
+            return;//Leave this method immediately!!!
+        }
+        //Leave this method immediately after call!!!
     }
 }
 

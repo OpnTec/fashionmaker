@@ -133,6 +133,8 @@ public slots:
     void         Highlight(quint32 id);
     void         UpdateDetailLabel();
     void         UpdatePatternInfo();
+    void         ShowOptions();
+    void         DeleteFromMenu();
 protected slots:
     void UpdateGrainline();
     void SaveMoveDetail(const QPointF &ptPos);
@@ -161,11 +163,9 @@ protected:
     virtual void       SaveDialogChange(const QString &undoText = QString()) final;
 
 private slots:
-    void ShowOptions();
     void ToggleInLayout(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
-    void DeleteFromMenu();
     void ToggleExcludeState(quint32 id);
     void ToggleNodePointAngleType(quint32 id, PieceNodeAngle type);
     void ToggleNodePointPassmark(quint32 id, bool toggle);
