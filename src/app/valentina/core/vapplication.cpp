@@ -172,6 +172,10 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
                 vStdErr() << QApplication::translate("vNoisyHandler", "WARNING:") << logMsg << "\n";
                 break;
             case QtCriticalMsg:
+                if (isPatternMessage)
+                {
+                    qApp->PostPatternMessage(logMsg, type);
+                }
                 debugdate += QStringLiteral(":CRITICAL:%1(%2)] %3: %4: %5").arg(context.file).arg(context.line)
                              .arg(context.function, context.category, logMsg);
                 vStdErr() << QApplication::translate("vNoisyHandler", "CRITICAL:") << logMsg << "\n";

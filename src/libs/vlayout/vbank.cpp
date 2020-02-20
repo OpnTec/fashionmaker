@@ -334,8 +334,9 @@ bool VBank::PrepareUnsorted()
         const qint64 square = details.at(i).Square();
         if (square <= 0)
         {
-            qCCritical(lBank, "Preparing data for layout error: Detail '%s' square <= 0",
-                       qUtf8Printable(details.at(i).GetName()));
+            qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+                                     tr("Preparing data for layout error: Detail '%1' square <= 0")
+                                         .arg(details.at(i).GetName());
             prepare = false;
             return prepare;
         }
@@ -358,14 +359,16 @@ bool VBank::PrepareDetails()
 {
     if (layoutWidth <= 0)
     {
-        qCCritical(lBank, "Preparing data for layout error: Layout paper sheet <= 0");
+        qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+                                 tr("Preparing data for layout error: Layout paper sheet <= 0");
         prepare = false;
         return prepare;
     }
 
     if (details.isEmpty())
     {
-        qCCritical(lBank, "Preparing data for layout error: List of details is empty");
+        qCCritical(lBank) << VAbstractApplication::patternMessageSignature +
+                                 tr("Preparing data for layout error: List of details is empty");
         prepare = false;
         return prepare;
     }

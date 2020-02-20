@@ -53,6 +53,7 @@ enum class Cases : qint8 { CaseThreeGroup = 0, CaseTwoGroup, CaseDesc, UnknownCa
 
 class VBank
 {
+    Q_DECLARE_TR_FUNCTIONS(VBank)
 public:
     VBank();
 
