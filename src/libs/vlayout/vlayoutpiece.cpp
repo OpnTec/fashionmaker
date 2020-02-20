@@ -466,7 +466,8 @@ VLayoutPiece VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContai
                              qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
     }
 
-    det.SetCountourPoints(futureMainPath.result(), piece.IsHideMainPath());
+    det.SetCountourPoints(futureMainPath.result(),
+                          qApp->Settings()->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
     det.SetInternalPaths(futureInternalPaths.result());
     det.SetPassmarks(futurePassmarks.result());

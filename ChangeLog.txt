@@ -38,6 +38,7 @@
 - Export tiled PDF with watermark.
 - [#984] Issue with up to date list of unique names.
 - Tracking changes/prevent "OK" recalculation after "Apply".
+- Change behavior for menu Pattern piece -> Show main path. Now it has an influence on export as well.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
