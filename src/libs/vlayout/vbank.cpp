@@ -29,6 +29,7 @@
 #include "vbank.h"
 
 #include <climits>
+#include <QLoggingCategory>
 
 #include "../vmisc/diagnostic.h"
 #include "../vmisc/vabstractapplication.h"

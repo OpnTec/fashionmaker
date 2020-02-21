@@ -45,7 +45,8 @@ unix {
             # Key -isystem disable checking errors in system headers.
             -isystem "$${OUT_PWD}/$${MOC_DIR}" \
             -isystem "$${OUT_PWD}/$${RCC_DIR}" \
-            $$CLANG_DEBUG_CXXFLAGS # See common.pri for more details.
+            $$CLANG_DEBUG_CXXFLAGS \# See common.pri for more details.
+            -Wno-gnu-zero-variadic-macro-arguments\ # See macros qCCritical
 
         checkWarnings{ # For enable run qmake with CONFIG+=checkWarnings
             QMAKE_CXXFLAGS += -Werror
