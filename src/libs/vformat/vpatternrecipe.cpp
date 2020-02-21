@@ -37,6 +37,7 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vgeometry/vcubicbezierpath.h"
 #include "../vtools/tools/drawTools/drawtools.h"
+#include "../vpatterndb/calculator.h"
 
 namespace
 {
@@ -88,7 +89,7 @@ VPatternRecipe::VPatternRecipe(VContainer *data, VAbstractPattern *pattern, QObj
 
     QDomElement recipeElement = createElement(QStringLiteral("recipe"));
     recipeElement.appendChild(createComment(FileComment()));
-    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.0.0"));
+    SetAttribute(recipeElement, QStringLiteral("version"), QStringLiteral("1.1.0"));
 
     recipeElement.appendChild(Prerequisite());
     recipeElement.appendChild(Content());
@@ -252,6 +253,8 @@ QDomElement VPatternRecipe::Content()
         content.appendChild(Draft(draw));
     }
 
+    content.appendChild(FinalMeasurements());
+
     return content;
 }
 
@@ -400,6 +403,46 @@ QT_WARNING_POP
     }
 
     throw VExceptionInvalidHistory(tr("Can't create history record for the tool."));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::FinalMeasurements()
+{
+    QDomElement recipeFinalMeasurements = createElement(QStringLiteral("finalMeasurements"));
+
+    const QVector<VFinalMeasurement> measurements = m_pattern->GetFinalMeasurements();
+
+    for (auto &m : measurements)
+    {
+        recipeFinalMeasurements.appendChild(FinalMeasurement(m));
+    }
+
+    return recipeFinalMeasurements;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QDomElement VPatternRecipe::FinalMeasurement(const VFinalMeasurement &fm)
+{
+    QDomElement recipeFinalMeasurement = createElement(QStringLiteral("finalMeasurement"));
+
+    SetAttribute(recipeFinalMeasurement, QStringLiteral("description"), fm.description);
+    SetAttribute(recipeFinalMeasurement, QStringLiteral("name"), fm.name);
+    SetAttribute(recipeFinalMeasurement, QStringLiteral("formula"), fm.formula); // TODO: localize
+
+    QScopedPointer<Calculator> cal(new Calculator());
+    const qreal result = cal->EvalFormula(m_data->DataVariables(), fm.formula);
+    if (qIsInf(result) || qIsNaN(result))
+    {
+        const QString errorMsg = QString("%1\n\n%1").arg(tr("Reading final measurements error."),
+                                                         tr("Value for final measurtement '%1' is infinite or NaN. "
+                                                            "Please, check your calculations.").arg(fm.name));
+        qApp->IsPedantic() ? throw VException(errorMsg) :
+                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+    }
+
+    SetAttribute(recipeFinalMeasurement, QStringLiteral("value"), result);
+
+    return recipeFinalMeasurement;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

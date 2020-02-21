@@ -37,6 +37,7 @@ class VIncrement;
 class VToolRecord;
 class VFormula;
 class VAbstractOperation;
+class VFinalMeasurement;
 
 class VPatternRecipe : public VDomDocument
 {
@@ -64,6 +65,9 @@ private:
 
     QDomElement Draft(const QDomElement &draft);
     QDomElement Step(const VToolRecord &tool);
+
+    QDomElement FinalMeasurements();
+    QDomElement FinalMeasurement(const VFinalMeasurement &fm);
 
     QDomElement BasePoint(const VToolRecord &record);
     QDomElement EndLine(const VToolRecord &record);
