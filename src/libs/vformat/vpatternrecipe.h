@@ -37,7 +37,7 @@ class VIncrement;
 class VToolRecord;
 class VFormula;
 class VAbstractOperation;
-class VFinalMeasurement;
+struct VFinalMeasurement;
 
 class VPatternRecipe : public VDomDocument
 {
