@@ -660,7 +660,7 @@ QVector<QLineF> VPassmark::FullPassmark(const VPiece &piece, const VContainer *d
         QVector<QLineF> lines;
         lines += SAPassmark(piece, data, PassmarkSide::All);
         if (qApp->Settings()->IsDoublePassmark()
-                && not piece.IsHideMainPath()
+                && (qApp->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath())
                 && m_data.isMainPathNode
                 && m_data.passmarkAngleType != PassmarkAngleType::Intersection
                 && m_data.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft

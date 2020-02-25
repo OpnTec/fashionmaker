@@ -354,7 +354,7 @@ QVector<VLayoutPassmark> ConvertPassmarks(const VPiece &piece, const VContainer 
                 }
 
                 if (qApp->Settings()->IsDoublePassmark()
-                        && not piece.IsHideMainPath()
+                        && (qApp->Settings()->IsPieceShowMainPath() || not piece.IsHideMainPath())
                         && pData.isMainPathNode
                         && pData.passmarkAngleType != PassmarkAngleType::Intersection
                         && pData.passmarkAngleType != PassmarkAngleType::IntersectionOnlyLeft
