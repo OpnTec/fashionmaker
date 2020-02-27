@@ -78,7 +78,7 @@ private:
     QMap<QString, qmu::QmuTranslation> PMSystemBooks{};
     QMap<QString, qmu::QmuTranslation> variables{};
     QMap<QString, qmu::QmuTranslation> functions{};
-    QMap<QString, qmu::QmuTranslation> functionDescriptions{};
+    QMap<QString, qmu::QmuTranslation> functionsDescriptions{};
     QMap<QString, qmu::QmuTranslation> placeholders{};
     QMap<QString, qmu::QmuTranslation> stDescriptions{};
     QMap<QString, QString> translatedFunctions{};
