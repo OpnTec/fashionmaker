@@ -11190,6 +11190,25 @@ Do you want to save your changes?</source>
         <source>Invalid version. Maximum supported format version is %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Can&apos;t open file %1:
+%2.</source>
+        <translation type="unfinished">Konnte Datei %1 nicht öffnen: %2.</translation>
+    </message>
+    <message>
+        <source>Can&apos;t open schema file %1:
+%2.</source>
+        <translation type="unfinished">Konnte Schemadatei %1 nicht öffnen:
+%2.</translation>
+    </message>
+    <message>
+        <source>Could not load schema file &apos;%1&apos;.</source>
+        <translation type="unfinished">Konnte Schemadatei %1 nicht öffnen.</translation>
+    </message>
+    <message>
+        <source>Validation error file %3 in line %1 column %2</source>
+        <translation type="unfinished">Fehler bei der Gültigkeitsprüfung in Datei %3, Zeile %1, Spalte %2</translation>
+    </message>
 </context>
 <context>
     <name>VAbstractCubicBezierPath</name>
@@ -11442,6 +11461,21 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Invalid notch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VBank</name>
+    <message>
+        <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preparing data for layout error: List of details is empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12035,7 +12069,7 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation>Konnte Schemadatei %1 nicht öffnen:
+        <translation type="vanished">Konnte Schemadatei %1 nicht öffnen:
 %2.</translation>
     </message>
     <message>
@@ -12044,7 +12078,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation>Fehler bei der Gültigkeitsprüfung in Datei %3, Zeile %1, Spalte %2</translation>
+        <translation type="vanished">Fehler bei der Gültigkeitsprüfung in Datei %3, Zeile %1, Spalte %2</translation>
     </message>
     <message>
         <source>Parsing error file %3 in line %1 column %2</source>
@@ -12072,7 +12106,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation>Konnte Schemadatei %1 nicht öffnen.</translation>
+        <translation type="vanished">Konnte Schemadatei %1 nicht öffnen.</translation>
     </message>
     <message>
         <source>Fail to write Canonical XML.</source>
@@ -12663,6 +12697,14 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reading final measurements error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15146,6 +15188,191 @@ Do you want to save your changes?</source>
         <comment>Left symbol _ in the name</comment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>converts degrees to radian</source>
+        <comment>functionm degTorad</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>converts radian to degrees</source>
+        <comment>function radTodeg</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sine function working with radians</source>
+        <comment>function sin</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosine function working with radians</source>
+        <comment>function cos</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tangens function working with radians</source>
+        <comment>function tan</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus sine function working with radians</source>
+        <comment>function asin</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus cosine function working with radians</source>
+        <comment>function acos</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus tangens function working with radians</source>
+        <comment>function atan</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic sine function</source>
+        <comment>function sinh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic cosine</source>
+        <comment>function cosh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic tangens function</source>
+        <comment>function tanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcus sine function</source>
+        <comment>function asinh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcus cosine function</source>
+        <comment>function acosh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hyperbolic arcur tangens function</source>
+        <comment>function atanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sine function working with degrees</source>
+        <comment>function sinD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cosine function working with degrees</source>
+        <comment>function cosD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>tangens function working with degrees</source>
+        <comment>function tanD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus sine function working with degrees</source>
+        <comment>function asinD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus cosine function working with degrees</source>
+        <comment>function acosD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>arcus tangens function working with degrees</source>
+        <comment>function atanD</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 2</source>
+        <comment>function log2</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 10</source>
+        <comment>function log10</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to the base 10</source>
+        <comment>function log</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>logarithm to base e (2.71828...)</source>
+        <comment>function ln</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>e raised to the power of x</source>
+        <comment>function exp</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>square root of a value</source>
+        <comment>function sqrt</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
+        <comment>function sign</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round to nearest integer</source>
+        <comment>function rint</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>round to up to 1 decimal</source>
+        <comment>function r2cm</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cut, split and rotate modeling operation. Takes cm units.</source>
+        <comment>function csrCm</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cut, split and rotate modeling operation. Takes inch units.</source>
+        <comment>function csrInch</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>absolute value</source>
+        <comment>function abs</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>min of all arguments</source>
+        <comment>function min</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>max of all arguments</source>
+        <comment>function max</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sum of all arguments</source>
+        <comment>function sum</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mean value of all arguments</source>
+        <comment>function avg</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
+        <comment>function fmod</comment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VVITConverter</name>
@@ -15205,6 +15432,18 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Hide not in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Piece options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete piece</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
