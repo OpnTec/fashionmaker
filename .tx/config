@@ -2,8 +2,9 @@
 host = https://www.transifex.com
 lang_map = uk: uk_UA, cs : cs_CZ, nl : nl_NL, fi : fi_FI, es : es_ES, id : id_ID
 
-[valentina-project.valentina_ts]
+[valentina-project.valentina-ts]
 file_filter = share/translations/valentina_<lang>.ts
+minimum_perc = 20
 source_file = share/translations/valentina.ts
 source_lang = en
 type = QT
