@@ -612,6 +612,7 @@ void DialogEditWrongFormula::ShowFunctions()
     ui->tableWidget->setColumnHidden(ColumnFullName, true);
     ui->labelDescription->setText(QString());
 
+    const QMap<QString, qmu::QmuTranslation> functionsDescriptions = qApp->TrVars()->GetFunctionsDescriptions();
     const QMap<QString, qmu::QmuTranslation> functions = qApp->TrVars()->GetFunctions();
     QMap<QString, qmu::QmuTranslation>::const_iterator i = functions.constBegin();
     while (i != functions.constEnd())
@@ -622,7 +623,10 @@ void DialogEditWrongFormula::ShowFunctions()
         font.setBold(true);
         item->setFont(font);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, ColumnName, item);
-        item->setToolTip(i.value().getMdisambiguation());
+
+        functionsDescriptions.contains(i.key())
+            ? item->setToolTip(functionsDescriptions.value(i.key()).translate(qApp->Settings()->GetLocale()))
+            : item->setToolTip(i.value().getMdisambiguation());
         ++i;
     }
 

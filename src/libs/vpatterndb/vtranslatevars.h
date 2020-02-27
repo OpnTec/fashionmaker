@@ -67,19 +67,21 @@ public:
 
     QMap<QString, QString> GetTranslatedFunctions() const;
     QMap<QString, qmu::QmuTranslation> GetFunctions() const;
+    QMap<QString, qmu::QmuTranslation> GetFunctionsDescriptions() const;
 
     static void BiasTokens(int position, int bias, QMap<int, QString> &tokens);
 
 private:
     Q_DISABLE_COPY(VTranslateVars)
-    QMap<QString, qmu::QmuTranslation> PMSystemNames;
-    QMap<QString, qmu::QmuTranslation> PMSystemAuthors;
-    QMap<QString, qmu::QmuTranslation> PMSystemBooks;
-    QMap<QString, qmu::QmuTranslation> variables;
-    QMap<QString, qmu::QmuTranslation> functions;
-    QMap<QString, qmu::QmuTranslation> placeholders;
-    QMap<QString, qmu::QmuTranslation> stDescriptions;
-    QMap<QString, QString> translatedFunctions;
+    QMap<QString, qmu::QmuTranslation> PMSystemNames{};
+    QMap<QString, qmu::QmuTranslation> PMSystemAuthors{};
+    QMap<QString, qmu::QmuTranslation> PMSystemBooks{};
+    QMap<QString, qmu::QmuTranslation> variables{};
+    QMap<QString, qmu::QmuTranslation> functions{};
+    QMap<QString, qmu::QmuTranslation> functionDescriptions{};
+    QMap<QString, qmu::QmuTranslation> placeholders{};
+    QMap<QString, qmu::QmuTranslation> stDescriptions{};
+    QMap<QString, QString> translatedFunctions{};
 
     void InitPatternMakingSystems();
     void InitVariables();

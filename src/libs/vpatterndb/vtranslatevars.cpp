@@ -47,15 +47,7 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 VTranslateVars::VTranslateVars()
-    :VTranslateMeasurements(),
-      PMSystemNames(QMap<QString, qmu::QmuTranslation>()),
-      PMSystemAuthors(QMap<QString, qmu::QmuTranslation>()),
-      PMSystemBooks(QMap<QString, qmu::QmuTranslation>()),
-      variables(QMap<QString, qmu::QmuTranslation>()),
-      functions(QMap<QString, qmu::QmuTranslation>()),
-      placeholders(QMap<QString, qmu::QmuTranslation>()),
-      stDescriptions(QMap<QString, qmu::QmuTranslation>()),
-      translatedFunctions(QMap<QString, QString>())
+    :VTranslateMeasurements()
 {
     InitPatternMakingSystems();
     InitVariables();
@@ -408,45 +400,140 @@ void VTranslateVars::InitVariables()
 void VTranslateVars::InitFunctions()
 {
     functions.insert(degTorad_F, translate("VTranslateVars", "degTorad", "converts degrees to radian"));
+    functionDescriptions.insert(degTorad_F, translate("VTranslateVars", "converts degrees to radian",
+                                                      "functionm degTorad"));
+
     functions.insert(radTodeg_F, translate("VTranslateVars", "radTodeg", "converts radian to degrees"));
+    functionDescriptions.insert(radTodeg_F, translate("VTranslateVars", "converts radian to degrees",
+                                                      "function radTodeg"));
+
     functions.insert(sin_F, translate("VTranslateVars", "sin", "sine function working with radians"));
+    functionDescriptions.insert(sin_F, translate("VTranslateVars", "sine function working with radians",
+                                                 "function sin"));
+
     functions.insert(cos_F, translate("VTranslateVars", "cos", "cosine function working with radians"));
+    functionDescriptions.insert(cos_F, translate("VTranslateVars", "cosine function working with radians",
+                                                 "function cos"));
+
     functions.insert(tan_F, translate("VTranslateVars", "tan", "tangens function working with radians"));
+    functionDescriptions.insert(tan_F, translate("VTranslateVars", "tangens function working with radians",
+                                                 "function tan"));
+
     functions.insert(asin_F, translate("VTranslateVars", "asin", "arcus sine function working with radians"));
+    functionDescriptions.insert(asin_F, translate("VTranslateVars", "arcus sine function working with radians",
+                                                  "function asin"));
+
     functions.insert(acos_F, translate("VTranslateVars", "acos", "arcus cosine function working with radians"));
+    functionDescriptions.insert(acos_F, translate("VTranslateVars", "arcus cosine function working with radians",
+                                                  "function acos"));
+
     functions.insert(atan_F, translate("VTranslateVars", "atan", "arcus tangens function working with radians"));
+    functionDescriptions.insert(atan_F, translate("VTranslateVars", "arcus tangens function working with radians",
+                                                  "function atan"));
+
     functions.insert(sinh_F, translate("VTranslateVars", "sinh", "hyperbolic sine function"));
+    functionDescriptions.insert(sinh_F, translate("VTranslateVars", "hyperbolic sine function", "function sinh"));
+
     functions.insert(cosh_F, translate("VTranslateVars", "cosh", "hyperbolic cosine"));
+    functionDescriptions.insert(cosh_F, translate("VTranslateVars", "hyperbolic cosine", "function cosh"));
+
     functions.insert(tanh_F, translate("VTranslateVars", "tanh", "hyperbolic tangens function"));
+    functionDescriptions.insert(tanh_F, translate("VTranslateVars", "hyperbolic tangens function", "function tanh"));
+
     functions.insert(asinh_F, translate("VTranslateVars", "asinh", "hyperbolic arcus sine function"));
+    functionDescriptions.insert(asinh_F, translate("VTranslateVars", "hyperbolic arcus sine function",
+                                                   "function asinh"));
+
     functions.insert(acosh_F, translate("VTranslateVars", "acosh", "hyperbolic arcus cosine function"));
+    functionDescriptions.insert(acosh_F, translate("VTranslateVars", "hyperbolic arcus cosine function",
+                                                   "function acosh"));
+
     functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcur tangens function"));
+    functionDescriptions.insert(atanh_F, translate("VTranslateVars", "hyperbolic arcur tangens function",
+                                                   "function atanh"));
+
     functions.insert(sinD_F, translate("VTranslateVars", "sinD", "sine function working with degrees"));
+    functionDescriptions.insert(sinD_F, translate("VTranslateVars", "sine function working with degrees",
+                                                  "function sinD"));
+
     functions.insert(cosD_F, translate("VTranslateVars", "cosD", "cosine function working with degrees"));
+    functionDescriptions.insert(cosD_F, translate("VTranslateVars", "cosine function working with degrees",
+                                                  "function cosD"));
+
     functions.insert(tanD_F, translate("VTranslateVars", "tanD", "tangens function working with degrees"));
+    functionDescriptions.insert(tanD_F, translate("VTranslateVars", "tangens function working with degrees",
+                                                  "function tanD"));
+
     functions.insert(asinD_F, translate("VTranslateVars", "asinD", "arcus sine function working with degrees"));
+    functionDescriptions.insert(asinD_F, translate("VTranslateVars", "arcus sine function working with degrees",
+                                                   "function asinD"));
+
     functions.insert(acosD_F, translate("VTranslateVars", "acosD", "arcus cosine function working with degrees"));
+    functionDescriptions.insert(acosD_F, translate("VTranslateVars", "arcus cosine function working with degrees",
+                                                   "function acosD"));
+
     functions.insert(atanD_F, translate("VTranslateVars", "atanD", "arcus tangens function working with degrees"));
+    functionDescriptions.insert(atanD_F, translate("VTranslateVars", "arcus tangens function working with degrees",
+                                                   "function atanD"));
+
     functions.insert(log2_F, translate("VTranslateVars", "log2", "logarithm to the base 2"));
+    functionDescriptions.insert(log2_F, translate("VTranslateVars", "logarithm to the base 2",  "function log2"));
+
     functions.insert(log10_F, translate("VTranslateVars", "log10", "logarithm to the base 10"));
+    functionDescriptions.insert(log10_F, translate("VTranslateVars", "logarithm to the base 10", "function log10"));
+
     functions.insert(log_F, translate("VTranslateVars", "log", "logarithm to the base 10"));
+    functionDescriptions.insert(log_F, translate("VTranslateVars", "logarithm to the base 10", "function log"));
+
     functions.insert(ln_F, translate("VTranslateVars", "ln", "logarithm to base e (2.71828...)"));
+    functionDescriptions.insert(ln_F, translate("VTranslateVars", "logarithm to base e (2.71828...)", "function ln"));
+
     functions.insert(exp_F, translate("VTranslateVars", "exp", "e raised to the power of x"));
+    functionDescriptions.insert(exp_F, translate("VTranslateVars", "e raised to the power of x", "function exp"));
+
     functions.insert(sqrt_F, translate("VTranslateVars", "sqrt", "square root of a value"));
+    functionDescriptions.insert(sqrt_F, translate("VTranslateVars", "square root of a value", "function sqrt"));
+
     functions.insert(sign_F, translate("VTranslateVars", "sign", "sign function -1 if x<0; 1 if x>0"));
+    functionDescriptions.insert(sign_F, translate("VTranslateVars", "sign function -1 if x<0; 1 if x>0",
+                                                  "function sign"));
+
     functions.insert(rint_F, translate("VTranslateVars", "rint", "round to nearest integer"));
+    functionDescriptions.insert(rint_F, translate("VTranslateVars", "round to nearest integer", "function rint"));
+
     functions.insert(r2cm_F, translate("VTranslateVars", "r2cm", "round to up to 1 decimal"));
+    functionDescriptions.insert(r2cm_F, translate("VTranslateVars", "round to up to 1 decimal", "function r2cm"));
+
     functions.insert(csrCm_F, translate("VTranslateVars", "csrCm", "cut, split and rotate modeling operation. Takes"
                                                                    " cm units."));
+    functionDescriptions.insert(csrCm_F, translate("VTranslateVars", "cut, split and rotate modeling operation. Takes "
+                                                                     "cm units.", "function csrCm"));
+
     functions.insert(csrInch_F, translate("VTranslateVars", "csrInch", "cut, split and rotate modeling operation. Takes"
-                                                                   " inch units."));
+                                                                       " inch units."));
+    functionDescriptions.insert(csrInch_F, translate("VTranslateVars", "cut, split and rotate modeling operation. Takes"
+                                                                       " inch units.", "function csrInch"));
+
     functions.insert(abs_F, translate("VTranslateVars", "abs", "absolute value"));
+    functionDescriptions.insert(abs_F, translate("VTranslateVars", "absolute value", "function abs"));
+
     functions.insert(min_F, translate("VTranslateVars", "min", "min of all arguments"));
+    functionDescriptions.insert(min_F, translate("VTranslateVars", "min of all arguments", "function min"));
+
     functions.insert(max_F, translate("VTranslateVars", "max", "max of all arguments"));
+    functionDescriptions.insert(max_F, translate("VTranslateVars", "max of all arguments", "function max"));
+
     functions.insert(sum_F, translate("VTranslateVars", "sum", "sum of all arguments"));
+    functionDescriptions.insert(sum_F, translate("VTranslateVars", "sum of all arguments", "function sum"));
+
     functions.insert(avg_F, translate("VTranslateVars", "avg", "mean value of all arguments"));
+    functionDescriptions.insert(avg_F, translate("VTranslateVars", "mean value of all arguments", "function avg"));
+
     functions.insert(fmod_F, translate("VTranslateVars", "fmod",
                                        "Returns the floating-point remainder of numer/denom (rounded towards zero)"));
+    functionDescriptions.insert(fmod_F, translate("VTranslateVars", "Returns the floating-point remainder of "
+                                                                    "numer/denom (rounded towards zero)",
+                                                  "function fmod"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1094,6 +1181,7 @@ void VTranslateVars::Retranslate()
     PMSystemBooks.clear();
     variables.clear();
     functions.clear();
+    functionDescriptions.clear();
     stDescriptions.clear();
 
     InitPatternMakingSystems();
@@ -1114,4 +1202,10 @@ QMap<QString, QString> VTranslateVars::GetTranslatedFunctions() const
 QMap<QString, qmu::QmuTranslation> VTranslateVars::GetFunctions() const
 {
     return functions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QMap<QString, qmu::QmuTranslation> VTranslateVars::GetFunctionsDescriptions() const
+{
+    return functionDescriptions;
 }
