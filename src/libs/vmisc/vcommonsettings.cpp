@@ -239,6 +239,11 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
+VCommonSettings::VCommonSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+    :QSettings(fileName, format, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommonSettings::SharePath(const QString &shareItem)
 {
 #ifdef Q_OS_WIN

@@ -44,6 +44,7 @@ class VCommonSettings : public QSettings
 public:
     VCommonSettings(Format format, Scope scope, const QString &organization, const QString &application = QString(),
               QObject *parent = nullptr);
+    VCommonSettings(const QString &fileName, Format format, QObject *parent = nullptr);
 
     static QString SharePath(const QString &shareItem);
     static QString MultisizeTablesPath();

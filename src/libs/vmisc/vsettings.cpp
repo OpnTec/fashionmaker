@@ -138,6 +138,13 @@ VSettings::VSettings(Format format, Scope scope, const QString &organization, co
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+VSettings::VSettings(const QString &fileName, QSettings::Format format, QObject *parent)
+    :VCommonSettings(fileName, format, parent)
+{
+    qRegisterMetaTypeStreamOperators<QMarginsF>("QMarginsF");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 template <class T>
 inline T VSettings::ValueOrDef(const QString &setting, const T &defValue) const
 {
