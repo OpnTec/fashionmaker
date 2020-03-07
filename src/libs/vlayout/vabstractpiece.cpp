@@ -51,7 +51,7 @@
 const quint32 VAbstractPieceData::streamHeader = 0x05CDD73A; // CRC-32Q string "VAbstractPieceData"
 const quint16 VAbstractPieceData::classVersion = 2;
 
-const qreal maxL = 2.5;
+const qreal maxL = 3.5;
 
 const qreal VSAPoint::passmarkFactor = 0.5;
 const qreal VSAPoint::maxPassmarkLength = (10/*mm*/ / 25.4) * PrintDPI;
