@@ -3450,6 +3450,22 @@ void VPattern::GarbageCollector(bool commit)
                         {
                             modElement.removeChild(modNode);
                             cleared = true;
+
+                            // Clear history
+                            try
+                            {
+                                vidtype id = GetParametrId(modNode);
+                                auto record = std::find_if(history.begin(), history.end(),
+                                                      [id](const VToolRecord &record) { return record.getId() == id; });
+                                if (record != history.end())
+                                {
+                                    history.erase(record);
+                                }
+                            }
+                            catch(const VExceptionWrongId &)
+                            {
+                                // do nothing
+                            }
                         }
                     }
                 }

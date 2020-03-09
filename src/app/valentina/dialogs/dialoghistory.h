@@ -35,6 +35,12 @@
 
 class VPattern;
 
+struct HistoryRecord
+{
+    QString description{};
+    quint32 id{NULL_ID};
+};
+
 namespace Ui
 {
     class DialogHistory;
@@ -86,11 +92,11 @@ private:
     qint32            cursorToolRecordRow;
 
     void              FillTable();
-    QString           Record(const VToolRecord &tool);
+    HistoryRecord     Record(const VToolRecord &tool) const;
     void              InitialTable();
     void              ShowPoint();
-    QString           PointName(quint32 pointId);
-    quint32           AttrUInt(const QDomElement &domElement, const QString &name);
+    QString           PointName(quint32 pointId) const;
+    quint32           AttrUInt(const QDomElement &domElement, const QString &name) const;
     void              RetranslateUi();
     int               CursorRow() const;
 };
