@@ -12,6 +12,9 @@
 *(v*).vit*
 *(v*).vst*
 
+# Valentina's backup file
+*.bak
+
 # KDE directory preferences
 .directory
 
