@@ -3059,6 +3059,12 @@ void DialogSeamAllowance::InitPatternPieceDataTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitLabelsTab()
 {
+    QString labelValue = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
+    uiTabLabels->lineEditDLWidthFormula->setPlainText(labelValue);
+    uiTabLabels->lineEditDLHeightFormula->setPlainText(labelValue);
+    uiTabLabels->lineEditPLWidthFormula->setPlainText(labelValue);
+    uiTabLabels->lineEditPLHeightFormula->setPlainText(labelValue);
+
     m_DLWidthBaseHeight = uiTabLabels->lineEditDLWidthFormula->height();
     m_DLHeightBaseHeight = uiTabLabels->lineEditDLHeightFormula->height();
     m_DLAngleBaseHeight = uiTabLabels->lineEditDLAngleFormula->height();
@@ -3125,6 +3131,9 @@ void DialogSeamAllowance::InitLabelsTab()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitGrainlineTab()
 {
+    uiTabGrainline->lineEditLenFormula->setPlainText(
+        QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit())));
+
     connect(uiTabGrainline->groupBoxGrainline, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledGrainline);
     connect(uiTabGrainline->pushButtonRot, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
     connect(uiTabGrainline->pushButtonLen, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
@@ -3349,7 +3358,7 @@ void DialogSeamAllowance::SetGrainlineLength(QString lengthFormula)
 {
     if (lengthFormula.isEmpty())
     {
-        lengthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+        lengthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(lengthFormula, qApp->Settings()->GetOsSeparator());
@@ -3369,7 +3378,7 @@ void DialogSeamAllowance::SetDLWidth(QString widthFormula)
 {
     if (widthFormula.isEmpty())
     {
-        widthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+        widthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
@@ -3389,7 +3398,7 @@ void DialogSeamAllowance::SetDLHeight(QString heightFormula)
 {
     if (heightFormula.isEmpty())
     {
-        heightFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+        heightFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
@@ -3429,7 +3438,7 @@ void DialogSeamAllowance::SetPLWidth(QString widthFormula)
 {
     if (widthFormula.isEmpty())
     {
-        widthFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+        widthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(widthFormula, qApp->Settings()->GetOsSeparator());
@@ -3449,7 +3458,7 @@ void DialogSeamAllowance::SetPLHeight(QString heightFormula)
 {
     if (heightFormula.isEmpty())
     {
-        heightFormula = QString().setNum(UnitConvertor(1, Unit::Cm, *data->GetPatternUnit()));
+        heightFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data->GetPatternUnit()));
     }
 
     const QString formula = qApp->TrVars()->FormulaToUser(heightFormula, qApp->Settings()->GetOsSeparator());
