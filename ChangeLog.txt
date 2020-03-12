@@ -41,6 +41,7 @@
 - Change behavior for menu Pattern piece -> Show main path. Now it has an influence on export as well.
 - Call Piece Options and Delete Piece from the piece list context menu.
 - Change default values for grainline length and pattern label size to 10 cm.
+- Tool Point at distance and angle now allows negative length.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

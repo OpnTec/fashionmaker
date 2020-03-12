@@ -151,7 +151,7 @@ void DialogEndLine::EvalLength()
     formulaData.labelEditFormula = ui->labelEditFormula;
     formulaData.labelResult = ui->labelResultCalculation;
     formulaData.postfix = UnitsToStr(qApp->patternUnit(), true);
-    formulaData.checkLessThanZero = true;
+    formulaData.checkLessThanZero = false;
 
     Eval(formulaData, flagFormula);
 }
