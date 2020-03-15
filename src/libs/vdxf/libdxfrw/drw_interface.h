@@ -62,9 +62,6 @@ public:
     /** Called for every point */
     virtual void addPoint(const DRW_Point &) { }
 
-    /** Called for every ASTM notch */
-    virtual void addASTMNotch(const DRW_ASTMNotch &) { }
-
     /** Called for every line */
     virtual void addLine(const DRW_Line &) { }
 

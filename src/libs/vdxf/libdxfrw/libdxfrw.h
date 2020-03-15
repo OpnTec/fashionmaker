@@ -91,7 +91,6 @@ private:
     bool processAppId();
 
     bool processPoint();
-    bool processASTMNotch();
     bool processLine();
     bool processRay();
     bool processXline();

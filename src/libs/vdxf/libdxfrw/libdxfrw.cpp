@@ -2369,28 +2369,6 @@ bool dxfRW::processPoint() {
     return true;
 }
 
-bool dxfRW::processASTMNotch()
-{
-    DRW_DBG("dxfRW::processASTMNotch\n");
-    int code;
-    DRW_ASTMNotch notch;
-    while (reader->readRec(&code)) {
-        DRW_DBG(code); DRW_DBG("\n");
-        switch (code) {
-        case 0: {
-            nextentity = reader->getString();
-            DRW_DBG(nextentity); DRW_DBG("\n");
-            iface->addASTMNotch(notch);
-            return true;  //found new entity or ENDSEC, terminate
-        }
-        default:
-            notch.parseCode(code, reader);
-            break;
-        }
-    }
-    return true;
-}
-
 bool dxfRW::processLine() {
     DRW_DBG("dxfRW::processLine\n");
     int code;
