@@ -80,6 +80,7 @@ namespace DRW {
         VIEWPORT,
 //        WIPEOUT, //WIPEOUTVARIABLE
         XLINE,
+        ASTMNOTCH, // ASTM NOTCH
         UNKNOWN
     };
 
@@ -249,6 +250,22 @@ public:
     DRW_Coord extPoint;       /*!<  Dir extrusion normal vector, code 210, 220 & 230 */
     // TNick: we're not handling code 50 - Angle of the X axis for
     // the UCS in effect when the point was drawn
+};
+
+
+class DRW_ASTMNotch : public DRW_Point {
+    SETENTFRIENDS
+public:
+    DRW_ASTMNotch()
+    {
+        eType = DRW::ASTMNOTCH;
+    }
+
+protected:
+    void parseCode(int code, dxfReader *reader);
+
+public:
+    double angle{0};  /*!< angle, code 50 */
 };
 
 //! Class to handle line entity

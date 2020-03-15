@@ -42,6 +42,7 @@
 - Call Piece Options and Delete Piece from the piece list context menu.
 - Change default values for grainline length and pattern label size to 10 cm.
 - Tool Point at distance and angle now allows negative length.
+- Export pattern to DXF-ASTM.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

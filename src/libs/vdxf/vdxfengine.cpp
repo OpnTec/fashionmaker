@@ -55,6 +55,23 @@
 
 static const qreal AAMATextHeight = 2.5;
 
+namespace
+{
+QVector<QPointF> PieceOutline(const VLayoutPiece &detail)
+{
+    QVector<QPointF> outline;
+    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        outline = detail.GetMappedSeamAllowancePoints();
+    }
+    else
+    {
+        outline = detail.GetMappedContourPoints();
+    }
+    return outline;
+}
+}
+
 //---------------------------------------------------------------------------------------------------------------------
 static inline QPaintEngine::PaintEngineFeatures svgEngineFeatures()
 {
@@ -623,7 +640,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
     }
     input->AddAAMALayers();
 
-    ExportAAMAGlobalText(input, details);
+    ExportStyleSystemText(input, details);
 
     for(auto &detail : details)
     {
@@ -643,7 +660,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
         ExportAAMAIntcut(detailBlock, detail);
         ExportAAMANotch(detailBlock, detail);
         ExportAAMAGrainline(detailBlock, detail);
-        ExportAAMAText(detailBlock, detail);
+        ExportPieceText(detailBlock, detail);
         ExportAAMADrill(detailBlock, detail);
 
         input->AddBlock(detailBlock);
@@ -661,17 +678,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 //---------------------------------------------------------------------------------------------------------------------
 void VDxfEngine::ExportAAMAOutline(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
-    QVector<QPointF> outline;
-    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
-    {
-        outline = detail.GetMappedSeamAllowancePoints();
-    }
-    else
-    {
-        outline = detail.GetMappedContourPoints();
-    }
-
-    DRW_Entity *e = AAMAPolygon(outline, QChar('1'), true);
+    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), QChar('1'), true);
     if (e)
     {
         detailBlock->ent.push_back(e);
@@ -761,7 +768,7 @@ void VDxfEngine::ExportAAMAGrainline(dx_ifaceBlock *detailBlock, const VLayoutPi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+void VDxfEngine::ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
 {
     const QStringList list = detail.GetPieceText();
     const QPointF startPos = detail.GetPieceTextPosition();
@@ -774,7 +781,7 @@ void VDxfEngine::ExportAAMAText(dx_ifaceBlock *detailBlock, const VLayoutPiece &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDxfEngine::ExportAAMAGlobalText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
+void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, const QVector<VLayoutPiece> &details)
 {
     for(auto &detail : details)
     {
@@ -808,6 +815,261 @@ void VDxfEngine::ExportAAMADrill(dx_ifaceBlock *detailBlock, const VLayoutPiece 
             point->layer = "13";
 
             detailBlock->ent.push_back(point);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
+{
+    if (size.isValid() == false)
+    {
+        qWarning()<<"VDxfEngine::begin(), size is not valid";
+        return false;
+    }
+
+    input = QSharedPointer<dx_iface>(new dx_iface(getFileNameForLocale(), m_version, varMeasurement,
+                                                  varInsunits));
+
+    input->AddAAMAHeaderData();
+    if (m_version > DRW::AC1009)
+    {
+        input->AddDefLayers();
+    }
+    input->AddASTMLayers();
+
+    ExportStyleSystemText(input, details);
+
+    for(auto &detail : details)
+    {
+        dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
+
+        QString blockName = detail.GetName();
+        if (m_version <= DRW::AC1009)
+        {
+            blockName.replace(' ', '_');
+        }
+
+        detailBlock->name = blockName.toStdString();
+        detailBlock->layer = '1';
+
+        ExportASTMPieceBoundary(detailBlock, detail);
+        ExportASTMSewLine(detailBlock, detail);
+        ExportASTMInternalLine(detailBlock, detail);
+        ExportASTMInternalCutout(detailBlock, detail);
+        ExportASTMNotch(detailBlock, detail);
+        ExportAAMAGrainline(detailBlock, detail);
+        ExportPieceText(detailBlock, detail);
+        ExportASTMDrill(detailBlock, detail);
+        ExportASTMAnnotationText(detailBlock, detail);
+
+        input->AddBlock(detailBlock);
+
+        DRW_Insert *insert = new DRW_Insert();
+        insert->name = blockName.toStdString();
+        insert->layer = '1';
+
+        input->AddEntity(insert);
+    }
+
+    return input->fileExport(m_binary);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMPieceBoundary(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QVector<QPointF> pieceBoundary = PieceOutline(detail);
+
+    // Piece boundary
+    DRW_Entity *e = AAMAPolygon(PieceOutline(detail), QChar('1'), true);
+    if (e)
+    {
+        detailBlock->ent.push_back(e);
+    }
+
+    // Piece boundary quality validation curves
+    DRW_Entity *q = AAMAPolygon(PieceOutline(detail), "84", true);
+    if (q)
+    {
+        detailBlock->ent.push_back(q);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMSewLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    if (not detail.IsHideMainPath() && not detail.IsSeamAllowanceBuiltIn())
+    {
+        QVector<QPointF> sewLine = detail.GetMappedContourPoints();
+
+        // Sew lines
+        if (DRW_Entity *e = AAMAPolygon(sewLine, "14", true))
+        {
+            detailBlock->ent.push_back(e);
+        }
+
+        // Sew lines quality validation curves
+        if (DRW_Entity *e = AAMAPolygon(sewLine, "87", true))
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMInternalLine(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    const QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(false);
+    for(auto &intCut : drawIntCut)
+    {
+        // Internal line
+        if (DRW_Entity *e = AAMAPolygon(intCut, QChar('8'), false))
+        {
+            detailBlock->ent.push_back(e);
+        }
+
+        // Internal lines quality validation curves
+        if (DRW_Entity *e = AAMAPolygon(intCut, "85", false))
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+    for(auto &label : labels)
+    {
+        if (label.type != PlaceLabelType::Doubletree && label.type != PlaceLabelType::Button
+            && label.type != PlaceLabelType::Circle)
+        {
+            for(auto &p : qAsConst(label.shape))
+            {
+                // Internal line (placelabel)
+                if (DRW_Entity *e = AAMAPolygon(p, QChar('8'), false))
+                {
+                    detailBlock->ent.push_back(e);
+                }
+
+                // Internal lines quality validation curves
+                if (DRW_Entity *e = AAMAPolygon(p, "85", false))
+                {
+                    detailBlock->ent.push_back(e);
+                }
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMInternalCutout(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QVector<QVector<QPointF>> drawIntCut = detail.InternalPathsForCut(true);
+    for(auto &intCut : drawIntCut)
+    {
+        // Internal cutout
+        if (DRW_Entity *e = AAMAPolygon(intCut, "11", false))
+        {
+            detailBlock->ent.push_back(e);
+        }
+
+        // Internal cutouts quality validation curves
+        if (DRW_Entity *e = AAMAPolygon(intCut, "86", false))
+        {
+            detailBlock->ent.push_back(e);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMAnnotationText(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    QString name = detail.GetName();
+    QPointF textPos = detail.VLayoutPiece::DetailBoundingRect().center();
+
+    QPointF pos(textPos.x(), textPos.y() - ToPixel(AAMATextHeight, varInsunits));
+    detailBlock->ent.push_back(AAMAText(pos, name, "15"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMDrill(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    const QVector<VLayoutPlaceLabel> labels = detail.GetPlaceLabels();
+
+    for(auto &label : labels)
+    {
+        if (label.type == PlaceLabelType::Doubletree || label.type == PlaceLabelType::Button
+            || label.type == PlaceLabelType::Circle)
+        {
+            const QPointF center = detail.GetMatrix().map(label.center);
+            DRW_Point *point = new DRW_Point();
+            point->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
+                                         FromPixel(getSize().height() - center.y(), varInsunits), 0);
+            point->layer = "13";
+
+            detailBlock->ent.push_back(point);
+
+            // TODO. Investigate drill category
+//            QPointF pos(center.x(), center.y() - ToPixel(AAMATextHeight, varInsunits));
+//            detailBlock->ent.push_back(AAMAText(pos, category, "13"));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::ExportASTMNotch(dx_ifaceBlock *detailBlock, const VLayoutPiece &detail)
+{
+    if (detail.IsSeamAllowance())
+    {
+        const QVector<VLayoutPassmark> passmarks = detail.GetPassmarks();
+        for(auto &passmark : passmarks)
+        {
+            DRW_ASTMNotch *notch = new DRW_ASTMNotch();
+            const QPointF center = passmark.baseLine.p1();
+
+            notch->basePoint = DRW_Coord(FromPixel(center.x(), varInsunits),
+                                         FromPixel(getSize().height() - center.y(), varInsunits),
+                                         FromPixel(passmark.baseLine.length(), varInsunits));
+
+            notch->angle = passmark.baseLine.angle();
+
+            if (passmark.type == PassmarkLineType::OneLine || passmark.type == PassmarkLineType::TwoLines
+                || passmark.type == PassmarkLineType::ThreeLines)
+            { // Slit notch
+                notch->layer = "4";
+            }
+            else if (passmark.type == PassmarkLineType::VMark || passmark.type == PassmarkLineType::VMark2)
+            {
+                QLineF boundaryLine = QLineF(passmark.lines.first().p2(), passmark.lines.last().p2());
+                notch->thickness = FromPixel(boundaryLine.length(), varInsunits); // width
+
+                notch->layer = "4";
+            }
+            else if (passmark.type == PassmarkLineType::TMark)
+            {
+                qreal width = FromPixel(passmark.lines.last().length(), varInsunits);
+                notch->thickness = FromPixel(width, varInsunits);
+
+                notch->layer = "80";
+            }
+            else if (passmark.type == PassmarkLineType::BoxMark)
+            {
+                QPointF start = passmark.lines.first().p1();
+                QPointF end = passmark.lines.last().p2();
+
+                notch->layer = "81";
+
+                notch->thickness = FromPixel(QLineF(start, end).length(), varInsunits);
+            }
+            else if (passmark.type == PassmarkLineType::UMark)
+            {
+                QPointF start = passmark.lines.first().p1();
+                QPointF end = passmark.lines.last().p2();
+
+                notch->thickness = FromPixel(QLineF(start, end).length(), varInsunits);
+
+                notch->layer = "83";
+            }
+
+            detailBlock->ent.push_back(notch);
         }
     }
 }

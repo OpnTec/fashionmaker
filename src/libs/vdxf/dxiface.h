@@ -124,6 +124,7 @@ public:
     void AddDefLayers();
     void AddAAMALayers();
     void AddAAMAHeaderData();
+    void AddASTMLayers();
 
 private:
     Q_DISABLE_COPY(dx_iface)

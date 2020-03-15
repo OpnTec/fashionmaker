@@ -43,8 +43,11 @@ bool dx_iface::fileExport(bool binary)
 
 void dx_iface::writeEntity(DRW_Entity* e){
     switch (e->eType) {
-        case DRW::POINT:
+    case DRW::POINT:
         dxfW->writePoint(static_cast<DRW_Point*>(e));
+        break;
+    case DRW::ASTMNOTCH:
+        dxfW->writeASTMNotch(static_cast<DRW_ASTMNotch*>(e));
         break;
     case DRW::LINE:
         dxfW->writeLine(static_cast<DRW_Line*>(e));
@@ -281,6 +284,107 @@ void dx_iface::AddAAMALayers()
 void dx_iface::AddAAMAHeaderData()
 {
     cData.headerC.addStr("$CLAYER", "1", 8); // Current layer name
+}
+
+void dx_iface::AddASTMLayers()
+{
+    DRW_Layer layer;
+
+    layer.name = '1';// piece boundary
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '2';// turn points
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '3';// curve points
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    layer.name = '4';// V-notch and slit notch
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '5';// grade reference and alternate grade reference line(s)
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '6';// mirror line
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    layer.name = '7';// grainline
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = '8';// internal line(s)
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '9';// stripe reference line(s)
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    // Do not support
+//    layer.name = '10';// plaid reference line(s)
+//    layer.color = DRW::black;
+//    cData.layers.push_back(layer);
+
+    layer.name = "11";// internal cutout(s)
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    // Layer 12 intentionally left blank by the standard
+
+    layer.name = "13";// drill holes
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "14";// sew line(s)
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "15";// annotation text
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "80";// T-notch
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "81";// castle notch
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "82";// check notch
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "83";// U-notch
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "84";// piece boundary quality validation curves
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "85";// internal lines quality validation curves
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "86";// internal cutouts quality validation curves
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
+
+    layer.name = "87";// sew lines quality validation curves
+    layer.color = DRW::black;
+    cData.layers.push_back(layer);
 }
 
 void dx_iface::AddDefLayers()

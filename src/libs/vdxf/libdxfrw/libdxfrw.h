@@ -47,6 +47,7 @@ public:
     bool writeVport(DRW_Vport *ent);
     bool writeAppId(DRW_AppId *ent);
     bool writePoint(DRW_Point *ent);
+    bool writeASTMNotch(DRW_ASTMNotch *ent);
     bool writeLine(DRW_Line *ent);
     bool writeRay(DRW_Ray *ent);
     bool writeXline(DRW_Xline *ent);
@@ -90,6 +91,7 @@ private:
     bool processAppId();
 
     bool processPoint();
+    bool processASTMNotch();
     bool processLine();
     bool processRay();
     bool processXline();

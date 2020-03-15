@@ -810,16 +810,15 @@ QVector<std::pair<QString, LayoutExportFormats> > DialogSaveLayout::InitFormats(
     InitFormat(LayoutExportFormats::DXF_AC1021_AAMA);
     InitFormat(LayoutExportFormats::DXF_AC1024_AAMA);
     InitFormat(LayoutExportFormats::DXF_AC1027_AAMA);
-    // We will support them anyway
-//    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1014_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1015_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1018_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
-//    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1006_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1009_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1012_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1014_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1015_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1018_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1021_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1024_ASTM);
+    InitFormat(LayoutExportFormats::DXF_AC1027_ASTM);
     InitFormat(LayoutExportFormats::PDFTiled); 
 //    InitFormat(LayoutExportFormats::NC);
 

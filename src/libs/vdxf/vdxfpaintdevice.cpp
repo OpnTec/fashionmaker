@@ -171,7 +171,16 @@ bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
     return res;
 }
 
- //---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+bool VDxfPaintDevice::ExportToASTM(const QVector<VLayoutPiece> &details) const
+{
+    engine->setActive(true);
+    const bool res = engine->ExportToASTM(details);
+    engine->setActive(false);
+    return res;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 int VDxfPaintDevice::metric(QPaintDevice::PaintDeviceMetric metric) const
 {
     switch (metric)

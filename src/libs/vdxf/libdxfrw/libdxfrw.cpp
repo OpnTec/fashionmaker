@@ -553,6 +553,15 @@ bool dxfRW::writePoint(DRW_Point *ent) {
     return true;
 }
 
+bool dxfRW::writeASTMNotch(DRW_ASTMNotch *ent)
+{
+    writePoint(ent);
+    writer->writeDouble(50, ent->angle);
+    writer->writeDouble(39, ent->thickness); // Defined, but not used in point
+
+    return true;
+}
+
 bool dxfRW::writeLine(DRW_Line *ent) {
     writer->writeString(0, "LINE");
     writeEntity(ent);
@@ -2354,6 +2363,28 @@ bool dxfRW::processPoint() {
         }
         default:
             point.parseCode(code, reader);
+            break;
+        }
+    }
+    return true;
+}
+
+bool dxfRW::processASTMNotch()
+{
+    DRW_DBG("dxfRW::processASTMNotch\n");
+    int code;
+    DRW_ASTMNotch notch;
+    while (reader->readRec(&code)) {
+        DRW_DBG(code); DRW_DBG("\n");
+        switch (code) {
+        case 0: {
+            nextentity = reader->getString();
+            DRW_DBG(nextentity); DRW_DBG("\n");
+            iface->addASTMNotch(notch);
+            return true;  //found new entity or ENDSEC, terminate
+        }
+        default:
+            notch.parseCode(code, reader);
             break;
         }
     }

@@ -224,6 +224,18 @@ void DRW_Point::parseCode(int code, dxfReader *reader){
     }
 }
 
+void DRW_ASTMNotch::parseCode(int code, dxfReader *reader)
+{
+    switch (code) {
+    case 50:
+        angle = reader->getDouble();
+        break;
+    default:
+        DRW_Point::parseCode(code, reader);
+        break;
+    }
+}
+
 void DRW_Line::parseCode(int code, dxfReader *reader){
     switch (code) {
     case 11:

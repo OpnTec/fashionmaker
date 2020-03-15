@@ -544,6 +544,7 @@ QVector<VLayoutPassmark> VLayoutPiece::Map<VLayoutPassmark>(QVector<VLayoutPassm
     for (int i = 0; i < passmarks.size(); ++i)
     {
         passmarks[i].lines = Map(passmarks.at(i).lines);
+        passmarks[i].baseLine = d->matrix.map(passmarks.at(i).baseLine);
     }
 
     return passmarks;

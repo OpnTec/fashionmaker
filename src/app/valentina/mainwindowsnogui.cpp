@@ -510,7 +510,16 @@ void MainWindowsNoGUI::ExportData(const QVector<VLayoutPiece> &listDetails)
         format == LayoutExportFormats::DXF_AC1018_AAMA ||
         format == LayoutExportFormats::DXF_AC1021_AAMA ||
         format == LayoutExportFormats::DXF_AC1024_AAMA ||
-        format == LayoutExportFormats::DXF_AC1027_AAMA)
+        format == LayoutExportFormats::DXF_AC1027_AAMA ||
+        format == LayoutExportFormats::DXF_AC1006_ASTM ||
+        format == LayoutExportFormats::DXF_AC1009_ASTM ||
+        format == LayoutExportFormats::DXF_AC1012_ASTM ||
+        format == LayoutExportFormats::DXF_AC1014_ASTM ||
+        format == LayoutExportFormats::DXF_AC1015_ASTM ||
+        format == LayoutExportFormats::DXF_AC1018_ASTM ||
+        format == LayoutExportFormats::DXF_AC1021_ASTM ||
+        format == LayoutExportFormats::DXF_AC1024_ASTM ||
+        format == LayoutExportFormats::DXF_AC1027_ASTM)
     {
         if (m_dialogSaveLayout->Mode() == Draw::Layout)
         {
@@ -665,15 +674,31 @@ void MainWindowsNoGUI::ExportApparelLayout(const QVector<VLayoutPiece> &details,
     switch (format)
     {
         case LayoutExportFormats::DXF_AC1006_ASTM:
+            ASTMDxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1009_ASTM:
+            ASTMDxfFile(name, DRW::AC1009, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1012_ASTM:
+            ASTMDxfFile(name, DRW::AC1012, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1014_ASTM:
+            ASTMDxfFile(name, DRW::AC1014, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1015_ASTM:
+            ASTMDxfFile(name, DRW::AC1015, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1018_ASTM:
+            ASTMDxfFile(name, DRW::AC1018, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1021_ASTM:
+            ASTMDxfFile(name, DRW::AC1021, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1024_ASTM:
+            ASTMDxfFile(name, DRW::AC1024, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
+            break;
         case LayoutExportFormats::DXF_AC1027_ASTM:
-            Q_UNREACHABLE(); // For now not supported
+            ASTMDxfFile(name, DRW::AC1027, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
             break;
         case LayoutExportFormats::DXF_AC1006_AAMA:
             AAMADxfFile(name, DRW::AC1006, m_dialogSaveLayout->IsBinaryDXFFormat(), size, details);
@@ -1422,6 +1447,20 @@ void MainWindowsNoGUI::AAMADxfFile(const QString &name, int version, bool binary
     generator.SetBinaryFormat(binary);
     generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
     generator.ExportToAAMA(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindowsNoGUI::ASTMDxfFile(const QString &name, int version, bool binary, const QSize &size,
+                                   const QVector<VLayoutPiece> &details) const
+{
+    VDxfPaintDevice generator;
+    generator.setFileName(name);
+    generator.setSize(size);
+    generator.setResolution(PrintDPI);
+    generator.SetVersion(static_cast<DRW::Version>(version));
+    generator.SetBinaryFormat(binary);
+    generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
+    generator.ExportToASTM(details);
 }
 
 QT_WARNING_POP
