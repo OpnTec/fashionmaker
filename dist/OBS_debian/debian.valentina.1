@@ -1,6 +1,6 @@
 .\" Manpage for valentina.
 .\" Contact dismine@gmail.com to correct errors.
-.TH valentina 1 "21 July, 2019" "valentina man page"
+.TH valentina 1 "15 March, 2020" "valentina man page"
 .SH NAME
 Valentina \- Pattern making program.
 .SH SYNOPSIS
@@ -102,6 +102,33 @@ The path to output destination folder. By default the directory at which the app
 .BR "*" " AutoCAD DXF 2013 AAMA files (*.dxf) = 23,"
 .RE
 .RS
+.BR "*" " AutoCAD DXF R10 ASTM файли (*.dxf) = 24,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF R11/12 ASTM файли (*.dxf) = 25,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF R13 ASTM файли (*.dxf) = 26,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF R14 ASTM файли (*.dxf) = 27,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF 2000 ASTM файли (*.dxf) = 28,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF 2004 ASTM файли (*.dxf) = 29,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF 2007 ASTM файли (*.dxf) = 30,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF 2010 ASTM файли (*.dxf) = 31,"
+.RE
+.RS
+.BR "*" " AutoCAD DXF 2013 ASTM файли (*.dxf) = 32,"
+.RE
+.RS
 .BR "*" " PDF tiled files (*.pdf) = 33."
 .RE
 .IP "--bdxf"
@@ -194,6 +221,8 @@ The path to output destination folder. By default the directory at which the app
 .RB "Nest quantity copies of each piece (" "export mode" ").
 .IP "-c, --crop"
 .RB "Auto crop unused length (" "export mode" ")."
+.IP "--cropWidth"
+.RB "Auto crop unused width (" "export mode" ")."
 .IP "-u, --unite"
 .RB "Unite pages if possible (" "export mode" "). Maximum value limited by QImage that supports only a maximum of " "32768x32768 px" " images."
 .IP "-S, --savelen"
