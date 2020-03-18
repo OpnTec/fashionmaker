@@ -2447,6 +2447,22 @@
         <source>Flipping by axis</source>
         <translation>Převrácení podle osy</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Otáčení</translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2485,6 +2501,22 @@
     <message>
         <source>Flipping by line</source>
         <translation>Převrácení podle čáry</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Otáčení</translation>
     </message>
 </context>
 <context>
@@ -3760,6 +3792,22 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Center point</source>
         <translation>Středový bod</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Otáčení</translation>
     </message>
 </context>
 <context>
@@ -5434,6 +5482,18 @@ Přesto použít nastavení?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Tento bod nemůže být původní bod. Vyberte, prosím, jiný původní bod</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Název:</translation>
     </message>
 </context>
 <context>
@@ -9570,6 +9630,13 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
 </context>
 <context>
+    <name>RenameGroup</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11341,6 +11408,10 @@ Chcete uložit změny?</translation>
         <source>Length</source>
         <translation>Délka</translation>
     </message>
+    <message>
+        <source>operation options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -13077,6 +13148,10 @@ Chcete uložit změny?</translation>
         <source>Origin point</source>
         <translation>Původní bod</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished">Převrácení podle osy</translation>
+    </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
@@ -13087,6 +13162,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Second line point</source>
         <translation>Druhý bod čáry</translation>
+    </message>
+    <message>
+        <source>flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13181,6 +13260,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Rotation origin point</source>
         <translation>Původní bod otočení</translation>
+    </message>
+    <message>
+        <source>move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13781,6 +13864,10 @@ Chcete uložit změny?</translation>
     <message>
         <source>Rotation angle</source>
         <translation>Úhel otáčení</translation>
+    </message>
+    <message>
+        <source>rotate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

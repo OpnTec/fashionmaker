@@ -2447,6 +2447,22 @@
         <source>Flipping by axis</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotation</translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2485,6 +2501,22 @@
     <message>
         <source>Flipping by line</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotation</translation>
     </message>
 </context>
 <context>
@@ -3755,6 +3787,22 @@ Apply settings anyway?</source>
     <message>
         <source>Center point</source>
         <translation>Point central</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotation</translation>
     </message>
 </context>
 <context>
@@ -5427,6 +5475,18 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9546,6 +9606,13 @@ This option will take an affect after restart.</source>
     </message>
 </context>
 <context>
+    <name>RenameGroup</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11312,6 +11379,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Length</source>
         <translation type="unfinished">Longueur</translation>
     </message>
+    <message>
+        <source>operation options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -13035,6 +13106,10 @@ Voulez-vous enregistrer les changements?</translation>
         <source>Origin point</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
@@ -13045,6 +13120,10 @@ Voulez-vous enregistrer les changements?</translation>
     <message>
         <source>Second line point</source>
         <translation type="unfinished">Point de deuxieme ligne</translation>
+    </message>
+    <message>
+        <source>flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13138,6 +13217,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation origin point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -13734,6 +13817,10 @@ Voulez-vous enregistrer les changements?</translation>
     </message>
     <message>
         <source>Rotation angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rotate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

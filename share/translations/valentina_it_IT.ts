@@ -2439,6 +2439,22 @@
         <source>Flipping by axis</source>
         <translation>Ruotare sull&apos;asse</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotazione</translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2477,6 +2493,22 @@
     <message>
         <source>Flipping by line</source>
         <translation>Ruota sulla linea</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotazione</translation>
     </message>
 </context>
 <context>
@@ -3752,6 +3784,22 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Center point</source>
         <translation>Punto centrale</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotazione</translation>
     </message>
 </context>
 <context>
@@ -5425,6 +5473,18 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Nome:</translation>
     </message>
 </context>
 <context>
@@ -9556,6 +9616,13 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
 </context>
 <context>
+    <name>RenameGroup</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11322,6 +11389,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Length</source>
         <translation type="unfinished">Lunghezza</translation>
     </message>
+    <message>
+        <source>operation options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -12984,6 +13055,10 @@ Vuoi salvare le tue modifiche?</translation>
         <source>Origin point</source>
         <translation>Punto d&apos;origine</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished">Ruotare sull&apos;asse</translation>
+    </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
@@ -12994,6 +13069,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Second line point</source>
         <translation type="unfinished">Secondo punto della linea</translation>
+    </message>
+    <message>
+        <source>flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13088,6 +13167,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Rotation origin point</source>
         <translation>Ruota punto d&apos;origine</translation>
+    </message>
+    <message>
+        <source>move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13680,6 +13763,10 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Rotation angle</source>
         <translation>Angolo di rotazione</translation>
+    </message>
+    <message>
+        <source>rotate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

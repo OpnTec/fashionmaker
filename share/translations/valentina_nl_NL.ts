@@ -2447,6 +2447,22 @@
         <source>Flipping by axis</source>
         <translation>Kantelen via de aslijn</translation>
     </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotatie</translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2485,6 +2501,22 @@
     <message>
         <source>Flipping by line</source>
         <translation>Kantelen via de lijn</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotatie</translation>
     </message>
 </context>
 <context>
@@ -3760,6 +3792,22 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>Center point</source>
         <translation>Middelpunt</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
+    </message>
+    <message>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotatie</translation>
     </message>
 </context>
 <context>
@@ -5433,6 +5481,18 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Dit punt kan geen startpunt zijn.  Gelieve een ander startpunt te kiezen</translation>
+    </message>
+    <message>
+        <source>Enable to create a visibility gropup from original objects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Naam:</translation>
     </message>
 </context>
 <context>
@@ -9567,6 +9627,13 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
 </context>
 <context>
+    <name>RenameGroup</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RenamePP</name>
     <message>
         <source>rename pattern piece</source>
@@ -11338,6 +11405,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Length</source>
         <translation>Lengte</translation>
     </message>
+    <message>
+        <source>operation options</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -13074,6 +13145,10 @@ Wil je deze veranderingen opslaan?</translation>
         <source>Origin point</source>
         <translation>Startpunt</translation>
     </message>
+    <message>
+        <source>Flipping by axis</source>
+        <translation type="unfinished">Kantelen via de aslijn</translation>
+    </message>
 </context>
 <context>
     <name>VToolFlippingByLine</name>
@@ -13084,6 +13159,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Second line point</source>
         <translation>Tweede lijnpunt</translation>
+    </message>
+    <message>
+        <source>flipping by line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13178,6 +13257,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Rotation origin point</source>
         <translation>Rotatie startpunt</translation>
+    </message>
+    <message>
+        <source>move</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -13778,6 +13861,10 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Rotation angle</source>
         <translation>Hoek van draaiing</translation>
+    </message>
+    <message>
+        <source>rotate</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
