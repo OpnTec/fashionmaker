@@ -273,11 +273,21 @@ QDomElement VDomDocument::elementById(quint32 id, const QString &tagName, bool u
 
     if (m_elementIdCache.contains(id))
     {
-       const QDomElement e = m_elementIdCache.value(id);
-       if (e.parentNode().nodeType() != QDomNode::BaseNode)
-       {
-           return e;
-       }
+        const QDomElement e = m_elementIdCache.value(id);
+        if (e.parentNode().nodeType() != QDomNode::BaseNode)
+        {
+            if (not tagName.isEmpty())
+            {
+                if (e.tagName() == tagName)
+                {
+                    return e;
+                }
+            }
+            else
+            {
+                return e;
+            }
+        }
     }
 
     if (updateCache)
