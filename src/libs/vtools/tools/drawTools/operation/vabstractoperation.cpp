@@ -40,9 +40,10 @@ const QString VAbstractOperation::TagDestination = QStringLiteral("destination")
 namespace
 {
 /**
- * @brief VisibilityGroupDataFromSource
- * @param initData
- * @return
+ * @brief VisibilityGroupDataFromSource converts source list to visibility group list.
+ * @param data container with pattern data
+ * @param source list with source objects
+ * @return visibility group data
  */
 QMap<quint32, quint32> VisibilityGroupDataFromSource(const VContainer *data, const QVector<quint32> &source)
 {
