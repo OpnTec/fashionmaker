@@ -58,7 +58,7 @@
 #include "tools/vtooluniondetails.h"
 #include "dialogs/dialogs.h"
 #include "dialogs/vwidgetgroups.h"
-#include "../vtools/undocommands/addgroup.h"
+#include "../vtools/undocommands/undogroup.h"
 #include "dialogs/vwidgetdetails.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "../qmuparser/qmuparsererror.h"

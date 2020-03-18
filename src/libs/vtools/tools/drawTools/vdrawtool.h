@@ -51,9 +51,7 @@
 #include "../vwidgets/vabstractmainwindow.h"
 #include "../vdatatool.h"
 #include "../vgeometry/vpointf.h"
-#include "../vtools/undocommands/addgroup.h"
-#include "../vtools/undocommands/additemtogroup.h"
-#include "../vtools/undocommands/removeitemfromgroup.h"
+#include "../vtools/undocommands/undogroup.h"
 
 /**
  * @brief The VDrawTool abstract class for all draw tool.
