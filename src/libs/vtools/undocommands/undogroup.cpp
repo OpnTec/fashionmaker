@@ -117,6 +117,34 @@ void AddGroup::redo()
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
 
+//RenameGroup
+//---------------------------------------------------------------------------------------------------------------------
+RenameGroup::RenameGroup(VAbstractPattern *doc, quint32 id, const QString &name, QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      newName(name)
+{
+    setText(tr("rename group"));
+    nodeId = id;
+    oldName = doc->GetGroupName(nodeId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RenameGroup::undo()
+{
+    qCDebug(vUndo, "Undo.");
+    doc->SetGroupName(nodeId, oldName);
+    emit UpdateGroups();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RenameGroup::redo()
+{
+    qCDebug(vUndo, "Redo.");
+
+    doc->SetGroupName(nodeId, newName);
+    emit UpdateGroups();
+}
+
 //AddItemToGroup
 //---------------------------------------------------------------------------------------------------------------------
 AddItemToGroup::AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent)

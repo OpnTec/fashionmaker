@@ -53,6 +53,22 @@ private:
     const QString nameActivDraw;
 };
 
+class RenameGroup : public VUndoCommand
+{
+    Q_OBJECT
+public:
+    RenameGroup(VAbstractPattern *doc, quint32 id, const QString &name, QUndoCommand *parent = nullptr);
+    virtual ~RenameGroup()=default;
+    virtual void undo() override;
+    virtual void redo() override;
+signals:
+    void UpdateGroups();
+private:
+    Q_DISABLE_COPY(RenameGroup)
+    QString newName;
+    QString oldName{};
+};
+
 class AddItemToGroup : public VUndoCommand
 {
     Q_OBJECT

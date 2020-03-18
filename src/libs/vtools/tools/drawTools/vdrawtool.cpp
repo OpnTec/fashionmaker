@@ -114,18 +114,24 @@ void VDrawTool::SaveDialogChange(const QString &undoText)
         QList<quint32> oldDependencies;
         QList<quint32> newDependencies;
         SaveDialog(newDomElement, oldDependencies, newDependencies);
-
-        if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
-        {
-            SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
-                                                               newDependencies, doc, m_id);
-            connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
-            qApp->getUndoStack()->push(saveOptions);
-        }
+        ApplyToolOptions(oldDependencies, newDependencies, oldDomElement, newDomElement);
     }
     else
     {
         qCDebug(vTool, "Can't find tool with id = %u", m_id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDrawTool::ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                const QDomElement &oldDomElement, const QDomElement &newDomElement)
+{
+    if (newDependencies != oldDependencies || not VDomDocument::Compare(newDomElement, oldDomElement))
+    {
+        SaveToolOptions *saveOptions = new SaveToolOptions(oldDomElement, newDomElement, oldDependencies,
+                                                           newDependencies, doc, m_id);
+        connect(saveOptions, &SaveToolOptions::NeedLiteParsing, doc, &VAbstractPattern::LiteParseTree);
+        qApp->getUndoStack()->push(saveOptions);
     }
 }
 

@@ -98,6 +98,17 @@ void VToolRotation::setDialog()
     dialogTool->SetOrigPointId(origPointId);
     dialogTool->SetAngle(formulaAngle);
     dialogTool->SetSuffix(suffix);
+
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    if (group != null_id)
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(true);
+        dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
+    }
+    else
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(false);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -113,6 +124,8 @@ VToolRotation *VToolRotation::Create(const QPointer<DialogTool> &dialog, VMainGr
     initData.angle = dialogTool->GetAngle();
     initData.suffix = dialogTool->GetSuffix();
     initData.source = dialogTool->GetObjects();
+    initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
+    initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;
@@ -251,6 +264,11 @@ QT_WARNING_POP
 
     if (initData.parse == Document::FullParse)
     {
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            qApp->getUndoStack()->beginMacro(tr("rotate"));
+        }
+
         VAbstractTool::AddRecord(initData.id, Tool::Rotation, initData.doc);
         VToolRotation *tool = new VToolRotation(initData);
         initData.scene->addItem(tool);
@@ -261,6 +279,13 @@ QT_WARNING_POP
         {
             initData.doc->IncrementReferens(initData.data->GetGObject(idObject)->getIdTool());
         }
+
+        if (initData.typeCreation == Source::FromGui && initData.hasLinkedVisibilityGroup)
+        {
+            VAbstractOperation::CreateVisibilityGroup(initData);
+            qApp->getUndoStack()->endMacro();
+        }
+
         return tool;
     }
     return nullptr;
@@ -344,6 +369,10 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrCenter, QString().setNum(dialogTool->GetOrigPointId()));
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

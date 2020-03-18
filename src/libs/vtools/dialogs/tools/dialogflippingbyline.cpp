@@ -79,6 +79,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
     FillComboBoxPoints(ui->comboBoxSecondLinePoint);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogFlippingByLine::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogFlippingByLine::GroupNameChanged);
     connect(ui->comboBoxFirstLinePoint, &QComboBox::currentTextChanged,
             this, &DialogFlippingByLine::PointChanged);
     connect(ui->comboBoxSecondLinePoint, &QComboBox::currentTextChanged,
@@ -140,6 +141,30 @@ void DialogFlippingByLine::SetSuffix(const QString &value)
 QVector<quint32> DialogFlippingByLine::GetObjects() const
 {
     return ConvertToVector(objects);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogFlippingByLine::GetVisibilityGroupName() const
+{
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogFlippingByLine::HasLinkedVisibilityGroup() const
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -297,6 +322,27 @@ void DialogFlippingByLine::SuffixChanged()
 
         flagName = true;
         ChangeColor(ui->labelSuffix, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::GroupNameChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
     }
     CheckState();
 }

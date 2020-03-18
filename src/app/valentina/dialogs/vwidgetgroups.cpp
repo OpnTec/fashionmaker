@@ -148,9 +148,9 @@ void VWidgetGroups::RenameGroup(int row, int column)
     }
 
     const quint32 id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toUInt();
-    doc->SetGroupName(id, ui->tableWidget->item(row, column)->text());
-
-    UpdateGroups();
+    ::RenameGroup *renameGroup = new ::RenameGroup(doc, id, ui->tableWidget->item(row, column)->text());
+    connect(renameGroup, &RenameGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
+    qApp->getUndoStack()->push(renameGroup);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -209,9 +209,9 @@ void VWidgetGroups::CtxMenu(const QPoint &pos)
 
         if (result == QDialog::Accepted)
         {
-            doc->SetGroupName(id, dialog->GetName());
-            item = ui->tableWidget->item(row, 1);
-            item->setText(dialog->GetName());
+            ::RenameGroup *renameGroup = new ::RenameGroup(doc, id, dialog->GetName());
+            connect(renameGroup, &RenameGroup::UpdateGroups, this, &VWidgetGroups::UpdateGroups);
+            qApp->getUndoStack()->push(renameGroup);
         }
     }
     else if (selectedAction == actionDelete)

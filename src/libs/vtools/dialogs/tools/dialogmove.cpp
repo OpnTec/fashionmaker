@@ -85,7 +85,8 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
       flagAngle(false),
       flagRotationAngle(false),
       flagLength(false),
-      flagName(true)
+      flagName(true),
+      flagGroupName(true)
 {
     ui->setupUi(this);
 
@@ -118,6 +119,7 @@ DialogMove::DialogMove(const VContainer *data, quint32 toolId, QWidget *parent)
     ui->comboBoxRotationOriginPoint->blockSignals(false);
 
     connect(ui->lineEditSuffix, &QLineEdit::textChanged, this, &DialogMove::SuffixChanged);
+    connect(ui->lineEditVisibilityGroup, &QLineEdit::textChanged, this, &DialogMove::GroupNameChanged);
     connect(ui->toolButtonExprAngle, &QPushButton::clicked, this, &DialogMove::FXAngle);
     connect(ui->toolButtonExprRotationAngle, &QPushButton::clicked, this, &DialogMove::FXRotationAngle);
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogMove::FXLength);
@@ -255,6 +257,30 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 QVector<quint32> DialogMove::GetObjects() const
 {
     return ConvertToVector(objects);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString DialogMove::GetVisibilityGroupName() const
+{
+    return ui->lineEditVisibilityGroup->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupName(const QString &name)
+{
+    ui->lineEditVisibilityGroup->setText(name.isEmpty() ? tr("Rotation") : name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool DialogMove::HasLinkedVisibilityGroup() const
+{
+    return ui->groupBoxVisibilityGroup->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetHasLinkedVisibilityGroup(bool linked)
+{
+    ui->groupBoxVisibilityGroup->setChecked(linked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -477,6 +503,27 @@ void DialogMove::SuffixChanged()
 
         flagName = true;
         ChangeColor(ui->labelSuffix, OkColor(this));
+    }
+    CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::GroupNameChanged()
+{
+    QLineEdit* edit = qobject_cast<QLineEdit*>(sender());
+    if (edit)
+    {
+        const QString name = edit->text();
+        if (name.isEmpty())
+        {
+            flagGroupName = false;
+            ChangeColor(ui->labelGroupName, errorColor);
+            CheckState();
+            return;
+        }
+
+        flagGroupName = true;
+        ChangeColor(ui->labelGroupName, OkColor(this));
     }
     CheckState();
 }

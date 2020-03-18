@@ -53,15 +53,14 @@ struct DestinationItem
 struct VAbstractOperationInitData : VAbstractToolInitData
 {
     VAbstractOperationInitData()
-        : VAbstractToolInitData(),
-          suffix(),
-          source(),
-          destination()
+        : VAbstractToolInitData()
     {}
 
-    QString suffix;
-    QVector<quint32> source;
-    QVector<DestinationItem> destination;
+    QString suffix{};
+    QVector<quint32> source{};
+    QVector<DestinationItem> destination{};
+    QString visibilityGroupName{};
+    bool hasLinkedVisibilityGroup{false};
 };
 
 // FIXME. I don't know how to use QGraphicsItem properly, so just took first available finished class.
@@ -133,12 +132,17 @@ protected:
 
     QMap<quint32, VAbstractSimple *> operatedObjects;
 
+    bool hasLinkedGroup{false};
+    QString groupName{};
+
     VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
                        QGraphicsItem *parent = nullptr);
 
     virtual void AddToFile() override;
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
+    virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
+                                  const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
 
     void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);
@@ -155,11 +159,15 @@ protected:
 
     QString ComplexPointToolTip(quint32 itemId) const;
     QString ComplexCurveToolTip(quint32 itemId) const;
+
+    static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
 private:
     Q_DISABLE_COPY(VAbstractOperation)
 
     void AllowCurveHover(bool enabled, GOType type);
     void AllowCurveSelecting(bool enabled, GOType type);
+
+    bool NeedUpdateVisibilityGroup() const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

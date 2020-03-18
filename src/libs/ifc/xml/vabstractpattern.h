@@ -200,7 +200,9 @@ public:
 
     void           ParseGroups(const QDomElement &domElement);
     QDomElement    CreateGroups();
-    QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData);
+    QDomElement    CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData,
+                            vidtype tool=null_id);
+    vidtype        GroupLinkedToTool(vidtype toolId) const;
     QString        GetGroupName(quint32 id);
     void           SetGroupName(quint32 id, const QString &name);
     QMap<quint32, QPair<QString, bool> > GetGroups();
@@ -413,6 +415,7 @@ public slots:
     void           ClearScene();
     void           CheckInLayoutList();
     void           SelectedDetail(quint32 id);
+    void           UpdateVisiblityGroups();
 
 protected:
     /** @brief nameActivDraw name current pattern peace. */

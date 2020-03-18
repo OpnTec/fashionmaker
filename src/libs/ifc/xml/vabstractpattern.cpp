@@ -1731,6 +1731,12 @@ void VAbstractPattern::SelectedDetail(quint32 id)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::UpdateVisiblityGroups()
+{
+    emit UpdateGroups();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::ToolExists(const quint32 &id)
 {
     if (tools.contains(id) == false)
@@ -2422,7 +2428,8 @@ QDomElement VAbstractPattern::CreateGroups()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData)
+QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const QMap<quint32, quint32> &groupData,
+                                          vidtype tool)
 {
     if (id == NULL_ID || groupData.isEmpty())
     {
@@ -2433,6 +2440,7 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
     SetAttribute(group, AttrId, id);
     SetAttribute(group, AttrName, name);
     SetAttribute(group, AttrVisible, true);
+    SetAttributeOrRemoveIf(group, AttrTool, tool, tool == null_id);
 
     auto i = groupData.constBegin();
     while (i != groupData.constEnd())
@@ -2446,66 +2454,50 @@ QDomElement VAbstractPattern::CreateGroup(quint32 id, const QString &name, const
 
     return group;
 }
+//---------------------------------------------------------------------------------------------------------------------
+vidtype VAbstractPattern::GroupLinkedToTool(vidtype toolId) const
+{
+    const QDomNodeList groups = elementsByTagName(TagGroup);
+    for (int i=0; i < groups.size(); ++i)
+    {
+        const QDomElement group = groups.at(i).toElement();
+        if (not group.isNull() && group.hasAttribute(AttrTool))
+        {
+            const quint32 id = GetParametrUInt(group, AttrTool, NULL_ID_STR);
+
+            if (toolId == id)
+            {
+                return GetParametrUInt(group, AttrId, NULL_ID_STR);
+            }
+        }
+    }
+
+    return null_id;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 QString VAbstractPattern::GetGroupName(quint32 id)
 {
     QString name = tr("New group");
-    QDomElement groups = CreateGroups();
-    if (not groups.isNull())
+    QDomElement group = elementById(id, TagGroup);
+    if (group.isElement())
     {
-        QDomElement group = elementById(id, TagGroup);
-        if (group.isElement())
-        {
-            name = GetParametrString(group, AttrName, name);
-            return name;
-        }
-        else
-        {
-            if (groups.childNodes().isEmpty())
-            {
-                QDomNode parent = groups.parentNode();
-                parent.removeChild(groups);
-            }
+        name = GetParametrString(group, AttrName, name);
 
-            qDebug("Can't get group by id = %u.", id);
-            return name;
-        }
     }
-    else
-    {
-        qDebug("Can't get tag Groups.");
-        return name;
-    }
+
+    return name;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::SetGroupName(quint32 id, const QString &name)
 {
-    QDomElement groups = CreateGroups();
-    if (not groups.isNull())
+    QDomElement group = elementById(id, TagGroup);
+    if (group.isElement())
     {
-        QDomElement group = elementById(id, TagGroup);
-        if (group.isElement())
-        {
-            group.setAttribute(AttrName, name);
-            modified = true;
-            emit patternChanged(false);
-        }
-        else
-        {
-            if (groups.childNodes().isEmpty())
-            {
-                QDomNode parent = groups.parentNode();
-                parent.removeChild(groups);
-            }
-
-            qDebug("Can't get group by id = %u.", id);
-        }
-    }
-    else
-    {
-        qDebug("Can't get tag Groups.");
+        group.setAttribute(AttrName, name);
+        modified = true;
+        emit patternChanged(false);
     }
 }
 

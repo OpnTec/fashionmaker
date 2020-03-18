@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>332</height>
+    <width>304</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -590,6 +590,41 @@
       <widget class="QComboBox" name="comboBoxRotationOriginPoint"/>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxVisibilityGroup">
+     <property name="toolTip">
+      <string>Enable to create a visibility gropup from original objects</string>
+     </property>
+     <property name="title">
+      <string>Visibility Group</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="labelGroupName">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEditVisibilityGroup">
+        <property name="text">
+         <string>Move</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
