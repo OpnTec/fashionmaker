@@ -67,6 +67,7 @@ DialogFlippingByLine::DialogFlippingByLine(const VContainer *data, quint32 toolI
       stage1(true),
       m_suffix(),
       flagName(true),
+      flagGroupName(true),
       flagError(false)
 {
     ui->setupUi(this);
