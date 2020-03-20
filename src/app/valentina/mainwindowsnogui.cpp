@@ -823,7 +823,6 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                                  ToPixel(printer->pageRect(QPrinter::Millimeter).height(), Unit::Mm));
     const double xscale = printer->pageRect().width() / printerPageRect.width();
     const double yscale = printer->pageRect().height() / printerPageRect.height();
-    const double scale = qMin(xscale, yscale);
 
     QPainter painter;
     if (not painter.begin(printer))
@@ -983,7 +982,7 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                     x = 0; y = 0;
                 }
 
-                QRectF target(x * scale, y * scale, source.width() * scale, source.height() * scale);
+                QRectF target(x * xscale, y * yscale, source.width() * xscale, source.height() * yscale);
 
                 scenes.at(paperIndex)->render(&painter, target, source, Qt::IgnoreAspectRatio);
 
