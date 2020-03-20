@@ -973,7 +973,9 @@ void MainWindowsNoGUI::PrintPages(QPrinter *printer)
                 qreal x,y;
                 if(printer->fullPage())
                 {
-                    QMarginsF printerMargins = printer->pageLayout().margins();
+                    QPageLayout layout = printer->pageLayout();
+                    layout.setUnits(QPageLayout::Millimeter);
+                    QMarginsF printerMargins = layout.margins();
                     x = qFloor(ToPixel(printerMargins.left(),Unit::Mm));
                     y = qFloor(ToPixel(printerMargins.top(),Unit::Mm));
                 }

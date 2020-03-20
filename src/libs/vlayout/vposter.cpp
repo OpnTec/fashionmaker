@@ -431,7 +431,9 @@ QRect VPoster::PageRect() const
 
     if(printer->fullPage())
     {
-        QMarginsF pMargins = printer->pageLayout().margins();
+        QPageLayout layout = printer->pageLayout();
+        layout.setUnits(QPageLayout::Millimeter);
+        QMarginsF pMargins = layout.margins();
         QRectF newRect = rect.marginsRemoved(pMargins);
         const QRect pageRectFP(0, 0, qFloor(ToPixel(newRect.width())), qFloor(ToPixel(newRect.height())));
         return pageRectFP;
