@@ -151,25 +151,14 @@ DialogSaveLayout::DialogSaveLayout(int count, Draw mode, const QString &fileName
 
     InitTemplates(ui->comboBoxTemplates);
 
+    connect(ui->toolButtonScaleConnected, &QToolButton::clicked, this, &DialogSaveLayout::ToggleScaleConnection);
+
+    connect(ui->doubleSpinBoxHorizontalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::HorizontalScaleChanged);
+    connect(ui->doubleSpinBoxVerticalScale, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, &DialogSaveLayout::VerticalScaleChanged);
+
     ReadSettings();
-
-    // connect for the template drop down box of the tiled pds
-    connect(ui->comboBoxTemplates, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, &DialogSaveLayout::WriteSettings);
-
-    // connects for the margins of the tiled pdf
-    connect(ui->doubleSpinBoxLeftField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxTopField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxRightField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-    connect(ui->doubleSpinBoxBottomField, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
-            this, &DialogSaveLayout::WriteSettings);
-
-    // connects for the orientation buttons for the tiled pdf
-    connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
-    connect(ui->toolButtonLandscape, &QToolButton::toggled, this, &DialogSaveLayout::WriteSettings);
 
     ShowExample();//Show example for current format.
 }
@@ -520,6 +509,8 @@ LayoutExportFormats DialogSaveLayout::Format() const
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::Save()
 {
+    WriteSettings();
+
     for (int i=0; i < count; ++i)
     {
         const QString name = Path()+'/'+FileName()+QString::number(i+1)+ExportFormatSuffix(Format());
@@ -624,6 +615,39 @@ void DialogSaveLayout::ShowExample()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::ToggleScaleConnection()
+{
+    m_scaleConnected = not m_scaleConnected;
+
+    QIcon icon;
+    icon.addFile(m_scaleConnected ? QStringLiteral(":/icon/32x32/link.png")
+                                  : QStringLiteral(":/icon/32x32/broken_link.png"));
+    ui->toolButtonScaleConnected->setIcon(icon);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::HorizontalScaleChanged(double d)
+{
+    if (m_scaleConnected)
+    {
+        ui->doubleSpinBoxVerticalScale->blockSignals(true);
+        ui->doubleSpinBoxVerticalScale->setValue(d);
+        ui->doubleSpinBoxVerticalScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::VerticalScaleChanged(double d)
+{
+    if (m_scaleConnected)
+    {
+        ui->doubleSpinBoxHorizontalScale->blockSignals(true);
+        ui->doubleSpinBoxHorizontalScale->setValue(d);
+        ui->doubleSpinBoxHorizontalScale->blockSignals(false);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogSaveLayout::IsTextAsPaths() const
 {
     return ui->checkBoxTextAsPaths->isChecked();
@@ -717,6 +741,30 @@ PageOrientation DialogSaveLayout::GetTiledPageOrientation() const
     {
         return PageOrientation::Landscape;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetXScale(qreal scale)
+{
+    ui->doubleSpinBoxHorizontalScale->setValue(scale * 100.);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal DialogSaveLayout::GetXScale() const
+{
+    return ui->doubleSpinBoxHorizontalScale->value() / 100.;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetYScale(qreal scale)
+{
+    ui->doubleSpinBoxVerticalScale->setValue(scale * 100.);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal DialogSaveLayout::GetYScale() const
+{
+    return ui->doubleSpinBoxVerticalScale->value() / 100.;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

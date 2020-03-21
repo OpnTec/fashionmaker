@@ -2,6 +2,7 @@
 # This need for corect working file translations.pro
 
 HEADERS += \
+    $$PWD/dialoglayoutscale.h \
     $$PWD/dialogs.h \
     $$PWD/dialogincrements.h \
     $$PWD/dialoghistory.h \
@@ -26,6 +27,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/dialogincrements.cpp \
     $$PWD/dialoghistory.cpp \
+    $$PWD/dialoglayoutscale.cpp \
     $$PWD/dialogpatternproperties.cpp \
     $$PWD/dialognewpattern.cpp \
     $$PWD/dialogaboutapp.cpp \
@@ -47,6 +49,7 @@ SOURCES += \
 FORMS += \
     $$PWD/dialogincrements.ui \
     $$PWD/dialoghistory.ui \
+    $$PWD/dialoglayoutscale.ui \
     $$PWD/dialogpatternproperties.ui \
     $$PWD/dialognewpattern.ui \
     $$PWD/dialogaboutapp.ui \

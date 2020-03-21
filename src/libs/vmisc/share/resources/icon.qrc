@@ -85,5 +85,9 @@
         <file>icon/32x32/font_preferences.png</file>
         <file>icon/24x24/font_preferences@2x.png</file>
         <file>icon/24x24/font_preferences.png</file>
+        <file>icon/32x32/broken_link.png</file>
+        <file>icon/32x32/broken_link@2x.png</file>
+        <file>icon/32x32/link.png</file>
+        <file>icon/32x32/link@2x.png</file>
     </qresource>
 </RCC>

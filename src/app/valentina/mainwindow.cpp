@@ -5527,6 +5527,8 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
             m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
             m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
             m_dialogSaveLayout->SetTextAsPaths(expParams->IsTextAsPaths());
+            m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
+            m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 
             if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
             {
@@ -5562,6 +5564,8 @@ bool MainWindow::DoExport(const VCommandLinePtr &expParams)
                 m_dialogSaveLayout->SetDestinationPath(expParams->OptDestinationPath());
                 m_dialogSaveLayout->SelectFormat(static_cast<LayoutExportFormats>(expParams->OptExportType()));
                 m_dialogSaveLayout->SetBinaryDXFFormat(expParams->IsBinaryDXF());
+                m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
+                m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 
                 if (static_cast<LayoutExportFormats>(expParams->OptExportType()) == LayoutExportFormats::PDFTiled)
                 {

@@ -588,6 +588,30 @@ void VDxfEngine::setInsunits(const VarInsunits &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VDxfEngine::GetXScale() const
+{
+    return m_xscale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetXScale(const qreal &xscale)
+{
+    m_xscale = xscale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VDxfEngine::GetYScale() const
+{
+    return m_yscale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfEngine::SetYScale(const qreal &yscale)
+{
+    m_yscale = yscale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wswitch-default")
 
@@ -642,7 +666,7 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
     ExportStyleSystemText(input, details);
 
-    for(auto &detail : details)
+    for(auto detail : details)
     {
         dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
 
@@ -654,6 +678,8 @@ bool VDxfEngine::ExportToAAMA(const QVector<VLayoutPiece> &details)
 
         detailBlock->name = blockName.toStdString();
         detailBlock->layer = '1';
+
+        detail.Scale(m_xscale, m_yscale);
 
         ExportAAMAOutline(detailBlock, detail);
         ExportAAMADraw(detailBlock, detail);
@@ -775,7 +801,7 @@ void VDxfEngine::ExportPieceText(dx_ifaceBlock *detailBlock, const VLayoutPiece 
 
     for (int i = 0; i < list.size(); ++i)
     {
-        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight, varInsunits)*(list.size() - i-1));
+        QPointF pos(startPos.x(), startPos.y() - ToPixel(AAMATextHeight * m_yscale, varInsunits)*(list.size() - i-1));
         detailBlock->ent.push_back(AAMAText(pos, list.at(i), QChar('1')));
     }
 }
@@ -790,7 +816,8 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
         {
             for (int j = 0; j < strings.size(); ++j)
             {
-                QPointF pos(0, getSize().height() - ToPixel(AAMATextHeight, varInsunits)*(strings.size() - j-1));
+                QPointF pos(0, getSize().height() -
+                                   ToPixel(AAMATextHeight * m_yscale, varInsunits)*(strings.size() - j-1));
                 input->AddEntity(AAMAText(pos, strings.at(j), QChar('1')));
             }
             return;
@@ -840,7 +867,7 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
 
     ExportStyleSystemText(input, details);
 
-    for(auto &detail : details)
+    for(auto detail : details)
     {
         dx_ifaceBlock *detailBlock = new dx_ifaceBlock();
 
@@ -852,6 +879,8 @@ bool VDxfEngine::ExportToASTM(const QVector<VLayoutPiece> &details)
 
         detailBlock->name = blockName.toStdString();
         detailBlock->layer = '1';
+
+        detail.Scale(m_xscale, m_yscale);
 
         ExportASTMPieceBoundary(detailBlock, detail);
         ExportASTMSewLine(detailBlock, detail);

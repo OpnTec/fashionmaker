@@ -86,6 +86,12 @@ public:
     void            SetTiledPageOrientation(PageOrientation orientation);
     PageOrientation GetTiledPageOrientation() const;
 
+    void  SetXScale(qreal scale);
+    qreal GetXScale() const;
+
+    void  SetYScale(qreal scale);
+    qreal GetYScale() const;
+
 protected:
     virtual void showEvent(QShowEvent *event) override;
     void InitTemplates(QComboBox *comboBoxTemplates);
@@ -94,6 +100,9 @@ private slots:
     void Save();
     void PathChanged(const QString &text);
     void ShowExample();
+    void ToggleScaleConnection();
+    void HorizontalScaleChanged(double d);
+    void VerticalScaleChanged(double d);
 private:
     Q_DISABLE_COPY(DialogSaveLayout)
     Ui::DialogSaveLAyout *ui;
@@ -101,6 +110,7 @@ private:
     bool isInitialized;
     Draw m_mode;
     bool m_tiledExportMode;
+    bool m_scaleConnected{true};
 
     static bool havePdf;
     static bool tested;

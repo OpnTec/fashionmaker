@@ -53,6 +53,8 @@ const QString LONG_OPTION_BINARYDXF         = QStringLiteral("bdxf");
 const QString LONG_OPTION_TEXT2PATHS        = QStringLiteral("text2paths");
 const QString LONG_OPTION_EXPORTONLYDETAILS = QStringLiteral("exportOnlyDetails");
 const QString LONG_OPTION_EXPORTSUCHDETAILS = QStringLiteral("exportSuchDetails");
+const QString LONG_OPTION_EXPXSCALE         = QStringLiteral("xscale");
+const QString LONG_OPTION_EXPYSCALE         = QStringLiteral("yscale");
 
 const QString LONG_OPTION_CROP_LENGTH       = QStringLiteral("crop");
 const QString SINGLE_OPTION_CROP_LENGTH     = QStringLiteral("c");
@@ -153,6 +155,8 @@ QStringList AllKeys()
         LONG_OPTION_TEXT2PATHS,
         LONG_OPTION_EXPORTONLYDETAILS,
         LONG_OPTION_EXPORTSUCHDETAILS,
+        LONG_OPTION_EXPXSCALE,
+        LONG_OPTION_EXPYSCALE,
         LONG_OPTION_CROP_LENGTH, SINGLE_OPTION_CROP_LENGTH,
         LONG_OPTION_CROP_WIDTH,
         LONG_OPTION_UNITE, SINGLE_OPTION_UNITE,

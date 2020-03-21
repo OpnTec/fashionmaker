@@ -409,6 +409,28 @@ bool VCommandLine::IsCSVWithHeader() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VCommandLine::ExportXScale() const
+{
+    qreal xs = 0;
+    if (IsOptionSet(LONG_OPTION_EXPXSCALE))
+    {
+        xs = OptionValue(LONG_OPTION_EXPXSCALE).toDouble();
+    }
+    return xs;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VCommandLine::ExportYScale() const
+{
+    qreal ys = 0;
+    if (IsOptionSet(LONG_OPTION_EXPYSCALE))
+    {
+        ys = OptionValue(LONG_OPTION_EXPYSCALE).toDouble();
+    }
+    return ys;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 QString VCommandLine::OptExportSuchDetails() const
 {
     QString path;
@@ -664,6 +686,12 @@ void VCommandLine::InitCommandLineOptions()
          translate("VCommandLine", "Page bottom margin in current units like 3.0 (export mode). If not set will be "
          "used value from default printer. Or 0 if none printers was found."),
          translate("VCommandLine", "The bottom margin")},
+        {LONG_OPTION_EXPXSCALE,
+         translate("VCommandLine", "Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode)."),
+         translate("VCommandLine", "Horizontal scale")},
+        {LONG_OPTION_EXPYSCALE,
+         translate("VCommandLine", "Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode)."),
+         translate("VCommandLine", "Vertical scale")},
     //=================================================================================================================
         {LONG_OPTION_FOLLOW_GRAINLINE,
          translate("VCommandLine", "Order detail to follow grainline direction (export mode).")},

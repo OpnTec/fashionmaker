@@ -88,6 +88,9 @@ public:
     bool IsExportOnlyDetails() const;
     bool IsCSVWithHeader() const;
 
+    qreal ExportXScale() const;
+    qreal ExportYScale() const;
+
     //@brief returns the piece name regex or empty string if not set
     QString OptExportSuchDetails() const;
 

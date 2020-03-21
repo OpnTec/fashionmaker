@@ -66,6 +66,12 @@ public:
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
 
+    qreal GetXScale() const;
+    void  SetXScale(const qreal &xscale);
+
+    qreal GetYScale() const;
+    void  SetYScale(const qreal &yscale);
+
     bool ExportToAAMA(const QVector<VLayoutPiece> &details) const;
     bool ExportToASTM(const QVector<VLayoutPiece> &details) const;
 

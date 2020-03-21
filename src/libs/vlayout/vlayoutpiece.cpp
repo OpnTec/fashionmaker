@@ -831,6 +831,14 @@ void VLayoutPiece::Translate(qreal dx, qreal dy)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutPiece::Scale(qreal sx, qreal sy)
+{
+    QTransform m;
+    m.scale(sx, sy);
+    d->matrix *= m;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLayoutPiece::Rotate(const QPointF &originPoint, qreal degrees)
 {
     QTransform m;

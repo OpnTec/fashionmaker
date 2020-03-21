@@ -163,6 +163,40 @@ void VDxfPaintDevice::setInsunits(const VarInsunits &var)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+qreal VDxfPaintDevice::GetXScale() const
+{
+    return engine->GetYScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetXScale(const qreal &xscale)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetXScale(), cannot set x scale while Dxf is being generated");
+        return;
+    }
+    engine->SetXScale(xscale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+qreal VDxfPaintDevice::GetYScale() const
+{
+    return engine->GetXScale();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VDxfPaintDevice::SetYScale(const qreal &yscale)
+{
+    if (engine->isActive())
+    {
+        qWarning("VDxfPaintDevice::SetYScale(), cannot set y scale while Dxf is being generated");
+        return;
+    }
+    engine->SetYScale(yscale);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VDxfPaintDevice::ExportToAAMA(const QVector<VLayoutPiece> &details) const
 {
     engine->setActive(true);

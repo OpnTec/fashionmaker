@@ -126,6 +126,7 @@ public:
     void SetMirror(bool value);
 
     void Translate(qreal dx, qreal dy);
+    void Scale(qreal sx, qreal sy);
     void Rotate(const QPointF &originPoint, qreal degrees);
     void Mirror(const QLineF &edge);
     void Mirror();

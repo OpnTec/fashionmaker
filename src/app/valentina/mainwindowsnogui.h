@@ -162,6 +162,9 @@ private:
 
     QString layoutPrinterName;
 
+    qreal m_xscale{1};
+    qreal m_yscale{1};
+
     static QList<QGraphicsItem *> CreateShadows(const QList<QGraphicsItem *> &papers);
     static QList<QGraphicsScene *> CreateScenes(const QList<QGraphicsItem *> &papers,
                                                 const QList<QGraphicsItem *> &shadows,

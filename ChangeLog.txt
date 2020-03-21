@@ -44,6 +44,7 @@
 - Tool Point at distance and angle now allows negative length.
 - Export pattern to DXF-ASTM.
 - [smart-pattern/valentina#18] Auto-created Visibility Group for group operation.
+- Setting scale factor for export and print.
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.

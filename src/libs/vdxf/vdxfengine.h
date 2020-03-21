@@ -92,6 +92,12 @@ public:
     void setMeasurement(const VarMeasurement &var);
     void setInsunits(const VarInsunits &var);
 
+    qreal GetXScale() const;
+    void  SetXScale(const qreal &xscale);
+
+    qreal GetYScale() const;
+    void  SetYScale(const qreal &yscale);
+
 private:
     Q_DISABLE_COPY(VDxfEngine)
     QSize            size;
@@ -104,6 +110,8 @@ private:
     VarMeasurement varMeasurement;
     VarInsunits varInsunits;
     DRW_Text *textBuffer;
+    qreal m_xscale{1};
+    qreal m_yscale{1};
 
     Q_REQUIRED_RESULT double FromPixel(double pix, const VarInsunits &unit) const;
     Q_REQUIRED_RESULT double ToPixel(double val, const VarInsunits &unit) const;
