@@ -124,7 +124,7 @@ VPoster::VPoster(const QPrinter *printer)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QVector<PosterData> VPoster::Calc(const QRect &imageRect, int page, PageOrientation orientation) const
+QVector<PosterData> VPoster::Calc(const QSize &imageRect, int page, PageOrientation orientation) const
 {
     QVector<PosterData> poster;
 
@@ -390,7 +390,7 @@ int VPoster::CountColumns(int width, PageOrientation orientation) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-PosterData VPoster::Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const
+PosterData VPoster::Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const
 {
     Q_UNUSED(imageRect)
 

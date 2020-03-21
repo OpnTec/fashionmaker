@@ -68,7 +68,7 @@ class VPoster
 public:
     explicit VPoster(const QPrinter *printer);
 
-    QVector<PosterData> Calc(const QRect &imageRect, int page, PageOrientation orientation) const;
+    QVector<PosterData> Calc(const QSize &imageRect, int page, PageOrientation orientation) const;
 
     QVector<QGraphicsItem *> Tile(QGraphicsItem *parent, const PosterData &img, int sheets,
                                   const VWatermarkData &watermarkData, const QString &watermarkPath) const;
@@ -84,7 +84,7 @@ private:
     int CountRows(int height, PageOrientation orientation) const;
     int CountColumns(int width, PageOrientation orientation) const;
 
-    PosterData Cut(int i, int j, const QRect &imageRect, PageOrientation orientation) const;
+    PosterData Cut(int i, int j, const QSize &imageRect, PageOrientation orientation) const;
 
     QRect PageRect() const;
 
