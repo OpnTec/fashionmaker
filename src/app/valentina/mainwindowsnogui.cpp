@@ -1218,8 +1218,8 @@ void MainWindowsNoGUI::SvgFile(const QString &name, QGraphicsRectItem *paper, QG
     generator.setFileName(name);
     generator.setSize(QSize(qFloor(r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right()),
                             qFloor(r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom())));
-    generator.setViewBox(QRectF(0, 0, r.width() + margins.left() + margins.right(),
-                                r.height() + margins.top() + margins.bottom()));
+    generator.setViewBox(QRectF(0, 0, r.width() * m_dialogSaveLayout->GetXScale() + margins.left() + margins.right(),
+                                r.height() * m_dialogSaveLayout->GetYScale() + margins.top() + margins.bottom()));
     generator.setTitle(tr("Pattern"));
     generator.setDescription(doc->GetDescription().toHtmlEscaped());
     generator.setResolution(static_cast<int>(PrintDPI));
@@ -1443,9 +1443,9 @@ void MainWindowsNoGUI::FlatDxfFile(const QString &name, int version, bool binary
     generator.setInsunits(VarInsunits::Millimeters);// Decided to always use mm. See issue #745
 
     QPainter painter;
-    painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
     if (painter.begin(&generator))
     {
+        painter.scale(m_dialogSaveLayout->GetXScale(), m_dialogSaveLayout->GetYScale());
         scene->render(&painter, paper->rect(), paper->rect(), Qt::IgnoreAspectRatio);
         painter.end();
     }
