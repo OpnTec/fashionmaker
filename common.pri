@@ -933,5 +933,7 @@ MSVC_DEBUG_CXXFLAGS += \
     -wd5026 \ # move constructor was implicitly defined as deleted
     -wd5027 \ # move assignment operator was implicitly defined as deleted
     -wd5039 \ # pointer or reference to potentially throwing function passed to extern C function under -EHc.
-    -wd4774 # format string expected in argument 3 is not a string literal
+    -wd4774 \ # format string expected in argument 3 is not a string literal
+    -wd5204 # class has virtual functions, but its trivial destructor is not virtual; instances of objects derived
+            # from this class may not be destructed correctly
 }
