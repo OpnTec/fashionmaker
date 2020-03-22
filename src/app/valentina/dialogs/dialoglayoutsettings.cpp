@@ -293,6 +293,18 @@ void DialogLayoutSettings::SetSaveLength(bool save)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool DialogLayoutSettings::IsPreferOneSheetSolution() const
+{
+    return ui->checkBoxOneSheetSolution->isChecked();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLayoutSettings::SetPreferOneSheetSolution(bool prefer)
+{
+    ui->checkBoxOneSheetSolution->setChecked(prefer);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool DialogLayoutSettings::IsUnitePages() const
 {
     return ui->checkBoxUnitePages->isChecked();
@@ -600,6 +612,7 @@ void DialogLayoutSettings::DialogAccepted()
     generator->SetAutoCropLength(GetAutoCropLength());
     generator->SetAutoCropWidth(GetAutoCropWidth());
     generator->SetSaveLength(IsSaveLength());
+    generator->SetPreferOneSheetSolution(IsPreferOneSheetSolution());
     generator->SetUnitePages(IsUnitePages());
     generator->SetStripOptimization(IsStripOptimization());
     generator->SetMultiplier(GetMultiplier());
@@ -695,6 +708,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetNestingTime(VSettings::GetDefNestingTime());
     SetEfficiencyCoefficient(VSettings::GetDefEfficiencyCoefficient());
     SetNestQuantity(VSettings::GetDefLayoutNestQuantity());
+    SetPreferOneSheetSolution(VSettings::GetDefLayoutPreferOneSheetSolution());
 
     CorrectMaxFileds();
     IgnoreAllFields(ui->checkBoxIgnoreFileds->isChecked());
@@ -1019,6 +1033,7 @@ void DialogLayoutSettings::ReadSettings()
     SetAutoCropLength(settings->GetLayoutAutoCropLength());
     SetAutoCropWidth(settings->GetLayoutAutoCropWidth());
     SetSaveLength(settings->GetLayoutSaveLength());
+    SetPreferOneSheetSolution(settings->GetLayoutPreferOneSheetSolution());
     SetUnitePages(settings->GetLayoutUnitePages());
     SetFields(settings->GetFields(GetDefPrinterFields()));
     SetIgnoreAllFields(settings->GetIgnoreAllFields());
@@ -1046,6 +1061,7 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutAutoCropLength(GetAutoCropLength());
     settings->SetLayoutAutoCropWidth(GetAutoCropWidth());
     settings->SetLayoutSaveLength(IsSaveLength());
+    settings->SetLayoutPreferOneSheetSolution(IsPreferOneSheetSolution());
     settings->SetLayoutUnitePages(IsUnitePages());
     settings->SetFields(GetFields());
     settings->SetIgnoreAllFields(IsIgnoreAllFields());

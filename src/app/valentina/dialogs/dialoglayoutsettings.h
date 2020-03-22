@@ -85,6 +85,9 @@ public:
     bool IsSaveLength() const;
     void SetSaveLength(bool save);
 
+    bool IsPreferOneSheetSolution() const;
+    void SetPreferOneSheetSolution(bool prefer);
+
     bool IsUnitePages() const;
     void SetUnitePages(bool save);
 

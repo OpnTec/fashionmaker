@@ -204,6 +204,7 @@ VLayoutGeneratorPtr VCommandLine::DefaultGenerator() const
     diag.SetAutoCropWidth(IsOptionSet(LONG_OPTION_CROP_WIDTH));
     diag.SetUnitePages(IsOptionSet(LONG_OPTION_UNITE));
     diag.SetSaveLength(IsOptionSet(LONG_OPTION_SAVELENGTH));
+    diag.SetPreferOneSheetSolution(IsOptionSet(LONG_OPTION_PREFER_ONE_SHEET_SOLUTION));
     diag.SetGroup(OptGroup());
 
     if (IsOptionSet(LONG_OPTION_IGNORE_MARGINS))
@@ -706,6 +707,8 @@ void VCommandLine::InitCommandLineOptions()
         {{SINGLE_OPTION_UNITE, LONG_OPTION_UNITE},
          translate("VCommandLine", "Unite pages if possible (export mode). Maximum value limited by QImage that "
          "supports only a maximum of 32768x32768 px images.")},
+        {LONG_OPTION_PREFER_ONE_SHEET_SOLUTION,
+         translate("VCommandLine", "Prefer one sheet layout solution (export mode).")},
     //=================================================================================================================
         {{SINGLE_OPTION_SAVELENGTH, LONG_OPTION_SAVELENGTH},
          translate("VCommandLine", "Save length of the sheet if set (export mode). The option tells the program to use "

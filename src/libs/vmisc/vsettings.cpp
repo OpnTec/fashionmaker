@@ -91,6 +91,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestQuantity, (QLatin1Stri
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropLength, (QLatin1String("layout/autoCropLength")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropWidth, (QLatin1String("layout/autoCropWidth")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSaveLength, (QLatin1String("layout/saveLength")))
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutPreferOneSheetSolution,
+                          (QLatin1String("layout/preferOneSheetSolution")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutUnitePages, (QLatin1String("layout/unitePages")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingFields, (QLatin1String("layout/fields")))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingIgnoreFields, (QLatin1String("layout/ignoreFields")))
@@ -424,6 +426,24 @@ bool VSettings::GetDefLayoutSaveLength()
 void VSettings::SetLayoutSaveLength(bool value)
 {
     setValue(*settingLayoutSaveLength, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetLayoutPreferOneSheetSolution() const
+{
+    return value(*settingLayoutPreferOneSheetSolution, GetDefLayoutPreferOneSheetSolution()).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+bool VSettings::GetDefLayoutPreferOneSheetSolution()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSettings::SetLayoutPreferOneSheetSolution(bool value)
+{
+    setValue(*settingLayoutPreferOneSheetSolution, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -110,6 +110,10 @@ public:
     static bool GetDefLayoutSaveLength();
     void SetLayoutSaveLength(bool value);
 
+    bool GetLayoutPreferOneSheetSolution() const;
+    static bool GetDefLayoutPreferOneSheetSolution();
+    void SetLayoutPreferOneSheetSolution(bool value);
+
     bool GetLayoutUnitePages() const;
     static bool GetDefLayoutUnitePages();
     void SetLayoutUnitePages(bool value);

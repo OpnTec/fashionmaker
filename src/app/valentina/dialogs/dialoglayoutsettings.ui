@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>601</width>
-    <height>600</height>
+    <height>645</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -445,6 +445,16 @@
          <widget class="QCheckBox" name="checkBoxSaveLength">
           <property name="text">
            <string>Save length of the sheet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxOneSheetSolution">
+          <property name="toolTip">
+           <string>Enable this option to prefer getting one sheet solutions. </string>
+          </property>
+          <property name="text">
+           <string>Prefer one sheet solution</string>
           </property>
          </widget>
         </item>

@@ -313,7 +313,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 if (lGenerator.PapersCount() <= papersCount)
                 {
                     const qreal layoutEfficiency = lGenerator.LayoutEfficiency();
-                    if (efficiency < layoutEfficiency)
+                    if (efficiency < layoutEfficiency || lGenerator.PapersCount() < papersCount)
                     {
                         efficiency = layoutEfficiency;
                         if (VApplication::IsGUIMode())
@@ -404,7 +404,11 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
                     && efficiency >= lGenerator.GetEfficiencyCoefficient()))
         {
-            break;
+            if (not lGenerator.IsPreferOneSheetSolution()
+                || (lGenerator.IsPreferOneSheetSolution() && lGenerator.PapersCount() == 1))
+            {
+                break;
+            }
         }
 
         if (IsTimeout())

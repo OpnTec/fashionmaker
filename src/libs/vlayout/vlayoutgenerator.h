@@ -117,6 +117,9 @@ public:
     bool IsSaveLength() const;
     void SetSaveLength(bool value);
 
+    bool IsPreferOneSheetSolution() const;
+    void SetPreferOneSheetSolution(bool value);
+
     bool IsUnitePages() const;
     void SetUnitePages(bool value);
 
@@ -154,6 +157,7 @@ private:
     bool autoCropLength;
     bool autoCropWidth;
     bool saveLength;
+    bool preferOneSheetSolution{false};
     bool unitePages;
     bool stripOptimizationEnabled;
     quint8 multiplier;

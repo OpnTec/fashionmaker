@@ -681,6 +681,18 @@ void VLayoutGenerator::SetSaveLength(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+bool VLayoutGenerator::IsPreferOneSheetSolution() const
+{
+    return preferOneSheetSolution;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetPreferOneSheetSolution(bool value)
+{
+    preferOneSheetSolution = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 bool VLayoutGenerator::GetAutoCropLength() const
 {
     return autoCropLength;

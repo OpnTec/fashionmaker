@@ -136,6 +136,7 @@ const QString LONG_OPTION_MANUAL_PRIORITY = QStringLiteral("manualPriority");
 const QString LONG_OPTION_LANDSCAPE_ORIENTATION = QStringLiteral("landscapeOrientation");
 
 const QString LONG_OPTION_NEST_QUANTITY = QStringLiteral("nestQuantity");
+const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION = QStringLiteral("preferOneSheetSolution");
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -193,6 +194,7 @@ QStringList AllKeys()
         LONG_OPTION_FOLLOW_GRAINLINE,
         LONG_OPTION_MANUAL_PRIORITY,
         LONG_OPTION_LANDSCAPE_ORIENTATION,
-        LONG_OPTION_NEST_QUANTITY
+        LONG_OPTION_NEST_QUANTITY,
+        LONG_OPTION_PREFER_ONE_SHEET_SOLUTION
     };
 }
