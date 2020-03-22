@@ -171,9 +171,10 @@ private:
 
     void GatherPages();
     void UnitePages();
-    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i);
+    void UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const;
     void UnitePapers(int j, QList<qreal> &papersLength, qreal length);
-    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details);
+    QList<VLayoutPiece> MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const;
+    VLayoutPaper MasterPage() const;
 };
 
 #endif // VLAYOUTGENERATOR_H

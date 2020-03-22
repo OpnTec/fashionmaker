@@ -275,12 +275,7 @@ qreal VLayoutGenerator::LayoutEfficiency() const
     qreal efficiency = 0;
     if (not papers.isEmpty())
     {
-        for(auto &paper : papers)
-        {
-            efficiency += paper.Efficiency();
-        }
-
-        efficiency /= papers.size();
+        efficiency = MasterPage().Efficiency();
     }
     return efficiency;
 }
@@ -613,7 +608,7 @@ void VLayoutGenerator::UnitePages()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i)
+void VLayoutGenerator::UniteDetails(int j, QList<QList<VLayoutPiece> > &nDetails, qreal length, int i) const
 {
     if ((j == 0 && nDetails.isEmpty()) || j >= nDetails.size())
     {//First or new details in paper
@@ -639,7 +634,7 @@ void VLayoutGenerator::UnitePapers(int j, QList<qreal> &papersLength, qreal leng
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &details)
+QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VLayoutPiece> &details) const
 {
     if (qFuzzyIsNull(length))
     {
@@ -654,6 +649,87 @@ QList<VLayoutPiece> VLayoutGenerator::MoveDetails(qreal length, const QVector<VL
     }
 
     return newDetails;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MasterPage return one "master" page combined all pieces on all pages.
+ *
+ * The main purpose of this method is to return the master page. This way we can efficiently calculate the efficiency
+ * of a solution taking into account empty space between bounding rectangles.
+ *
+ * @return master page
+ */
+VLayoutPaper VLayoutGenerator::MasterPage() const
+{
+    if (papers.size() < 2)
+    {
+        return papers.first();
+    }
+
+    QList<QList<VLayoutPiece> > nDetails;
+    qreal length = 0;
+    const int j = 0; // papers count. Always 1.
+
+    for (int i = 0; i < papers.size(); ++i)
+    {
+        if (IsPortrait())
+        {
+            int paperHeight = 0;
+            if (autoCropLength)
+            {
+                const QRectF rec = papers.at(i).DetailsBoundingRect();
+                paperHeight = qRound(rec.y() + rec.height());
+            }
+            else
+            {
+                paperHeight = papers.at(i).GetHeight();
+            }
+
+            if (i != papers.size()-1)
+            {
+                paperHeight = qRound(paperHeight + bank->GetLayoutWidth()*2);
+            }
+
+            UniteDetails(j, nDetails, length, i);
+            length += paperHeight;
+        }
+        else
+        {
+            int paperWidth = 0;
+            if (autoCropLength)
+            {
+                const QRectF rec = papers.at(i).DetailsBoundingRect();
+                paperWidth = qRound(rec.x() + rec.width());
+            }
+            else
+            {
+                paperWidth = papers.at(i).GetWidth();
+            }
+
+            if (i != papers.size()-1)
+            {
+                paperWidth = qRound(paperWidth + bank->GetLayoutWidth()*2);
+            }
+
+            UniteDetails(j, nDetails, length, i);
+            length += paperWidth;
+        }
+    }
+
+    const int height = IsPortrait() ? qRound(length+accuracyPointOnLine*4) : PageHeight();
+    const int width = IsPortrait() ? PageWidth() : qRound(length+accuracyPointOnLine*4);
+
+    VLayoutPaper paper(height, width, bank->GetLayoutWidth());
+    paper.SetShift(shift);
+    paper.SetPaperIndex(static_cast<quint32>(0));
+    paper.SetRotate(rotate);
+    paper.SetFollowGrainline(followGrainline);
+    paper.SetRotationNumber(rotationNumber);
+    paper.SetSaveLength(saveLength);
+    paper.SetDetails(nDetails.at(0));
+
+    return paper;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
