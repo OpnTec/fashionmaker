@@ -51,6 +51,13 @@
     </message>
 </context>
 <context>
+    <name>ChangeGroupOptions</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
@@ -2419,6 +2426,18 @@
         <source>Rotation</source>
         <translation type="unfinished">Περιστροφή</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2474,6 +2493,18 @@
         <source>Rotation</source>
         <translation type="unfinished">Περιστροφή</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogGroup</name>
@@ -2487,7 +2518,7 @@
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Μοναδικό όνομα κομματιού πατρόν</translation>
+        <translation type="vanished">Μοναδικό όνομα κομματιού πατρόν</translation>
     </message>
     <message>
         <source>Choose group name</source>
@@ -2496,6 +2527,18 @@
     <message>
         <source>New group</source>
         <translation>Νέα ομάδα</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3025,6 +3068,65 @@
     </message>
 </context>
 <context>
+    <name>DialogLayoutScale</name>
+    <message>
+        <source>Layout scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Περιθώρια</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Αριστερά:</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation type="unfinished">εκ</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Δεξιά:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished">Επάνω:</translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished">Κάτω:</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
@@ -3306,6 +3408,14 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Auto crop unused width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3735,6 +3845,18 @@ Apply settings anyway?</source>
     <message>
         <source>Rotation</source>
         <translation type="unfinished">Περιστροφή</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5409,6 +5531,18 @@ Apply settings anyway?</source>
         <source>Name:</source>
         <translation type="unfinished">Όνομα:</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5510,6 +5644,38 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Orientation:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Επιλογές</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -11150,6 +11316,14 @@ Do you want to save your changes?</source>
         <source>operation options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>delete operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -11716,6 +11890,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Auto crop unused width (export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet layout solution (export mode).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -15112,7 +15306,7 @@ Do you want to save your changes?</source>
     <name>VWidgetGroups</name>
     <message>
         <source>Rename</source>
-        <translation>Μετονομασία</translation>
+        <translation type="vanished">Μετονομασία</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -15132,6 +15326,26 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Show All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter by tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Προτιμήσεις</translation>
+    </message>
+    <message>
+        <source>Categories: %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

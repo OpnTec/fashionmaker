@@ -51,6 +51,13 @@
     </message>
 </context>
 <context>
+    <name>ChangeGroupOptions</name>
+    <message>
+        <source>rename group</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChangeGroupVisibility</name>
     <message>
         <source>change group visibility</source>
@@ -2463,6 +2470,18 @@
         <source>Rotation</source>
         <translation type="unfinished">Rotación</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogFlippingByLine</name>
@@ -2518,6 +2537,18 @@
         <source>Rotation</source>
         <translation type="unfinished">Rotación</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogGroup</name>
@@ -2531,7 +2562,7 @@
     </message>
     <message>
         <source>Unique pattern piece name</source>
-        <translation>Nombre único de pieza del patrón</translation>
+        <translation type="vanished">Nombre único de pieza del patrón</translation>
     </message>
     <message>
         <source>Choose group name</source>
@@ -2540,6 +2571,18 @@
     <message>
         <source>New group</source>
         <translation>Nuevo grupo</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3081,6 +3124,65 @@
     </message>
 </context>
 <context>
+    <name>DialogLayoutScale</name>
+    <message>
+        <source>Layout scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished">Margenes</translation>
+    </message>
+    <message>
+        <source>Left:</source>
+        <translation type="unfinished">Izquierda:</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation type="unfinished">cm</translation>
+    </message>
+    <message>
+        <source>Right:</source>
+        <translation type="unfinished">Derecha:</translation>
+    </message>
+    <message>
+        <source>Top:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DialogLayoutSettings</name>
     <message>
         <source>Paper size</source>
@@ -3379,6 +3481,14 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Auto crop unused width</source>
         <translation>Recorte automático del ancho no utilizado</translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet solution</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3807,6 +3917,18 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Rotation</source>
         <translation type="unfinished">Rotación</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5493,6 +5615,18 @@ Aplicar características de todos modos?</translation>
         <source>Name:</source>
         <translation type="unfinished">Nombre:</translation>
     </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add tags</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DialogSaveLAyout</name>
@@ -5595,6 +5729,38 @@ Aplicar características de todos modos?</translation>
     <message>
         <source>Orientation:</source>
         <translation>Orientación:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opciones</translation>
+    </message>
+    <message>
+        <source>Scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished">%</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="obsolete">...</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11406,6 +11572,14 @@ Quieres guardar los cambios?</translation>
         <source>operation options</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>delete operation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visibility group</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VAbstractPattern</name>
@@ -12093,6 +12267,26 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Auto crop unused width (export mode).</source>
         <translation>Auto cortar ancho sin uso (modo de exportación).</translation>
+    </message>
+    <message>
+        <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Horizontal scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vertical scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer one sheet layout solution (export mode).</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -15629,7 +15823,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Renombrar</translation>
+        <translation type="vanished">Renombrar</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -15650,6 +15844,26 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Show All</source>
         <translation>Mostrar Todo</translation>
+    </message>
+    <message>
+        <source>Tags:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Separate each tag with comma.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filter by tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished">Preferencias</translation>
+    </message>
+    <message>
+        <source>Categories: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
