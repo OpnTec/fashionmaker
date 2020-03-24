@@ -404,8 +404,7 @@ bool MainWindowsNoGUI::GenerateLayout(VLayoutGenerator& lGenerator)
                 || (nestingState == LayoutErrors::NoError && not qFuzzyIsNull(lGenerator.GetEfficiencyCoefficient())
                     && efficiency >= lGenerator.GetEfficiencyCoefficient()))
         {
-            if (not lGenerator.IsPreferOneSheetSolution()
-                || (lGenerator.IsPreferOneSheetSolution() && lGenerator.PapersCount() == 1))
+            if (not lGenerator.IsPreferOneSheetSolution() || lGenerator.PapersCount() == 1)
             {
                 break;
             }

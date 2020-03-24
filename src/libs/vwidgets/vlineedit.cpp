@@ -41,7 +41,7 @@ namespace
 class MultiSelectCompleter : public QCompleter
 {
 public:
-    MultiSelectCompleter(QObject* parent=nullptr);
+    explicit MultiSelectCompleter(QObject* parent=nullptr);
     MultiSelectCompleter(const QStringList& items, QObject* parent=nullptr);
     virtual ~MultiSelectCompleter() =default;
 
