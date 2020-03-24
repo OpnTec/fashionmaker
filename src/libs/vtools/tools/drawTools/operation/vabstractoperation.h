@@ -143,6 +143,7 @@ protected:
     virtual void ChangeLabelVisibility(quint32 id, bool visible) override;
     virtual void ApplyToolOptions(const QList<quint32> &oldDependencies, const QList<quint32> &newDependencies,
                                   const QDomElement &oldDomElement, const QDomElement &newDomElement) override;
+    virtual void PerformDelete() override;
 
     void UpdateNamePosition(quint32 id, const QPointF &pos);
     void SaveSourceDestination(QDomElement &tag);

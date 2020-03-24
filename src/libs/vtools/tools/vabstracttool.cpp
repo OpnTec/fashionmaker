@@ -224,10 +224,7 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
             }
         }
 
-        qCDebug(vTool, "Begin deleting.");
-        DelTool *delTool = new DelTool(doc, m_id);
-        connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
-        qApp->getUndoStack()->push(delTool);
+        PerformDelete();
 
         // Throw exception, this will help prevent case when we forget to immediately quit function.
         VExceptionToolWasDeleted e("Tool was used after deleting.");
@@ -237,6 +234,15 @@ void VAbstractTool::DeleteToolWithConfirm(bool ask)
     {
         qCDebug(vTool, "Can't delete, tool has children.");
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractTool::PerformDelete()
+{
+    qCDebug(vTool, "Begin deleting.");
+    DelTool *delTool = new DelTool(doc, m_id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(delTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

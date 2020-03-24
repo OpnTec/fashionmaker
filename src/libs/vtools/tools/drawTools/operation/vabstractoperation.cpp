@@ -31,6 +31,7 @@
 #include "../../../undocommands/label/operationshowlabel.h"
 #include "../../../undocommands/savetooloptions.h"
 #include "../../../undocommands/undogroup.h"
+#include "../../../undocommands/deltool.h"
 #include "../vgeometry/vpointf.h"
 
 const QString VAbstractOperation::TagItem        = QStringLiteral("item");
@@ -614,6 +615,34 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
     }
 
     if (updateToolOptions && updateVisibilityOptions)
+    {
+        qApp->getUndoStack()->endMacro();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractOperation::PerformDelete()
+{
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    bool deleteGroup = group != null_id;
+
+    qCDebug(vTool, "Begin deleting.");
+    if (deleteGroup)
+    {
+        qApp->getUndoStack()->beginMacro(tr("delete operation"));
+
+        qCDebug(vTool, "Deleting the linked group.");
+        DelGroup *delGroup = new DelGroup(doc, group);
+        connect(delGroup, &DelGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+        qApp->getUndoStack()->push(delGroup);
+    }
+
+    qCDebug(vTool, "Deleting the tool.");
+    DelTool *delTool = new DelTool(doc, m_id);
+    connect(delTool, &DelTool::NeedFullParsing, doc, &VAbstractPattern::NeedFullParsing);
+    qApp->getUndoStack()->push(delTool);
+
+    if (deleteGroup)
     {
         qApp->getUndoStack()->endMacro();
     }
