@@ -653,6 +653,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::FlippingByAxis:
             case Tool::FlippingByLine:
                 dialogTool->SetGroupCategories(doc->GetGroupCategories());
+                break;
             default:
                 break;
         }
