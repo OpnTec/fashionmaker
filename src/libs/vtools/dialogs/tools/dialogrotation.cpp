@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -194,6 +195,25 @@ bool DialogRotation::HasLinkedVisibilityGroup() const
 void DialogRotation::SetHasLinkedVisibilityGroup(bool linked)
 {
     ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogRotation::GetVisibilityGroupTags() const
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -432,6 +452,18 @@ void DialogRotation::SaveData()
     operation->SetOriginPointId(GetOrigPointId());
     operation->SetAngle(formulaAngle);
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

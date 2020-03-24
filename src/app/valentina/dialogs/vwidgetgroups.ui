@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>371</width>
-    <height>279</height>
+    <height>438</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,30 @@
     <normaloff>:/icon/64x64/icon64x64.png</normaloff>:/icon/64x64/icon64x64.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Tags:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="VCompleterLineEdit" name="lineEditTags">
+       <property name="toolTip">
+        <string>Separate each tag with comma.</string>
+       </property>
+       <property name="placeholderText">
+        <string>Filter by tags</string>
+       </property>
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item>
     <widget class="QTableWidget" name="tableWidget">
      <property name="alternatingRowColors">
@@ -47,16 +71,23 @@
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
      </attribute>
-     <attribute name="verticalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
      <attribute name="verticalHeaderMinimumSectionSize">
       <number>10</number>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
      </attribute>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VCompleterLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>vlineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>

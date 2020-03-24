@@ -90,6 +90,8 @@ public:
     quint32          GetToolId() const;
     void             SetToolId(const quint32 &value);
 
+    virtual void SetGroupCategories(const QStringList &categories);
+
     static void MoveListRowTop(QListWidget *list);
     static void MoveListRowUp(QListWidget *list);
     static void MoveListRowDown(QListWidget *list);

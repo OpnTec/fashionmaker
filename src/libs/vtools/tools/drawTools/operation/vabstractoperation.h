@@ -60,6 +60,7 @@ struct VAbstractOperationInitData : VAbstractToolInitData
     QVector<quint32> source{};
     QVector<DestinationItem> destination{};
     QString visibilityGroupName{};
+    QStringList visibilityGroupTags{};
     bool hasLinkedVisibilityGroup{false};
 };
 
@@ -134,6 +135,7 @@ protected:
 
     bool hasLinkedGroup{false};
     QString groupName{};
+    QStringList groupTags{};
 
     VAbstractOperation(VAbstractPattern *doc, VContainer *data, quint32 id, const QString &suffix,
                        const QVector<quint32> &source, const QVector<DestinationItem> &destination,
@@ -187,6 +189,7 @@ void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
     {
         dialogTool->SetHasLinkedVisibilityGroup(true);
         dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
+        dialogTool->SetVisibilityGroupTags(doc->GetGroupTags(group));
     }
     else
     {

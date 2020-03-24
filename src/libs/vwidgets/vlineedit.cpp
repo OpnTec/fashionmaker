@@ -28,6 +28,72 @@
 
 #include "vlineedit.h"
 
+#include <QApplication>
+#include <QCompleter>
+#include <QStringListModel>
+#include <QTimer>
+#include <QtDebug>
+
+#include "../vmisc/compatibility.h"
+
+namespace
+{
+class MultiSelectCompleter : public QCompleter
+{
+public:
+    MultiSelectCompleter(QObject* parent=nullptr);
+    MultiSelectCompleter(const QStringList& items, QObject* parent=nullptr);
+    virtual ~MultiSelectCompleter() =default;
+
+    virtual QString pathFromIndex(const QModelIndex& index) const override;
+    virtual QStringList splitPath(const QString& path) const override;
+
+private:
+    Q_DISABLE_COPY(MultiSelectCompleter)
+};
+}
+
+//MultiSelectCompleter
+//---------------------------------------------------------------------------------------------------------------------
+MultiSelectCompleter::MultiSelectCompleter(QObject *parent)
+    : QCompleter(parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+MultiSelectCompleter::MultiSelectCompleter(const QStringList& items, QObject* parent)
+    : QCompleter(items, parent)
+{}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString MultiSelectCompleter::pathFromIndex(const QModelIndex& index) const
+{
+    QString path = QCompleter::pathFromIndex(index);
+
+    QString text = static_cast<QLineEdit*>(widget())->text();
+
+    int pos = text.lastIndexOf(',');
+    if (pos >= 0)
+    {
+        path = text.left(pos) + ", " + path;
+    }
+
+    return path;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList MultiSelectCompleter::splitPath( const QString& path ) const
+{
+    int pos = path.lastIndexOf(',') + 1;
+
+    while (pos < path.length() && path.at(pos) == QLatin1Char(' '))
+    {
+        pos++;
+    }
+
+    return QStringList(path.mid(pos));
+}
+
+//VLineEdit
 //---------------------------------------------------------------------------------------------------------------------
 VLineEdit::VLineEdit(QWidget *parent)
     : QLineEdit(parent),
@@ -74,3 +140,59 @@ void VLineEdit::mousePressEvent(QMouseEvent *e)
     }
 }
 
+// VCompleterLineEdit
+//---------------------------------------------------------------------------------------------------------------------
+VCompleterLineEdit::VCompleterLineEdit(QWidget *parent)
+    : VLineEdit(parent),
+      m_model(new QStringListModel(this))
+{
+    setCompleter(new MultiSelectCompleter());
+    completer()->setModel(m_model);
+    completer()->setCompletionMode(QCompleter::PopupCompletion);
+    completer()->setCaseSensitivity(Qt::CaseInsensitive);
+    connect(this, &VCompleterLineEdit::textEdited, this, &VCompleterLineEdit::ShowCompletion);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCompleterLineEdit::SetCompletion(const QStringList &list)
+{
+    m_model->setStringList(list);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCompleterLineEdit::focusInEvent(QFocusEvent *e)
+{
+    QLineEdit::focusInEvent(e);
+    // force completion when line edit is focued in
+    completer()->complete();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCompleterLineEdit::ShowCompletion()
+{
+//    PrepareCompletion();
+
+    // force to show all items when text is empty
+    completer()->setCompletionMode(text().isEmpty() ? QCompleter::UnfilteredPopupCompletion
+                                                    : QCompleter::PopupCompletion);
+    if (text().isEmpty())
+    {
+        // completion list will be hidden now; we will show it again after a delay
+        QTimer::singleShot(100, this, &VCompleterLineEdit::CompletionPopup);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCompleterLineEdit::CompletionPopup()
+{
+    // apparently, complete() works only in event handler
+    QApplication::postEvent(this, new QEvent(QEvent::User));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCompleterLineEdit::customEvent(QEvent *e)
+{
+    QLineEdit::customEvent(e);
+    // force completion after text is deleted
+    completer()->complete();
+}

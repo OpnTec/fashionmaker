@@ -71,6 +71,11 @@ public:
     bool HasLinkedVisibilityGroup() const;
     void SetHasLinkedVisibilityGroup(bool linked);
 
+    void        SetVisibilityGroupTags(const QStringList &tags);
+    QStringList GetVisibilityGroupTags() const;
+
+    virtual void SetGroupCategories(const QStringList &categories) override;
+
     virtual void ShowDialog(bool click) override;
 
 public slots:
@@ -105,6 +110,8 @@ private:
     bool flagName;
     bool flagGroupName;
     bool flagError;
+
+    QStringList m_groupTags{};
 
     static void FillComboBoxAxisType(QComboBox *box);
 };

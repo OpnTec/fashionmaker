@@ -54,6 +54,11 @@ public:
     void    SetName(const QString &name);
     QString GetName() const;
 
+    void        SetTags(const QStringList &tags);
+    QStringList GetTags() const;
+
+    void SetGroupCategories(const QStringList &categories);
+
     QMap<quint32, quint32> GetGroup() const;
 
     virtual void ShowDialog(bool click) override;

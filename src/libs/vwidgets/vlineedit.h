@@ -31,6 +31,8 @@
 
 #include <QLineEdit>
 
+class QStringListModel;
+
 class VLineEdit : public QLineEdit
 {
     Q_OBJECT
@@ -45,6 +47,33 @@ protected:
 private:
     Q_DISABLE_COPY(VLineEdit)
     bool m_selectOnMousePress;
+};
+
+/*! Line edit widget with auto completion based on QStringListModel.
+  Modified behaviour: completion list will appear even when contents of
+  line edit is empty. Full list of options will be showed when line edit
+  has focus and is empty.
+  */
+class VCompleterLineEdit : public VLineEdit
+{
+    Q_OBJECT
+public:
+    explicit VCompleterLineEdit(QWidget *parent = nullptr);
+
+    //! Set list of options used for completion.
+    void SetCompletion(const QStringList &list);
+
+protected:
+    virtual void focusInEvent(QFocusEvent *e) override;
+    virtual void customEvent(QEvent* e) override;
+
+private slots:
+    void ShowCompletion();
+    void CompletionPopup();
+
+private:
+    Q_DISABLE_COPY(VCompleterLineEdit)
+    QStringListModel *m_model;
 };
 
 #endif // VLINEEDIT_H

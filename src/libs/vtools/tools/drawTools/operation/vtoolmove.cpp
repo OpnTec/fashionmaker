@@ -149,6 +149,7 @@ VToolMove *VToolMove::Create(const QPointer<DialogTool> &dialog, VMainGraphicsSc
     initData.source = dialogTool->GetObjects();
     initData.hasLinkedVisibilityGroup = dialogTool->HasLinkedVisibilityGroup();
     initData.visibilityGroupName = dialogTool->GetVisibilityGroupName();
+    initData.visibilityGroupTags = dialogTool->GetVisibilityGroupTags();
     initData.scene = scene;
     initData.doc = doc;
     initData.data = data;

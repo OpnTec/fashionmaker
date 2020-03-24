@@ -800,6 +800,13 @@ void DialogTool::SetToolId(const quint32 &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogTool::SetGroupCategories(const QStringList &categories)
+{
+    Q_UNUSED(categories)
+    // do nothing
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::ShowDialog(bool click)
 {
     Q_UNUSED(click)

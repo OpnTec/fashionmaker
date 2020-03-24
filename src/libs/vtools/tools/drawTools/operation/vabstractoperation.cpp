@@ -609,9 +609,9 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
         {
             if (group != null_id)
             {
-                RenameGroup *renameGroup = new RenameGroup(doc, group, groupName);
-                connect(renameGroup, &RenameGroup::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
-                qApp->getUndoStack()->push(renameGroup);
+                ChangeGroupOptions *groupOptions = new ChangeGroupOptions(doc, group, groupName, groupTags);
+                connect(groupOptions, &ChangeGroupOptions::UpdateGroups, doc, &VAbstractPattern::UpdateVisiblityGroups);
+                qApp->getUndoStack()->push(groupOptions);
             }
             else
             {
@@ -619,6 +619,7 @@ void VAbstractOperation::ApplyToolOptions(const QList<quint32> &oldDependencies,
                 initData.id = m_id;
                 initData.hasLinkedVisibilityGroup = hasLinkedGroup;
                 initData.visibilityGroupName = groupName;
+                initData.visibilityGroupTags = groupTags;
                 initData.data = &(VDataTool::data);
                 initData.doc = doc;
                 initData.source = source;
@@ -790,7 +791,7 @@ bool VAbstractOperation::NeedUpdateVisibilityGroup() const
     {
         if (group != null_id)
         {
-            if (groupName != doc->GetGroupName(group))
+            if (groupName != doc->GetGroupName(group) || groupTags != doc->GetGroupTags(group))
             {
                 return true; // rename group
             }
@@ -916,7 +917,8 @@ void VAbstractOperation::CreateVisibilityGroup(const VAbstractOperationInitData 
 
     const QMap<quint32, quint32> groupData = VisibilityGroupDataFromSource(initData.data, initData.source);
     vidtype groupId = initData.data->getNextId();
-    const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName, groupData, initData.id);
+    const QDomElement group = initData.doc->CreateGroup(groupId, initData.visibilityGroupName,
+                                                        initData.visibilityGroupTags, groupData, initData.id);
     if (not group.isNull())
     {
         AddGroup *addGroup = new AddGroup(group, initData.doc);

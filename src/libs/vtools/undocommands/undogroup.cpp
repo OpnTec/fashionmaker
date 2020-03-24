@@ -145,6 +145,38 @@ void RenameGroup::redo()
     emit UpdateGroups();
 }
 
+//ChangeGroupOptions
+//---------------------------------------------------------------------------------------------------------------------
+ChangeGroupOptions::ChangeGroupOptions(VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags,
+                                       QUndoCommand *parent)
+    : VUndoCommand(QDomElement(), doc, parent),
+      newName(name),
+      newTags(tags)
+{
+    setText(tr("rename group"));
+    nodeId = id;
+    oldName = doc->GetGroupName(nodeId);
+    oldTags = doc->GetGroupTags(nodeId);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ChangeGroupOptions::undo()
+{
+    qCDebug(vUndo, "Undo.");
+    doc->SetGroupName(nodeId, oldName);
+    doc->SetGroupTags(nodeId, oldTags);
+    emit UpdateGroups();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ChangeGroupOptions::redo()
+{
+    qCDebug(vUndo, "Redo.");
+    doc->SetGroupName(nodeId, newName);
+    doc->SetGroupTags(nodeId, newTags);
+    emit UpdateGroups();
+}
+
 //AddItemToGroup
 //---------------------------------------------------------------------------------------------------------------------
 AddItemToGroup::AddItemToGroup(const QDomElement &xml, VAbstractPattern *doc, quint32 groupId, QUndoCommand *parent)

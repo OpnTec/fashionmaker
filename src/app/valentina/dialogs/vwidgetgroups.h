@@ -34,6 +34,7 @@
 
 class QTableWidgetItem;
 class VAbstractPattern;
+struct VGroupData;
 
 namespace Ui
 {
@@ -61,9 +62,11 @@ private:
     Ui::VWidgetGroups *ui;
     VAbstractPattern *doc;
 
-    void FillTable(const QMap<quint32, QPair<QString, bool> > &groups);
+    void FillTable(QMap<quint32, VGroupData> groups);
     void SetGroupVisibility(vidtype id, bool visible) const;
     void SetMultipleGroupsVisibility(const QVector<vidtype> &groups, bool visible) const;
+
+    QMap<quint32, VGroupData> FilterGroups(const QMap<quint32, VGroupData> &groups);
 
     int  GroupRow(vidtype id) const;
 };

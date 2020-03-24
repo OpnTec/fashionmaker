@@ -30,6 +30,7 @@
 
 #include <QColor>
 #include <QComboBox>
+#include <QCompleter>
 #include <QDialog>
 #include <QLabel>
 #include <QLineEdit>
@@ -281,6 +282,25 @@ bool DialogMove::HasLinkedVisibilityGroup() const
 void DialogMove::SetHasLinkedVisibilityGroup(bool linked)
 {
     ui->groupBoxVisibilityGroup->setChecked(linked);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetVisibilityGroupTags(const QStringList &tags)
+{
+    ui->lineEditGroupTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogMove::GetVisibilityGroupTags() const
+{
+    return ui->lineEditGroupTags->text().split(',');
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMove::SetGroupCategories(const QStringList &categories)
+{
+    m_groupTags = categories;
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -551,6 +571,18 @@ void DialogMove::SaveData()
     operation->SetRotationAngle(formulaRotationAngle);
     operation->SetRotationOriginPointId(GetRotationOrigPointId());
     operation->RefreshGeometry();
+
+    QStringList groupTags = ui->lineEditGroupTags->text().split(',');
+    for (auto &tag : groupTags)
+    {
+        tag = tag.trimmed();
+        if (not m_groupTags.contains(tag))
+        {
+            m_groupTags.append(tag);
+        }
+    }
+
+    ui->lineEditGroupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

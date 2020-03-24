@@ -648,6 +648,11 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
             case Tool::PlaceLabel:
                 dialogTool->SetPiecesList(doc->GetActivePPPieces());
                 break;
+            case Tool::Rotation:
+            case Tool::Move:
+            case Tool::FlippingByAxis:
+            case Tool::FlippingByLine:
+                dialogTool->SetGroupCategories(doc->GetGroupCategories());
             default:
                 break;
         }
@@ -1241,7 +1246,8 @@ void MainWindow::ClosedDialogGroup(int result)
     {
         const QPointer<DialogGroup> dialog = qobject_cast<DialogGroup *>(dialogTool);
         SCASSERT(not dialog.isNull())
-        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetGroup());
+        const QDomElement group = doc->CreateGroup(pattern->getNextId(), dialog->GetName(), dialog->GetTags(),
+                                                   dialog->GetGroup());
         if (not group.isNull())
         {
             AddGroup *addGroup = new AddGroup(group, doc);

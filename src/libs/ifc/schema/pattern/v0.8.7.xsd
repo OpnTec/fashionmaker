@@ -800,6 +800,7 @@
                         <xs:attribute name="name" type="xs:string"/>
                         <xs:attribute name="visible" type="xs:boolean"/>
                         <xs:attribute name="tool" type="xs:unsignedInt"/>
+                        <xs:attribute name="tags" type="xs:string"/>
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>

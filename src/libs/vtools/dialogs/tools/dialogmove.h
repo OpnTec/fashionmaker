@@ -76,6 +76,11 @@ public:
     bool HasLinkedVisibilityGroup() const;
     void SetHasLinkedVisibilityGroup(bool linked);
 
+    void        SetVisibilityGroupTags(const QStringList &tags);
+    QStringList GetVisibilityGroupTags() const;
+
+    virtual void SetGroupCategories(const QStringList &categories) override;
+
     virtual void ShowDialog(bool click) override;
 
 public slots:
@@ -137,6 +142,8 @@ private:
     bool flagLength;
     bool flagName;
     bool flagGroupName;
+
+    QStringList m_groupTags{};
 
     void EvalAngle();
     void EvalRotationAngle();

@@ -195,4 +195,27 @@ inline void AppendTo(Cont &container, const Input &input)
 #endif // QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+template <typename T>
+inline bool SetIntersects(const QSet<T> &set1, const QSet<T> &set2)
+{
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    return set1.intersects(set2);
+#else
+    const bool otherIsBigger = set2.size() > set1.size();
+    const QSet<T> &smallestSet = otherIsBigger ? set1 : set2;
+    const QSet<T> &biggestSet = otherIsBigger ? set2 : set1;
+    typename QSet<T>::const_iterator i = smallestSet.cbegin();
+    typename QSet<T>::const_iterator e = smallestSet.cend();
+    while (i != e)
+    {
+        if (biggestSet.contains(*i))
+            return true;
+        ++i;
+    }
+    return false;
+
+#endif
+}
+
 #endif // COMPATIBILITY_H

@@ -69,6 +69,25 @@ private:
     QString oldName{};
 };
 
+class ChangeGroupOptions : public VUndoCommand
+{
+    Q_OBJECT
+public:
+    ChangeGroupOptions(VAbstractPattern *doc, quint32 id, const QString &name, const QStringList &tags,
+                       QUndoCommand *parent = nullptr);
+    virtual ~ChangeGroupOptions()=default;
+    virtual void undo() override;
+    virtual void redo() override;
+signals:
+    void UpdateGroups();
+private:
+    Q_DISABLE_COPY(ChangeGroupOptions)
+    QString newName;
+    QString oldName{};
+    QStringList newTags;
+    QStringList oldTags{};
+};
+
 class AddItemToGroup : public VUndoCommand
 {
     Q_OBJECT

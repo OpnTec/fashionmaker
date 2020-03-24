@@ -28,6 +28,7 @@
 
 #include "dialoggroup.h"
 
+#include <QCompleter>
 #include <QLineEdit>
 
 #include "ui_dialoggroup.h"
@@ -61,6 +62,24 @@ void DialogGroup::SetName(const QString &name)
 QString DialogGroup::GetName() const
 {
     return ui->lineEditName->text();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogGroup::SetTags(const QStringList &tags)
+{
+    ui->lineEditTags->setText(tags.join(", "));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QStringList DialogGroup::GetTags() const
+{
+    return ui->lineEditTags->text().split(",");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogGroup::SetGroupCategories(const QStringList &categories)
+{
+    ui->lineEditTags->SetCompletion(categories);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
