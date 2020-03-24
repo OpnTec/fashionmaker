@@ -75,16 +75,7 @@ void VToolFlippingByLine::setDialog()
     dialogTool->SetSecondLinePointId(m_secondLinePointId);
     dialogTool->SetSuffix(suffix);
 
-    vidtype group = doc->GroupLinkedToTool(m_id);
-    if (group != null_id)
-    {
-        dialogTool->SetHasLinkedVisibilityGroup(true);
-        dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
-    }
-    else
-    {
-        dialogTool->SetHasLinkedVisibilityGroup(false);
-    }
+    SetDialogVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

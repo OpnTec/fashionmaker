@@ -151,6 +151,9 @@ protected:
     template <typename T>
     void ShowToolVisualization(bool show);
 
+    template <typename T>
+    void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
+
     void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
     template <typename T>
@@ -170,6 +173,25 @@ private:
 
     bool NeedUpdateVisibilityGroup() const;
 };
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
+{
+    SCASSERT(not dialogTool.isNull())
+
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    dialogTool->SetGroupCategories(doc->GetGroupCategories());
+    if (group != null_id)
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(true);
+        dialogTool->SetVisibilityGroupName(doc->GetGroupName(group));
+    }
+    else
+    {
+        dialogTool->SetHasLinkedVisibilityGroup(false);
+    }
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T>
