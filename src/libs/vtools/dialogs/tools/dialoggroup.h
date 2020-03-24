@@ -57,7 +57,7 @@ public:
     void        SetTags(const QStringList &tags);
     QStringList GetTags() const;
 
-    void SetGroupCategories(const QStringList &categories);
+    virtual void SetGroupCategories(const QStringList &categories) override;
 
     QMap<quint32, quint32> GetGroup() const;
 

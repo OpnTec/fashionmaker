@@ -42,7 +42,6 @@ class MultiSelectCompleter : public QCompleter
 {
 public:
     explicit MultiSelectCompleter(QObject* parent=nullptr);
-    MultiSelectCompleter(const QStringList& items, QObject* parent=nullptr);
     virtual ~MultiSelectCompleter() =default;
 
     virtual QString pathFromIndex(const QModelIndex& index) const override;
@@ -57,11 +56,6 @@ private:
 //---------------------------------------------------------------------------------------------------------------------
 MultiSelectCompleter::MultiSelectCompleter(QObject *parent)
     : QCompleter(parent)
-{}
-
-//---------------------------------------------------------------------------------------------------------------------
-MultiSelectCompleter::MultiSelectCompleter(const QStringList& items, QObject* parent)
-    : QCompleter(items, parent)
 {}
 
 //---------------------------------------------------------------------------------------------------------------------
