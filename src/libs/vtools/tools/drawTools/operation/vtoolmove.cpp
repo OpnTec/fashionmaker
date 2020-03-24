@@ -517,7 +517,8 @@ QString VToolMove::MakeToolTip() const
     return QStringLiteral("<tr> <td><b>%1:</b> %2°</td> </tr>"
                           "<tr> <td><b>%3:</b> %4 %5</td> </tr>"
                           "<tr> <td><b>%6:</b> %7°</td> </tr>"
-                          "<tr> <td><b>%8:</b> %9</td> </tr>")
+                          "<tr> <td><b>%8:</b> %9</td> </tr>"
+                          "%10")
             .arg(tr("Angle"))                                // 1
             .arg(GetFormulaAngle().getDoubleValue())         // 2
             .arg(tr("Length"))                               // 3
@@ -526,7 +527,8 @@ QString VToolMove::MakeToolTip() const
                  tr("Rotation angle"))                       // 6
             .arg(GetFormulaRotationAngle().getDoubleValue()) // 7
             .arg(tr("Rotation origin point"),                // 8
-                 OriginPointName());                         // 9
+                 OriginPointName())                          // 9
+            .arg(VisibilityGroupToolTip());                  // 10
 }
 
 //---------------------------------------------------------------------------------------------------------------------

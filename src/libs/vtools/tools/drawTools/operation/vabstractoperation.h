@@ -163,6 +163,7 @@ protected:
 
     QString ComplexPointToolTip(quint32 itemId) const;
     QString ComplexCurveToolTip(quint32 itemId) const;
+    QString VisibilityGroupToolTip() const;
 
     static void CreateVisibilityGroup(const VAbstractOperationInitData & initData);
 private:

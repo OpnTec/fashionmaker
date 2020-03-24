@@ -406,7 +406,8 @@ signals:
     /**
      * @brief UpdateGroups emit if the groups have been updated
      */
-    void            UpdateGroups();
+    void           UpdateGroups();
+    void           UpdateToolTip();
 
 public slots:
     virtual void   LiteParseTree(const Document &parse)=0;

@@ -279,6 +279,7 @@ void VWidgetGroups::UpdateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::FillTable(const QMap<quint32, QPair<QString, bool> > &groups)
 {
+    emit doc->UpdateToolTip();
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clear();
 

@@ -530,6 +530,26 @@ VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, 
       destination(destination),
       operatedObjects()
 {
+    connect(doc, &VAbstractPattern::UpdateToolTip, [this]()
+    {
+        QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
+        while (i.hasNext())
+        {
+            i.next();
+            if (i.value()->GetType() == GOType::Point)
+            {
+                VSimplePoint *item = qobject_cast<VSimplePoint *>(i.value());
+                SCASSERT(item != nullptr)
+                item->setToolTip(ComplexPointToolTip(i.key()));
+            }
+            else
+            {
+                VSimpleCurve *item = qobject_cast<VSimpleCurve *>(i.value());
+                SCASSERT(item != nullptr)
+                item->setToolTip(ComplexCurveToolTip(i.key()));
+            }
+        }
+    });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -871,6 +891,19 @@ QString VAbstractOperation::ComplexCurveToolTip(quint32 itemId) const
             .arg(qApp->fromPixel(curve->GetLength()))
             .arg(UnitsToStr(qApp->patternUnit(), true), MakeToolTip());
     return toolTip;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+QString VAbstractOperation::VisibilityGroupToolTip() const
+{
+    vidtype group = doc->GroupLinkedToTool(m_id);
+    if (group != null_id)
+    {
+        return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>")
+                 .arg(tr("Visibility group"), doc->GetGroupName(group)); // 1, 2
+    }
+
+    return QString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

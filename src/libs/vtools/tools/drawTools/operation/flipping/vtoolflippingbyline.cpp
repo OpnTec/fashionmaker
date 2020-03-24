@@ -242,8 +242,11 @@ void VToolFlippingByLine::SaveOptions(QDomElement &tag, QSharedPointer<VGObject>
 QString VToolFlippingByLine::MakeToolTip() const
 {
     return QStringLiteral("<tr> <td><b>%1:</b> %2</td> </tr>"
-                          "<tr> <td><b>%3:</b> %4</td> </tr>")
-            .arg(tr("First line point"), FirstLinePointName(), tr("Second line point"), SecondLinePointName());
+                          "<tr> <td><b>%3:</b> %4</td> </tr>"
+                          "%5")
+            .arg(tr("First line point"), FirstLinePointName(),
+             tr("Second line point"), SecondLinePointName()) // 1, 2, 3, 4
+            .arg(VisibilityGroupToolTip()); // 5
 }
 
 //---------------------------------------------------------------------------------------------------------------------
