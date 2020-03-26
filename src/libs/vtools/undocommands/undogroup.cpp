@@ -92,8 +92,6 @@ void AddGroup::undo()
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
-
-    emit doc->UpdateToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -115,8 +113,6 @@ void AddGroup::redo()
         qCDebug(vUndo, "Can't get tag Groups.");
         return;
     }
-
-    emit doc->UpdateToolTip();
 
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
