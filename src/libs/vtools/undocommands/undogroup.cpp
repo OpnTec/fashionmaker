@@ -92,6 +92,8 @@ void AddGroup::undo()
     {
         emit doc->SetCurrentPP(nameActivDraw);//Return current pattern piece after undo
     }
+
+    emit doc->UpdateToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -114,6 +116,8 @@ void AddGroup::redo()
         return;
     }
 
+    emit doc->UpdateToolTip();
+
     VMainGraphicsView::NewSceneRect(qApp->getCurrentScene(), qApp->getSceneView());
 }
 
@@ -134,6 +138,7 @@ void RenameGroup::undo()
     qCDebug(vUndo, "Undo.");
     doc->SetGroupName(nodeId, oldName);
     emit UpdateGroups();
+    emit doc->UpdateToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -143,6 +148,7 @@ void RenameGroup::redo()
 
     doc->SetGroupName(nodeId, newName);
     emit UpdateGroups();
+    emit doc->UpdateToolTip();
 }
 
 //ChangeGroupOptions
@@ -166,6 +172,7 @@ void ChangeGroupOptions::undo()
     doc->SetGroupName(nodeId, oldName);
     doc->SetGroupTags(nodeId, oldTags);
     emit UpdateGroups();
+    emit doc->UpdateToolTip();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,6 +182,7 @@ void ChangeGroupOptions::redo()
     doc->SetGroupName(nodeId, newName);
     doc->SetGroupTags(nodeId, newTags);
     emit UpdateGroups();
+    emit doc->UpdateToolTip();
 }
 
 //AddItemToGroup

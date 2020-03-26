@@ -311,7 +311,6 @@ void VWidgetGroups::UpdateGroups()
 //---------------------------------------------------------------------------------------------------------------------
 void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
 {
-    emit doc->UpdateToolTip();
     ui->lineEditTags->SetCompletion(doc->GetGroupCategories());
 
     groups = FilterGroups(groups);
