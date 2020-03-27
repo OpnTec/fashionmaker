@@ -183,7 +183,7 @@ void TST_TSTranslation::CheckInvalidCharacter()
     QFETCH(QString, source);
     QFETCH(QDomElement, message);
 
-    if (source == '=' or source == '%')
+    if (source == QChar('=') or source == QChar('%'))
     {
         const QDomNode context = message.parentNode();
         if (context.isNull())
