@@ -325,7 +325,7 @@
          <item alignment="Qt::AlignRight">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
             <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
@@ -561,7 +561,7 @@
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
               <property name="pixmap">
                <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
@@ -760,7 +760,7 @@
             <item alignment="Qt::AlignRight">
              <widget class="QLabel" name="label_10">
               <property name="text">
-               <string/>
+               <string notr="true"/>
               </property>
               <property name="pixmap">
                <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>
@@ -1045,7 +1045,7 @@
                </font>
               </property>
               <property name="text">
-               <string>=</string>
+               <string notr="true">=</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1527,7 +1527,7 @@
          <item alignment="Qt::AlignRight">
           <widget class="QLabel" name="label_5">
            <property name="text">
-            <string/>
+            <string notr="true"/>
            </property>
            <property name="pixmap">
             <pixmap resource="../../../../vmisc/share/resources/icon.qrc">:/icon/24x24/equal.png</pixmap>

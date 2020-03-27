@@ -3158,20 +3158,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>...</source>
         <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3445,7 +3433,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source> min</source>
-        <translation>min</translation>
+        <translation type="vanished">min</translation>
     </message>
     <message>
         <source>Efficiency:</source>
@@ -3454,10 +3442,6 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
         <translation>Imposta coefficiente di efficienza del piazzamento. Il coefficiente di efficienza del piazzamento è la percentuale di area occupata dai pezzi all’interno dell’area delimitata. Se la loro disposizione raggiunge il livello richiesto, il processo si interrompe. Se il valore è impostato su 0 non viene effettuata nessuna verifica. </translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3482,6 +3466,11 @@ Applicare la configurazione comunque?</translation>
     <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> min</source>
+        <comment>minutes</comment>
+        <translation type="unfinished">min</translation>
     </message>
 </context>
 <context>
@@ -4865,10 +4854,6 @@ Applicare la configurazione comunque?</translation>
         <translation>Lunghezza:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5740,20 +5725,8 @@ Applicare la configurazione comunque?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;┐&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>...</source>
         <translation type="obsolete">...</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:600;&quot;&gt;┘&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10910,10 +10883,6 @@ Vuoi salvare le tue modifiche?</translation>
     <message>
         <source>Formula wizard</source>
         <translation>Formula magica</translation>
-    </message>
-    <message>
-        <source>=</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Value</source>

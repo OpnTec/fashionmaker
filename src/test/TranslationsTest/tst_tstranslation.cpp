@@ -172,6 +172,34 @@ void TST_TSTranslation::CheckEllipsis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckInvalidCharacter_data()
+{
+    PrepareOriginalStrings();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_TSTranslation::CheckInvalidCharacter()
+{
+    QFETCH(QString, source);
+    QFETCH(QDomElement, message);
+
+    if (source == '=' or source == '%')
+    {
+        const QDomNode context = message.parentNode();
+        if (context.isNull())
+        {
+            QFAIL("Can't get context.");
+        }
+
+        const QString contextName = context.firstChildElement(TagName).text();
+        const QString error = QString("String contains invalid character '%1' in context '%2'. It should not be "
+                                      "marked for translation.")
+                                  .arg(source, contextName);
+        QFAIL(qUtf8Printable(error));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_TSTranslation::PrepareOriginalStrings()
 {
     QTest::addColumn<QString>("source");

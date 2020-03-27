@@ -384,7 +384,7 @@
              <string>Time given for the algorithm to find best layout.</string>
             </property>
             <property name="suffix">
-             <string> min</string>
+             <string comment="minutes"> min</string>
             </property>
             <property name="minimum">
              <number>1</number>
@@ -429,7 +429,7 @@
              <string>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </string>
             </property>
             <property name="suffix">
-             <string>%</string>
+             <string notr="true">%</string>
             </property>
             <property name="decimals">
              <number>1</number>

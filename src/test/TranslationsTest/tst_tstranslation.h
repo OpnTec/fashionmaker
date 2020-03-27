@@ -44,6 +44,8 @@ private slots:
     void CheckEmptyToolButton();
     void CheckEllipsis_data();
     void CheckEllipsis();
+    void CheckInvalidCharacter_data();
+    void CheckInvalidCharacter();
 
 private:
     Q_DISABLE_COPY(TST_TSTranslation)
