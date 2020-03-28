@@ -530,7 +530,7 @@ VAbstractOperation::VAbstractOperation(VAbstractPattern *doc, VContainer *data, 
       destination(destination),
       operatedObjects()
 {
-    connect(doc, &VAbstractPattern::UpdateToolTip, [this]()
+    connect(doc, &VAbstractPattern::UpdateToolTip, this, [this]()
     {
         QMapIterator<quint32, VAbstractSimple *> i(operatedObjects);
         while (i.hasNext())
