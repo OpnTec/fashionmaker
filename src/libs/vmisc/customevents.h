@@ -107,8 +107,6 @@ private:
     QtMsgType m_severity;
 };
 
-#endif // CUSTOMEVENTS_H
-
 inline QString PatternMessageEvent::Message() const
 {
     return m_message;
@@ -118,3 +116,5 @@ inline QtMsgType PatternMessageEvent::Severity() const
 {
     return m_severity;
 }
+
+#endif // CUSTOMEVENTS_H
