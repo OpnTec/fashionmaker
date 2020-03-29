@@ -2464,11 +2464,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -2531,11 +2531,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -3135,23 +3135,23 @@
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Ліве:</translation>
+        <translation>Ліве:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Праве:</translation>
+        <translation>Праве:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнє:</translation>
+        <translation>Верхнє:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнє:</translation>
+        <translation>Нижнє:</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -3164,10 +3164,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3462,16 +3458,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3896,11 +3892,11 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5594,7 +5590,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Імя:</translation>
+        <translation>Імя:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5713,7 +5709,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Параметри</translation>
+        <translation>Параметри</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5726,10 +5722,6 @@ Apply settings anyway?</source>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -11426,21 +11418,21 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Не можу відкрити файл%1: 
+        <translation>Не можу відкрити файл%1: 
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Не можу відкрити файл схеми %1:\n%2.</translation>
+        <translation>Не можу відкрити файл схеми %1:\n%2.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">Не вдалося завантажити файл схеми &apos;%1&apos;.</translation>
+        <translation>Не вдалося завантажити файл схеми &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Помилка валідації файлу %3 в рядку %1 стовпця %2</translation>
+        <translation>Помилка валідації файлу %3 в рядку %1 стовпця %2</translation>
     </message>
 </context>
 <context>
@@ -13299,7 +13291,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Відзеркалити по вісі</translation>
+        <translation>Відзеркалити по вісі</translation>
     </message>
 </context>
 <context>
@@ -15820,7 +15812,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Властивості</translation>
+        <translation>Властивості</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

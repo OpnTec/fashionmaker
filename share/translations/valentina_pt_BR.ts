@@ -2464,11 +2464,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -2531,11 +2531,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -3131,27 +3131,27 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Margens</translation>
+        <translation>Margens</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Esquerda:</translation>
+        <translation>Esquerda:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Direita:</translation>
+        <translation>Direita:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Topo:</translation>
+        <translation>Topo:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Base:</translation>
+        <translation>Base:</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -3164,10 +3164,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3460,16 +3456,16 @@ Aplicar configurações de qualquer forma?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3894,11 +3890,11 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5591,7 +5587,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5706,7 +5702,7 @@ Aplicar configurações de qualquer forma?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opções</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5719,10 +5715,6 @@ Aplicar configurações de qualquer forma?</translation>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -11404,13 +11396,13 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Impossível abrir o arquivo %1:
+        <translation>Impossível abrir o arquivo %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Impossível abrir o arquivo de esquema %1:
+        <translation>Impossível abrir o arquivo de esquema %1:
 %2.</translation>
     </message>
     <message>
@@ -11419,7 +11411,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Arquivo de erro de validação %3 na linha %1 coluna %2</translation>
+        <translation>Arquivo de erro de validação %3 na linha %1 coluna %2</translation>
     </message>
 </context>
 <context>
@@ -13231,7 +13223,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Espelhar através do eixo</translation>
+        <translation>Espelhar através do eixo</translation>
     </message>
 </context>
 <context>
@@ -15707,7 +15699,7 @@ Deseja salvar suas mudanças?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferências</translation>
+        <translation>Preferências</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

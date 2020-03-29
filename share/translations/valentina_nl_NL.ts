@@ -54,7 +54,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>hernoem groep</translation>
     </message>
 </context>
 <context>
@@ -2456,31 +2456,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiketten:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket toevoegen</translation>
     </message>
 </context>
 <context>
@@ -2523,31 +2523,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiketten:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket toevoegen</translation>
     </message>
 </context>
 <context>
@@ -2574,15 +2574,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket toevoegen</translation>
     </message>
 </context>
 <context>
@@ -3127,51 +3127,43 @@
     <name>DialogLayoutScale</name>
     <message>
         <source>Layout scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal van de opmaak</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Marges</translation>
+        <translation>Marges</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Links:</translation>
+        <translation>Links:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Rechts:</translation>
+        <translation>Rechts:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Bovenaan:</translation>
+        <translation>Bovenaan:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Onderaan:</translation>
+        <translation>Onderaan:</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>Vertikaal:</translation>
     </message>
 </context>
 <context>
@@ -3444,20 +3436,12 @@ Toch de instellingen aanpassen?</translation>
         <translation>Tijd toegekend aan het algoritme om de beste opmaak te vinden.</translation>
     </message>
     <message>
-        <source> min</source>
-        <translation type="vanished">min</translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation>Efficiëntie:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
         <translation>Bepaal de opmaak efficiëntie coëfficiënt. De opmaak efficiëntie coëfficiënt is de verhouding van het gebied door de stukken ingenomen ten opzichte van de rechthoek die alle objecten bevat.  Als het aantal inpassingen het verwachte niveau bereikt, wordt het proces gestopt. Als de waarde 0 is, wordt er niet gechecked. </translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="vanished">%</translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3477,16 +3461,20 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Zet deze optie aan om 1-blad oplossingen te verkrijgen. </translation>
     </message>
     <message>
         <source>Prefer one sheet solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkies een 1-blad oplossing</translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3902,31 +3890,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket toevoegen</translation>
     </message>
 </context>
 <context>
@@ -4870,10 +4858,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Lengte:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation>U markering</translation>
     </message>
@@ -5603,27 +5587,27 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet aan om een zichtbaarheidsgroep aan te maken vanuit de originele objecten</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket toevoegen</translation>
     </message>
 </context>
 <context>
@@ -5730,27 +5714,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opties</translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>Vertikaal:</translation>
     </message>
 </context>
 <context>
@@ -8346,7 +8322,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation>Maak een nieuw patroondeel om te gaan werken.</translation>
+        <translation>Start een nieuw patroondeel op.</translation>
     </message>
     <message>
         <source>Changes applied.</source>
@@ -9354,7 +9330,7 @@ Deze optie wordt actief na een herstart..</translation>
     <name>QObject</name>
     <message>
         <source>Create new pattern piece to start working.</source>
-        <translation type="vanished">Maak een nieuw patroondeel om te gaan werken.</translation>
+        <translation type="vanished">Start een nieuw patroondeel op.</translation>
     </message>
     <message>
         <source>mm</source>
@@ -9785,7 +9761,7 @@ Deze optie wordt actief na een herstart..</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>hernoem groep</translation>
     </message>
 </context>
 <context>
@@ -10912,10 +10888,6 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Formule assistent</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -11455,22 +11427,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">kan bestand niet openen %1:
+        <translation>kan bestand niet openen %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Kan schema bestand niet openen %1:
+        <translation>Kan schema bestand niet openen %1:
 %2.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">Kan schema bestand niet laden &apos;%1&quot;.</translation>
+        <translation>Kan schema bestand niet laden &apos;%1&quot;.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Validatie fout bestand %3 op lijn %1 kolom %2</translation>
+        <translation>Validatie fout bestand %3 op lijn %1 kolom %2</translation>
     </message>
 </context>
 <context>
@@ -11562,15 +11534,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>operation options</source>
-        <translation type="unfinished"></translation>
+        <translation>bewerkingsopties</translation>
     </message>
     <message>
         <source>delete operation</source>
-        <translation type="unfinished"></translation>
+        <translation>verwijder bewerking</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaarheid groep</translation>
     </message>
 </context>
 <context>
@@ -11747,15 +11719,15 @@ Wil je deze veranderingen opslaan?</translation>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Detail &apos;%1&apos; vierkant &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Lay-out blad papier &lt;=0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het voorbereiden van gegevens voor lay-out: Detail lijst is leeg</translation>
     </message>
 </context>
 <context>
@@ -12262,23 +12234,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de horizontale schaal factor tussen 0.01 en 3.0 (standaard=1.0, export modus).</translation>
     </message>
     <message>
         <source>Horizontal scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontale schaal</translation>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet de vertikale schaal factor tussen 0.01 en 3.0 (standaard=1.0, export modus).</translation>
     </message>
     <message>
         <source>Vertical scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale schaal</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Verkies 1-blad opmaak oplossing (export modus).</translation>
     </message>
 </context>
 <context>
@@ -13005,11 +12977,11 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Reading final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inlezen definitieve maten fout.</translation>
     </message>
     <message>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarde voor de definitieve maten &apos;%1&apos; is oneindig of NaN. Controlleer uw berekeningen.</translation>
     </message>
 </context>
 <context>
@@ -13330,7 +13302,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Kantelen via de aslijn</translation>
+        <translation>Kantelen via de aslijn</translation>
     </message>
 </context>
 <context>
@@ -13345,7 +13317,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantelen langs een lijn</translation>
     </message>
 </context>
 <context>
@@ -13443,7 +13415,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>verplaats</translation>
     </message>
 </context>
 <context>
@@ -14047,7 +14019,7 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>draai</translation>
     </message>
 </context>
 <context>
@@ -15551,187 +15523,187 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation type="unfinished"></translation>
+        <translation>omzetten graden naar radialen</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
-        <translation type="unfinished"></translation>
+        <translation>omzetten radialen naar graden</translation>
     </message>
     <message>
         <source>sine function working with radians</source>
         <comment>function sin</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinus gebruikt radialen</translation>
     </message>
     <message>
         <source>cosine function working with radians</source>
         <comment>function cos</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosinus gebruikt radialen</translation>
     </message>
     <message>
         <source>tangens function working with radians</source>
         <comment>function tan</comment>
-        <translation type="unfinished"></translation>
+        <translation>tangens gebruikt radialen</translation>
     </message>
     <message>
         <source>arcus sine function working with radians</source>
         <comment>function asin</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogsinus gebruikt radialen</translation>
     </message>
     <message>
         <source>arcus cosine function working with radians</source>
         <comment>function acos</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogcosinus gebruikt radialen</translation>
     </message>
     <message>
         <source>arcus tangens function working with radians</source>
         <comment>function atan</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogtanges gebruikt radialen</translation>
     </message>
     <message>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische sine functie</translation>
     </message>
     <message>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische cosinus</translation>
     </message>
     <message>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische tangens functie</translation>
     </message>
     <message>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische arcus sine functie</translation>
     </message>
     <message>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische boogcosinus</translation>
     </message>
     <message>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hyperbolische arcus tangens functie</translation>
     </message>
     <message>
         <source>sine function working with degrees</source>
         <comment>function sinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>sinus gebruikt graden</translation>
     </message>
     <message>
         <source>cosine function working with degrees</source>
         <comment>function cosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>cosinus gebruikt graden</translation>
     </message>
     <message>
         <source>tangens function working with degrees</source>
         <comment>function tanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>tangens gebruikt graden</translation>
     </message>
     <message>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogsinus gebruikt graden</translation>
     </message>
     <message>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogcosinus gebruikt graden</translation>
     </message>
     <message>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>boogtangens gebruikt graden</translation>
     </message>
     <message>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritme naar de basis 2</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritme naar de basis 10</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritme naar de basis 10</translation>
     </message>
     <message>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritme naar basis e (2.71828...)</translation>
     </message>
     <message>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
-        <translation type="unfinished"></translation>
+        <translation>e tot de macht van x</translation>
     </message>
     <message>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kwadrant wortelgetal van een waarde</translation>
     </message>
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
-        <translation type="unfinished"></translation>
+        <translation>Teken functie -1 als x&lt;0; 1 als x&gt;0</translation>
     </message>
     <message>
         <source>round to nearest integer</source>
         <comment>function rint</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rond het dichtbijzijnde gehele getal</translation>
     </message>
     <message>
         <source>round to up to 1 decimal</source>
         <comment>function r2cm</comment>
-        <translation type="unfinished"></translation>
+        <translation>afronden op 1 decimaal</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes cm units.</source>
         <comment>function csrCm</comment>
-        <translation type="unfinished"></translation>
+        <translation>model snijden, splitsen en draaien operatie. Gebruikt cm.</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes inch units.</source>
         <comment>function csrInch</comment>
-        <translation type="unfinished"></translation>
+        <translation>model snijden, splitsen en draaien operatie. Gebruikt inches.</translation>
     </message>
     <message>
         <source>absolute value</source>
         <comment>function abs</comment>
-        <translation type="unfinished"></translation>
+        <translation>absolute waarde</translation>
     </message>
     <message>
         <source>min of all arguments</source>
         <comment>function min</comment>
-        <translation type="unfinished"></translation>
+        <translation>min van alle argumenten</translation>
     </message>
     <message>
         <source>max of all arguments</source>
         <comment>function max</comment>
-        <translation type="unfinished"></translation>
+        <translation>max van alle argumenten</translation>
     </message>
     <message>
         <source>sum of all arguments</source>
         <comment>function sum</comment>
-        <translation type="unfinished"></translation>
+        <translation>som van alle argumenten</translation>
     </message>
     <message>
         <source>mean value of all arguments</source>
         <comment>function avg</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gemiddelde waarde van alle argumenten</translation>
     </message>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
-        <translation type="unfinished"></translation>
+        <translation>Brengt het drijvende-punt restant van numerator/denominator terug ( afgerond naar nul)</translation>
     </message>
 </context>
 <context>
@@ -15796,15 +15768,15 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Piece options</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkstuk opties</translation>
     </message>
     <message>
         <source>Delete piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder werkstuk</translation>
     </message>
     <message>
         <source>Cannot find piece by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan werkstuk met id &apos;%1&apos; niet vinden</translation>
     </message>
 </context>
 <context>
@@ -15839,23 +15811,23 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiket:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <source>Filter by tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter per etiket</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Voorkeuren</translation>
+        <translation>Voorkeuren</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoriëen: %1.</translation>
     </message>
 </context>
 <context>

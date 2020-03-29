@@ -2888,7 +2888,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
@@ -2913,10 +2913,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3136,16 +3132,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5139,7 +5135,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opțiuni</translation>
+        <translation>Opțiuni</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5152,10 +5148,6 @@ Apply settings anyway?</source>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -14078,7 +14070,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferințe</translation>
+        <translation>Preferințe</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

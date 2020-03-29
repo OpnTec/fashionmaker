@@ -2280,7 +2280,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nazwa:</translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2347,7 +2347,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nazwa:</translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2899,19 +2899,19 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Marginesy</translation>
+        <translation>Marginesy</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Lewy:</translation>
+        <translation>Lewy:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Prawy:</translation>
+        <translation>Prawy:</translation>
     </message>
     <message>
         <source>Top:</source>
@@ -2932,10 +2932,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3151,16 +3147,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3577,7 +3573,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nazwa:</translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -5087,7 +5083,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nazwa:</translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5186,7 +5182,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opcje</translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5199,10 +5195,6 @@ Apply settings anyway?</source>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -14384,7 +14376,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Ustawienia</translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

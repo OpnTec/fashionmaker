@@ -54,7 +54,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>переименовать группу</translation>
     </message>
 </context>
 <context>
@@ -2456,31 +2456,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Позволяет создать группу видимости из исходных объектов</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа видимости</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить категории</translation>
     </message>
 </context>
 <context>
@@ -2523,31 +2523,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Позволяет создать группу видимости из исходных объектов</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа видимости</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить категории</translation>
     </message>
 </context>
 <context>
@@ -2574,15 +2574,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить категории</translation>
     </message>
 </context>
 <context>
@@ -3127,47 +3127,43 @@
     <name>DialogLayoutScale</name>
     <message>
         <source>Layout scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб раскладки</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Поля</translation>
+        <translation>Поля</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Левое:</translation>
+        <translation>Левое:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">см</translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Правое:</translation>
+        <translation>Правое:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Верхнее:</translation>
+        <translation>Верхнее:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Нижнее:</translation>
+        <translation>Нижнее:</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>По горизонтали:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>По вертикали:</translation>
     </message>
 </context>
 <context>
@@ -3453,7 +3449,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Nest quantity of copies according to piece settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разложить согласно количеству копий в соответствии с настройками детали.</translation>
     </message>
     <message>
         <source>Nest quantity</source>
@@ -3465,15 +3461,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Включите эту опцию, чтобы  получить раскладку на одном листе.</translation>
     </message>
     <message>
         <source>Prefer one sheet solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Предпочесть решение с одним листом</translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3890,31 +3890,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Позволяет создать группу видимости из исходных объектов</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа видимости</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Поворот</translation>
+        <translation>Поворот</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить категории</translation>
     </message>
 </context>
 <context>
@@ -5584,31 +5584,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта точка не может быть исходной точкой. Пожалуйста, выберите другую исходную точку</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Позволяет создать группу видимости из исходных объектов</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа видимости</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Название:</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить категории</translation>
     </message>
 </context>
 <context>
@@ -5715,23 +5715,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>По горизонтали:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
+        <translation>По вертикали:</translation>
     </message>
 </context>
 <context>
@@ -8340,7 +8336,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Cannot read settings from a malformed .INI file.</source>
@@ -8348,7 +8344,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите объекты контура,  &lt;b&gt;%1 &lt;/b&gt;- кривая обратного направления</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
@@ -8655,7 +8651,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Process has been stoped because of exception.</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс был остановлен из-за исключения.</translation>
     </message>
     <message>
         <source>File error.
@@ -9510,19 +9506,19 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Cannot calculate seam allowance before for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать припуск на шов перед точкой &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать припуск на шов после точки &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
         <source>Cannot calculate seam allowance after for point &apos;%1&apos;. Reason: </source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать припуск на шов после точки &apos;%1&apos;.  Причина: </translation>
     </message>
     <message>
         <source>Cannot calculate passmark length for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно рассчитать длину надсечки для точки &apos;%1&apos;. Причина: %2.</translation>
     </message>
     <message>
         <source>Passmark &apos;%1&apos; is not part of piece &apos;%2&apos;.</source>
@@ -9538,7 +9534,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверная формула &apos;%1&apos; для инструмента с идентификатором &apos;%2&apos;. %3.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
@@ -9767,7 +9763,7 @@ This option will take an affect after restart.</source>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>переименовать группу</translation>
     </message>
 </context>
 <context>
@@ -10915,7 +10911,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список всех установленных надсечек. Чтобы поставить надсечку, вернитесь во вкладку «Главный контур», вызовите контекстное меню у нужной точки и поставьте галочку в строке &quot;Надсечка&quot;.</translation>
     </message>
 </context>
 <context>
@@ -11433,22 +11429,22 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Невозможно открыть файл %1:
+        <translation>Невозможно открыть файл %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Невозможно открыть файл схемы %1:
+        <translation>Невозможно открыть файл схемы %1:
 %2.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">Не удалось открыть файл схемы &apos;%1&apos;.</translation>
+        <translation>Не удалось открыть файл схемы &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Ошибка валидации файла %3 в строке %1 столбца %2</translation>
+        <translation>Ошибка валидации файла %3 в строке %1 столбца %2</translation>
     </message>
 </context>
 <context>
@@ -11525,7 +11521,7 @@ Do you want to save your changes?</source>
     <name>VAbstractNode</name>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот идентификатор (%1) не является уникальным.</translation>
     </message>
 </context>
 <context>
@@ -11540,15 +11536,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>operation options</source>
-        <translation type="unfinished"></translation>
+        <translation>параметры операции</translation>
     </message>
     <message>
         <source>delete operation</source>
-        <translation type="unfinished"></translation>
+        <translation>удалить операцию</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа видимости</translation>
     </message>
 </context>
 <context>
@@ -11733,7 +11729,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка подготовки данных для раскладки: список деталей пуст</translation>
     </message>
 </context>
 <context>
@@ -12200,7 +12196,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Order detail to follow grainline direction (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Получите детали в соответствии с направлением долевой (режим экспорта).</translation>
     </message>
     <message>
         <source>&lt;Time&gt; in minutes given for the algorithm to find best layout. Time must be in range from 1 minute to 60 minutes. Default value 1 minute.</source>
@@ -12224,7 +12220,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Nest quantity copies of each piece (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Разложить согласно количеству копий каждой детали (режим экспорта).</translation>
     </message>
     <message>
         <source>Set layout efficiency &lt;coefficient&gt;. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. Coefficient must be in range from 0 to 100. Default value 0.</source>
@@ -12244,7 +12240,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Horizontal scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб по горизонтали</translation>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
@@ -12252,11 +12248,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Vertical scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб по вертикали</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Предпочесть решение с одним листом раскладки (режим экспорта).</translation>
     </message>
 </context>
 <context>
@@ -12400,11 +12396,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Not unique id (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Не уникальный идентификатор (%1)</translation>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот идентификатор (%1) не является уникальным.</translation>
     </message>
     <message>
         <source>Couldn&apos;t get version information.</source>
@@ -12439,7 +12435,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот идентификатор (%1) не является уникальным.</translation>
     </message>
     <message>
         <source>Add to group</source>
@@ -12477,7 +12473,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Result is infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Результат бесконечен</translation>
     </message>
     <message>
         <source>Result is NaN</source>
@@ -12971,19 +12967,19 @@ Do you want to save your changes?</source>
     <name>VPatternRecipe</name>
     <message>
         <source>Invalid tag %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильная категория %1</translation>
     </message>
     <message>
         <source>Can&apos;t find element by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается найти элемент с идентификатором &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Can&apos;t create history record for the tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать запись истории для инструмента.</translation>
     </message>
     <message>
         <source>Reading final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка чтения финальных измерений.</translation>
     </message>
     <message>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
@@ -13031,7 +13027,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Cannot open the watermark image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удается открыть изображение водяного знака.</translation>
     </message>
 </context>
 <context>
@@ -13308,7 +13304,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Отразить объект по оси</translation>
+        <translation>Отразить объект по оси</translation>
     </message>
 </context>
 <context>
@@ -14100,7 +14096,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот идентификатор (%1) не является уникальным.</translation>
     </message>
     <message>
         <source>Tool was used after deleting.</source>
@@ -14141,7 +14137,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>This id (%1) is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот идентификатор (%1) не является уникальным.</translation>
     </message>
 </context>
 <context>
@@ -15534,42 +15530,42 @@ Do you want to save your changes?</source>
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation type="unfinished"></translation>
+        <translation>Преобразует градусы в радианы</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
-        <translation type="unfinished"></translation>
+        <translation>Преобразует радианы в градусы</translation>
     </message>
     <message>
         <source>sine function working with radians</source>
         <comment>function sin</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция синуса, работающая с радианами</translation>
     </message>
     <message>
         <source>cosine function working with radians</source>
         <comment>function cos</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция косинуса, работающая с радианами</translation>
     </message>
     <message>
         <source>tangens function working with radians</source>
         <comment>function tan</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция тангенса, работающая с радианами</translation>
     </message>
     <message>
         <source>arcus sine function working with radians</source>
         <comment>function asin</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арксинуса, работающая с радианами</translation>
     </message>
     <message>
         <source>arcus cosine function working with radians</source>
         <comment>function acos</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арккосинуса, работающая с радианами</translation>
     </message>
     <message>
         <source>arcus tangens function working with radians</source>
         <comment>function atan</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арктангенса, работающая с радианами</translation>
     </message>
     <message>
         <source>hyperbolic sine function</source>
@@ -15604,32 +15600,32 @@ Do you want to save your changes?</source>
     <message>
         <source>sine function working with degrees</source>
         <comment>function sinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция синуса, работающая с градусами</translation>
     </message>
     <message>
         <source>cosine function working with degrees</source>
         <comment>function cosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция косинуса, работающая с градусами</translation>
     </message>
     <message>
         <source>tangens function working with degrees</source>
         <comment>function tanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция тангенса, работающая с градусами</translation>
     </message>
     <message>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арксинуса, работающая с градусами</translation>
     </message>
     <message>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арккосинуса, работающая с градусами</translation>
     </message>
     <message>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>Функция арктангенса, работающая с градусами</translation>
     </message>
     <message>
         <source>logarithm to the base 2</source>
@@ -15659,7 +15655,7 @@ Do you want to save your changes?</source>
     <message>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
-        <translation type="unfinished"></translation>
+        <translation>Квадратный корень из значения</translation>
     </message>
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
@@ -15669,47 +15665,47 @@ Do you want to save your changes?</source>
     <message>
         <source>round to nearest integer</source>
         <comment>function rint</comment>
-        <translation type="unfinished"></translation>
+        <translation>Округление до целого числа</translation>
     </message>
     <message>
         <source>round to up to 1 decimal</source>
         <comment>function r2cm</comment>
-        <translation type="unfinished"></translation>
+        <translation>Округление до 1 десятичного знака</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes cm units.</source>
         <comment>function csrCm</comment>
-        <translation type="unfinished"></translation>
+        <translation>Вырезать, разделить и повернуть операцию моделирования. Взять единицу измерения - см.</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes inch units.</source>
         <comment>function csrInch</comment>
-        <translation type="unfinished"></translation>
+        <translation>Вырезать, разделить и повернуть операцию моделирования. Взять единицу измерения - дюйм.</translation>
     </message>
     <message>
         <source>absolute value</source>
         <comment>function abs</comment>
-        <translation type="unfinished"></translation>
+        <translation>Абсолютная величина (модуль)</translation>
     </message>
     <message>
         <source>min of all arguments</source>
         <comment>function min</comment>
-        <translation type="unfinished"></translation>
+        <translation>Минимальный из всех аргументов</translation>
     </message>
     <message>
         <source>max of all arguments</source>
         <comment>function max</comment>
-        <translation type="unfinished"></translation>
+        <translation>Максимальный из всех аргументов</translation>
     </message>
     <message>
         <source>sum of all arguments</source>
         <comment>function sum</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сумма всех аргументов</translation>
     </message>
     <message>
         <source>mean value of all arguments</source>
         <comment>function avg</comment>
-        <translation type="unfinished"></translation>
+        <translation>Среднее значение всех аргументов</translation>
     </message>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
@@ -15779,11 +15775,11 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Piece options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры детали</translation>
     </message>
     <message>
         <source>Delete piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить деталь</translation>
     </message>
     <message>
         <source>Cannot find piece by id &apos;%1&apos;</source>
@@ -15822,23 +15818,23 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделяйте каждую категорию запятой.</translation>
     </message>
     <message>
         <source>Filter by tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр по категориям</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории: %1.</translation>
     </message>
 </context>
 <context>
@@ -15865,7 +15861,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Контур кривой&lt;/b&gt;: выберите  семь или более точек, &lt;b&gt;%1&lt;/b&gt; - завершить создание</translation>
     </message>
 </context>
 <context>
@@ -15958,7 +15954,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Контур кривой&lt;/b&gt;: выберите три или более точек, &lt;b&gt;%1&lt;/b&gt; - завершить создание</translation>
     </message>
     <message>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>

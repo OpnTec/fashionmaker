@@ -2076,7 +2076,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2139,7 +2139,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -2715,7 +2715,7 @@
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
@@ -2740,10 +2740,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -2963,16 +2959,16 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3393,7 +3389,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Rotation</source>
@@ -4962,7 +4958,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nmi:</translation>
+        <translation>Nmi:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5061,7 +5057,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5074,10 +5070,6 @@ Apply settings anyway?</source>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -10194,13 +10186,13 @@ Do you want to save your changes?</source>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Tiedostoa %1 ei voitu avata:
+        <translation>Tiedostoa %1 ei voitu avata:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Skeematiedostoa %1 ei voitu avata.
+        <translation>Skeematiedostoa %1 ei voitu avata.
 %2.</translation>
     </message>
     <message>
@@ -10209,7 +10201,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Tarkastus virhe tiedostossa %3 rivillä %1 kohdassa %2</translation>
+        <translation>Tarkastus virhe tiedostossa %3 rivillä %1 kohdassa %2</translation>
     </message>
 </context>
 <context>
@@ -14288,7 +14280,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Asetukset</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

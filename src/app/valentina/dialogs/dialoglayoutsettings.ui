@@ -451,7 +451,7 @@
         <item>
          <widget class="QCheckBox" name="checkBoxOneSheetSolution">
           <property name="toolTip">
-           <string>Enable this option to prefer getting one sheet solutions. </string>
+           <string>Enable this option to prefer getting one sheet solutions.</string>
           </property>
           <property name="text">
            <string>Prefer one sheet solution</string>

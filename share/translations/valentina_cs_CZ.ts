@@ -2464,11 +2464,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -2531,11 +2531,11 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -3131,27 +3131,27 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Okraje</translation>
+        <translation>Okraje</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Levý:</translation>
+        <translation>Levý:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Pravý:</translation>
+        <translation>Pravý:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished">Nahoře:</translation>
+        <translation>Nahoře:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished">Dole:</translation>
+        <translation>Dole:</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -3164,14 +3164,6 @@
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3444,20 +3436,12 @@ Přesto použít nastavení?</translation>
         <translation>Čas daný algoritmu k nalezení nejlepšího rozvržení.</translation>
     </message>
     <message>
-        <source> min</source>
-        <translation type="vanished"> min</translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation>Účinnost:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="vanished">%</translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3476,17 +3460,17 @@ Přesto použít nastavení?</translation>
         <translation>Automaticky ořezat nepoužívanou šířku</translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"> min</translation>
+        <translation> min</translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3910,11 +3894,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -4870,10 +4854,6 @@ Přesto použít nastavení?</translation>
         <translation>Délka:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation>Značka U</translation>
     </message>
@@ -5612,7 +5592,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Tags:</source>
@@ -5731,7 +5711,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Volby</translation>
+        <translation>Volby</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -5744,14 +5724,6 @@ Přesto použít nastavení?</translation>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -10915,10 +10887,6 @@ Chcete uložit změny?</translation>
         <translation>Průvodce vzorcem</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Hodnota</translation>
     </message>
@@ -11458,22 +11426,22 @@ Chcete uložit změny?</translation>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">Nelze otevřít soubor %1:
+        <translation>Nelze otevřít soubor %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">Nelze otevřít soubor se schématem %1:
+        <translation>Nelze otevřít soubor se schématem %1:
 %2.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">Nepodařilo se nahrát soubor se schématem &apos;%1&apos;.</translation>
+        <translation>Nepodařilo se nahrát soubor se schématem &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Chyba při ověřování souboru %3 na řádku %1, ve sloupci %2</translation>
+        <translation>Chyba při ověřování souboru %3 na řádku %1, ve sloupci %2</translation>
     </message>
 </context>
 <context>
@@ -13333,7 +13301,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Převrácení podle osy</translation>
+        <translation>Převrácení podle osy</translation>
     </message>
 </context>
 <context>
@@ -15854,7 +15822,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Categories: %1.</source>

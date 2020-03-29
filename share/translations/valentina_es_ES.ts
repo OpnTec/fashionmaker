@@ -54,7 +54,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>renombrar grupo</translation>
     </message>
 </context>
 <context>
@@ -2456,31 +2456,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de Visibilidad</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotación</translation>
+        <translation>Rotación</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar etiquetas</translation>
     </message>
 </context>
 <context>
@@ -2523,31 +2523,31 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de Visibilidad</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotación</translation>
+        <translation>Rotación</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar etiquetas</translation>
     </message>
 </context>
 <context>
@@ -2574,15 +2574,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar etiquetas</translation>
     </message>
 </context>
 <context>
@@ -3131,47 +3131,39 @@
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished">Margenes</translation>
+        <translation>Margenes</translation>
     </message>
     <message>
         <source>Left:</source>
-        <translation type="unfinished">Izquierda:</translation>
+        <translation>Izquierda:</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished">cm</translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>Right:</source>
-        <translation type="unfinished">Derecha:</translation>
+        <translation>Derecha:</translation>
     </message>
     <message>
         <source>Top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Superior:</translation>
     </message>
     <message>
         <source>Bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Inferior:</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -3443,20 +3435,12 @@ Aplicar características de todos modos?</translation>
         <translation>Tiempo dado para que el algoritmo encuentre el mejor diseño.</translation>
     </message>
     <message>
-        <source> min</source>
-        <translation type="vanished"> min</translation>
-    </message>
-    <message>
         <source>Efficiency:</source>
         <translation>Eficiencia:</translation>
     </message>
     <message>
         <source>Set layout efficiency coefficient. Layout efficiency coefficientt is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made. </source>
         <translation>Establecer coeficiente de eficiencia del diseño. El coeficiente de eficiencia del diseño es el radio del área ocupada por las piezas al limite rectangular de todas las piezas. Si el anidamiento alcanza el nivel requerido, el proceso se detiene. Si el valor es 0 no se realizará ninguna comprobación. </translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="vanished">%</translation>
     </message>
     <message>
         <source>Manual priority</source>
@@ -3475,17 +3459,17 @@ Aplicar características de todos modos?</translation>
         <translation>Recorte automático del ancho no utilizado</translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefiere una solución de hoja</translation>
     </message>
     <message>
         <source> min</source>
         <comment>minutes</comment>
-        <translation type="unfinished"> min</translation>
+        <translation> min</translation>
+    </message>
+    <message>
+        <source>Enable this option to prefer getting one sheet solutions.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3901,31 +3885,31 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de Visibilidad</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="unfinished">Rotación</translation>
+        <translation>Rotación</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar etiquetas</translation>
     </message>
 </context>
 <context>
@@ -4869,10 +4853,6 @@ Aplicar características de todos modos?</translation>
         <translation>Longitud:</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>U mark</source>
         <translation>Marca U</translation>
     </message>
@@ -5602,27 +5582,27 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar para crear un grupo de visibilidad a partir de objetos originales</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de Visibilidad</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nombre:</translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Agregar etiquetas</translation>
     </message>
 </context>
 <context>
@@ -5729,27 +5709,19 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opciones</translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Escala</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal:</translation>
     </message>
     <message>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%</source>
-        <translation type="obsolete">%</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
 </context>
 <context>
@@ -8471,11 +8443,11 @@ el patrón.</translation>
     </message>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca de Agua</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -8483,19 +8455,19 @@ el patrón.</translation>
     </message>
     <message>
         <source>Edit current</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar actual</translation>
     </message>
     <message>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor</translation>
     </message>
     <message>
         <source>Create or edit a watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear o editar una marca de agua</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos de marca de agua</translation>
     </message>
 </context>
 <context>
@@ -8682,7 +8654,11 @@ el patrón.</translation>
 %1
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Error archivo.
+
+%1
+
+%2</translation>
     </message>
 </context>
 <context>
@@ -9557,7 +9533,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir el parámetro toInt</translation>
     </message>
 </context>
 <context>
@@ -9782,7 +9758,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>renombrar grupo</translation>
     </message>
 </context>
 <context>
@@ -10909,10 +10885,6 @@ Quieres guardar los cambios?</translation>
         <translation>Asistente de formula</translation>
     </message>
     <message>
-        <source>=</source>
-        <translation type="vanished">=</translation>
-    </message>
-    <message>
         <source>Value</source>
         <translation>Valor</translation>
     </message>
@@ -10934,7 +10906,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de todos los piques definidos. Para definir un pique regrese a la pestaña de Ruta Principal, llame al menú de contexto por un punto del articulo y hágalo un pique.</translation>
     </message>
 </context>
 <context>
@@ -11452,22 +11424,22 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>Can&apos;t open file %1:
 %2.</source>
-        <translation type="unfinished">No se pudo abrir el archivo %1:
+        <translation>No se pudo abrir el archivo %1:
 %2.</translation>
     </message>
     <message>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">No se pudo abrir el archivo de esquema %1:
+        <translation>No se pudo abrir el archivo de esquema %1:
 %2.</translation>
     </message>
     <message>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">No se puede cargar el archivo de esquema &apos;%1&apos;.</translation>
+        <translation>No se puede cargar el archivo de esquema &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Error de validación en el archivo %3 en la línea %1 columna %2</translation>
+        <translation>Error de validación en el archivo %3 en la línea %1 columna %2</translation>
     </message>
 </context>
 <context>
@@ -11559,7 +11531,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>operation options</source>
-        <translation type="unfinished"></translation>
+        <translation>opciones de operacion</translation>
     </message>
     <message>
         <source>delete operation</source>
@@ -11567,7 +11539,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de visibilidad</translation>
     </message>
 </context>
 <context>
@@ -11744,15 +11716,15 @@ Quieres guardar los cambios?</translation>
     <name>VBank</name>
     <message>
         <source>Preparing data for layout error: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparación de datos para error de diseño: Detalle &apos;%1&apos; cuadro &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparación de datos para el error de diseño: Hoja de papel del diseño &lt;= 0</translation>
     </message>
     <message>
         <source>Preparing data for layout error: List of details is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparación de datos para el error de diseño: la lista de detalles está vacía</translation>
     </message>
 </context>
 <context>
@@ -12267,7 +12239,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer escala vertical desde 0.01 hasta 3.0 ( Predeterminado = 1.0, modo exportación).</translation>
     </message>
     <message>
         <source>Vertical scale</source>
@@ -12275,7 +12247,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefiere una solución de diseño de hoja (modo de exportación).</translation>
     </message>
 </context>
 <context>
@@ -13002,11 +12974,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Reading final measurements error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de lectura de medidas finales.</translation>
     </message>
     <message>
         <source>Value for final measurtement &apos;%1&apos; is infinite or NaN. Please, check your calculations.</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor para medida final &apos;%1&apos; es infinito o no es un numero. Por favor, revise sus cálculos.</translation>
     </message>
 </context>
 <context>
@@ -13017,7 +12989,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pique para el punto &apos;%1&apos; en la pieza &apos;%2&apos; será inhabilitado. La longitud manual es menor que el valor permitido.</translation>
     </message>
 </context>
 <context>
@@ -13036,7 +13008,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Not supported file suffix &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No soporta el archivo con sufijo &apos;%1&apos;</translation>
     </message>
     <message>
         <source>cm</source>
@@ -13050,7 +13022,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Cannot open the watermark image.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede abrir la imagen de marca de agua.</translation>
     </message>
 </context>
 <context>
@@ -13327,7 +13299,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Flipping by axis</source>
-        <translation type="unfinished">Volteando por ejes</translation>
+        <translation>Volteando por ejes</translation>
     </message>
 </context>
 <context>
@@ -13342,7 +13314,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>flipping by line</source>
-        <translation type="unfinished"></translation>
+        <translation>voltear por linea</translation>
     </message>
 </context>
 <context>
@@ -13440,7 +13412,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>move</source>
-        <translation type="unfinished"></translation>
+        <translation>mover</translation>
     </message>
 </context>
 <context>
@@ -14044,7 +14016,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>rotar</translation>
     </message>
 </context>
 <context>
@@ -15548,187 +15520,187 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>converts degrees to radian</source>
         <comment>functionm degTorad</comment>
-        <translation type="unfinished"></translation>
+        <translation>convertir grados a radianes</translation>
     </message>
     <message>
         <source>converts radian to degrees</source>
         <comment>function radTodeg</comment>
-        <translation type="unfinished"></translation>
+        <translation>convertir radianes a grados</translation>
     </message>
     <message>
         <source>sine function working with radians</source>
         <comment>function sin</comment>
-        <translation type="unfinished"></translation>
+        <translation>función seno trabajando con radianes</translation>
     </message>
     <message>
         <source>cosine function working with radians</source>
         <comment>function cos</comment>
-        <translation type="unfinished"></translation>
+        <translation>función coseno trabajando con radianes</translation>
     </message>
     <message>
         <source>tangens function working with radians</source>
         <comment>function tan</comment>
-        <translation type="unfinished"></translation>
+        <translation>función tangente trabajando con radianes</translation>
     </message>
     <message>
         <source>arcus sine function working with radians</source>
         <comment>function asin</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arcoseno trabajando con radianes</translation>
     </message>
     <message>
         <source>arcus cosine function working with radians</source>
         <comment>function acos</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco coseno trabajando con radianes</translation>
     </message>
     <message>
         <source>arcus tangens function working with radians</source>
         <comment>function atan</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco tangente trabajando con radianes</translation>
     </message>
     <message>
         <source>hyperbolic sine function</source>
         <comment>function sinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>función seno hiperbolico</translation>
     </message>
     <message>
         <source>hyperbolic cosine</source>
         <comment>function cosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>coseno hiperbolico</translation>
     </message>
     <message>
         <source>hyperbolic tangens function</source>
         <comment>function tanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>función tangente hiperbolico</translation>
     </message>
     <message>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco coseno hiperbolico</translation>
     </message>
     <message>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco coseno hiperbolico</translation>
     </message>
     <message>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco tangente hiperbolica</translation>
     </message>
     <message>
         <source>sine function working with degrees</source>
         <comment>function sinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función seno trabajando con grados</translation>
     </message>
     <message>
         <source>cosine function working with degrees</source>
         <comment>function cosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función coseno trabajando con grados</translation>
     </message>
     <message>
         <source>tangens function working with degrees</source>
         <comment>function tanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función tangente trabajando con grados</translation>
     </message>
     <message>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco seno trabajando con grados</translation>
     </message>
     <message>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco coseno trabajando con grados</translation>
     </message>
     <message>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
-        <translation type="unfinished"></translation>
+        <translation>función arco tangente trabajando con grados</translation>
     </message>
     <message>
         <source>logarithm to the base 2</source>
         <comment>function log2</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo de base 2</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log10</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo de base 10</translation>
     </message>
     <message>
         <source>logarithm to the base 10</source>
         <comment>function log</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo de base 10</translation>
     </message>
     <message>
         <source>logarithm to base e (2.71828...)</source>
         <comment>function ln</comment>
-        <translation type="unfinished"></translation>
+        <translation>logaritmo base e (2.71828...)</translation>
     </message>
     <message>
         <source>e raised to the power of x</source>
         <comment>function exp</comment>
-        <translation type="unfinished"></translation>
+        <translation>e elevado a la potencia de x</translation>
     </message>
     <message>
         <source>square root of a value</source>
         <comment>function sqrt</comment>
-        <translation type="unfinished"></translation>
+        <translation>raíz cuadrada de un valor</translation>
     </message>
     <message>
         <source>sign function -1 if x&lt;0; 1 if x&gt;0</source>
         <comment>function sign</comment>
-        <translation type="unfinished"></translation>
+        <translation>signo de la función -1 si x&lt;0; 1 si x&gt;0</translation>
     </message>
     <message>
         <source>round to nearest integer</source>
         <comment>function rint</comment>
-        <translation type="unfinished"></translation>
+        <translation>redondear al entero mas cercano</translation>
     </message>
     <message>
         <source>round to up to 1 decimal</source>
         <comment>function r2cm</comment>
-        <translation type="unfinished"></translation>
+        <translation>redondear hasta 1 decimal</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes cm units.</source>
         <comment>function csrCm</comment>
-        <translation type="unfinished"></translation>
+        <translation>cortar, dividir y rotar la operación de modelado. Toma unidades cm.</translation>
     </message>
     <message>
         <source>cut, split and rotate modeling operation. Takes inch units.</source>
         <comment>function csrInch</comment>
-        <translation type="unfinished"></translation>
+        <translation>cortar, dividir y rotar la operación de modelado. Toma unidades pulgadas.</translation>
     </message>
     <message>
         <source>absolute value</source>
         <comment>function abs</comment>
-        <translation type="unfinished"></translation>
+        <translation>valor absoluto</translation>
     </message>
     <message>
         <source>min of all arguments</source>
         <comment>function min</comment>
-        <translation type="unfinished"></translation>
+        <translation>minimo de todos los argumentos</translation>
     </message>
     <message>
         <source>max of all arguments</source>
         <comment>function max</comment>
-        <translation type="unfinished"></translation>
+        <translation>máximo de todos los argumentos</translation>
     </message>
     <message>
         <source>sum of all arguments</source>
         <comment>function sum</comment>
-        <translation type="unfinished"></translation>
+        <translation>suma de todos los argumentos</translation>
     </message>
     <message>
         <source>mean value of all arguments</source>
         <comment>function avg</comment>
-        <translation type="unfinished"></translation>
+        <translation>significado del valor de todos los argumentos</translation>
     </message>
     <message>
         <source>Returns the floating-point remainder of numer/denom (rounded towards zero)</source>
         <comment>function fmod</comment>
-        <translation type="unfinished"></translation>
+        <translation>Devuelve el resto de punto flotante de numerador/denominador (redondeado hacia cero)</translation>
     </message>
 </context>
 <context>
@@ -15793,15 +15765,15 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Piece options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones de pieza</translation>
     </message>
     <message>
         <source>Delete piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar pieza</translation>
     </message>
     <message>
         <source>Cannot find piece by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede encontrar pieza con id &apos;%1&apos;</translation>
     </message>
 </context>
 <context>
@@ -15836,11 +15808,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Separar cada etiqueta con coma.</translation>
     </message>
     <message>
         <source>Filter by tags</source>
@@ -15848,7 +15820,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Preferencias</translation>
+        <translation>Preferencias</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
@@ -15982,11 +15954,11 @@ Quieres guardar los cambios?</translation>
     <name>WatermarkWindow</name>
     <message>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Marca de Agua</translation>
     </message>
     <message>
         <source>Opacity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacidad:</translation>
     </message>
     <message>
         <source>Text</source>
@@ -15998,7 +15970,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>watermark text</source>
-        <translation type="unfinished"></translation>
+        <translation>texto marca de agua</translation>
     </message>
     <message>
         <source>Rotation:</source>
@@ -16006,20 +15978,20 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente:</translation>
     </message>
     <message>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>El que es perico, donde quiera es verde</translation>
     </message>
     <message>
         <source>Edit font</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar fuente</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen</translation>
     </message>
     <message>
         <source>Path:</source>
@@ -16027,7 +15999,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>path to image</source>
-        <translation type="unfinished"></translation>
+        <translation>ruta a la imagen</translation>
     </message>
     <message>
         <source>Browse…</source>
@@ -16035,7 +16007,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Gray color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color gris</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -16071,7 +16043,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Watermark image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen Marca de agua</translation>
     </message>
     <message>
         <source>File error.</source>
@@ -16079,7 +16051,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Watermark files</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivos de marca de agua</translation>
     </message>
     <message>
         <source>Save as</source>
@@ -16087,7 +16059,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>marca de agua</translation>
     </message>
     <message>
         <source>Failed to lock. This file already opened in another window.</source>
@@ -16128,7 +16100,8 @@ Quieres guardar los cambios?</translation>
     <message>
         <source>The watermark has been modified.
 Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>La marca de agua ha sido modificada.
+Quiere guardar los cambios?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -16140,15 +16113,15 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>untitled.vwm</source>
-        <translation type="unfinished"></translation>
+        <translation>sintítulo.vwm</translation>
     </message>
     <message>
         <source>Confirm format rewriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar reescritura de formato</translation>
     </message>
     <message>
         <source>This file is using previous format version v%1. The current is v%2. Saving the file with this app version will update the format version for this file. This may prevent you from be able to open the file with older app versions. Do you really want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Este archivo esta usando un formato de version previo v%1. El actual es v%2. Guardando el archivo con esta version de la aplicación actualizara el formato de version para este archivo. Esto puede impedir que pueda abrir el archivo con versiones anteriores de la aplicación. ¿Realmente quieres continuar?</translation>
     </message>
     <message>
         <source>File saved</source>
