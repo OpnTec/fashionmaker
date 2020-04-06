@@ -301,6 +301,7 @@ QTableWidgetItem * DialogIncrements::AddCell(QTableWidget *table, const QString 
 
     QTableWidgetItem *item = new QTableWidgetItem(text);
     item->setTextAlignment(aligment);
+    item->setToolTip(text);
 
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
