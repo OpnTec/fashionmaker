@@ -95,9 +95,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     qCDebug(vDialog, "Showing variables.");
     ShowUnits();
 
-    const bool freshCall = true;
-    FillIncrements(freshCall);
-    FillPreviewCalculations(freshCall);
+    FillIncrements();
+    FillPreviewCalculations();
     FillLengthsLines();
     FillLengthLinesAngles();
     FillLengthsCurves();
@@ -182,15 +181,15 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
 /**
  * @brief FillIncrementTable fill data for increment table
  */
-void DialogIncrements::FillIncrements(bool freshCall)
+void DialogIncrements::FillIncrements()
 {
-    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrementsWithSeparators(), false, freshCall);
+    FillIncrementsTable(ui->tableWidgetIncrement, data->DataIncrementsWithSeparators(), false);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogIncrements::FillPreviewCalculations(bool freshCall)
+void DialogIncrements::FillPreviewCalculations()
 {
-    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrementsWithSeparators(), true, freshCall);
+    FillIncrementsTable(ui->tableWidgetPC, data->DataIncrementsWithSeparators(), true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -869,7 +868,7 @@ void DialogIncrements::RefreshPattern()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogIncrements::FillIncrementsTable(QTableWidget *table,
                                            const QMap<QString, QSharedPointer<VIncrement> > &increments,
-                                           bool takePreviewCalculations, bool freshCall)
+                                           bool takePreviewCalculations)
 {
     SCASSERT(table != nullptr)
 
@@ -920,11 +919,6 @@ void DialogIncrements::FillIncrementsTable(QTableWidget *table,
         }
     }
 
-    if (freshCall)
-    {
-        table->resizeColumnsToContents();
-        table->resizeRowsToContents();
-    }
     table->horizontalHeader()->setStretchLastSection(true);
     table->blockSignals(false);
 }

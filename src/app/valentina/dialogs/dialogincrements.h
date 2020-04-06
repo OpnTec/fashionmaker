@@ -111,10 +111,10 @@ private:
 
     void                 FillIncrementsTable(QTableWidget *table,
                                              const QMap<QString, QSharedPointer<VIncrement> > &increments,
-                                             bool takePreviewCalculations, bool freshCall = false);
+                                             bool takePreviewCalculations);
 
-    void                 FillIncrements(bool freshCall = false);
-    void                 FillPreviewCalculations(bool freshCall = false);
+    void                 FillIncrements();
+    void                 FillPreviewCalculations();
     void                 FillLengthsLines();
     void                 FillLengthLinesAngles();
     void                 FillLengthsCurves();
