@@ -3460,10 +3460,6 @@ Apply settings anyway?</source>
         <translation>Автоматически обрезать неиспользуемую ширину</translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="vanished">Включите эту опцию, чтобы  получить раскладку на одном листе.</translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation>Предпочесть решение с одним листом</translation>
     </message>

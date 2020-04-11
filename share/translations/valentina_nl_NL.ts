@@ -3460,10 +3460,6 @@ Toch de instellingen aanpassen?</translation>
         <translation>Automatisch inkorten van ongebruikte breedte</translation>
     </message>
     <message>
-        <source>Enable this option to prefer getting one sheet solutions. </source>
-        <translation type="vanished">Zet deze optie aan om 1-blad oplossingen te verkrijgen. </translation>
-    </message>
-    <message>
         <source>Prefer one sheet solution</source>
         <translation>Verkies een 1-blad oplossing</translation>
     </message>
@@ -3474,7 +3470,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze optie aanzetten om 1-blad oplossingen te verkrijgen.</translation>
     </message>
 </context>
 <context>

@@ -4783,11 +4783,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Continue the first point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Prolunga il primo punto fino al contorno del pezzo</translation>
     </message>
     <message>
         <source>Continue the last point to the cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Prolunga l&apos;ultimo punto fino al contorno del pezzo</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
@@ -8231,7 +8231,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Internal path tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento Tracciato Interno</translation>
     </message>
     <message>
         <source>Save &amp;As…</source>
@@ -9788,7 +9788,7 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     <name>SavePlaceLabelOptions</name>
     <message>
         <source>save place label options</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva opzioni di posizionamento etichetta</translation>
     </message>
 </context>
 <context>

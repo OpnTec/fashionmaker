@@ -3127,7 +3127,7 @@
     <name>DialogLayoutScale</name>
     <message>
         <source>Layout scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala del diseño</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3163,7 +3163,7 @@
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical:</translation>
     </message>
 </context>
 <context>
@@ -3469,7 +3469,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilite esta opción para preferir obtener soluciones de una hoja.</translation>
     </message>
 </context>
 <context>
@@ -5713,7 +5713,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished">Escala</translation>
+        <translation>Escala</translation>
     </message>
     <message>
         <source>Horizontal:</source>
@@ -5721,7 +5721,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertical:</translation>
     </message>
 </context>
 <context>
@@ -6482,7 +6482,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
             <numerusform>Para seguir %n opción(es) se requiere re-inicializar el programa: %1.</numerusform>
         </translation>
@@ -11535,7 +11535,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>delete operation</source>
-        <translation type="unfinished"></translation>
+        <translation>borrar operacion</translation>
     </message>
     <message>
         <source>Visibility group</source>
@@ -12231,11 +12231,11 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer factor de escala horizontal desde 0.01 hasta 3.0 (predeterminado = 1.0, modo exportación).</translation>
     </message>
     <message>
         <source>Horizontal scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala horizontal</translation>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
@@ -12243,7 +12243,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Vertical scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala vertical</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
@@ -15816,7 +15816,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Filter by tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar por etiquetas</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -15824,7 +15824,7 @@ Quieres guardar los cambios?</translation>
     </message>
     <message>
         <source>Categories: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoría: %1.</translation>
     </message>
 </context>
 <context>
