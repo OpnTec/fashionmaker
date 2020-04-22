@@ -16,7 +16,8 @@ Vcs-Browser: https://gitlab.com/smart-pattern/valentina
 
 Package: valentina
 Architecture: i386 amd64
-Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt5core5a (>= 5.4.0) | libqt5core5 (>= 5.4.0), libqt5gui5 (>= 5.4.0) | libqt5gui5-gles (>= 5.4.0), libqt5printsupport5 (>= 5.4.0), libqt5svg5 (>= 5.4.0), libqt5widgets5 (>= 5.4.0), libqt5xml5 (>= 5.4.0), libqt5xmlpatterns5 (>= 5.4.0), libqt5concurrent5(>= 5.4.0), libqt5opengl5 (>= 5.4.0), libstdc++6 (>= 4.8), xpdf
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libqt5core5a (>= 5.4.0) | libqt5core5 (>= 5.4.0), libqt5gui5 (>= 5.4.0) | libqt5gui5-gles (>= 5.4.0), libqt5printsupport5 (>= 5.4.0), libqt5svg5 (>= 5.4.0), libqt5widgets5 (>= 5.4.0), libqt5xml5 (>= 5.4.0), libqt5xmlpatterns5 (>= 5.4.0), libqt5concurrent5(>= 5.4.0), libqt5opengl5 (>= 5.4.0), libstdc++6 (>= 4.8)
+Suggests: xpdf
 Conflicts: seamly2d
 Description: Pattern making program.
  Valentina is a cross-platform patternmaking program which allows designers 
