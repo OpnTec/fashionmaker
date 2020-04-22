@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 8.0.0),
                libqt5opengl5-dev (>= 5.4.0)
 Standards-Version: 3.9.5
 Homepage: https://valentinaproject.bitbucket.io/
-Vcs-Browser: https://bitbucket.org/dismine/valentina
+Vcs-Browser: https://gitlab.com/smart-pattern/valentina
 
 Package: valentina
 Architecture: i386 amd64

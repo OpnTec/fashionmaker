@@ -83,7 +83,7 @@ Requires:   poppler-utils
 
 Version:	0.7.0
 Release:	0
-URL:		https://bitbucket.org/dismine/valentina
+URL:		https://gitlab.com/smart-pattern/valentina
 License:	GPL-3.0+
 Source0:	%{name}-%{version}.tar.gz
 Group:		Graphics
