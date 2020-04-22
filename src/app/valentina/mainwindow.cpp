@@ -2143,13 +2143,13 @@ void MainWindow::ToolBarDraws()
 
     connect(ui->actionOptionDraw, &QAction::triggered, this, [this]()
     {
-        const QString activDraw = doc->GetNameActivPP();
-        const QString nameDraw = PatternPieceName(activDraw);
-        if (nameDraw.isEmpty() || activDraw == nameDraw)
+        QString draw = doc->GetNameActivPP();
+        bool ok = PatternPieceName(draw);
+        if (not ok)
         {
             return;
         }
-        qApp->getUndoStack()->push(new RenamePP(doc, nameDraw, comboBoxDraws));
+        qApp->getUndoStack()->push(new RenamePP(doc, draw, comboBoxDraws));
     });
 }
 
@@ -4524,11 +4524,10 @@ void MainWindow::CreateActions()
         qCDebug(vMainWindow, "Generated PP name: %s", qUtf8Printable(patternPieceName));
 
         qCDebug(vMainWindow, "PP count %d", comboBoxDraws->count());
-        patternPieceName = PatternPieceName(patternPieceName);
+        bool ok = PatternPieceName(patternPieceName);
         qCDebug(vMainWindow, "PP name: %s", qUtf8Printable(patternPieceName));
-        if (patternPieceName.isEmpty())
+        if (not ok)
         {
-            qCDebug(vMainWindow, "Name empty.");
             return;
         }
 
@@ -4733,7 +4732,7 @@ void MainWindow::InitAutoSave()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-QString MainWindow::PatternPieceName(const QString &text)
+bool MainWindow::PatternPieceName(QString &name)
 {
     QScopedPointer<QInputDialog> dlg(new QInputDialog(this));
     dlg->setInputMode( QInputDialog::TextInput );
@@ -4741,23 +4740,29 @@ QString MainWindow::PatternPieceName(const QString &text)
     dlg->setTextEchoMode(QLineEdit::Normal);
     dlg->setWindowTitle(tr("Enter a new label for the pattern piece."));
     dlg->resize(300, 100);
-    dlg->setTextValue(text);
+    dlg->setTextValue(name);
     QString nameDraw;
     while (1)
     {
         const bool bOk = dlg->exec();
         nameDraw = dlg->textValue();
-        if (bOk == false || nameDraw.isEmpty() || text == nameDraw)
+        if (not bOk)
         {
-            return text;
+            return false;
+        }
+
+        if (nameDraw.isEmpty())
+        {
+            continue;
         }
 
         if (comboBoxDraws->findText(nameDraw) == -1)
         {
-            break;//repeate show dialog
+            name = nameDraw;
+            break;// unique name
         }
     }
-    return nameDraw;
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -335,7 +335,7 @@ private:
     void               CreateMenus();
     void               CreateActions();
     void               InitAutoSave();
-    QString            PatternPieceName(const QString &text);
+    bool               PatternPieceName(QString &name);
     QString            CheckPathToMeasurements(const QString &patternPath, const QString &path);
     QComboBox          *SetGradationList(QLabel *label, const QStringList &list);
     void               ChangePP(int index, bool zoomBestFit = true);
