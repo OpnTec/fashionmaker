@@ -343,7 +343,10 @@ void VWidgetGroups::FillTable(QMap<quint32, VGroupData> groups)
 
         item = new QTableWidgetItem(data.name);
         item->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-        item->setToolTip(tr("Categories: %1.").arg(data.tags.join(", ")));
+        if (not data.tags.isEmpty())
+        {
+            item->setToolTip(tr("Categories: %1.").arg(data.tags.join(", ")));
+        }
 
         if(doc->GroupIsEmpty(i.key()))
         {
