@@ -156,6 +156,9 @@ protected:
     template <typename T>
     void SetDialogVisibilityGroupData(QPointer<T> dialogTool);
 
+    template <typename T>
+    void SaveVisibilityGroupData(QPointer<T> dialogTool);
+
     void InitCurve(quint32 id, VContainer *data, GOType curveType, SceneObject sceneType);
 
     template <typename T>
@@ -195,6 +198,18 @@ void VAbstractOperation::SetDialogVisibilityGroupData(QPointer<T> dialogTool)
     {
         dialogTool->SetHasLinkedVisibilityGroup(false);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+template<typename T>
+void VAbstractOperation::SaveVisibilityGroupData(QPointer<T> dialogTool)
+{
+    SCASSERT(not dialogTool.isNull())
+
+    // Save for later use.
+    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
+    groupName = dialogTool->GetVisibilityGroupName();
+    groupTags = dialogTool->GetVisibilityGroupTags();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

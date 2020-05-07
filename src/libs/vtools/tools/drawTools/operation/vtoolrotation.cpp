@@ -362,9 +362,8 @@ void VToolRotation::SaveDialog(QDomElement &domElement, QList<quint32> &oldDepen
     doc->SetAttribute(domElement, AttrAngle, dialogTool->GetAngle());
     doc->SetAttribute(domElement, AttrSuffix, dialogTool->GetSuffix());
 
-    // Save for later use.
-    hasLinkedGroup = dialogTool->HasLinkedVisibilityGroup();
-    groupName = dialogTool->GetVisibilityGroupName();
+    // Save visibility data for later use
+    SaveVisibilityGroupData(dialogTool);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
