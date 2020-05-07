@@ -1656,7 +1656,7 @@
     <name>DialogDuplicateDetail</name>
     <message>
         <source>Dialog duplicate detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento duplica dettaglio</translation>
     </message>
     <message>
         <source>Click to place duplicate</source>
@@ -4715,7 +4715,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona se vuoi impostare un punto ad angolo come tacca. Mostra solo tacca a sinistra dell&apos;angolo.</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -4723,7 +4723,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona se vuoi impostare un punto ad angolo come tacca. Mostra solo tacca a destra dell&apos;angolo.</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
@@ -4739,7 +4739,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea una formula che regola la visibilità. Valori differenti da 0 rendono un tracciato visibile.</translation>
     </message>
     <message>
         <source>1</source>
@@ -4791,7 +4791,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
-        <translation type="unfinished"></translation>
+        <translation>Il tracciato e una linea di ritaglio. Usa per regolare l&apos;esportazione nel formato DXF-AAMA</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -4862,7 +4862,7 @@ Applicare la configurazione comunque?</translation>
     <name>DialogPin</name>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento spillo</translation>
     </message>
     <message>
         <source>Point:</source>
@@ -4874,7 +4874,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Spillo</translation>
     </message>
     <message>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
@@ -4985,7 +4985,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea una formula che regola la visibilità. Valori differenti da 0 rendono un tracciato visibile.</translation>
     </message>
     <message>
         <source>1</source>
@@ -5571,7 +5571,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>This point cannot be origin point. Please, select another origin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo non può essere il punto di origine. Selezionane un altro, grazie</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
@@ -5908,11 +5908,11 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Pins</source>
-        <translation type="unfinished"></translation>
+        <translation>Spilli</translation>
     </message>
     <message>
         <source>no pin</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuno spillo</translation>
     </message>
     <message>
         <source>Labels</source>
@@ -5960,7 +5960,7 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento crea dettaglio</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -6541,19 +6541,19 @@ Applicare la configurazione comunque?</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo simmetria del primo contorno</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo la simmetria del secondo contorno</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo l&apos;angolo destro del primo contorno</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguendo l&apos;angolo destro del secondo contorno</translation>
     </message>
 </context>
 <context>
@@ -8139,11 +8139,11 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Pin tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento spillo</translation>
     </message>
     <message>
         <source>Select pin point</source>
-        <translation type="unfinished"></translation>
+        <translation>Selezionare punto per spillo</translation>
     </message>
     <message>
         <source>Insert node tool</source>
@@ -8183,7 +8183,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi ancora usare la modalità Layout. Seleziona almeno un dettaglio per il layout, grazie.</translation>
     </message>
     <message>
         <source>You can&apos;t use Layout mode yet.</source>
@@ -8227,7 +8227,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Workpiece tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento crea dettaglio</translation>
     </message>
     <message>
         <source>Internal path tool</source>
@@ -8884,7 +8884,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Come da opzioni del Sistema Operativo</translation>
     </message>
     <message>
         <source>Centimeters</source>
@@ -8916,7 +8916,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Double click calls Zoom fit best for current pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppio clic per zoom migliore adattamento per l&apos;attuale pezzo del modello</translation>
     </message>
     <message>
         <source>Scrolling</source>
@@ -8949,7 +8949,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Mouse scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Scala mouse</translation>
     </message>
     <message>
         <source>Sensor:</source>
@@ -8971,7 +8971,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Acceleration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Accelerazione:</translation>
     </message>
     <message>
         <source>User Interface</source>
@@ -9030,7 +9030,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>I miei Modelli</translation>
     </message>
     <message>
         <source>My label templates</source>
@@ -9077,7 +9077,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>By default hide the main path if the seam allowance was enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nasconde automaticamente il tracciato principale se il margine di cucitura è abilitato</translation>
     </message>
     <message>
         <source>Hide main path</source>
@@ -9149,7 +9149,7 @@ Vuoi salvare i cambiamenti?</translation>
     </message>
     <message>
         <source>Line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spessore linea:</translation>
     </message>
     <message>
         <source>Millimiters</source>
@@ -9417,15 +9417,15 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting countour</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra il primo punto e il contorno di ritaglio</translation>
     </message>
     <message>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting countour</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nel tracciato interno &apos;%1&apos;. Non c&apos;è intersezione tra l&apos;ultimo punto e il contorno di ritaglio</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;. Il margine di cucitura non è ancora stato stabilito.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find position for a notch.</source>
@@ -9433,15 +9433,15 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Unable to fix a notch position.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;. Impossibile trovare una posizione per la tacca.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Notch collapse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;. La tacca collassa.</translation>
     </message>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;. Cannot find intersection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;. Impossibile trovare un&apos;intersezione.</translation>
     </message>
     <message>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
@@ -10453,7 +10453,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Export from multisize measurements is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esportazione da misure multitaglia non supportata.</translation>
     </message>
     <message>
         <source>Customer name:</source>
@@ -10477,7 +10477,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Measurement name in is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome della misura mancante.</translation>
     </message>
     <message>
         <source>Merasurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
@@ -10497,7 +10497,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error in row %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nella riga %1.</translation>
     </message>
     <message>
         <source>Multisize measurements require at least 4 columns.</source>
@@ -10521,7 +10521,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Error in row %1. Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nella riga %1. Nome misura mancante.</translation>
     </message>
     <message>
         <source>Cannot save settings. Access denied.</source>
@@ -10659,7 +10659,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Detail label visible</source>
-        <translation type="unfinished">Dettaglio etichetta visibile</translation>
+        <translation>Attiva/Disattiva Etichetta del Dettaglio</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -10703,7 +10703,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Pattern label visible</source>
-        <translation type="unfinished">Modello etichetta visibile</translation>
+        <translation>Attiva/Disattiva Etichetta del Modello</translation>
     </message>
     <message>
         <source>Label template:</source>
@@ -10731,7 +10731,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>A text field to add comments in</source>
-        <translation type="unfinished"></translation>
+        <translation>Uno spazio di testo per aggiungere commenti</translation>
     </message>
     <message>
         <source>Orientation:</source>
@@ -10751,11 +10751,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Edit piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica modello di etichetta</translation>
     </message>
     <message>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opzione per regolare la visibilità e posizione dell&apos;etichetta. &lt;b&gt;Non disponibile se il modello etichetta non è stato caricato&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
@@ -10822,7 +10822,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona se vuoi impostare un punto ad angolo come tacca. Mostra solo tacca a sinistra dell&apos;angolo.</translation>
     </message>
     <message>
         <source>Intersection (only left)</source>
@@ -10830,7 +10830,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona se vuoi impostare un punto ad angolo come tacca. Mostra solo tacca a destra dell&apos;angolo.</translation>
     </message>
     <message>
         <source>Intersection (only right)</source>
@@ -11253,7 +11253,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>With OS options</source>
-        <translation type="unfinished"></translation>
+        <translation>Come da opzioni del Sistema Operativo</translation>
     </message>
     <message>
         <source>User Interface</source>
@@ -11304,7 +11304,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>My Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>I miei Modelli</translation>
     </message>
     <message>
         <source>My Patterns</source>
@@ -11399,11 +11399,11 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invalid version. Minimum supported format version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione non valida. La versione minima supportata è %1</translation>
     </message>
     <message>
         <source>Invalid version. Maximum supported format version is %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione non valida. La versione massima supportata è %1</translation>
     </message>
     <message>
         <source>Can&apos;t open file %1:
@@ -11692,7 +11692,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Invalid notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tacca non valida.</translation>
     </message>
 </context>
 <context>
@@ -11990,7 +11990,7 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>Export text as paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta testo come tracciato.</translation>
     </message>
     <message>
         <source>Export only details. Export details as they positioned in the details mode. Any layout related options will be ignored.</source>
@@ -12488,19 +12488,19 @@ Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
         <source>by first edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo simmetria del primo contorno</translation>
     </message>
     <message>
         <source>by second edge symmetry</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo la simmetria del secondo contorno</translation>
     </message>
     <message>
         <source>by first edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Secondo l&apos;angolo destro del primo contorno</translation>
     </message>
     <message>
         <source>by second edge right angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguendo l&apos;angolo destro del secondo contorno</translation>
     </message>
     <message>
         <source>Passmark</source>
@@ -12898,7 +12898,7 @@ Vuoi salvare le tue modifiche?</translation>
     <name>VPiece</name>
     <message>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile calcolare una tacca per il punto &apos;%1&apos; nel pezzo &apos;%2&apos;.</translation>
     </message>
     <message>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>

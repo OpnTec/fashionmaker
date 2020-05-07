@@ -14017,7 +14017,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <source>rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>поворот</translation>
     </message>
 </context>
 <context>

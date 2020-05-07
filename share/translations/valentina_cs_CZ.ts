@@ -54,7 +54,7 @@
     <name>ChangeGroupOptions</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat skupinu</translation>
     </message>
 </context>
 <context>
@@ -691,11 +691,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
 </context>
 <context>
@@ -806,11 +806,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
 </context>
 <context>
@@ -988,11 +988,11 @@
     </message>
     <message>
         <source>Approximation Scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
 </context>
 <context>
@@ -1031,11 +1031,11 @@
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
@@ -2456,11 +2456,11 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit vytvoření skupiny viditelnosti z původních předmětů</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2472,15 +2472,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat značky</translation>
     </message>
 </context>
 <context>
@@ -2523,11 +2523,11 @@
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit vytvoření skupiny viditelnosti z původních předmětů</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2539,15 +2539,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat značky</translation>
     </message>
 </context>
 <context>
@@ -2574,15 +2574,15 @@
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat značky</translation>
     </message>
 </context>
 <context>
@@ -3127,7 +3127,7 @@
     <name>DialogLayoutScale</name>
     <message>
         <source>Layout scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Měřítko rozvržení</translation>
     </message>
     <message>
         <source>Margins</source>
@@ -3155,15 +3155,15 @@
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Měřítko</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovná:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Svislá:</translation>
     </message>
 </context>
 <context>
@@ -3461,7 +3461,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Prefer one sheet solution</source>
-        <translation type="unfinished"></translation>
+        <translation>Upřednostnit jednolistové řešení</translation>
     </message>
     <message>
         <source> min</source>
@@ -3470,7 +3470,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Enable this option to prefer getting one sheet solutions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit tuto volbu, aby se upřednostňovalo získání jednolistového řešení.</translation>
     </message>
 </context>
 <context>
@@ -3886,11 +3886,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit vytvoření skupiny viditelnosti z původních předmětů</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -3902,15 +3902,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat značky</translation>
     </message>
 </context>
 <context>
@@ -4843,7 +4843,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat hlavní cestu předmětů, &lt;b&gt;%1&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Manual length</source>
@@ -5584,11 +5584,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Enable to create a visibility gropup from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit vytvoření skupiny viditelnosti z původních předmětů</translation>
     </message>
     <message>
         <source>Visibility Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -5596,15 +5596,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Add tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat značky</translation>
     </message>
 </context>
 <context>
@@ -5715,15 +5715,15 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Měřítko</translation>
     </message>
     <message>
         <source>Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovná:</translation>
     </message>
     <message>
         <source>Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>Svislá:</translation>
     </message>
 </context>
 <context>
@@ -5806,7 +5806,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>tiled</source>
-        <translation type="unfinished"></translation>
+        <translation>dlážděný</translation>
     </message>
     <message>
         <source>Numerical control</source>
@@ -6029,7 +6029,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat hlavní cestu předmětů po směru hodinových ručiček (doprava), &lt;b&gt;%1&lt;/b&gt; - obrátit směr křivky, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Circle</source>
@@ -6314,11 +6314,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
 </context>
 <context>
@@ -6457,11 +6457,11 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Nastavit stupnici přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
     <message>
         <source>Cannot find point with id %1</source>
@@ -6484,10 +6484,10 @@ Přesto použít nastavení?</translation>
     </message>
     <message numerus="yes">
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform>Následována %n volba, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
-            <numerusform>Následovány %n volby, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
-            <numerusform>Následováno %n voleb, vyžaduje opětovné spuštění, aby se projevilo: %1.</numerusform>
+        <translation>
+            <numerusform>Sledováno %n volba vyžaduje opětovné spuštění, aby se projevila %1.</numerusform>
+            <numerusform>Sledováno %n volby vyžaduje opětovné spuštění, aby se projevily %1.</numerusform>
+            <numerusform>Sledováno %n voleb vyžaduje opětovné spuštění, aby se projevilo %1.</numerusform>
         </translation>
     </message>
 </context>
@@ -8341,15 +8341,15 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte předměty cesty, &lt;b&gt;%1&lt;/b&gt; - obrátitkřivku směru</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
     <message>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;%2&lt;/b&gt; - potvrdit výběr</translation>
     </message>
     <message>
         <source>Point of intersection circle and segment</source>
@@ -8972,7 +8972,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
-        <translation>Citlivost rozsahu posunování pro myš s čidlem</translation>
+        <translation>Citlivost posunování měřítka pro myš s čidlem</translation>
     </message>
     <message>
         <source>Wheel:</source>
@@ -8981,7 +8981,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
-        <translation>Citlivost rozsahu posunování pro myš s kolečkem</translation>
+        <translation>Citlivost posunování měřítka pro myš s kolečkem</translation>
     </message>
     <message>
         <source>Acceleration:</source>
@@ -9155,7 +9155,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <source>Set default curve approximation scale</source>
-        <translation>Nastavit stupnici přibližnosti výchozí křivky</translation>
+        <translation>Nastavit výchozí měřítko přibližnosti křivky</translation>
     </message>
     <message>
         <source>Bold line width</source>
@@ -9527,11 +9527,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <source>Empty list of nodes for tool with id &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prázdný seznam uzlů pro nástroj s ID &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Invalid formula &apos;%1&apos; for tool with id &apos;%2&apos;. %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný vzorec &apos;%1&apos; pro nástroj s ID &apos;%2&apos;. %3.</translation>
     </message>
     <message>
         <source>Can&apos;t convert toInt parameter</source>
@@ -9760,7 +9760,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <name>RenameGroup</name>
     <message>
         <source>rename group</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat skupinu</translation>
     </message>
 </context>
 <context>
@@ -11541,7 +11541,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Visibility group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina viditelnosti</translation>
     </message>
 </context>
 <context>
@@ -12233,19 +12233,19 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Set horizontal scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit vodorovné měřítko od 0.01 do 3.0 (výchozí = 1.0, režim vyvedení).</translation>
     </message>
     <message>
         <source>Horizontal scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovné měřítko</translation>
     </message>
     <message>
         <source>Set vertical scale factor from 0.01 to 3.0 (default = 1.0, export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit svislé měřítko od 0.01 do 3.0 (výchozí = 1.0, režim vyvedení).</translation>
     </message>
     <message>
         <source>Vertical scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Svislé měřítko</translation>
     </message>
     <message>
         <source>Prefer one sheet layout solution (export mode).</source>
@@ -13945,7 +13945,7 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Approximation scale:</source>
-        <translation>Stupnice přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <source>Rotation origin point:</source>
@@ -15810,11 +15810,11 @@ Chcete uložit změny?</translation>
     </message>
     <message>
         <source>Tags:</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky:</translation>
     </message>
     <message>
         <source>Separate each tag with comma.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oddělit každou značku čárkou.</translation>
     </message>
     <message>
         <source>Filter by tags</source>
