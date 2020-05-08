@@ -85,6 +85,7 @@
 - Fix dialog for tool Point along perpendicular. No memory of line color settings. 
 - Fix crash after uniting three pieces in sequence.
 - Incorrect conversion to newer curve format.
+- Elide a variable description in the formula wizard.
 
 # Version 0.6.1 October 23, 2018
 - [#885] Regression. Broken support for multi size measurements.

@@ -3,6 +3,7 @@
 
 SOURCES += \
     $$PWD/vcomboboxdelegate.cpp \
+    $$PWD/velidedlabel.cpp \
     $$PWD/vmaingraphicsscene.cpp \
     $$PWD/vmaingraphicsview.cpp \
     $$PWD/vwidgetpopup.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 HEADERS += \
     $$PWD/stable.h \
     $$PWD/vcomboboxdelegate.h \
+    $$PWD/velidedlabel.h \
     $$PWD/vmaingraphicsscene.h \
     $$PWD/vmaingraphicsview.h \
     $$PWD/vwidgetpopup.h \
