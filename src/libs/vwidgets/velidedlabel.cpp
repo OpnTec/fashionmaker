@@ -29,6 +29,7 @@
 
 #include <QPainter>
 #include <QTextLayout>
+#include <ciso646>
 
 //---------------------------------------------------------------------------------------------------------------------
 VElidedLabel::VElidedLabel(QWidget *parent)
