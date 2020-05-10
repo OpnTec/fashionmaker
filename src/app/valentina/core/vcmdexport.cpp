@@ -412,7 +412,7 @@ bool VCommandLine::IsCSVWithHeader() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCommandLine::ExportXScale() const
 {
-    qreal xs = 0;
+    qreal xs = 1;
     if (IsOptionSet(LONG_OPTION_EXPXSCALE))
     {
         xs = OptionValue(LONG_OPTION_EXPXSCALE).toDouble();
@@ -423,7 +423,7 @@ qreal VCommandLine::ExportXScale() const
 //---------------------------------------------------------------------------------------------------------------------
 qreal VCommandLine::ExportYScale() const
 {
-    qreal ys = 0;
+    qreal ys = 1;
     if (IsOptionSet(LONG_OPTION_EXPYSCALE))
     {
         ys = OptionValue(LONG_OPTION_EXPYSCALE).toDouble();
