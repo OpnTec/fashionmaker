@@ -415,7 +415,7 @@ qreal VCommandLine::ExportXScale() const
     qreal xs = 1;
     if (IsOptionSet(LONG_OPTION_EXPXSCALE))
     {
-        xs = OptionValue(LONG_OPTION_EXPXSCALE).toDouble();
+        xs = qBound(0.01, OptionValue(LONG_OPTION_EXPXSCALE).toDouble(), 3.0);
     }
     return xs;
 }
@@ -426,7 +426,7 @@ qreal VCommandLine::ExportYScale() const
     qreal ys = 1;
     if (IsOptionSet(LONG_OPTION_EXPYSCALE))
     {
-        ys = OptionValue(LONG_OPTION_EXPYSCALE).toDouble();
+        ys = qBound(0.01, OptionValue(LONG_OPTION_EXPYSCALE).toDouble(), 3.0);
     }
     return ys;
 }
