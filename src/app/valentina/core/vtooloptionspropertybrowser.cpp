@@ -983,6 +983,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArc(VPE::VProperty *property)
     SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 8: // AttrRadius
             i->SetFormulaRadius(value.value<VFormula>());
             break;
@@ -1021,6 +1024,9 @@ void VToolOptionsPropertyBrowser::ChangeDataToolArcWithLength(VPE::VProperty *pr
     SCASSERT(i != nullptr)
     switch (PropertiesList().indexOf(id))
     {
+        case 0: // AttrName
+            Q_UNREACHABLE();//The attribute is read only
+            break;
         case 8: // AttrRadius
             i->SetFormulaRadius(value.value<VFormula>());
             break;
@@ -2019,6 +2025,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArc(QGraphicsItem *item)
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc"));
 
+    AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
@@ -2035,6 +2042,7 @@ void VToolOptionsPropertyBrowser::ShowOptionsToolArcWithLength(QGraphicsItem *it
     i->ShowVisualization(true);
     formView->setTitle(tr("Arc with given length"));
 
+    AddPropertyObjectName(i, tr("Name:"), true);
     AddPropertyParentPointName(i->CenterPointName(), tr("Center point:"), AttrCenter);
     AddPropertyFormula(tr("Radius:"), i->GetFormulaRadius(), AttrRadius);
     AddPropertyFormula(tr("First angle:"), i->GetFormulaF1(), AttrAngle1);
