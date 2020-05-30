@@ -84,6 +84,7 @@ private:
     QSet<quint32>    AllPathBackboneIds() const;
     bool             IsPathValid() const;
     VCubicBezierPath ExtractPath() const;
+    void             ValidatePath();
 };
 
 //---------------------------------------------------------------------------------------------------------------------
