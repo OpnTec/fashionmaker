@@ -127,6 +127,9 @@ PreferencesConfigurationPage::PreferencesConfigurationPage(QWidget *parent)
     // Theme
     ui->darkModeCheck->setChecked(settings->GetDarkMode());
 
+    // Tool panel
+    ui->checkBoxToolPanelScaling->setChecked(settings->GetToolPanelScaling());
+
     // Tab Scrolling
     ui->spinBoxDuration->setMinimum(VSettings::scrollingDurationMin);
     ui->spinBoxDuration->setMaximum(VSettings::scrollingDurationMax);
@@ -176,6 +179,11 @@ QStringList PreferencesConfigurationPage::Apply()
     {
         settings->SetDarkMode(ui->darkModeCheck->isChecked());
         preferences.append(tr("dark mode"));
+    }
+
+    if (settings->GetToolPanelScaling() != ui->checkBoxToolPanelScaling->isChecked())
+    {
+        settings->SetToolPanelScaling(ui->checkBoxToolPanelScaling->isChecked());
     }
 
     settings->SetFreeCurveMode(ui->checkBoxFreeCurve->isChecked());

@@ -4077,6 +4077,9 @@ void MainWindow::ReadSettings()
         // Text under tool buton icon
         ToolBarStyles();
 
+        // Tool box scaling
+        ToolBoxSizePolicy();
+
         isDockToolOptionsVisible = ui->dockWidgetToolOptions->isEnabled();
         isDockGroupsVisible = ui->dockWidgetGroups->isEnabled();
 
@@ -5085,6 +5088,14 @@ void MainWindow::ToolBarStyles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ToolBoxSizePolicy()
+{
+    ui->toolBox->setSizePolicy(ui->toolBox->sizePolicy().horizontalPolicy(),
+                               qApp->ValentinaSettings()->GetToolPanelScaling() ? QSizePolicy::Fixed
+                                                                                : QSizePolicy::Preferred);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ShowPaper(int index)
 {
     if (index < 0 || index >= scenes.size())
@@ -5115,6 +5126,7 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, toolOptions,
                 &VToolOptionsPropertyBrowser::RefreshOptions);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarStyles);
+        connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBoxSizePolicy);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this](){emit doc->FullUpdateFromFile();});
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);

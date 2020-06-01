@@ -33,9 +33,9 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-152</y>
+            <y>-161</y>
             <width>624</width>
-            <height>707</height>
+            <height>717</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -270,6 +270,16 @@
                 </property>
                 <property name="checked">
                  <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxToolPanelScaling">
+                <property name="toolTip">
+                 <string>Change the position of the tool panel to optimize for big screen resolutions. By default, the tool panel will take all available space.</string>
+                </property>
+                <property name="text">
+                 <string>Tool panel scaling</string>
                 </property>
                </widget>
               </item>

@@ -47,7 +47,8 @@
 - Setting scale factor for export and print.
 - New layout generator option: Prefer one sheet solution.
 - [smart-pattern/valentina#15] Organization of groups - groups categories
-- Improve the property browser. Show full arc name. 
+- Improve the property browser. Show full arc name.
+- [smart-pattern/valentina#45] Optimize tool box position for big screen resolutions. 
 
 # Version 0.6.2 (unreleased)
 - [#903] Bug in tool Cut Spline path.
