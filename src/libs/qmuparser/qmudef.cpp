@@ -323,8 +323,11 @@ QString NameRegExp()
         //Same regexp in pattern.xsd shema file. Don't forget to synchronize.
         // \p{Nd} - \p{Decimal_Digit_Number}
         // \p{Zs} - \p{Space_Separator}
-        regex = QString("^([^\\p{Nd}\\p{Zs}*/&|!<>^\n\\()%1%2%3%4=?:;'\"]){1,1}"
-                        "([^\\p{Zs}*/&|!<>^\n\\()%1%2%3%4=?:;\"]){0,}$")
+        // Here we use permanent start of string and end of string anchors \A and \z to match whole pattern as one
+        // string. In some cases, a user may pass multiline or line that ends with a new line. To cover case with a new
+        // line at the end of string use /z anchor.
+        regex = QString("\\A([^\\p{Nd}\\p{Zs}*/&|!<>^\\n\\()%1%2%3%4=?:;'\"]){1,1}"
+                        "([^\\p{Zs}*/&|!<>^\\n\\()%1%2%3%4=?:;\"]){0,}\\z")
                 .arg(negativeSigns, positiveSigns, decimalPoints, groupSeparators);
     }
 
