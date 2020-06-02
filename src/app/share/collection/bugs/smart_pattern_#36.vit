@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+ <vit>
+  <version>0.5.0</version> 
+<read-only>true</read-only> 
+ <notes/>
+ <unit>cm</unit>
+ <pm_system>998</pm_system>
+ <personal>
+<customer> 
+336
+</customer> 
+ <birth-date>1800-01-01</birth-date> 
+ <gender>female</gender> 
+   <email/> 
+ </personal>
+
+<body-measurements>
+
+<m name='@d' value='22.2869'/>
+<m name='@e' value='7.96956'/>
+
+
+</body-measurements> 
+ </vit>

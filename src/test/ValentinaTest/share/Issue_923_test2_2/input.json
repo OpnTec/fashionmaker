@@ -1,7 +1,7 @@
 {
     "vector": [
         {
-            "angle": 1,
+            "angle": 3,
             "saAfter": 151.18110236220474,
             "saBefore": 37.795275590551185,
             "type": "VSAPoint",
@@ -468,7 +468,7 @@
             "y": 331.90352529002166
         },
         {
-            "angle": 1,
+            "angle": 3,
             "saAfter": 151.18110236220474,
             "saBefore": 37.795275590551185,
             "type": "VSAPoint",

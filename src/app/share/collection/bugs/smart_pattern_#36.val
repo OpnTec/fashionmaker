@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v0.7.0.0a (https://valentinaproject.bitbucket.io/).-->
+    <version>0.8.7</version>
+    <unit>mm</unit>
+    <description/>
+    <notes/>
+    <patternName>надсечка внутри детали</patternName>
+    <patternNumber/>
+    <company/>
+    <patternLabel dateFormat="MM-dd-yyyy" timeFormat="hh:mm:ss">
+        <line alignment="0" bold="false" italic="false" sfIncrement="0" text="%pName%  %pLetter%"/>
+    </patternLabel>
+    <patternMaterials>
+        <material name="Virs" number="1"/>
+    </patternMaterials>
+    <finalMeasurements/>
+    <measurements>smart_pattern_#36.vit</measurements>
+    <increments>
+        <increment description="" formula="29&#10;+#stojka_shyrina_shva_snizu&#10;+ #stojka_shyrina_shva_sverxu" name="#model_stojka_shyrina"/>
+    </increments>
+    <previewCalculations/>
+    <draw name="Стойка">
+        <calculation>
+            <point id="6226" mx="8.65025" my="-2.56084" name="Центр0" showLabel="true" type="single" x="7.9375" y="5903.31"/>
+            <point angle="0" basePoint="6226" id="6227" length="150" lineColor="black" mx="1.32292" my="2.64583" name="нуль1" showLabel="true" type="endLine" typeLine="none"/>
+            <point angle="0" basePoint="6227" id="6229" length="40" lineColor="black" mx="1.32292" my="2.64583" name="нуль2" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point angle="0" basePoint="6229" id="6231" length="40" lineColor="black" mx="1.32292" my="2.64583" name="нуль3" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point angle="0" basePoint="6231" id="6233" length="40" lineColor="black" mx="1.32292" my="2.64583" name="нуль4" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point angle="270" basePoint="6233" id="6234" length="222.869" lineColor="deeppink" mx="1.32292" my="2.64583" name="Длина_стойки_по_выпуклому_краю_1_2_со_швом" showLabel="true" type="endLine" typeLine="dashLine"/>
+            <point angle="180" basePoint="6226" id="6236" length="#model_stojka_shyrina" lineColor="cornflowerblue" mx="-35.1237" my="-4.29639" name="Центр1" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point firstPoint="6226" id="6238" length="0.5" lineColor="black" mx="-177.478" my="4.2755" name="х1_4а" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6239" length="0.5" lineColor="black" mx="-180.785" my="19.8923" name="х1_4б" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6240" length="1.5" lineColor="black" mx="-182.568" my="36.0919" name="х1_4" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6241" length="1.9" lineColor="black" mx="-185.276" my="52.9302" name="х1_2а" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6242" length="2.5" lineColor="black" mx="-185.458" my="73.49" name="х1_2б" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6243" length="3.8" lineColor="black" mx="-184.491" my="90.1892" name="х1_2" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6244" length="6" lineColor="black" mx="-183.776" my="102.273" name="х3_4а" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6245" length="10" lineColor="black" mx="-182.144" my="114.794" name="х3_4б" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6246" length="15.5" lineColor="black" mx="-177.918" my="129.855" name="х3_4" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6247" length="23.5" lineColor="black" mx="-170.951" my="145.663" name="х1а" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6248" length="30" lineColor="black" mx="-167.834" my="159.459" name="х1б" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6249" length="28+14" lineColor="black" mx="-154.42" my="172.459" name="х_1" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="270" basePoint="6226" id="6261" length="Line_нуль4_Длина_стойки_по_выпуклому_краю_1_2_со_швом *219/222 -5" lineColor="black" mx="1.32292" my="2.64583" name="Расчётная_длина_по_у0" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="6226" id="6263" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у1_2_0" secondPoint="6261" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6264" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у_1_4_0" secondPoint="6263" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6263" id="6265" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у3_4_0" secondPoint="6261" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6240" id="6266" mx="1.32292" my="2.64583" name="H9" secondPoint="6264" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6243" id="6267" mx="1.32292" my="2.64583" name="H10" secondPoint="6263" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6246" id="6268" mx="1.32292" my="2.64583" name="H11" secondPoint="6265" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6249" id="6269" mx="1.32292" my="2.64583" name="Длина_итер0" secondPoint="6261" showLabel="true" type="pointOfIntersection"/>
+            <spline aScale="0" color="black" id="6270" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6226"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6266"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6267"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6268"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6269"/>
+            </spline>
+            <point angle="270" basePoint="6226" id="6272" length="#raznica_plana_i_fakta =  Line_нуль4_Длина_стойки_по_выпуклому_краю_1_2_со_швом  - SplPath_Центр0_Длина_итер0;&#10;&#10;Line_Центр0_Расчётная_длина_по_у0 + #raznica_plana_i_fakta " lineColor="black" mx="-3.03236" my="10.812" name="Расчётная_длина_по_у1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="6226" id="6273" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у1_2_и1" secondPoint="6272" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6226" id="6274" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у1_4_и1" secondPoint="6273" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6273" id="6275" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у3_4_и1" secondPoint="6272" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6240" id="6276" mx="1.32292" my="2.64583" name="H12" secondPoint="6274" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6243" id="6277" mx="1.32292" my="2.64583" name="H13" secondPoint="6273" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6246" id="6278" mx="1.32292" my="2.64583" name="H14" secondPoint="6275" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6249" id="6279" mx="-46.5852" my="17.3449" name="Длина_итер1" secondPoint="6272" showLabel="true" type="pointOfIntersection"/>
+            <spline aScale="0" color="black" id="6280" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6226"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6276"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6277"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6278"/>
+                <pathPoint angle1="180" angle2="0" length1="0" length2="0" pSpline="6279"/>
+            </spline>
+            <point angle="0" basePoint="6226" id="6282" length="90" lineColor="darkGreen" mx="1.32292" my="2.64583" name="у0" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point angle="270" basePoint="6282" id="6237" length="#raznica_dlin_krivyx = SplPath_Центр0_Длина_итер1 - SplPath_Центр0_Длина_итер0;&#10;#raznica_po_y = Line_Центр0_Расчётная_длина_по_у1 - Line_Центр0_Расчётная_длина_по_у0;&#10;&#10;&#10;#dlina_nedostajusciaja = Line_нуль4_Длина_стойки_по_выпуклому_краю_1_2_со_швом - SplPath_Центр0_Длина_итер1;&#10;&#10;#dobavka_vysoty = #raznica_po_y * #dlina_nedostajusciaja / #raznica_dlin_krivyx;&#10;Line_Центр0_Расчётная_длина_по_у1 + #dobavka_vysoty -1" lineColor="black" mx="4.30862" my="12.901" name="Расчётная_длина_по_у3" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point firstPoint="6282" id="6250" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у1_2" secondPoint="6237" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6282" id="6251" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у1_4" secondPoint="6250" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6250" id="6252" length="CurrentLength/2" lineColor="black" mx="1.32292" my="2.64583" name="у3_4" secondPoint="6237" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6282" id="6253" length="CurrentLength/3" lineColor="black" mx="1.32292" my="2.64583" name="у1_4а" secondPoint="6251" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6282" id="6254" length="CurrentLength*2/3" lineColor="black" mx="1.32292" my="2.64583" name="у1_4б" secondPoint="6251" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6251" id="6255" length="CurrentLength/3" lineColor="black" mx="1.32292" my="2.64583" name="у1_2а" secondPoint="6250" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6251" id="6256" length="CurrentLength*2/3" lineColor="black" mx="1.32292" my="2.64583" name="у1_2б" secondPoint="6250" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6250" id="6257" length="CurrentLength/3" lineColor="black" mx="1.32292" my="2.64583" name="у3_4а" secondPoint="6252" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6250" id="6258" length="CurrentLength*2/3&#10;" lineColor="black" mx="1.32292" my="2.64583" name="у3_4б" secondPoint="6252" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6252" id="6259" length="CurrentLength/3" lineColor="black" mx="1.32292" my="2.64583" name="у1а" secondPoint="6237" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6252" id="6260" length="CurrentLength*2/3" lineColor="black" mx="1.32292" my="2.64583" name="у1б" secondPoint="6237" showLabel="true" type="alongLine" typeLine="none"/>
+            <point firstPoint="6240" id="6283" mx="8.40025" my="-4.4315" name="т1_4" secondPoint="6251" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6243" id="6284" mx="1.32292" my="2.64583" name="т1_2" secondPoint="6250" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6246" id="6285" mx="1.32292" my="2.64583" name="т3_4" secondPoint="6252" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6249" id="6286" mx="1.32292" my="2.64583" name="т_1" secondPoint="6237" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6238" id="6287" mx="5.67817" my="-3.88709" name="т1_4а" secondPoint="6253" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6239" id="6288" mx="7.31143" my="-5.52032" name="т1_4б" secondPoint="6254" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6241" id="6289" mx="10.0335" my="-3.34268" name="т1_2а" secondPoint="6255" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6242" id="6290" mx="10.0335" my="-2.25386" name="т1_2б" secondPoint="6256" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6244" id="6291" mx="1.32292" my="2.64583" name="т3_4а" secondPoint="6257" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6245" id="6292" mx="1.32292" my="2.64583" name="т3_4б" secondPoint="6258" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6247" id="6293" mx="5.6782" my="-0.0762208" name="т1а" secondPoint="6259" showLabel="true" type="pointOfIntersection"/>
+            <point firstPoint="6248" id="6294" mx="0.675707" my="-1.56106" name="т1б" secondPoint="6260" showLabel="true" type="pointOfIntersection"/>
+            <spline aScale="0" color="deeppink" id="6295" penStyle="hair" type="cubicBezierPath">
+                <pathPoint pSpline="6226"/>
+                <pathPoint pSpline="6287"/>
+                <pathPoint pSpline="6288"/>
+                <pathPoint pSpline="6283"/>
+                <pathPoint pSpline="6289"/>
+                <pathPoint pSpline="6290"/>
+                <pathPoint pSpline="6284"/>
+                <pathPoint pSpline="6291"/>
+                <pathPoint pSpline="6292"/>
+                <pathPoint pSpline="6285"/>
+                <pathPoint pSpline="6293"/>
+                <pathPoint pSpline="6294"/>
+                <pathPoint pSpline="6286"/>
+            </spline>
+            <point id="6305" length="SplPath_Центр0_т_1 -23 +8" mx="-7.65623" my="-10.8771" name="вс1" showLabel="true" splinePath="6295" type="cutSplinePath"/>
+            <point angle="-180" firstPoint="6305" id="6306" length="#model_stojka_shyrina -2" lineColor="cornflowerblue" mx="3.22115" my="7.57243" name="вс2" secondPoint="6286" showLabel="false" type="normal" typeLine="dashLine"/>
+            <point firstPoint="6306" id="6311" length="14.74" lineColor="black" mx="-18.5724" my="-18.5964" name="вс_ц_окр" secondPoint="6305" showLabel="true" type="alongLine" typeLine="none"/>
+            <point angle="245" basePoint="6311" id="6312" length="14.74" lineColor="deepskyblue" mx="8.83361" my="-14.7041" name="вс3" showLabel="false" type="endLine" typeLine="dotLine"/>
+            <line firstPoint="6311" id="6314" lineColor="deepskyblue" secondPoint="6306" typeLine="dashLine"/>
+            <arc aScale="0" angle1="AngleLine_вс_ц_окр_вс2" angle2="AngleLine_вс_ц_окр_вс3" center="6311" color="deeppink" id="6315" penStyle="hair" radius="Line_вс_ц_окр_вс2" type="simple"/>
+            <point arc="6315" crossPoint="2" id="6316" mx="-51.7153" my="6.24505" name="вс_т_кстлной" showLabel="true" tangent="6286" type="pointFromArcAndTangent"/>
+            <line firstPoint="6316" id="6317" lineColor="blue" secondPoint="6286" typeLine="hair"/>
+            <point angle="-180" firstPoint="6285" id="6318" length="#model_stojka_shyrina/2" lineColor="cornflowerblue" mx="-14.465" my="7.00111" name="т3_4ц" secondPoint="6286" showLabel="true" type="normal" typeLine="dashLine"/>
+            <point angle="-180" firstPoint="6283" id="6320" length="#model_stojka_shyrina/2" lineColor="cornflowerblue" mx="-10.1097" my="-14.7753" name="т1_4ц" secondPoint="6284" showLabel="true" type="normal" typeLine="dashLine"/>
+            <point firstPoint="6226" id="6321" length="CurrentLength/2" lineColor="black" mx="-10.6541" my="8.08993" name="т0_ц" secondPoint="6236" showLabel="true" type="alongLine" typeLine="none"/>
+            <operation id="6322" p1Line="6318" p2Line="6311" suffix="_з" type="flippingByLine">
+                <source>
+                    <item idObject="6285"/>
+                    <item idObject="6293"/>
+                </source>
+                <destination>
+                    <item idObject="6323" mx="-31.8861" my="-12.5977" showLabel="true"/>
+                    <item idObject="6324" mx="-29.164" my="-9.87557" showLabel="true"/>
+                </destination>
+            </operation>
+            <operation id="6327" p1Line="6321" p2Line="6320" suffix="_зр" type="flippingByLine">
+                <source>
+                    <item idObject="6287"/>
+                    <item idObject="6288"/>
+                    <item idObject="6283"/>
+                    <item idObject="6289"/>
+                    <item idObject="6290"/>
+                </source>
+                <destination>
+                    <item idObject="6328" mx="-44.4076" my="-7.15355" showLabel="true"/>
+                    <item idObject="6329" mx="-44.4076" my="-4.4315" showLabel="true"/>
+                    <item idObject="6330" mx="-41.1411" my="-4.4315" showLabel="true"/>
+                    <item idObject="6331" mx="-47.674" my="-6.06473" showLabel="true"/>
+                    <item idObject="6332" mx="-49.8516" my="-7.15355" showLabel="true"/>
+                </destination>
+            </operation>
+            <point arc="6315" crossPoint="1" id="6333" mx="-97.4093" my="-0.392649" name="Ндсчка_вс_т_кстлной1" showLabel="true" tangent="6324" type="pointFromArcAndTangent"/>
+            <arc aScale="0" angle1="90" angle2="270" center="6284" color="cornflowerblue" id="6335" penStyle="dotLine" radius="#model_stojka_shyrina" type="simple"/>
+            <point arc="6335" crossPoint="1" id="6336" mx="-43.8166" my="-5.5829" name="т1_2_в" showLabel="true" tangent="6332" type="pointFromArcAndTangent"/>
+            <arc aScale="0" angle1="90" angle2="270" center="6291" color="darkGreen" id="6337" penStyle="dotLine" radius="#model_stojka_shyrina" type="simple"/>
+            <point arc="6337" crossPoint="1" id="6338" mx="-44.1733" my="-8.34428" name="т3_4а_в" showLabel="true" tangent="6336" type="pointFromArcAndTangent"/>
+            <arc aScale="0" angle1="90" angle2="270" center="6292" color="darkviolet" id="6339" penStyle="dotLine" radius="#model_stojka_shyrina" type="simple"/>
+            <point arc="6339" crossPoint="1" id="6340" mx="21.8893" my="-8.52888" name="т3_4б_в" showLabel="true" tangent="6338" type="pointFromArcAndTangent"/>
+            <point firstPoint="6333" id="6394" length="CurrentLength/2" lineColor="black" mx="-28.8368" my="-6.79064" name="вс_в3" secondPoint="6324" showLabel="true" type="alongLine" typeLine="none"/>
+            <spline aScale="0" color="blue" id="6396" penStyle="hair" type="cubicBezierPath">
+                <pathPoint pSpline="6236"/>
+                <pathPoint pSpline="6328"/>
+                <pathPoint pSpline="6329"/>
+                <pathPoint pSpline="6330"/>
+                <pathPoint pSpline="6331"/>
+                <pathPoint pSpline="6332"/>
+                <pathPoint pSpline="6336"/>
+                <pathPoint pSpline="6338"/>
+                <pathPoint pSpline="6340"/>
+                <pathPoint pSpline="6323"/>
+                <pathPoint pSpline="6324"/>
+                <pathPoint pSpline="6394"/>
+                <pathPoint pSpline="6333"/>
+            </spline>
+            <point id="6398" length="@e" mx="65.3343" my="-1.06243" name="Стйка_ндсчк_плеча" showLabel="true" splinePath="6295" type="cutSplinePath"/>
+            <operation axisType="2" center="6282" id="7244" suffix="h1" type="flippingByAxis">
+                <source>
+                    <item idObject="6338"/>
+                    <item idObject="6396"/>
+                    <item idObject="6337"/>
+                    <item idObject="6336"/>
+                    <item idObject="6335"/>
+                    <item idObject="6332"/>
+                    <item idObject="6339"/>
+                    <item idObject="6331"/>
+                    <item idObject="6330"/>
+                    <item idObject="6329"/>
+                    <item idObject="6328"/>
+                    <item idObject="6323"/>
+                    <item idObject="6321"/>
+                    <item idObject="6320"/>
+                    <item idObject="6340"/>
+                    <item idObject="6295"/>
+                    <item idObject="6324"/>
+                    <item idObject="6318"/>
+                    <item idObject="6292"/>
+                    <item idObject="6291"/>
+                    <item idObject="6285"/>
+                    <item idObject="6284"/>
+                    <item idObject="6293"/>
+                    <item idObject="6394"/>
+                    <item idObject="6333"/>
+                    <item idObject="6315"/>
+                    <item idObject="6287"/>
+                    <item idObject="6290"/>
+                    <item idObject="6289"/>
+                    <item idObject="6288"/>
+                    <item idObject="6283"/>
+                    <item idObject="6294"/>
+                    <item idObject="6316"/>
+                    <item idObject="6286"/>
+                </source>
+                <destination>
+                    <item idObject="7245" mx="-44.1733" my="-8.34428" showLabel="true"/>
+                    <item idObject="7246"/>
+                    <item idObject="7247"/>
+                    <item idObject="7248" mx="-43.8166" my="-5.5829" showLabel="true"/>
+                    <item idObject="7249"/>
+                    <item idObject="7250" mx="-49.8516" my="-7.15355" showLabel="true"/>
+                    <item idObject="7251"/>
+                    <item idObject="7252" mx="-47.674" my="-6.06473" showLabel="true"/>
+                    <item idObject="7253" mx="-41.1411" my="-4.4315" showLabel="true"/>
+                    <item idObject="7254" mx="-44.4076" my="-4.4315" showLabel="true"/>
+                    <item idObject="7255" mx="-44.4076" my="-7.15355" showLabel="true"/>
+                    <item idObject="7256" mx="-31.8861" my="-12.5977" showLabel="true"/>
+                    <item idObject="7257" mx="-10.6541" my="8.08993" showLabel="true"/>
+                    <item idObject="7258" mx="-10.1097" my="-14.7753" showLabel="true"/>
+                    <item idObject="7259" mx="21.8893" my="-8.52888" showLabel="true"/>
+                    <item idObject="7260"/>
+                    <item idObject="7261" mx="-29.164" my="-9.87557" showLabel="true"/>
+                    <item idObject="7262" mx="-14.465" my="7.00111" showLabel="true"/>
+                    <item idObject="7263" mx="1.32292" my="2.64583" showLabel="true"/>
+                    <item idObject="7264" mx="1.32292" my="2.64583" showLabel="true"/>
+                    <item idObject="7265" mx="1.32292" my="2.64583" showLabel="true"/>
+                    <item idObject="7266" mx="1.32292" my="2.64583" showLabel="true"/>
+                    <item idObject="7267" mx="5.6782" my="-0.0762208" showLabel="true"/>
+                    <item idObject="7268" mx="-28.8368" my="-6.79064" showLabel="true"/>
+                    <item idObject="7269" mx="-97.4093" my="-0.392649" showLabel="true"/>
+                    <item idObject="7270"/>
+                    <item idObject="7271" mx="5.67817" my="-3.88709" showLabel="true"/>
+                    <item idObject="7272" mx="10.0335" my="-2.25386" showLabel="true"/>
+                    <item idObject="7273" mx="10.0335" my="-3.34268" showLabel="true"/>
+                    <item idObject="7274" mx="7.31143" my="-5.52032" showLabel="true"/>
+                    <item idObject="7275" mx="8.40025" my="-4.4315" showLabel="true"/>
+                    <item idObject="7276" mx="0.675707" my="-1.56106" showLabel="true"/>
+                    <item idObject="7277" mx="-51.7153" my="6.24505" showLabel="true"/>
+                    <item idObject="7278" mx="1.32292" my="2.64583" showLabel="true"/>
+                </destination>
+            </operation>
+            <spline aScale="0" color="black" duplicate="1" id="7279" penStyle="hair" type="cubicBezierPath">
+                <pathPoint pSpline="6226"/>
+                <pathPoint pSpline="7271"/>
+                <pathPoint pSpline="7274"/>
+                <pathPoint pSpline="7275"/>
+                <pathPoint pSpline="7273"/>
+                <pathPoint pSpline="7272"/>
+                <pathPoint pSpline="7266"/>
+                <pathPoint pSpline="7264"/>
+                <pathPoint pSpline="7263"/>
+                <pathPoint pSpline="7265"/>
+                <pathPoint pSpline="7267"/>
+                <pathPoint pSpline="7276"/>
+                <pathPoint pSpline="7278"/>
+            </spline>
+            <point id="7280" length="79.6956" mx="51.7718" my="-3.90097" name="Cтйка_ндсчк_плеча1" showLabel="true" splinePath="7279" type="cutSplinePath"/>
+            <spline aScale="0" color="black" duplicate="1" id="7281" penStyle="hair" type="cubicBezierPath">
+                <pathPoint pSpline="6236"/>
+                <pathPoint pSpline="7255"/>
+                <pathPoint pSpline="7254"/>
+                <pathPoint pSpline="7253"/>
+                <pathPoint pSpline="7252"/>
+                <pathPoint pSpline="7250"/>
+                <pathPoint pSpline="7248"/>
+                <pathPoint pSpline="7245"/>
+                <pathPoint pSpline="7259"/>
+                <pathPoint pSpline="7256"/>
+                <pathPoint pSpline="7261"/>
+                <pathPoint pSpline="7268"/>
+                <pathPoint pSpline="7269"/>
+            </spline>
+        </calculation>
+        <modeling>
+            <point id="7366" idObject="6226" inUse="false" mx="8.65025" my="-2.56084" showLabel="false" type="modeling"/>
+            <spline id="7367" idObject="6295" inUse="false" type="modelingPath"/>
+            <point id="7368" idObject="6398" inUse="false" mx="65.3343" my="-1.06243" showLabel="true" type="modeling"/>
+            <spline id="7369" idObject="6295" inUse="false" type="modelingPath"/>
+            <point id="7370" idObject="6286" inUse="false" mx="1.32292" my="2.64583" showLabel="false" type="modeling"/>
+            <point id="7371" idObject="6316" inUse="false" mx="-51.7153" my="6.24505" showLabel="false" type="modeling"/>
+            <arc id="7372" idObject="6315" inUse="false" type="modeling"/>
+            <point id="7373" idObject="6333" inUse="false" mx="22.0564" my="-8.96418" showLabel="true" type="modeling"/>
+            <spline id="7374" idObject="6396" inUse="false" type="modelingPath"/>
+            <point id="7375" idObject="6236" inUse="false" mx="-28.9538" my="24.2392" showLabel="false" type="modeling"/>
+            <spline id="7376" idObject="7281" inUse="false" type="modelingPath"/>
+            <point id="7377" idObject="7269" inUse="false" mx="16.6992" my="-13.2499" showLabel="true" type="modeling"/>
+            <arc id="7378" idObject="7270" inUse="false" type="modeling"/>
+            <point id="7379" idObject="7277" inUse="false" mx="-33.977" my="-48.5124" showLabel="false" type="modeling"/>
+            <point id="7380" idObject="7278" inUse="false" mx="1.32292" my="2.64583" showLabel="false" type="modeling"/>
+            <spline id="7381" idObject="7279" inUse="false" type="modelingPath"/>
+            <point id="7382" idObject="7280" inUse="false" mx="51.7718" my="-3.90097" showLabel="true" type="modeling"/>
+            <spline id="7383" idObject="7279" inUse="false" type="modelingPath"/>
+        </modeling>
+        <details>
+            <detail forbidFlipping="true" forceFlipping="false" hideMainPath="true" id="7384" mx="3634.01" my="-3811.19" name="Стойка1" seamAllowance="true" version="2" width="8">
+                <data annotation="" foldPosition="" fontSize="10" height="8.93415" letter="" mx="-108.468" my="22346.2" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="true" width="36.6364">
+                    <line alignment="0" bold="false" italic="false" sfIncrement="0" text="%pName%  %pLetter%"/>
+                </data>
+                <patternInfo fontSize="0" height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" length="1" mx="0" my="0" rotation="90" visible="false"/>
+                <nodes>
+                    <node idObject="7377" passmark="true" passmarkAngle="straightforward" passmarkLine="one" type="NodePoint"/>
+                    <node idObject="7378" reverse="0" type="NodeArc"/>
+                    <node idObject="7379" type="NodePoint"/>
+                    <node idObject="7380" type="NodePoint"/>
+                    <node idObject="7381" reverse="1" type="NodeSplinePath"/>
+                    <node idObject="7382" type="NodePoint"/>
+                    <node idObject="7383" reverse="1" type="NodeSplinePath"/>
+                    <node idObject="7366" type="NodePoint"/>
+                    <node idObject="7367" reverse="0" type="NodeSplinePath"/>
+                    <node idObject="7368" type="NodePoint"/>
+                    <node idObject="7369" reverse="0" type="NodeSplinePath"/>
+                    <node idObject="7370" type="NodePoint"/>
+                    <node idObject="7371" type="NodePoint"/>
+                    <node idObject="7372" reverse="1" type="NodeArc"/>
+                    <node idObject="7373" type="NodePoint"/>
+                    <node idObject="7374" reverse="1" type="NodeSplinePath"/>
+                    <node idObject="7375" type="NodePoint"/>
+                    <node idObject="7376" reverse="0" type="NodeSplinePath"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups>
+            <group id="6235" name="Вспомогательные начальные мерки" visible="true">
+                <item object="6227" tool="6227"/>
+                <item object="6228" tool="6228"/>
+                <item object="6229" tool="6229"/>
+                <item object="6230" tool="6230"/>
+                <item object="6231" tool="6231"/>
+                <item object="6232" tool="6232"/>
+                <item object="6233" tool="6233"/>
+                <item object="6234" tool="6234"/>
+            </group>
+            <group id="6262" name="Итерация 3" visible="true">
+                <item object="6237" tool="6237"/>
+                <item object="6250" tool="6250"/>
+                <item object="6251" tool="6251"/>
+                <item object="6252" tool="6252"/>
+                <item object="6253" tool="6253"/>
+                <item object="6254" tool="6254"/>
+                <item object="6255" tool="6255"/>
+                <item object="6256" tool="6256"/>
+                <item object="6257" tool="6257"/>
+                <item object="6258" tool="6258"/>
+                <item object="6259" tool="6259"/>
+                <item object="6260" tool="6260"/>
+            </group>
+            <group id="6271" name="Итерация 0" visible="true">
+                <item object="6261" tool="6261"/>
+                <item object="6263" tool="6263"/>
+                <item object="6264" tool="6264"/>
+                <item object="6265" tool="6265"/>
+                <item object="6267" tool="6267"/>
+                <item object="6268" tool="6268"/>
+                <item object="6269" tool="6269"/>
+                <item object="6270" tool="6270"/>
+                <item object="6266" tool="6266"/>
+            </group>
+            <group id="6281" name="Итерация 1" visible="true">
+                <item object="6272" tool="6272"/>
+                <item object="6273" tool="6273"/>
+                <item object="6274" tool="6274"/>
+                <item object="6275" tool="6275"/>
+                <item object="6277" tool="6277"/>
+                <item object="6278" tool="6278"/>
+                <item object="6279" tool="6279"/>
+                <item object="6280" tool="6280"/>
+                <item object="6276" tool="6276"/>
+            </group>
+            <group id="6400" name="Закруглуние вспом построения" visible="true">
+                <item object="6305" tool="6305"/>
+                <item object="6306" tool="6306"/>
+                <item object="6312" tool="6312"/>
+                <item object="6383" tool="6383"/>
+                <item object="6384" tool="6384"/>
+                <item object="6311" tool="6311"/>
+                <item object="6401" tool="6401"/>
+            </group>
+        </groups>
+    </draw>
+</pattern>

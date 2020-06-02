@@ -115,5 +115,7 @@
         <file>Issue_604/output.json</file>
         <file>Issue_548_case1/input.json</file>
         <file>Issue_548_case1/output.json</file>
+        <file>smart_pattern_#36/input.json</file>
+        <file>smart_pattern_#36/output.json</file>
     </qresource>
 </RCC>

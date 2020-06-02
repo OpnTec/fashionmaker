@@ -298,6 +298,12 @@ void TST_VAbstractPiece::EquidistantRemoveLoop_data()
                      QStringLiteral("://DP_6/input.json"),
                      QStringLiteral("://DP_6/output.json"),
                      37.795275590551185 /*seam allowance width (1.0 cm)*/);
+
+    // See file src/app/share/collection/bugs/smart_pattern_#36.val
+    ASSERT_TEST_CASE("Incorrect position of a notch",
+                     QStringLiteral("://smart_pattern_#36/input.json"),
+                     QStringLiteral("://smart_pattern_#36/output.json"),
+                     30.236220472440944 /*seam allowance width (0.8 cm)*/);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
