@@ -253,8 +253,12 @@ void Visualization::DrawLine(VScaledLine *lineItem, const QLineF &line, const QC
     visPen.setStyle(style);
 
     lineItem->setPen(visPen);
-    lineItem->setLine(line);
-    lineItem->setVisible(true);
+    if (not line.isNull())
+    {
+        lineItem->setLine(line);
+    }
+
+    lineItem->setVisible(not line.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
