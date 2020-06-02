@@ -379,7 +379,11 @@ void VArc::CreateName()
 {
     QString name = ARC_ + QString("%1").arg(this->GetCenter().name());
 
-    if (VAbstractCurve::id() != NULL_ID)
+    if (getMode() == Draw::Modeling && getIdObject() != NULL_ID)
+    {
+        name += QString("_%1").arg(getIdObject());
+    }
+    else if (VAbstractCurve::id() != NULL_ID)
     {
         name += QString("_%1").arg(VAbstractCurve::id());
     }
