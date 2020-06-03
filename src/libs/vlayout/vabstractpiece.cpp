@@ -1527,6 +1527,7 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
 //    DumpVector(base); // Uncomment for dumping test data
 //    DumpVector(allowance); // Uncomment for dumping test data
 
+    // First check direction
     const qreal baseDirection = VPiece::SumTrapezoids(base);
     const qreal allowanceDirection = VPiece::SumTrapezoids(allowance);
 
@@ -1535,6 +1536,7 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
         return false; // Wrong direction
     }
 
+    // Edges must not intersect
     for (auto i = 0; i < base.count(); ++i)
     {
         int nextI = -1;
@@ -1582,6 +1584,17 @@ bool VAbstractPiece::IsAllowanceValid(const QVector<QPointF> &base, const QVecto
             {
                 return false;
             }
+        }
+    }
+
+    // Just instersection edges is not enough. The base must be inside of the allowance.
+    QPolygonF allowancePolygon(allowance);
+
+    for (auto &point : base)
+    {
+        if (not allowancePolygon.containsPoint(point, Qt::WindingFill))
+        {
+            return false;
         }
     }
 
