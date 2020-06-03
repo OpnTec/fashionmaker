@@ -371,7 +371,7 @@ bool WatermarkWindow::on_actionSave_triggered()
             QMessageBox messageBox(this);
             messageBox.setIcon(QMessageBox::Question);
             messageBox.setText(tr("The document has no write permissions."));
-            messageBox.setInformativeText("Do you want to change the premissions?");
+            messageBox.setInformativeText(tr("Do you want to change the premissions?"));
             messageBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
             messageBox.setDefaultButton(QMessageBox::Yes);
 
