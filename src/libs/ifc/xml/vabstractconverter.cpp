@@ -165,14 +165,7 @@ void VAbstractConverter::ReserveFile() const
             .arg(info.absoluteDir().absolutePath(), info.baseName(), GetFormatVersionStr(), info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup++; // turn checking on
-#endif /*Q_OS_WIN32*/
         const bool isFileWritable = info.isWritable();
-#ifdef Q_OS_WIN32
-        qt_ntfs_permission_lookup--; // turn it off again
-#endif /*Q_OS_WIN32*/
-
         if (not IsReadOnly() && isFileWritable)
         {
             const QString errorMsg(tr("Error creating a reserv copy: %1.").arg(error));
