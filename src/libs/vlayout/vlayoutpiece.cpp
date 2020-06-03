@@ -1202,10 +1202,10 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
         const qreal dH = QLineF(labelShape.at(1), labelShape.at(2)).length();
         const qreal angle = - QLineF(labelShape.at(0), labelShape.at(1)).angle();
         qreal dY = 0;
-        qreal dX = 0;
 
         for (int i = 0; i < tm.GetSourceLinesCount(); ++i)
         {
+
             const TextLine& tl = tm.GetSourceLine(i);
             QFont fnt = tm.GetFont();
             fnt.setPixelSize(tm.GetFont().pixelSize() + tl.m_iFontSize);
@@ -1233,7 +1233,9 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
             {
                 qsText = fm.elidedText(qsText, Qt::ElideMiddle, static_cast<int>(dW));
             }
-            if ((tl.m_eAlign & Qt::AlignLeft) > 0)
+
+            qreal dX = 0;
+            if (tl.m_eAlign == 0 || (tl.m_eAlign & Qt::AlignLeft) > 0)
             {
                 dX = 0;
             }
@@ -1245,7 +1247,7 @@ void VLayoutPiece::CreateLabelStrings(QGraphicsItem *parent, const QVector<QPoin
                 dX = (dW - fm.width(qsText))/2;
 #endif
             }
-            else
+            else if ((tl.m_eAlign & Qt::AlignRight) > 0)
             {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
                 dX = dW - fm.horizontalAdvance(qsText);
