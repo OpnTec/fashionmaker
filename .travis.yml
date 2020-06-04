@@ -4,28 +4,26 @@ jobs:
   - stage: main test
     os: linux
     dist: xenial
-    sudo: required
     compiler: clang
     env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
-    cache:
-    - ccache
-    directories:
-    - "$HOME/.sonar/cache"
+    cache: 
+     ccache: true
+     directories:
+     - "$HOME/.sonar/cache"
   - os: linux
     dist: bionic
-    sudo: required
     compiler: clang
     env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=true
     cache:
-    - ccache
-    directories:
-    - "$HOME/.sonar/cache"
+     ccache: true
+     directories:
+     - "$HOME/.sonar/cache"
   - os: osx
     compiler: clang
     env:
@@ -40,17 +38,21 @@ jobs:
     osx_image: xcode8
   - stage: sonarcloud
     os: linux
-    dist: xenial
-    sudo: required
+    dist: bionic
     compiler: clang
     env:
     - DEPLOY=false
     - CCACHE_CPP2=yes
     - RUN_TESTS=false
     cache:
-    - ccache
-    directories:
-    - "$HOME/.sonar/cache"
+     ccache: true
+     directories:
+     - "$HOME/.sonar/cache"
+    addons:
+      sonarcloud:
+        organization: "dismine"
+        token:
+          secure: L8uC9uH9d+coVwndZ+UzDpMFS+fxk8dCSEcoAIXC22xg4PhHACbZJqrSANRNy8UC7LZHdFlGDozeHLqw6FPanKIoNy6yX7ngGjuR2azLOdqNhBvlhH6Knc0ua7zSpQuHDkkv3vwdJHS4MNXvAwTr+ErLXmEBvuekiM2HEHGRA8MtdEo9naq+m65/ZTkn3iiA654HT2gh3afYDONyTbEa6WkGmoI1Z597PoIJ/0HaKf9TqO/FahXhLYmLL9UW7rPCwj8rUyLiJ39lRrmo2JAPdRT/QoxAA5l97OI+IMjv5ut5p1KZUozuAedxj8kx43QAw+YuRqBZAuZOy5meFSHV62WG5CbqCuZPE79+JyLTYSKxuuzK6v8F6jnQRXC79EdYEIRbXtC86ZftFDgHTt1LP4JaBoPV9ee3DiY7PHO65oSjey7831Ou18UcjmV0BqtQfVVAWsRKYTqjFCBKa9hNDbzIKHLbmj5/K5TitBMTBpjSYnLYJdkDWY3DPGpWDFyT2oo2bRrSl9/UsuT27hi5psMTQSlrYqIGezVz0KDf3TjWPS5RhHjMr+Lt4Ykh5YxKw9zmvH9gvPwOQbfTtPNZHGOMt1Q8aZhovruYDlBleBFuDaHnKV8U9lJr2BOb44nvx+BBURo/Xq1cNew9UNitjTvtEmPeocOLMb2lFMkXAbs=
 before_install:
 - |
   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -140,20 +142,12 @@ before_deploy:
     fi
   fi
 deploy:
-  edge:
-    branch: v1.8.47
   provider: bintray
   skip_cleanup: true
   file: "../share/bintray.json"
   user: dismine
   key:
     secure: q9rcswyUyOqHAnxL0FLEQ8tdFkE21kNlv/TUpZgk0MbcsWRhBWaKJVv5kz6ABkjeLMB7c7eS7KfYRui0RFBKHI7ZnpzHBZN4f1aGd/rf9m5qaZdKFFBlpz4tXPHvXOVyXRwOReqFj7brAz6NB+oqJN8HFA4Q1y039yZOaHt28JkwYSDqS5lRvbwegYS8kaJupGZcm8NaNeB8tuXuZ/8DIQpZdVKmBUwpgpPAewCEqYP4z9DUpsmMZ5h63g7mJKm9di91cQr65eS24io6m1ZfAx8M6kTaKwyR5nz8a8bnqR48AAnbNoM8Xj1sgJqnT40DZKPCNr7KL3JSNRglKNgHVMFBOj0v9F5YxsDs8twWuqFVbywB+lNSHDyvGVgmS2+EdwKLQT0YBxYfIL1nh34ed7GffZZmBcAJGfxo8ieAMRgyylSyQIHJ0ZBl6X6DzOvLpvFlcva9yhqZfkx3P/Dgarqklnj3DdvzTDW2vxCT4yVLpMySlBXW2I3s7m8xpOjZbM7eZfMZkwjd/e8IYp8jxdQnxlzNe15mzxSXnZjLz3Rwi1qzhJZyZf4OGVxuQuR9oW+c5q55OOY5hImtZELlJyu1K0zKTd85g0D+WwKj4J30J0QWl1pxZlln59Q5cMmpyQ7sc8zN1WPoWAEyavwPrf4028TpEJqaUw/0cQGg9I4=
-  dry-run: false
   on:
     all_branches: true
     condition: "$DEPLOY = true"
-addons:
-  sonarcloud:
-    organization: "dismine"
-    token:
-      secure: L8uC9uH9d+coVwndZ+UzDpMFS+fxk8dCSEcoAIXC22xg4PhHACbZJqrSANRNy8UC7LZHdFlGDozeHLqw6FPanKIoNy6yX7ngGjuR2azLOdqNhBvlhH6Knc0ua7zSpQuHDkkv3vwdJHS4MNXvAwTr+ErLXmEBvuekiM2HEHGRA8MtdEo9naq+m65/ZTkn3iiA654HT2gh3afYDONyTbEa6WkGmoI1Z597PoIJ/0HaKf9TqO/FahXhLYmLL9UW7rPCwj8rUyLiJ39lRrmo2JAPdRT/QoxAA5l97OI+IMjv5ut5p1KZUozuAedxj8kx43QAw+YuRqBZAuZOy5meFSHV62WG5CbqCuZPE79+JyLTYSKxuuzK6v8F6jnQRXC79EdYEIRbXtC86ZftFDgHTt1LP4JaBoPV9ee3DiY7PHO65oSjey7831Ou18UcjmV0BqtQfVVAWsRKYTqjFCBKa9hNDbzIKHLbmj5/K5TitBMTBpjSYnLYJdkDWY3DPGpWDFyT2oo2bRrSl9/UsuT27hi5psMTQSlrYqIGezVz0KDf3TjWPS5RhHjMr+Lt4Ykh5YxKw9zmvH9gvPwOQbfTtPNZHGOMt1Q8aZhovruYDlBleBFuDaHnKV8U9lJr2BOb44nvx+BBURo/Xq1cNew9UNitjTvtEmPeocOLMb2lFMkXAbs=
