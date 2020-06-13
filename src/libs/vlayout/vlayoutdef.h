@@ -31,6 +31,7 @@
 
 #include <QSize>
 #include <QTransform>
+#include <QPainterPath>
 #include <ciso646>
 
 #include "../vmisc/typedef.h"
