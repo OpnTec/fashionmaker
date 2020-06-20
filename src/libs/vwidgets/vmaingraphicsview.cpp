@@ -58,6 +58,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vsettings.h"
 #include "vabstractmainwindow.h"
+#include "global.h"
 
 const qreal maxSceneSize = ((20.0 * 1000.0) / 25.4) * PrintDPI; // 20 meters in pixels
 
@@ -668,6 +669,33 @@ qreal VMainGraphicsView::MaxScale()
     const qreal screenSize = qMin(screenRect.width(), screenRect.height());
 
     return maxSceneSize / screenSize;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::EnsureItemVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin,
+                                                   int ymargin)
+{
+    SCASSERT(item != nullptr)
+    const qreal scale = SceneScale(item->scene());
+
+    const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(this);
+    const QRectF itemRect = item->mapToScene(item->boundingRect()).boundingRect();
+
+    // If item's rect is bigger than view's rect ensureVisible works very unstable.
+    if (itemRect.height() + 2*ymargin < viewRect.height() &&
+        itemRect.width() + 2*xmargin < viewRect.width())
+    {
+        EnsureVisibleWithDelay(item, msecs, xmargin, ymargin);
+    }
+    else
+    {
+        // Ensure visible only small rect around a cursor
+        VMainGraphicsScene *currentScene = qobject_cast<VMainGraphicsScene *>(item->scene());
+        SCASSERT(currentScene);
+        const QPointF cursorPosition = currentScene->getScenePos();
+        EnsureVisibleWithDelay(QRectF(cursorPosition.x()-5/scale, cursorPosition.y()-5/scale, 10/scale, 10/scale),
+                               msecs);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

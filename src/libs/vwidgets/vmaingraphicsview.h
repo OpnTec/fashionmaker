@@ -127,6 +127,8 @@ public:
     static qreal MinScale();
     static qreal MaxScale();
 
+    void EnsureItemVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 5, int ymargin = 5);
+
     void EnsureVisibleWithDelay(const QRectF &rect, unsigned long msecs, int xmargin = 50, int ymargin = 50);
     void EnsureVisibleWithDelay(const QGraphicsItem *item, unsigned long msecs, int xmargin = 50, int ymargin = 50);
 
