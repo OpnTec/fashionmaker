@@ -175,8 +175,8 @@ QVariant VControlPointSpline::itemChange(QGraphicsItem::GraphicsItemChange chang
                         if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                         {
                             const qreal scale = SceneScale(scene());
-                            const int xmargin = qCeil(50/scale);
-                            const int ymargin = qCeil(50/scale);
+                            const int xmargin = 5;
+                            const int ymargin = 5;
 
                             const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                             const QRectF itemRect = sceneBoundingRect();

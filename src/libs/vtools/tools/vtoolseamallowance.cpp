@@ -978,8 +978,8 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                 if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                 {
                     const qreal scale = SceneScale(scene());
-                    const int xmargin = qCeil(50/scale);
-                    const int ymargin = qCeil(50/scale);
+                    const int xmargin = 5;
+                    const int ymargin = 5;
 
                     const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                     const QRectF itemRect = mapToScene(boundingRect()|childrenBoundingRect()).boundingRect();
@@ -988,7 +988,7 @@ QVariant VToolSeamAllowance::itemChange(QGraphicsItem::GraphicsItemChange change
                     if (itemRect.height() + 2*ymargin < viewRect.height() &&
                         itemRect.width() + 2*xmargin < viewRect.width())
                     {
-                        view->EnsureVisibleWithDelay(itemRect, VMainGraphicsView::scrollDelay, xmargin, ymargin);
+                        view->EnsureVisibleWithDelay(this, VMainGraphicsView::scrollDelay, xmargin, ymargin);
                     }
                     else
                     {

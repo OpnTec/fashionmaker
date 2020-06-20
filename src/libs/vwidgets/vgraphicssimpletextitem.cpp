@@ -202,8 +202,8 @@ QVariant VGraphicsSimpleTextItem::itemChange(GraphicsItemChange change, const QV
                     if (VMainGraphicsView *view = qobject_cast<VMainGraphicsView *>(viewList.at(0)))
                     {
                         const qreal scale = SceneScale(scene());
-                        int xmargin = qCeil(50/scale);
-                        int ymargin = qCeil(50/scale);
+                        int xmargin = 5;
+                        int ymargin = 5;
 
                         const QRectF viewRect = VMainGraphicsView::SceneVisibleArea(view);
                         const QRectF itemRect = mapToScene(boundingRect()).boundingRect();

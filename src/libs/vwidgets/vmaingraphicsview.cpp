@@ -411,7 +411,7 @@ void GraphicsViewZoom::PinchTriggered(QPinchGesture *gesture)
     }
 }
 
-const unsigned long VMainGraphicsView::scrollDelay = 80;
+const unsigned long VMainGraphicsView::scrollDelay = 160;
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
