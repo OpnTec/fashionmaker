@@ -39,10 +39,10 @@ shallow_clone: false                 # default is "false"
 environment:
   matrix:
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    QT5: Qt\5.14\mingw73_32
-    QT_VERSION: Qt5.14
+    QT5: Qt\5.15\mingw81_32
+    QT_VERSION: Qt5.15
     QMAKE_GENERATOR: "MinGW Makefiles"
-    MINGW_PATH: C:\Qt\Tools\mingw730_32\bin
+    MINGW_PATH: C:\Qt\Tools\mingw810_32\bin
     PLATFORM: x86
     DEPLOY: true
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
@@ -52,6 +52,26 @@ environment:
     MINGW_PATH: C:\Qt\Tools\mingw492_32\bin
     PLATFORM: x86
     DEPLOY: true
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    QT5: Qt\5.15\mingw81_64
+    QT_VERSION: Qt5.15
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw810_64\bin
+    PLATFORM: x64
+    DEPLOY: false
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    QT5: Qt\5.15\msvc2019_64
+    QMAKE_GENERATOR: "NMake Makefiles JOM"
+    VSVER: 16
+    PLATFORM: x64
+    DEPLOY: false 
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    QT5: Qt\5.14\mingw73_32
+    QT_VERSION: Qt5.14
+    QMAKE_GENERATOR: "MinGW Makefiles"
+    MINGW_PATH: C:\Qt\Tools\mingw730_32\bin
+    PLATFORM: x86
+    DEPLOY: false
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     QT5: Qt\5.14\mingw73_64
     QT_VERSION: Qt5.14
