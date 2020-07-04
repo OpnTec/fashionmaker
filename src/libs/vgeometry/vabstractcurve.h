@@ -63,8 +63,8 @@ public:
 
     virtual QVector<QPointF> GetPoints() const =0;
     static QVector<QPointF>  GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin, const QPointF &end,
-                                              bool reverse = false);
-    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse = false) const;
+                                              bool reverse, QString &error);
+    QVector<QPointF>         GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const;
 
     virtual QPainterPath     GetPath() const;
     virtual qreal            GetLength() const =0;

@@ -665,7 +665,8 @@ void TST_VSpline::GetSegmentPoints_issue767()
     points.append(QPointF(4214.980535433111, 2269.448333408385));
     points.append(QPointF(4214.980535433071, 2235.242494488189));
 
-    const QVector<QPointF> res = VAbstractCurve::GetSegmentPoints(points, begin, end, false);
+    QString error;
+    const QVector<QPointF> res = VAbstractCurve::GetSegmentPoints(points, begin, end, false, error);
 
     QVector<QPointF> origPoints;
     origPoints.append(QPointF(3964.650771379471, 3212.2173150777817));

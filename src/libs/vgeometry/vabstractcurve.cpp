@@ -38,6 +38,7 @@
 #include "vabstractcurve_p.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/compatibility.h"
+#include "../ifc/exception/vexceptionobjecterror.h"
 
 VAbstractCurve::VAbstractCurve(const GOType &type, const quint32 &idObject, const Draw &mode)
     :VGObject(type, idObject, mode), d (new VAbstractCurveData())
@@ -81,7 +82,7 @@ VAbstractCurve::~VAbstractCurve()
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points, const QPointF &begin,
-                                                  const QPointF &end, bool reverse)
+                                                  const QPointF &end, bool reverse, QString &error)
 {
     QVector<QPointF> segment = points;
     if (reverse)
@@ -98,15 +99,47 @@ QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QVector<QPointF> &points
         finish = segment.last();
     }
 
-    segment = FromBegin(segment, start);
-    segment = ToEnd(segment, finish);
+    bool ok = false;
+    segment = FromBegin(segment, start, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment start.");
+        return segment;
+    }
+
+    ok = false;
+    segment = ToEnd(segment, finish, &ok);
+
+    if (not ok)
+    {
+        error = QObject::tr("Could not find the segment end.");
+        return segment;
+    }
+
+    if (segment.length() < 2)
+    {
+        error = QObject::tr("Segment is too short.");
+    }
+
     return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 QVector<QPointF> VAbstractCurve::GetSegmentPoints(const QPointF &begin, const QPointF &end, bool reverse) const
 {
-    return GetSegmentPoints(GetPoints(), begin, end, reverse);
+    QString error;
+    QVector<QPointF> segment = GetSegmentPoints(GetPoints(), begin, end, reverse, error);
+
+    if (not error.isEmpty())
+    {
+        const QString errorMsg = QObject::tr("Error calculating segment for curve '%1'. %2")
+                                     .arg(name(), error);
+        qApp->IsPedantic() ? throw VExceptionObjectError(errorMsg) :
+                           qWarning() << VAbstractApplication::patternMessageSignature + errorMsg;
+    }
+
+    return segment;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
