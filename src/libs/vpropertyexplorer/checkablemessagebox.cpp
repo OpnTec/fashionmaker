@@ -156,7 +156,7 @@ void CheckableMessageBox::setText(const QString &t)
 // cppcheck-suppress unusedFunction
 QPixmap CheckableMessageBox::iconPixmap() const
 {
-#if QT_VERSION <= QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     if (const QPixmap *p = d->pixmapLabel->pixmap())   
     {
         return QPixmap(*p);
