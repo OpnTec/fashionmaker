@@ -79,7 +79,7 @@ private:
     quint32     planeCount;
     QSize            size;
     int              resolution;
-    QMatrix          matrix;
+    QTransform       matrix;
 
     QPolygonF  MakePointsUnique(const QPolygonF &polygon)const;
     qint64     Square(const QPolygonF &poly)const;

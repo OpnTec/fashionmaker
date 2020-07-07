@@ -39,6 +39,7 @@
 #include <QIODevice>
 #include <QList>
 #include <QTextStream>
+#include <Qt>
 
 #include "../vmisc/diagnostic.h"
 
@@ -615,7 +616,11 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
             }
             data += qxt_addCsvQuotes(d_ptr.quoteMode, d_ptr.header.at(col));
         }
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         stream << data << endl;
+#else
+        stream << data << Qt::endl;
+#endif
     }
     for (row = 0; row < rows; ++row)
     {
@@ -636,7 +641,11 @@ bool QxtCsvModel::toCSV(QIODevice* dest, QString &error, bool withHeader, QChar 
                 data += qxt_addCsvQuotes(d_ptr.quoteMode, QString());
             }
         }
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         stream << data << endl;
+#else
+        stream << data << Qt::endl;
+#endif
     }
     stream << flush;
     dest->close();

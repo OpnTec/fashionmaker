@@ -51,6 +51,7 @@
 #include <QDateTime>
 #include <QtXmlPatterns>
 #include <QIcon>
+#include <Qt>
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -202,7 +203,11 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         vStdOut().flush();
         vStdErr().flush();
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         (*qApp->LogFile()) << debugdate <<  endl;
+#else
+        (*qApp->LogFile()) << debugdate <<  Qt::endl;
+#endif
     }
 
     if (isGuiThread)

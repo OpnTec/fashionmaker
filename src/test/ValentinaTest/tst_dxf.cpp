@@ -59,7 +59,11 @@ TST_DXF::TST_DXF(QObject *parent)
 void TST_DXF::initTestCase()
 {
     QTextStream ts(stdout);
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", "))<< endl;
+#else
+    ts << QStringLiteral("Available codecs:\n%2.").arg(AvailableCodecs().join(", "))<< Qt::endl;
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------

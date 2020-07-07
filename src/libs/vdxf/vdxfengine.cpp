@@ -154,7 +154,7 @@ void VDxfEngine::updateState(const QPaintEngineState &state)
 
     if (flags & QPaintEngine::DirtyTransform)
     {
-        matrix = state.matrix(); // Save new matrix for moving paths
+        matrix = state.transform(); // Save new matrix for moving paths
     }
 }
 
