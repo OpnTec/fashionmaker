@@ -10,7 +10,7 @@ Help translate https://www.transifex.com/organization/valentina
 
 Valentina
 ==========
-Valentina is a cross-platform patternmaking program which allows designers 
+Valentina is a cross-platform patternmaking program that allows designers 
 to create and model patterns of clothing. This software allows pattern 
 creation, using either standard sizing tables or an individual’s set of 
 measurements. It blends new technologies with traditional methods to create 
@@ -39,7 +39,7 @@ You can build Valentina with
     make (or mingw32-make or nmake or jom, depending on your platform)
 
 Note: On some platforms e.g. Fedora, all Qt-tools come as qmake-qt5 
-    etc. In this case you should install qtchooser. This wrapper 
+    etc. In this case, you should install qtchooser. This wrapper 
     resolves the Qt version with respect to QT_SELECT. So run 
 
     export QT_SELECT=5
